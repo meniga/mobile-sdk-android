@@ -3,12 +3,11 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.artifactory'
+apply plugin: "com.github.dcendents.android-maven"
 
 if(project.hasProperty('artifactory_username') && (file("./publish.gradle").exists()) ){
     apply from: 'publish.gradle'
 }
-
-
 
 buildscript {
     repositories {
@@ -92,20 +91,35 @@ task deploy() {
 }
 deploy.dependsOn uploadArchives
 
-project.ext.set('groupIdConst','com.meniga')
-project.ext.set('artifactIdConst','sdk')
 
-// Upload to the local maven repo
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: mavenLocal().url)
-            pom.project {
-                groupId = project.groupIdConst
-                artifactId = project.artifactIdConst
-                packaging 'aar'
-                version =  project.libraryVersion
-            }
-        }
-    }
+project.ext.set("groupIdConst","com.meniga")
+project.ext.set("artifactIdConst","sdk")
+
+
+ext {
+    bintrayRepo = "android"
+    bintrayName = "com.meniga.sdk"
+    bintrayOrg = "meniga"
+
+    publishedGroupId = "com.meniga.sdk"
+    libraryName = "sdk"
+    artifact = "sdk"
+
+    libraryDescription = "Meniga Android SDK"
+
+    siteUrl = "https://github.com/meniga/mobile-sdk-android"
+    gitUrl = "https://github.com/meniga/mobile-sdk-android.git"
+
+    libraryVersion = android.defaultConfig.versionName
+
+    developerId = "developerId"
+    developerName = "meniga"
+    developerEmail = "developer@email.com"
+
+    licenseName = "The MIT License (MIT)"
+    licenseUrl = "https://opensource.org/licenses/MIT"
+    allLicenses = ["MIT"]
 }
+
+apply from: "../install.gradle"
+apply from: "../bintray.gradle"
