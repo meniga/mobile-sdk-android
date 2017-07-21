@@ -1,0 +1,138 @@
+{
+   "data": [{  
+	   "totalExpenses":-70280.0000,
+	   "totalIncome":750.0000,
+	   "transactionCount":16,
+	   "expensesPerCategory":{  
+		  "14":-55130.0000,
+		  "18":-15020.0000,
+		  "78":-31.0000,
+		  "133":-25.0000,
+		  "71":-47.0000,
+		  "49":-12.0000,
+		  "39":-10.0000,
+		  "35":-5.0000
+	   },
+	   "incomePerCategory":{  
+		  "5":750.0000
+	   },
+	   "transactionCountPerMerchant":{  
+
+	   },
+	   "scheduledEventType":"Weekly",
+	   "endDate":"2016-05-28T23:59:59Z",
+	   "transactionsPerDay":[  
+		  {  
+			 "date":"2016-05-26T00:00:00",
+			 "income":0.0,
+			 "expenses":-55080.0000,
+			 "merchantIds":[  
+
+			 ],
+			 "expensesPerCategory":{  
+				"14":-55080.0000
+			 },
+			 "incomePerCategory":{  
+
+			 }
+		  },
+		  {  
+			 "date":"2016-05-27T00:00:00",
+			 "income":0.0,
+			 "expenses":-15022.0000,
+			 "merchantIds":[  
+
+			 ],
+			 "expensesPerCategory":{  
+				"18":-15000.0000,
+				"49":-12.0000,
+				"71":-5.0000,
+				"35":-5.0000
+			 },
+			 "incomePerCategory":{  
+
+			 }
+		  },
+		  {  
+			 "date":"2016-05-24T00:00:00",
+			 "income":0.0,
+			 "expenses":-81.0000,
+			 "merchantIds":[  
+
+			 ],
+			 "expensesPerCategory":{  
+				"14":-50.0000,
+				"78":-31.0000
+			 },
+			 "incomePerCategory":{  
+
+			 }
+		  },
+		  {  
+			 "date":"2016-05-22T00:00:00",
+			 "income":0.0,
+			 "expenses":-42.0000,
+			 "merchantIds":[  
+
+			 ],
+			 "expensesPerCategory":{  
+				"133":-25.0000,
+				"18":-10.0000,
+				"71":-7.0000
+			 },
+			 "incomePerCategory":{  
+
+			 }
+		  },
+		  {  
+			 "date":"2016-05-28T00:00:00",
+			 "income":0.0,
+			 "expenses":-45.0000,
+			 "merchantIds":[  
+
+			 ],
+			 "expensesPerCategory":{  
+				"71":-35.0000,
+				"39":-10.0000
+			 },
+			 "incomePerCategory":{  
+
+			 }
+		  },
+		  {  
+			 "date":"2016-05-23T00:00:00",
+			 "income":0.0,
+			 "expenses":-10.0000,
+			 "merchantIds":[  
+
+			 ],
+			 "expensesPerCategory":{  
+				"18":-10.0000
+			 },
+			 "incomePerCategory":{  
+
+			 }
+		  },
+		  {  
+			 "date":"2016-05-25T00:00:00",
+			 "income":750.0000,
+			 "expenses":0.0,
+			 "merchantIds":[  
+
+			 ],
+			 "expensesPerCategory":{  
+
+			 },
+			 "incomePerCategory":{  
+				"5":750.0000
+			 }
+		  }
+	   ],
+	   "topicId":0,
+	   "date":"2016-05-22T00:00:00Z",
+	   "topicName":"Info",
+	   "title":"",
+	   "body":"",
+	   "typeName":"ScheduledFeedItemModel"
+	}]
+}

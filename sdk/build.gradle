@@ -1,0 +1,111 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
+
+if(project.hasProperty('artifactory_username') && (file("./publish.gradle").exists()) ){
+    apply from: 'publish.gradle'
+}
+
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.18"
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '25.0.3'
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 6
+        versionName "0.45"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'proguard-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+        debug {
+            testCoverageEnabled true
+            minifyEnabled false
+            testProguardFile 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+task copyResDirectoryToClasses(type: Copy){
+    from "${projectDir}/src/test/res"
+    into "${buildDir}/intermediates/classes/test/debug/res"
+}
+
+project.ext.set('packageName','com.meniga.sdk')
+project.ext.set('libraryVersion',android.defaultConfig.versionName)
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.8.1'
+    compile 'net.danlew:android.joda:2.9.9'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'javax.inject:javax.inject:1'
+    compile 'javax.annotation:javax.annotation-api:1.2'
+
+    testCompile "org.robolectric:robolectric:3.3.2"
+    testCompile 'net.jodah:concurrentunit:0.4.2'
+    testCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
+    testCompile 'com.squareup.retrofit2:retrofit-mock:2.1.0'
+    testCompile 'org.assertj:assertj-core:1.7.1'
+    testCompile 'junit:junit:4.12'
+}
+
+// Convenience task
+task deploy() {
+}
+deploy.dependsOn uploadArchives
+
+project.ext.set('groupIdConst','com.meniga')
+project.ext.set('artifactIdConst','sdk')
+
+// Upload to the local maven repo
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: mavenLocal().url)
+            pom.project {
+                groupId = project.groupIdConst
+                artifactId = project.artifactIdConst
+                packaging 'aar'
+                version =  project.libraryVersion
+            }
+        }
+    }
+}

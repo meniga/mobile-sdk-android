@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Wallet",
+      "description": "Wallet",
+      "accountCategory": "Wallet",
+      "accountClass": "wallet",
+      "organizationId": 1,
+      "importAccountConfiguration": null,
+      "realmId": 0,
+      "accountCategoryDetails": null,
+      "enableCashback": false
+    },
+    {
+      "id": 37,
+      "name": "Mastercard",
+      "description": "Creditcard demo",
+      "accountCategory": "Credit",
+      "accountClass": "euro",
+      "organizationId": 1,
+      "importAccountConfiguration": null,
+      "realmId": 1,
+      "accountCategoryDetails": null,
+      "enableCashback": true
+    },
+    {
+      "id": 39,
+      "name": "Checking account",
+      "description": "Checking demo",
+      "accountCategory": "Current",
+      "accountClass": "meniga",
+      "organizationId": 1,
+      "importAccountConfiguration": null,
+      "realmId": 1,
+      "accountCategoryDetails": null,
+      "enableCashback": true
+    },
+    {
+      "id": 41,
+      "name": "Savings account",
+      "description": "Savings demo",
+      "accountCategory": "Savings",
+      "accountClass": "meniga",
+      "organizationId": 1,
+      "importAccountConfiguration": null,
+      "realmId": 1,
+      "accountCategoryDetails": null,
+      "enableCashback": false
+    },
+    {
+      "id": 42,
+      "name": "Manual Assets And Liabilities",
+      "description": "Manual Assets And Liabilities",
+      "accountCategory": "Manual",
+      "accountClass": null,
+      "organizationId": 1,
+      "importAccountConfiguration": null,
+      "realmId": 0,
+      "accountCategoryDetails": null,
+      "enableCashback": false
+    },
+    {
+      "id": 43,
+      "name": "Liabilities",
+      "description": "Liabilities",
+      "accountCategory": "Loan",
+      "accountClass": null,
+      "organizationId": 1,
+      "importAccountConfiguration": null,
+      "realmId": 1,
+      "accountCategoryDetails": null,
+      "enableCashback": false
+    },
+    {
+      "id": 44,
+      "name": "Assets",
+      "description": "Assets",
+      "accountCategory": "Asset",
+      "accountClass": null,
+      "organizationId": 1,
+      "importAccountConfiguration": null,
+      "realmId": 1,
+      "accountCategoryDetails": null,
+      "enableCashback": false
+    },
+    {
+      "id": 45,
+      "name": "TestBank Current",
+      "description": "TestBank Current",
+      "accountCategory": "Current",
+      "accountClass": null,
+      "organizationId": 2,
+      "importAccountConfiguration": null,
+      "realmId": 2,
+      "accountCategoryDetails": null,
+      "enableCashback": false
+    },
+    {
+      "id": 46,
+      "name": "TestBank Credit",
+      "description": "TestBank Credit",
+      "accountCategory": "Credit",
+      "accountClass": null,
+      "organizationId": 2,
+      "importAccountConfiguration": null,
+      "realmId": 2,
+      "accountCategoryDetails": null,
+      "enableCashback": false
+    },
+    {
+      "id": 47,
+      "name": "TestBank Saving",
+      "description": "TestBank Saving",
+      "accountCategory": "Savings",
+      "accountClass": null,
+      "organizationId": 2,
+      "importAccountConfiguration": null,
+      "realmId": 2,
+      "accountCategoryDetails": null,
+      "enableCashback": false
+    }
+  ]
+}

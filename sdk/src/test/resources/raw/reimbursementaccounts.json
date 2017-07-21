@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "isActive": false,
+      "isVerified": true,
+      "name": "Test account",
+      "accountType": "Bank account ISL",
+      "accountInfo": "{}"
+    },
+    {
+      "id": 1,
+      "isActive": true,
+      "isVerified": true,
+      "name": "Test account 2",
+      "accountType": "Bank account ISL",
+      "accountInfo": "{}"
+    }
+  ],
+  "meta": {
+    "totalCount": 2
+  }
+}

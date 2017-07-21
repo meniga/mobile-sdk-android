@@ -1,0 +1,14 @@
+{
+  "data": {
+    "id": 6251,
+    "eventTypeIdentifier": "transactions_merchant_count",
+    "actionText": "View transaction",
+    "messageData": "{\"TransactionId\":1072431,\"MerchantId\":100000000,\"MerchantName\":\"McDonalds\",\"TotalCount\":63,\"PeriodCount\":30,\"DisplayIconIdentifier\":\"71\",\"CategoryName\":\"Fast Food\"}",
+    "date": "2016-12-08T10:50:53.3717884",
+    "topicId": 1072431,
+    "topicName": "Transaction",
+    "title": "McDonalds",
+    "body": "That makes 30 transactions this year.",
+    "typeName": "UserEventFeedItemModel"
+  }
+}

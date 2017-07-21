@@ -1,0 +1,540 @@
+{
+  "data": [
+    {
+      "userEventTypeIdentifier": "accounts",
+      "subscriptions": [
+        {
+          "channelName": "Activity_Feed_Mobile",
+          "isSubscribed": true,
+          "canUpdateSubscription": false
+        },
+        {
+          "channelName": "Email",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        },
+        {
+          "channelName": "Push",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        }
+      ],
+      "settings": [],
+      "children": [
+        {
+          "userEventTypeIdentifier": "accounts_available_amount",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [
+            {
+              "identifier": "AvailableAmountSettings",
+              "value": "{\"10\":[15000.0],\"11\":[15000.0],\"12\":[15000.0]}",
+              "dataType": "System.Collections.Generic.Dictionary`2[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.List`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+            },
+            {
+              "identifier": "UpperAvailableAmountSettings",
+              "value": null,
+              "dataType": "System.Collections.Generic.Dictionary`2[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "userEventTypeIdentifier": "scheduled_user_event",
+      "subscriptions": [
+        {
+          "channelName": "Activity_Feed_Mobile",
+          "isSubscribed": true,
+          "canUpdateSubscription": false
+        },
+        {
+          "channelName": "Email",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        },
+        {
+          "channelName": "Push",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        }
+      ],
+      "settings": [],
+      "children": [
+        {
+          "userEventTypeIdentifier": "scheduled_monthly_transaction_report",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "scheduled_weekly_transaction_report",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "userEventTypeIdentifier": "segment_based_custom_content",
+      "subscriptions": [
+        {
+          "channelName": "Activity_Feed_Mobile",
+          "isSubscribed": true,
+          "canUpdateSubscription": false
+        },
+        {
+          "channelName": "Email",
+          "isSubscribed": false,
+          "canUpdateSubscription": false
+        },
+        {
+          "channelName": "Push",
+          "isSubscribed": true,
+          "canUpdateSubscription": false
+        }
+      ],
+      "settings": [],
+      "children": []
+    },
+    {
+      "userEventTypeIdentifier": "transactions",
+      "subscriptions": [
+        {
+          "channelName": "Activity_Feed_Mobile",
+          "isSubscribed": true,
+          "canUpdateSubscription": false
+        },
+        {
+          "channelName": "Email",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        },
+        {
+          "channelName": "Push",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        }
+      ],
+      "settings": [],
+      "children": [
+        {
+          "userEventTypeIdentifier": "transactions_category_budget_watch",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [
+            {
+              "identifier": "CategoryBudgetWatchThresholdMap",
+              "value": null,
+              "dataType": "System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+            }
+          ],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "transactions_merchant_count",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "transactions_threshold_deposit",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [
+            {
+              "identifier": "DepositAboveThresholdValue",
+              "value": "500.0",
+              "dataType": "System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+            }
+          ],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "transactions_threshold_expenses",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [
+            {
+              "identifier": "ExpensesAboveThresholdValue",
+              "value": "50000.0",
+              "dataType": "System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"
+            }
+          ],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "transactions_unusual_spending",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "cashback_offer_redemption",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "userEventTypeIdentifier": "challenge",
+      "subscriptions": [
+        {
+          "channelName": "Activity_Feed_Mobile",
+          "isSubscribed": true,
+          "canUpdateSubscription": true
+        },
+        {
+          "channelName": "Email",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        },
+        {
+          "channelName": "Push",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        }
+      ],
+      "settings": [],
+      "children": [
+        {
+          "userEventTypeIdentifier": "challenge_started",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "challenge_progress",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "challenge_completed",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "userEventTypeIdentifier": "cashback_offer",
+      "subscriptions": [
+        {
+          "channelName": "Activity_Feed_Mobile",
+          "isSubscribed": true,
+          "canUpdateSubscription": true
+        },
+        {
+          "channelName": "Email",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        },
+        {
+          "channelName": "Push",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        }
+      ],
+      "settings": [],
+      "children": [
+        {
+          "userEventTypeIdentifier": "cashback_offer_available",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "cashback_offer_days_left",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        },
+        {
+          "userEventTypeIdentifier": "cashback_repayment",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": true,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "userEventTypeIdentifier": "dialog",
+      "subscriptions": [
+        {
+          "channelName": "Activity_Feed_Mobile",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        },
+        {
+          "channelName": "Email",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        },
+        {
+          "channelName": "Push",
+          "isSubscribed": false,
+          "canUpdateSubscription": true
+        }
+      ],
+      "settings": [],
+      "children": [
+        {
+          "userEventTypeIdentifier": "dialog_message",
+          "subscriptions": [
+            {
+              "channelName": "Activity_Feed_Mobile",
+              "isSubscribed": true,
+              "canUpdateSubscription": false
+            },
+            {
+              "channelName": "Email",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            },
+            {
+              "channelName": "Push",
+              "isSubscribed": false,
+              "canUpdateSubscription": true
+            }
+          ],
+          "settings": [],
+          "children": []
+        }
+      ]
+    }
+  ]
+}

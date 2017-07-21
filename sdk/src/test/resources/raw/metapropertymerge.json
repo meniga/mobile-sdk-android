@@ -1,0 +1,19 @@
+{
+  "data": [],
+  "meta": {
+    "propBoolean": true,
+    "propString": "string",
+    "propNumber": 1,
+    "propNumber2": 1,
+    "propFloat": 1.0,
+    "propNull": null,
+    "propObject": {
+      "nestedPropString": "string",
+      "nestedPropNumber": 1
+    },
+    "propObject2": {
+      "nestedPropString": "string",
+      "nestedPropNumber": 1
+    }
+  }
+}

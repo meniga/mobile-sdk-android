@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "merchantId": 3,
+      "text": "Waitrose",
+      "nettoAmount": -3129,
+      "transactionCount": 34
+    },
+    {
+      "merchantId": 27,
+      "text": "Amazon",
+      "nettoAmount": -1962,
+      "transactionCount": 21
+    },
+    {
+      "merchantId": 31,
+      "text": "Primark",
+      "nettoAmount": -1494,
+      "transactionCount": 28
+    },
+    {
+      "merchantId": 21,
+      "text": "Texaco",
+      "nettoAmount": -1368,
+      "transactionCount": 48
+    },
+    {
+      "merchantId": 29,
+      "text": "Proud Galleries",
+      "nettoAmount": -906,
+      "transactionCount": 43
+    }
+  ]
+}

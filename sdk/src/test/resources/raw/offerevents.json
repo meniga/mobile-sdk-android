@@ -1,0 +1,38 @@
+{
+  "data": [
+      {
+        "validationToken": "QKb3wWqYr@cJUS8IVDkX0SulIP4SO25HyFa$Amn5wqoUvgikeWLxVE7sUypP6yM@8xYq1m6gN1j2MHig4lPyMHUbqQgyK82KZ$GytTE32zEBgOKLLPRxG5djweDPshGKVZkKbzcMLXr2T6jwNBE134FyPVUS8eJhFXnXIONIP3E=",
+        "reward": 50.0000,
+        "rewardType": "FixedAmount",
+        "relevanceHook": null,
+        "state": "Accepted",
+        "daysLeft": 11,
+        "merchantName": "IKEA",
+        "minimumPurchaseAmount": 250.0000,
+        "maximumCashbackPerPurchase": 50.0000,
+        "date": "2017-02-27T12:31:44.101+00:00",
+        "topicId": 2,
+        "topicName": "offer",
+        "title": "£50 off your next purchase",
+        "body": "Get £50 off your next purchase when you spend more than £250 at one of our stores.",
+        "typeName": "OfferFeedItem"
+      },
+      {
+        "validationToken": "QKb3wWqYr@cJUS8IVDkX0SulIP4SO25HyFa$Amn5wqoUvgikeWLxVE7sUypP6yM@8xYq1m6gN1j2MHig4lPyMHUbqQgyK82KZ$GytTE32zEBgOKLLPRxG5djweDPshGKVZkKbzcMLXr2T6jwNBE134FyPVUS8eJhFXnXIONIP3E=",
+        "reward": 20.0000,
+        "rewardType": "FixedAmount",
+        "relevanceHook": null,
+        "state": "Accepted",
+        "daysLeft": 11,
+        "merchantName": "IKEA",
+        "minimumPurchaseAmount": 250.0000,
+        "maximumCashbackPerPurchase": 50.0000,
+        "date": "2017-02-27T12:31:44.101+00:00",
+        "topicId": 2,
+        "topicName": "offer",
+        "title": "£50 off your next purchase",
+        "body": "Get £50 off your next purchase when you spend more than £250 at one of our stores.",
+        "typeName": "OfferFeedItem"
+      }
+  ]
+}

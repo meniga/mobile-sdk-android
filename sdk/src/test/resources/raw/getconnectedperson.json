@@ -1,0 +1,37 @@
+[
+  {
+    "UserId": 0,
+    "PersonId": 0,
+    "FirstName": "string",
+    "RealmUserIdentity": "string",
+    "LastName": "string",
+    "LastLoginDate": "2015-11-19T14:06:15.651Z",
+    "IsInitialSetupDone": true,
+    "Email": "string",
+    "Culture": "string",
+    "LastLoginRemoteHost": "string",
+    "CreateDate": "2015-11-19T14:06:15.651Z",
+    "TermsAndConditionsId": 0,
+    "TermsAndConditionsAcceptDate": "2015-11-19T14:06:15.651Z",
+    "OptOutDate": "2015-11-19T14:06:15.651Z",
+    "Profile": {
+      "PersonId": 0,
+      "Gender": 0,
+      "BirthYear": "2015-11-19T14:06:15.651Z",
+      "PostalCode": "string",
+      "NumberInFamily": 0,
+      "NumberOfKids": 0,
+      "NumberOfCars": 0,
+      "IncomeId": 0,
+      "ApartmentType": 0,
+      "ApartmentSize": 0,
+      "ApartmentRooms": 0,
+      "ApartmentSizeKey": 0,
+      "HasSavedProfile": true,
+      "Created": "2015-11-19T14:06:15.651Z"
+    },
+    "PhoneNumber": "string",
+    "PasswordExpiryDate": "2015-11-19T14:06:15.651Z",
+    "Hide": true
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "PersonId": 2542,
+  "Gender": 2,
+  "BirthYear": "/Date(631152000000+0000)/",
+  "PostalCode": "220",
+  "NumberInFamily": 3,
+  "NumberOfKids": 1,
+  "NumberOfCars": 3,
+  "IncomeId": null,
+  "ApartmentType": 1,
+  "ApartmentSize": 86,
+  "ApartmentRooms": 3,
+  "ApartmentSizeKey": 2,
+  "HasSavedProfile": null,
+  "Created": "/Date(1444838622770+0000)/"
+}

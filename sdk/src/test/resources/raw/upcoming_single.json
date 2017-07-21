@@ -1,0 +1,45 @@
+{
+  "data": {
+      "id": 14,
+      "bankReference": null,
+      "text": "Heating bill",
+      "amount": -10000,
+      "amountInCurrency": 10000,
+      "currencyCode": "ISK",
+      "date": "2016-10-01T00:00:00",
+      "paymentStatus": "Open",
+      "isFlagged": true,
+      "isWatched": true,
+      "accountId": 5565,
+      "transactionId": null,
+      "invoiceId": null,
+      "scheduledPaymentId": null,
+      "categoryId": 134,
+      "recurringPattern": {
+        "id": 20,
+        "text": "Heating bill",
+        "amountInCurrency": 10000,
+        "currencyCode": "ISK",
+        "categoryId": 134,
+        "accountId": 5565,
+        "pattern": {
+          "dayOfMonth": 1,
+          "dayOfMonthInterval": null,
+          "month": "April",
+          "monthInterval": null,
+          "dayOfWeek": "Tuesday",
+          "dayOfWeekInterval": null,
+          "weekOfYear": null,
+          "weekInterval": null
+        },
+        "repeatUntil": "2018-09-29T12:38:55.614",
+        "isWatched": false,
+        "isFlagged": false,
+        "type": "Manual",
+        "status": "Accepted"
+      },
+      "comments": [],
+      "reconcileScores": [],
+      "details": null
+    }
+}

@@ -1,0 +1,2880 @@
+{
+  "data": [
+    {
+      "accountId": 2886,
+      "realmAccountTypeId": 42,
+      "accountName": "12are",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Asset",
+      "currentBalance": 70000,
+      "history": [
+        {
+          "id": 4816,
+          "accountId": 2886,
+          "balance": 70000,
+          "balanceDate": "2014-02-08T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4821,
+          "accountId": 2886,
+          "balance": 350,
+          "balanceDate": "2014-12-12T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4835,
+          "accountId": 2886,
+          "balance": 273058,
+          "balanceDate": "2016-04-19T15:12:07.279",
+          "isDefault": false
+        },
+        {
+          "id": 4826,
+          "accountId": 2886,
+          "balance": 70000,
+          "balanceDate": "2016-04-19T15:17:55",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2938,
+      "realmAccountTypeId": 42,
+      "accountName": "5AAAAAASKE",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4792,
+          "accountId": 2938,
+          "balance": -255,
+          "balanceDate": "2016-03-01T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4720,
+          "accountId": 2938,
+          "balance": 0,
+          "balanceDate": "2016-04-18T12:37:10.336",
+          "isDefault": false
+        },
+        {
+          "id": 4721,
+          "accountId": 2938,
+          "balance": 0,
+          "balanceDate": "2016-04-18T13:46:00.757199",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2922,
+      "realmAccountTypeId": 42,
+      "accountName": "AAaaa 1460979645748",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -1100,
+      "history": [
+        {
+          "id": 4688,
+          "accountId": 2922,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:40:45.765",
+          "isDefault": false
+        },
+        {
+          "id": 4689,
+          "accountId": 2922,
+          "balance": -1100,
+          "balanceDate": "2016-04-18T13:03:40.259889",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2891,
+      "realmAccountTypeId": 42,
+      "accountName": "Aadami",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 600,
+      "history": [
+        {
+          "id": 4565,
+          "accountId": 2891,
+          "balance": 25,
+          "balanceDate": "2015-09-07T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4566,
+          "accountId": 2891,
+          "balance": 25,
+          "balanceDate": "2016-04-16T21:51:27",
+          "isDefault": false
+        },
+        {
+          "id": 4797,
+          "accountId": 2891,
+          "balance": 600,
+          "balanceDate": "2016-04-19T11:14:27.1",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2933,
+      "realmAccountTypeId": 42,
+      "accountName": "AHAHAHAHHA",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -1100,
+      "history": [
+        {
+          "id": 4710,
+          "accountId": 2933,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:40:45.765",
+          "isDefault": false
+        },
+        {
+          "id": 4711,
+          "accountId": 2933,
+          "balance": -1100,
+          "balanceDate": "2016-04-18T13:31:08.16952",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2919,
+      "realmAccountTypeId": 42,
+      "accountName": "ALLA 1460979645748",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 36,
+      "history": [
+        {
+          "id": 4682,
+          "accountId": 2919,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:40:45.765",
+          "isDefault": false
+        },
+        {
+          "id": 4683,
+          "accountId": 2919,
+          "balance": 0,
+          "balanceDate": "2016-04-18T12:58:47.962689",
+          "isDefault": false
+        },
+        {
+          "id": 4798,
+          "accountId": 2919,
+          "balance": 36,
+          "balanceDate": "2016-04-19T11:18:10.553",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2920,
+      "realmAccountTypeId": 42,
+      "accountName": "ALLA 1460979645748",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 25,
+      "history": [
+        {
+          "id": 4684,
+          "accountId": 2920,
+          "balance": 0,
+          "balanceDate": "2016-04-17T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4685,
+          "accountId": 2920,
+          "balance": 25,
+          "balanceDate": "2016-04-18T12:59:58",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2921,
+      "realmAccountTypeId": 42,
+      "accountName": "ALLAaaa 1460979645748",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 255,
+      "history": [
+        {
+          "id": 4686,
+          "accountId": 2921,
+          "balance": 0,
+          "balanceDate": "2016-04-17T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4687,
+          "accountId": 2921,
+          "balance": 255,
+          "balanceDate": "2016-04-18T13:00:11",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2887,
+      "realmAccountTypeId": 42,
+      "accountName": "Arte",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 2000,
+      "history": [
+        {
+          "id": 4557,
+          "accountId": 2887,
+          "balance": 5,
+          "balanceDate": "2016-03-01T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4558,
+          "accountId": 2887,
+          "balance": 2000,
+          "balanceDate": "2016-04-16T20:57:44",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2888,
+      "realmAccountTypeId": 42,
+      "accountName": "Arte",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 60,
+      "history": [
+        {
+          "id": 4559,
+          "accountId": 2888,
+          "balance": 255,
+          "balanceDate": "2016-03-01T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4560,
+          "accountId": 2888,
+          "balance": 60,
+          "balanceDate": "2016-04-16T20:57:46",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2937,
+      "realmAccountTypeId": 42,
+      "accountName": "ASKE",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -1000,
+      "history": [
+        {
+          "id": 4718,
+          "accountId": 2937,
+          "balance": -1000,
+          "balanceDate": "2016-04-18T12:37:10.336",
+          "isDefault": false
+        },
+        {
+          "id": 4719,
+          "accountId": 2937,
+          "balance": -1000,
+          "balanceDate": "2016-04-18T13:43:05.412075",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2894,
+      "realmAccountTypeId": 42,
+      "accountName": "Ftyui",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 80,
+      "history": [
+        {
+          "id": 4620,
+          "accountId": 2894,
+          "balance": 5000000,
+          "balanceDate": "2014-01-01T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4621,
+          "accountId": 2894,
+          "balance": 80,
+          "balanceDate": "2016-04-17T22:06:14",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2892,
+      "realmAccountTypeId": 42,
+      "accountName": "Oke",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 55,
+      "history": [
+        {
+          "id": 4567,
+          "accountId": 2892,
+          "balance": 25,
+          "balanceDate": "2016-03-01T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4789,
+          "accountId": 2892,
+          "balance": 35,
+          "balanceDate": "2016-04-01T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4800,
+          "accountId": 2892,
+          "balance": 15,
+          "balanceDate": "2016-04-15T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4568,
+          "accountId": 2892,
+          "balance": 25,
+          "balanceDate": "2016-04-16T21:51:58",
+          "isDefault": false
+        },
+        {
+          "id": 4793,
+          "accountId": 2892,
+          "balance": 36,
+          "balanceDate": "2016-04-17T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4799,
+          "accountId": 2892,
+          "balance": 55,
+          "balanceDate": "2016-04-19T12:15:39.391",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2893,
+      "realmAccountTypeId": 42,
+      "accountName": "Olfa",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -2000,
+      "history": [
+        {
+          "id": 4569,
+          "accountId": 2893,
+          "balance": -500,
+          "balanceDate": "2014-11-11T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4570,
+          "accountId": 2893,
+          "balance": -2000,
+          "balanceDate": "2016-04-17T21:58:37",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2889,
+      "realmAccountTypeId": 42,
+      "accountName": "Ryui",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -2000,
+      "history": [
+        {
+          "id": 4561,
+          "accountId": 2889,
+          "balance": -25,
+          "balanceDate": "2015-09-01T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4562,
+          "accountId": 2889,
+          "balance": -2000,
+          "balanceDate": "2016-04-16T21:45:28",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2818,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460460891446",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 999,
+      "history": [
+        {
+          "id": 4521,
+          "accountId": 2818,
+          "balance": 999,
+          "balanceDate": "2016-04-15T13:04:48.262",
+          "isDefault": false
+        },
+        {
+          "id": 4526,
+          "accountId": 2818,
+          "balance": 999,
+          "balanceDate": "2016-04-15T13:15:47.745",
+          "isDefault": false
+        },
+        {
+          "id": 4529,
+          "accountId": 2818,
+          "balance": 999,
+          "balanceDate": "2016-04-15T13:16:18.707",
+          "isDefault": false
+        },
+        {
+          "id": 4533,
+          "accountId": 2818,
+          "balance": 999,
+          "balanceDate": "2016-04-15T13:21:46.853",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2872,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460721926546",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4508,
+          "accountId": 2872,
+          "balance": 0,
+          "balanceDate": "2016-04-15T12:05:08.0744325",
+          "isDefault": false
+        },
+        {
+          "id": 4507,
+          "accountId": 2872,
+          "balance": 0,
+          "balanceDate": "2016-04-15T12:05:26.546",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2873,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460725177614",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4510,
+          "accountId": 2873,
+          "balance": 0,
+          "balanceDate": "2016-04-15T12:59:19.1982017",
+          "isDefault": false
+        },
+        {
+          "id": 4509,
+          "accountId": 2873,
+          "balance": 0,
+          "balanceDate": "2016-04-15T12:59:37.615",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2875,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460725387520",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4515,
+          "accountId": 2875,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:02:49.0962017",
+          "isDefault": false
+        },
+        {
+          "id": 4514,
+          "accountId": 2875,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:03:07.52",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2876,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460725435397",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4518,
+          "accountId": 2876,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:03:36.9726017",
+          "isDefault": false
+        },
+        {
+          "id": 4517,
+          "accountId": 2876,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:03:55.397",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2878,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460725488832",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4523,
+          "accountId": 2878,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:04:30.4182017",
+          "isDefault": false
+        },
+        {
+          "id": 4522,
+          "accountId": 2878,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:04:48.832",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2880,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460726162471",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4528,
+          "accountId": 2880,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:15:44.1080479",
+          "isDefault": false
+        },
+        {
+          "id": 4527,
+          "accountId": 2880,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:16:02.471",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2881,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460726508038",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4535,
+          "accountId": 2881,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:21:29.6792479",
+          "isDefault": false
+        },
+        {
+          "id": 4534,
+          "accountId": 2881,
+          "balance": 0,
+          "balanceDate": "2016-04-15T13:21:48.038",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2884,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460733101757",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4549,
+          "accountId": 2884,
+          "balance": 0,
+          "balanceDate": "2016-04-15T15:11:22.8001703",
+          "isDefault": false
+        },
+        {
+          "id": 4548,
+          "accountId": 2884,
+          "balance": 0,
+          "balanceDate": "2016-04-15T15:11:41.757",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2895,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460971633841",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4622,
+          "accountId": 2895,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:27:13.841",
+          "isDefault": false
+        },
+        {
+          "id": 4623,
+          "accountId": 2895,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:27:14.4768248",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2896,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460971688896",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4624,
+          "accountId": 2896,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:28:08.896",
+          "isDefault": false
+        },
+        {
+          "id": 4625,
+          "accountId": 2896,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:28:09.0615747",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2897,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460971879400",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4626,
+          "accountId": 2897,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:31:19.4",
+          "isDefault": false
+        },
+        {
+          "id": 4627,
+          "accountId": 2897,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:31:19.7103968",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2898,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460971901435",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4628,
+          "accountId": 2898,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:31:41.436",
+          "isDefault": false
+        },
+        {
+          "id": 4629,
+          "accountId": 2898,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:31:41.6441374",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2899,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460971982864",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4630,
+          "accountId": 2899,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:33:02.865",
+          "isDefault": false
+        },
+        {
+          "id": 4631,
+          "accountId": 2899,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:33:03.1234597",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2900,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460972125476",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4632,
+          "accountId": 2900,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:35:25.476",
+          "isDefault": false
+        },
+        {
+          "id": 4633,
+          "accountId": 2900,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:35:25.7388577",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2901,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460972283064",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4634,
+          "accountId": 2901,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:38:03.064",
+          "isDefault": false
+        },
+        {
+          "id": 4635,
+          "accountId": 2901,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:38:03.2832577",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2902,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460972312503",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4636,
+          "accountId": 2902,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:38:32.503",
+          "isDefault": false
+        },
+        {
+          "id": 4637,
+          "accountId": 2902,
+          "balance": 0,
+          "balanceDate": "2016-04-18T09:38:32.6892577",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2903,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460974646862",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4641,
+          "accountId": 2903,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:17:26.862",
+          "isDefault": false
+        },
+        {
+          "id": 4642,
+          "accountId": 2903,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:22:36.6025042",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2904,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460974852905",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4643,
+          "accountId": 2904,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:20:52.905",
+          "isDefault": false
+        },
+        {
+          "id": 4644,
+          "accountId": 2904,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:26:02.0712584",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2905,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460974966527",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4645,
+          "accountId": 2905,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:22:46.527",
+          "isDefault": false
+        },
+        {
+          "id": 4646,
+          "accountId": 2905,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:27:55.6711866",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2906,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460975062765",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4647,
+          "accountId": 2906,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:24:22.765",
+          "isDefault": false
+        },
+        {
+          "id": 4648,
+          "accountId": 2906,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:29:31.986204",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2907,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460975128727",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4649,
+          "accountId": 2907,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:25:28.728",
+          "isDefault": false
+        },
+        {
+          "id": 4650,
+          "accountId": 2907,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:30:37.9122266",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2908,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460975421311",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4651,
+          "accountId": 2908,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:30:21.311",
+          "isDefault": false
+        },
+        {
+          "id": 4652,
+          "accountId": 2908,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:35:30.4911504",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2909,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460975481280",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4653,
+          "accountId": 2909,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:31:21.28",
+          "isDefault": false
+        },
+        {
+          "id": 4654,
+          "accountId": 2909,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:36:30.4887504",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2910,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460975537798",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4655,
+          "accountId": 2910,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:32:17.798",
+          "isDefault": false
+        },
+        {
+          "id": 4656,
+          "accountId": 2910,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:37:26.9919504",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2911,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460975652828",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4657,
+          "accountId": 2911,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:34:12.828",
+          "isDefault": false
+        },
+        {
+          "id": 4658,
+          "accountId": 2911,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:39:22.0575504",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2912,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460975802456",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4659,
+          "accountId": 2912,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:36:42.457",
+          "isDefault": false
+        },
+        {
+          "id": 4660,
+          "accountId": 2912,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:41:51.6154273",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2913,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460975935475",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4661,
+          "accountId": 2913,
+          "balance": 0,
+          "balanceDate": "2016-04-18T10:38:55.475",
+          "isDefault": false
+        },
+        {
+          "id": 4662,
+          "accountId": 2913,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:44:04.6530801",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2914,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460978925934",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4669,
+          "accountId": 2914,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:28:45.934",
+          "isDefault": false
+        },
+        {
+          "id": 4670,
+          "accountId": 2914,
+          "balance": 0,
+          "balanceDate": "2016-04-18T12:33:55.2095273",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2915,
+      "realmAccountTypeId": 42,
+      "accountName": "Test NetWorth Account 1460979229487",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4671,
+          "accountId": 2915,
+          "balance": 0,
+          "balanceDate": "2016-04-18T11:33:49.487",
+          "isDefault": false
+        },
+        {
+          "id": 4672,
+          "accountId": 2915,
+          "balance": 0,
+          "balanceDate": "2016-04-18T12:39:46.6017798",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2961,
+      "realmAccountTypeId": 42,
+      "accountName": "This is a Test Account 1461073254427",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -1000,
+      "history": [
+        {
+          "id": 4817,
+          "accountId": 2961,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T13:40:54.427",
+          "isDefault": false
+        },
+        {
+          "id": 4818,
+          "accountId": 2961,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T14:45:43.1881397",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2962,
+      "realmAccountTypeId": 42,
+      "accountName": "This is a Test Account 1461073266160",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -1000,
+      "history": [
+        {
+          "id": 4819,
+          "accountId": 2962,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T13:41:06.161",
+          "isDefault": false
+        },
+        {
+          "id": 4820,
+          "accountId": 2962,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T14:45:54.8102142",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2963,
+      "realmAccountTypeId": 42,
+      "accountName": "This is a Test Account 1461073297386",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -1000,
+      "history": [
+        {
+          "id": 4822,
+          "accountId": 2963,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T13:41:37.386",
+          "isDefault": false
+        },
+        {
+          "id": 4823,
+          "accountId": 2963,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T14:46:25.8700133",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2965,
+      "realmAccountTypeId": 42,
+      "accountName": "This is a Test Account 1461073355884",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -1000,
+      "history": [
+        {
+          "id": 4827,
+          "accountId": 2965,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T13:42:35.884",
+          "isDefault": false
+        },
+        {
+          "id": 4828,
+          "accountId": 2965,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T14:47:24.3703883",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2967,
+      "realmAccountTypeId": 42,
+      "accountName": "This is a Test Account 1461078727878",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -1000,
+      "history": [
+        {
+          "id": 4836,
+          "accountId": 2967,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T15:12:07.878",
+          "isDefault": false
+        },
+        {
+          "id": 4837,
+          "accountId": 2967,
+          "balance": -1000,
+          "balanceDate": "2016-04-19T16:16:56.5398777",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2529,
+      "realmAccountTypeId": 37,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": false,
+      "isExcluded": false,
+      "netWorthType": "Liability",
+      "currentBalance": -960,
+      "history": [
+        {
+          "id": 3741,
+          "accountId": 2529,
+          "balance": 23874,
+          "balanceDate": "2014-04-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3742,
+          "accountId": 2529,
+          "balance": 22508,
+          "balanceDate": "2014-05-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3743,
+          "accountId": 2529,
+          "balance": 21044,
+          "balanceDate": "2014-06-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3744,
+          "accountId": 2529,
+          "balance": 20165,
+          "balanceDate": "2014-07-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3745,
+          "accountId": 2529,
+          "balance": 18991,
+          "balanceDate": "2014-08-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3746,
+          "accountId": 2529,
+          "balance": 17624,
+          "balanceDate": "2014-09-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3747,
+          "accountId": 2529,
+          "balance": 16598,
+          "balanceDate": "2014-10-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3748,
+          "accountId": 2529,
+          "balance": 15623,
+          "balanceDate": "2014-11-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3749,
+          "accountId": 2529,
+          "balance": 15034,
+          "balanceDate": "2014-12-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3750,
+          "accountId": 2529,
+          "balance": 14009,
+          "balanceDate": "2015-01-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3751,
+          "accountId": 2529,
+          "balance": 13030,
+          "balanceDate": "2015-02-28T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3752,
+          "accountId": 2529,
+          "balance": 11648,
+          "balanceDate": "2015-03-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3753,
+          "accountId": 2529,
+          "balance": 11015,
+          "balanceDate": "2015-04-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3754,
+          "accountId": 2529,
+          "balance": 10094,
+          "balanceDate": "2015-05-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3755,
+          "accountId": 2529,
+          "balance": 9216,
+          "balanceDate": "2015-06-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3756,
+          "accountId": 2529,
+          "balance": 8498,
+          "balanceDate": "2015-07-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3757,
+          "accountId": 2529,
+          "balance": 6962,
+          "balanceDate": "2015-08-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3758,
+          "accountId": 2529,
+          "balance": 5795,
+          "balanceDate": "2015-09-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3759,
+          "accountId": 2529,
+          "balance": 4927,
+          "balanceDate": "2015-10-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3760,
+          "accountId": 2529,
+          "balance": 3488,
+          "balanceDate": "2015-11-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3761,
+          "accountId": 2529,
+          "balance": 2424,
+          "balanceDate": "2015-12-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3762,
+          "accountId": 2529,
+          "balance": 1466,
+          "balanceDate": "2016-01-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3763,
+          "accountId": 2529,
+          "balance": 241,
+          "balanceDate": "2016-02-29T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3764,
+          "accountId": 2529,
+          "balance": -771,
+          "balanceDate": "2016-03-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3584,
+          "accountId": 2529,
+          "balance": 0,
+          "balanceDate": "2016-04-01T11:06:06.1552691",
+          "isDefault": false
+        },
+        {
+          "id": 3587,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-01T11:08:41.5946655",
+          "isDefault": false
+        },
+        {
+          "id": 3600,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-01T12:09:55.9943538",
+          "isDefault": false
+        },
+        {
+          "id": 3667,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-01T13:47:21.6791427",
+          "isDefault": false
+        },
+        {
+          "id": 3681,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-01T14:49:41.5548069",
+          "isDefault": false
+        },
+        {
+          "id": 3765,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-05T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3728,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-05T12:42:27.8037456",
+          "isDefault": false
+        },
+        {
+          "id": 3737,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-05T16:32:54.6468384",
+          "isDefault": false
+        },
+        {
+          "id": 3867,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-07T09:20:48.0859745",
+          "isDefault": false
+        },
+        {
+          "id": 3886,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-07T12:48:30.2645748",
+          "isDefault": false
+        },
+        {
+          "id": 3899,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-07T14:42:17.300195",
+          "isDefault": false
+        },
+        {
+          "id": 3966,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-08T09:19:59.9992087",
+          "isDefault": false
+        },
+        {
+          "id": 3972,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-08T15:44:22.1587514",
+          "isDefault": false
+        },
+        {
+          "id": 3984,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-11T10:35:39.4635643",
+          "isDefault": false
+        },
+        {
+          "id": 4475,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-14T13:57:45.8137368",
+          "isDefault": false
+        },
+        {
+          "id": 4538,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-15T13:26:46.2820744",
+          "isDefault": false
+        },
+        {
+          "id": 4552,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-15T15:34:55.5714637",
+          "isDefault": false
+        },
+        {
+          "id": 4840,
+          "accountId": 2529,
+          "balance": -960,
+          "balanceDate": "2016-04-19T16:17:05.1666777",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 2,
+        "name": "Credit",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2530,
+      "realmAccountTypeId": 39,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": false,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 459,
+      "history": [
+        {
+          "id": 3766,
+          "accountId": 2530,
+          "balance": 1708,
+          "balanceDate": "2014-04-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3767,
+          "accountId": 2530,
+          "balance": 1623,
+          "balanceDate": "2014-05-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3768,
+          "accountId": 2530,
+          "balance": 1543,
+          "balanceDate": "2014-06-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3769,
+          "accountId": 2530,
+          "balance": 1483,
+          "balanceDate": "2014-07-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3770,
+          "accountId": 2530,
+          "balance": 1458,
+          "balanceDate": "2014-08-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3771,
+          "accountId": 2530,
+          "balance": 1218,
+          "balanceDate": "2014-09-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3772,
+          "accountId": 2530,
+          "balance": 1163,
+          "balanceDate": "2014-10-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3773,
+          "accountId": 2530,
+          "balance": 1103,
+          "balanceDate": "2014-11-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3774,
+          "accountId": 2530,
+          "balance": 1015,
+          "balanceDate": "2014-12-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3775,
+          "accountId": 2530,
+          "balance": 833,
+          "balanceDate": "2015-01-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3776,
+          "accountId": 2530,
+          "balance": 713,
+          "balanceDate": "2015-02-28T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3777,
+          "accountId": 2530,
+          "balance": 415,
+          "balanceDate": "2015-03-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3778,
+          "accountId": 2530,
+          "balance": 284,
+          "balanceDate": "2015-04-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3779,
+          "accountId": 2530,
+          "balance": 27,
+          "balanceDate": "2015-05-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3780,
+          "accountId": 2530,
+          "balance": -88,
+          "balanceDate": "2015-06-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3781,
+          "accountId": 2530,
+          "balance": -113,
+          "balanceDate": "2015-07-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3782,
+          "accountId": 2530,
+          "balance": -174,
+          "balanceDate": "2015-08-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3783,
+          "accountId": 2530,
+          "balance": -212,
+          "balanceDate": "2015-09-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3784,
+          "accountId": 2530,
+          "balance": -381,
+          "balanceDate": "2015-10-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3785,
+          "accountId": 2530,
+          "balance": -449,
+          "balanceDate": "2015-11-30T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3786,
+          "accountId": 2530,
+          "balance": -596,
+          "balanceDate": "2015-12-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3787,
+          "accountId": 2530,
+          "balance": -777,
+          "balanceDate": "2016-01-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3788,
+          "accountId": 2530,
+          "balance": -1017,
+          "balanceDate": "2016-02-29T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3789,
+          "accountId": 2530,
+          "balance": -1236,
+          "balanceDate": "2016-03-31T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3585,
+          "accountId": 2530,
+          "balance": 0,
+          "balanceDate": "2016-04-01T11:06:06.5140714",
+          "isDefault": false
+        },
+        {
+          "id": 3588,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-01T11:08:41.8754673",
+          "isDefault": false
+        },
+        {
+          "id": 3601,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-01T12:09:56.0099539",
+          "isDefault": false
+        },
+        {
+          "id": 3668,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-01T13:47:21.6947427",
+          "isDefault": false
+        },
+        {
+          "id": 3682,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-01T14:49:41.570407",
+          "isDefault": false
+        },
+        {
+          "id": 3790,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-05T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 3729,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-05T12:42:28.8489456",
+          "isDefault": false
+        },
+        {
+          "id": 3738,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-05T16:32:55.0524384",
+          "isDefault": false
+        },
+        {
+          "id": 3868,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-07T09:20:48.1015745",
+          "isDefault": false
+        },
+        {
+          "id": 3887,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-07T12:48:30.2801748",
+          "isDefault": false
+        },
+        {
+          "id": 3900,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-07T14:42:17.3157951",
+          "isDefault": false
+        },
+        {
+          "id": 3967,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-08T09:20:00.0460081",
+          "isDefault": false
+        },
+        {
+          "id": 3973,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-08T15:44:22.5019514",
+          "isDefault": false
+        },
+        {
+          "id": 3985,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-11T10:35:41.0235643",
+          "isDefault": false
+        },
+        {
+          "id": 4476,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-14T13:57:46.5313368",
+          "isDefault": false
+        },
+        {
+          "id": 4539,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-15T13:26:46.2976745",
+          "isDefault": false
+        },
+        {
+          "id": 4553,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-15T15:34:55.7430637",
+          "isDefault": false
+        },
+        {
+          "id": 4841,
+          "accountId": 2530,
+          "balance": 459,
+          "balanceDate": "2016-04-19T16:17:05.1822777",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 1,
+        "name": "Current",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2531,
+      "realmAccountTypeId": 41,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": false,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 1246,
+      "history": [
+        {
+          "id": 3586,
+          "accountId": 2531,
+          "balance": 0,
+          "balanceDate": "2016-04-01T11:06:06.5608717",
+          "isDefault": false
+        },
+        {
+          "id": 3589,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-01T11:08:41.9222676",
+          "isDefault": false
+        },
+        {
+          "id": 3602,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-01T12:09:56.025554",
+          "isDefault": false
+        },
+        {
+          "id": 3669,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-01T13:47:21.6947427",
+          "isDefault": false
+        },
+        {
+          "id": 3683,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-01T14:49:41.5860071",
+          "isDefault": false
+        },
+        {
+          "id": 3730,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-05T12:42:28.8645456",
+          "isDefault": false
+        },
+        {
+          "id": 3739,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-05T16:32:55.0680384",
+          "isDefault": false
+        },
+        {
+          "id": 3869,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-07T09:20:48.1171745",
+          "isDefault": false
+        },
+        {
+          "id": 3888,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-07T12:48:30.2957748",
+          "isDefault": false
+        },
+        {
+          "id": 3901,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-07T14:42:17.3313952",
+          "isDefault": false
+        },
+        {
+          "id": 3968,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-08T09:20:00.0616079",
+          "isDefault": false
+        },
+        {
+          "id": 3974,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-08T15:44:22.5175514",
+          "isDefault": false
+        },
+        {
+          "id": 3986,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-11T10:35:41.0391643",
+          "isDefault": false
+        },
+        {
+          "id": 4477,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-14T13:57:46.5469368",
+          "isDefault": false
+        },
+        {
+          "id": 4540,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-15T13:26:46.3132746",
+          "isDefault": false
+        },
+        {
+          "id": 4554,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-15T15:34:55.7586637",
+          "isDefault": false
+        },
+        {
+          "id": 4842,
+          "accountId": 2531,
+          "balance": 1246,
+          "balanceDate": "2016-04-19T16:17:05.1978777",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 3,
+        "name": "Savings",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2803,
+      "realmAccountTypeId": 42,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4175,
+          "accountId": 2803,
+          "balance": 0,
+          "balanceDate": "2016-04-11T15:43:01.3109198",
+          "isDefault": false
+        },
+        {
+          "id": 4174,
+          "accountId": 2803,
+          "balance": 0,
+          "balanceDate": "2016-04-11T15:43:07.228",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2804,
+      "realmAccountTypeId": 42,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4177,
+          "accountId": 2804,
+          "balance": 0,
+          "balanceDate": "2016-04-11T15:44:14.6933198",
+          "isDefault": false
+        },
+        {
+          "id": 4176,
+          "accountId": 2804,
+          "balance": 0,
+          "balanceDate": "2016-04-11T15:44:20.705",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2805,
+      "realmAccountTypeId": 42,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4179,
+          "accountId": 2805,
+          "balance": 0,
+          "balanceDate": "2016-04-11T15:44:31.2605198",
+          "isDefault": false
+        },
+        {
+          "id": 4178,
+          "accountId": 2805,
+          "balance": 0,
+          "balanceDate": "2016-04-11T15:44:37.397",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2806,
+      "realmAccountTypeId": 42,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4181,
+          "accountId": 2806,
+          "balance": 0,
+          "balanceDate": "2016-04-11T15:51:11.604047",
+          "isDefault": false
+        },
+        {
+          "id": 4180,
+          "accountId": 2806,
+          "balance": 0,
+          "balanceDate": "2016-04-11T15:51:17.746",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2808,
+      "realmAccountTypeId": 42,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4241,
+          "accountId": 2808,
+          "balance": 0,
+          "balanceDate": "2016-04-11T17:31:47.9609569",
+          "isDefault": false
+        },
+        {
+          "id": 4240,
+          "accountId": 2808,
+          "balance": 0,
+          "balanceDate": "2016-04-11T17:31:53.449",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2809,
+      "realmAccountTypeId": 42,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Liability",
+      "currentBalance": 0,
+      "history": [
+        {
+          "id": 4243,
+          "accountId": 2809,
+          "balance": 0,
+          "balanceDate": "2016-04-11T17:32:54.6357843",
+          "isDefault": false
+        },
+        {
+          "id": 4242,
+          "accountId": 2809,
+          "balance": 0,
+          "balanceDate": "2016-04-11T17:32:59.978",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2817,
+      "realmAccountTypeId": 42,
+      "accountName": "UpdatedName",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 999,
+      "history": [
+        {
+          "id": 4400,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:14:20.903",
+          "isDefault": false
+        },
+        {
+          "id": 4401,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:16:31.402",
+          "isDefault": false
+        },
+        {
+          "id": 4402,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:17:16.239",
+          "isDefault": false
+        },
+        {
+          "id": 4403,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:19:35.749",
+          "isDefault": false
+        },
+        {
+          "id": 4407,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:25:45.62",
+          "isDefault": false
+        },
+        {
+          "id": 4408,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:26:27.148",
+          "isDefault": false
+        },
+        {
+          "id": 4409,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:28:32.051",
+          "isDefault": false
+        },
+        {
+          "id": 4410,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:29:11.733",
+          "isDefault": false
+        },
+        {
+          "id": 4411,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:30:09.695",
+          "isDefault": false
+        },
+        {
+          "id": 4415,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:32:03.785",
+          "isDefault": false
+        },
+        {
+          "id": 4416,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:43:12.006",
+          "isDefault": false
+        },
+        {
+          "id": 4417,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:56:39.439",
+          "isDefault": false
+        },
+        {
+          "id": 4418,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-13T14:57:03.103",
+          "isDefault": false
+        },
+        {
+          "id": 4461,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T11:32:16.258",
+          "isDefault": false
+        },
+        {
+          "id": 4462,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T12:16:37.606",
+          "isDefault": false
+        },
+        {
+          "id": 4463,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T12:21:17.945",
+          "isDefault": false
+        },
+        {
+          "id": 4464,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T12:29:02.752",
+          "isDefault": false
+        },
+        {
+          "id": 4465,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T12:35:09.385",
+          "isDefault": false
+        },
+        {
+          "id": 4469,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T12:57:19.038",
+          "isDefault": false
+        },
+        {
+          "id": 4470,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T12:58:07.32",
+          "isDefault": false
+        },
+        {
+          "id": 4471,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T12:59:03.415",
+          "isDefault": false
+        },
+        {
+          "id": 4472,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T13:02:12.154",
+          "isDefault": false
+        },
+        {
+          "id": 4473,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T13:03:33.415",
+          "isDefault": false
+        },
+        {
+          "id": 4474,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T13:03:53.288",
+          "isDefault": false
+        },
+        {
+          "id": 4273,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T13:35:44.074",
+          "isDefault": false
+        },
+        {
+          "id": 4274,
+          "accountId": 2817,
+          "balance": 999,
+          "balanceDate": "2016-04-14T13:52:43.568",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    },
+    {
+      "accountId": 2890,
+      "realmAccountTypeId": 42,
+      "accountName": "Xcoi",
+      "isImport": false,
+      "isManual": true,
+      "isExcluded": true,
+      "netWorthType": "Asset",
+      "currentBalance": 2000,
+      "history": [
+        {
+          "id": 4563,
+          "accountId": 2890,
+          "balance": -2588,
+          "balanceDate": "2016-01-03T00:00:00",
+          "isDefault": false
+        },
+        {
+          "id": 4564,
+          "accountId": 2890,
+          "balance": -388000,
+          "balanceDate": "2016-04-16T21:47:55.9405553",
+          "isDefault": false
+        },
+        {
+          "id": 4790,
+          "accountId": 2890,
+          "balance": 2000,
+          "balanceDate": "2016-04-19T09:24:52.863",
+          "isDefault": false
+        },
+        {
+          "id": 4791,
+          "accountId": 2890,
+          "balance": 2000,
+          "balanceDate": "2016-04-19T09:30:32.034",
+          "isDefault": false
+        }
+      ],
+      "accountType": {
+        "id": 21,
+        "name": "Manual",
+        "parentId": null,
+        "parentName": null
+      }
+    }
+  ]
+}

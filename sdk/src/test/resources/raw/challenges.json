@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "id": "e9b6101a-49eb-4d25-98e4-7b48dab90d50",
+      "title": "Eat like a Boss",
+      "description": "You can't handle the truth",
+      "type": "SuggestedSpending",
+      "startDate": "2017-02-01T00:00:00",
+      "endDate": "2017-02-28T23:59:59.999",
+      "accepted": false,
+      "acceptedDate": null,
+      "typeData": {
+        "categoryIds": [
+          12,
+          13,
+          14
+        ],
+        "targetPercentage": 50,
+        "spentAmount": null,
+        "targetAmount": null,
+        "numberOfParticipants": 1,
+        "recurringInterval": null,
+        "metaData": "{\"color\": \"warning\"}"
+      },
+      "iconUrl": null,
+      "topicId": 0
+    },
+    {
+      "id": "a6006f56-9ee7-4a11-9564-cc099d1b58fe",
+      "title": "GlobalSpendingMeterMarker",
+      "description": null,
+      "type": "SuggestedSpending",
+      "startDate": "2017-01-01T00:00:00",
+      "endDate": "2018-01-01T00:00:00",
+      "accepted": false,
+      "acceptedDate": null,
+      "typeData": {
+        "targetPercentage": 20,
+        "spentAmount": null,
+        "targetAmount": null,
+        "numberOfParticipants": 3,
+        "recurringInterval": "Monthly"
+      },
+      "iconUrl": null,
+      "topicId": 0
+    }
+  ]
+}

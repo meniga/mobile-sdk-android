@@ -1,0 +1,114 @@
+{
+  "defaultCultureName": "en-GB",
+  "systemCurrency": "GBP",
+  "numberFormat": "#,##0.00",
+  "currencyFormat": "£ {0}",
+  "clusterNodeName": null,
+  "currencyRoundOff": 1,
+  "currencyDecimalDigits": 2,
+  "currencies": [
+    {
+      "id": 1,
+      "code": "ISK",
+      "isDefault": false,
+      "name": "Icelandic Krona",
+      "format": "#,##0",
+      "currencyFormat": "{0} kr.",
+      "provider": null,
+      "roundOff": 3
+    },
+    {
+      "id": 2,
+      "code": "USD",
+      "isDefault": false,
+      "name": "US Dollar",
+      "format": "#,##0.00",
+      "currencyFormat": "$ {0}",
+      "provider": null,
+      "roundOff": 1
+    },
+    {
+      "id": 3,
+      "code": "EUR",
+      "isDefault": false,
+      "name": "Euro",
+      "format": "#,##0.00",
+      "currencyFormat": "€ {0}",
+      "provider": null,
+      "roundOff": 1
+    },
+    {
+      "id": 4,
+      "code": "CAD",
+      "isDefault": false,
+      "name": "Canadian Dollar",
+      "format": "#,##0.00",
+      "currencyFormat": "$ {0}",
+      "provider": null,
+      "roundOff": 1
+    },
+    {
+      "id": 5,
+      "code": "GBP",
+      "isDefault": true,
+      "name": "Pound Sterling",
+      "format": "#,##0.00",
+      "currencyFormat": "£ {0}",
+      "provider": null,
+      "roundOff": 1
+    },
+    {
+      "id": 6,
+      "code": "DKK",
+      "isDefault": false,
+      "name": "Danish Krone",
+      "format": "#,##0.00",
+      "currencyFormat": "{0} kr.",
+      "provider": null,
+      "roundOff": 1
+    },
+    {
+      "id": 7,
+      "code": "NOK",
+      "isDefault": false,
+      "name": "Norwegian Krone",
+      "format": "#,##0",
+      "currencyFormat": "kr {0}",
+      "provider": null,
+      "roundOff": 1
+    },
+    {
+      "id": 8,
+      "code": "SEK",
+      "isDefault": false,
+      "name": "Swedish Krona",
+      "format": "#,##0",
+      "currencyFormat": "{0} kr",
+      "provider": null,
+      "roundOff": 1
+    },
+    {
+      "id": 9,
+      "code": "CHF",
+      "isDefault": false,
+      "name": "Swiss Franc",
+      "format": "#,##0.00",
+      "currencyFormat": "CHF {0}",
+      "provider": null,
+      "roundOff": 1
+    },
+    {
+      "id": 10,
+      "code": "JPY",
+      "isDefault": false,
+      "name": "Japanese Yen",
+      "format": "#,##0",
+      "currencyFormat": "¥ {0}",
+      "provider": null,
+      "roundOff": 3
+    }
+  ],
+  "currentCulture": "is-IS",
+  "currencyGroupSymbol": ".",
+  "currencyDecimalSymbol": ","
+}

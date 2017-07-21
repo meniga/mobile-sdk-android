@@ -1,0 +1,37 @@
+{
+  "data": [{
+    "userId": 48439,
+    "personId": 48592,
+    "firstName": null,
+    "lastName": null,
+    "lastLoginDate": "2017-07-10T09:56:40.7746082",
+    "isInitialSetupDone": true,
+    "email": "example@example.com",
+    "culture": "is-IS",
+    "lastLoginRemoteHost": "example.meniga.is",
+    "createDate": "2015-03-03T13:02:52.853",
+    "termsAndConditionsId": 28,
+    "termsAndConditionsAcceptDate": "2015-03-03T13:02:54.353",
+    "optOutDate": null,
+    "profile": {
+      "personId": 48592,
+      "gender": 2,
+      "birthYear": "1990-12-13T00:00:00",
+      "postalCode": null,
+      "numberInFamily": 2,
+      "numberOfKids": 1,
+      "numberOfCars": 1,
+      "incomeId": null,
+      "apartmentType": 1,
+      "apartmentSize": 75,
+      "apartmentRooms": 3,
+      "apartmentSizeKey": 2,
+      "hasSavedProfile": null,
+      "created": "2015-03-03T13:02:52.853",
+      "currencyCode": "ISK"
+    },
+    "phoneNumber": null,
+    "passwordExpiryDate": null,
+    "hide": false
+  }]
+}

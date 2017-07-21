@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "typeData" : {
+        "categoryIds": [
+          71
+        ],
+        "targetPercentage": 22,
+        "spentAmount": null,
+        "targetAmount": null,
+        "numberOfParticipants": 1,
+        "recurringInterval": null,
+        "metaData": "{\"color\": \"secondary\"}"
+      }
+    }
+  ]
+}

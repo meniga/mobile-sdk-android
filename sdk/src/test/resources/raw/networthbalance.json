@@ -1,0 +1,25 @@
+{
+  "data" : [
+    {
+      "id": 4792,
+      "accountId": 2938,
+      "balance": -255,
+      "balanceDate": "2016-03-01T00:00:00",
+      "isDefault": false
+    },
+    {
+      "id": 4720,
+      "accountId": 2938,
+      "balance": 0,
+      "balanceDate": "2016-04-18T12:37:10.336",
+      "isDefault": false
+    },
+    {
+      "id": 4721,
+      "accountId": 2938,
+      "balance": 0,
+      "balanceDate": "2016-04-18T13:46:00.757199",
+      "isDefault": false
+    }
+  ]
+}

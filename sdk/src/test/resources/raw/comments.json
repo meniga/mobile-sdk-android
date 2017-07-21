@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "id": 206,
+      "personId": 598,
+      "comment": "Voða flott komment",
+      "createdDate": "2016-04-20T13:48:39.8237094",
+      "modifiedDate": null
+    },
+    {
+      "id": 207,
+      "personId": 598,
+      "comment": "Ertu að sjá þetta #komment",
+      "createdDate": "2016-04-20T13:48:50.7901509",
+      "modifiedDate": null
+    }
+  ]
+}
