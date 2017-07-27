@@ -18,7 +18,7 @@ import java.util.List;
 public interface MenigaAccountOperations {
 	Result<MenigaAccount> getAccount(long id);
 
-	Result<List<MenigaAccount>> getAccounts();
+	Result<List<MenigaAccount>> getAccounts(boolean includeHidden, boolean includeDisabled);
 
 	Result<Void> updateAccount(MenigaAccount menigaAccount);
 

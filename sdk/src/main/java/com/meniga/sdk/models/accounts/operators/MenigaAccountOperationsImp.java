@@ -14,6 +14,7 @@ import com.meniga.sdk.webservices.requests.GetAccountBalanceHistory;
 import com.meniga.sdk.webservices.requests.GetAccountMetadata;
 import com.meniga.sdk.webservices.requests.GetAccountMetadataKeyVal;
 import com.meniga.sdk.webservices.requests.GetAccountTypes;
+import com.meniga.sdk.webservices.requests.GetAccounts;
 import com.meniga.sdk.webservices.requests.GetAuthorizationTypes;
 import com.meniga.sdk.webservices.requests.UpdateAccount;
 import com.meniga.sdk.webservices.requests.UpdateAccountMetadata;
@@ -42,8 +43,11 @@ public class MenigaAccountOperationsImp implements MenigaAccountOperations {
 	}
 
 	@Override
-	public Result<List<MenigaAccount>> getAccounts() {
-		return MenigaSDK.executor().getAccounts();
+	public Result<List<MenigaAccount>> getAccounts(boolean includeHidden, boolean includeDisabled) {
+		GetAccounts req = new GetAccounts();
+		req.includeHidden = includeHidden;
+		req.includeDisabled = includeDisabled;
+		return MenigaSDK.executor().getAccounts(req);
 	}
 
 	@Override

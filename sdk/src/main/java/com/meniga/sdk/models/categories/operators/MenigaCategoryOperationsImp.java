@@ -19,9 +19,10 @@ import java.util.List;
 public class MenigaCategoryOperationsImp implements MenigaCategoryOperations {
 
 	@Override
-	public Result<List<MenigaCategory>> getCategories(Boolean publicOnly) {
+	public Result<List<MenigaCategory>> getCategories(Boolean publicOnly, String culture) {
 		GetCategories req = new GetCategories();
 		req.isPublic = publicOnly;
+		req.culture = culture;
 		return MenigaSDK.executor().getCategories(req);
 	}
 

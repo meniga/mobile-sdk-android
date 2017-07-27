@@ -141,14 +141,14 @@ public class MenigaUser implements Serializable, Parcelable, Cloneable {
 	}
 
 	/**
-	 * @return Date of the user accepting T&C
+	 * @return Date of the user accepting T&lt;C
 	 */
 	public DateTime getTermsAndConditionsAcceptDate() {
 		return termsAndConditionsAcceptDate;
 	}
 
 	/**
-	 * @return Id of accepted T&C
+	 * @return Id of accepted T&lt;C
 	 */
 	public Integer getTermsAndConditionsId() {
 		return termsAndConditionsId;

@@ -37,6 +37,7 @@ import com.meniga.sdk.models.transactions.MenigaTransactionRule;
 import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.user.MenigaSync;
+import com.meniga.sdk.models.user.MenigaSyncStatus;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
@@ -221,7 +222,7 @@ public interface MenigaAPI {
 	Call<MenigaSync> startSync(@Body StartSync req);
 
 	@GET(APIConst.URL_SYNC)
-	Call<MenigaSync.MenigaSyncStatus> getSyncStatus();
+	Call<MenigaSyncStatus> getSyncStatus();
 
 	@GET(APIConst.URL_SYNC + "/{id}")
 	Call<MenigaSync> getSync(@Path("id") long id);
@@ -471,6 +472,9 @@ public interface MenigaAPI {
 
 	@POST(APIConst.URL_CHALLENGES + "/{id}" + APIConst.CHALLENGES_ACCEPT)
 	Call<MenigaChallenge> acceptChallenge(@Path("id") String id);
+
+	@DELETE(APIConst.URL_CHALLENGES + "/{id}")
+	Call<Void> deleteChallenge(@Path("id") String id);
 
 	@POST(APIConst.URL_CHALLENGES)
 	Call<MenigaChallenge> createChallenge(@Body CreateChallenge req);

@@ -180,7 +180,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Retrieves a specific budget by id
-	 * @parm id budget id
+	 * @param id budget id
 	 * @param filter constraints to limit the data retrieved for the budget ({@link BudgetFilter#categoryIds}, {@link BudgetFilter#startDate}, {@link BudgetFilter#endDate}, {@link BudgetFilter#allowOverlappingDates}, {@link BudgetFilter#type}, {@link BudgetFilter#includeEntries})
 	 * @return Meniga task containing the list of all budgets that meet the filter constraints
 	 */
@@ -242,7 +242,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Delete a budget by id
-	 * @parm id budget id of the budget to delete
+	 * @param id budget id of the budget to delete
 	 * @return Meniga task
 	 */
 	public static Result<Void> deleteById(long id) {

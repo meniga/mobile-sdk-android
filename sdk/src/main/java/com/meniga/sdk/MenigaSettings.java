@@ -38,22 +38,40 @@ public class MenigaSettings {
 	private final List<EventBaseConverter> userEventFeedConverters;
 	private final CustomErrorHandler errorHandler;
 	private final TaskAdapter taskAdapter;
+	private String culture = "en-GB";
 	private SSLSocketFactory sslSocketFactory;
 	private X509TrustManager x509TrustManager;
 
 	private MenigaSettings(Builder builder) {
-		this.endpoint = builder.endpoint;
-		this.authenticator = builder.authenticator;
-        this.persistenceProvider = builder.persistenceProvider;
-	    this.persistenceMode = builder.persistenceMode;
-	    this.specialServiceEndpoints = builder.specialServiceEndpoints;
-		this.interceptors = builder.interceptors;
-		this.userEventFeedConverters = builder.userEventFeedConverters;
-		this.taskAdapter = builder.taskAdapter;
-		this.errorHandler = builder.errorHandler;
-		this.networkInterceptors = builder.networkInterceptors;
-		this.sslSocketFactory = builder.sslSocketFactory;
-		this.x509TrustManager = builder.x509TrustManager;
+		endpoint = builder.endpoint;
+		authenticator = builder.authenticator;
+        persistenceProvider = builder.persistenceProvider;
+	    persistenceMode = builder.persistenceMode;
+	    specialServiceEndpoints = builder.specialServiceEndpoints;
+		interceptors = builder.interceptors;
+		userEventFeedConverters = builder.userEventFeedConverters;
+		taskAdapter = builder.taskAdapter;
+		errorHandler = builder.errorHandler;
+		networkInterceptors = builder.networkInterceptors;
+		culture = builder.culture;
+		sslSocketFactory = builder.sslSocketFactory;
+		x509TrustManager = builder.x509TrustManager;
+	}
+
+	/**
+	 * Returns the framework culture being used (e.g. is-IS, en-GB etc)
+	 * @return
+	 */
+	public String getCulture() {
+		return culture;
+	}
+
+	/**
+	 * Only setter for the settings because culture can be updated after building the initial settings.
+	 * @param culture The new culture to use, in the form e.g. is-IS, en-GB etc.
+	 */
+	public void updateCulture(String culture) {
+		this.culture = culture;
 	}
 
 	/**
@@ -62,7 +80,7 @@ public class MenigaSettings {
 	 * @return Authentication Provider implementation used by the SDK.
 	 */
 	public Authenticator getAuthenticator() {
-		return this.authenticator;
+		return authenticator;
 	}
 
 	/**
@@ -71,7 +89,7 @@ public class MenigaSettings {
 	 * @return current endpoint used by the SDK.
 	 */
 	public HttpUrl getEndpoint() {
-		return this.endpoint;
+		return endpoint;
 	}
 
 	/**
@@ -79,7 +97,7 @@ public class MenigaSettings {
 	 * @return x509TrustManager
 	 */
 	public X509TrustManager getX509TrustManager() {
-		return this.x509TrustManager;
+		return x509TrustManager;
 	}
 
 	/**
@@ -87,7 +105,7 @@ public class MenigaSettings {
 	 * @return SSLSocketFactory
 	 */
 	public SSLSocketFactory getSslSocketFactory() {
-		return this.sslSocketFactory;
+		return sslSocketFactory;
 	}
 
 	/**
@@ -96,7 +114,7 @@ public class MenigaSettings {
 	 * @return current error handler used by the SDK.
 	 */
 	public CustomErrorHandler getErrorHandler() {
-		return this.errorHandler;
+		return errorHandler;
 	}
 
 	/**
@@ -114,7 +132,7 @@ public class MenigaSettings {
 	 * @return The read and write timout in ms
 	 */
 	public long getTimeout() {
-		return this.timeout;
+		return timeout;
 	}
 
 	/**
@@ -122,7 +140,7 @@ public class MenigaSettings {
 	 * @return
 	 */
     public PersistenceProvider getPersistenceProvider() {
-        return this.persistenceProvider;
+        return persistenceProvider;
     }
 
 	/**
@@ -165,6 +183,7 @@ public class MenigaSettings {
 		private final List<EventBaseConverter> userEventFeedConverters = new ArrayList<>();
 		private CustomErrorHandler errorHandler;
 		private TaskAdapter taskAdapter;
+		private String culture = "en-GB";
 		private SSLSocketFactory sslSocketFactory;
 		private X509TrustManager x509TrustManager;
 
@@ -309,6 +328,16 @@ public class MenigaSettings {
 		public Builder useSSLFactory(SSLSocketFactory sslSocketFactory,X509TrustManager x509TrustManager) {
 			this.sslSocketFactory = sslSocketFactory;
 			this.x509TrustManager = x509TrustManager;
+			return this;
+		}
+
+		/**
+		 * Sets the framework culture, e.g. en-GB, is-IS etc.
+		 * @param culture The culture in xx-xx form
+		 * @return
+		 */
+		public Builder culture(String culture) {
+			this.culture = culture;
 			return this;
 		}
 

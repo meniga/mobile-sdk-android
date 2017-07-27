@@ -129,7 +129,11 @@ public class MenigaAccount extends StateObject implements Parcelable, Serializab
 	 * @return A Result containing a list of all the accounts the user has
 	 */
 	public static Result<List<MenigaAccount>> fetch() {
-		return MenigaAccount.apiOperator.getAccounts();
+		return MenigaAccount.apiOperator.getAccounts(false, false);
+	}
+
+	public static Result<List<MenigaAccount>> fetch(boolean includeHidden, boolean includeDisabled) {
+		return MenigaAccount.apiOperator.getAccounts(includeHidden, includeDisabled);
 	}
 
 	/**

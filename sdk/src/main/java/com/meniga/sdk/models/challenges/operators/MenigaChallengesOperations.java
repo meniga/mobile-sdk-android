@@ -33,4 +33,6 @@ public interface MenigaChallengesOperations {
 	Result<MenigaChallenge> getChallenge(UUID id);
 
 	Result<Void> updateChallenge(MenigaChallenge challenge, boolean updateCategories);
+
+	Result<Void> deleteChallenge(UUID id);
 }

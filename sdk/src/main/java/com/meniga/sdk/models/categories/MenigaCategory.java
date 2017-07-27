@@ -332,13 +332,13 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
      */
 
 	/**
-	 * Retrieves all categories including user created categories. Some of the entries in the list might be
-	 * of type MenigaUserCategory
+	 * Retrieves all categories including user created categories in a specified culture (language).
+	 * Some of the entries in the list might be of type MenigaUserCategory
 	 *
 	 * @return A list of all categories
 	 */
 	public static Result<List<MenigaCategory>> fetch() {
-		return MenigaCategory.apiOperator.getCategories(false);
+		return MenigaCategory.apiOperator.getCategories(false, MenigaSDK.getMenigaSettings().getCulture());
 	}
 
 	/**
@@ -404,7 +404,7 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 		if (type == CategoryRequest.ALL) {
 			publicOnly = false;
 		} else if (type == CategoryRequest.ONLY_USER_CATEGORIES) {
-			Result<List<MenigaCategory>> task = MenigaCategory.apiOperator.getCategories(false);
+			Result<List<MenigaCategory>> task = MenigaCategory.apiOperator.getCategories(false, MenigaSDK.getMenigaSettings().getCulture());
 			return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<List<MenigaCategory>>() {
 				@Override
 				public void onFinished(List<MenigaCategory> result, boolean failed) {
@@ -423,7 +423,7 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 			});
 		}
 
-		return MenigaCategory.apiOperator.getCategories(publicOnly);
+		return MenigaCategory.apiOperator.getCategories(publicOnly, MenigaSDK.getMenigaSettings().getCulture());
 	}
 
 	/**

@@ -427,6 +427,24 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 	}
 
 	/**
+	 * Delete the instance by id on the server.
+	 * @return A task indicating if the operation was successful or not
+	 */
+	public static Result<Void> delete(UUID id) {
+		Result<Void> task = MenigaChallenge.apiOperations.deleteChallenge(id);
+		return task;
+	}
+
+	/**
+	 * Delete the instance on the server.
+	 * @return A task indicating if the operation was successful or not
+	 */
+	public Result<Void> delete() {
+		Result<Void> task = MenigaChallenge.apiOperations.deleteChallenge(this.getId());
+		return task;
+	}
+
+	/**
 	 * Marks the challenges object as accepted
 	 * @return A Task of type void, the task will have an error and be marked as failed if accept is not successful
 	 */

@@ -3,6 +3,7 @@ package com.meniga.sdk.models.user.operators;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.user.MenigaSync;
+import com.meniga.sdk.models.user.MenigaSyncStatus;
 import com.meniga.sdk.webservices.requests.GetSync;
 import com.meniga.sdk.webservices.requests.StartSync;
 
@@ -20,7 +21,7 @@ public final class MenigaSyncOperationsImp implements MenigaSyncOperations {
 	}
 
 	@Override
-	public Result<MenigaSync.MenigaSyncStatus> getSyncStatus() {
+	public Result<MenigaSyncStatus> getSyncStatus() {
 		return MenigaSDK.executor().getSyncStatus();
 	}
 

@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Interceptor;
@@ -20,38 +19,40 @@ import com.meniga.sdk.models.user.operators.MenigaSyncOperations;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSync implements Serializable, Parcelable, Cloneable {
-	public static final Creator<MenigaSync> CREATOR = new Creator<MenigaSync>() {
-		@Override
-		public MenigaSync createFromParcel(Parcel source) {
-			return new MenigaSync(source);
-		}
-
-		@Override
-		public MenigaSync[] newArray(int size) {
-			return new MenigaSync[size];
-		}
-	};
 
 	protected static MenigaSyncOperations apiOperator;
 
-	protected long syncHistoryId;
-	protected boolean isSyncDone;
-	protected DateTime syncSessionStartTime;
-	protected List<RealmSyncResponse> realmSyncResponses;
+	protected boolean hasCompletedSyncSession;
+	protected boolean isSynchronizationNeeded;
+	protected SynchronizationStatus synchronizationStatus;
 
-	protected MenigaSync() {
+	/**
+	 * @return True if user has a completed synchronization session
+	 */
+	public boolean isHasCompletedSyncSession() {
+		return hasCompletedSyncSession;
 	}
 
-	protected MenigaSync(Parcel in) {
-		this.syncHistoryId = in.readLong();
-		this.isSyncDone = in.readByte() != 0;
-		this.syncSessionStartTime = (DateTime) in.readSerializable();
-		this.realmSyncResponses = in.createTypedArrayList(RealmSyncResponse.CREATOR);
+	/**
+	 * @return True if synchronization is needed for the user
+	 */
+	public boolean isSynchronizationNeeded() {
+		return isSynchronizationNeeded;
+	}
+
+	/**
+	 * @return Current synchronization status
+	 */
+	public SynchronizationStatus getSynchronizationStatus() {
+		return synchronizationStatus;
 	}
 
 	@Override
-	public int describeContents() {
-		return 0;
+	public int hashCode() {
+		int result = (hasCompletedSyncSession ? 1 : 0);
+		result = 31 * result + (isSynchronizationNeeded ? 1 : 0);
+		result = 31 * result + (synchronizationStatus != null ? synchronizationStatus.hashCode() : 0);
+		return result;
 	}
 
 	@Override
@@ -59,13 +60,6 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 		return (MenigaSync) super.clone();
 	}
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeLong(this.syncHistoryId);
-		dest.writeByte(isSyncDone ? (byte) 1 : (byte) 0);
-		dest.writeSerializable(this.syncSessionStartTime);
-		dest.writeTypedList(realmSyncResponses);
-	}
 
 	/**
 	 * Sets the api operator for doing api calls
@@ -76,39 +70,13 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 		MenigaSync.apiOperator = operator;
 	}
 
-	/**
-	 * @return Gets the sync history id.
-	 */
-	public long getSyncHistoryId() {
-		return syncHistoryId;
-	}
 
-	/**
-	 * @return Gets or sets the sync session start time.
-	 */
-	public DateTime getSyncSessionStartTime() {
-		return syncSessionStartTime;
-	}
-
-	/**
-	 * @return Gets the realm sync responses.
-	 */
-	public List<RealmSyncResponse> getRealmSyncResponses() {
-		return realmSyncResponses;
-	}
-
-	/**
-	 * @return Gets a value indicating whether this sync session is done or is still running in the background
-	 */
-	public boolean getIsSyncDone() {
-		return this.isSyncDone;
-	}
 
 	private boolean hasNewData() {
-		if (this.realmSyncResponses == null || this.realmSyncResponses.size() == 0) {
+		if (this.synchronizationStatus.realmSyncResponses == null || this.synchronizationStatus.realmSyncResponses.size() == 0) {
 			return false;
 		}
-		for (RealmSyncResponse resp : this.realmSyncResponses) {
+		for (RealmSyncResponse resp : this.synchronizationStatus.realmSyncResponses) {
 			for (AccountSyncStatus stat : resp.getAccountSyncStatuses()) {
 				if (stat.getTransactionsProcessed() > 0) {
 					return true;
@@ -122,11 +90,11 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * @return Number of new transactions that came into the system as a result of the sync.
 	 */
 	public int getNumNewTransactions() {
-		if (this.realmSyncResponses == null || this.realmSyncResponses.size() == 0) {
+		if (this.synchronizationStatus.realmSyncResponses == null || this.synchronizationStatus.realmSyncResponses.size() == 0) {
 			return 0;
 		}
 		int cnt = 0;
-		for (RealmSyncResponse resp : this.realmSyncResponses) {
+		for (RealmSyncResponse resp : this.synchronizationStatus.realmSyncResponses) {
 			for (AccountSyncStatus stat : resp.getAccountSyncStatuses()) {
 				cnt += stat.getTransactionsProcessed();
 			}
@@ -136,34 +104,15 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
 		MenigaSync that = (MenigaSync) o;
 
-		if (syncHistoryId != that.syncHistoryId) {
-			return false;
-		}
-		if (isSyncDone != that.isSyncDone) {
-			return false;
-		}
-		if (syncSessionStartTime != null ? !syncSessionStartTime.equals(that.syncSessionStartTime) : that.syncSessionStartTime != null) {
-			return false;
-		}
-		return realmSyncResponses != null ? realmSyncResponses.equals(that.realmSyncResponses) : that.realmSyncResponses == null;
-	}
+		if (hasCompletedSyncSession != that.hasCompletedSyncSession) return false;
+		if (isSynchronizationNeeded != that.isSynchronizationNeeded) return false;
+		return synchronizationStatus != null ? synchronizationStatus.equals(that.synchronizationStatus) : that.synchronizationStatus == null;
 
-	@Override
-	public int hashCode() {
-		int result = (int) (syncHistoryId ^ (syncHistoryId >>> 32));
-		result = 31 * result + (isSyncDone ? 1 : 0);
-		result = 31 * result + (syncSessionStartTime != null ? syncSessionStartTime.hashCode() : 0);
-		result = 31 * result + (realmSyncResponses != null ? realmSyncResponses.hashCode() : 0);
-		return result;
 	}
 
 	/**
@@ -208,192 +157,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 		}
 	}
 
-	/**
-	 * Represents a response for all the accounts in a specific realm. A realm can be e.g. a bank institute.
-	 * <p>
-	 * Copyright 2017 Meniga Iceland Inc.
-	 */
-	public static class RealmSyncResponse implements Serializable, Parcelable {
-		public static final Creator<RealmSyncResponse> CREATOR = new Creator<RealmSyncResponse>() {
-			@Override
-			public RealmSyncResponse createFromParcel(Parcel source) {
-				return new RealmSyncResponse(source);
-			}
-
-			@Override
-			public RealmSyncResponse[] newArray(int size) {
-				return new RealmSyncResponse[size];
-			}
-		};
-
-		List<AccountSyncStatus> accountSyncStatuses;
-
-		protected RealmSyncResponse(Parcel in) {
-			this.accountSyncStatuses = in.createTypedArrayList(AccountSyncStatus.CREATOR);
-		}
-
-		/**
-		 * @return An array of sync statuses for each of the accounts the user has in this realm when using particular credentials.
-		 */
-		public List<AccountSyncStatus> getAccountSyncStatuses() {
-			return this.accountSyncStatuses;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) {
-				return true;
-			}
-			if (o == null || getClass() != o.getClass()) {
-				return false;
-			}
-
-			RealmSyncResponse that = (RealmSyncResponse) o;
-
-			return accountSyncStatuses != null ? accountSyncStatuses.equals(that.accountSyncStatuses) : that.accountSyncStatuses == null;
-		}
-
-		@Override
-		public int hashCode() {
-			return accountSyncStatuses != null ? accountSyncStatuses.hashCode() : 0;
-		}
-
-		@Override
-		public int describeContents() {
-			return 0;
-		}
-
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeTypedList(accountSyncStatuses);
-		}
-	}
-
-	/**
-	 * Contains further details about the sync status of specific accounts.
-	 * <p>
-	 * Copyright 2017 Meniga Iceland Inc.
-	 */
-	public static class AccountSyncStatus implements Serializable, Parcelable {
-		public static final Creator<AccountSyncStatus> CREATOR = new Creator<AccountSyncStatus>() {
-			@Override
-			public AccountSyncStatus createFromParcel(Parcel source) {
-				return new AccountSyncStatus(source);
-			}
-
-			@Override
-			public AccountSyncStatus[] newArray(int size) {
-				return new AccountSyncStatus[size];
-			}
-		};
-
-		private int transactionsProcessed;
-
-		protected AccountSyncStatus(Parcel in) {
-			this.transactionsProcessed = in.readInt();
-		}
-
-		/**
-		 * @return Total number of transactions that has already been processed during this synchronization.
-		 */
-		public int getTransactionsProcessed() {
-			return this.transactionsProcessed;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) {
-				return true;
-			}
-			if (o == null || getClass() != o.getClass()) {
-				return false;
-			}
-
-			AccountSyncStatus that = (AccountSyncStatus) o;
-
-			return transactionsProcessed == that.transactionsProcessed;
-
-		}
-
-		@Override
-		public int hashCode() {
-			return transactionsProcessed;
-		}
-
-		@Override
-		public int describeContents() {
-			return 0;
-		}
-
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeInt(this.transactionsProcessed);
-		}
-	}
-
-	/**
-	 * Contains info on wheather or not the sync process has finished.
-	 * <p>
-	 * Copyright 2017 Meniga Iceland Inc.
-	 */
-	public static class MenigaSyncStatus implements Parcelable {
-		public static final Creator<MenigaSyncStatus> CREATOR = new Creator<MenigaSyncStatus>() {
-			@Override
-			public MenigaSyncStatus createFromParcel(Parcel source) {
-				return new MenigaSyncStatus(source);
-			}
-
-			@Override
-			public MenigaSyncStatus[] newArray(int size) {
-				return new MenigaSyncStatus[size];
-			}
-		};
-
-		protected boolean hasCompletedSyncSession;
-
-		protected MenigaSyncStatus(Parcel in) {
-			this.hasCompletedSyncSession = in.readByte() != 0;
-		}
-
-		/**
-		 * @return True if user has a completed synchronization session.
-		 */
-		public boolean getHasCompletedSyncSession() {
-			return hasCompletedSyncSession;
-		}
-
-		@Override
-		public int describeContents() {
-			return 0;
-		}
-
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeByte(hasCompletedSyncSession ? (byte) 1 : (byte) 0);
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) {
-				return true;
-			}
-			if (o == null || getClass() != o.getClass()) {
-				return false;
-			}
-
-			MenigaSyncStatus that = (MenigaSyncStatus) o;
-
-			return hasCompletedSyncSession == that.hasCompletedSyncSession;
-
-		}
-
-		@Override
-		public int hashCode() {
-			return (hasCompletedSyncSession ? 1 : 0);
-		}
-	}
-
-    /*
+	/*
 	--- API calls below ---
 	 */
 
@@ -413,7 +177,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 						if (failed || result == null) {
 							postSync.onFailure(new Exception("Failure syncing"));
 						} else if (result.getHasCompletedSyncSession()) {
-							Result<MenigaSync> subTask = MenigaSync.fetch(MenigaSync.this.syncHistoryId);
+							Result<MenigaSync> subTask = MenigaSync.fetch(MenigaSync.this.synchronizationStatus.syncHistoryId);
 							MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(subTask, new Interceptor<MenigaSync>() {
 								@Override
 								public void onFinished(MenigaSync result, boolean failed) {
@@ -502,4 +266,37 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	public Result<MenigaSyncStatus> isSyncDone() {
 		return MenigaSync.apiOperator.getSyncStatus();
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeByte(this.hasCompletedSyncSession ? (byte) 1 : (byte) 0);
+		dest.writeByte(this.isSynchronizationNeeded ? (byte) 1 : (byte) 0);
+		dest.writeParcelable(this.synchronizationStatus, flags);
+	}
+
+	public MenigaSync() {
+	}
+
+	protected MenigaSync(Parcel in) {
+		this.hasCompletedSyncSession = in.readByte() != 0;
+		this.isSynchronizationNeeded = in.readByte() != 0;
+		this.synchronizationStatus = in.readParcelable(SynchronizationStatus.class.getClassLoader());
+	}
+
+	public static final Creator<MenigaSync> CREATOR = new Creator<MenigaSync>() {
+		@Override
+		public MenigaSync createFromParcel(Parcel source) {
+			return new MenigaSync(source);
+		}
+
+		@Override
+		public MenigaSync[] newArray(int size) {
+			return new MenigaSync[size];
+		}
+	};
 }

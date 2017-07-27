@@ -2,6 +2,7 @@ package com.meniga.sdk.models.user.operators;
 
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.user.MenigaSync;
+import com.meniga.sdk.models.user.MenigaSyncStatus;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -9,7 +10,7 @@ import com.meniga.sdk.models.user.MenigaSync;
 public interface MenigaSyncOperations {
 	Result<MenigaSync> startSync(long timeout);
 
-	Result<MenigaSync.MenigaSyncStatus> getSyncStatus();
+	Result<MenigaSyncStatus> getSyncStatus();
 
 	Result<MenigaSync> getSync(long syncHistoryId);
 }

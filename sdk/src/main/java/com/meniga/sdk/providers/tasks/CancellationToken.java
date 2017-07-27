@@ -7,11 +7,11 @@ import java.util.concurrent.CancellationException;
  * Copyright 2017 Meniga Iceland Inc.
  *
  * Propagates notification that operations should be canceled.
- * <p/>
+ *
  * Create an instance of {@code CancellationTokenSource} and pass the token returned from
  * {@code CancellationTokenSource#getToken()} to the asynchronous operation(s).
  * Call {@code CancellationTokenSource#cancel()} to cancel the operations.
- * <p/>
+ *
  * A {@code CancellationToken} can only be cancelled once - it should not be passed to future operations
  * once cancelled.
  *

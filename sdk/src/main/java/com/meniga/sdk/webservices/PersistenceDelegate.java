@@ -41,6 +41,7 @@ import com.meniga.sdk.models.transactions.MenigaTransactionRule;
 import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.user.MenigaSync;
+import com.meniga.sdk.models.user.MenigaSyncStatus;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
@@ -116,8 +117,7 @@ public class PersistenceDelegate {
 	// --
 	// Sync
 	// --
-	public Result<List<MenigaAccount>> getAccounts() {
-		GetAccounts req = new GetAccounts();
+	public Result<List<MenigaAccount>> getAccounts(GetAccounts req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
@@ -235,7 +235,7 @@ public class PersistenceDelegate {
 		return taskAdapter.adapt(getClient(Service.SYNC).startSync(req), null);
 	}
 
-	public Result<MenigaSync.MenigaSyncStatus> getSyncStatus() {
+	public Result<MenigaSyncStatus> getSyncStatus() {
 		TaskAdapter taskAdapter = MenigaSDK.getMenigaSettings().getTaskAdapter();
 		return taskAdapter.adapt(getClient(Service.SYNC).getSyncStatus(), null);
 	}
@@ -633,6 +633,10 @@ public class PersistenceDelegate {
 
 	public Result<MenigaChallenge> acceptChallenge(AcceptChallenge req) {
 		return persist(req, getClient(Service.CHALLENGES).acceptChallenge(req.id.toString()));
+	}
+
+	public Result<Void> deleteChallenge(DeleteChallenge req) {
+		return persist(req, getClient(Service.CHALLENGES).deleteChallenge(req.id.toString()));
 	}
 
 	public Result<MenigaChallenge> createChallenge(CreateChallenge req) {

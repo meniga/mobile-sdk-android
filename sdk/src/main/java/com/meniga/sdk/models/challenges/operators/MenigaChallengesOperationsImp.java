@@ -8,6 +8,7 @@ import com.meniga.sdk.models.challenges.enums.CustomChallengeColor;
 import com.meniga.sdk.webservices.requests.AcceptChallenge;
 import com.meniga.sdk.webservices.requests.CreateChallenge;
 import com.meniga.sdk.webservices.requests.CreateChallengeTypeData;
+import com.meniga.sdk.webservices.requests.DeleteChallenge;
 import com.meniga.sdk.webservices.requests.GetChallenge;
 import com.meniga.sdk.webservices.requests.GetChallenges;
 import com.meniga.sdk.webservices.requests.UpdateChallenge;
@@ -92,5 +93,12 @@ public class MenigaChallengesOperationsImp implements MenigaChallengesOperations
 		}
 
 		return MenigaSDK.executor().updateChallenge(req);
+	}
+
+	@Override
+	public Result<Void> deleteChallenge(UUID id) {
+		DeleteChallenge req = new DeleteChallenge();
+		req.id = id;
+		return MenigaSDK.executor().deleteChallenge(req);
 	}
 }

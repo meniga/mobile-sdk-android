@@ -138,7 +138,7 @@ public class MenigaUpcomingScheduledPayment implements Serializable, Parcelable,
 	}
 
 	/**
-	 * @returnThe account identifier that uniquely identifies the destination account in external
+	 * @return The account identifier that uniquely identifies the destination account in external
 	 * system that the scheduled payment should be paid to
 	 */
 	public String getDestinationAccIdentifier() {
