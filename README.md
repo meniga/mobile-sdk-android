@@ -12,19 +12,8 @@ Developers for institutions implementing the Meniga REST API can usi this sdk to
 ```groovy
 dependencies {
 
-  compile 'com.meniga.sdk:1.0.0'
+  compile 'com.meniga.sdk:1.0.1'
 
-}
-```
-
-You also have to add the url to the snapshot repository:
-
-```gradle
-allprojects {
-  repositories {
-    ...
-
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 ```
 
