@@ -11,9 +11,7 @@ Developers for institutions implementing the Meniga REST API can usi this sdk to
 
 ```groovy
 dependencies {
-
   compile 'com.meniga.sdk:1.0.1'
-
 }
 ```
 
