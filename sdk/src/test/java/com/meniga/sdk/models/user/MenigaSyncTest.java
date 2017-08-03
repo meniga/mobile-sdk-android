@@ -3,7 +3,6 @@ package com.meniga.sdk.models.user;
 import android.os.Parcel;
 
 import com.google.gson.Gson;
-import com.meniga.sdk.BuildConfig;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.utils.FileImporter;
@@ -12,13 +11,12 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 
 
 import java.io.IOException;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -32,12 +30,12 @@ public class MenigaSyncTest {
 		MenigaSync items = this.gson();
 
 		assertThat(items).isNotNull();
-		assertThat(items.getSyncHistoryId()).isEqualTo(5353);
-		assertThat(items.getSyncSessionStartTime()).isNotNull();
-		assertThat(items.getIsSyncDone()).isTrue();
-		assertThat(items.getRealmSyncResponses().size()).isGreaterThan(0);
-		assertThat(items.getRealmSyncResponses().get(0).accountSyncStatuses.size()).isGreaterThan(0);
-		assertThat(items.getRealmSyncResponses().get(0).accountSyncStatuses.get(0).getTransactionsProcessed()).isEqualTo(12);
+		assertThat(items.getSynchronizationStatus().getSyncHistoryId()).isEqualTo(150L);
+		assertThat(items.getSynchronizationStatus().getSyncSessionStartTime()).isNotNull();
+		assertThat(items.getSynchronizationStatus().getIsSyncDone()).isTrue();
+		assertThat(items.getSynchronizationStatus().getRealmSyncResponses().size()).isGreaterThan(0);
+		assertThat(items.getSynchronizationStatus().getRealmSyncResponses().get(0).accountSyncStatuses.size()).isGreaterThan(0);
+		assertThat(items.getSynchronizationStatus().getRealmSyncResponses().get(0).accountSyncStatuses.get(0).getTransactionsProcessed()).isEqualTo(230);
 	}
 
 	@Test

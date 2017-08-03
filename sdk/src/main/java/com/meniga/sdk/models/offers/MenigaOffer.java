@@ -493,8 +493,8 @@ public class MenigaOffer implements Parcelable {
 
 	/**
 	 * Mark offer as seen
-	 * @param offerId
-	 * @return
+	 * @param offerId id of offer
+	 * @return Task with void result
 	 */
 	public static Result<Void> seen(long offerId) {
 		return MenigaOffer.apiOperator.markAsSeen(offerId);

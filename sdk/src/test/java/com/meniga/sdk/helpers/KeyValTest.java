@@ -2,7 +2,8 @@ package com.meniga.sdk.helpers;
 
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 
 /**
  * Copyright 2017 Meniga Iceland Inc.

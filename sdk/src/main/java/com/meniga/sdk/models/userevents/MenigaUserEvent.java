@@ -112,10 +112,6 @@ public class MenigaUserEvent implements Serializable, Parcelable, Cloneable {
 	};
 
 	/**
-	 API operations below
-	 */
-
-	/**
 	 * Gets a user events subscriptions by id
 	 *
 	 * @return List og MenigaUserEvent subscriptions

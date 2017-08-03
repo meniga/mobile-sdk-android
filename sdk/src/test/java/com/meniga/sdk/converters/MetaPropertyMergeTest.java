@@ -4,15 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.meniga.sdk.BuildConfig;
 import com.meniga.sdk.annotations.MetaProperty;
 import com.meniga.sdk.helpers.GsonProvider;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
 
 
 import java.io.File;

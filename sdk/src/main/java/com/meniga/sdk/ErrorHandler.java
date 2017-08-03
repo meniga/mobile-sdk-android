@@ -1,11 +1,9 @@
 package com.meniga.sdk;
+import android.util.Log;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
-import android.util.Log;
-
 public class ErrorHandler {
 	public static void reportAndHandle(Throwable ex) {
 		if (ex == null) {

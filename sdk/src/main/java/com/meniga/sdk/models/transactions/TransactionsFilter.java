@@ -1,7 +1,4 @@
 package com.meniga.sdk.models.transactions;
-/**
- * Copyright 2017 Meniga Iceland Inc.
- */
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -892,7 +889,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		/**
 		 * A flag telling the selector to use exact merchant texts
 		 *
-		 * @param useExactMerchantTexts
+		 * @param useExactMerchantTexts Boolean to use exact merchant texts
 		 * @return builder object
 		 */
 		public Builder useExactMerchantTexts(boolean useExactMerchantTexts) {

@@ -1,18 +1,13 @@
 package com.meniga.sdk.models.accounts;
 
-/**
- * Copyright 2017 Meniga Iceland Inc.
- */
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
 
 /**
- * Represents further data on the type of account.
- * <p>
  * Copyright 2017 Meniga Iceland Inc.
+ * Represents further data on the type of account.
  */
 public class MenigaAccountType implements Parcelable, Serializable {
 	public static final Creator<MenigaAccountType> CREATOR = new Creator<MenigaAccountType>() {

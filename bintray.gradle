@@ -1,56 +1,45 @@
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
 
-version = libraryVersion
+publishing {
+    publications {
+        Production(MavenPublication) {
+            artifact("$buildDir/outputs/aar/sdk-release.aar")
+            groupId 'com.meniga'
+            artifactId 'sdk'
+            version android.defaultConfig.versionName
 
-if (project.hasProperty("android")) { // Android libraries
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-    }
+            //The publication doesn't know about our dependencies, so we have to manually add them to the pom
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
 
-    task javadoc(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
-} else { // Java libraries
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-bintray {
-    user = bintray_user
-    key = bintray_apikey
-
-    configurations = ['archives']
-    pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        desc = libraryDescription
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
-        publish = true
-        userOrg = bintrayOrg
-        publicDownloadNumbers = true
-        version {
-            desc = libraryDescription
-            gpg {
-                sign = true //Determines whether to GPG sign the files. The default is false
-                passphrase = bintray_gpgpassword
-                //Optional. The passphrase for GPG signing'
+                //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
             }
         }
     }
+}
+version = android.defaultConfig.versionName
+bintray {
+    user = bintray_user
+    key = bintray_apikey
+    dryRun = false
+
+    pkg {
+        repo = "android"
+        name = "com.meniga.sdk"
+        desc = "Meniga SDK library"
+        websiteUrl = "https://github.com/meniga/mobile-sdk-android"
+        vcsUrl = "https://github.com/meniga/mobile-sdk-android.git"
+        licenses = ["MIT"]
+        publish = true
+        userOrg = "meniga"
+        publicDownloadNumbers = true
+    }
+    publications = ['Production']
 }

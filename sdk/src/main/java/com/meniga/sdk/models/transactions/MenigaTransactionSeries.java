@@ -163,9 +163,6 @@ public class MenigaTransactionSeries implements Serializable, Parcelable, Clonea
 		return result;
 	}
 
-	/**
-	 API methods below
-	 */
 
 	/**
 	 * Retrieves a series of transactions aggregated over time.

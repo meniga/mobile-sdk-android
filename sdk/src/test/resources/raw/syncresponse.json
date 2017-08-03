@@ -1,55 +1,59 @@
 {
   "data": {
-    "syncHistoryId": 5353,
-    "isSyncDone": true,
-    "syncSessionStartTime": "2016-04-20T23:29:17.197Z",
-    "realmSyncResponses": [
-      {
-        "realmCredentialsId": 0,
-        "realmCredentialsDisplayName": "string",
-        "organizationId": 0,
-        "organizationName": "string",
-        "organizationBankCode": "string",
-        "accountSyncStatuses": [
-          {
-            "accountId": 0,
-            "balance": 0,
-            "limit": 0,
-            "transactionsProcessed": 12,
-            "totalTransactions": 0,
-            "startDate": "2016-04-20T23:29:17.198Z",
-            "endDate": "2016-04-20T23:29:17.198Z",
-            "accountStatus": "string"
-          }
-        ],
-        "authenticationChallenge": {
-          "requiredParameters": [
+    "synchronizationStatus": {
+      "syncHistoryId": 150,
+      "isSyncDone": true,
+      "syncSessionStartTime": "2017-07-27T12:23:34.896Z",
+      "realmSyncResponses": [
+        {
+          "realmCredentialsId": 1550004040444,
+          "realmCredentialsDisplayName": "string",
+          "organizationId": 144,
+          "organizationName": "ExampleBank",
+          "organizationBankCode": "EB",
+          "isSyncDone": true,
+          "accountSyncStatuses": [
             {
-              "name": "string",
-              "displayName": "string",
-              "regularExpression": "string",
-              "minLength": 0,
-              "maxLength": 0,
-              "isPassword": true,
-              "isHidden": true,
-              "isDropDown": true,
-              "dropDownValues": "string",
-              "parentId": 0,
-              "canSave": true,
-              "isEncrypted": true,
-              "isIdentity": true
+              "accountId": 15567,
+              "balance": 50000,
+              "limit": 2000,
+              "transactionsProcessed": 230,
+              "totalTransactions": 5180,
+              "startDate": "2017-07-27T12:23:34.896Z",
+              "endDate": "2017-07-27T12:23:34.896Z",
+              "accountStatus": "GOOD"
             }
           ],
-          "contentType": 0,
-          "textChallence": "string",
-          "binaryChallenge": "string",
-          "errorMessage": "string",
-          "userIdentifier": "string",
-          "canSave": true,
-          "loginHelp": "string"
-        },
-        "isSyncDone": true
-      }
-    ]
+          "authenticationChallenge": {
+            "requiredParameters": [
+              {
+                "name": "OTP",
+                "displayName": "Example Bank OTP",
+                "regularExpression": null,
+                "minLength": 0,
+                "maxLength": 0,
+                "isPassword": false,
+                "isHidden": false,
+                "isDropDown": false,
+                "dropDownValues": null,
+                "parentId": 0,
+                "canSave": false,
+                "isEncrypted": false,
+                "isIdentity": false
+              }
+            ],
+            "contentType": "TEXT",
+            "textChallenge": "Some Text challenge",
+            "binaryChallenge": null,
+            "errorMessage": null,
+            "userIdentifier": null,
+            "canSave": false,
+            "loginHelp": "Please enter input"
+          }
+        }
+      ]
+    },
+    "hasCompletedSyncSession": true,
+    "isSynchronizationNeeded": true
   }
 }

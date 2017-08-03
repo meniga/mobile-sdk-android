@@ -3,7 +3,6 @@ package com.meniga.sdk.models.offers;
 import android.os.Parcel;
 
 import com.google.gson.Gson;
-import com.meniga.sdk.BuildConfig;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.utils.FileImporter;
@@ -12,7 +11,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 
 

@@ -4,24 +4,23 @@ import android.os.Parcel;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.meniga.sdk.BuildConfig;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.ChallengeItemFactory;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 import com.meniga.sdk.models.challenges.enums.CustomChallengeColor;
 import com.meniga.sdk.utils.FileImporter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.

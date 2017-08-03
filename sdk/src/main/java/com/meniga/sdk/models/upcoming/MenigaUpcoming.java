@@ -452,7 +452,7 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 	/**
 	 * Creates a new instance of an upcoming series
 	 * @param text A human readable text that is displayed to the end user as the title or subject of the upcoming transaction
-	 * @param amountInCurrency
+	 * @param amountInCurrency An amount in the currency specified.
 	 * @param currencyCode The amount for the upcoming transaction in the currency of the "CurrencyCode"
 	 * @param date The expected booking/payment date of the upcoming transaction
 	 * @param accountId The id of the account that the upcoming transaction is expected to be booked from

@@ -7,10 +7,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
- * Collection of {@link Executor}s to use in conjunction with {@link BasicTask}.
- */
-/**
  * Copyright 2017 Meniga Iceland Inc.
+ * Collection of {@link Executor}s to use in conjunction with {@link Task}.
  */
 final class MenigaExecutors {
 

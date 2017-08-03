@@ -49,7 +49,7 @@ public class MenigaAccountOperationsMock implements MenigaAccountOperations {
 	}
 
 	@Override
-	public Result<List<MenigaAccount>> getAccounts() {
+	public Result<List<MenigaAccount>> getAccounts(boolean b, boolean b1) {
 		TaskCompletionSource<List<MenigaAccount>> task = new TaskCompletionSource<>();
 		task.setResult(gson());
 		return new MTask<>(task.getTask(), task);

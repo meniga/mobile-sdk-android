@@ -16,7 +16,6 @@ public class Merge {
 	 *
 	 * @param object1 Object who's fields will be replaced with the ones from object2
 	 * @param object2 The source of data, the fields from this object will be copied to object1
-	 * @throws IllegalAccessException
 	 */
 	public static <E> void merge(E object1, E object2) throws IllegalAccessException {
 		for (Field field : Merge.getAllFields(object1.getClass())) {

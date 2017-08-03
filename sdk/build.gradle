@@ -1,11 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'maven'
-apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.artifactory'
-apply plugin: "com.github.dcendents.android-maven"
 
-if(project.hasProperty('artifactory_username') && (file("./publish.gradle").exists()) ){
+if (project.hasProperty('artifactory_username') && (file("./publish.gradle").exists())) {
     apply from: 'publish.gradle'
 }
 
@@ -54,21 +52,19 @@ android {
     }
 }
 
-task copyResDirectoryToClasses(type: Copy){
+task copyResDirectoryToClasses(type: Copy) {
     from "${projectDir}/src/test/res"
     into "${buildDir}/intermediates/classes/test/debug/res"
 }
 
-project.ext.set('packageName','com.meniga.sdk')
-project.ext.set('libraryVersion',android.defaultConfig.versionName)
+project.ext.set('packageName', 'com.meniga.sdk')
+project.ext.set('libraryVersion', android.defaultConfig.versionName)
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.8.1'
     compile 'net.danlew:android.joda:2.9.9'
@@ -92,34 +88,8 @@ task deploy() {
 deploy.dependsOn uploadArchives
 
 
-project.ext.set("groupIdConst","com.meniga")
-project.ext.set("artifactIdConst","sdk")
+project.ext.set("groupIdConst", "com.meniga")
+project.ext.set("artifactIdConst", "sdk")
 
-
-ext {
-    bintrayRepo = "android"
-    bintrayName = "com.meniga.sdk"
-    bintrayOrg = "meniga"
-
-    publishedGroupId = "com.meniga.sdk"
-    libraryName = "sdk"
-    artifact = "sdk"
-
-    libraryDescription = "Meniga Android SDK"
-
-    siteUrl = "https://github.com/meniga/mobile-sdk-android"
-    gitUrl = "https://github.com/meniga/mobile-sdk-android.git"
-
-    libraryVersion = android.defaultConfig.versionName
-
-    developerId = "developerId"
-    developerName = "meniga"
-    developerEmail = "developer@email.com"
-
-    licenseName = "The MIT License (MIT)"
-    licenseUrl = "https://opensource.org/licenses/MIT"
-    allLicenses = ["MIT"]
-}
-
-apply from: "../install.gradle"
+//apply from: "../install.gradle"
 apply from: "../bintray.gradle"

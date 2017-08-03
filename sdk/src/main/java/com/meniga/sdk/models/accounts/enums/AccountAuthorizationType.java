@@ -1,11 +1,9 @@
 package com.meniga.sdk.models.accounts.enums;
-/**
- * Copyright 2017 Meniga Iceland Inc.
- */
 
 import java.io.Serializable;
 
 /**
+ * Copyright 2017 Meniga Iceland Inc.
  * Type of authorizations during account aggregation
  */
 public enum AccountAuthorizationType implements Serializable {

@@ -59,8 +59,7 @@ public class MenigaSettings {
 	}
 
 	/**
-	 * Returns the framework culture being used (e.g. is-IS, en-GB etc)
-	 * @return
+	 * @return Returns the framework culture being used (e.g. is-IS, en-GB etc)
 	 */
 	public String getCulture() {
 		return culture;
@@ -136,24 +135,21 @@ public class MenigaSettings {
 	}
 
 	/**
-	 * Returns the persistence provider object.
-	 * @return
+	 * @return Returns the persistence provider object.
 	 */
     public PersistenceProvider getPersistenceProvider() {
         return persistenceProvider;
     }
 
 	/**
-	 * Get all the custom interceptors that have been added to the OkHttp client by the user
-	 * @return
+	 * @return Get all the custom interceptors that have been added to the OkHttp client by the user
 	 */
 	public List<Interceptor> getHttpInterceptors() {
 		return interceptors;
 	}
 
 	/**
-	 * Get all the custom Network interceptors that have been added to the OkHttp client by the user
-	 * @return
+	 * @return Get all the custom Network interceptors that have been added to the OkHttp client by the user
 	 */
 	public List<Interceptor> getNetworkInterceptors() {
 		return networkInterceptors;
@@ -281,7 +277,7 @@ public class MenigaSettings {
 		 * model classes can use other endpoints than the default given one.
 		 * @param service The service should have a different endpoint
 		 * @param endpoint The endpoint for the model class type
-		 * @return
+		 * @return Returns settings builder
 		 */
 		public Builder addEndpointForService(Service service, String endpoint) {
 			if(specialServiceEndpoints == null) {
@@ -297,7 +293,7 @@ public class MenigaSettings {
 		/**
 		 * Adds an interceptor to the OkHttp client for custom request/response intercept operations as needed
 		 * @param interceptor The OkHttp interceptor to createOfferAccount
-		 * @return
+		 * @return Returns settings builder
 		 */
 		public Builder addHttpInterceptor(Interceptor interceptor) {
 			interceptors.add(interceptor);
@@ -307,13 +303,12 @@ public class MenigaSettings {
 		/**
 		 * Adds an network interceptor to the OkHttp client
 		 * @param interceptor The OkHttp network interceptor
-		 * @return
+		 * @return Returns settings builder
 		 */
 		public Builder addNetworkInterceptor(Interceptor interceptor) {
 			networkInterceptors.add(interceptor);
 			return this;
 		}
-
 		public Builder useTaskAdapter(TaskAdapter taskAdapter){
 			this.taskAdapter = taskAdapter;
 			return this;
@@ -323,7 +318,7 @@ public class MenigaSettings {
 		 * Sets OkHTTP sslSocketFactory for use with custom certificates;
 		 * @param sslSocketFactory custom sslSocketFactory instance
 		 * @param x509TrustManager custom x509TrustManager instance
-		 * @return
+		 * @return Returns settings builder
 		 */
 		public Builder useSSLFactory(SSLSocketFactory sslSocketFactory,X509TrustManager x509TrustManager) {
 			this.sslSocketFactory = sslSocketFactory;
@@ -334,7 +329,7 @@ public class MenigaSettings {
 		/**
 		 * Sets the framework culture, e.g. en-GB, is-IS etc.
 		 * @param culture The culture in xx-xx form
-		 * @return
+		 * @return Returns settings builder
 		 */
 		public Builder culture(String culture) {
 			this.culture = culture;
@@ -344,7 +339,7 @@ public class MenigaSettings {
 		/**
 		 * Adds an User event converter for the MenigaFeed object. Otherwise it will use provided default providers or return a generic userevent object.
 		 * @param converter An implementation of UserEventConverter
-		 * @return
+		 * @return Returns settings builder
 		 */
 		public Builder addUserEventFeedConverter(EventBaseConverter<MenigaFeedItem> converter){
 			userEventFeedConverters.add(converter);

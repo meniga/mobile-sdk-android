@@ -2,7 +2,6 @@ package com.meniga.sdk.models.transactions;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.meniga.sdk.BuildConfig;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.models.transactions.enums.FilterTimeGroup;
@@ -11,9 +10,6 @@ import junit.framework.Assert;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.model.InitializationError;
-
 
 
 import java.util.Arrays;

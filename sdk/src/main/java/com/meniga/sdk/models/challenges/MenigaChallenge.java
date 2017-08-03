@@ -367,9 +367,6 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 		return result;
 	}
 
-	/**
-	 API operations below
-	 */
 
 	/**
 	 * Gets all challenges, expired, suggested and accepted alike but not expired ones
@@ -467,13 +464,13 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Creates a new custom challenge object with a default value for iconId
-	 * @param title
-	 * @param description
-	 * @param startDate
-	 * @param endDate
-	 * @param categoryIds
-	 * @param targetAmount
-	 * @param color
+	 * @param title Title of the challenge
+	 * @param description Description of the challange
+	 * @param startDate Time period start for when the challenge starts
+	 * @param endDate Time period end for when the challenge starts
+	 * @param categoryIds Category ids that this challenge applies to
+	 * @param targetAmount The budget target amount for the challenge
+	 * @param color Color of the challenge being created
 	 * @return A task containing the newly created custom challenge
 	 */
 	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,

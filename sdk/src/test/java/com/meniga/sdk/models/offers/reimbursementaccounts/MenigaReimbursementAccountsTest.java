@@ -2,7 +2,6 @@ package com.meniga.sdk.models.offers.reimbursementaccounts;
 
 import android.os.Parcel;
 
-import com.meniga.sdk.BuildConfig;
 import com.meniga.sdk.models.MockClient;
 import com.meniga.sdk.models.MockInterceptor;
 import com.meniga.sdk.webservices.requests.GetReimbursementAccountTypes;

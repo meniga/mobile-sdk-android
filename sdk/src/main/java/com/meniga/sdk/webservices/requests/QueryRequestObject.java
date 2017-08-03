@@ -21,9 +21,7 @@ public abstract class QueryRequestObject implements ValueHashable {
 	}
 
 	/**
-	 * To be overriden in dericed classes since definition varies a lot
-	 *
-	 * @return
+	 * To be overridden in declered classes since definition varies a lot
 	 */
 	public Map<String, String> toQueryMap() {
 		return null;

@@ -1,13 +1,10 @@
 package com.meniga.sdk.models.categories.enums;
-/**
- * Copyright 2017 Meniga Iceland Inc.
- */
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 /**
+ * Copyright 2017 Meniga Iceland Inc.
  * Enum that represents if a category is a income or an expense.
  */
 public enum CategoryType implements Serializable {

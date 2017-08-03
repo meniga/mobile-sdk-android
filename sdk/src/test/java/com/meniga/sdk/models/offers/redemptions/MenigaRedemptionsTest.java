@@ -2,7 +2,6 @@ package com.meniga.sdk.models.offers.redemptions;
 
 import android.os.Parcel;
 
-import com.meniga.sdk.BuildConfig;
 import com.meniga.sdk.models.MockClient;
 import com.meniga.sdk.models.MockInterceptor;
 import com.meniga.sdk.webservices.requests.GetRedemptions;
@@ -11,7 +10,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 
 

@@ -267,7 +267,10 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 		if (children != null ? !children.equals(that.children) : that.children != null) {
 			return false;
 		}
-		if (parent != null ? !parent.equals(that.parent) : that.parent != null) {
+		if (parent == null && that.parent != null || parent != null && that.parent == null) {
+			return false;
+		}
+		if (parent != null && parent.getId() != that.parent.getId()) {
 			return false;
 		}
 		if (categoryContextId != null ? !categoryContextId.equals(that.categoryContextId) : that.categoryContextId != null) {

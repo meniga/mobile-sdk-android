@@ -3,7 +3,6 @@ package com.meniga.sdk.models.networth;
 import android.os.Parcel;
 
 import com.google.gson.Gson;
-import com.meniga.sdk.BuildConfig;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MenigaDecimal;
@@ -14,7 +13,6 @@ import junit.framework.Assert;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 
 
@@ -22,7 +20,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.

@@ -335,9 +335,6 @@ public class MenigaMerchant implements Serializable, Parcelable, Cloneable {
 		return 0;
 	}
 
-	/**
-	 API operations below
-	 */
 
 	/**
 	 * Gets a merchant by id

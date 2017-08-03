@@ -1,0 +1,49 @@
+package com.meniga.sdk;
+
+import com.meniga.sdk.models.user.ChallengeContentType;
+import com.meniga.sdk.models.user.MenigaSync;
+import com.meniga.sdk.providers.tasks.Task;
+import com.meniga.sdk.utils.FileImporter;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
+
+import okhttp3.HttpUrl;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+
+/**
+ * Copyright 2017 Meniga Iceland Inc.
+ */
+
+public class MenigaSyncTest {
+
+	@Test
+	public void test() throws Exception {
+		// Create a MockWebServer. These are lean enough that you can create a new
+		// instance for every unit test.
+		MockWebServer server = new MockWebServer();
+
+		// Schedule some responses.
+		server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("syncresponse.json")));
+		server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("syncstatus.json")));
+
+		// Start the server.
+		server.start();
+
+		// Ask the server for its URL. You'll need this to make HTTP requests.
+		HttpUrl baseUrl = server.url("/v1");
+		MenigaSettings settings = new MenigaSettings.Builder().endpoint(baseUrl).build();
+		MenigaSDK.init(settings);
+		Task<MenigaSync> syncTask = MenigaSync.start(1000).getTask();
+		syncTask.waitForCompletion();
+		MenigaSync sync = syncTask.getResult();
+
+		Assert.assertNotNull(sync);
+		Assert.assertEquals(true, sync.getSynchronizationStatus().getIsSyncDone());
+		Assert.assertEquals(ChallengeContentType.TEXT, sync.getSynchronizationStatus().getRealmSyncResponses().get(0).getAuthenticationChallenge().getContentType());
+		// Shut down the server. Instances cannot be reused.
+		server.shutdown();
+	}
+}
