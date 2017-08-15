@@ -28,7 +28,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard-rules.pro'
     }
@@ -90,7 +90,6 @@ dependencies {
 task deploy() {
 }
 deploy.dependsOn uploadArchives
-
 
 project.ext.set("groupIdConst", "com.meniga")
 project.ext.set("artifactIdConst", "sdk")

@@ -1,9 +1,9 @@
-package com.meniga.sdk.models.user.operators;
+package com.meniga.sdk.models.sync.operators;
 
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.user.MenigaSync;
-import com.meniga.sdk.models.user.MenigaSyncStatus;
+import com.meniga.sdk.models.sync.MenigaSync;
+import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.webservices.requests.GetSync;
 import com.meniga.sdk.webservices.requests.StartSync;
 

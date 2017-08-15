@@ -1,7 +1,7 @@
 package com.meniga.sdk;
 
+import com.meniga.sdk.models.sync.MenigaSync;
 import com.meniga.sdk.models.user.ChallengeContentType;
-import com.meniga.sdk.models.user.MenigaSync;
 import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.utils.FileImporter;
 
@@ -41,8 +41,7 @@ public class MenigaSyncTest {
 		MenigaSync sync = syncTask.getResult();
 
 		Assert.assertNotNull(sync);
-		Assert.assertEquals(true, sync.getSynchronizationStatus().getIsSyncDone());
-		Assert.assertEquals(ChallengeContentType.TEXT, sync.getSynchronizationStatus().getRealmSyncResponses().get(0).getAuthenticationChallenge().getContentType());
+		Assert.assertEquals(ChallengeContentType.TEXT, sync.getRealmSyncResponses().get(0).getAuthenticationChallenge().getContentType());
 		// Shut down the server. Instances cannot be reused.
 		server.shutdown();
 	}

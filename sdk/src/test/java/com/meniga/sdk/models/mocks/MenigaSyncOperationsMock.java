@@ -4,11 +4,11 @@ import com.google.gson.Gson;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MTask;
-import com.meniga.sdk.models.user.MenigaSyncStatus;
+import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.providers.tasks.TaskCompletionSource;
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.user.MenigaSync;
-import com.meniga.sdk.models.user.operators.MenigaSyncOperations;
+import com.meniga.sdk.models.sync.MenigaSync;
+import com.meniga.sdk.models.sync.operators.MenigaSyncOperations;
 import com.meniga.sdk.utils.FileImporter;
 
 import java.io.IOException;

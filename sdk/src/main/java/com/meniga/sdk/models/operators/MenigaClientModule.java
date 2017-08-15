@@ -45,8 +45,8 @@ import com.meniga.sdk.models.transactions.operators.MenigaTransactionSeriesOpera
 import com.meniga.sdk.models.transactions.operators.MenigaTransactionSeriesOperationsImp;
 import com.meniga.sdk.models.upcoming.operators.MenigaUpcomingOperations;
 import com.meniga.sdk.models.upcoming.operators.MenigaUpcomingOperationsImp;
-import com.meniga.sdk.models.user.operators.MenigaSyncOperations;
-import com.meniga.sdk.models.user.operators.MenigaSyncOperationsImp;
+import com.meniga.sdk.models.sync.operators.MenigaSyncOperations;
+import com.meniga.sdk.models.sync.operators.MenigaSyncOperationsImp;
 import com.meniga.sdk.models.user.operators.MenigaUserOperations;
 import com.meniga.sdk.models.user.operators.MenigaUserOperationsImp;
 import com.meniga.sdk.models.user.operators.MenigaUserProfileOperations;
