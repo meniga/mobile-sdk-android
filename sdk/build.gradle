@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.artifactory'
 
 if (project.hasProperty('artifactory_username') && (file("./publish.gradle").exists())) {
@@ -15,7 +16,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.18"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.1.1"
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
 }
