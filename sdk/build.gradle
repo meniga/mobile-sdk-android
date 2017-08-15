@@ -6,6 +6,9 @@ apply plugin: 'com.jfrog.artifactory'
 if (project.hasProperty('artifactory_username') && (file("./publish.gradle").exists())) {
     apply from: 'publish.gradle'
 }
+if (project.hasProperty('bintray_user') && (file("./bintray.gradle").exists())) {
+    apply from: "../bintray.gradle"
+}
 
 buildscript {
     repositories {
@@ -91,5 +94,3 @@ deploy.dependsOn uploadArchives
 project.ext.set("groupIdConst", "com.meniga")
 project.ext.set("artifactIdConst", "sdk")
 
-//apply from: "../install.gradle"
-apply from: "../bintray.gradle"
