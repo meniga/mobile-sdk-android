@@ -1,7 +1,9 @@
-package com.meniga.sdk.models.user;
+package com.meniga.sdk.models.sync;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.meniga.sdk.models.user.AuthenticationChallenge;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +14,14 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class RealmSyncResponse implements Serializable, Parcelable {
+
+	protected RealmSyncResponse() {
+	}
+
+	protected RealmSyncResponse(Parcel in) {
+		this.accountSyncStatuses = in.createTypedArrayList(AccountSyncStatus.CREATOR);
+		this.authenticationChallenge = in.readParcelable(AuthenticationChallenge.class.getClassLoader());
+	}
 
 	protected List<AccountSyncStatus> accountSyncStatuses;
 	protected AuthenticationChallenge authenticationChallenge;
@@ -60,14 +70,6 @@ public class RealmSyncResponse implements Serializable, Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeTypedList(this.accountSyncStatuses);
 		dest.writeParcelable(this.authenticationChallenge, flags);
-	}
-
-	public RealmSyncResponse() {
-	}
-
-	protected RealmSyncResponse(Parcel in) {
-		this.accountSyncStatuses = in.createTypedArrayList(AccountSyncStatus.CREATOR);
-		this.authenticationChallenge = in.readParcelable(AuthenticationChallenge.class.getClassLoader());
 	}
 
 	public static final Creator<RealmSyncResponse> CREATOR = new Creator<RealmSyncResponse>() {

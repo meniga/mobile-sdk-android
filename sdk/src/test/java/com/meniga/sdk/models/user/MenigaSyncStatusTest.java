@@ -5,6 +5,7 @@ import android.os.Parcel;
 import com.google.gson.Gson;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
+import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;

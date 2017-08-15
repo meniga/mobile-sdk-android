@@ -1,4 +1,4 @@
-package com.meniga.sdk.models.user;
+package com.meniga.sdk.models.sync;
 
 import android.os.Parcel;
 import android.os.Parcelable;

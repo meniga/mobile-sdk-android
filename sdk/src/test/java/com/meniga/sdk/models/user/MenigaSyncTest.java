@@ -5,6 +5,7 @@ import android.os.Parcel;
 import com.google.gson.Gson;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
+import com.meniga.sdk.models.sync.MenigaSync;
 import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
@@ -30,12 +31,11 @@ public class MenigaSyncTest {
 		MenigaSync items = this.gson();
 
 		assertThat(items).isNotNull();
-		assertThat(items.getSynchronizationStatus().getSyncHistoryId()).isEqualTo(150L);
-		assertThat(items.getSynchronizationStatus().getSyncSessionStartTime()).isNotNull();
-		assertThat(items.getSynchronizationStatus().getIsSyncDone()).isTrue();
-		assertThat(items.getSynchronizationStatus().getRealmSyncResponses().size()).isGreaterThan(0);
-		assertThat(items.getSynchronizationStatus().getRealmSyncResponses().get(0).accountSyncStatuses.size()).isGreaterThan(0);
-		assertThat(items.getSynchronizationStatus().getRealmSyncResponses().get(0).accountSyncStatuses.get(0).getTransactionsProcessed()).isEqualTo(230);
+		assertThat(items.getSyncHistoryId()).isEqualTo(150L);
+		assertThat(items.getSyncSessionStartTime()).isNotNull();
+		assertThat(items.getRealmSyncResponses().size()).isGreaterThan(0);
+		assertThat(items.getRealmSyncResponses().get(0).getAccountSyncStatuses().size()).isEqualTo(1);
+		assertThat(items.getRealmSyncResponses().get(0).getAccountSyncStatuses().get(0).getTransactionsProcessed()).isEqualTo(230);
 	}
 
 	@Test

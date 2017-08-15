@@ -49,10 +49,10 @@ import com.meniga.sdk.models.transactions.operators.MenigaTransactionRuleOperati
 import com.meniga.sdk.models.transactions.operators.MenigaTransactionSeriesOperations;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.upcoming.operators.MenigaUpcomingOperations;
-import com.meniga.sdk.models.user.MenigaSync;
+import com.meniga.sdk.models.sync.MenigaSync;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
-import com.meniga.sdk.models.user.operators.MenigaSyncOperations;
+import com.meniga.sdk.models.sync.operators.MenigaSyncOperations;
 import com.meniga.sdk.models.user.operators.MenigaUserOperations;
 import com.meniga.sdk.models.user.operators.MenigaUserProfileOperations;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
