@@ -268,6 +268,10 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.USER_EVENTS).setSubscription(req));
 	}
 
+	public Result<Void> updateSettings(SetSubscriptionSettings req) {
+		return persist(req, getClient(Service.USER_EVENTS).updateSettings(req));
+	}
+
 	public Result<MenigaSync> getSync(GetSync req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
@@ -770,4 +774,6 @@ public class PersistenceDelegate {
 	Map<Service, MenigaAPI> getApis() {
 		return clients;
 	}
+
+
 }

@@ -59,6 +59,7 @@ import com.meniga.sdk.webservices.requests.RecategorizeTransactions;
 import com.meniga.sdk.webservices.requests.RegisterUser;
 import com.meniga.sdk.webservices.requests.ResetBudget;
 import com.meniga.sdk.webservices.requests.SetSubscription;
+import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
 import com.meniga.sdk.webservices.requests.SplitTransaction;
 import com.meniga.sdk.webservices.requests.StartSync;
 import com.meniga.sdk.webservices.requests.UpdateAccount;
@@ -244,6 +245,9 @@ public interface MenigaAPI {
 
 	@PUT(APIConst.URL_USER_EVENTS)
 	Call<Void> setSubscription(@Body SetSubscription req);
+
+	@PUT(APIConst.URL_USER_EVENTS + APIConst.UE_DETAILS)
+	Call<Void> updateSettings(@Body SetSubscriptionSettings req);
 
 	// --
 	// Feed
@@ -506,4 +510,5 @@ public interface MenigaAPI {
 
 	@DELETE
     Call<Object> genericDelete(@Url String path, @QueryMap Map<String, String> query);
+
 }
