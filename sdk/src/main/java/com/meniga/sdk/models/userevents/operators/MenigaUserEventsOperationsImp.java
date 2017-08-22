@@ -5,9 +5,11 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.models.userevents.enums.UserEventType;
 import com.meniga.sdk.webservices.requests.SetSubscription;
+import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -32,5 +34,21 @@ public class MenigaUserEventsOperationsImp implements MenigaUserEventsOperations
 		}
 
 		return MenigaSDK.executor().setSubscription(req);
+	}
+
+	@Override
+	public Result<Void> updateSettings(Map<String, String> subscriptionSettings) {
+		SetSubscriptionSettings req = new SetSubscriptionSettings();
+
+		req.subscriptionSettings = new ArrayList<>();
+		for (Map.Entry<String, String> entry : subscriptionSettings.entrySet())
+		{
+			SetSubscriptionSettings.SubscriptionSettings ss = new SetSubscriptionSettings.SubscriptionSettings();
+			ss.identifier = entry.getKey();
+			ss.value = entry.getValue();
+			req.subscriptionSettings.add(ss);
+		}
+
+		return MenigaSDK.executor().updateSettings(req);
 	}
 }

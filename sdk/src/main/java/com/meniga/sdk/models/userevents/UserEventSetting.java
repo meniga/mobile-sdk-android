@@ -3,17 +3,59 @@ package com.meniga.sdk.models.userevents;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.meniga.sdk.helpers.GsonProvider;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 
 public class UserEventSetting implements Parcelable {
 
-	protected String channelName;
-	protected Boolean isSubscribed;
-	protected Boolean canUpdateSubscription;
+	protected String identifier;
+	protected String value;
+	protected String dataType;
 
 	public UserEventSetting() {
+	}
+
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public String getDataType() {
+		return dataType;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		UserEventSetting that = (UserEventSetting) o;
+
+		if (identifier != null ? !identifier.equals(that.identifier) : that.identifier != null)
+			return false;
+		if (value != null ? !value.equals(that.value) : that.value != null) return false;
+		return dataType != null ? dataType.equals(that.dataType) : that.dataType == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = identifier != null ? identifier.hashCode() : 0;
+		result = 31 * result + (value != null ? value.hashCode() : 0);
+		result = 31 * result + (dataType != null ? dataType.hashCode() : 0);
+		return result;
 	}
 
 	@Override
@@ -23,15 +65,15 @@ public class UserEventSetting implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(this.channelName);
-		dest.writeValue(this.isSubscribed);
-		dest.writeValue(this.canUpdateSubscription);
+		dest.writeString(this.identifier);
+		dest.writeString(this.value);
+		dest.writeString(this.dataType);
 	}
 
 	protected UserEventSetting(Parcel in) {
-		this.channelName = in.readString();
-		this.isSubscribed = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		this.canUpdateSubscription = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.identifier = in.readString();
+		this.value = in.readString();
+		this.dataType = in.readString();
 	}
 
 	public static final Creator<UserEventSetting> CREATOR = new Creator<UserEventSetting>() {
@@ -45,41 +87,4 @@ public class UserEventSetting implements Parcelable {
 			return new UserEventSetting[size];
 		}
 	};
-
-
-	public String getChannelName() {
-		return channelName;
-	}
-
-	public Boolean getSubscribed() {
-		return isSubscribed;
-	}
-
-	public Boolean getCanUpdateSubscription() {
-		return canUpdateSubscription;
-	}
-
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		UserEventSetting that = (UserEventSetting) o;
-
-		if (channelName != null ? !channelName.equals(that.channelName) : that.channelName != null)
-			return false;
-		if (isSubscribed != null ? !isSubscribed.equals(that.isSubscribed) : that.isSubscribed != null)
-			return false;
-		return canUpdateSubscription != null ? canUpdateSubscription.equals(that.canUpdateSubscription) : that.canUpdateSubscription == null;
-
-	}
-
-	@Override
-	public int hashCode() {
-		int result = channelName != null ? channelName.hashCode() : 0;
-		result = 31 * result + (isSubscribed != null ? isSubscribed.hashCode() : 0);
-		result = 31 * result + (canUpdateSubscription != null ? canUpdateSubscription.hashCode() : 0);
-		return result;
-	}
 }

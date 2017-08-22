@@ -11,6 +11,7 @@ import com.meniga.sdk.models.userevents.operators.MenigaUserEventsOperations;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -136,5 +137,9 @@ public class MenigaUserEvent implements Serializable, Parcelable, Cloneable {
 
 		}
 		return MenigaUserEvent.apiOperations.setSubscription(userEventTypeIdentifier, subscribed, channel, reason);
+	}
+
+	public static Result<Void> updateSettings(Map<String, String> subscriptionSettings) {
+		return MenigaUserEvent.apiOperations.updateSettings(subscriptionSettings);
 	}
 }
