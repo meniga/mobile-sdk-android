@@ -170,9 +170,6 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 	}
 
 	public Integer getTargetPercentage() {
-		if (targetPercentage == null) {
-			return 1;
-		}
 		return targetPercentage;
 	}
 
@@ -366,7 +363,6 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 		result = 31 * result + (customChallengeColor != null ? customChallengeColor.hashCode() : 0);
 		return result;
 	}
-
 
 	/**
 	 * Gets all challenges, expired, suggested and accepted alike but not expired ones
