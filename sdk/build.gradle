@@ -94,3 +94,19 @@ deploy.dependsOn uploadArchives
 project.ext.set("groupIdConst", "com.meniga")
 project.ext.set("artifactIdConst", "sdk")
 
+
+// Upload to the local maven repo
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: mavenLocal().url)
+            pom.project {
+                groupId = project.groupIdConst
+                artifactId = project.artifactIdConst
+                packaging 'aar'
+                version =  project.libraryVersion
+            }
+        }
+    }
+}
+

@@ -35,6 +35,18 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 		this.messageData = in.readString();
 	}
 
+	public static final Creator<MenigaEvent> CREATOR = new Creator<MenigaEvent>() {
+		@Override
+		public MenigaEvent createFromParcel(Parcel in) {
+			return new MenigaEvent(in);
+		}
+
+		@Override
+		public MenigaEvent[] newArray(int size) {
+			return new MenigaEvent[size];
+		}
+	};
+
 	public long getId() {
 		return this.id;
 	}

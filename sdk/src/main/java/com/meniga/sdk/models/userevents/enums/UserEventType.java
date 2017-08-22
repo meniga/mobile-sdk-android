@@ -2,6 +2,8 @@ package com.meniga.sdk.models.userevents.enums;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Locale;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -54,6 +56,6 @@ public enum UserEventType {
 
     @Override
     public String toString() {
-        return super.toString().toLowerCase();
+        return super.toString().toLowerCase(Locale.getDefault());
     }
 }

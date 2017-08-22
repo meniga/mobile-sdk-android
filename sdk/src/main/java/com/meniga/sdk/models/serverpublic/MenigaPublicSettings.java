@@ -8,6 +8,7 @@ import com.meniga.sdk.models.serverpublic.operators.MenigaPublicSettingsOperatio
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Public configurations for the whole Meniga system.
@@ -253,7 +254,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 			return null;
 		}
 		for (MenigaCurrency currency : currencies) {
-			if (currency.getCode().toUpperCase().equals(code.toUpperCase())) {
+			if (currency.getCode().toUpperCase().equals(code.toUpperCase(Locale.getDefault()))) {
 				return currency;
 			}
 		}

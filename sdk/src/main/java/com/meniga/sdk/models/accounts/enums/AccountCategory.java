@@ -3,6 +3,7 @@ package com.meniga.sdk.models.accounts.enums;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -28,7 +29,7 @@ public enum AccountCategory implements Serializable {
 	private String accountCategory;
 
 	AccountCategory(String accountType) {
-		this.accountCategory = accountType.toUpperCase();
+		this.accountCategory = accountType.toUpperCase(Locale.getDefault());
 	}
 
 	@Override
