@@ -3,9 +3,8 @@ package com.meniga.sdk.models.budget;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.meniga.sdk.MenigaSDK;
-import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 
@@ -27,6 +26,9 @@ public class MenigaBudget implements Parcelable, Serializable {
 	protected String description;
 	protected List<Long> accountIds;
 	protected DateTime created;
+	protected boolean isDefault;
+	protected BudgetPeriod period;
+	protected int offset;
 	protected List<MenigaBudgetEntry> entries;
 
 	protected MenigaBudget() {
@@ -41,44 +43,111 @@ public class MenigaBudget implements Parcelable, Serializable {
 		MenigaBudget.apiOperator = operator;
 	}
 
-	public long getId() {
-		return id;
+	/*
+	* API Calls
+	*/
+
+	/**
+	 * Fetches a list of budgets available to the user
+	 * @param ids list of budget ids
+	 * @param accountIds list of account ids
+	 * @param budgetType type of budget
+	 * @return list of budgets without entries
+	 */
+	public static Result<List<MenigaBudget>> fetch(List<Long> ids, List<Long> accountIds, BudgetType budgetType) {
+		return apiOperator.getBudgets(ids, accountIds, budgetType);
 	}
 
-	public String getName() {
-		return name;
+	/**
+	 * Fetches a list of budgets available to the user
+	 * @param id list of budget ids
+	 * @param filter BudgetFilter
+	 * @return list of budgets without entries
+	 */
+	public static Result<MenigaBudget> fetch(Long id, BudgetFilter filter) {
+		return apiOperator.getBudgetById(id, filter);
 	}
 
-	public String getDescription() {
-		return description;
+	/**
+	 * Create a single instance of budget
+	 * @param type type of budget
+	 * @param name name of budget
+	 * @param description description of budget
+	 * @param accountIds lisdt of account ids relevant to the budget
+	 * @param isDefault if this instance is the default budget for the user
+	 * @param period what kinds of period this budget applies to
+	 * @param offset integer offset on how the period of this budget is calculated
+	 * @return a instance of budget
+	 */
+	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, boolean isDefault, BudgetPeriod period, int offset) {
+		return apiOperator.createBudget(type, name, description, accountIds, isDefault, period, offset);
 	}
 
-	public List<Long> getAccountIds() {
-		return accountIds;
+	/**
+	 * Deletes the budget
+	 * @return Void
+	 */
+	public static Result<Void> delete(long id) {
+		return apiOperator.deleteBudget(id);
 	}
 
-	public DateTime getCreated() {
-		return created;
+	/**
+	 * Deletes the budget
+	 * @return Void
+	 */
+	public Result<Void> delete() {
+		return apiOperator.deleteBudget(this.id);
 	}
 
-	public List<MenigaBudgetEntry> getEntries() {
-		return entries;
+	/**
+	 * Updates the budgets name, description, accountids, default and offset
+	 * @return Void
+	 */
+	public Result<MenigaBudget> update() {
+		return apiOperator.updateBudget(this.id,this.name, this.description, this.accountIds, this.isDefault, this.offset);
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	/**
+	 * Causes the budget to reset (remove all entries and fall back to default generated entries)
+	 * @return Void
+	 */
+	public static Result<Void> reset(long id) {
+		return apiOperator.reset(id);
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	/**
+	 * Causes the budget to reset (remove all entries and fall back to default generated entries)
+	 * @return Void
+	 */
+	public Result<Void> reset() {
+		return apiOperator.reset(this.id);
 	}
 
-	public void setAccountIds(List<Long> accountIds) {
-		this.accountIds = accountIds;
+	/**
+	 * Fetches the entries for this budget
+	 * @return list of budget entries
+	 */
+	public Result<List<MenigaBudgetEntry>> fetchEntries(BudgetFilter filter){
+		return apiOperator.getBudgetEntries(this.id, filter);
 	}
 
-	public void setEntries(List<MenigaBudgetEntry> entries) {
-		this.entries = entries;
+	/**
+	 * Create entries applies to this budget
+	 * @param entries list of budget entries
+	 * @return Void
+	 */
+	public Result<List<MenigaBudgetEntry>> createEntries(List<MenigaBudgetEntry> entries) {
+		return apiOperator.createBudgetEntries(this.id, entries);
+	}
+
+
+	/**
+	 * Deletes entry
+	 * @param entryId id of entry
+	 * @return Void
+	 */
+	public Result<Void> deleteEntry(long entryId) {
+		return apiOperator.deleteBudgetEntry(this.id, entryId);
 	}
 
 	@Override
@@ -94,6 +163,9 @@ public class MenigaBudget implements Parcelable, Serializable {
 		dest.writeString(this.description);
 		dest.writeList(this.accountIds);
 		dest.writeSerializable(this.created);
+		dest.writeByte(this.isDefault ? (byte) 1 : (byte) 0);
+		dest.writeInt(this.period == null ? -1 : this.period.ordinal());
+		dest.writeInt(this.offset);
 		dest.writeTypedList(this.entries);
 	}
 
@@ -103,9 +175,13 @@ public class MenigaBudget implements Parcelable, Serializable {
 		this.type = tmpType == -1 ? null : BudgetType.values()[tmpType];
 		this.name = in.readString();
 		this.description = in.readString();
-		this.accountIds = new ArrayList<>();
+		this.accountIds = new ArrayList<Long>();
 		in.readList(this.accountIds, Long.class.getClassLoader());
 		this.created = (DateTime) in.readSerializable();
+		this.isDefault = in.readByte() != 0;
+		int tmpPeriod = in.readInt();
+		this.period = tmpPeriod == -1 ? null : BudgetPeriod.values()[tmpPeriod];
+		this.offset = in.readInt();
 		this.entries = in.createTypedArrayList(MenigaBudgetEntry.CREATOR);
 	}
 
@@ -120,146 +196,4 @@ public class MenigaBudget implements Parcelable, Serializable {
 			return new MenigaBudget[size];
 		}
 	};
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-
-		MenigaBudget that = (MenigaBudget) o;
-
-		if (id != that.id) {
-			return false;
-		}
-		if (type != that.type) {
-			return false;
-		}
-		if (name != null ? !name.equals(that.name) : that.name != null) {
-			return false;
-		}
-		if (description != null ? !description.equals(that.description) : that.description != null) {
-			return false;
-		}
-		if (accountIds != null ? !accountIds.equals(that.accountIds) : that.accountIds != null) {
-			return false;
-		}
-		if (created != null ? !created.equals(that.created) : that.created != null) {
-			return false;
-		}
-		return entries != null ? entries.equals(that.entries) : that.entries == null;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
-		result = 31 * result + (type != null ? type.hashCode() : 0);
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (description != null ? description.hashCode() : 0);
-		result = 31 * result + (accountIds != null ? accountIds.hashCode() : 0);
-		result = 31 * result + (created != null ? created.hashCode() : 0);
-		result = 31 * result + (entries != null ? entries.hashCode() : 0);
-		return result;
-	}
-
-	/*
-	* API Calls
-	*/
-
-	/**
-	 * Retrieves a filtered list of all budgets for the authenticated user
-	 * @param filter constraints to filter the list of retrieved budgets and their data on ({@link BudgetFilter#categoryIds}, {@link BudgetFilter#startDate}, {@link BudgetFilter#endDate}, {@link BudgetFilter#allowOverlappingDates}, {@link BudgetFilter#type})
-	 * @return Meniga task containing the list of all budgets that meet the filter constraints
-	 */
-	public static Result<List<MenigaBudget>> fetch(BudgetFilter filter) {
-		return apiOperator.getBudgets(filter);
-	}
-
-	/**
-	 * Retrieves a specific budget by id
-	 * @param id budget id
-	 * @param filter constraints to limit the data retrieved for the budget ({@link BudgetFilter#categoryIds}, {@link BudgetFilter#startDate}, {@link BudgetFilter#endDate}, {@link BudgetFilter#allowOverlappingDates}, {@link BudgetFilter#type}, {@link BudgetFilter#includeEntries})
-	 * @return Meniga task containing the list of all budgets that meet the filter constraints
-	 */
-	public static Result<MenigaBudget> fetch(long id, BudgetFilter filter) {
-		return apiOperator.getBudgetById(id, filter);
-	}
-
-	/**
-	 * Create a budget
-	 * @param name name of budget
-	 * @param description description for budget
-	 * @param accountIds accountId's for the accounts the budget applies to
-	 * @param entries budget entries to set for the created budget
-	 * @return Meniga task returning the created budget object
-	 */
-	public static Result<MenigaBudget> create(String name, String description, List<Long> accountIds, List<MenigaBudgetEntry> entries) {
-		return apiOperator.createBudget(name, description, accountIds, entries);
-	}
-
-	/**
-	 * Delete a budget. This will delete the budget corresponding to this budget instance
-	 * @return Meniga task
-	 */
-	public Result<Void> delete() {
-		return apiOperator.deleteBudget(this.id);
-	}
-
-	/**
-	 * Update this budget instance. A new name, description, accountIds and entries can be set for a budget.
-	 * @return Meniga task returning the updated budget object, the current instance will also be updated
-	 */
-	public Result<MenigaBudget> update() {
-		Result<MenigaBudget> task = apiOperator.updateBudget(this);
-		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaBudget>() {
-			@Override
-			public void onFinished(MenigaBudget result, boolean failed) {
-				if (failed || result == null) {
-					return;
-				}
-				setName(result.getName());
-				setDescription(result.getDescription());
-				setAccountIds(result.getAccountIds());
-				setEntries(result.getEntries());
-			}
-		});
-	}
-
-	// TODO: This should really return an update budget, or at least update the instance
-
-	/**
-	 * Reset this budget
-	 * @param categoryIds categories to reset
-	 * @param resetManualEntries will manually made entries also be reset?
-	 * @return Meniga taskd
-	 */
-	public Result<Void> reset(List<Long> categoryIds, boolean resetManualEntries) {
-		return apiOperator.resetBudget(this.id, categoryIds, resetManualEntries);
-	}
-
-	/**
-	 * Delete a budget by id
-	 * @param id budget id of the budget to delete
-	 * @return Meniga task
-	 */
-	public static Result<Void> deleteById(long id) {
-		return apiOperator.deleteBudget(id);
-	}
-
-	// TODO: This should really return an update budget, or at least update the instance
-
-	/**
-	 * Reset a budget by id
-	 * @param id of the budget to reset
-	 * @param categoryIds categories to reset
-	 * @param resetManualEntries will manually made entries also be reset?
-	 * @return Meniga task
-	 */
-
-	public static Result<Void> resetById(long id, List<Long> categoryIds, boolean resetManualEntries) {
-		return apiOperator.resetBudget(id, categoryIds, resetManualEntries);
-	}
 }

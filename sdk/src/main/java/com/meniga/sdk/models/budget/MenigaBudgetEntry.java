@@ -21,34 +21,15 @@ public class MenigaBudgetEntry implements Parcelable {
     protected long id;
     protected MenigaDecimal targetAmount;
     protected MenigaDecimal spentAmount;
+	protected DateTime endDate;
     protected DateTime updatedAt;
-    protected DateTime startDate;
-    protected DateTime endDate;
-    protected List<Long> categoryIds;
-    // For a planning entry
-    protected int autoFillType;
+	protected Integer generationType;
+	protected List<Long> categoryIds;
+	protected long budgetId;
+
 
     protected MenigaBudgetEntry() {
 
-    }
-
-	protected MenigaBudgetEntry(Parcel in) {
-		this.id = in.readLong();
-		this.targetAmount = (MenigaDecimal) in.readSerializable();
-		this.spentAmount = (MenigaDecimal) in.readSerializable();
-		this.updatedAt = (DateTime) in.readSerializable();
-		this.startDate = (DateTime) in.readSerializable();
-		this.endDate = (DateTime) in.readSerializable();
-		this.categoryIds = new ArrayList<>();
-		in.readList(this.categoryIds, Long.class.getClassLoader());
-	}
-
-    public MenigaBudgetEntry(MenigaDecimal targetAmount, DateTime startDate, DateTime endDate, List<Long> categoryIds) {
-        this.id = -1; // Should not be used
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.targetAmount = targetAmount;
-        this.categoryIds = new ArrayList<>(categoryIds);
     }
 
     /**
@@ -61,193 +42,127 @@ public class MenigaBudgetEntry implements Parcelable {
         MenigaBudget.apiOperator = operator;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-	        return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-	        return false;
-        }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
-        MenigaBudgetEntry that = (MenigaBudgetEntry) o;
+		MenigaBudgetEntry that = (MenigaBudgetEntry) o;
 
-        if (id != that.id) {
-	        return false;
-        }
-        if (targetAmount != null ? !targetAmount.equals(that.targetAmount) : that.targetAmount != null) {
-	        return false;
-        }
-        if (spentAmount != null ? !spentAmount.equals(that.spentAmount) : that.spentAmount != null) {
-	        return false;
-        }
-        if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null) {
-	        return false;
-        }
-        if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) {
-	        return false;
-        }
-        if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) {
-	        return false;
-        }
-        return categoryIds != null ? categoryIds.equals(that.categoryIds) : that.categoryIds == null;
+		if (id != that.id) return false;
+		if (budgetId != that.budgetId) return false;
+		if (targetAmount != null ? !targetAmount.equals(that.targetAmount) : that.targetAmount != null)
+			return false;
+		if (spentAmount != null ? !spentAmount.equals(that.spentAmount) : that.spentAmount != null)
+			return false;
+		if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
+		if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null)
+			return false;
+		if (generationType != null ? !generationType.equals(that.generationType) : that.generationType != null)
+			return false;
+		return categoryIds != null ? categoryIds.equals(that.categoryIds) : that.categoryIds == null;
 
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (targetAmount != null ? targetAmount.hashCode() : 0);
-        result = 31 * result + (spentAmount != null ? spentAmount.hashCode() : 0);
-        result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
-        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
-        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-        result = 31 * result + (categoryIds != null ? categoryIds.hashCode() : 0);
-        return result;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public MenigaDecimal getTargetAmount() {
-        return targetAmount;
-    }
-
-    public void setTargetAmount(MenigaDecimal targetAmount) {
-        this.targetAmount = targetAmount;
-    }
-
-    public DateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public DateTime getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(DateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public DateTime getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(DateTime endDate) {
-        this.endDate = endDate;
-    }
-
-    public List<Long> getCategoryIds() {
-        return categoryIds;
-    }
-
-    public int getAutoFillType() {
-        return autoFillType;
-    }
-
-    public void setCategoryIds(List<Long> categoryIds) {
-        this.categoryIds = categoryIds;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.id);
-        dest.writeSerializable(this.targetAmount);
-        dest.writeSerializable(this.spentAmount);
-        dest.writeSerializable(this.updatedAt);
-        dest.writeSerializable(this.startDate);
-        dest.writeSerializable(this.endDate);
-        dest.writeList(this.categoryIds);
-    }
-
-    public static final Creator<MenigaBudgetEntry> CREATOR = new Creator<MenigaBudgetEntry>() {
-        @Override
-        public MenigaBudgetEntry createFromParcel(Parcel source) {
-            return new MenigaBudgetEntry(source);
-        }
-
-        @Override
-        public MenigaBudgetEntry[] newArray(int size) {
-            return new MenigaBudgetEntry[size];
-        }
-    };
-
-	/*
-	 * API operations below
-	 */
-
-	/**
-	 * Retrieves list of budget entries for a given budget
-	 * @param budgetId id of budget for which to fetch entries
-	 * @param filter contraints to apply to list of retrieved entries ({@link BudgetFilter#categoryIds}, {@link BudgetFilter#startDate}, {@link BudgetFilter#endDate})
-	 * @return Meniga task containing the list of all budgets that meet the filter constraints
-	 */
-
-	public static Result<List<MenigaBudgetEntry>> fetch(long budgetId, BudgetFilter filter) {
-		return MenigaBudget.apiOperator.getBudgetEntries(budgetId, filter);
 	}
 
-	/**
-	 * Retrieves a specify budget entry
-	 * @param budgetId id of budget for which to fetch the entry
-	 * @param entryId id of the entry to fetch
-	 * @return Meniga task containing the budget entry
-	 */
-
-	public static Result<MenigaBudgetEntry> fetch(long budgetId, long entryId) {
-		return MenigaBudget.apiOperator.getBudgetEntryById(budgetId, entryId);
+	@Override
+	public int hashCode() {
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (targetAmount != null ? targetAmount.hashCode() : 0);
+		result = 31 * result + (spentAmount != null ? spentAmount.hashCode() : 0);
+		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+		result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
+		result = 31 * result + (generationType != null ? generationType.hashCode() : 0);
+		result = 31 * result + (categoryIds != null ? categoryIds.hashCode() : 0);
+		result = 31 * result + (int) (budgetId ^ (budgetId >>> 32));
+		return result;
 	}
 
-	/**
-	 * Retrieves all planning related budget entries that satisfy filter
-	 * @param budgetId id of budget for which to fetch the entry
-	 * @param filter contraints to apply to list of retrieved entries ({@link BudgetFilter#categoryIds}, {@link BudgetFilter#startDate}, {@link BudgetFilter#endDate}, {@link BudgetFilter#autoFill})
-	 * @return Meniga task containing the list of all budget entries that meet the filter constraints
-	 */
-
-	public static Result<List<MenigaBudgetEntry>> fetchPlanningEntries(long budgetId, BudgetFilter filter) {
-		return apiOperator.getPlanningBudgetEntries(budgetId, filter);
+	public long getId() {
+		return id;
 	}
 
-	/**
-	 * Create budget entries for a budget
-	 * @param budgetId id of budget for which to create the entries
-	 * @param entries list of budget entries to create
-	 * @param isRecurring are entries recurring entries
-	 * @return Meniga task containing the list of the created budget entries
-	 */
-
-	public static Result<List<MenigaBudgetEntry>> create(long budgetId, List<MenigaBudgetEntry> entries, boolean isRecurring) {
-		return MenigaBudget.apiOperator.createBudgetEntries(budgetId, entries, isRecurring);
+	public MenigaDecimal getTargetAmount() {
+		return targetAmount;
 	}
 
-	/**
-	 * Update a budget entry
-	 * @param budgetId id of budget of the entry
-	 * @param entry the budget entry to update
-	 * @return Meniga task containing the update budget entry
-	 */
-
-	// This is static since the request needs additional information that is mandatory
-	public static Result<MenigaBudgetEntry> update(long budgetId, MenigaBudgetEntry entry) {
-		return MenigaBudget.apiOperator.updateBudgetEntry(budgetId, entry);
+	public MenigaDecimal getSpentAmount() {
+		return spentAmount;
 	}
 
-	/**
-	 * Delete a budget entry
-	 * @param budgetId id of budget of the entry
-	 * @param entryId id of the entry to delete
-	 * @return Meniga task
-	 */
-
-	// This is static since the request needs additional information that is mandatory
-	public static Result<Void> deleteById(long budgetId, long entryId) {
-		return MenigaBudget.apiOperator.deleteBudgetEntry(budgetId, entryId);
+	public DateTime getEndDate() {
+		return endDate;
 	}
+
+	public DateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public Integer getGenerationType() {
+		return generationType;
+	}
+
+	public List<Long> getCategoryIds() {
+		return categoryIds;
+	}
+
+	public long getBudgetId() {
+		return budgetId;
+	}
+
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeLong(this.id);
+		dest.writeSerializable(this.targetAmount);
+		dest.writeSerializable(this.spentAmount);
+		dest.writeSerializable(this.endDate);
+		dest.writeSerializable(this.updatedAt);
+		dest.writeValue(this.generationType);
+		dest.writeList(this.categoryIds);
+		dest.writeLong(this.budgetId);
+	}
+
+	protected MenigaBudgetEntry(Parcel in) {
+		this.id = in.readLong();
+		this.targetAmount = (MenigaDecimal) in.readSerializable();
+		this.spentAmount = (MenigaDecimal) in.readSerializable();
+		this.endDate = (DateTime) in.readSerializable();
+		this.updatedAt = (DateTime) in.readSerializable();
+		this.generationType = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.categoryIds = new ArrayList<Long>();
+		in.readList(this.categoryIds, Long.class.getClassLoader());
+		this.budgetId = in.readLong();
+	}
+
+	public static final Creator<MenigaBudgetEntry> CREATOR = new Creator<MenigaBudgetEntry>() {
+		@Override
+		public MenigaBudgetEntry createFromParcel(Parcel source) {
+			return new MenigaBudgetEntry(source);
+		}
+
+		@Override
+		public MenigaBudgetEntry[] newArray(int size) {
+			return new MenigaBudgetEntry[size];
+		}
+	};
+
+
+	/**
+	 * Updates budget entry
+	 * @param targetAmount The target amount for the entry. Positive and negative numbers allowed ,
+	 * @param startDate The inclusive lower date limit for period on the budget ,
+	 * @param endDate  The inclusive upper date limit for the period on the budget ,
+	 * @param generationType The generation rule to use if a planning entry. If present on a GET then this is a generated entry ,
+	 * @param categoryIds An array of category Ids linked to. Categories can be of any category type
+	 * @return Void
+	 */
+	public Result<MenigaBudgetEntry> update(MenigaDecimal targetAmount, DateTime startDate, DateTime endDate, int generationType, List<Long> categoryIds) {
+		return apiOperator.updateEntry(this.budgetId, this.id, targetAmount, startDate, endDate, generationType, categoryIds);
+	}
+
 }

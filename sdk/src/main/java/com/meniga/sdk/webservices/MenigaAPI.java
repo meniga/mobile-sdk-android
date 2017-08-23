@@ -57,7 +57,6 @@ import com.meniga.sdk.webservices.requests.GetTopMerchants;
 import com.meniga.sdk.webservices.requests.GetTransactionSeries;
 import com.meniga.sdk.webservices.requests.RecategorizeTransactions;
 import com.meniga.sdk.webservices.requests.RegisterUser;
-import com.meniga.sdk.webservices.requests.ResetBudget;
 import com.meniga.sdk.webservices.requests.SetSubscription;
 import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
 import com.meniga.sdk.webservices.requests.SplitTransaction;
@@ -426,43 +425,43 @@ public interface MenigaAPI {
 	// --
 	// Budget
 	// --
-	@GET(APIConst.URL_BUDGET)
+	@GET(APIConst.URL_BUDGETS)
 	Call<List<MenigaBudget>> getBudgets(@QueryMap Map<String, String> queryMap);
 
-	@GET(APIConst.URL_BUDGET + "/{id}")
+	@GET(APIConst.URL_BUDGETS + "/{id}")
 	Call<MenigaBudget> getBudgetById(@Path("id") long id, @QueryMap Map<String, String> queryMap);
 
-	@GET(APIConst.URL_BUDGET + "/{id}" + APIConst.BU_ENTRIES)
+	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES)
 	Call<List<MenigaBudgetEntry>> getBudgetEntries(@Path("id") long id, @QueryMap Map<String, String> queryMap);
 
-	@GET(APIConst.URL_BUDGET + "/{id}" + APIConst.BU_ENTRIES + "/{entryId}")
+	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + "/{entryId}")
 	Call<MenigaBudgetEntry> getBudgetEntryById(@Path("id") long id, @Path("entryId") long entryId);
 
-	@GET(APIConst.URL_BUDGET + "/{id}" + APIConst.BU_ENTRIES + APIConst.BU_PLANNING)
+	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + APIConst.BU_PLANNING)
 	Call<List<MenigaBudgetEntry>> getPlanningBudgetEntries(@Path("id") long id, @QueryMap Map<String, String> queryMap);
 
-	@POST(APIConst.URL_BUDGET)
+	@POST(APIConst.URL_BUDGETS)
 	Call<MenigaBudget> createBudget(@Body CreateBudget req);
 
-	@POST(APIConst.URL_BUDGET + "/{id}" + APIConst.BU_ENTRIES)
+	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES)
 	Call<List<MenigaBudgetEntry>> createBudgetEntries(@Path("id") long id, @Body CreateBudgetEntries req);
 
-	@POST(APIConst.URL_BUDGET + "/{id}" +  APIConst.BU_RESET)
-	Call<Void> resetBudget(@Path("id") long id, @Body ResetBudget req);
+	@POST(APIConst.URL_BUDGETS + "/{id}" +  APIConst.BU_RESET)
+	Call<Void> resetBudget(@Path("id") long id);
 
-	@POST(APIConst.URL_BUDGET + "/{id}" + APIConst.BU_ENTRIES + APIConst.BU_RECURRING)
+	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + APIConst.BU_RECURRING)
 	Call<List<MenigaBudgetEntry>> createRecurringBudgetEntries(@Path("id") long id, @Body CreateBudgetEntries req);
 
-	@PUT(APIConst.URL_BUDGET + "/{id}")
+	@PUT(APIConst.URL_BUDGETS + "/{id}")
 	Call<MenigaBudget> updateBudget(@Path("id") long id, UpdateBudget req);
 
-	@PUT(APIConst.URL_BUDGET + "/{id}" + APIConst.BU_ENTRIES + "/{entryId}")
+	@PUT(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + "/{entryId}")
 	Call<MenigaBudgetEntry> updateBudgetEntry(@Path("id") long id, @Path("id") long entryId, UpdateBudgetEntry req);
 
-	@DELETE(APIConst.URL_BUDGET + "/{id}")
+	@DELETE(APIConst.URL_BUDGETS + "/{id}")
 	Call<Void> deleteBudget(@Path("id") long id);
 
-	@DELETE(APIConst.URL_BUDGET + "/{id}" + APIConst.BU_ENTRIES + "/{entryId}")
+	@DELETE(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + "/{entryId}")
 	Call<Void> deleteBudgetEntry(@Path("id") long id, @Path("id") long entryId);
 
 	// --

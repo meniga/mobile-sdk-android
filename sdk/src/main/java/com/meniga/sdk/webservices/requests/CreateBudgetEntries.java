@@ -9,11 +9,14 @@ import java.util.List;
  */
 
 public class CreateBudgetEntries extends QueryRequestObject {
+
     public long budgetId;
     public List<MenigaBudgetEntry> entries;
-    public boolean isRecurring;
+
     @Override
     public long getValueHash() {
-        return 0;
+        int result = (int) (budgetId ^ (budgetId >>> 32));
+        result = 31 * result + (entries != null ? entries.hashCode() : 0);
+        return result;
     }
 }

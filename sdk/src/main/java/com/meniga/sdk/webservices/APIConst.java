@@ -82,7 +82,7 @@ class APIConst {
 	static final String CHALLENGES_ACCEPT = "/accept";
 
 	// Budget
-	static final String URL_BUDGET = "budget";
+	static final String URL_BUDGETS = "budgets";
 	static final String BU_ENTRIES = "/entries";
 	static final String BU_PLANNING = "/planning";
 	static final String BU_RESET = "/reset";

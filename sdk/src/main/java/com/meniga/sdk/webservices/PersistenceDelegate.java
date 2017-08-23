@@ -665,28 +665,14 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.BUDGET).getBudgetEntries(req.budgetId,req.query));
-	}
-
-	public Result<List<MenigaBudgetEntry>> getPlanningBudgetEntries(GetBudgetEntries req) {
-		if (provider.hasKey(req)) {
-			return createTask(provider.fetch(req));
-		}
-		return persist(req, getClient(Service.BUDGET).getPlanningBudgetEntries(req.budgetId,req.query));
-	}
-
-	public Result<MenigaBudgetEntry> getBudgetEntryById(GetBudgetEntryById req) {
-		if (provider.hasKey(req)) {
-			return createTask(provider.fetch(req));
-		}
-		return persist(req, getClient(Service.BUDGET).getBudgetEntryById(req.budgetId,req.entryId));
+		return persist(req, getClient(Service.BUDGET).getBudgetEntries(req.budgetId, req.toQueryMap()));
 	}
 
 	public Result<MenigaBudget> getBudgetById(GetBudgetById req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.BUDGET).getBudgetById(req.id, req.query));
+		return persist(req, getClient(Service.BUDGET).getBudgetById(req.id, req.toQueryMap()));
 	}
 
 	public Result<MenigaBudget> createBudget(CreateBudget req) {
@@ -694,31 +680,27 @@ public class PersistenceDelegate {
 	}
 
 	public Result<List<MenigaBudgetEntry>> createBudgetEntries(CreateBudgetEntries req) {
-		if(req.isRecurring) {
-			return persist(req, getClient(Service.BUDGET).createRecurringBudgetEntries(req.budgetId, req));
-		} else {
-			return persist(req, getClient(Service.BUDGET).createBudgetEntries(req.budgetId, req));
-		}
+		return persist(req, getClient(Service.BUDGET).createBudgetEntries(req.budgetId, req));
 	}
 
-	public Result<MenigaBudget> updateBudgetEntry(long id, UpdateBudget req) {
-		return persist(req, getClient(Service.BUDGET).updateBudget(id, req));
+	public Result<MenigaBudgetEntry> updateBudgetEntry(UpdateBudgetEntry req) {
+		return persist(req, getClient(Service.BUDGET).updateBudgetEntry(req.budgetId,req.id,req));
 	}
 
 	public Result<Void> deleteBudgetEntry(DeleteBudgetEntry req) {
-		return persist(req, getClient(Service.BUDGET).deleteBudgetEntry(req.budgetId, req.entryId));
-	}
-
-	public Result<MenigaBudgetEntry> updateBudgetEntry(long bugetId, long entryId, UpdateBudgetEntry req) {
-		return persist(req, getClient(Service.BUDGET).updateBudgetEntry(bugetId, entryId, req));
+		return persist(req, getClient(Service.BUDGET).deleteBudgetEntry(req.budgetId,req.entryId));
 	}
 
 	public Result<Void> resetBudget(ResetBudget req) {
-		return persist(req, getClient(Service.BUDGET).resetBudget(req.id, req));
+		return persist(req, getClient(Service.BUDGET).resetBudget(req.id));
 	}
 
 	public Result<Void> deleteBudget(DeleteBudget req) {
 		return persist(req, getClient(Service.BUDGET).deleteBudget(req.id));
+	}
+
+	public Result<MenigaBudget> updateBudget(UpdateBudget req) {
+		return persist(req, getClient(Service.BUDGET).updateBudget(req.id, req));
 	}
 
 	// --
@@ -774,6 +756,7 @@ public class PersistenceDelegate {
 	Map<Service, MenigaAPI> getApis() {
 		return clients;
 	}
+
 
 
 }

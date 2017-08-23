@@ -1,0 +1,51 @@
+{
+  "data": {
+    "isDefault": false,
+    "accountIds": [
+      1
+    ],
+    "created": "2017-01-23T04:56:07.000+00:00",
+    "name": "Basic Budget 1",
+    "description": "A basic budget of budget type",
+    "id": 1,
+    "type": "budget",
+    "entries": [
+      {
+        "categoryIds": [
+          5
+        ],
+        "targetAmount": 14000,
+        "endDate": "2017-05-10T04:56:07.000+00:00",
+        "spentAmount": 8344,
+        "id": 1,
+        "budgetId": 1,
+        "startDate": "2017-05-10T04:56:07.000+00:00",
+        "updatedAt": "2017-05-10T04:56:07.000+00:00"
+      },
+      {
+        "categoryIds": [
+          7
+        ],
+        "targetAmount": 21000,
+        "endDate": "2017-05-10T04:56:07.000+00:00",
+        "spentAmount": 10334,
+        "id": 2,
+        "budgetId": 1,
+        "startDate": "2017-05-10T04:56:07.000+00:00",
+        "updatedAt": "2017-05-10T04:56:07.000+00:00"
+      },
+      {
+        "categoryIds": [
+          8
+        ],
+        "targetAmount": 12500,
+        "endDate": "2017-05-10T04:56:07.000+00:00",
+        "spentAmount": 600,
+        "id": 3,
+        "budgetId": 1,
+        "startDate": "2017-05-10T04:56:07.000+00:00",
+        "updatedAt": "2017-06-11T04:56:07.000+00:00"
+      }
+    ]
+  }
+}

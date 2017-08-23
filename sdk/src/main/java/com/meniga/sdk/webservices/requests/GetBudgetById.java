@@ -2,6 +2,7 @@ package com.meniga.sdk.webservices.requests;
 
 import com.meniga.sdk.models.budget.BudgetFilter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,7 +12,6 @@ public class GetBudgetById extends QueryRequestObject {
 
 	public transient long id;
 	public transient BudgetFilter filter;
-	public transient Map<String, String> query;
 
 	public GetBudgetById() {
 	}
@@ -19,5 +19,12 @@ public class GetBudgetById extends QueryRequestObject {
 	@Override
 	public long getValueHash() {
 		return this.id;
+	}
+
+	@Override
+	public Map<String, String> toQueryMap() {
+		if(filter != null)
+			return filter.asMap();
+		return new HashMap<>();
 	}
 }
