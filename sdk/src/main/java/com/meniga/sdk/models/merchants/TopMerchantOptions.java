@@ -12,6 +12,7 @@ public class TopMerchantOptions {
 	private Boolean useParentMerchantIds;
 
 	public static class Builder {
+
 		private Integer maxMerchants;
 		private Boolean includeUnMappedMerchants;
 		private Boolean useParentMerchantIds;

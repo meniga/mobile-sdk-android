@@ -8,28 +8,28 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public enum BudgetType implements Serializable {
-    @SerializedName("planning")
-    PLANNING,
-    @SerializedName("budget")
-    BUDGET,
-    @SerializedName("challenges")
-    CHALLENGES;
+	@SerializedName("planning")
+	PLANNING,
+	@SerializedName("budget")
+	BUDGET,
+	@SerializedName("challenges")
+	CHALLENGES;
 
-    @Override
-    public String toString() {
-        switch (this) {
+	@Override
+	public String toString() {
+		switch (this) {
 
-            case CHALLENGES:
-                return "challenges";
+			case CHALLENGES:
+				return "challenges";
 
-            case BUDGET:
-                return "budget";
+			case BUDGET:
+				return "budget";
 
-            case PLANNING:
-                return "planning";
+			case PLANNING:
+				return "planning";
 
-            default:
-                return "budget";
-        }
-    }
+			default:
+				return "budget";
+		}
+	}
 }

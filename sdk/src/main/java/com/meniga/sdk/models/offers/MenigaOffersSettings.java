@@ -10,7 +10,8 @@ import com.meniga.sdk.models.offers.operators.MenigaOfferOperations;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaOffersSettings implements Parcelable {
-    protected static MenigaOfferOperations apiOperator;
+
+	protected static MenigaOfferOperations apiOperator;
 
 	protected MenigaOffersSettings() {
 	}
@@ -18,9 +19,9 @@ public class MenigaOffersSettings implements Parcelable {
 	protected MenigaOffersSettings(Parcel in) {
 	}
 
-    public static void setOperator(MenigaOfferOperations apiOperator) {
-        MenigaOffersSettings.apiOperator = apiOperator;
-    }
+	public static void setOperator(MenigaOfferOperations apiOperator) {
+		MenigaOffersSettings.apiOperator = apiOperator;
+	}
 
 	@Override
 	public int describeContents() {

@@ -14,6 +14,7 @@ import org.joda.time.DateTime;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaNetWorthBalanceOperationsImp implements MenigaNetWorthBalanceOperations {
+
 	@Override
 	public Result<Void> updateBalance(long accountId, long balanceId, MenigaDecimal newBalance, DateTime balanceDate) {
 		UpdateHistoryBalance req = new UpdateHistoryBalance();

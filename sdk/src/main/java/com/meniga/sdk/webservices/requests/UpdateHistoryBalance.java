@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class UpdateHistoryBalance extends QueryRequestObject {
+
 	public transient long accountId;
 	public transient long balanceId;
 	public MenigaDecimal balance;

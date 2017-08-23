@@ -12,6 +12,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetUpcoming extends QueryRequestObject {
+
 	public DateTime from;
 	public DateTime to;
 	public List<Long> accountIds;
@@ -39,25 +40,25 @@ public class GetUpcoming extends QueryRequestObject {
 		query.put("dateFrom", fmt.print(from));
 		query.put("dateTo", fmt.print(to));
 
-		if(accountIds != null && accountIds.size() > 0) {
+		if (accountIds != null && accountIds.size() > 0) {
 			String ids = "";
-			for(int i = 0; i < accountIds.size(); i++) {
-				if(i > 0) {
+			for (int i = 0; i < accountIds.size(); i++) {
+				if (i > 0) {
 					ids += ",";
 				}
 				ids += accountIds.get(i);
 			}
 		}
 
-		if(includeDetails != null) {
+		if (includeDetails != null) {
 			query.put("includeDetails", Boolean.toString(includeDetails));
 		}
 
-		if(watchedOnly != null) {
+		if (watchedOnly != null) {
 			query.put("watchedOnly", Boolean.toString(watchedOnly));
 		}
 
-		if(recurringPatternId != null) {
+		if (recurringPatternId != null) {
 			query.put("recurringPatternId", Long.toString(recurringPatternId));
 		}
 

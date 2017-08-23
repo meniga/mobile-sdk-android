@@ -28,21 +28,21 @@ public class GetBudgets extends QueryRequestObject {
 	public Map<String, String> toQueryMap() {
 		Map<String, String> query = new HashMap<>();
 		String idsString = createList(this.ids);
-		if(idsString.length() != 0){
+		if (idsString.length() != 0) {
 			query.put("ids", idsString);
 		}
 		String accountIdsString = createList(this.accountIds);
-		if(accountIdsString.length() != 0){
+		if (accountIdsString.length() != 0) {
 			query.put("accountIds", accountIdsString);
 		}
-		if(type != null)
+		if (type != null)
 			query.put("type", type.toString());
 		return query;
 	}
 
-	private String createList(List<Long> listOfLongs){
+	private String createList(List<Long> listOfLongs) {
 		StringBuilder builder = new StringBuilder();
-		if(listOfLongs != null && listOfLongs.size() > 0) {
+		if (listOfLongs != null && listOfLongs.size() > 0) {
 			for (long id : listOfLongs) {
 				if (builder.length() != 0) {
 					builder.append(",");

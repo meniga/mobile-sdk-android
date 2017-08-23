@@ -17,6 +17,7 @@ import com.meniga.sdk.models.accounts.operators.MenigaAccountOperations;
 import com.meniga.sdk.models.transactions.MetaData;
 
 import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;

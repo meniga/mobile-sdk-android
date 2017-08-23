@@ -18,36 +18,36 @@ import com.meniga.sdk.webservices.requests.GetReimbursementAccounts;
 public class MenigaReimbursementAccountOperationsImp implements MenigaReimbursementAccountOperations {
 
 	@Override
-    public Result<MenigaReimbursementAccount> createOfferAccount(String name, String accountType, MenigaOfferAccountInfo accountInfo) {
-        CreateReimbursementAccount req = new CreateReimbursementAccount();
+	public Result<MenigaReimbursementAccount> createOfferAccount(String name, String accountType, MenigaOfferAccountInfo accountInfo) {
+		CreateReimbursementAccount req = new CreateReimbursementAccount();
 
-	    Gson gson = new Gson();
+		Gson gson = new Gson();
 
-        req.name = name;
-        req.accountType = accountType;
-        req.accountInfo = gson.toJson(accountInfo);
+		req.name = name;
+		req.accountType = accountType;
+		req.accountInfo = gson.toJson(accountInfo);
 
-        return MenigaSDK.executor().addReimbursementAccount(req);
-    }
+		return MenigaSDK.executor().addReimbursementAccount(req);
+	}
 
-    @Override
-    public Result<MenigaReimbursementAccountPage> getReimbursementAccounts(Boolean includeInactive) {
-        GetReimbursementAccounts req = new GetReimbursementAccounts();
-        req.includeInactive = includeInactive;
-        return MenigaSDK.executor().getReimbursementAccounts(req);
-    }
+	@Override
+	public Result<MenigaReimbursementAccountPage> getReimbursementAccounts(Boolean includeInactive) {
+		GetReimbursementAccounts req = new GetReimbursementAccounts();
+		req.includeInactive = includeInactive;
+		return MenigaSDK.executor().getReimbursementAccounts(req);
+	}
 
-    @Override
-    public Result<MenigaReimbursementAccountTypePage> getReimbursementAccountTypes(Integer skip, Integer take) {
-        GetReimbursementAccountTypes req = new GetReimbursementAccountTypes();
-        req.skip = skip;
-        req.take = take;
-        return MenigaSDK.executor().getReimbursementAccountTypes(req);
-    }
+	@Override
+	public Result<MenigaReimbursementAccountTypePage> getReimbursementAccountTypes(Integer skip, Integer take) {
+		GetReimbursementAccountTypes req = new GetReimbursementAccountTypes();
+		req.skip = skip;
+		req.take = take;
+		return MenigaSDK.executor().getReimbursementAccountTypes(req);
+	}
 
-    @Override
-    public Result<MenigaReimbursementAccount> getReimbursementAccountById(int id) {
-        GetReimbursementAccountById req = new GetReimbursementAccountById(id);
-        return MenigaSDK.executor().getReimbursementAccountById(req);
-    }
+	@Override
+	public Result<MenigaReimbursementAccount> getReimbursementAccountById(int id) {
+		GetReimbursementAccountById req = new GetReimbursementAccountById(id);
+		return MenigaSDK.executor().getReimbursementAccountById(req);
+	}
 }

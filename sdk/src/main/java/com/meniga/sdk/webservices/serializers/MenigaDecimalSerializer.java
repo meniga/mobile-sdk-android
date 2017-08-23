@@ -15,6 +15,7 @@ import java.lang.reflect.Type;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaDecimalSerializer implements JsonDeserializer<MenigaDecimal>, JsonSerializer<MenigaDecimal> {
+
 	@Override
 	public MenigaDecimal deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		return new MenigaDecimal(json.getAsString());

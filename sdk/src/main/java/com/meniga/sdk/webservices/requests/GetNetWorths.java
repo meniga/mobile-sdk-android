@@ -11,6 +11,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetNetWorths extends QueryRequestObject {
+
 	public DateTime startDate;
 	public DateTime endDate;
 	public Boolean useInterpolation;

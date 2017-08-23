@@ -11,6 +11,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class Merge {
+
 	/**
 	 * Overwrites all private, protected and public fields of object1 with those from object 2
 	 *

@@ -4,6 +4,7 @@ package com.meniga.sdk.providers.tasks;
  * Copyright 2017 Meniga Iceland Inc.
  */
 class UnobservedErrorNotifier {
+
 	private Task<?> task;
 
 	UnobservedErrorNotifier(Task<?> task) {

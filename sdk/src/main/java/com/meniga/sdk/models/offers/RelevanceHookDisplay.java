@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class RelevanceHookDisplay implements Parcelable, Serializable {
+
 	public static final Creator<RelevanceHookDisplay> CREATOR = new Creator<RelevanceHookDisplay>() {
 		@Override
 		public RelevanceHookDisplay createFromParcel(Parcel source) {

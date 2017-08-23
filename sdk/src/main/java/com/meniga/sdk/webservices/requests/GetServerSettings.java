@@ -5,6 +5,7 @@ package com.meniga.sdk.webservices.requests;
  */
 
 public class GetServerSettings extends QueryRequestObject {
+
 	@Override
 	public long getValueHash() {
 		return 0;

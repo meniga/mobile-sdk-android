@@ -22,9 +22,8 @@ public class GetBudgetEntries extends QueryRequestObject {
 	}
 
 	@Override
-	public Map<String, String> toQueryMap()
-	{
-		if(filter != null)
+	public Map<String, String> toQueryMap() {
+		if (filter != null)
 			return filter.asMap();
 		return new HashMap<>();
 	}

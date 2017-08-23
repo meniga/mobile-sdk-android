@@ -5,14 +5,15 @@ package com.meniga.sdk.webservices.requests;
  */
 
 public class GetReimbursementAccountById extends QueryRequestObject {
-    public GetReimbursementAccountById(int id) {
-        this.id = id;
-    }
 
-    public int id;
+	public GetReimbursementAccountById(int id) {
+		this.id = id;
+	}
 
-    @Override
-    public long getValueHash() {
-        return id;
-    }
+	public int id;
+
+	@Override
+	public long getValueHash() {
+		return id;
+	}
 }

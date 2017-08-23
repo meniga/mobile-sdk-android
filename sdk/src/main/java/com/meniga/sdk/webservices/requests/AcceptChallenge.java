@@ -10,6 +10,7 @@ import java.util.UUID;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class AcceptChallenge extends QueryRequestObject {
+
 	public UUID id;
 	public transient MenigaDecimal targetAmount;
 

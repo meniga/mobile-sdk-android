@@ -16,19 +16,19 @@ import java.util.UUID;
 public interface MenigaChallengesOperations {
 
 	Result<List<MenigaChallenge>> getChallenges(boolean includeExpired,
-	                                                boolean excludeSuggested,
-	                                                boolean excludeAccepted);
+	                                            boolean excludeSuggested,
+	                                            boolean excludeAccepted);
 
 	Result<MenigaChallenge> acceptChallenge(UUID id, MenigaDecimal targetAmount);
 
 	Result<MenigaChallenge> createChallenge(String title,
-	                                            String description,
-	                                            DateTime startDate,
-	                                            DateTime endDate,
-	                                            List<Long> categoryIds,
-	                                            MenigaDecimal targetAmount,
-	                                            Long iconId,
-	                                            CustomChallengeColor color);
+	                                        String description,
+	                                        DateTime startDate,
+	                                        DateTime endDate,
+	                                        List<Long> categoryIds,
+	                                        MenigaDecimal targetAmount,
+	                                        Long iconId,
+	                                        CustomChallengeColor color);
 
 	Result<MenigaChallenge> getChallenge(UUID id);
 

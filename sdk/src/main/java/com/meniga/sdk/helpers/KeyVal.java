@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 @SuppressWarnings("unchecked")
 public class KeyVal<A, B> implements Comparable<KeyVal<A, B>>, Parcelable {
+
 	public static final Creator<KeyVal> CREATOR = new Creator<KeyVal>() {
 		@Override
 		public KeyVal createFromParcel(Parcel in) {

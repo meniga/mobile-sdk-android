@@ -23,6 +23,7 @@ public class UpdateChallenge extends QueryRequestObject {
 	}
 
 	public static class TypeData {
+
 		public MenigaDecimal targetAmount;
 		//public List<Long> categoryIds;
 		//public String metaData;

@@ -47,7 +47,7 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 	}
 
 	/**
-	 * @return  Total number of transactions to process during this synchronization session, or null if the number of transactions is still unknown.
+	 * @return Total number of transactions to process during this synchronization session, or null if the number of transactions is still unknown.
 	 */
 	public Integer getTotalTransactions() {
 		return totalTransactions;
@@ -68,7 +68,7 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 	}
 
 	/**
-	 * @return  External status of account this can be different between each implementation of the backend.
+	 * @return External status of account this can be different between each implementation of the backend.
 	 */
 	public String getAccountStatus() {
 		return accountStatus;

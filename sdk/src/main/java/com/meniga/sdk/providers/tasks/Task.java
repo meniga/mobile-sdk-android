@@ -21,6 +21,7 @@ import retrofit2.Call;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class Task<TResult> {
+
 	/**
 	 * An {@link java.util.concurrent.Executor} that executes tasks in parallel.
 	 */
@@ -41,7 +42,7 @@ public class Task<TResult> {
 	/**
 	 * Interface for handlers invoked when a failed {@code Task} is about to be
 	 * finalized, but the exception has not been consumed.
-	 *
+	 * <p>
 	 * The handler will execute in the GC thread, so if the handler needs to do
 	 * anything time consuming or complex it is a good idea to fire off a {@code Task}
 	 * to handle the exception.
@@ -50,9 +51,11 @@ public class Task<TResult> {
 	 * @see #setUnobservedExceptionHandler
 	 */
 	interface UnobservedExceptionHandler {
+
 		/**
 		 * Method invoked when the given task has an unobserved exception.
 		 * <p>Any exception thrown by this method will be ignored.
+		 *
 		 * @param t the task
 		 * @param e the exception
 		 */
@@ -72,6 +75,7 @@ public class Task<TResult> {
 
 	/**
 	 * Set the handler invoked when a task has an unobserved exception.
+	 *
 	 * @param eh the object to use as an unobserved exception handler. If
 	 *           <tt>null</tt> then unobserved exceptions will be ignored.
 	 */
@@ -112,7 +116,7 @@ public class Task<TResult> {
 
 	/**
 	 * @return {@code true} if the task completed (has a result, an error, or was cancelled.
-	 *         {@code false} otherwise.
+	 * {@code false} otherwise.
 	 */
 	public boolean isCompleted() {
 		synchronized (lock) {
@@ -176,8 +180,9 @@ public class Task<TResult> {
 
 	/**
 	 * Blocks until the task is complete or times out.
+	 *
 	 * @return {@code true} if the task completed (has a result, an error, or was cancelled).
-	 *         {@code false} otherwise.
+	 * {@code false} otherwise.
 	 */
 	public boolean waitForCompletion(long duration, TimeUnit timeUnit) throws InterruptedException {
 		synchronized (lock) {
@@ -234,8 +239,8 @@ public class Task<TResult> {
 	/**
 	 * Creates a task that completes after a time delay.
 	 *
-	 * @param delay The number of milliseconds to wait before completing the returned task. Zero and
-	 *              negative values are treated as requests for immediate execution.
+	 * @param delay             The number of milliseconds to wait before completing the returned task. Zero and
+	 *                          negative values are treated as requests for immediate execution.
 	 * @param cancellationToken The optional cancellation token that will be checked prior to
 	 *                          completing the returned task.
 	 */
@@ -243,7 +248,8 @@ public class Task<TResult> {
 		return delay(delay, MenigaExecutors.scheduled(), cancellationToken);
 	}
 
-	/* package */ static Task<Void> delay(long delay, ScheduledExecutorService executor, final CancellationToken cancellationToken) {
+	/* package */
+	static Task<Void> delay(long delay, ScheduledExecutorService executor, final CancellationToken cancellationToken) {
 		if (cancellationToken != null && cancellationToken.isCancellationRequested()) {
 			return Task.cancelled();
 		}
@@ -287,22 +293,22 @@ public class Task<TResult> {
 	 */
 	private Task<Void> makeVoid() {
 		return this.continueWithTask(new Continuation<TResult, Task<Void>>() {
-             @Override
-             public Task<Void> then(Task<TResult> task) throws Exception {
-	             if (task.isCancelled()) {
-		             return Task.cancelled();
-	             }
-	             if (task.isFaulted()) {
-		             return Task.forError(task.getError());
-	             }
-	             return Task.forResult(null);
-             }
-         });
+			@Override
+			public Task<Void> then(Task<TResult> task) throws Exception {
+				if (task.isCancelled()) {
+					return Task.cancelled();
+				}
+				if (task.isFaulted()) {
+					return Task.forError(task.getError());
+				}
+				return Task.forResult(null);
+			}
+		});
 	}
 
 	/**
 	 * Invokes the callable on a background thread, returning a Task to represent the operation.
-	 *
+	 * <p>
 	 * If you want to cancel the resulting Task throw a {@link java.util.concurrent.CancellationException}
 	 * from the callable.
 	 */
@@ -319,7 +325,7 @@ public class Task<TResult> {
 
 	/**
 	 * Invokes the callable using the given executor, returning a Task to represent the operation.
-	 *
+	 * <p>
 	 * If you want to cancel the resulting Task throw a {@link java.util.concurrent.CancellationException}
 	 * from the callable.
 	 */
@@ -360,7 +366,7 @@ public class Task<TResult> {
 
 	/**
 	 * Invokes the callable on the current thread, producing a Task.
-	 *
+	 * <p>
 	 * If you want to cancel the resulting Task throw a {@link java.util.concurrent.CancellationException}
 	 * from the callable.
 	 */
@@ -377,15 +383,14 @@ public class Task<TResult> {
 
 	/**
 	 * Creates a task that will complete when any of the supplied tasks have completed.
-	 *
+	 * <p>
 	 * The returned task will complete when any of the supplied tasks has completed. The returned task
 	 * will always end in the completed state with its result set to the first task to complete. This
 	 * is true even if the first task to complete ended in the canceled or faulted state.
 	 *
-	 * @param tasks
-	 *          The tasks to wait on for completion.
+	 * @param tasks The tasks to wait on for completion.
 	 * @return A task that represents the completion of one of the supplied tasks.
-	 *         The return task's result is the task that completed.
+	 * The return task's result is the task that completed.
 	 */
 	public static <TResult> Task<Task<TResult>> whenAnyResult(Collection<? extends Task<TResult>> tasks) {
 		if (tasks.size() == 0) {
@@ -413,15 +418,14 @@ public class Task<TResult> {
 
 	/**
 	 * Creates a task that will complete when any of the supplied tasks have completed.
-	 *
+	 * <p>
 	 * The returned task will complete when any of the supplied tasks has completed. The returned task
 	 * will always end in the completed state with its result set to the first task to complete. This
 	 * is true even if the first task to complete ended in the canceled or faulted state.
 	 *
-	 * @param tasks
-	 *          The tasks to wait on for completion.
+	 * @param tasks The tasks to wait on for completion.
 	 * @return A task that represents the completion of one of the supplied tasks.
-	 *         The return task's Result is the task that completed.
+	 * The return task's Result is the task that completed.
 	 */
 	@SuppressWarnings("unchecked")
 	public static Task<Task<?>> whenAny(Collection<? extends Task<?>> tasks) {
@@ -450,22 +454,22 @@ public class Task<TResult> {
 
 	/**
 	 * Creates a task that completes when all of the provided tasks are complete.
-	 *
+	 * <p>
 	 * If any of the supplied tasks completes in a faulted state, the returned task will also complete
 	 * in a faulted state, where its exception will resolve to that {@link java.lang.Exception} if a
 	 * single task fails or an {@link AggregateException} of all the {@link java.lang.Exception}s
 	 * if multiple tasks fail.
-	 *
+	 * <p>
 	 * If none of the supplied tasks faulted but at least one of them was cancelled, the returned
 	 * task will end as cancelled.
-	 *
+	 * <p>
 	 * If none of the tasks faulted and none of the tasks were cancelled, the resulting task will end
 	 * completed. The result of the returned task will be set to a list containing all of the results
 	 * of the supplied tasks in the same order as they were provided (e.g. if the input tasks collection
 	 * contained t1, t2, t3, the output task's result will return an {@code List&lt;TResult&gt;}
 	 * where {@code list.get(0) == t1.getResult(), list.get(1) == t2.getResult(), and
 	 * list.get(2) == t3.getResult()}).
-	 *
+	 * <p>
 	 * If the supplied collection contains no tasks, the returned task will immediately transition to
 	 * a completed state before it's returned to the caller.
 	 * The returned {@code List&lt;TResult&gt;} will contain 0 elements.
@@ -492,18 +496,18 @@ public class Task<TResult> {
 
 	/**
 	 * Creates a task that completes when all of the provided tasks are complete.
-	 *
+	 * <p>
 	 * If any of the supplied tasks completes in a faulted state, the returned task will also complete
 	 * in a faulted state, where its exception will resolve to that {@link java.lang.Exception} if a
 	 * single task fails or an {@link AggregateException} of all the {@link java.lang.Exception}s
 	 * if multiple tasks fail.
-	 *
+	 * <p>
 	 * If none of the supplied tasks faulted but at least one of them was cancelled, the returned
 	 * task will end as cancelled.
-	 *
+	 * <p>
 	 * If none of the tasks faulted and none of the tasks were canceled, the resulting task will
 	 * end in the completed state.
-	 * 
+	 * <p>
 	 * If the supplied collection contains no tasks, the returned task will immediately transition
 	 * to a completed state before it's returned to the caller.
 	 *
@@ -542,7 +546,7 @@ public class Task<TResult> {
 								allFinished.setError(causes.get(0));
 							} else {
 								Exception error = new AggregateException(
-										String.format(Locale.US,"There were %d exceptions.", causes.size()),
+										String.format(Locale.US, "There were %d exceptions.", causes.size()),
 										causes);
 								allFinished.setError(error);
 							}
@@ -604,7 +608,7 @@ public class Task<TResult> {
 				}
 
 				if (predicate.call()) {
-					return Task.<Void> forResult(null).onSuccessTask(continuation, executor)
+					return Task.<Void>forResult(null).onSuccessTask(continuation, executor)
 							.onSuccessTask(predicateContinuation.get(), executor);
 				}
 				return Task.forResult(null);
@@ -831,15 +835,11 @@ public class Task<TResult> {
 	 * the results of the given Task through to the given continuation and using the results of that
 	 * call to set the result of the TaskContinuationSource.
 	 *
-	 * @param tcs
-	 *          The TaskContinuationSource that will be orchestrated by this call.
-	 * @param continuation
-	 *          The non-async continuation.
-	 * @param task
-	 *          The task being completed.
-	 * @param executor
-	 *          The executor to use when running the continuation (allowing the continuation to be
-	 *          scheduled on a different thread).
+	 * @param tcs          The TaskContinuationSource that will be orchestrated by this call.
+	 * @param continuation The non-async continuation.
+	 * @param task         The task being completed.
+	 * @param executor     The executor to use when running the continuation (allowing the continuation to be
+	 *                     scheduled on a different thread).
 	 */
 	private static <TContinuationResult, TResult> void completeImmediately(
 			final TaskCompletionSource<TContinuationResult> tcs,
@@ -875,15 +875,11 @@ public class Task<TResult> {
 	 * TaskCompletionSource's results are only set when the new Task has completed, unwrapping the
 	 * results of the task returned by the continuation.
 	 *
-	 * @param tcs
-	 *          The TaskContinuationSource that will be orchestrated by this call.
-	 * @param continuation
-	 *          The async continuation.
-	 * @param task
-	 *          The task being completed.
-	 * @param executor
-	 *          The executor to use when running the continuation (allowing the continuation to be
-	 *          scheduled on a different thread).
+	 * @param tcs          The TaskContinuationSource that will be orchestrated by this call.
+	 * @param continuation The async continuation.
+	 * @param task         The task being completed.
+	 * @param executor     The executor to use when running the continuation (allowing the continuation to be
+	 *                     scheduled on a different thread).
 	 */
 	private static <TContinuationResult, TResult> void completeAfterTask(
 			final TaskCompletionSource<TContinuationResult> tcs,

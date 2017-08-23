@@ -13,65 +13,66 @@ import java.util.ArrayList;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaReimbursementAccountPage extends ArrayList<MenigaReimbursementAccount> implements Parcelable, Serializable {
-    @Expose(deserialize = false, serialize = false)
-    @MetaProperty
-    private Integer totalCount;
 
-    public MenigaReimbursementAccountPage() {
-    }
+	@Expose(deserialize = false, serialize = false)
+	@MetaProperty
+	private Integer totalCount;
 
-    public Integer getTotalCount() {
-        return totalCount;
-    }
+	public MenigaReimbursementAccountPage() {
+	}
 
-    public void setTotalCount(Integer totalCount) {
-        this.totalCount = totalCount;
-    }
+	public Integer getTotalCount() {
+		return totalCount;
+	}
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
+	}
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(this);
-        dest.writeValue(this.totalCount);
-    }
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
-    protected MenigaReimbursementAccountPage(Parcel in) {
-        in.readList(this,this.getClass().getClassLoader());
-        this.totalCount = (Integer) in.readValue(Integer.class.getClassLoader());
-    }
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeList(this);
+		dest.writeValue(this.totalCount);
+	}
 
-    public static final Creator<MenigaReimbursementAccountPage> CREATOR = new Creator<MenigaReimbursementAccountPage>() {
-        @Override
-        public MenigaReimbursementAccountPage createFromParcel(Parcel source) {
-            return new MenigaReimbursementAccountPage(source);
-        }
+	protected MenigaReimbursementAccountPage(Parcel in) {
+		in.readList(this, this.getClass().getClassLoader());
+		this.totalCount = (Integer) in.readValue(Integer.class.getClassLoader());
+	}
 
-        @Override
-        public MenigaReimbursementAccountPage[] newArray(int size) {
-            return new MenigaReimbursementAccountPage[size];
-        }
-    };
+	public static final Creator<MenigaReimbursementAccountPage> CREATOR = new Creator<MenigaReimbursementAccountPage>() {
+		@Override
+		public MenigaReimbursementAccountPage createFromParcel(Parcel source) {
+			return new MenigaReimbursementAccountPage(source);
+		}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+		@Override
+		public MenigaReimbursementAccountPage[] newArray(int size) {
+			return new MenigaReimbursementAccountPage[size];
+		}
+	};
 
-        MenigaReimbursementAccountPage that = (MenigaReimbursementAccountPage) o;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
 
-        return totalCount != null ? totalCount.equals(that.totalCount) : that.totalCount == null;
+		MenigaReimbursementAccountPage that = (MenigaReimbursementAccountPage) o;
 
-    }
+		return totalCount != null ? totalCount.equals(that.totalCount) : that.totalCount == null;
 
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (totalCount != null ? totalCount.hashCode() : 0);
-        return result;
-    }
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (totalCount != null ? totalCount.hashCode() : 0);
+		return result;
+	}
 }

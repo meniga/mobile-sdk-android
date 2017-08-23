@@ -52,9 +52,9 @@ public class MenigaChallengesOperationsImp implements MenigaChallengesOperations
 
 	@Override
 	public Result<MenigaChallenge> createChallenge(String title, String description,
-	                                                   DateTime startDate, DateTime endDate,
-	                                                   List<Long> categoryIds, MenigaDecimal targetAmount,
-	                                                   Long iconId, CustomChallengeColor color) {
+	                                               DateTime startDate, DateTime endDate,
+	                                               List<Long> categoryIds, MenigaDecimal targetAmount,
+	                                               Long iconId, CustomChallengeColor color) {
 		CreateChallenge req = new CreateChallenge();
 		req.title = title;
 		req.description = description;

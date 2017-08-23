@@ -32,6 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class WebClient {
+
 	private static Map<Service, Retrofit> retrofits = new HashMap<>();
 	private static CookieJar cookieJar = new JavaNetCookieJar(new CookieManager());
 

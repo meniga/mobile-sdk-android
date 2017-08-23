@@ -8,6 +8,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class CookieInjector {
+
 	public URI uri;
 	public Map<String, List<String>> map;
 }

@@ -9,12 +9,13 @@ import java.util.List;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
- *
+ * <p>
  * Aggregates multiple {@code Throwable}s that may be thrown in the process of a task's execution.
  *
  * @see Task#whenAll(java.util.Collection)
  */
 public class AggregateException extends Exception {
+
 	private static final long serialVersionUID = 1L;
 
 	private static final String DEFAULT_MESSAGE = "There were multiple errors.";
@@ -25,10 +26,8 @@ public class AggregateException extends Exception {
 	 * Constructs a new {@code AggregateException} with the current stack trace, the specified detail
 	 * message and with references to the inner throwables that are the cause of this exception.
 	 *
-	 * @param detailMessage
-	 *            The detail message for this exception.
-	 * @param innerThrowables
-	 *            The exceptions that are the cause of the current exception.
+	 * @param detailMessage   The detail message for this exception.
+	 * @param innerThrowables The exceptions that are the cause of the current exception.
 	 */
 	public AggregateException(String detailMessage, Throwable[] innerThrowables) {
 		this(detailMessage, Arrays.asList(innerThrowables));
@@ -39,10 +38,8 @@ public class AggregateException extends Exception {
 	 * Constructs a new {@code AggregateException} with the current stack trace, the specified detail
 	 * message and with references to the inner throwables that are the cause of this exception.
 	 *
-	 * @param detailMessage
-	 *            The detail message for this exception.
-	 * @param innerThrowables
-	 *            The exceptions that are the cause of the current exception.
+	 * @param detailMessage   The detail message for this exception.
+	 * @param innerThrowables The exceptions that are the cause of the current exception.
 	 */
 	public AggregateException(String detailMessage, List<? extends Throwable> innerThrowables) {
 		super(detailMessage,
@@ -54,8 +51,7 @@ public class AggregateException extends Exception {
 	 * Constructs a new {@code AggregateException} with the current stack trace and with references to
 	 * the inner throwables that are the cause of this exception.
 	 *
-	 * @param innerThrowables
-	 *            The exceptions that are the cause of the current exception.
+	 * @param innerThrowables The exceptions that are the cause of the current exception.
 	 */
 	public AggregateException(List<? extends Throwable> innerThrowables) {
 		this(DEFAULT_MESSAGE, innerThrowables);

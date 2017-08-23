@@ -19,6 +19,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaComment extends StateObject implements Parcelable, Serializable, Cloneable {
+
 	public static final Parcelable.Creator<MenigaComment> CREATOR = new Parcelable.Creator<MenigaComment>() {
 		public MenigaComment createFromParcel(Parcel source) {
 			return new MenigaComment(source);

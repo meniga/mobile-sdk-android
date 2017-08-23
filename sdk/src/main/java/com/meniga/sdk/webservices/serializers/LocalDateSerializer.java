@@ -19,9 +19,10 @@ import java.lang.reflect.Type;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class LocalDateSerializer implements JsonDeserializer<LocalDate>, JsonSerializer<LocalDate> {
+
 	@Override
 	public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		String str = json.getAsString().substring(0,19);
+		String str = json.getAsString().substring(0, 19);
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss");
 		return format.parseLocalDate(str);
 	}

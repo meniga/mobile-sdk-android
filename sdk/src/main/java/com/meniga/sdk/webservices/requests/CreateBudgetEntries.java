@@ -10,13 +10,13 @@ import java.util.List;
 
 public class CreateBudgetEntries extends QueryRequestObject {
 
-    public long budgetId;
-    public List<MenigaBudgetEntry> entries;
+	public long budgetId;
+	public List<MenigaBudgetEntry> entries;
 
-    @Override
-    public long getValueHash() {
-        int result = (int) (budgetId ^ (budgetId >>> 32));
-        result = 31 * result + (entries != null ? entries.hashCode() : 0);
-        return result;
-    }
+	@Override
+	public long getValueHash() {
+		int result = (int) (budgetId ^ (budgetId >>> 32));
+		result = 31 * result + (entries != null ? entries.hashCode() : 0);
+		return result;
+	}
 }

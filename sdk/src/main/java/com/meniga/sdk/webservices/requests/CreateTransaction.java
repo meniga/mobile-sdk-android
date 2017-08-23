@@ -13,6 +13,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class CreateTransaction extends QueryRequestObject {
+
 	public DateTime date;
 	public String text;
 	public MenigaDecimal amount;

@@ -14,6 +14,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransactionSeriesOperationsImp implements MenigaTransactionSeriesOperations {
+
 	@Override
 	public Result<List<MenigaTransactionSeries>> getTransactionSeries(TransactionsFilter tf, Options options, List<SeriesSelector> ss) {
 		GetTransactionSeries request = new GetTransactionSeries();

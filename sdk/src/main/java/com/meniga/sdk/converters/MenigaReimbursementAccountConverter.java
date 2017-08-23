@@ -29,9 +29,12 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeOfAccount = new TypeToken<MenigaReimbursementAccount>() {}.getType();
-		Type typeOfAccounts = new TypeToken<MenigaReimbursementAccountPage>() {}.getType();
-		Type typeOfAccountTypes = new TypeToken<MenigaReimbursementAccountTypePage>() {}.getType();
+		Type typeOfAccount = new TypeToken<MenigaReimbursementAccount>() {
+		}.getType();
+		Type typeOfAccounts = new TypeToken<MenigaReimbursementAccountPage>() {
+		}.getType();
+		Type typeOfAccountTypes = new TypeToken<MenigaReimbursementAccountTypePage>() {
+		}.getType();
 
 		if (typeOfAccount.equals(type)) {
 			return new Converter<ResponseBody, MenigaReimbursementAccount>() {
@@ -60,7 +63,7 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 
 					JsonObject meta = jobject.getAsJsonObject("meta");
 
-                    return MenigaConverter.mergeMeta(gson, page, meta);
+					return MenigaConverter.mergeMeta(gson, page, meta);
 				}
 			};
 		} else if (typeOfAccountTypes.equals(type)) {
@@ -77,7 +80,7 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 
 					JsonObject meta = jobject.getAsJsonObject("meta");
 
-                    return MenigaConverter.mergeMeta(gson, page, meta);
+					return MenigaConverter.mergeMeta(gson, page, meta);
 				}
 			};
 		}

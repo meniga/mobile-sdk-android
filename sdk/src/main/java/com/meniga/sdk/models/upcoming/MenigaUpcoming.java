@@ -20,6 +20,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcoming extends StateObject implements Serializable, Parcelable, Cloneable {
+
 	private long id;
 	private String bankReference;
 	private String text;
@@ -79,6 +80,7 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 	public long getId() {
 		return id;
 	}
+
 	/**
 	 * @return An identifier that connects invoices to scheduled payments to transactions in the external system
 	 */
@@ -213,7 +215,7 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 	public void setAmountInCurrency(MenigaDecimal amountInCurrency) {
 		changed();
 		this.amountInCurrency = amountInCurrency;
- 	}
+	}
 
 	public void setCurrencyCode(String currencyCode) {
 		changed();
@@ -286,7 +288,7 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 		transactionId = last.transactionId;
 		isFlagged = last.isFlagged;
 		isWatched = last.isWatched;
-		recurringPattern  = last.recurringPattern;
+		recurringPattern = last.recurringPattern;
 	}
 
 	@Override
@@ -432,8 +434,9 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 
 	/**
 	 * Fetches all upcoming items between the date range
+	 *
 	 * @param from Get all upcoming items after this date
-	 * @param to Get all upcoming items before this date
+	 * @param to   Get all upcoming items before this date
 	 * @return Meniga task containing the list of all upcoming items that meet the time range constraints
 	 */
 	public static Result<List<MenigaUpcoming>> fetch(DateTime from, DateTime to) {
@@ -442,6 +445,7 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 
 	/**
 	 * Fetches a specific upcoming item
+	 *
 	 * @param id The id of the upcoming to fetch
 	 * @return Meniga task containing the upcoming item
 	 */
@@ -451,21 +455,22 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 
 	/**
 	 * Creates a new instance of an upcoming series
-	 * @param text A human readable text that is displayed to the end user as the title or subject of the upcoming transaction
+	 *
+	 * @param text             A human readable text that is displayed to the end user as the title or subject of the upcoming transaction
 	 * @param amountInCurrency An amount in the currency specified.
-	 * @param currencyCode The amount for the upcoming transaction in the currency of the "CurrencyCode"
-	 * @param date The expected booking/payment date of the upcoming transaction
-	 * @param accountId The id of the account that the upcoming transaction is expected to be booked from
-	 * @param categoryId The id of the category this upcoming transaction has been categorized as
-	 * @param isFlagged True if the upcoming transaction is flagged by the user
-	 * @param isWatched True if the upcoming transaction added to the watched list
+	 * @param currencyCode     The amount for the upcoming transaction in the currency of the "CurrencyCode"
+	 * @param date             The expected booking/payment date of the upcoming transaction
+	 * @param accountId        The id of the account that the upcoming transaction is expected to be booked from
+	 * @param categoryId       The id of the category this upcoming transaction has been categorized as
+	 * @param isFlagged        True if the upcoming transaction is flagged by the user
+	 * @param isWatched        True if the upcoming transaction added to the watched list
 	 * @param recurringPattern The recurring pattern that will be used to generate all the upcoming items
 	 * @return The upcoming series, all upcoming that were created
 	 */
 	public static Result<List<MenigaUpcoming>> create(String text, MenigaDecimal amountInCurrency,
-	                                                String currencyCode, DateTime date, Long accountId,
-	                                                Long categoryId, Boolean isFlagged, Boolean isWatched,
-	                                                MenigaUpcomingRecurringPattern recurringPattern) {
+	                                                  String currencyCode, DateTime date, Long accountId,
+	                                                  Long categoryId, Boolean isFlagged, Boolean isWatched,
+	                                                  MenigaUpcomingRecurringPattern recurringPattern) {
 		return MenigaUpcoming.apiOperator.createUpcoming(
 				text,
 				amountInCurrency,
@@ -481,6 +486,7 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 
 	/**
 	 * Saves change made to this upcoming item
+	 *
 	 * @param updateWholeSeries Updates the whole series, this means that a new series of upcoming
 	 *                          items will be created, all having paymentStatus=Open
 	 * @return A task of type Void. The task will indicate if the update was successful or not
@@ -509,6 +515,7 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 
 	/**
 	 * Deletes this upcoming itom from the server
+	 *
 	 * @return A task of type Void. The task will indicate if the deleteUpcoming was successful or not
 	 */
 	public Result<Void> delete(boolean deleteSeries) {

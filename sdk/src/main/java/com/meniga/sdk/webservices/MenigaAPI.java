@@ -95,6 +95,7 @@ import retrofit2.http.Url;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaAPI {
+
 	// --
 	// Merchant
 	// --
@@ -234,7 +235,7 @@ public interface MenigaAPI {
 	Call<List<MenigaRealmAccount>> getRealmAccounts(@Path("id") long id);
 
 	@POST(APIConst.URL_SYNC + APIConst.ACCOUNTS + "/{id}" + APIConst.AUTHORIZE)
-	Call<List<MenigaRealmAccount>> addRealmAccountsToMeniga(@Path("id")long realmUserId, @Body List<MenigaRealmAccount> realmAccounts);
+	Call<List<MenigaRealmAccount>> addRealmAccountsToMeniga(@Path("id") long realmUserId, @Body List<MenigaRealmAccount> realmAccounts);
 
 	// --
 	// UserEvents
@@ -446,7 +447,7 @@ public interface MenigaAPI {
 	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES)
 	Call<List<MenigaBudgetEntry>> createBudgetEntries(@Path("id") long id, @Body CreateBudgetEntries req);
 
-	@POST(APIConst.URL_BUDGETS + "/{id}" +  APIConst.BU_RESET)
+	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_RESET)
 	Call<Void> resetBudget(@Path("id") long id);
 
 	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + APIConst.BU_RECURRING)
@@ -492,8 +493,8 @@ public interface MenigaAPI {
 	Call<List<MenigaOrganization>> getOrganizations();
 
 	// Generic
-    @GET
-    Call<Object> genericGet(@Url String path, @QueryMap Map<String, String> query);
+	@GET
+	Call<Object> genericGet(@Url String path, @QueryMap Map<String, String> query);
 
 	@HEAD
 	Call<Object> genericHead(@Url String path, @QueryMap Map<String, String> query);
@@ -508,6 +509,6 @@ public interface MenigaAPI {
 	Call<Object> genericPut(@Url String path, @Body String body, @QueryMap Map<String, String> query);
 
 	@DELETE
-    Call<Object> genericDelete(@Url String path, @QueryMap Map<String, String> query);
+	Call<Object> genericDelete(@Url String path, @QueryMap Map<String, String> query);
 
 }

@@ -15,7 +15,7 @@ public abstract class QueryRequestObject implements ValueHashable {
 	public String toJsonString(Gson gson) {
 		String obj;
 		synchronized (lock) {
-			 obj = gson.toJson(this);
+			obj = gson.toJson(this);
 		}
 		return obj;
 	}

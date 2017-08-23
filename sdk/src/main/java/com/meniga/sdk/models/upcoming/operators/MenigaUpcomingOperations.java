@@ -13,13 +13,14 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaUpcomingOperations {
+
 	Result<List<MenigaUpcoming>> getUpcoming(DateTime from, DateTime to);
 
 	Result<MenigaUpcoming> getUpcoming(long id);
 
 	Result<List<MenigaUpcoming>> createUpcoming(String text, MenigaDecimal amountInCurrency, String currencyCode,
-	                                                DateTime date, Long accountId, Long categoryId, Boolean isFlagged,
-	                                                Boolean isWatched, MenigaUpcomingRecurringPattern recurringPattern);
+	                                            DateTime date, Long accountId, Long categoryId, Boolean isFlagged,
+	                                            Boolean isWatched, MenigaUpcomingRecurringPattern recurringPattern);
 
 	Result<Void> updateUpcoming(MenigaUpcoming update, boolean updateWholeSeries);
 

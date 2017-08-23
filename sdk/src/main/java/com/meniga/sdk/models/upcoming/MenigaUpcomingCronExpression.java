@@ -14,6 +14,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingCronExpression implements Serializable, Parcelable, Cloneable {
+
 	private Integer dayOfMonth;
 	private Integer dayOfMonthInterval;
 	private CronMonth month;
@@ -209,7 +210,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 		dayOfWeek = tmpDayOfWeek == -1 ? null : CronDayOfWeek.values()[tmpDayOfWeek];
 		dayOfWeekInterval = (Integer) in.readValue(Integer.class.getClassLoader());
 		Long weekOfYearMs = (Long) in.readValue(Long.class.getClassLoader());
-		if(weekOfYearMs != null) {
+		if (weekOfYearMs != null) {
 			weekOfYear = new DateTime(weekOfYearMs);
 		}
 		weekInterval = (Integer) in.readValue(Integer.class.getClassLoader());

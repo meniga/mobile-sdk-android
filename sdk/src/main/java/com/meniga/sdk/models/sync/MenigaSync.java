@@ -157,6 +157,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * Copyright 2017 Meniga Iceland Inc.
 	 */
 	public static abstract class PostSyncCallback {
+
 		protected boolean hasNewData;
 		protected Long timeStamp;
 		protected int numNewTransactions;
@@ -250,6 +251,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	/**
 	 * Starts the accounts synchronization process and also returns a MenigaSync object
 	 * that contains further details.
+	 *
 	 * @param timeout Timeout for the sync procedure, the actuall response callback might take longer
 	 * @return A new sync object created by starting the sync procedure
 	 */
@@ -260,6 +262,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	/**
 	 * Starts the accounts synchronization process and also returns a MenigaSync object
 	 * that contains further details.
+	 *
 	 * @param timeout  The amount of time the background process should try to check the syn result before terminating.
 	 * @param interval The amount of time between checks for sync completion in the background
 	 * @return A new sync object.

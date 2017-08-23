@@ -35,7 +35,7 @@ public class MenigaOfferOperationsImp implements MenigaOfferOperations {
 	@Override
 	public Result<MenigaOfferPage> getOffers(int skip, int take, List<OfferFilterState> states, List<Long> offerId, boolean expiredCashBackOnly) {
 		GetOffers req = new GetOffers();
-		if(states == null || states.size() == 0) {
+		if (states == null || states.size() == 0) {
 			states = new ArrayList<>();
 			states.add(OfferFilterState.ALL);
 		}

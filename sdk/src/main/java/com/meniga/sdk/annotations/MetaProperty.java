@@ -11,5 +11,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface MetaProperty {
-    String fromProperty() default "";
+
+	String fromProperty() default "";
 }

@@ -11,5 +11,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaTopMerchantOperations {
+
 	Result<List<MenigaTopMerchant>> getTopMerchants(TransactionsFilter filter, TopMerchantOptions options);
 }

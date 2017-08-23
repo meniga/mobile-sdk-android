@@ -12,6 +12,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaMerchantOperationsImp implements MenigaMerchantOperations {
+
 	@Override
 	public Result<MenigaMerchant> getMerchant(long id) {
 		GetMerchant req = new GetMerchant();

@@ -14,6 +14,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaTransactionRuleOperations {
+
 	Result<List<MenigaTransactionRule>> getTransactionRules();
 
 	Result<MenigaTransactionRule> createTransactionRule(

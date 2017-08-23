@@ -7,6 +7,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetNetWorthFirstBalanceEntry extends QueryRequestObject {
+
 	public boolean excludeAccountsExcludedFromNetWorth;
 
 	public Map<String, String> toQueryMap() {

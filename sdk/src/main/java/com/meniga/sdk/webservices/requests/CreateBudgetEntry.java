@@ -11,14 +11,15 @@ import java.util.List;
  */
 
 public class CreateBudgetEntry extends QueryRequestObject {
-    public MenigaDecimal targetAmount;
-    public DateTime startDate;
-    public DateTime endDate;
-    public List<Long> categoryIds;
-    public int autoFillType;
 
-    @Override
-    public long getValueHash() {
-        return 0;
-    }
+	public MenigaDecimal targetAmount;
+	public DateTime startDate;
+	public DateTime endDate;
+	public List<Long> categoryIds;
+	public int autoFillType;
+
+	@Override
+	public long getValueHash() {
+		return 0;
+	}
 }

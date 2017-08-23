@@ -9,6 +9,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaMerchantOperations {
+
 	Result<MenigaMerchant> getMerchant(long id);
 
 	Result<List<MenigaMerchant>> getMerchants(List<Long> id);

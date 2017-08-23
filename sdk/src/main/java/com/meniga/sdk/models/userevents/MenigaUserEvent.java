@@ -131,7 +131,7 @@ public class MenigaUserEvent implements Serializable, Parcelable, Cloneable {
 		for (int i = 0; i < userEvents.size(); i++) {
 			for (int j = 0; j < userEvents.get(i).getSubscriptions().size(); j++) {
 				UserEventSubscription sub = userEvents.get(i).getSubscriptions().get(j);
-				if(sub.getChannelName().equals(channel))
+				if (sub.getChannelName().equals(channel))
 					userEventTypeIdentifier.add(userEvents.get(i).getUserEventTypeIdentifier());
 			}
 

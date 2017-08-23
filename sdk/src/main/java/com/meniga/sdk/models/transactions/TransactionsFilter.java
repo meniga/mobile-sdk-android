@@ -700,6 +700,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	 * Copyright 2017 Meniga Iceland Inc.
 	 */
 	public static class Builder {
+
 		private String type;
 		private String orderBy;
 		private Integer take = 50;

@@ -13,6 +13,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class UpdateUpcoming extends QueryRequestObject {
+
 	public transient long id;
 	public String text;
 	public MenigaDecimal amountInCurrency;

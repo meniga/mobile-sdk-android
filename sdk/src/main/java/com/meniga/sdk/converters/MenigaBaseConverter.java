@@ -30,8 +30,7 @@ public class MenigaBaseConverter<T> extends MenigaConverter {
 				JsonParser parser = new JsonParser();
 				JsonObject jsonObject = parser.parse(body).getAsJsonObject();
 				JsonElement jsonElement = null;
-				if (jsonObject.has("data"))
-				{
+				if (jsonObject.has("data")) {
 					jsonElement = jsonObject.get("data");
 				}
 

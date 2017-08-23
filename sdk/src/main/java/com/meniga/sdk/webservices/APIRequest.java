@@ -24,7 +24,7 @@ public class APIRequest {
 
 	public static Result<Object> genericRequest(HttpMethod method, String path) {
 		String body = null;
-		if(method == HttpMethod.POST) {
+		if (method == HttpMethod.POST) {
 			body = "";
 		}
 		return MenigaSDK.executor().genericRequest(method, path, body, new HashMap<String, String>());

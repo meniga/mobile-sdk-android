@@ -27,6 +27,7 @@ import java.util.UUID;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaChallenge extends StateObject implements Serializable, Cloneable, Parcelable {
+
 	private static MenigaChallengesOperations apiOperations;
 
 	private UUID id;
@@ -253,6 +254,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 	/**
 	 * Merges another MenigaChallenge object into this. Replaces null fields on this object with
 	 * fields from other if the field in other is not null
+	 *
 	 * @param other The other MenigaChallenge object to merge with this one
 	 */
 	public void merge(MenigaChallenge other) {
@@ -366,6 +368,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Gets all challenges, expired, suggested and accepted alike but not expired ones
+	 *
 	 * @return A task that includes all the challenge objects that match the default parameters
 	 */
 	public static Result<List<MenigaChallenge>> fetch() {
@@ -374,6 +377,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Gets a challenge by its unique id.
+	 *
 	 * @param id The id of the challenge to getChallenge
 	 * @return A task that includes the challenge object that matches the id
 	 */
@@ -383,6 +387,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Refreshes this instance with fresh new data from the server (if there have been any changes that is).
+	 *
 	 * @return A void task. The instance of this challenge will have been updated
 	 */
 	public Result<MenigaChallenge> refresh() {
@@ -403,6 +408,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Gets all challenges, both new ones and accepted ones, also excluded ones if includeExpired is set to true
+	 *
 	 * @return A task that includes all the challenge objects that match the query parameters
 	 */
 	public static Result<List<MenigaChallenge>> fetch(boolean includeExpired, boolean excludeSuggested, boolean excludeAccepted) {
@@ -411,6 +417,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Updates the instance on the server. All fields that have a setter can be updated
+	 *
 	 * @return A task indicating if the operation was successful or not
 	 */
 	public Result<Void> update() {
@@ -421,6 +428,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Delete the instance by id on the server.
+	 *
 	 * @return A task indicating if the operation was successful or not
 	 */
 	public static Result<Void> delete(UUID id) {
@@ -430,6 +438,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Delete the instance on the server.
+	 *
 	 * @return A task indicating if the operation was successful or not
 	 */
 	public Result<Void> delete() {
@@ -439,6 +448,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Marks the challenges object as accepted
+	 *
 	 * @return A Task of type void, the task will have an error and be marked as failed if accept is not successful
 	 */
 	public Result<MenigaChallenge> accept(MenigaDecimal targetAmount) {
@@ -460,36 +470,38 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	/**
 	 * Creates a new custom challenge object with a default value for iconId
-	 * @param title Title of the challenge
-	 * @param description Description of the challange
-	 * @param startDate Time period start for when the challenge starts
-	 * @param endDate Time period end for when the challenge starts
-	 * @param categoryIds Category ids that this challenge applies to
+	 *
+	 * @param title        Title of the challenge
+	 * @param description  Description of the challange
+	 * @param startDate    Time period start for when the challenge starts
+	 * @param endDate      Time period end for when the challenge starts
+	 * @param categoryIds  Category ids that this challenge applies to
 	 * @param targetAmount The budget target amount for the challenge
-	 * @param color Color of the challenge being created
+	 * @param color        Color of the challenge being created
 	 * @return A task containing the newly created custom challenge
 	 */
 	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
-	                                                 DateTime endDate, List<Long> categoryIds,
-	                                                 MenigaDecimal targetAmount, CustomChallengeColor color) {
+	                                             DateTime endDate, List<Long> categoryIds,
+	                                             MenigaDecimal targetAmount, CustomChallengeColor color) {
 		return MenigaChallenge.create(title, description, startDate, endDate, categoryIds, targetAmount, null, color);
 	}
 
 	/**
 	 * Creates a new custom challenge object
-	 * @param title Title of the challenge
-	 * @param description Description of the challange
-	 * @param startDate Time period start for when the challenge starts
-	 * @param endDate Time period end for when the challenge starts
-	 * @param categoryIds Category ids that this challenge applies to
+	 *
+	 * @param title        Title of the challenge
+	 * @param description  Description of the challange
+	 * @param startDate    Time period start for when the challenge starts
+	 * @param endDate      Time period end for when the challenge starts
+	 * @param categoryIds  Category ids that this challenge applies to
 	 * @param targetAmount The budget target amount for the challenge
-	 * @param iconId Id of the icon associated with the challenge
-	 * @param color Color of the challenge being created
+	 * @param iconId       Id of the icon associated with the challenge
+	 * @param color        Color of the challenge being created
 	 * @return A task containing the newly created custom challenge
 	 */
 	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
-	                                                 DateTime endDate, List<Long> categoryIds,
-	                                                 MenigaDecimal targetAmount, Long iconId, CustomChallengeColor color) {
+	                                             DateTime endDate, List<Long> categoryIds,
+	                                             MenigaDecimal targetAmount, Long iconId, CustomChallengeColor color) {
 		return MenigaChallenge.apiOperations.createChallenge(
 				title,
 				description,

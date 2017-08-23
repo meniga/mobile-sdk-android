@@ -10,6 +10,7 @@ import com.meniga.sdk.helpers.MenigaDecimal;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaAccountEventData implements Parcelable {
+
 	@SerializedName("AccountName")
 	private String accountName;
 	@SerializedName("AccountCategory")

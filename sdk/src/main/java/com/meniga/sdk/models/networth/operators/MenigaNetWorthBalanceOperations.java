@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaNetWorthBalanceOperations {
+
 	Result<Void> updateBalance(long accountId, long balanceId, MenigaDecimal amount, DateTime date);
 
 	Result<Void> deleteBalance(long accountId, long balanceId);

@@ -15,6 +15,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaTransactionOperations {
+
 	Result<MenigaTransaction> getTransaction(long id);
 
 	Result<MenigaTransaction> createTransaction(DateTime date, String text, MenigaDecimal amount, long categoryId);

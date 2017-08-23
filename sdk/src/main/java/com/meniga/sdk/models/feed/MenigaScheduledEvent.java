@@ -18,6 +18,7 @@ import java.util.Map;
  * Model class for the scheduled event, such as a weekly/monthly expense report.
  */
 public class MenigaScheduledEvent implements MenigaFeedItem, Serializable, Cloneable, Parcelable {
+
 	public static final Parcelable.Creator<MenigaScheduledEvent> CREATOR = new Parcelable.Creator<MenigaScheduledEvent>() {
 		@Override
 		public MenigaScheduledEvent createFromParcel(Parcel source) {

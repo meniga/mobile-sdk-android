@@ -105,7 +105,7 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
 		UpdateBudgetEntry req = new UpdateBudgetEntry();
 		req.budgetId = budgetId;
 		req.id = id;
-		req.targetAmount= targetAmount;
+		req.targetAmount = targetAmount;
 		req.startDate = startDate;
 		req.endDate = endDate;
 		req.generationType = generationType;

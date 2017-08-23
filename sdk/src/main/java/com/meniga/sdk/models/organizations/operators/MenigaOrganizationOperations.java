@@ -9,5 +9,5 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaOrganizationOperations {
-    Result<List<MenigaOrganization>> getOrganizations();
+	Result<List<MenigaOrganization>> getOrganizations();
 }

@@ -11,9 +11,10 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaRealmOperations {
-    Result<MenigaRealmAuthResponse> performBankAuthenticationStep(long id, List<MenigaRealmAuthParameter> authParams, String userId);
 
-    Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId);
+	Result<MenigaRealmAuthResponse> performBankAuthenticationStep(long id, List<MenigaRealmAuthParameter> authParams, String userId);
 
-    Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts);
+	Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId);
+
+	Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts);
 }

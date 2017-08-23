@@ -1,4 +1,5 @@
 package com.meniga.sdk.models.categories.enums;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

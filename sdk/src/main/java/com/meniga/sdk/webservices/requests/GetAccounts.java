@@ -7,6 +7,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetAccounts extends QueryRequestObject {
+
 	public boolean includeDisabled;
 	public boolean includeHidden;
 

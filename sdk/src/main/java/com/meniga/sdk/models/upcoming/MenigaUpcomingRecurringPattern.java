@@ -15,6 +15,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingRecurringPattern implements Serializable, Parcelable, Cloneable {
+
 	private long id;
 	private String text;
 	private MenigaDecimal amountInCurrency;

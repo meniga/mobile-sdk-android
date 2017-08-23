@@ -39,7 +39,8 @@ class Executors {
 		return INSTANCE.background;
 	}
 
-	/* package */ static ScheduledExecutorService scheduled() {
+	/* package */
+	static ScheduledExecutorService scheduled() {
 		return INSTANCE.scheduled;
 	}
 
@@ -48,7 +49,8 @@ class Executors {
 	 * the stack runs too deep, at which point it will delegate to {@link Executors#background}
 	 * in order to trim the stack.
 	 */
-  /* package */ static Executor immediate() {
+  /* package */
+	static Executor immediate() {
 		return INSTANCE.immediate;
 	}
 
@@ -59,6 +61,7 @@ class Executors {
 	 * to trim the stack.
 	 */
 	private static class ImmediateExecutor implements Executor {
+
 		private static final int MAX_DEPTH = 15;
 		private ThreadLocal<Integer> executionDepth = new ThreadLocal<>();
 

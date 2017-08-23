@@ -4,7 +4,7 @@ import java.io.Closeable;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
- *
+ * <p>
  * Represents a callback delegate that has been registered with a {@link CancellationToken}.
  *
  * @see CancellationToken#register(Runnable)

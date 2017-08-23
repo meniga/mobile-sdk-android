@@ -7,6 +7,7 @@ import com.meniga.sdk.models.transactions.MenigaComment;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaCommentOperations {
+
 	Result<MenigaComment> createComment(long transId, String comment);
 
 	Result<Void> updateComment(MenigaComment comment);

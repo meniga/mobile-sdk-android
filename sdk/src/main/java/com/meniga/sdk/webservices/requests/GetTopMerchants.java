@@ -7,7 +7,7 @@ import com.meniga.sdk.models.transactions.TransactionsFilter;
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class GetTopMerchants extends QueryRequestObject  {
+public class GetTopMerchants extends QueryRequestObject {
 
 	public TransactionsFilter transactionFilter;
 	public TopMerchantOptions options;

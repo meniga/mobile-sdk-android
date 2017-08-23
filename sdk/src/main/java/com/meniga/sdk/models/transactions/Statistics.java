@@ -13,6 +13,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class Statistics implements Serializable, Parcelable {
+
 	public static final Creator<Statistics> CREATOR = new Creator<Statistics>() {
 		@Override
 		public Statistics createFromParcel(Parcel source) {

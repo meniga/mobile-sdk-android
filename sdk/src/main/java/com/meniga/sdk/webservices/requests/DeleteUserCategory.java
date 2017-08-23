@@ -7,6 +7,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class DeleteUserCategory extends QueryRequestObject {
+
 	public transient long id;
 	public boolean deleteConnectedRules;
 	public Long newCategoryId;

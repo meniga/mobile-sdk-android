@@ -11,7 +11,7 @@ public enum OfferState implements Serializable {
 
 	@SerializedName("Available")
 	AVAILABLE,
-	@SerializedName(value="Activated", alternate={"Accepted"})
+	@SerializedName(value = "Activated", alternate = {"Accepted"})
 	ACTIVATED,
 	@SerializedName("Declined")
 	DECLINED,

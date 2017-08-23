@@ -8,7 +8,8 @@ import java.io.Serializable;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaUpcomingReconcileScore implements Serializable, Parcelable, Cloneable  {
+public class MenigaUpcomingReconcileScore implements Serializable, Parcelable, Cloneable {
+
 	private long upcomingId;
 	private Long transactionId;
 	private Float confidenceScore;

@@ -9,6 +9,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaTagOperations {
+
 	Result<List<MenigaTag>> getTags();
 
 	Result<MenigaTag> getTag(long id);

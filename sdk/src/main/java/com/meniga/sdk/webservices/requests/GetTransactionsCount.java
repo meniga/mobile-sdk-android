@@ -9,6 +9,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetTransactionsCount extends QueryRequestObject {
+
 	public List<Long> accountIds = new ArrayList<>();
 
 	@Override

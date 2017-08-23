@@ -15,6 +15,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaOfferOperations {
+
 	Result<MenigaOfferPage> getOffers(int skip, int take, List<OfferFilterState> states, List<Long> offerId, boolean expiredCashBackOnly);
 
 	Result<MenigaOffer> getOfferById(long id);

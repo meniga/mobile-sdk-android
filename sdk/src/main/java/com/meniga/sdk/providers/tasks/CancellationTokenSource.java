@@ -74,6 +74,7 @@ public class CancellationTokenSource implements Closeable {
 
 	/**
 	 * Schedules a cancel operation on this {@code CancellationTokenSource} after the specified number of milliseconds.
+	 *
 	 * @param delay The number of milliseconds to wait before completing the returned task. If delay is {@code 0}
 	 *              the cancel is executed immediately. If delay is {@code -1} any scheduled cancellation is stopped.
 	 */
@@ -146,7 +147,7 @@ public class CancellationTokenSource implements Closeable {
 
 	/**
 	 * @throws CancellationException if this token has had cancellation requested.
-	 * May be used to stop execution of a thread or runnable.
+	 *                               May be used to stop execution of a thread or runnable.
 	 */
   /* package */ void throwIfCancellationRequested() throws CancellationException {
 		synchronized (lock) {

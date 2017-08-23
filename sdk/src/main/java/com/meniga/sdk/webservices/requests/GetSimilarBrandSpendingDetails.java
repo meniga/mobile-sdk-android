@@ -4,6 +4,7 @@ package com.meniga.sdk.webservices.requests;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetSimilarBrandSpendingDetails extends QueryRequestObject {
+
 	public long id;
 
 	public GetSimilarBrandSpendingDetails(long id) {

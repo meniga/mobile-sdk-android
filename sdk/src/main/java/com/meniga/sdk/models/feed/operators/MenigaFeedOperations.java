@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaFeedOperations {
+
 	Result<MenigaFeed> getFeed(DateTime from, DateTime to);
 
 	Result<MenigaFeed> getFeed(DateTime from, DateTime to, int skip, int take);

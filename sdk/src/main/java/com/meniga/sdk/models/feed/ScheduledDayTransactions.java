@@ -17,6 +17,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class ScheduledDayTransactions implements Serializable, Cloneable, Parcelable {
+
 	public static final Creator<ScheduledDayTransactions> CREATOR = new Creator<ScheduledDayTransactions>() {
 		@Override
 		public ScheduledDayTransactions createFromParcel(Parcel source) {

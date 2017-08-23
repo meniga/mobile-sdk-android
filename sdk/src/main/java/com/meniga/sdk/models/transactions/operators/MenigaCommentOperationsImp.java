@@ -6,6 +6,7 @@ import com.meniga.sdk.models.transactions.MenigaComment;
 import com.meniga.sdk.webservices.requests.CreateComment;
 import com.meniga.sdk.webservices.requests.DeleteComment;
 import com.meniga.sdk.webservices.requests.UpdateComment;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */

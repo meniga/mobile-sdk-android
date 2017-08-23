@@ -21,6 +21,7 @@ import java.lang.reflect.Type;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class BudgetDateSerializer implements JsonDeserializer<BudgetDate>, JsonSerializer<BudgetDate> {
+
 	@Override
 	public BudgetDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		JsonObject obj = json.getAsJsonObject();

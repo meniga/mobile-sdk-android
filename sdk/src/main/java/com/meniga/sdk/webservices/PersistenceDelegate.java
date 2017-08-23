@@ -58,6 +58,7 @@ import retrofit2.Response;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class PersistenceDelegate {
+
 	private Map<Service, MenigaAPI> clients;
 	private PersistenceProvider provider;
 
@@ -73,7 +74,7 @@ public class PersistenceDelegate {
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().adapt(call, new Callback<E>() {
 			@Override
 			public void onResponse(Call<E> call, Response<E> response) {
-				if(!call.isCanceled() && response.isSuccessful()){
+				if (!call.isCanceled() && response.isSuccessful()) {
 					provider.save(key, response.body());
 				}
 			}
@@ -684,11 +685,11 @@ public class PersistenceDelegate {
 	}
 
 	public Result<MenigaBudgetEntry> updateBudgetEntry(UpdateBudgetEntry req) {
-		return persist(req, getClient(Service.BUDGET).updateBudgetEntry(req.budgetId,req.id,req));
+		return persist(req, getClient(Service.BUDGET).updateBudgetEntry(req.budgetId, req.id, req));
 	}
 
 	public Result<Void> deleteBudgetEntry(DeleteBudgetEntry req) {
-		return persist(req, getClient(Service.BUDGET).deleteBudgetEntry(req.budgetId,req.entryId));
+		return persist(req, getClient(Service.BUDGET).deleteBudgetEntry(req.budgetId, req.entryId));
 	}
 
 	public Result<Void> resetBudget(ResetBudget req) {
@@ -715,7 +716,7 @@ public class PersistenceDelegate {
 	// --
 	Result<Object> genericRequest(HttpMethod method, String path, String body, Map<String, String> query) {
 		TaskAdapter taskAdapter = MenigaSDK.getMenigaSettings().getTaskAdapter();
-		switch(method) {
+		switch (method) {
 			case HEAD:
 				return taskAdapter.adapt(getClient(Service.BYPASS).genericHead(path, query), null);
 			case OPTIONS:
@@ -747,7 +748,7 @@ public class PersistenceDelegate {
 	}
 
 	private MenigaAPI getClient(Service forService) {
-		if(!clients.containsKey(forService)) {
+		if (!clients.containsKey(forService)) {
 			return clients.get(Service.ALL);
 		}
 		return clients.get(forService);
@@ -756,7 +757,6 @@ public class PersistenceDelegate {
 	Map<Service, MenigaAPI> getApis() {
 		return clients;
 	}
-
 
 
 }

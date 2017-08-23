@@ -493,6 +493,7 @@ public class MenigaOffer implements Parcelable {
 
 	/**
 	 * Mark offer as seen
+	 *
 	 * @param offerId id of offer
 	 * @return Task with void result
 	 */
@@ -549,7 +550,7 @@ public class MenigaOffer implements Parcelable {
 	/**
 	 * Fetch redemption transactions by offer id
 	 *
-	 * @param id  offer id of the offer for which the redemption transactions are to be retrieved
+	 * @param id offer id of the offer for which the redemption transactions are to be retrieved
 	 * @return list of redemption transactions
 	 */
 	public static Result<MenigaRedemptions> fetchRedemptionsById(int id) {
@@ -559,9 +560,9 @@ public class MenigaOffer implements Parcelable {
 	/**
 	 * Fetch nearby merchant locations
 	 *
-	 * @param latitude central latitude for location filtering
-	 * @param longitude central longitude for location filtering
-	 * @param radiumKm radius in km for location filtering
+	 * @param latitude       central latitude for location filtering
+	 * @param longitude      central longitude for location filtering
+	 * @param radiumKm       radius in km for location filtering
 	 * @param limitLocations the maximum number of locations to be returned (per offer)
 	 * @return list of redemption transactions
 	 */
@@ -572,10 +573,10 @@ public class MenigaOffer implements Parcelable {
 	/**
 	 * Fetch nearby merchant locations by offer id
 	 *
-	 * @param id offer id of the offer for which the locations are to be retrieved
-	 * @param latitude central latitude for location filtering
-	 * @param longitude central longitude for location filtering
-	 * @param radiumKm radius in km for location filtering
+	 * @param id             offer id of the offer for which the locations are to be retrieved
+	 * @param latitude       central latitude for location filtering
+	 * @param longitude      central longitude for location filtering
+	 * @param radiumKm       radius in km for location filtering
 	 * @param limitLocations the maximum number of locations to be returned (per offer)
 	 * @return list of redemption transactions
 	 */

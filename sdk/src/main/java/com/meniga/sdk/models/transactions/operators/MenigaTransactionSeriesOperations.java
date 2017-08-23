@@ -12,5 +12,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaTransactionSeriesOperations {
+
 	Result<List<MenigaTransactionSeries>> getTransactionSeries(TransactionsFilter tf, Options options, List<SeriesSelector> ss);
 }

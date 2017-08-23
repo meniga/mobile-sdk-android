@@ -92,7 +92,7 @@ public class BasicTaskAdapter implements TaskAdapter {
 		res.continueWithTask(new Continuation<T, Task<T>>() {
 			@Override
 			public Task<T> then(Task<T> task) throws Exception {
-				if(task.isFaulted())
+				if (task.isFaulted())
 					tcs.setError(task.getError());
 				else
 					tcs.setResult(task.getResult());

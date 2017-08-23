@@ -7,6 +7,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetCategories extends QueryRequestObject {
+
 	public Boolean isPublic;
 	public boolean flat = true;
 	public String culture;

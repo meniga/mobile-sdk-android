@@ -21,9 +21,10 @@ import java.lang.reflect.Type;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class DateTimeSerializer implements JsonDeserializer<DateTime>, JsonSerializer<DateTime> {
+
 	@Override
 	public DateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		String str = json.getAsString().substring(0,19);
+		String str = json.getAsString().substring(0, 19);
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss");
 
 		return format.parseDateTime(str);

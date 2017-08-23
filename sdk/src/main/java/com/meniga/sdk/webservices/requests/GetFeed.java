@@ -12,6 +12,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetFeed extends QueryRequestObject {
+
 	public DateTime dateFrom;
 	public DateTime dateTo;
 	public int skip = 0;

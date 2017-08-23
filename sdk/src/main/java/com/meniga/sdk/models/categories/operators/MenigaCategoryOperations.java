@@ -11,6 +11,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaCategoryOperations {
+
 	Result<List<MenigaCategory>> getCategories(Boolean publicOnly, String culture);
 
 	Result<MenigaCategory> getCategoryById(long id);

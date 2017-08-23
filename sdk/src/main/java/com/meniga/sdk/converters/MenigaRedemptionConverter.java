@@ -23,9 +23,11 @@ import retrofit2.Retrofit;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaRedemptionConverter extends MenigaConverter {
+
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeOfRedemptions = new TypeToken<MenigaRedemptions>() {}.getType();
+		Type typeOfRedemptions = new TypeToken<MenigaRedemptions>() {
+		}.getType();
 
 		if (typeOfRedemptions.equals(type)) {
 			return new Converter<ResponseBody, MenigaRedemptions>() {
@@ -41,7 +43,8 @@ public class MenigaRedemptionConverter extends MenigaConverter {
 
 					JsonObject meta = object.getAsJsonObject("meta");
 
-					List<MenigaScheduledReimbursement> cashBackRaw = gson.fromJson(meta.getAsJsonArray("scheduledReimbursements"), new TypeToken<List<MenigaScheduledReimbursement>>(){}.getType());
+					List<MenigaScheduledReimbursement> cashBackRaw = gson.fromJson(meta.getAsJsonArray("scheduledReimbursements"), new TypeToken<List<MenigaScheduledReimbursement>>() {
+					}.getType());
 					MenigaRedemptions main = MenigaConverter.mergeMeta(gson, page, meta);
 
 					main.setScheduledReimbursement(cashBackRaw);

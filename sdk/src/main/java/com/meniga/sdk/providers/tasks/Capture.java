@@ -4,6 +4,7 @@ package com.meniga.sdk.providers.tasks;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class Capture<T> {
+
 	private T value;
 
 	public Capture() {

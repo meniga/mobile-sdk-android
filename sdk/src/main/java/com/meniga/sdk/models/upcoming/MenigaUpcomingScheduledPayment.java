@@ -14,6 +14,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingScheduledPayment implements Serializable, Parcelable, Cloneable {
+
 	private long id;
 	private String identifier;
 	private String bankReference;

@@ -8,6 +8,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetMerchants extends QueryRequestObject {
+
 	public List<Long> ids;
 
 	@Override

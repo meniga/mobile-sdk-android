@@ -16,6 +16,7 @@ import java.util.Locale;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable {
+
 	public static final Creator<MenigaPublicSettings> CREATOR = new Creator<MenigaPublicSettings>() {
 		@Override
 		public MenigaPublicSettings createFromParcel(Parcel source) {
@@ -173,6 +174,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 
 	/**
 	 * Retrieves the number format (e.g. ###,####.##) for the currency code provided
+	 *
 	 * @param currencyCode The currency code used to look up the number format
 	 * @return The number format corresponding to the currency code
 	 */
@@ -192,6 +194,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 
 	/**
 	 * Retrieves the standalone currency symbol for the currency code provided
+	 *
 	 * @param currencyCode The currency code to use to look for the symbol (USD = $, EUR = € etc)
 	 * @return The standalone currency symbol ($, € etc)
 	 */
@@ -221,6 +224,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 
 	/**
 	 * Converts the currency format into a java format-able string. The server format is in C# format
+	 *
 	 * @param currencyCode The currency code to retrieve the correct currency format
 	 * @return The currency format in java format for the currency code requested
 	 */

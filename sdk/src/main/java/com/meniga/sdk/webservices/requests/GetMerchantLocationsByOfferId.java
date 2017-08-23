@@ -7,6 +7,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetMerchantLocationsByOfferId extends QueryRequestObject {
+
 	public long offerId;
 	public Double latitude;
 	public Double longitude;

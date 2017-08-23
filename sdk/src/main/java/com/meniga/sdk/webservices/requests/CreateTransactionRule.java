@@ -15,6 +15,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class CreateTransactionRule extends QueryRequestObject {
+
 	public transient boolean applyOnExisting;
 	public String name;
 	public String textCriteria;

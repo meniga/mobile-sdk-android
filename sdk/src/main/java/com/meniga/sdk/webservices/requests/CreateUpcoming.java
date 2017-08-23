@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class CreateUpcoming extends QueryRequestObject {
+
 	public String text;
 	public MenigaDecimal amountInCurrency;
 	public String currencyCode;

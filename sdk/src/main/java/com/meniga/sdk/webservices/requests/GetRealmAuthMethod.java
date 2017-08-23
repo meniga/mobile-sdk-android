@@ -9,13 +9,13 @@ import java.util.List;
  */
 public class GetRealmAuthMethod extends QueryRequestObject {
 
-    public transient long id;
-    public List<MenigaRealmAuthParameter.SimpleAuthParameter> parameters;
-    public boolean saveDetails;
-    public String realmUserIdentifier;
+	public transient long id;
+	public List<MenigaRealmAuthParameter.SimpleAuthParameter> parameters;
+	public boolean saveDetails;
+	public String realmUserIdentifier;
 
-    @Override
-    public long getValueHash() {
-        return id;
-    }
+	@Override
+	public long getValueHash() {
+		return id;
+	}
 }

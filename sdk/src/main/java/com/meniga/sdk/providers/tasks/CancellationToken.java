@@ -5,13 +5,13 @@ import java.util.concurrent.CancellationException;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
- *
+ * <p>
  * Propagates notification that operations should be canceled.
- *
+ * <p>
  * Create an instance of {@code CancellationTokenSource} and pass the token returned from
  * {@code CancellationTokenSource#getToken()} to the asynchronous operation(s).
  * Call {@code CancellationTokenSource#cancel()} to cancel the operations.
- *
+ * <p>
  * A {@code CancellationToken} can only be cancelled once - it should not be passed to future operations
  * once cancelled.
  *
@@ -38,6 +38,7 @@ public class CancellationToken {
 	/**
 	 * Registers a runnable that will be called when this CancellationToken is canceled.
 	 * If this token is already in the canceled state, the runnable will be run immediately and synchronously.
+	 *
 	 * @param action the runnable to be run when the token is cancelled.
 	 * @return a {@link CancellationTokenRegistration} instance that can be used to unregister
 	 * the action.
@@ -48,7 +49,7 @@ public class CancellationToken {
 
 	/**
 	 * @throws CancellationException if this token has had cancellation requested.
-	 * May be used to stop execution of a thread or runnable.
+	 *                               May be used to stop execution of a thread or runnable.
 	 */
 	public void throwIfCancellationRequested() throws CancellationException {
 		tokenSource.throwIfCancellationRequested();

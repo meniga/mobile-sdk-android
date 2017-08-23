@@ -6,11 +6,11 @@ package com.meniga.sdk.webservices.requests;
 
 public class ResetBudget extends QueryRequestObject {
 
-    public long id;
+	public long id;
 
-    @Override
-    public long getValueHash() {
-        return (int) (id ^ (id >>> 32));
-    }
+	@Override
+	public long getValueHash() {
+		return (int) (id ^ (id >>> 32));
+	}
 
 }

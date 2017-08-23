@@ -49,7 +49,8 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Fetches a list of budgets available to the user
-	 * @param ids list of budget ids
+	 *
+	 * @param ids        list of budget ids
 	 * @param accountIds list of account ids
 	 * @param budgetType type of budget
 	 * @return list of budgets without entries
@@ -60,7 +61,8 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Fetches a list of budgets available to the user
-	 * @param id list of budget ids
+	 *
+	 * @param id     list of budget ids
 	 * @param filter BudgetFilter
 	 * @return list of budgets without entries
 	 */
@@ -70,13 +72,14 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Create a single instance of budget
-	 * @param type type of budget
-	 * @param name name of budget
+	 *
+	 * @param type        type of budget
+	 * @param name        name of budget
 	 * @param description description of budget
-	 * @param accountIds lisdt of account ids relevant to the budget
-	 * @param isDefault if this instance is the default budget for the user
-	 * @param period what kinds of period this budget applies to
-	 * @param offset integer offset on how the period of this budget is calculated
+	 * @param accountIds  lisdt of account ids relevant to the budget
+	 * @param isDefault   if this instance is the default budget for the user
+	 * @param period      what kinds of period this budget applies to
+	 * @param offset      integer offset on how the period of this budget is calculated
 	 * @return a instance of budget
 	 */
 	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, boolean isDefault, BudgetPeriod period, int offset) {
@@ -85,6 +88,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Deletes the budget
+	 *
 	 * @return Void
 	 */
 	public static Result<Void> delete(long id) {
@@ -93,6 +97,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Deletes the budget
+	 *
 	 * @return Void
 	 */
 	public Result<Void> delete() {
@@ -101,14 +106,16 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Updates the budgets name, description, accountids, default and offset
+	 *
 	 * @return Void
 	 */
 	public Result<MenigaBudget> update() {
-		return apiOperator.updateBudget(this.id,this.name, this.description, this.accountIds, this.isDefault, this.offset);
+		return apiOperator.updateBudget(this.id, this.name, this.description, this.accountIds, this.isDefault, this.offset);
 	}
 
 	/**
 	 * Causes the budget to reset (remove all entries and fall back to default generated entries)
+	 *
 	 * @return Void
 	 */
 	public static Result<Void> reset(long id) {
@@ -117,6 +124,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Causes the budget to reset (remove all entries and fall back to default generated entries)
+	 *
 	 * @return Void
 	 */
 	public Result<Void> reset() {
@@ -125,14 +133,16 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Fetches the entries for this budget
+	 *
 	 * @return list of budget entries
 	 */
-	public Result<List<MenigaBudgetEntry>> fetchEntries(BudgetFilter filter){
+	public Result<List<MenigaBudgetEntry>> fetchEntries(BudgetFilter filter) {
 		return apiOperator.getBudgetEntries(this.id, filter);
 	}
 
 	/**
 	 * Create entries applies to this budget
+	 *
 	 * @param entries list of budget entries
 	 * @return Void
 	 */
@@ -143,6 +153,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 
 	/**
 	 * Deletes entry
+	 *
 	 * @param entryId id of entry
 	 * @return Void
 	 */

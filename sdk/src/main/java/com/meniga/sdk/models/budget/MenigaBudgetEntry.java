@@ -16,31 +16,32 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaBudgetEntry implements Parcelable {
-    protected static MenigaBudgetOperations apiOperator;
 
-    protected long id;
-    protected MenigaDecimal targetAmount;
-    protected MenigaDecimal spentAmount;
+	protected static MenigaBudgetOperations apiOperator;
+
+	protected long id;
+	protected MenigaDecimal targetAmount;
+	protected MenigaDecimal spentAmount;
 	protected DateTime endDate;
-    protected DateTime updatedAt;
+	protected DateTime updatedAt;
 	protected Integer generationType;
 	protected List<Long> categoryIds;
 	protected long budgetId;
 
 
-    protected MenigaBudgetEntry() {
+	protected MenigaBudgetEntry() {
 
-    }
+	}
 
-    /**
-     * Sets the api operator for doing api calls
-     *
-     * @param operator An object that implements the MenigaBudgetOperations interface for carrying out api operations on this class.
-     */
+	/**
+	 * Sets the api operator for doing api calls
+	 *
+	 * @param operator An object that implements the MenigaBudgetOperations interface for carrying out api operations on this class.
+	 */
 
-    public static void setOperator(MenigaBudgetOperations operator) {
-        MenigaBudget.apiOperator = operator;
-    }
+	public static void setOperator(MenigaBudgetOperations operator) {
+		MenigaBudget.apiOperator = operator;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -154,11 +155,12 @@ public class MenigaBudgetEntry implements Parcelable {
 
 	/**
 	 * Updates budget entry
-	 * @param targetAmount The target amount for the entry. Positive and negative numbers allowed ,
-	 * @param startDate The inclusive lower date limit for period on the budget ,
-	 * @param endDate  The inclusive upper date limit for the period on the budget ,
+	 *
+	 * @param targetAmount   The target amount for the entry. Positive and negative numbers allowed ,
+	 * @param startDate      The inclusive lower date limit for period on the budget ,
+	 * @param endDate        The inclusive upper date limit for the period on the budget ,
 	 * @param generationType The generation rule to use if a planning entry. If present on a GET then this is a generated entry ,
-	 * @param categoryIds An array of category Ids linked to. Categories can be of any category type
+	 * @param categoryIds    An array of category Ids linked to. Categories can be of any category type
 	 * @return Void
 	 */
 	public Result<MenigaBudgetEntry> update(MenigaDecimal targetAmount, DateTime startDate, DateTime endDate, int generationType, List<Long> categoryIds) {

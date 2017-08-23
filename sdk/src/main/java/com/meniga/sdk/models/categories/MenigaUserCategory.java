@@ -15,6 +15,7 @@ import com.meniga.sdk.models.categories.enums.CategoryType;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUserCategory extends MenigaCategory {
+
 	public static final Creator<MenigaUserCategory> CREATOR = new Creator<MenigaUserCategory>() {
 		public MenigaUserCategory createFromParcel(Parcel source) {
 			return new MenigaUserCategory(source);

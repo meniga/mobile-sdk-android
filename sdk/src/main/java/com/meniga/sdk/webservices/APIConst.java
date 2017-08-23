@@ -4,6 +4,7 @@ package com.meniga.sdk.webservices;
  * Copyright 2017 Meniga Iceland Inc.
  */
 class APIConst {
+
 	// Merchant
 	static final String URL_MERCHANT = "merchants";
 	static final String URL_TOP_MERCHANT = "merchants/top";

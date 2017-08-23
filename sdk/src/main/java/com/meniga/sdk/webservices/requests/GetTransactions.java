@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *  Copyright 2017 Meniga Iceland Inc.
+ * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetTransactions extends QueryRequestObject {
+
 	public TransactionsFilter filter;
 
 	@Override

@@ -10,6 +10,7 @@ import java.util.HashMap;
  */
 @SuppressWarnings("unchecked")
 public class BasicPersistanceProviderCache implements PersistenceProvider {
+
 	private HashMap<Object, Object> map = new HashMap<>();
 
 	@Override

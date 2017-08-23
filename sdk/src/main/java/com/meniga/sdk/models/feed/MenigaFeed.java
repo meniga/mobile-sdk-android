@@ -325,7 +325,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 		});
 	}
 
-	public static Result<MenigaFeedItem> fetchEvent(long id){
+	public static Result<MenigaFeedItem> fetchEvent(long id) {
 		return MenigaFeed.apiOperator.getEvent(id);
 	}
 }

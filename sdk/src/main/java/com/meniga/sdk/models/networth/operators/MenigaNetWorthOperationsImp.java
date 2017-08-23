@@ -22,6 +22,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaNetWorthOperationsImp implements MenigaNetWorthOperations {
+
 	@Override
 	public Result<MenigaNetWorth> getNetWorth(long id) {
 		GetNetWorth req = new GetNetWorth();

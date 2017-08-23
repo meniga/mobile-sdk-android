@@ -13,6 +13,7 @@ import java.lang.reflect.Type;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaCategoryScoreSerializer implements JsonDeserializer<MenigaCategoryScore> {
+
 	@Override
 	public MenigaCategoryScore deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		Gson gson = new Gson();

@@ -42,7 +42,8 @@ public class MenigaTransactionsConverter extends MenigaConverter {
 
 					Gson gson = GsonProvider.getGsonBuilder().create();
 
-					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(body), new TypeToken<List<MenigaTransaction>>(){}.getType());
+					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(body), new TypeToken<List<MenigaTransaction>>() {
+					}.getType());
 					for (MenigaTransaction trans : menigaTransactions) {
 						if (trans.getComments() == null) {
 							continue;
@@ -81,7 +82,8 @@ public class MenigaTransactionsConverter extends MenigaConverter {
 
 					Gson gson = GsonProvider.getGsonBuilder().create();
 
-					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(body), new TypeToken<List<MenigaTransaction>>(){}.getType());
+					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(body), new TypeToken<List<MenigaTransaction>>() {
+					}.getType());
 					MenigaTransactionPage list = new MenigaTransactionPage();
 					list.addAll(menigaTransactions);
 					JsonElement element = new JsonParser().parse(body);

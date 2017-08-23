@@ -16,6 +16,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaAccountOperations {
+
 	Result<MenigaAccount> getAccount(long id);
 
 	Result<List<MenigaAccount>> getAccounts(boolean includeHidden, boolean includeDisabled);

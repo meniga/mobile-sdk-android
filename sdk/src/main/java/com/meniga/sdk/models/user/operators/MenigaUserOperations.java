@@ -9,9 +9,10 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaUserOperations {
+
 	Result<List<MenigaUser>> getUsers();
 
-    Result<Void> setCulture(String culture);
+	Result<Void> setCulture(String culture);
 
-    Result<MenigaUser> registerUser(String email, String password, String culture);
+	Result<MenigaUser> registerUser(String email, String password, String culture);
 }

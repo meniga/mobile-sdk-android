@@ -27,8 +27,10 @@ public class MenigaOfferConverter extends MenigaConverter {
 
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeOfOffers = new TypeToken<MenigaOfferPage>() {}.getType();
-		Type typeOfOffer = new TypeToken<MenigaOffer>() {}.getType();
+		Type typeOfOffers = new TypeToken<MenigaOfferPage>() {
+		}.getType();
+		Type typeOfOffer = new TypeToken<MenigaOffer>() {
+		}.getType();
 
 		if (typeOfOffers.equals(type)) {
 			return new Converter<ResponseBody, MenigaOfferPage>() {

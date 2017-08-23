@@ -27,11 +27,12 @@ import okhttp3.Interceptor;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSettings {
+
 	private final HttpUrl endpoint;
 	private final Authenticator authenticator;
 	private final long timeout = 60;
 	private final PersistenceMode persistenceMode;
-    private PersistenceProvider persistenceProvider;
+	private PersistenceProvider persistenceProvider;
 	private final Map<Service, String> specialServiceEndpoints;
 	private final List<Interceptor> interceptors;
 	private final List<Interceptor> networkInterceptors;
@@ -45,9 +46,9 @@ public class MenigaSettings {
 	private MenigaSettings(Builder builder) {
 		endpoint = builder.endpoint;
 		authenticator = builder.authenticator;
-        persistenceProvider = builder.persistenceProvider;
-	    persistenceMode = builder.persistenceMode;
-	    specialServiceEndpoints = builder.specialServiceEndpoints;
+		persistenceProvider = builder.persistenceProvider;
+		persistenceMode = builder.persistenceMode;
+		specialServiceEndpoints = builder.specialServiceEndpoints;
 		interceptors = builder.interceptors;
 		userEventFeedConverters = builder.userEventFeedConverters;
 		taskAdapter = builder.taskAdapter;
@@ -67,6 +68,7 @@ public class MenigaSettings {
 
 	/**
 	 * Only setter for the settings because culture can be updated after building the initial settings.
+	 *
 	 * @param culture The new culture to use, in the form e.g. is-IS, en-GB etc.
 	 */
 	public void updateCulture(String culture) {
@@ -93,6 +95,7 @@ public class MenigaSettings {
 
 	/**
 	 * Returns x509TrustManager for custom certificates;
+	 *
 	 * @return x509TrustManager
 	 */
 	public X509TrustManager getX509TrustManager() {
@@ -101,6 +104,7 @@ public class MenigaSettings {
 
 	/**
 	 * Returns SSLSocketFactory for custom certificates;
+	 *
 	 * @return SSLSocketFactory
 	 */
 	public SSLSocketFactory getSslSocketFactory() {
@@ -119,6 +123,7 @@ public class MenigaSettings {
 	/**
 	 * Returns a map containing endpoints for specific service endpoints, e.g. if a
 	 * certain feature needs to communicate with a different server than the rest of the modules
+	 *
 	 * @return The map containing the mapping between model types and their endpoints
 	 */
 	public Map<Service, String> getSpecialServiceEndpoints() {
@@ -137,9 +142,9 @@ public class MenigaSettings {
 	/**
 	 * @return Returns the persistence provider object.
 	 */
-    public PersistenceProvider getPersistenceProvider() {
-        return persistenceProvider;
-    }
+	public PersistenceProvider getPersistenceProvider() {
+		return persistenceProvider;
+	}
 
 	/**
 	 * @return Get all the custom interceptors that have been added to the OkHttp client by the user
@@ -157,6 +162,7 @@ public class MenigaSettings {
 
 	/**
 	 * Returns all user event feed converters in use.
+	 *
 	 * @return List of all UserEventConverters.
 	 */
 	public List<EventBaseConverter> getUserEventFeedConverters() {
@@ -168,11 +174,12 @@ public class MenigaSettings {
 	}
 
 	public static class Builder {
+
 		private HttpUrl endpoint;
 		private Authenticator authenticator;
 		private PersistenceMode persistenceMode;
 		private long timeout;
-        private PersistenceProvider persistenceProvider;
+		private PersistenceProvider persistenceProvider;
 		private Map<Service, String> specialServiceEndpoints = new HashMap<>();
 		private List<Interceptor> interceptors = new ArrayList<>();
 		private List<Interceptor> networkInterceptors = new ArrayList<>();
@@ -275,12 +282,13 @@ public class MenigaSettings {
 		/**
 		 * Adds a special endpoint url for a specific model class type (service). This way certain
 		 * model classes can use other endpoints than the default given one.
-		 * @param service The service should have a different endpoint
+		 *
+		 * @param service  The service should have a different endpoint
 		 * @param endpoint The endpoint for the model class type
 		 * @return Returns settings builder
 		 */
 		public Builder addEndpointForService(Service service, String endpoint) {
-			if(specialServiceEndpoints == null) {
+			if (specialServiceEndpoints == null) {
 				specialServiceEndpoints = new HashMap<>();
 			}
 			if (!endpoint.endsWith("/")) {
@@ -292,6 +300,7 @@ public class MenigaSettings {
 
 		/**
 		 * Adds an interceptor to the OkHttp client for custom request/response intercept operations as needed
+		 *
 		 * @param interceptor The OkHttp interceptor to createOfferAccount
 		 * @return Returns settings builder
 		 */
@@ -302,6 +311,7 @@ public class MenigaSettings {
 
 		/**
 		 * Adds an network interceptor to the OkHttp client
+		 *
 		 * @param interceptor The OkHttp network interceptor
 		 * @return Returns settings builder
 		 */
@@ -309,18 +319,20 @@ public class MenigaSettings {
 			networkInterceptors.add(interceptor);
 			return this;
 		}
-		public Builder useTaskAdapter(TaskAdapter taskAdapter){
+
+		public Builder useTaskAdapter(TaskAdapter taskAdapter) {
 			this.taskAdapter = taskAdapter;
 			return this;
 		}
 
 		/**
 		 * Sets OkHTTP sslSocketFactory for use with custom certificates;
+		 *
 		 * @param sslSocketFactory custom sslSocketFactory instance
 		 * @param x509TrustManager custom x509TrustManager instance
 		 * @return Returns settings builder
 		 */
-		public Builder useSSLFactory(SSLSocketFactory sslSocketFactory,X509TrustManager x509TrustManager) {
+		public Builder useSSLFactory(SSLSocketFactory sslSocketFactory, X509TrustManager x509TrustManager) {
 			this.sslSocketFactory = sslSocketFactory;
 			this.x509TrustManager = x509TrustManager;
 			return this;
@@ -328,6 +340,7 @@ public class MenigaSettings {
 
 		/**
 		 * Sets the framework culture, e.g. en-GB, is-IS etc.
+		 *
 		 * @param culture The culture in xx-xx form
 		 * @return Returns settings builder
 		 */
@@ -338,10 +351,11 @@ public class MenigaSettings {
 
 		/**
 		 * Adds an User event converter for the MenigaFeed object. Otherwise it will use provided default providers or return a generic userevent object.
+		 *
 		 * @param converter An implementation of UserEventConverter
 		 * @return Returns settings builder
 		 */
-		public Builder addUserEventFeedConverter(EventBaseConverter<MenigaFeedItem> converter){
+		public Builder addUserEventFeedConverter(EventBaseConverter<MenigaFeedItem> converter) {
 			userEventFeedConverters.add(converter);
 			return this;
 		}
@@ -359,7 +373,7 @@ public class MenigaSettings {
 			return new MenigaSettings(this);
 		}
 
-		private void preBuild(){
+		private void preBuild() {
 			// Add default event converters
 			userEventFeedConverters.add(new MenigaAccountAvailableAmountEventConverter());
 			userEventFeedConverters.add(new MenigaCustomEventConverter());

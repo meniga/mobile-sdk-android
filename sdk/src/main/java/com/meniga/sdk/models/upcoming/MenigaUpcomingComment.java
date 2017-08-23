@@ -11,6 +11,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingComment implements Serializable, Parcelable, Cloneable {
+
 	private long id;
 	private DateTime created;
 	private DateTime modified;

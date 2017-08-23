@@ -14,6 +14,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaNetWorthOperations {
+
 	Result<MenigaNetWorth> getNetWorth(long id);
 
 	Result<List<MenigaNetWorth>> getNetWorth(DateTime startDate, DateTime endDate, boolean useInterpolation, int skip, int take);

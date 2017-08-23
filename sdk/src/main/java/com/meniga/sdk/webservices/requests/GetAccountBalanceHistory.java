@@ -11,6 +11,7 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetAccountBalanceHistory extends QueryRequestObject {
+
 	public long id;
 	public DateTime dateFrom;
 	public DateTime dateTo;

@@ -13,6 +13,7 @@ import org.joda.time.DateTime;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaAccountEvent implements MenigaFeedItem, Parcelable {
+
 	private long id;
 	@SerializedName("topicId")
 	private long accountId;

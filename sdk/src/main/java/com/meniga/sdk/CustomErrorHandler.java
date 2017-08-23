@@ -5,5 +5,6 @@ package com.meniga.sdk;
  */
 
 public interface CustomErrorHandler {
-    void reportAndHandle(Throwable t);
+
+	void reportAndHandle(Throwable t);
 }

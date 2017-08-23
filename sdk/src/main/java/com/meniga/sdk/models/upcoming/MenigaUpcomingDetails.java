@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingDetails implements Serializable, Parcelable, Cloneable {
+
 	private MenigaUpcomingInvoice invoice;
 	private MenigaUpcomingScheduledPayment scheduledPayment;
 

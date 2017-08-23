@@ -121,7 +121,7 @@ public class MenigaOfferMeta implements Parcelable {
 		result = 31 * result + offersActivated;
 		result = 31 * result + offersDeclined;
 		result = 31 * result + offersNotSeen;
-		result = 31 * result + (offersEnabled? 1 : 0);
+		result = 31 * result + (offersEnabled ? 1 : 0);
 		result = 31 * result + (offersEnabledTimestamp != null ? offersEnabledTimestamp.hashCode() : 0);
 		result = 31 * result + (termsAndConditionsAccepted ? 1 : 0);
 		result = 31 * result + (isReimbursementAccountValid ? 1 : 0);

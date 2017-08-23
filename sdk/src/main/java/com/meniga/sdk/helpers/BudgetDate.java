@@ -8,6 +8,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class BudgetDate implements Serializable {
+
 	private LocalDate date;
 
 	public BudgetDate(LocalDate date) {

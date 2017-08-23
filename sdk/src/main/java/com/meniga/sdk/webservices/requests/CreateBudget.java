@@ -10,17 +10,18 @@ import java.util.List;
  */
 
 public class CreateBudget extends QueryRequestObject {
-    public BudgetType type;
+
+	public BudgetType type;
 	public BudgetPeriod period;
-    public String name;
-    public String description;
-    public List<Long> accountIds;
-    public List<CreateBudgetEntry> entries;
+	public String name;
+	public String description;
+	public List<Long> accountIds;
+	public List<CreateBudgetEntry> entries;
 	public boolean isDefault;
 	public int offset;
 
-    @Override
-    public long getValueHash() {
-        return 0;
-    }
+	@Override
+	public long getValueHash() {
+		return 0;
+	}
 }

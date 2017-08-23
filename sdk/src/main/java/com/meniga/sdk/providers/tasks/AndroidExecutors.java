@@ -27,11 +27,11 @@ public class AndroidExecutors {
 	/**
 	 * Nexus 5: Quad-Core
 	 * Moto X: Dual-Core
-	 *
+	 * <p>
 	 * AsyncTask:
-	 *   CORE_POOL_SIZE = CPU_COUNT + 1
-	 *   MAX_POOL_SIZE = CPU_COUNT * 2 + 1
-	 *
+	 * CORE_POOL_SIZE = CPU_COUNT + 1
+	 * MAX_POOL_SIZE = CPU_COUNT * 2 + 1
+	 * <p>
 	 * https://github.com/android/platform_frameworks_base/commit/719c44e03b97e850a46136ba336d729f5fbd1f47
 	 */
 	private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
@@ -44,13 +44,13 @@ public class AndroidExecutors {
 	 * or create new threads until the core pool is full. tasks will then be queued. If an
 	 * task cannot be queued, a new thread will be created unless this would exceed max pool
 	 * size, then the task will be rejected. Threads will time out after 1 second.
-	 *
+	 * <p>
 	 * Core thread timeout is only available on android-9+.
 	 *
 	 * @return the newly created thread pool
 	 */
 	public static ExecutorService newCachedThreadPool() {
-		ThreadPoolExecutor executor =  new ThreadPoolExecutor(
+		ThreadPoolExecutor executor = new ThreadPoolExecutor(
 				CORE_POOL_SIZE,
 				MAX_POOL_SIZE,
 				KEEP_ALIVE_TIME, TimeUnit.SECONDS,
@@ -66,14 +66,14 @@ public class AndroidExecutors {
 	 * or create new threads until the core pool is full. tasks will then be queued. If an
 	 * task cannot be queued, a new thread will be created unless this would exceed max pool
 	 * size, then the task will be rejected. Threads will time out after 1 second.
-	 *
+	 * <p>
 	 * Core thread timeout is only available on android-9+.
 	 *
 	 * @param threadFactory the factory to use when creating new threads
 	 * @return the newly created thread pool
 	 */
 	public static ExecutorService newCachedThreadPool(ThreadFactory threadFactory) {
-		ThreadPoolExecutor executor =  new ThreadPoolExecutor(
+		ThreadPoolExecutor executor = new ThreadPoolExecutor(
 				CORE_POOL_SIZE,
 				MAX_POOL_SIZE,
 				KEEP_ALIVE_TIME, TimeUnit.SECONDS,
@@ -88,11 +88,11 @@ public class AndroidExecutors {
 	/**
 	 * Compatibility helper function for
 	 * {@link java.util.concurrent.ThreadPoolExecutor#allowCoreThreadTimeOut(boolean)}
-	 *
+	 * <p>
 	 * Only available on android-9+.
 	 *
 	 * @param executor the {@link java.util.concurrent.ThreadPoolExecutor}
-	 * @param value true if should time out, else false
+	 * @param value    true if should time out, else false
 	 */
 	@SuppressLint("NewApi")
 	public static void allowCoreThreadTimeout(ThreadPoolExecutor executor, boolean value) {
@@ -110,6 +110,7 @@ public class AndroidExecutors {
 	 * An {@link java.util.concurrent.Executor} that runs tasks on the UI thread.
 	 */
 	private static class UIThreadExecutor implements Executor {
+
 		@Override
 		public void execute(Runnable command) {
 			new Handler(Looper.getMainLooper()).post(command);

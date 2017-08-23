@@ -10,6 +10,7 @@ import java.util.Map;
  */
 
 public class GetRedemptions extends QueryRequestObject {
+
 	public Integer skip;
 	public Integer take;
 	public DateTime dateFrom;
@@ -18,16 +19,16 @@ public class GetRedemptions extends QueryRequestObject {
 	@Override
 	public Map<String, String> toQueryMap() {
 		Map<String, String> map = new HashMap<>();
-		if(this.dateFrom != null) {
+		if (this.dateFrom != null) {
 			map.put("dateFrom", this.dateFrom.toString());
 		}
-		if(this.dateTo != null) {
+		if (this.dateTo != null) {
 			map.put("dateTo", this.dateTo.toString());
 		}
-		if(this.skip != null) {
+		if (this.skip != null) {
 			map.put("skip", Integer.toString(this.skip));
 		}
-		if(this.take != null) {
+		if (this.take != null) {
 			map.put("take", Integer.toString(this.take));
 		}
 		return map;

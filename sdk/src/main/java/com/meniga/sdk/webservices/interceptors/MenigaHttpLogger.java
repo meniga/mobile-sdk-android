@@ -28,6 +28,7 @@ import okio.BufferedSource;
  * An OkHttp interceptor that logs requests and responses. Supports logging headers and/or body.
  */
 public class MenigaHttpLogger implements Interceptor {
+
 	private static final Charset UTF8 = Charset.forName("UTF-8");
 	private static final String REQUEST_START = " Request Start ----> ";
 	private static final String RESPONSE_START = "Response Start ----> ";
@@ -41,7 +42,7 @@ public class MenigaHttpLogger implements Interceptor {
 	private final LogType logType;
 
 	public MenigaHttpLogger(String tag, LogLevel logLevel, LogType logType) {
-		if(tag != null && tag.length() > 0) {
+		if (tag != null && tag.length() > 0) {
 			this.tag = tag;
 		}
 		this.logLevel = logLevel;
@@ -95,7 +96,7 @@ public class MenigaHttpLogger implements Interceptor {
 
 		if (!logBody) {
 			log(REQUEST_END + request.method());
-		} else if(!hasRequestBody) {
+		} else if (!hasRequestBody) {
 			log(BODY);
 			log(NO_BODY);
 		} else if (bodyEncoded(request.headers())) {
@@ -148,7 +149,7 @@ public class MenigaHttpLogger implements Interceptor {
 
 		if (!logBody) {
 			log(RESPONSE_END);
-		} else if(!HttpHeaders.hasBody(response)) {
+		} else if (!HttpHeaders.hasBody(response)) {
 			log(BODY);
 			log(NO_BODY);
 			log(RESPONSE_END);
@@ -199,18 +200,18 @@ public class MenigaHttpLogger implements Interceptor {
 	}
 
 	static boolean isPlaintext(Buffer buffer) throws EOFException {
-			Buffer prefix = new Buffer();
-			long byteCount = buffer.size() < 64 ? buffer.size() : 64;
-			buffer.copyTo(prefix, 0, byteCount);
-			for (int i = 0; i < 16; i++) {
-				if (prefix.exhausted()) {
-					break;
-				}
-				if (Character.isISOControl(prefix.readUtf8CodePoint())) {
-					return false;
-				}
+		Buffer prefix = new Buffer();
+		long byteCount = buffer.size() < 64 ? buffer.size() : 64;
+		buffer.copyTo(prefix, 0, byteCount);
+		for (int i = 0; i < 16; i++) {
+			if (prefix.exhausted()) {
+				break;
 			}
-			return true;
+			if (Character.isISOControl(prefix.readUtf8CodePoint())) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private void log(String msg) {

@@ -14,15 +14,15 @@ import java.io.Serializable;
  */
 public class MenigaReimbursementAccount implements Serializable, Parcelable {
 
-    protected static MenigaReimbursementAccountOperations apiOperator;
+	protected static MenigaReimbursementAccountOperations apiOperator;
 
-    protected transient long id;
-    protected transient boolean isActive;
-    protected transient boolean isVerified;
+	protected transient long id;
+	protected transient boolean isActive;
+	protected transient boolean isVerified;
 
-    protected String name;
-    protected String accountType;
-    protected String accountInfo;
+	protected String name;
+	protected String accountType;
+	protected String accountInfo;
 
 	protected MenigaReimbursementAccount() {
 	}
@@ -36,48 +36,48 @@ public class MenigaReimbursementAccount implements Serializable, Parcelable {
 		accountInfo = in.readString();
 	}
 
-    public static void setOperator(MenigaReimbursementAccountOperations apiOperator) {
-        MenigaReimbursementAccount.apiOperator = apiOperator;
-        MenigaReimbursementAccountType.setOperator(apiOperator);
-    }
+	public static void setOperator(MenigaReimbursementAccountOperations apiOperator) {
+		MenigaReimbursementAccount.apiOperator = apiOperator;
+		MenigaReimbursementAccountType.setOperator(apiOperator);
+	}
 
-    public long getId() {
-        return id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public boolean isActive() {
-        return isActive;
-    }
+	public boolean isActive() {
+		return isActive;
+	}
 
-    public boolean isVerified() {
-        return isVerified;
-    }
+	public boolean isVerified() {
+		return isVerified;
+	}
 
-    public MenigaOfferAccountInfo getAccountInfo() {
-        Gson gson = new Gson();
-	    return gson.fromJson(accountInfo, MenigaOfferAccountInfo.class);
-    }
+	public MenigaOfferAccountInfo getAccountInfo() {
+		Gson gson = new Gson();
+		return gson.fromJson(accountInfo, MenigaOfferAccountInfo.class);
+	}
 
-    public void setAccountInfo(MenigaOfferAccountInfo accountInfo) {
-        Gson gson = new Gson();
-	    this.accountInfo = gson.toJson(accountInfo);
-    }
+	public void setAccountInfo(MenigaOfferAccountInfo accountInfo) {
+		Gson gson = new Gson();
+		this.accountInfo = gson.toJson(accountInfo);
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getAccountType() {
-        return accountType;
-    }
+	public String getAccountType() {
+		return accountType;
+	}
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 
 	@Override
 	public int describeContents() {
@@ -150,15 +150,15 @@ public class MenigaReimbursementAccount implements Serializable, Parcelable {
 	API methods below
 	 */
 
-    /**
-     * Get a reimbursement account by it's id
-     *
-     * @param id of the reimbursement account to be fetched
-     * @return A reimbursement account
-     */
-    public static Result<MenigaReimbursementAccount> fetch(int id) {
-        return MenigaReimbursementAccount.apiOperator.getReimbursementAccountById(id);
-    }
+	/**
+	 * Get a reimbursement account by it's id
+	 *
+	 * @param id of the reimbursement account to be fetched
+	 * @return A reimbursement account
+	 */
+	public static Result<MenigaReimbursementAccount> fetch(int id) {
+		return MenigaReimbursementAccount.apiOperator.getReimbursementAccountById(id);
+	}
 
 	/**
 	 * Get a reimbursement account with default query values
@@ -169,22 +169,22 @@ public class MenigaReimbursementAccount implements Serializable, Parcelable {
 		return MenigaReimbursementAccount.apiOperator.getReimbursementAccounts(false);
 	}
 
-    /**
-     * Get a reimbursement account by it's id
-     *
-     * @param includeInactive include inactive reimbursement accounts?
-     * @return List of matching reimbursement accounts
-     */
-    public static Result<MenigaReimbursementAccountPage> fetch(Boolean includeInactive) {
-        return MenigaReimbursementAccount.apiOperator.getReimbursementAccounts(includeInactive);
-    }
+	/**
+	 * Get a reimbursement account by it's id
+	 *
+	 * @param includeInactive include inactive reimbursement accounts?
+	 * @return List of matching reimbursement accounts
+	 */
+	public static Result<MenigaReimbursementAccountPage> fetch(Boolean includeInactive) {
+		return MenigaReimbursementAccount.apiOperator.getReimbursementAccounts(includeInactive);
+	}
 
 	/**
 	 * Add a reimbursement account. Only one active reimbursement account per user is allowed.
 	 * Therefore, when a reimbursement account is added all existing active reimbursement accounts
 	 * are deactivated.
 	 *
-	 * @param name The name given to the account
+	 * @param name        The name given to the account
 	 * @param accountInfo The account information related to the account
 	 * @return A reimbursement account
 	 */

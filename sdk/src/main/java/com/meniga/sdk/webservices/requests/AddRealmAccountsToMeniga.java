@@ -9,11 +9,11 @@ import java.util.List;
  */
 public class AddRealmAccountsToMeniga extends QueryRequestObject {
 
-    public transient long realmUserId;
-    public List<MenigaRealmAccount> realmAccounts;
+	public transient long realmUserId;
+	public List<MenigaRealmAccount> realmAccounts;
 
-    @Override
-    public long getValueHash() {
-        return 0;
-    }
+	@Override
+	public long getValueHash() {
+		return 0;
+	}
 }

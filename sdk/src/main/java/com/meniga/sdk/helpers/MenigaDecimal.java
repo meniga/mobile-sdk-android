@@ -11,12 +11,14 @@ import java.math.RoundingMode;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaDecimal implements Serializable, Comparable {
+
 	public static MenigaDecimal ZERO = new MenigaDecimal(0);
 
 	private BigDecimal number;
 
 	/**
 	 * Expects US locale for decimal format. Decimal symbol is '.'
+	 *
 	 * @param str decimal number represented in us local fx. 5.4
 	 */
 	public MenigaDecimal(String str) {

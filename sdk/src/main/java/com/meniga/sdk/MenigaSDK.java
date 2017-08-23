@@ -77,7 +77,7 @@ public class MenigaSDK {
 	private static MenigaSettings settings;
 	private static Map<String, WebClient> clients;
 
-    @Inject
+	@Inject
 	MenigaTransactionOperations transactionOperator;
 	@Inject
 	MenigaAccountOperations accountOperator;
@@ -144,12 +144,12 @@ public class MenigaSDK {
 
 		MenigaTransaction.setOperator(transactionOperator);
 		MenigaAccount.setOperator(accountOperator);
-        MenigaTag.setOperator(tagOperator);
-        MenigaSync.setOperator(syncOperator);
-        MenigaFeed.setOperator(feedOperator);
-        MenigaUserProfile.setOperator(userProfileOperator);
-        MenigaCategory.setOperator(categoryOperations);
-        MenigaUserCategory.setOperator(categoryOperations);
+		MenigaTag.setOperator(tagOperator);
+		MenigaSync.setOperator(syncOperator);
+		MenigaFeed.setOperator(feedOperator);
+		MenigaUserProfile.setOperator(userProfileOperator);
+		MenigaCategory.setOperator(categoryOperations);
+		MenigaUserCategory.setOperator(categoryOperations);
 		MenigaTransactionSeries.setOperator(transactionSeriesOperator);
 		MenigaComment.setOperator(commentsOperator);
 		MenigaUser.setOperator(userOperator);
@@ -158,10 +158,10 @@ public class MenigaSDK {
 		MenigaOffersSettings.setOperator(offerOperator);
 		MenigaReimbursementAccount.setOperator(reimbursementAccountOperations);
 		MenigaNetWorth.setOperator(netWorthOperator);
-        MenigaTransactionRule.setOperator(transactionRuleOperator);
-        MenigaNetWorthBalance.setOperator(netWorthBalanceOperations);
-        MenigaMerchant.setOperator(merchantOperations);
-        MenigaTopMerchant.setOperator(merchantTopOperations);
+		MenigaTransactionRule.setOperator(transactionRuleOperator);
+		MenigaNetWorthBalance.setOperator(netWorthBalanceOperations);
+		MenigaMerchant.setOperator(merchantOperations);
+		MenigaTopMerchant.setOperator(merchantTopOperations);
 		MenigaPublicSettings.setOperator(publicOperations);
 		MenigaTerms.setOperator(termsOperations);
 		MenigaUpcoming.setOperator(upcomingOperations);
@@ -179,8 +179,8 @@ public class MenigaSDK {
 	 * @param settings MenigaServerSettings object that has all the required settings set.
 	 */
 	public static void init(MenigaSettings settings) {
-        MenigaSDK sdk = new MenigaSDK();
-        sdk.initInjector();
+		MenigaSDK sdk = new MenigaSDK();
+		sdk.initInjector();
 
 		DateTimeZone.setDefault(DateTimeZone.UTC);
 
@@ -193,7 +193,7 @@ public class MenigaSDK {
 		}
 		MenigaSDK.persistenceDelegate.setProvider(provider);
 		MenigaSDK.persistenceDelegate.setApis(WebClient.createApiInterfaces(settings));
-    }
+	}
 
 	/**
 	 * Clears all settings and flat and resets the SDK.

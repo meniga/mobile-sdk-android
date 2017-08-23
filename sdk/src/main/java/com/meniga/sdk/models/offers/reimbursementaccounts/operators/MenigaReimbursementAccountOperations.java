@@ -10,7 +10,7 @@ import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAcc
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaReimbursementAccountOperations {
-    Result<MenigaReimbursementAccount> createOfferAccount(String name, String accountType, MenigaOfferAccountInfo accountInfo);
+	Result<MenigaReimbursementAccount> createOfferAccount(String name, String accountType, MenigaOfferAccountInfo accountInfo);
 
 	Result<MenigaReimbursementAccountPage> getReimbursementAccounts(Boolean includeInactive);
 

@@ -41,8 +41,7 @@ public class MenigaUserEventsOperationsImp implements MenigaUserEventsOperations
 		SetSubscriptionSettings req = new SetSubscriptionSettings();
 
 		req.subscriptionSettings = new ArrayList<>();
-		for (Map.Entry<String, String> entry : subscriptionSettings.entrySet())
-		{
+		for (Map.Entry<String, String> entry : subscriptionSettings.entrySet()) {
 			SetSubscriptionSettings.SubscriptionSettings ss = new SetSubscriptionSettings.SubscriptionSettings();
 			ss.identifier = entry.getKey();
 			ss.value = entry.getValue();

@@ -10,8 +10,8 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaOrganizationOperationsImp implements MenigaOrganizationOperations {
-    @Override
-    public Result<List<MenigaOrganization>> getOrganizations() {
-        return MenigaSDK.executor().getOrganizations();
-    }
+	@Override
+	public Result<List<MenigaOrganization>> getOrganizations() {
+		return MenigaSDK.executor().getOrganizations();
+	}
 }

@@ -16,36 +16,37 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaRealmOperationsImp implements MenigaRealmOperations {
-    @Override
-    public Result<MenigaRealmAuthResponse> performBankAuthenticationStep(long id, List<MenigaRealmAuthParameter> authPars, String userId) {
-        GetRealmAuthMethod req = new GetRealmAuthMethod();
-        req.id = id;
-        if (authPars != null && authPars.size() > 0) {
-            List<MenigaRealmAuthParameter.SimpleAuthParameter> pars = new ArrayList<>();
-            for (MenigaRealmAuthParameter par : authPars) {
-                pars.add(par.getSimpleParameter());
-            }
-            req.parameters = pars;
-            req.saveDetails = true;
-        }
-        req.realmUserIdentifier = userId;
-        return MenigaSDK.executor().performBankAuthenticationStep(req);
-    }
 
-    @Override
-    public Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId) {
-        GetRealmAccounts req = new GetRealmAccounts();
-        req.realmUserId = realmUserId;
+	@Override
+	public Result<MenigaRealmAuthResponse> performBankAuthenticationStep(long id, List<MenigaRealmAuthParameter> authPars, String userId) {
+		GetRealmAuthMethod req = new GetRealmAuthMethod();
+		req.id = id;
+		if (authPars != null && authPars.size() > 0) {
+			List<MenigaRealmAuthParameter.SimpleAuthParameter> pars = new ArrayList<>();
+			for (MenigaRealmAuthParameter par : authPars) {
+				pars.add(par.getSimpleParameter());
+			}
+			req.parameters = pars;
+			req.saveDetails = true;
+		}
+		req.realmUserIdentifier = userId;
+		return MenigaSDK.executor().performBankAuthenticationStep(req);
+	}
 
-        return MenigaSDK.executor().getRealmAccounts(req);
-    }
+	@Override
+	public Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId) {
+		GetRealmAccounts req = new GetRealmAccounts();
+		req.realmUserId = realmUserId;
 
-    @Override
-    public Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts) {
-        AddRealmAccountsToMeniga req = new AddRealmAccountsToMeniga();
-        req.realmUserId = realmUserId;
-        req.realmAccounts = accounts;
+		return MenigaSDK.executor().getRealmAccounts(req);
+	}
 
-        return MenigaSDK.executor().addRealmAccountsToMeniga(req);
-    }
+	@Override
+	public Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts) {
+		AddRealmAccountsToMeniga req = new AddRealmAccountsToMeniga();
+		req.realmUserId = realmUserId;
+		req.realmAccounts = accounts;
+
+		return MenigaSDK.executor().addRealmAccountsToMeniga(req);
+	}
 }

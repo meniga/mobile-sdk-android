@@ -14,6 +14,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingInvoice implements Serializable, Parcelable, Cloneable {
+
 	private long id;
 	private String identifier;
 	private String bankReference;
@@ -138,7 +139,7 @@ public class MenigaUpcomingInvoice implements Serializable, Parcelable, Cloneabl
 	}
 
 	/**
-	 * @return  The custom data parsed into a dictionary of key-values
+	 * @return The custom data parsed into a dictionary of key-values
 	 */
 	public String getParsedData() {
 		return parsedData;

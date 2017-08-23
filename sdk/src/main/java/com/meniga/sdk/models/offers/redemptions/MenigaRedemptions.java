@@ -176,10 +176,9 @@ public class MenigaRedemptions extends ArrayList<MenigaRedemptionTransaction> im
 	 * Fetch redemption transactions
 	 *
 	 * @param dateFrom the inclusive transaction date to search from
-	 * @param dateTo the exlusive transaction date to search to same day as fromDate is included
-	 * @param skip number of records to skip
-	 * @param take number of records to return
-	 *
+	 * @param dateTo   the exlusive transaction date to search to same day as fromDate is included
+	 * @param skip     number of records to skip
+	 * @param take     number of records to return
 	 * @return list of redemption transactions
 	 */
 	public static Result<MenigaRedemptions> fetch(Integer skip, Integer take, DateTime dateFrom, DateTime dateTo) {
@@ -190,8 +189,7 @@ public class MenigaRedemptions extends ArrayList<MenigaRedemptionTransaction> im
 	 * Fetch redemption transactions
 	 *
 	 * @param dateFrom the inclusive transaction date to search from
-	 * @param dateTo the exlusive transaction date to search to same day as fromDate is included
-	 *
+	 * @param dateTo   the exlusive transaction date to search to same day as fromDate is included
 	 * @return list of redemption transactions
 	 */
 	public static Result<MenigaRedemptions> fetch(DateTime dateFrom, DateTime dateTo) {

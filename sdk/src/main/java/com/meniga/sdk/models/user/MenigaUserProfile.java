@@ -17,6 +17,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUserProfile implements Serializable, Parcelable, Cloneable {
+
 	public static final Parcelable.Creator<MenigaUserProfile> CREATOR = new Parcelable.Creator<MenigaUserProfile>() {
 		@Override
 		public MenigaUserProfile createFromParcel(Parcel source) {

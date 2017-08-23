@@ -7,19 +7,20 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class SetCulture extends QueryRequestObject {
-    public transient String culture;
 
-    @Override
-    public long getValueHash() {
-        return culture.hashCode();
-    }
+	public transient String culture;
 
-    @Override
-    public Map<String, String> toQueryMap() {
-        Map<String, String> map = new HashMap<>();
+	@Override
+	public long getValueHash() {
+		return culture.hashCode();
+	}
 
-        map.put("culture", culture);
+	@Override
+	public Map<String, String> toQueryMap() {
+		Map<String, String> map = new HashMap<>();
 
-        return map;
-    }
+		map.put("culture", culture);
+
+		return map;
+	}
 }

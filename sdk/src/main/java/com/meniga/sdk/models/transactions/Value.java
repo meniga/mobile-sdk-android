@@ -17,6 +17,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class Value implements Serializable, Parcelable {
+
 	public static final Creator<Value> CREATOR = new Creator<Value>() {
 		@Override
 		public Value createFromParcel(Parcel source) {

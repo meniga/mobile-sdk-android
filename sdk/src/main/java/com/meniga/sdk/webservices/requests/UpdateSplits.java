@@ -6,6 +6,7 @@ import com.meniga.sdk.helpers.MenigaDecimal;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class UpdateSplits extends QueryRequestObject {
+
 	public transient long id;
 	public MenigaDecimal amount;
 	public String text;

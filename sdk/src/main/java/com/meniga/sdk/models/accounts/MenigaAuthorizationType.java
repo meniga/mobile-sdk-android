@@ -11,6 +11,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaAuthorizationType implements Parcelable, Serializable {
+
 	public static final Creator<MenigaAuthorizationType> CREATOR = new Creator<MenigaAuthorizationType>() {
 		@Override
 		public MenigaAuthorizationType createFromParcel(Parcel source) {

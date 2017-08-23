@@ -40,9 +40,9 @@ public class MenigaUpcomingOperationsImp implements MenigaUpcomingOperations {
 
 	@Override
 	public Result<List<MenigaUpcoming>> createUpcoming(String text, MenigaDecimal amountInCurrency,
-	                                                       String currencyCode, DateTime date, Long accountId,
-	                                                       Long categoryId, Boolean isFlagged, Boolean isWatched,
-	                                                       MenigaUpcomingRecurringPattern recurringPattern) {
+	                                                   String currencyCode, DateTime date, Long accountId,
+	                                                   Long categoryId, Boolean isFlagged, Boolean isWatched,
+	                                                   MenigaUpcomingRecurringPattern recurringPattern) {
 		CreateUpcoming req = new CreateUpcoming();
 		req.text = text;
 		req.amountInCurrency = amountInCurrency;
