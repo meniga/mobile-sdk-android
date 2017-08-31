@@ -350,10 +350,15 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 	 * containing their children in this.children. Some of the entries in the list might be
 	 * of type MenigaUserCategory
 	 *
+	 * @param type Get only public categories or both public and user created at the same time
 	 * @return A list of root categories
 	 */
-	public static Result<List<MenigaCategory>> fetchTree() {
-		Result<List<MenigaCategory>> task = MenigaCategory.apiOperator.getCategoriesTree(null);
+	public static Result<List<MenigaCategory>> fetchTree(final CategoryRequest type) {
+		Boolean publicOnly = false;
+		if (type == CategoryRequest.ONLY_SYSTEM_CATEGORIES) {
+			publicOnly = true;
+		}
+		Result<List<MenigaCategory>> task = MenigaCategory.apiOperator.getCategoriesTree(publicOnly);
 		task.getTask().continueWith(new Continuation<List<MenigaCategory>, Object>() {
 			@Override
 			public Object then(Task<List<MenigaCategory>> task) throws Exception {
@@ -373,6 +378,7 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 									continue;
 								}
 								duplicateCheck.put(child.getId(), true);
+
 								root.getChildren().add(child);
 								child.parent = root;
 							}
@@ -407,26 +413,7 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 		boolean publicOnly = true;
 		if (type == CategoryRequest.ALL) {
 			publicOnly = false;
-		} else if (type == CategoryRequest.ONLY_USER_CATEGORIES) {
-			Result<List<MenigaCategory>> task = MenigaCategory.apiOperator.getCategories(false, MenigaSDK.getMenigaSettings().getCulture());
-			return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<List<MenigaCategory>>() {
-				@Override
-				public void onFinished(List<MenigaCategory> result, boolean failed) {
-					if (failed) {
-						return;
-					}
-					List<MenigaCategory> onlyUser = new ArrayList<>();
-					for (MenigaCategory cat : result) {
-						if (cat instanceof MenigaUserCategory) {
-							onlyUser.add(cat);
-						}
-					}
-					result.clear();
-					result.addAll(onlyUser);
-				}
-			});
 		}
-
 		return MenigaCategory.apiOperator.getCategories(publicOnly, MenigaSDK.getMenigaSettings().getCulture());
 	}
 
