@@ -12,7 +12,7 @@ import java.util.UUID;
 public class AcceptChallenge extends QueryRequestObject {
 
 	public UUID id;
-	public transient MenigaDecimal targetAmount;
+	public MenigaDecimal targetAmount;
 
 	@Override
 	public long getValueHash() {
@@ -21,8 +21,6 @@ public class AcceptChallenge extends QueryRequestObject {
 
 	@Override
 	public Map<String, String> toQueryMap() {
-		Map<String, String> query = new HashMap<>();
-		query.put("targetAmount", Double.toString(targetAmount.doubleValue()));
-		return query;
+		return new HashMap<>();
 	}
 }
