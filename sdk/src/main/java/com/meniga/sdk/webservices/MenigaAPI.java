@@ -41,6 +41,7 @@ import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
+import com.meniga.sdk.webservices.requests.AcceptChallenge;
 import com.meniga.sdk.webservices.requests.CreateBudget;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntries;
 import com.meniga.sdk.webservices.requests.CreateChallenge;
@@ -475,7 +476,7 @@ public interface MenigaAPI {
 	Call<MenigaChallenge> getChallenge(@Path("id") String id);
 
 	@POST(APIConst.URL_CHALLENGES + "/{id}" + APIConst.CHALLENGES_ACCEPT)
-	Call<MenigaChallenge> acceptChallenge(@Path("id") String id);
+	Call<MenigaChallenge> acceptChallenge(@Body AcceptChallenge req, @Path("id") String id);
 
 	@DELETE(APIConst.URL_CHALLENGES + "/{id}")
 	Call<Void> deleteChallenge(@Path("id") String id);

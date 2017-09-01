@@ -637,7 +637,7 @@ public class PersistenceDelegate {
 	}
 
 	public Result<MenigaChallenge> acceptChallenge(AcceptChallenge req) {
-		return persist(req, getClient(Service.CHALLENGES).acceptChallenge(req.id.toString()));
+		return persist(req, getClient(Service.CHALLENGES).acceptChallenge(req, req.id.toString()));
 	}
 
 	public Result<Void> deleteChallenge(DeleteChallenge req) {
