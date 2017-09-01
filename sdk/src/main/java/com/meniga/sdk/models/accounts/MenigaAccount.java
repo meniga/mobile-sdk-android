@@ -67,7 +67,7 @@ public class MenigaAccount extends StateObject implements Parcelable, Serializab
 	protected boolean inactive;
 	protected DateTime attachedToUserDate;
 	protected boolean isHidden;
-	protected transient boolean isDisabled;
+	protected boolean isDisabled;
 	protected List<MetaData> metadata;
 
 	protected MenigaAccount() {
