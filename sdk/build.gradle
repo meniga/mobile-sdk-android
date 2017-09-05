@@ -7,7 +7,8 @@ apply plugin: 'com.jfrog.artifactory'
 if (project.hasProperty('artifactory_username') && (file("./publish.gradle").exists())) {
     apply from: 'publish.gradle'
 }
-if (project.hasProperty('bintray_user') && (file("./bintray.gradle").exists())) {
+
+if (project.hasProperty('bintray_user') && (file("../bintray.gradle").exists())) {
     apply from: "../bintray.gradle"
 }
 
