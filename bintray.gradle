@@ -1,6 +1,9 @@
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
+
+logger.info("BINTRAY " + project.libraryVersion)
+
 publishing {
     publications {
         Production(MavenPublication) {

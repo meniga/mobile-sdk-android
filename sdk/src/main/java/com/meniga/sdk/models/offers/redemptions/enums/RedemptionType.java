@@ -28,7 +28,7 @@ public enum RedemptionType implements Serializable {
 	PART_OVER_MAX_ON_OFFER,
 	@SerializedName("PartOverMaxOfferRefundAmount")
 	PART_OVER_MAX_OFFER_REFUND_AMOUNT,
-	@SerializedName("PartUnderMinAccumulated")
+	@SerializedName("PartUnderMinAccumulatedAmount")
 	PART_UNDER_MIN_ACCUMULATED,
 	@SerializedName("PartAccumulated")
 	PART_ACCUMULATED,
@@ -36,7 +36,7 @@ public enum RedemptionType implements Serializable {
 	PART_REFUND_NETTED,
 	@SerializedName("ZeroUnderMinPurchaseAmount")
 	ZERO_UNDER_MIN_PURCHASE_AMOUNT,
-	@SerializedName("ZeroOverMaxOffer")
+	@SerializedName("ZeroOverMaxOnOffer")
 	ZERO_OVER_MAX_ON_OFFER,
 	@SerializedName("ZeroOverMaxOfferRefundAmount")
 	ZERO_OVER_MAX_OFFER_REFUND_AMOUNT,
@@ -46,6 +46,8 @@ public enum RedemptionType implements Serializable {
 	ZERO_UNDER_MIN_ACCUMULATED_AMOUNT,
 	@SerializedName("ZeroOtherOffer")
 	ZERO_OTHER_OFFER,
+	@SerializedName("ZeroAccountType")
+	ZERO_ACCOUNT_TYPE,
 	@SerializedName("ZeroAccumulated")
 	ZERO_ACCUMULATED,
 	@SerializedName("ZeroRefundNetted")
