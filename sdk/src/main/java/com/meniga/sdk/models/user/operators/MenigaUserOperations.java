@@ -15,4 +15,6 @@ public interface MenigaUserOperations {
 	Result<Void> setCulture(String culture);
 
 	Result<MenigaUser> registerUser(String email, String password, String culture);
+
+    Result<Void> forgotPassword(String email);
 }

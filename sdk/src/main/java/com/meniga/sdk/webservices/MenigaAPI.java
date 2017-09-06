@@ -53,6 +53,7 @@ import com.meniga.sdk.webservices.requests.CreateTransaction;
 import com.meniga.sdk.webservices.requests.CreateTransactionRule;
 import com.meniga.sdk.webservices.requests.CreateUpcoming;
 import com.meniga.sdk.webservices.requests.CreateUserCategory;
+import com.meniga.sdk.webservices.requests.ForgotPassword;
 import com.meniga.sdk.webservices.requests.GetRealmAuthMethod;
 import com.meniga.sdk.webservices.requests.GetTopMerchants;
 import com.meniga.sdk.webservices.requests.GetTransactionSeries;
@@ -273,6 +274,9 @@ public interface MenigaAPI {
 
 	@POST(APIConst.URL_ME + APIConst.REGISTER)
 	Call<MenigaUser> registerUser(@Body RegisterUser newUser);
+
+	@POST(APIConst.URL_ME + APIConst.PASSWORD + APIConst.FORGOT)
+	Call<Void> forgotPassword(@Body ForgotPassword req);
 
 	// --
 	// Categories

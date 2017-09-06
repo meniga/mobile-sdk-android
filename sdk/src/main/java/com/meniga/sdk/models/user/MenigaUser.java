@@ -70,7 +70,7 @@ public class MenigaUser implements Serializable, Parcelable, Cloneable {
 	 * @param operator An object that implements the MenigaUserOperations interface for carrying out api operations on this class.
 	 */
 	public static void setOperator(MenigaUserOperations operator) {
-		MenigaUser.apiOperator = operator;
+		apiOperator = operator;
 	}
 
 	@Override
@@ -193,14 +193,18 @@ public class MenigaUser implements Serializable, Parcelable, Cloneable {
 	 * @return A task containing a list of the current user as well as all conntected users
 	 */
 	public static Result<List<MenigaUser>> fetch() {
-		return MenigaUser.apiOperator.getUsers();
+		return apiOperator.getUsers();
 	}
 
 	public static Result<Void> setCulture(String culture) {
-		return MenigaUser.apiOperator.setCulture(culture);
+		return apiOperator.setCulture(culture);
 	}
 
 	public static Result<MenigaUser> create(String email, String password, String culture) {
-		return MenigaUser.apiOperator.registerUser(email, password, culture);
+		return apiOperator.registerUser(email, password, culture);
+	}
+
+	public static Result<Void> forgotPassword(String email) {
+		return apiOperator.forgotPassword(email);
 	}
 }
