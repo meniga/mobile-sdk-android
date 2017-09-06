@@ -358,7 +358,7 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 		if (type == CategoryRequest.ONLY_SYSTEM_CATEGORIES) {
 			publicOnly = true;
 		}
-		Result<List<MenigaCategory>> task = MenigaCategory.apiOperator.getCategoriesTree(publicOnly);
+		Result<List<MenigaCategory>> task = MenigaCategory.apiOperator.getCategoriesTree(publicOnly, MenigaSDK.getMenigaSettings().getCulture());
 		task.getTask().continueWith(new Continuation<List<MenigaCategory>, Object>() {
 			@Override
 			public Object then(Task<List<MenigaCategory>> task) throws Exception {
@@ -424,6 +424,6 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 	 * @return The category object
 	 */
 	public static Result<MenigaCategory> fetch(long id) {
-		return MenigaCategory.apiOperator.getCategoryById(id);
+		return MenigaCategory.apiOperator.getCategoryById(id, MenigaSDK.getMenigaSettings().getCulture());
 	}
 }
