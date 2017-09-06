@@ -393,7 +393,7 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.CATEGORIES).getCategoryById(req.categoryId));
+		return persist(req, getClient(Service.CATEGORIES).getCategoryById(req.categoryId, req.toQueryMap()));
 	}
 
 	public Result<MenigaUserCategory> createUserCategory(CreateUserCategory req) {

@@ -281,7 +281,7 @@ public interface MenigaAPI {
 	Call<List<MenigaCategory>> getCategories(@QueryMap Map<String, String> queryMap);
 
 	@GET(APIConst.URL_CATEGORIES + "/{id}")
-	Call<MenigaCategory> getCategoryById(@Path("id") long categoryId);
+	Call<MenigaCategory> getCategoryById(@Path("id") long categoryId, @QueryMap Map<String, String> queryMap);
 
 	@POST(APIConst.URL_CATEGORIES)
 	Call<MenigaUserCategory> createUserCategory(@Body CreateUserCategory req);

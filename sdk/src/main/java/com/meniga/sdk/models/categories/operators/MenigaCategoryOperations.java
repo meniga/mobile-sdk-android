@@ -14,7 +14,7 @@ public interface MenigaCategoryOperations {
 
 	Result<List<MenigaCategory>> getCategories(Boolean publicOnly, String culture);
 
-	Result<MenigaCategory> getCategoryById(long id);
+	Result<MenigaCategory> getCategoryById(long id, String culture);
 
 	Result<MenigaUserCategory> createUserCategory(String name, boolean isFixedExpenses, CategoryType categoryType, Long parentId);
 
@@ -22,5 +22,5 @@ public interface MenigaCategoryOperations {
 
 	Result<Void> updateUserCategory(long id, String name, Boolean isFixedExpenses, CategoryType categoryType, Long parentCategoryId);
 
-	Result<List<MenigaCategory>> getCategoriesTree(Boolean publicOnly);
+	Result<List<MenigaCategory>> getCategoriesTree(Boolean publicOnly, String culture);
 }

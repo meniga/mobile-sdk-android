@@ -27,17 +27,19 @@ public class MenigaCategoryOperationsImp implements MenigaCategoryOperations {
 	}
 
 	@Override
-	public Result<List<MenigaCategory>> getCategoriesTree(Boolean publicOnly) {
+	public Result<List<MenigaCategory>> getCategoriesTree(Boolean publicOnly, String culture) {
 		GetCategories req = new GetCategories();
 		req.isPublic = publicOnly;
 		req.flat = false;
+		req.culture = culture;
 		return MenigaSDK.executor().getCategories(req);
 	}
 
 	@Override
-	public Result<MenigaCategory> getCategoryById(long id) {
+	public Result<MenigaCategory> getCategoryById(long id, String culture) {
 		GetCategoryById req = new GetCategoryById();
 		req.categoryId = id;
+		req.culture = culture;
 		return MenigaSDK.executor().getCategoryById(req);
 	}
 
