@@ -434,6 +434,10 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.USERS).registerUser(req));
 	}
 
+	public Result<Void> forgotPassword(ForgotPassword req) {
+		return persist(req, getClient(Service.USERS).forgotPassword(req));
+	}
+
 	// --
 	// Offers
 	// --

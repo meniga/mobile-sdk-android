@@ -3,6 +3,7 @@ package com.meniga.sdk.models.user.operators;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.user.MenigaUser;
+import com.meniga.sdk.webservices.requests.ForgotPassword;
 import com.meniga.sdk.webservices.requests.GetUsers;
 import com.meniga.sdk.webservices.requests.RegisterUser;
 import com.meniga.sdk.webservices.requests.SetCulture;
@@ -13,7 +14,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUserOperationsImp implements MenigaUserOperations {
-
 	@Override
 	public Result<List<MenigaUser>> getUsers() {
 		return MenigaSDK.executor().getUsers(new GetUsers());
@@ -33,5 +33,12 @@ public class MenigaUserOperationsImp implements MenigaUserOperations {
 		register.password = password;
 		register.culture = culture;
 		return MenigaSDK.executor().registerUser(register);
+	}
+
+	@Override
+	public Result<Void> forgotPassword(String email) {
+		ForgotPassword req = new ForgotPassword();
+		req.email = email;
+		return MenigaSDK.executor().forgotPassword(req);
 	}
 }
