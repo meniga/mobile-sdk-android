@@ -11,7 +11,7 @@ public class GetRealmAuthMethod extends QueryRequestObject {
 
 	public transient long id;
 	public List<MenigaRealmAuthParameter.SimpleAuthParameter> parameters;
-	public boolean saveDetails;
+	public Boolean saveDetails;
 	public String realmUserIdentifier;
 
 	@Override

@@ -22,7 +22,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0.12"
+        versionName "1.0.13"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard-rules.pro'
     }
