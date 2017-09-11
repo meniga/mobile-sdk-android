@@ -63,6 +63,11 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 		return this.date;
 	}
 
+	@Override
+	public DateTime getOriginalDate() {
+		return date;
+	}
+
 	public String getBody() {
 		return this.body;
 	}

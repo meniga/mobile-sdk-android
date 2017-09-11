@@ -36,11 +36,14 @@ public class MenigaCustomEvent implements MenigaFeedItem, Parcelable {
 		return (MenigaFeedItem) super.clone();
 	}
 
-	@Override
 	public DateTime getDate() {
 		return this.date;
 	}
 
+	@Override
+	public DateTime getOriginalDate() {
+		return this.date;
+	}
 
 	@Override
 	public int describeContents() {

@@ -38,8 +38,12 @@ public class MenigaAccountEvent implements MenigaFeedItem, Parcelable {
 		return messageData;
 	}
 
-	@Override
 	public DateTime getDate() {
+		return date;
+	}
+
+	@Override
+	public DateTime getOriginalDate() {
 		return date;
 	}
 
