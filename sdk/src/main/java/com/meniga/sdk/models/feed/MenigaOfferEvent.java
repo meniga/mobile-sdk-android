@@ -93,8 +93,12 @@ public class MenigaOfferEvent implements MenigaFeedItem, Serializable, Cloneable
 		return (MenigaOfferEvent) super.clone();
 	}
 
-	@Override
 	public DateTime getDate() {
+		return date;
+	}
+
+	@Override
+	public DateTime getOriginalDate() {
 		return date;
 	}
 

@@ -9,5 +9,5 @@ public interface MenigaFeedItem {
 
 	MenigaFeedItem clone() throws CloneNotSupportedException;
 
-	DateTime getDate();
+	DateTime getOriginalDate();
 }
