@@ -32,6 +32,7 @@ import com.meniga.sdk.models.organizations.MenigaOrganization;
 import com.meniga.sdk.models.organizations.MenigaRealmAccount;
 import com.meniga.sdk.models.organizations.MenigaRealmAuthResponse;
 import com.meniga.sdk.models.serverpublic.MenigaPublicSettings;
+import com.meniga.sdk.models.terms.MenigaTermType;
 import com.meniga.sdk.models.terms.MenigaTerms;
 import com.meniga.sdk.models.transactions.MenigaComment;
 import com.meniga.sdk.models.transactions.MenigaTag;
@@ -716,6 +717,31 @@ public class PersistenceDelegate {
 	}
 
 	// --
+	// Terms
+	// --
+	public Result<List<MenigaTerms>> getTerms(GetTerms req) {
+		if (provider.hasKey(req)) {
+			return createTask(provider.fetch(req));
+		}
+		return persist(req, getClient(Service.TERMS).getTerms());
+	}
+
+	public Result<List<MenigaTermType>> getTermTypes(GetTermTypes req) {
+		if (provider.hasKey(req)) {
+			return createTask(provider.fetch(req));
+		}
+		return persist(req, getClient(Service.TERMS).getTermTypes());
+	}
+
+	public Result<Void> acceptTerms(AcceptTerms req) {
+		return persist(req, getClient(Service.TERMS).acceptTerms(req.typeId));
+	}
+
+	public Result<Void> declineTerms(DeclineTerms req) {
+		return persist(req, getClient(Service.TERMS).declineTerms(req.typeId));
+	}
+
+	// --
 	// Generic
 	// --
 	Result<Object> genericRequest(HttpMethod method, String path, String body, Map<String, String> query) {
@@ -744,13 +770,6 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.PUBLIC).getPublicSettings());
 	}
 
-	public Result<List<MenigaTerms>> getTerms(GetTerms req) {
-		if (provider.hasKey(req)) {
-			return createTask(provider.fetch(req));
-		}
-		return persist(req, getClient(Service.TERMS).getTerms());
-	}
-
 	private MenigaAPI getClient(Service forService) {
 		if (!clients.containsKey(forService)) {
 			return clients.get(Service.ALL);
@@ -761,6 +780,4 @@ public class PersistenceDelegate {
 	Map<Service, MenigaAPI> getApis() {
 		return clients;
 	}
-
-
 }

@@ -28,6 +28,7 @@ import com.meniga.sdk.models.organizations.MenigaOrganization;
 import com.meniga.sdk.models.organizations.MenigaRealmAccount;
 import com.meniga.sdk.models.organizations.MenigaRealmAuthResponse;
 import com.meniga.sdk.models.serverpublic.MenigaPublicSettings;
+import com.meniga.sdk.models.terms.MenigaTermType;
 import com.meniga.sdk.models.terms.MenigaTerms;
 import com.meniga.sdk.models.transactions.MenigaComment;
 import com.meniga.sdk.models.transactions.MenigaTag;
@@ -407,6 +408,15 @@ public interface MenigaAPI {
 	@GET(APIConst.URL_TERMS)
 	Call<List<MenigaTerms>> getTerms();
 
+	@GET(APIConst.URL_TERMS + APIConst.TYPES)
+	Call<List<MenigaTermType>> getTermTypes();
+
+	@POST(APIConst.URL_TERMS + "/{typeId}/" + APIConst.ACCEPT)
+	Call<Void> acceptTerms(@Path("typeId") long typeId);
+
+	@POST(APIConst.URL_TERMS + "/{typeId}/" + APIConst.DECLINE)
+	Call<Void> declineTerms(@Path("typeId") long typeId);
+
 	// --
 	// Upcoming
 	// --
@@ -515,5 +525,4 @@ public interface MenigaAPI {
 
 	@DELETE
 	Call<Object> genericDelete(@Url String path, @QueryMap Map<String, String> query);
-
 }
