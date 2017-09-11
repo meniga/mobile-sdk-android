@@ -93,6 +93,9 @@ class APIConst {
 
 	// Terms
 	static final String URL_TERMS = "terms";
+	static final String TYPES = "/types";
+	static final String ACCEPT = "/accept";
+	static final String DECLINE = "/decline";
 
 	// Organizations
 	static final String URL_ORGANIZATIONS = "organizations";
