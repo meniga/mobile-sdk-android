@@ -3,6 +3,7 @@ package com.meniga.sdk.models.terms;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.terms.operators.MenigaTermsOperations;
 
@@ -149,11 +150,11 @@ public class MenigaTerms implements Parcelable, Serializable, Cloneable {
 	 * @return Public system settings.
 	 */
 	public static Result<List<MenigaTerms>> fetch() {
-		return MenigaTerms.apiOperator.getTerms();
+		return MenigaTerms.apiOperator.getTerms(MenigaSDK.getMenigaSettings().getCulture());
 	}
 
 	public static Result<List<MenigaTermType>> fetchTypes() {
-		return MenigaTerms.apiOperator.getTermTypes();
+		return MenigaTerms.apiOperator.getTermTypes(MenigaSDK.getMenigaSettings().getCulture());
 	}
 
 	public static Result<Void> accept(long typeId) {

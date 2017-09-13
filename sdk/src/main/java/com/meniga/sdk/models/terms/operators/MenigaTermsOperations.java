@@ -11,10 +11,9 @@ import java.util.List;
  */
 
 public interface MenigaTermsOperations {
+	Result<List<MenigaTerms>> getTerms(String culture);
 
-	Result<List<MenigaTerms>> getTerms();
-
-    Result<List<MenigaTermType>> getTermTypes();
+    Result<List<MenigaTermType>> getTermTypes(String culture);
 
     Result<Void> acceptTerms(long typeId);
 
