@@ -723,14 +723,14 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.TERMS).getTerms());
+		return persist(req, getClient(Service.TERMS).getTerms(req.culture));
 	}
 
 	public Result<List<MenigaTermType>> getTermTypes(GetTermTypes req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.TERMS).getTermTypes());
+		return persist(req, getClient(Service.TERMS).getTermTypes(req.culture));
 	}
 
 	public Result<Void> acceptTerms(AcceptTerms req) {

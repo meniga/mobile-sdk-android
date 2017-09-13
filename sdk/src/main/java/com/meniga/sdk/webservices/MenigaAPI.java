@@ -87,6 +87,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
+import retrofit2.http.Header;
 import retrofit2.http.OPTIONS;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -406,10 +407,10 @@ public interface MenigaAPI {
 	// Terms
 	// --
 	@GET(APIConst.URL_TERMS)
-	Call<List<MenigaTerms>> getTerms();
+	Call<List<MenigaTerms>> getTerms(@Header("Accept-Language") String culture);
 
 	@GET(APIConst.URL_TERMS + APIConst.TYPES)
-	Call<List<MenigaTermType>> getTermTypes();
+	Call<List<MenigaTermType>> getTermTypes(@Header("Accept-Language") String culture);
 
 	@POST(APIConst.URL_TERMS + "/{typeId}/" + APIConst.ACCEPT)
 	Call<Void> acceptTerms(@Path("typeId") long typeId);

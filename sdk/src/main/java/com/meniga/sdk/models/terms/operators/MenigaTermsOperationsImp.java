@@ -17,13 +17,17 @@ import java.util.List;
 
 public class MenigaTermsOperationsImp implements MenigaTermsOperations {
 	@Override
-	public Result<List<MenigaTerms>> getTerms() {
-		return MenigaSDK.executor().getTerms(new GetTerms());
+	public Result<List<MenigaTerms>> getTerms(String culture) {
+		GetTerms req = new GetTerms();
+		req.culture = culture;
+		return MenigaSDK.executor().getTerms(req);
 	}
 
 	@Override
-	public Result<List<MenigaTermType>> getTermTypes() {
-		return MenigaSDK.executor().getTermTypes(new GetTermTypes());
+	public Result<List<MenigaTermType>> getTermTypes(String culture) {
+		GetTermTypes req = new GetTermTypes();
+		req.culture = culture;
+		return MenigaSDK.executor().getTermTypes(req);
 	}
 
 	@Override
