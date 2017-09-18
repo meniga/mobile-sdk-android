@@ -16,13 +16,11 @@ import java.util.Locale;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable {
-
 	public static final Creator<MenigaPublicSettings> CREATOR = new Creator<MenigaPublicSettings>() {
 		@Override
 		public MenigaPublicSettings createFromParcel(Parcel source) {
 			return new MenigaPublicSettings(source);
 		}
-
 		@Override
 		public MenigaPublicSettings[] newArray(int size) {
 			return new MenigaPublicSettings[size];
@@ -36,6 +34,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 	protected String systemCurrency;
 	protected String numberFormat;
 	protected String currencyFormat;
+	protected String currencyFormatUsingCode;
 	protected String clusterNodeName;
 	protected int currencyRoundOff;
 	protected int currencyDecimalDigits;
@@ -52,6 +51,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 		this.systemCurrency = in.readString();
 		this.numberFormat = in.readString();
 		this.currencyFormat = in.readString();
+		this.currencyFormatUsingCode = in.readString();
 		this.clusterNodeName = in.readString();
 		this.currencyRoundOff = in.readInt();
 		this.currencyDecimalDigits = in.readInt();
@@ -86,6 +86,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 		dest.writeString(this.systemCurrency);
 		dest.writeString(this.numberFormat);
 		dest.writeString(this.currencyFormat);
+		dest.writeString(this.currencyFormatUsingCode);
 		dest.writeString(this.clusterNodeName);
 		dest.writeInt(this.currencyRoundOff);
 		dest.writeInt(this.currencyDecimalDigits);
@@ -121,6 +122,13 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 	 */
 	public String getCurrencyFormat() {
 		return currencyFormat;
+	}
+
+	/**
+	 * @return The currency format using currency code instead of symbol
+	 */
+	public String getCurrencyFormatUsingCode() {
+		return currencyFormatUsingCode;
 	}
 
 	/**
@@ -228,12 +236,30 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 	 * @param currencyCode The currency code to retrieve the correct currency format
 	 * @return The currency format in java format for the currency code requested
 	 */
-	public String getJavaFormatForCurrency(String currencyCode) {
+
+	/**
+	 * Converts the currency format into a java format-able string. The server format is in C# format
+	 *
+	 * @param currencyCode The currency code to retrieve the correct currency format
+	 * @param useCurrencyCode Whether to use currency symbol (e.g. $) or currency code (e.g. USD)
+	 * @return The currency format in java format for the currency code requested
+	 */
+	public String getJavaFormatForCurrency(String currencyCode, boolean useCurrencyCode) {
 		MenigaCurrency currency = findCurrency(currencyCode);
 		String format = currencyFormat;
 		if (currency != null) {
-			format = currency.getCurrencyFormat();
+			if (useCurrencyCode) {
+				format = currency.getCurrencyFormatUsingCode();
+			} else {
+				format = currency.getCurrencyFormat();
+			}
+		} else if (useCurrencyCode) {
+			if (currencyFormatUsingCode == null || currencyFormatUsingCode.length() == 0) {
+				currencyFormatUsingCode = currencyFormat.replace(getCurrencySymbol(currencyCode), currencyCode);
+			}
+			format = currencyFormatUsingCode;
 		}
+
 
 		if (format == null) {
 			if (currency != null && currency.getCode() != null) {
@@ -294,6 +320,9 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 		if (currencyFormat != null ? !currencyFormat.equals(that.currencyFormat) : that.currencyFormat != null) {
 			return false;
 		}
+		if (currencyFormatUsingCode != null ? !currencyFormatUsingCode.equals(that.currencyFormatUsingCode) : that.currencyFormatUsingCode != null) {
+			return false;
+		}
 		if (clusterNodeName != null ? !clusterNodeName.equals(that.clusterNodeName) : that.clusterNodeName != null) {
 			return false;
 		}
@@ -315,6 +344,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 		result = 31 * result + (systemCurrency != null ? systemCurrency.hashCode() : 0);
 		result = 31 * result + (numberFormat != null ? numberFormat.hashCode() : 0);
 		result = 31 * result + (currencyFormat != null ? currencyFormat.hashCode() : 0);
+		result = 31 * result + (currencyFormatUsingCode != null ? currencyFormatUsingCode.hashCode() : 0);
 		result = 31 * result + (clusterNodeName != null ? clusterNodeName.hashCode() : 0);
 		result = 31 * result + currencyRoundOff;
 		result = 31 * result + currencyDecimalDigits;
@@ -326,7 +356,6 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 	}
 
 	private static class MenigaCurrency implements Parcelable, Serializable {
-
 		public static final Creator<MenigaCurrency> CREATOR = new Creator<MenigaCurrency>() {
 			@Override
 			public MenigaCurrency createFromParcel(Parcel source) {
@@ -345,6 +374,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 		protected String name;
 		protected String format;
 		protected String currencyFormat;
+		protected String currencyFormatUsingCode;
 		protected String provider;
 		protected Integer roundOff;
 
@@ -358,6 +388,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 			this.name = in.readString();
 			this.format = in.readString();
 			this.currencyFormat = in.readString();
+			this.currencyFormatUsingCode = in.readString();
 			this.provider = in.readString();
 			this.roundOff = (Integer) in.readValue(Integer.class.getClassLoader());
 		}
@@ -375,6 +406,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 			dest.writeString(this.name);
 			dest.writeString(this.format);
 			dest.writeString(this.currencyFormat);
+			dest.writeString(this.currencyFormatUsingCode);
 			dest.writeString(this.provider);
 			dest.writeValue(this.roundOff);
 		}
@@ -422,6 +454,20 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 		}
 
 		/**
+		 * @return The format of the currency using currency code instead of symbol
+		 */
+		public String getCurrencyFormatUsingCode() {
+			if (currencyFormatUsingCode == null) {
+				String symbol = currencyFormat.replace(" ", "");
+				for (int i = 0; i < 11; i++) {
+					symbol = symbol.replace("{" + i + "}", "");
+				}
+				currencyFormatUsingCode = currencyFormat.replace(symbol, code);
+			}
+			return currencyFormatUsingCode;
+		}
+
+		/**
 		 * @return Who gives you the information about the currency.
 		 */
 		public String getProvider() {
@@ -464,6 +510,9 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 			if (currencyFormat != null ? !currencyFormat.equals(currency.currencyFormat) : currency.currencyFormat != null) {
 				return false;
 			}
+			if (currencyFormatUsingCode != null ? !currencyFormatUsingCode.equals(currency.currencyFormatUsingCode) : currency.currencyFormatUsingCode != null) {
+				return false;
+			}
 			if (provider != null ? !provider.equals(currency.provider) : currency.provider != null) {
 				return false;
 			}
@@ -478,6 +527,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 			result = 31 * result + (name != null ? name.hashCode() : 0);
 			result = 31 * result + (format != null ? format.hashCode() : 0);
 			result = 31 * result + (currencyFormat != null ? currencyFormat.hashCode() : 0);
+			result = 31 * result + (currencyFormatUsingCode != null ? currencyFormatUsingCode.hashCode() : 0);
 			result = 31 * result + (provider != null ? provider.hashCode() : 0);
 			result = 31 * result + (roundOff != null ? roundOff.hashCode() : 0);
 			return result;
