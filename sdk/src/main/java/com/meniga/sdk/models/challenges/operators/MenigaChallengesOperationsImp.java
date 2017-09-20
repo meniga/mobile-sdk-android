@@ -76,20 +76,20 @@ public class MenigaChallengesOperationsImp implements MenigaChallengesOperations
 		UpdateChallenge req = new UpdateChallenge();
 		req.id = challenge.getId();
 
-		/*req.title = challenge.getTitle();
+		req.title = challenge.getTitle();
 		req.description = challenge.getDescription();
 		req.startDate = challenge.getStartDate();
 		req.endDate = challenge.getEndDate();
-		req.iconUrl = challenge.getIconUrl();*/
+		req.iconUrl = challenge.getIconUrl();
 
 		req.typeData = new UpdateChallenge.TypeData();
 		req.typeData.targetAmount = challenge.getTargetAmount();
 
 		if (updateCategoryIds) {
-			//req.typeData.categoryIds = challenge.getCategoryIds();
+			req.typeData.categoryIds = challenge.getCategoryIds();
 		}
 		if (challenge.getCustomChallengeColor() != null) {
-			//req.typeData.metaData = "{\"color\": \"" + challenge.getCustomChallengeColor().toColorString() + "\"}";
+			req.typeData.metaData = "{\"color\": \"" + challenge.getCustomChallengeColor().toColorString() + "\"}";
 		}
 
 		return MenigaSDK.executor().updateChallenge(req);

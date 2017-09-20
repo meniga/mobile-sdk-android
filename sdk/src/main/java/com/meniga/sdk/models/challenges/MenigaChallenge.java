@@ -30,25 +30,25 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	private static MenigaChallengesOperations apiOperations;
 
-	private UUID id;
-	private boolean accepted;
-	private DateTime acceptedDate;
-	private Long topicId;
-	private String title;
-	private String description;
-	private ChallengeType type;
-	private DateTime publishDate;
-	private DateTime startDate;
-	private DateTime endDate;
-	private List<Long> categoryIds;
-	private Integer targetPercentage;
-	private MenigaDecimal targetAmount;
-	private MenigaDecimal spentAmount;
-	private String iconUrl;
-	private ChallengeInterval recurringInterval;
+	protected UUID id;
+	protected boolean accepted;
+	protected DateTime acceptedDate;
+	protected Long topicId;
+	protected String title;
+	protected String description;
+	protected ChallengeType type;
+	protected DateTime publishDate;
+	protected DateTime startDate;
+	protected DateTime endDate;
+	protected List<Long> categoryIds;
+	protected Integer targetPercentage;
+	protected MenigaDecimal targetAmount;
+	protected MenigaDecimal spentAmount;
+	protected String iconUrl;
+	protected ChallengeInterval recurringInterval;
 	@SerializedName("color")
-	private CustomChallengeColor customChallengeColor;
-	private boolean categoryIdsDirty;
+	protected CustomChallengeColor customChallengeColor;
+	protected boolean categoryIdsDirty;
 
 	protected MenigaChallenge() {
 	}
@@ -198,6 +198,42 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	public CustomChallengeColor getCustomChallengeColor() {
 		return customChallengeColor;
+	}
+
+	public void setTitle(String titleIn) {
+		changed();
+		title = titleIn;
+	}
+
+	public void setDescription(String desc) {
+		changed();
+		description = desc;
+	}
+
+	public void setStartDate(DateTime starts) {
+		changed();
+		startDate = starts;
+	}
+
+	public void setEndDate(DateTime ends) {
+		changed();
+		endDate = ends;
+	}
+
+	public void setIconUrl(String url) {
+		changed();
+		iconUrl = url;
+	}
+
+	public void setCustomChallengeColor(CustomChallengeColor color) {
+		changed();
+		customChallengeColor = color;
+	}
+
+	public void setCategoryIds(List<Long> ids) {
+		changed();
+		categoryIds = ids;
+		categoryIdsDirty = true;
 	}
 
 	/**
