@@ -3,25 +3,18 @@ package com.meniga.sdk.models.feed;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 
 public class MenigaTransactionCountEventData implements Parcelable {
 
-	@SerializedName("TransactionId")
+
 	private long transactionId;
-	@SerializedName("MerchantId")
 	private long merchantId;
-	@SerializedName("MerchantName")
 	private String merchantName;
-	@SerializedName("TotalCount")
 	private int totalCount;
-	@SerializedName("PeriodCount")
 	private int periodCount;
-	@SerializedName("CategoryName")
 	private String categoryName;
 
 

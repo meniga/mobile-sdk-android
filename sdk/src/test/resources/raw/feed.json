@@ -4,7 +4,14 @@
       "id": 2721,
       "eventTypeIdentifier": "transactions_merchant_count",
       "actionText": "View transaction",
-      "messageData": "{\"TransactionId\":688625,\"MerchantId\":1,\"MerchantName\":\"McDonalds Regent Street\",\"TotalCount\":68,\"PeriodCount\":20,\"DisplayIconIdentifier\":\"71\",\"CategoryName\":\"Fast Food\"}",
+      "messageData": {
+        "transactionId": 2535235,
+        "merchantId": 235252,
+        "merchantName": "Flatbakan",
+        "totalCount": 11,
+        "periodCount": 30,
+        "categoryName": "Apples"
+      },
       "date": "2016-09-03T10:50:53.3717884",
       "topicId": 688625,
       "topicName": "Transaction",
@@ -317,13 +324,37 @@
       "id": 4,
       "eventTypeIdentifier": "transactions_threshold_deposit",
       "actionText": "Check Transaction",
-      "messageData": "{\"TransactionId\":45,\"Amount\":100.0,\"Description\":\"Income: Example company.\",\"CurrencyCode\":\"ISK\"}",
+      "messageData": {
+        "transactionId": 150,
+        "Amount": "5000",
+        "Description": "Pizza",
+        "CurrencyCode": "ISK"
+      },
       "date": "2017-06-30T00:00:00",
       "topicId": 275106102,
       "topicName": "Transaction",
       "title": "Money!",
       "body": "Somone got some income.",
       "typeName": "UserEventFeedItemModel"
+    },
+    {
+    "id": 6,
+    "eventTypeIdentifier": "transactions_merchant_count",
+    "actionText": "You have been here 10 times",
+    "messageData": {
+      "transactionId": 150,
+      "merchantId": 5400,
+      "merchantName": "Pizza",
+      "totalCount": 10,
+      "periodCount": 2,
+      "categoryName": "Food"
+    },
+    "date": "2017-06-30T00:00:00",
+    "topicId": 275126102,
+    "topicName": "Transaction Merchant Count",
+    "title": "You have shopped here many times",
+    "body": "You have shopped here many times",
+    "typeName": "UserEventFeedItemModel"
     }
   ],
   "meta": {

@@ -40,7 +40,7 @@ public class MenigaFeedTest {
 		feedTaskTask.waitForCompletion();
 		MenigaFeed feed = feedTaskTask.getResult();
 		Assert.assertNotNull(feed);
-		Assert.assertEquals(7,feed.size());
+		Assert.assertEquals(8, feed.size());
 		// Shut down the server. Instances cannot be reused.
 		server.shutdown();
 
