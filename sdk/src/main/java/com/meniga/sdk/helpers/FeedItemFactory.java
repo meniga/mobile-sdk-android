@@ -3,7 +3,9 @@ package com.meniga.sdk.helpers;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.meniga.sdk.MenigaSDK;
+import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
+import com.meniga.sdk.eventconverters.generic.MenigaTransactionEventConverter;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
 import com.meniga.sdk.models.feed.MenigaOfferEvent;
 import com.meniga.sdk.models.feed.MenigaScheduledEvent;
@@ -30,11 +32,7 @@ public class FeedItemFactory {
 			case "UserEventFeedItemModel":
 				String eventTypeIdentifier = element.get("eventTypeIdentifier").getAsString();
 				EventBaseConverter converter = resolveConverter(eventTypeIdentifier);
-				if (converter != null) {
-					return converter.eventConverter(element);
-				} else {
-					return gson.fromJson(element, MenigaTransactionEvent.class);
-				}
+				return converter.eventConverter(element);
 
 			case "ScheduledFeedItemModel":
 				return gson.fromJson(element, MenigaScheduledEvent.class);
@@ -58,6 +56,6 @@ public class FeedItemFactory {
 			if (converter.eventName().equals(eventName))
 				return converter;
 		}
-		return null;
+		return new MenigaTransactionEventConverter();
 	}
 }
