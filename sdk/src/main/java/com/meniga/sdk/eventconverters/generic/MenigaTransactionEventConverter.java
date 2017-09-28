@@ -5,19 +5,19 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.helpers.GsonProvider;
-import com.meniga.sdk.models.feed.MenigaAccountEvent;
-import com.meniga.sdk.models.feed.MenigaAccountEventData;
+import com.meniga.sdk.models.feed.MenigaEvent;
+import com.meniga.sdk.models.feed.MenigaTransactionEvent;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class MenigaAccountAvailableAmountEventConverter implements EventBaseConverter<MenigaAccountEvent> {
+public class MenigaTransactionEventConverter implements EventBaseConverter<MenigaTransactionEvent> {
 
 	private final String MESSAGE_DATA = "messageData";
 
 	@Override
-	public MenigaAccountEvent eventConverter(JsonElement element) {
+	public MenigaEvent eventConverter(JsonElement element) {
 		Gson gson = GsonProvider.getGsonBuilder().create();
 		JsonElement je = element.getAsJsonObject().get(MESSAGE_DATA);
 
@@ -26,16 +26,12 @@ public class MenigaAccountAvailableAmountEventConverter implements EventBaseConv
 			element.getAsJsonObject().add(MESSAGE_DATA, convertToObject(je.getAsString()));
 		}
 
-		MenigaAccountEventData data = gson.fromJson(element.getAsJsonObject().get(MESSAGE_DATA), MenigaAccountEventData.class);
-
-		MenigaAccountEvent event = gson.fromJson(element, MenigaAccountEvent.class);
-		event.setMessageData(data);
-		return event;
+		return gson.fromJson(element, MenigaTransactionEvent.class);
 	}
 
 	@Override
 	public String eventName() {
-		return "accounts_available_amount";
+		return "";
 	}
 
 	private JsonElement convertToObject(String stringified) {

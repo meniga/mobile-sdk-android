@@ -102,6 +102,7 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 		return Long.toString(this.topicId) + ": " + this.eventTypeIdentifier;
 	}
 
+
 	@Override
 	public int describeContents() {
 		return 0;
@@ -122,7 +123,6 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 		}
 	}
 
-
 	protected MenigaEvent(Parcel in) {
 		this.id = in.readLong();
 		this.topicId = in.readLong();
@@ -132,7 +132,7 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 		int tmpEventTypeIdentifier = in.readInt();
 		this.eventTypeIdentifier = tmpEventTypeIdentifier == -1 ? null : UserEventType.values()[tmpEventTypeIdentifier];
 		int messageDataSize = in.readInt();
-		this.messageData = new HashMap<>(messageDataSize);
+		this.messageData = new HashMap<String, String>(messageDataSize);
 		for (int i = 0; i < messageDataSize; i++) {
 			String key = in.readString();
 			String value = in.readString();
@@ -140,4 +140,15 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 		}
 	}
 
+	public static final Creator<MenigaEvent> CREATOR = new Creator<MenigaEvent>() {
+		@Override
+		public MenigaEvent createFromParcel(Parcel source) {
+			return new MenigaEvent(source);
+		}
+
+		@Override
+		public MenigaEvent[] newArray(int size) {
+			return new MenigaEvent[size];
+		}
+	};
 }
