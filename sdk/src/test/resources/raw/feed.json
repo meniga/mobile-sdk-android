@@ -20,6 +20,56 @@
       "typeName": "UserEventFeedItemModel"
     },
     {
+      "id": 20180624,
+      "eventTypeIdentifier": "accounts_available_amount",
+      "actionText": "View account",
+      "messageData": "{\"AccountName\":\"Private\",\"AccountCategory\":1,\"ThresholdAmountTrigger\":1500.0,\"CurrencyCode\":\"ISK\"}",
+      "date": "2017-09-27T04:44:34.4877175",
+      "topicId": 41415,
+      "topicName": "Account",
+      "title": "Private",
+      "body": "Psst, mind the balance on on this account.",
+      "typeName": "UserEventFeedItemModel",
+      "type": "UserEvents"
+    },
+    {
+      "id": 20196620,
+      "eventTypeIdentifier": "transactions_threshold_deposit",
+      "actionText": "View transaction",
+      "messageData": "{\"TransactionId\":285692440,\"Amount\":5700.0,\"Description\":\"Millifært: Dagrún Linda Garðarsdóttir\",\"CurrencyCode\":\"ISK\"}",
+      "date": "2017-09-27T00:00:00",
+      "topicId": 285692440,
+      "topicName": "Transaction",
+      "title": "Eniga Meniga!",
+      "body": "Money deposited in your account.",
+      "typeName": "UserEventFeedItemModel",
+      "type": "UserEvents"
+    },
+    {
+      "id": 2722,
+      "eventTypeIdentifier": "transactions_merchant_count",
+      "actionText": "View transaction",
+      "messageData": "{\"transactionId\":2535235,\"merchantId\":235252,\"merchantName\":\"Flatbakan\",\"totalCount\":11,\"periodCount\":30,\"categoryName\":\"Apples\"}\"",
+      "date": "2016-09-03T10:50:53.3717884",
+      "topicId": 688655,
+      "topicName": "Transaction",
+      "title": "McDonalds Regent Street",
+      "body": "That makes 20 transactions this year.",
+      "typeName": "UserEventFeedItemModel"
+    },
+    {
+      "id": 275,
+      "eventTypeIdentifier": "accounts_available_amount",
+      "actionText": "Account Available",
+      "messageData": "{\"AccountName\":\"Money\",\"AccountCategory\":1,\"ThresholdAmountTrigger\":7500.0,\"CurrencyCode\":\"ISK\"}",
+      "date": "2016-09-03T10:50:53.3717884",
+      "topicId": 688655,
+      "topicName": "Transaction",
+      "title": "Account Available",
+      "body": "more money",
+      "typeName": "UserEventFeedItemModel"
+    },
+    {
       "parentIdentifier": "32f4d621-658a-4ea3-9069-648dde847f51",
       "id": 688627,
       "amount": -29,
@@ -338,23 +388,23 @@
       "typeName": "UserEventFeedItemModel"
     },
     {
-    "id": 6,
-    "eventTypeIdentifier": "transactions_merchant_count",
-    "actionText": "You have been here 10 times",
-    "messageData": {
-      "transactionId": 150,
-      "merchantId": 5400,
-      "merchantName": "Pizza",
-      "totalCount": 10,
-      "periodCount": 2,
-      "categoryName": "Food"
-    },
-    "date": "2017-06-30T00:00:00",
-    "topicId": 275126102,
-    "topicName": "Transaction Merchant Count",
-    "title": "You have shopped here many times",
-    "body": "You have shopped here many times",
-    "typeName": "UserEventFeedItemModel"
+      "id": 6,
+      "eventTypeIdentifier": "transactions_merchant_count",
+      "actionText": "You have been here 10 times",
+      "messageData": {
+        "transactionId": 150,
+        "merchantId": 5400,
+        "merchantName": "Pizza",
+        "totalCount": 10,
+        "periodCount": 2,
+        "categoryName": "Food"
+      },
+      "date": "2017-06-30T00:00:00",
+      "topicId": 275126102,
+      "topicName": "Transaction Merchant Count",
+      "title": "You have shopped here many times",
+      "body": "You have shopped here many times",
+      "typeName": "UserEventFeedItemModel"
     }
   ],
   "meta": {
