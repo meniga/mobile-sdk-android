@@ -11,11 +11,8 @@ import com.meniga.sdk.helpers.MenigaDecimal;
  */
 public class MenigaAccountEventData implements Parcelable {
 
-	@SerializedName("AccountName")
 	private String accountName;
-	@SerializedName("AccountCategory")
 	private String accountCategory;
-	@SerializedName("ThresholdAmountTrigger")
 	private MenigaDecimal thresholdAmountTrigger;
 
 	protected MenigaAccountEventData() {

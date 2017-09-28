@@ -9,15 +9,16 @@ import android.os.Parcelable;
 
 public class MenigaTransactionCountEvent extends MenigaTransactionEvent implements MenigaFeedItem, Parcelable {
 
-	private transient MenigaTransactionCountEventData messageData;
+	private MenigaTransactionCountEventData countEventData;
 
-	public MenigaTransactionCountEventData getTransactionCountEventData() {
-		return messageData;
+	public MenigaTransactionCountEvent() {
 	}
 
-	public void setMessageData(MenigaTransactionCountEventData messageData) {
-		this.messageData = messageData;
+
+	public void setMessageData(MenigaTransactionCountEventData countEventData) {
+		this.countEventData = countEventData;
 	}
+
 
 	@Override
 	public int describeContents() {
@@ -27,15 +28,12 @@ public class MenigaTransactionCountEvent extends MenigaTransactionEvent implemen
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
-		dest.writeParcelable(messageData, 0);
-	}
-
-	public MenigaTransactionCountEvent() {
+		dest.writeParcelable(this.countEventData, flags);
 	}
 
 	protected MenigaTransactionCountEvent(Parcel in) {
 		super(in);
-		this.messageData = in.readParcelable(MenigaTransactionCountEvent.class.getClassLoader());
+		this.countEventData = in.readParcelable(MenigaTransactionCountEventData.class.getClassLoader());
 	}
 
 	public static final Creator<MenigaTransactionCountEvent> CREATOR = new Creator<MenigaTransactionCountEvent>() {
@@ -50,22 +48,7 @@ public class MenigaTransactionCountEvent extends MenigaTransactionEvent implemen
 		}
 	};
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
-
-		MenigaTransactionCountEvent that = (MenigaTransactionCountEvent) o;
-
-		return messageData.equals(that.messageData);
-
-	}
-
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + messageData.hashCode();
-		return result;
+	public MenigaTransactionCountEventData getMessageCountEventData() {
+		return countEventData;
 	}
 }

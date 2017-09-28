@@ -8,6 +8,8 @@ import com.meniga.sdk.models.userevents.enums.UserEventType;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -20,32 +22,10 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 	private DateTime date;
 	private String body;
 	private UserEventType eventTypeIdentifier;
-	private String messageData;
+	private Map<String, String> messageData;
 
 	protected MenigaEvent() {
 	}
-
-	protected MenigaEvent(Parcel in) {
-		this.id = in.readLong();
-		this.title = in.readString();
-		this.date = (DateTime) in.readSerializable();
-		this.body = in.readString();
-		int tmpUserEventTypeIdentifier = in.readInt();
-		this.eventTypeIdentifier = tmpUserEventTypeIdentifier == -1 ? null : UserEventType.values()[tmpUserEventTypeIdentifier];
-		this.messageData = in.readString();
-	}
-
-	public static final Creator<MenigaEvent> CREATOR = new Creator<MenigaEvent>() {
-		@Override
-		public MenigaEvent createFromParcel(Parcel in) {
-			return new MenigaEvent(in);
-		}
-
-		@Override
-		public MenigaEvent[] newArray(int size) {
-			return new MenigaEvent[size];
-		}
-	};
 
 	public long getId() {
 		return this.id;
@@ -64,6 +44,11 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 	}
 
 	@Override
+	public MenigaFeedItem clone() throws CloneNotSupportedException {
+		return (MenigaEvent) super.clone();
+	}
+
+	@Override
 	public DateTime getOriginalDate() {
 		return date;
 	}
@@ -79,53 +64,42 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 		return this.eventTypeIdentifier;
 	}
 
-	public String getMessageData() {
+	public Map<String, String> getMessageData() {
 		return this.messageData;
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
 		MenigaEvent that = (MenigaEvent) o;
 
-		if (this.id != that.id) {
-			return false;
-		}
-		if (this.title != null ? !this.title.equals(that.title) : that.title != null) {
-			return false;
-		}
-		if (this.date != null ? !this.date.equals(that.date) : that.date != null) {
-			return false;
-		}
-		if (this.body != null ? !this.body.equals(that.body) : that.body != null) {
-			return false;
-		}
-		if (this.eventTypeIdentifier != that.eventTypeIdentifier) {
-			return false;
-		}
-		return this.messageData != null ? this.messageData.equals(that.messageData) : that.messageData == null;
+		if (id != that.id) return false;
+		if (topicId != that.topicId) return false;
+		if (title != null ? !title.equals(that.title) : that.title != null) return false;
+		if (date != null ? !date.equals(that.date) : that.date != null) return false;
+		if (body != null ? !body.equals(that.body) : that.body != null) return false;
+		if (eventTypeIdentifier != that.eventTypeIdentifier) return false;
+		return messageData != null ? messageData.equals(that.messageData) : that.messageData == null;
+
 	}
 
 	@Override
 	public int hashCode() {
-		int result = (int) (this.id ^ (this.id >>> 32));
-		result = 31 * result + (this.title != null ? this.title.hashCode() : 0);
-		result = 31 * result + (this.date != null ? this.date.hashCode() : 0);
-		result = 31 * result + (this.body != null ? this.body.hashCode() : 0);
-		result = 31 * result + (this.eventTypeIdentifier != null ? this.eventTypeIdentifier.hashCode() : 0);
-		result = 31 * result + (this.messageData != null ? this.messageData.hashCode() : 0);
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (int) (topicId ^ (topicId >>> 32));
+		result = 31 * result + (title != null ? title.hashCode() : 0);
+		result = 31 * result + (date != null ? date.hashCode() : 0);
+		result = 31 * result + (body != null ? body.hashCode() : 0);
+		result = 31 * result + (eventTypeIdentifier != null ? eventTypeIdentifier.hashCode() : 0);
+		result = 31 * result + (messageData != null ? messageData.hashCode() : 0);
 		return result;
 	}
 
 	@Override
-	public MenigaEvent clone() throws CloneNotSupportedException {
-		return (MenigaEvent) super.clone();
+	public String toString() {
+		return Long.toString(this.topicId) + ": " + this.eventTypeIdentifier;
 	}
 
 	@Override
@@ -136,15 +110,34 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeLong(this.id);
+		dest.writeLong(this.topicId);
 		dest.writeString(this.title);
 		dest.writeSerializable(this.date);
 		dest.writeString(this.body);
 		dest.writeInt(this.eventTypeIdentifier == null ? -1 : this.eventTypeIdentifier.ordinal());
-		dest.writeString(this.messageData);
+		dest.writeInt(this.messageData.size());
+		for (Map.Entry<String, String> entry : this.messageData.entrySet()) {
+			dest.writeString(entry.getKey());
+			dest.writeString(entry.getValue());
+		}
 	}
 
-	@Override
-	public String toString() {
-		return Long.toString(this.topicId) + ": " + this.eventTypeIdentifier;
+
+	protected MenigaEvent(Parcel in) {
+		this.id = in.readLong();
+		this.topicId = in.readLong();
+		this.title = in.readString();
+		this.date = (DateTime) in.readSerializable();
+		this.body = in.readString();
+		int tmpEventTypeIdentifier = in.readInt();
+		this.eventTypeIdentifier = tmpEventTypeIdentifier == -1 ? null : UserEventType.values()[tmpEventTypeIdentifier];
+		int messageDataSize = in.readInt();
+		this.messageData = new HashMap<>(messageDataSize);
+		for (int i = 0; i < messageDataSize; i++) {
+			String key = in.readString();
+			String value = in.readString();
+			this.messageData.put(key, value);
+		}
 	}
+
 }

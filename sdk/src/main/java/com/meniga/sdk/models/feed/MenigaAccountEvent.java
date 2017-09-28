@@ -4,8 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-import com.meniga.sdk.models.feed.MenigaAccountEventData;
-import com.meniga.sdk.models.feed.MenigaFeedItem;
 
 import org.joda.time.DateTime;
 
