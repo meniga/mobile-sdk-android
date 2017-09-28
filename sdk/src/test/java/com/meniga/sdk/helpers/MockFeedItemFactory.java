@@ -3,6 +3,7 @@ package com.meniga.sdk.helpers;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaAccountAvailableAmountEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaCustomEventConverter;
+import com.meniga.sdk.eventconverters.generic.MenigaTransactionEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaTransactionCountEventConverter;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class MockFeedItemFactory extends FeedItemFactory {
 	@Override
 	protected List<EventBaseConverter> getUserEventFeedConverters() {
 		List<EventBaseConverter> mockConverters = new ArrayList<>();
+		mockConverters.add(new MenigaTransactionEventConverter());
 		mockConverters.add(new MenigaAccountAvailableAmountEventConverter());
 		mockConverters.add(new MenigaCustomEventConverter());
 		mockConverters.add(new MenigaTransactionCountEventConverter());
