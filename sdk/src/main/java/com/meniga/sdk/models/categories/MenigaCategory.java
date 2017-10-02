@@ -319,6 +319,18 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 		dest.writeInt(this.categoryType == null ? -1 : this.categoryType.ordinal());
 		dest.writeString(this.categoryRank);
 		dest.writeValue(this.budgetGenerationType);
+		if (children != null) {
+			MenigaCategory self = null;
+			for (MenigaCategory cat : children) {
+				if (cat.getId() == id) {
+					self = cat;
+					break;
+				}
+			}
+			if (self != null) {
+				children.remove(self);
+			}
+		}
 		dest.writeTypedList(children);
 		dest.writeValue(this.categoryContextId);
 		dest.writeValue(this.orderId);
