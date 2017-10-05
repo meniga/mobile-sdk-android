@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
@@ -18,20 +19,50 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaBudget implements Parcelable, Serializable {
-
 	protected static MenigaBudgetOperations apiOperator;
+
 	protected long id;
 	protected BudgetType type;
 	protected String name;
 	protected String description;
 	protected List<Long> accountIds;
-	protected DateTime created;
-	protected boolean isDefault;
 	protected BudgetPeriod period;
 	protected int offset;
-	protected List<MenigaBudgetEntry> entries;
+	protected DateTime created;
 
 	protected MenigaBudget() {
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public BudgetType getType() {
+		return type;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public List<Long> getAccountIds() {
+		return accountIds;
+	}
+
+	public BudgetPeriod getPeriod() {
+		return period;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public DateTime getCreated() {
+		return created;
 	}
 
 	/**
@@ -43,122 +74,53 @@ public class MenigaBudget implements Parcelable, Serializable {
 		MenigaBudget.apiOperator = operator;
 	}
 
-	/*
-	* API Calls
-	*/
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-	/**
-	 * Fetches a list of budgets available to the user
-	 *
-	 * @param ids        list of budget ids
-	 * @param accountIds list of account ids
-	 * @param budgetType type of budget
-	 * @return list of budgets without entries
-	 */
-	public static Result<List<MenigaBudget>> fetch(List<Long> ids, List<Long> accountIds, BudgetType budgetType) {
-		return apiOperator.getBudgets(ids, accountIds, budgetType);
+		MenigaBudget that = (MenigaBudget) o;
+
+		if (id != that.id) {
+			return false;
+		}
+		if (offset != that.offset) {
+			return false;
+		}
+		if (type != that.type) {
+			return false;
+		}
+		if (name != null ? !name.equals(that.name) : that.name != null) {
+			return false;
+		}
+		if (description != null ? !description.equals(that.description) : that.description != null) {
+			return false;
+		}
+		if (accountIds != null ? !accountIds.equals(that.accountIds) : that.accountIds != null) {
+			return false;
+		}
+		if (period != that.period) {
+			return false;
+		}
+		return created != null ? created.equals(that.created) : that.created == null;
+
 	}
 
-	/**
-	 * Fetches a list of budgets available to the user
-	 *
-	 * @param id     list of budget ids
-	 * @param filter BudgetFilter
-	 * @return list of budgets without entries
-	 */
-	public static Result<MenigaBudget> fetch(Long id, BudgetFilter filter) {
-		return apiOperator.getBudgetById(id, filter);
-	}
-
-	/**
-	 * Create a single instance of budget
-	 *
-	 * @param type        type of budget
-	 * @param name        name of budget
-	 * @param description description of budget
-	 * @param accountIds  lisdt of account ids relevant to the budget
-	 * @param isDefault   if this instance is the default budget for the user
-	 * @param period      what kinds of period this budget applies to
-	 * @param offset      integer offset on how the period of this budget is calculated
-	 * @return a instance of budget
-	 */
-	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, boolean isDefault, BudgetPeriod period, int offset) {
-		return apiOperator.createBudget(type, name, description, accountIds, isDefault, period, offset);
-	}
-
-	/**
-	 * Deletes the budget
-	 *
-	 * @return Void
-	 */
-	public static Result<Void> delete(long id) {
-		return apiOperator.deleteBudget(id);
-	}
-
-	/**
-	 * Deletes the budget
-	 *
-	 * @return Void
-	 */
-	public Result<Void> delete() {
-		return apiOperator.deleteBudget(this.id);
-	}
-
-	/**
-	 * Updates the budgets name, description, accountids, default and offset
-	 *
-	 * @return Void
-	 */
-	public Result<MenigaBudget> update() {
-		return apiOperator.updateBudget(this.id, this.name, this.description, this.accountIds, this.isDefault, this.offset);
-	}
-
-	/**
-	 * Causes the budget to reset (remove all entries and fall back to default generated entries)
-	 *
-	 * @return Void
-	 */
-	public static Result<Void> reset(long id) {
-		return apiOperator.reset(id);
-	}
-
-	/**
-	 * Causes the budget to reset (remove all entries and fall back to default generated entries)
-	 *
-	 * @return Void
-	 */
-	public Result<Void> reset() {
-		return apiOperator.reset(this.id);
-	}
-
-	/**
-	 * Fetches the entries for this budget
-	 *
-	 * @return list of budget entries
-	 */
-	public Result<List<MenigaBudgetEntry>> fetchEntries(BudgetFilter filter) {
-		return apiOperator.getBudgetEntries(this.id, filter);
-	}
-
-	/**
-	 * Create entries applies to this budget
-	 *
-	 * @param entries list of budget entries
-	 * @return Void
-	 */
-	public Result<List<MenigaBudgetEntry>> createEntries(List<MenigaBudgetEntry> entries) {
-		return apiOperator.createBudgetEntries(this.id, entries);
-	}
-
-
-	/**
-	 * Deletes entry
-	 *
-	 * @param entryId id of entry
-	 * @return Void
-	 */
-	public Result<Void> deleteEntry(long entryId) {
-		return apiOperator.deleteBudgetEntry(this.id, entryId);
+	@Override
+	public int hashCode() {
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (type != null ? type.hashCode() : 0);
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + (accountIds != null ? accountIds.hashCode() : 0);
+		result = 31 * result + (period != null ? period.hashCode() : 0);
+		result = 31 * result + offset;
+		result = 31 * result + (created != null ? created.hashCode() : 0);
+		return result;
 	}
 
 	@Override
@@ -173,11 +135,9 @@ public class MenigaBudget implements Parcelable, Serializable {
 		dest.writeString(this.name);
 		dest.writeString(this.description);
 		dest.writeList(this.accountIds);
-		dest.writeSerializable(this.created);
-		dest.writeByte(this.isDefault ? (byte) 1 : (byte) 0);
 		dest.writeInt(this.period == null ? -1 : this.period.ordinal());
 		dest.writeInt(this.offset);
-		dest.writeTypedList(this.entries);
+		dest.writeSerializable(this.created);
 	}
 
 	protected MenigaBudget(Parcel in) {
@@ -188,12 +148,10 @@ public class MenigaBudget implements Parcelable, Serializable {
 		this.description = in.readString();
 		this.accountIds = new ArrayList<Long>();
 		in.readList(this.accountIds, Long.class.getClassLoader());
-		this.created = (DateTime) in.readSerializable();
-		this.isDefault = in.readByte() != 0;
 		int tmpPeriod = in.readInt();
 		this.period = tmpPeriod == -1 ? null : BudgetPeriod.values()[tmpPeriod];
 		this.offset = in.readInt();
-		this.entries = in.createTypedArrayList(MenigaBudgetEntry.CREATOR);
+		this.created = (DateTime) in.readSerializable();
 	}
 
 	public static final Creator<MenigaBudget> CREATOR = new Creator<MenigaBudget>() {
@@ -207,4 +165,17 @@ public class MenigaBudget implements Parcelable, Serializable {
 			return new MenigaBudget[size];
 		}
 	};
+
+	/*
+	* API Calls
+	*/
+
+	public static Result<List<MenigaBudget>> fetch() {
+		return apiOperator.getBudgets(BudgetType.PLANNING);
+	}
+
+	public static Result<Void> create(String name, String description, List<Long> accountIds) {
+		return apiOperator.createBudget(name, description, accountIds);
+	}
+
 }

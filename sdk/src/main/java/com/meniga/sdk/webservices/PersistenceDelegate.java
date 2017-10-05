@@ -11,6 +11,7 @@ import com.meniga.sdk.models.accounts.MenigaAccountType;
 import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
+import com.meniga.sdk.models.budget.operators.CreateBudget;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -671,42 +672,11 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.BUDGET).getBudgetEntries(req.budgetId, req.toQueryMap()));
+		return persist(req, getClient(Service.BUDGET).getBudgetEntries(Long.toString(req.id), req.toQueryMap()));
 	}
 
-	public Result<MenigaBudget> getBudgetById(GetBudgetById req) {
-		if (provider.hasKey(req)) {
-			return createTask(provider.fetch(req));
-		}
-		return persist(req, getClient(Service.BUDGET).getBudgetById(req.id, req.toQueryMap()));
-	}
-
-	public Result<MenigaBudget> createBudget(CreateBudget req) {
+	public Result<Void> createBudget(CreateBudget req) {
 		return persist(req, getClient(Service.BUDGET).createBudget(req));
-	}
-
-	public Result<List<MenigaBudgetEntry>> createBudgetEntries(CreateBudgetEntries req) {
-		return persist(req, getClient(Service.BUDGET).createBudgetEntries(req.budgetId, req));
-	}
-
-	public Result<MenigaBudgetEntry> updateBudgetEntry(UpdateBudgetEntry req) {
-		return persist(req, getClient(Service.BUDGET).updateBudgetEntry(req.budgetId, req.id, req));
-	}
-
-	public Result<Void> deleteBudgetEntry(DeleteBudgetEntry req) {
-		return persist(req, getClient(Service.BUDGET).deleteBudgetEntry(req.budgetId, req.entryId));
-	}
-
-	public Result<Void> resetBudget(ResetBudget req) {
-		return persist(req, getClient(Service.BUDGET).resetBudget(req.id));
-	}
-
-	public Result<Void> deleteBudget(DeleteBudget req) {
-		return persist(req, getClient(Service.BUDGET).deleteBudget(req.id));
-	}
-
-	public Result<MenigaBudget> updateBudget(UpdateBudget req) {
-		return persist(req, getClient(Service.BUDGET).updateBudget(req.id, req));
 	}
 
 	// --

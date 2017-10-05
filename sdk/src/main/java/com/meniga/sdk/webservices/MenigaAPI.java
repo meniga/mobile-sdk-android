@@ -7,6 +7,7 @@ import com.meniga.sdk.models.accounts.MenigaAccountType;
 import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
+import com.meniga.sdk.models.budget.operators.CreateBudget;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -43,8 +44,6 @@ import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.requests.AcceptChallenge;
-import com.meniga.sdk.webservices.requests.CreateBudget;
-import com.meniga.sdk.webservices.requests.CreateBudgetEntries;
 import com.meniga.sdk.webservices.requests.CreateChallenge;
 import com.meniga.sdk.webservices.requests.CreateComment;
 import com.meniga.sdk.webservices.requests.CreateNetWorthAccount;
@@ -66,8 +65,6 @@ import com.meniga.sdk.webservices.requests.SplitTransaction;
 import com.meniga.sdk.webservices.requests.StartSync;
 import com.meniga.sdk.webservices.requests.UpdateAccount;
 import com.meniga.sdk.webservices.requests.UpdateAccountMetadata;
-import com.meniga.sdk.webservices.requests.UpdateBudget;
-import com.meniga.sdk.webservices.requests.UpdateBudgetEntry;
 import com.meniga.sdk.webservices.requests.UpdateChallenge;
 import com.meniga.sdk.webservices.requests.UpdateComment;
 import com.meniga.sdk.webservices.requests.UpdateHistoryBalance;
@@ -412,10 +409,10 @@ public interface MenigaAPI {
 	@GET(APIConst.URL_TERMS + APIConst.TYPES)
 	Call<List<MenigaTermType>> getTermTypes(@Header("Accept-Language") String culture);
 
-	@POST(APIConst.URL_TERMS + "/{typeId}/" + APIConst.ACCEPT)
+	@POST(APIConst.URL_TERMS + "/{typeId}" + APIConst.ACCEPT)
 	Call<Void> acceptTerms(@Path("typeId") long typeId);
 
-	@POST(APIConst.URL_TERMS + "/{typeId}/" + APIConst.DECLINE)
+	@POST(APIConst.URL_TERMS + "/{typeId}" + APIConst.DECLINE)
 	Call<Void> declineTerms(@Path("typeId") long typeId);
 
 	// --
@@ -443,43 +440,13 @@ public interface MenigaAPI {
 	// Budget
 	// --
 	@GET(APIConst.URL_BUDGETS)
-	Call<List<MenigaBudget>> getBudgets(@QueryMap Map<String, String> queryMap);
+	Call<List<MenigaBudget>> getBudgets(@QueryMap Map<String, String> query);
 
-	@GET(APIConst.URL_BUDGETS + "/{id}")
-	Call<MenigaBudget> getBudgetById(@Path("id") long id, @QueryMap Map<String, String> queryMap);
-
-	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES)
-	Call<List<MenigaBudgetEntry>> getBudgetEntries(@Path("id") long id, @QueryMap Map<String, String> queryMap);
-
-	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + "/{entryId}")
-	Call<MenigaBudgetEntry> getBudgetEntryById(@Path("id") long id, @Path("entryId") long entryId);
-
-	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + APIConst.BU_PLANNING)
-	Call<List<MenigaBudgetEntry>> getPlanningBudgetEntries(@Path("id") long id, @QueryMap Map<String, String> queryMap);
+	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES)
+	Call<List<MenigaBudgetEntry>> getBudgetEntries(@Path("id") String id, @QueryMap Map<String, String> query);
 
 	@POST(APIConst.URL_BUDGETS)
-	Call<MenigaBudget> createBudget(@Body CreateBudget req);
-
-	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES)
-	Call<List<MenigaBudgetEntry>> createBudgetEntries(@Path("id") long id, @Body CreateBudgetEntries req);
-
-	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_RESET)
-	Call<Void> resetBudget(@Path("id") long id);
-
-	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + APIConst.BU_RECURRING)
-	Call<List<MenigaBudgetEntry>> createRecurringBudgetEntries(@Path("id") long id, @Body CreateBudgetEntries req);
-
-	@PUT(APIConst.URL_BUDGETS + "/{id}")
-	Call<MenigaBudget> updateBudget(@Path("id") long id, UpdateBudget req);
-
-	@PUT(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + "/{entryId}")
-	Call<MenigaBudgetEntry> updateBudgetEntry(@Path("id") long id, @Path("id") long entryId, UpdateBudgetEntry req);
-
-	@DELETE(APIConst.URL_BUDGETS + "/{id}")
-	Call<Void> deleteBudget(@Path("id") long id);
-
-	@DELETE(APIConst.URL_BUDGETS + "/{id}" + APIConst.BU_ENTRIES + "/{entryId}")
-	Call<Void> deleteBudgetEntry(@Path("id") long id, @Path("id") long entryId);
+	Call<Void> createBudget(@Body CreateBudget req);
 
 	// --
 	// Challenges

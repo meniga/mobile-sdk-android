@@ -29,11 +29,6 @@ import javax.inject.Inject;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaAccountOperationsImp implements MenigaAccountOperations {
-
-	@Inject
-	public MenigaAccountOperationsImp() {
-	}
-
 	@Override
 	public Result<MenigaAccount> getAccount(long id) {
 		GetAccount req = new GetAccount();
