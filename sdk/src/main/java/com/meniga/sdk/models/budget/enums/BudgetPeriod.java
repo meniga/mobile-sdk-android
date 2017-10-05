@@ -7,13 +7,13 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public enum BudgetPeriod {
-	@SerializedName("week")
+	@SerializedName("Week")
 	WEEK,
-	@SerializedName("month")
+	@SerializedName("Month")
 	MONTH,
-	@SerializedName("quarter")
+	@SerializedName("Quarter")
 	QUARTER,
-	@SerializedName("year")
+	@SerializedName("Year")
 	YEAR;
 
 	@Override
@@ -21,16 +21,16 @@ public enum BudgetPeriod {
 		switch (this) {
 
 			case WEEK:
-				return "week";
+				return "Week";
 
 			case MONTH:
-				return "month";
+				return "Month";
 
 			case QUARTER:
-				return "quarter";
+				return "Quarter";
 
 			default:
-				return "budget";
+				return "Budget";
 		}
 	}
 }

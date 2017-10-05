@@ -10,10 +10,9 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class GetBudgets extends QueryRequestObject {
-
-	public transient List<Long> ids;
-	public transient List<Long> accountIds;
-	public transient BudgetType type;
+	public List<Long> ids;
+	public List<Long> accountIds;
+	public BudgetType type;
 
 	@Override
 	public long getValueHash() {
@@ -23,33 +22,33 @@ public class GetBudgets extends QueryRequestObject {
 		return result;
 	}
 
-
 	@Override
 	public Map<String, String> toQueryMap() {
-		Map<String, String> query = new HashMap<>();
-		String idsString = createList(this.ids);
-		if (idsString.length() != 0) {
-			query.put("ids", idsString);
-		}
-		String accountIdsString = createList(this.accountIds);
-		if (accountIdsString.length() != 0) {
-			query.put("accountIds", accountIdsString);
-		}
-		if (type != null)
-			query.put("type", type.toString());
-		return query;
-	}
-
-	private String createList(List<Long> listOfLongs) {
-		StringBuilder builder = new StringBuilder();
-		if (listOfLongs != null && listOfLongs.size() > 0) {
-			for (long id : listOfLongs) {
-				if (builder.length() != 0) {
-					builder.append(",");
+		Map<String, String> map = new HashMap<>();
+		if (ids != null && ids.size() > 0) {
+			StringBuilder bld = new StringBuilder();
+			for (int i = 0; i < ids.size(); i++) {
+				if (i > 0) {
+					bld.append(",");
 				}
-				builder.append(String.valueOf(id));
+				bld.append(ids.get(i));
 			}
+			map.put("ids", bld.toString());
 		}
-		return builder.toString();
+		if (ids != null && accountIds.size() > 0) {
+			StringBuilder bld = new StringBuilder();
+			for (int i = 0; i < accountIds.size(); i++) {
+				if (i > 0) {
+					bld.append(",");
+				}
+				bld.append(ids.get(i));
+			}
+			map.put("accountIds", bld.toString());
+		}
+		if (type != null) {
+			map.put("type", type.toString());
+		}
+
+		return map;
 	}
 }

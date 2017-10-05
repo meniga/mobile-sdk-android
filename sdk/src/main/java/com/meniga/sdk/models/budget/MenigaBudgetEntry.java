@@ -5,77 +5,37 @@ import android.os.Parcelable;
 
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.models.budget.enums.GenerationTypeValue;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaBudgetEntry implements Parcelable {
+public class MenigaBudgetEntry implements Parcelable, Serializable {
 
 	protected static MenigaBudgetOperations apiOperator;
 
-	protected long id;
-	protected MenigaDecimal targetAmount;
-	protected MenigaDecimal spentAmount;
-	protected DateTime endDate;
-	protected DateTime updatedAt;
-	protected Integer generationType;
-	protected List<Long> categoryIds;
-	protected long budgetId;
-
+	private long id;
+	private MenigaDecimal targetAmount;
+	private DateTime startDate;
+	private DateTime endDate;
+	private DateTime updatedAt;
+	private long budgetId;
+	private int generationType;
+	private MenigaDecimal spentAmount;
+	private List<Long> categoryIds;
 
 	protected MenigaBudgetEntry() {
-
 	}
-
-	/**
-	 * Sets the api operator for doing api calls
-	 *
-	 * @param operator An object that implements the MenigaBudgetOperations interface for carrying out api operations on this class.
-	 */
 
 	public static void setOperator(MenigaBudgetOperations operator) {
-		MenigaBudget.apiOperator = operator;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		MenigaBudgetEntry that = (MenigaBudgetEntry) o;
-
-		if (id != that.id) return false;
-		if (budgetId != that.budgetId) return false;
-		if (targetAmount != null ? !targetAmount.equals(that.targetAmount) : that.targetAmount != null)
-			return false;
-		if (spentAmount != null ? !spentAmount.equals(that.spentAmount) : that.spentAmount != null)
-			return false;
-		if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
-		if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null)
-			return false;
-		if (generationType != null ? !generationType.equals(that.generationType) : that.generationType != null)
-			return false;
-		return categoryIds != null ? categoryIds.equals(that.categoryIds) : that.categoryIds == null;
-
-	}
-
-	@Override
-	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
-		result = 31 * result + (targetAmount != null ? targetAmount.hashCode() : 0);
-		result = 31 * result + (spentAmount != null ? spentAmount.hashCode() : 0);
-		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-		result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
-		result = 31 * result + (generationType != null ? generationType.hashCode() : 0);
-		result = 31 * result + (categoryIds != null ? categoryIds.hashCode() : 0);
-		result = 31 * result + (int) (budgetId ^ (budgetId >>> 32));
-		return result;
+		MenigaBudgetEntry.apiOperator = operator;
 	}
 
 	public long getId() {
@@ -86,8 +46,8 @@ public class MenigaBudgetEntry implements Parcelable {
 		return targetAmount;
 	}
 
-	public MenigaDecimal getSpentAmount() {
-		return spentAmount;
+	public DateTime getStartDate() {
+		return startDate;
 	}
 
 	public DateTime getEndDate() {
@@ -98,18 +58,73 @@ public class MenigaBudgetEntry implements Parcelable {
 		return updatedAt;
 	}
 
-	public Integer getGenerationType() {
-		return generationType;
+	public long getBudgetId() {
+		return budgetId;
+	}
+
+	public GenerationTypeValue getGenerationType() {
+		return new GenerationTypeValue(generationType);
+	}
+
+	public MenigaDecimal getSpentAmount() {
+		return spentAmount;
 	}
 
 	public List<Long> getCategoryIds() {
 		return categoryIds;
 	}
 
-	public long getBudgetId() {
-		return budgetId;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		MenigaBudgetEntry that = (MenigaBudgetEntry) o;
+
+		if (id != that.id) {
+			return false;
+		}
+		if (budgetId != that.budgetId) {
+			return false;
+		}
+		if (generationType != that.generationType) {
+			return false;
+		}
+		if (targetAmount != null ? !targetAmount.equals(that.targetAmount) : that.targetAmount != null) {
+			return false;
+		}
+		if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) {
+			return false;
+		}
+		if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) {
+			return false;
+		}
+		if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null) {
+			return false;
+		}
+		if (spentAmount != null ? !spentAmount.equals(that.spentAmount) : that.spentAmount != null) {
+			return false;
+		}
+		return categoryIds != null ? categoryIds.equals(that.categoryIds) : that.categoryIds == null;
 	}
 
+	@Override
+	public int hashCode() {
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (targetAmount != null ? targetAmount.hashCode() : 0);
+		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+		result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
+		result = 31 * result + (int) (budgetId ^ (budgetId >>> 32));
+		result = 31 * result + generationType;
+		result = 31 * result + (spentAmount != null ? spentAmount.hashCode() : 0);
+		result = 31 * result + (categoryIds != null ? categoryIds.hashCode() : 0);
+		return result;
+	}
 
 	@Override
 	public int describeContents() {
@@ -120,24 +135,26 @@ public class MenigaBudgetEntry implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeLong(this.id);
 		dest.writeSerializable(this.targetAmount);
-		dest.writeSerializable(this.spentAmount);
+		dest.writeSerializable(this.startDate);
 		dest.writeSerializable(this.endDate);
 		dest.writeSerializable(this.updatedAt);
-		dest.writeValue(this.generationType);
-		dest.writeList(this.categoryIds);
 		dest.writeLong(this.budgetId);
+		dest.writeInt(this.generationType);
+		dest.writeSerializable(this.spentAmount);
+		dest.writeList(this.categoryIds);
 	}
 
 	protected MenigaBudgetEntry(Parcel in) {
 		this.id = in.readLong();
 		this.targetAmount = (MenigaDecimal) in.readSerializable();
-		this.spentAmount = (MenigaDecimal) in.readSerializable();
+		this.startDate = (DateTime) in.readSerializable();
 		this.endDate = (DateTime) in.readSerializable();
 		this.updatedAt = (DateTime) in.readSerializable();
-		this.generationType = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.budgetId = in.readLong();
+		this.generationType = in.readInt();
+		this.spentAmount = (MenigaDecimal) in.readSerializable();
 		this.categoryIds = new ArrayList<Long>();
 		in.readList(this.categoryIds, Long.class.getClassLoader());
-		this.budgetId = in.readLong();
 	}
 
 	public static final Creator<MenigaBudgetEntry> CREATOR = new Creator<MenigaBudgetEntry>() {
@@ -152,19 +169,35 @@ public class MenigaBudgetEntry implements Parcelable {
 		}
 	};
 
-
-	/**
-	 * Updates budget entry
-	 *
-	 * @param targetAmount   The target amount for the entry. Positive and negative numbers allowed ,
-	 * @param startDate      The inclusive lower date limit for period on the budget ,
-	 * @param endDate        The inclusive upper date limit for the period on the budget ,
-	 * @param generationType The generation rule to use if a planning entry. If present on a GET then this is a generated entry ,
-	 * @param categoryIds    An array of category Ids linked to. Categories can be of any category type
-	 * @return Void
-	 */
-	public Result<MenigaBudgetEntry> update(MenigaDecimal targetAmount, DateTime startDate, DateTime endDate, int generationType, List<Long> categoryIds) {
-		return apiOperator.updateEntry(this.budgetId, this.id, targetAmount, startDate, endDate, generationType, categoryIds);
+	@Override
+	public String toString() {
+		if (categoryIds.size() > 0) {
+			return categoryIds.get(0) + ": " + startDate.toString("dd.MM.YYYY") + " - " + endDate.toString("dd.MM.YYYY");
+		}
+		return super.toString();
 	}
 
+	/*
+	* API Calls
+	*/
+
+	public static Result<List<MenigaBudgetEntry>> fetch(long budgetId) {
+		return apiOperator.getBudgetEntries(
+				budgetId,
+				DateTime.now().withDayOfMonth(1).withTimeAtStartOfDay(),
+				DateTime.now().withDayOfMonth(1).withTimeAtStartOfDay().plusMonths(1).minusDays(1),
+				null,
+				true
+		);
+	}
+
+	public static Result<List<MenigaBudgetEntry>> fetch(long budgetId, DateTime month) {
+		return apiOperator.getBudgetEntries(
+				budgetId,
+				month.withDayOfMonth(1).withTimeAtStartOfDay(),
+				month.withDayOfMonth(1).withTimeAtStartOfDay().plusMonths(1).minusDays(1),
+				null,
+				true
+		);
+	}
 }
