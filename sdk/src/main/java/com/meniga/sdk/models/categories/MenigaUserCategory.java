@@ -9,12 +9,14 @@ import com.meniga.sdk.models.Merge;
 import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.categories.enums.CategoryType;
 
+import java.io.Serializable;
+
 /**
  * Represents a user created category, directly inherits from MenigaCategory.
  * <p>
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaUserCategory extends MenigaCategory {
+public class MenigaUserCategory extends MenigaCategory implements Serializable {
 
 	public static final Creator<MenigaUserCategory> CREATOR = new Creator<MenigaUserCategory>() {
 		public MenigaUserCategory createFromParcel(Parcel source) {

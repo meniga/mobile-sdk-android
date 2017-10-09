@@ -3,11 +3,13 @@ package com.meniga.sdk.models.feed;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class MenigaTransactionCountEvent extends MenigaTransactionEvent implements MenigaFeedItem, Parcelable {
+public class MenigaTransactionCountEvent extends MenigaTransactionEvent implements MenigaFeedItem, Parcelable, Serializable {
 
 	private MenigaTransactionCountEventData countEventData;
 

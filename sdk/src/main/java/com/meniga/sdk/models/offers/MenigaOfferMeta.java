@@ -3,10 +3,12 @@ package com.meniga.sdk.models.offers;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaOfferMeta implements Parcelable {
+public class MenigaOfferMeta implements Parcelable, Serializable {
 
 	protected int availableOffers;
 	protected int availableOffersActivated;

@@ -16,6 +16,7 @@ import com.meniga.sdk.providers.tasks.TaskCompletionSource;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +24,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 @SuppressWarnings("unused")
-public class MenigaOffer implements Parcelable {
+public class MenigaOffer implements Parcelable, Serializable {
 
 	protected static MenigaOfferOperations apiOperator;
 

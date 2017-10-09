@@ -3,10 +3,12 @@ package com.meniga.sdk.models.offers.reimbursementaccounts;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaOfferAccountInfo implements Parcelable {
+public class MenigaOfferAccountInfo implements Parcelable, Serializable {
 
 	private String bankNumber;
 	private String ledger;

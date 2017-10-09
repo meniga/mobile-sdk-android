@@ -6,10 +6,12 @@ import android.os.Parcelable;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaCustomEvent implements MenigaFeedItem, Parcelable {
+public class MenigaCustomEvent implements MenigaFeedItem, Parcelable, Serializable {
 
 	private DateTime date;
 	private long id;

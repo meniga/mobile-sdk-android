@@ -3,10 +3,12 @@ package com.meniga.sdk.models.transactions;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MetaData implements Parcelable {
+public class MetaData implements Parcelable, Serializable {
 
 	public static final Parcelable.Creator<MetaData> CREATOR = new Parcelable.Creator<MetaData>() {
 		@Override

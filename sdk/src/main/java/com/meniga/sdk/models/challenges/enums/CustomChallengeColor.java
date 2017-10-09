@@ -4,12 +4,13 @@ import android.graphics.Color;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public enum CustomChallengeColor {
+public enum CustomChallengeColor implements Serializable {
 	@SerializedName("secondary")
 	NAVY,
 	@SerializedName("success")

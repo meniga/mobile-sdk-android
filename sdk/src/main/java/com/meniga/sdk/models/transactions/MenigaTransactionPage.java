@@ -1,5 +1,6 @@
 package com.meniga.sdk.models.transactions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * A list of transaction that includes the total number of transactions available given the criteria
  * used to generate the list.
  */
-public class MenigaTransactionPage extends ArrayList<MenigaTransaction> {
+public class MenigaTransactionPage extends ArrayList<MenigaTransaction> implements Serializable {
 
 	protected int totalNumTransactions;
 	protected int numPages;

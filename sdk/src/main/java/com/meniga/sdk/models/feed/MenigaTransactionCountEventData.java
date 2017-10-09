@@ -3,11 +3,13 @@ package com.meniga.sdk.models.feed;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class MenigaTransactionCountEventData implements Parcelable {
+public class MenigaTransactionCountEventData implements Parcelable, Serializable {
 
 
 	private long transactionId;

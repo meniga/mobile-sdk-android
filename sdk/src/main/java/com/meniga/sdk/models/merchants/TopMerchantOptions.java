@@ -1,11 +1,13 @@
 package com.meniga.sdk.models.merchants;
 
 
+import java.io.Serializable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class TopMerchantOptions {
+public class TopMerchantOptions implements Serializable {
 
 	private Integer maxMerchants;
 	private Boolean includeUnMappedMerchants;

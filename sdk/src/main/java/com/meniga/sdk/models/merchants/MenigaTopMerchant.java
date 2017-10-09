@@ -8,13 +8,14 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.merchants.operators.MenigaTopMerchantOperations;
 import com.meniga.sdk.models.transactions.TransactionsFilter;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class MenigaTopMerchant implements Parcelable {
+public class MenigaTopMerchant implements Parcelable, Serializable {
 
 	protected long merchantId;
 	protected String text;

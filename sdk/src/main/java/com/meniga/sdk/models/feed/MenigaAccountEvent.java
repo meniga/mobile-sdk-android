@@ -7,10 +7,12 @@ import com.google.gson.annotations.SerializedName;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaAccountEvent implements MenigaFeedItem, Parcelable {
+public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializable {
 
 	private long id;
 	@SerializedName("topicId")

@@ -3,11 +3,13 @@ package com.meniga.sdk.models.userevents;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class UserEventSubscription implements Parcelable {
+public class UserEventSubscription implements Parcelable, Serializable {
 
 	protected String channelName;
 	protected Boolean isSubscribed;
