@@ -87,6 +87,7 @@ class APIConst {
 	// Budget
 	static final String URL_BUDGETS = "budgets";
 	static final String BUDGET_ENTRIES = "/entries";
+	static final String BUDGET_RULES = "/rules";
 
 	// Terms
 	static final String URL_TERMS = "terms";

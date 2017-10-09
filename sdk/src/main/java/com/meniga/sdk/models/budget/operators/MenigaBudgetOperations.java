@@ -19,7 +19,11 @@ public interface MenigaBudgetOperations {
 
     Result<List<MenigaBudget>> getBudgets(BudgetType planning);
 
-    Result<List<MenigaBudgetEntry>> getBudgetEntries(long budgetId, DateTime start, DateTime end, List<Long> categoryIds, boolean allowIntersect);
+    Result<List<MenigaBudgetEntry>> getBudgetEntries(long budgetId, DateTime start, DateTime end,
+                                                     List<Long> categoryIds, boolean allowIntersect);
 
     Result<Void> createBudget(String name, String description, List<Long> accountIds);
+
+    Result<Void> updateBudget(long budgetId, MenigaDecimal targetAmount, DateTime startDate, DateTime endDate,
+                              List<Long> catIds, int generationTypeValue, DateTime repeatUntil);
 }

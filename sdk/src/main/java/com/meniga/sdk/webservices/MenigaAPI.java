@@ -65,6 +65,7 @@ import com.meniga.sdk.webservices.requests.SplitTransaction;
 import com.meniga.sdk.webservices.requests.StartSync;
 import com.meniga.sdk.webservices.requests.UpdateAccount;
 import com.meniga.sdk.webservices.requests.UpdateAccountMetadata;
+import com.meniga.sdk.webservices.requests.UpdateBudget;
 import com.meniga.sdk.webservices.requests.UpdateChallenge;
 import com.meniga.sdk.webservices.requests.UpdateComment;
 import com.meniga.sdk.webservices.requests.UpdateHistoryBalance;
@@ -447,6 +448,9 @@ public interface MenigaAPI {
 
 	@POST(APIConst.URL_BUDGETS)
 	Call<Void> createBudget(@Body CreateBudget req);
+
+	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_RULES)
+	Call<Void> updateBudget(@Path("id") String id, @Body UpdateBudget req);
 
 	// --
 	// Challenges

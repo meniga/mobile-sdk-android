@@ -679,6 +679,10 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.BUDGET).createBudget(req));
 	}
 
+	public Result<Void> updateBudget(UpdateBudget req) {
+		return persist(req, getClient(Service.BUDGET).updateBudget(Long.toString(req.budgetId), req));
+	}
+
 	// --
 	// Organizations
 	// --
