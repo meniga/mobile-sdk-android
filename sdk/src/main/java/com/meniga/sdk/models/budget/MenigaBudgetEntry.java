@@ -5,8 +5,10 @@ import android.os.Parcelable;
 
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.models.budget.enums.GenerationType;
 import com.meniga.sdk.models.budget.enums.GenerationTypeValue;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
+import com.meniga.sdk.models.categories.MenigaCategory;
 
 import org.joda.time.DateTime;
 
@@ -199,5 +201,26 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 				null,
 				true
 		);
+	}
+
+	public static Result<List<MenigaBudgetEntry>> fetch(long budgetId, DateTime from, DateTime to) {
+		return apiOperator.getBudgetEntries(budgetId, from, to, null, true);
+	}
+
+	public static Result<List<MenigaBudgetEntry>> fetch(long budgetId, DateTime from, DateTime to, List<Long> categoryIds) {
+		return apiOperator.getBudgetEntries(budgetId, from, to, categoryIds, true);
+	}
+
+	public static Result<Void> update(long budgetId, MenigaDecimal targetAmount, DateTime startDate, DateTime endDate,
+									  MenigaCategory category, GenerationType generationType, int generationTypeValue,
+									  DateTime repeatUntil) {
+		List<Long> catIds = new ArrayList<>();
+		catIds.add(category.getId());
+		if (generationType == GenerationType.SAME_AS_MONTH) {
+			generationTypeValue = -Math.abs(generationTypeValue);
+		} else if (generationType == GenerationType.AVERAGE_MONTHS) {
+			generationTypeValue = Math.abs(generationTypeValue);
+		}
+		return apiOperator.updateBudget(budgetId, targetAmount, startDate, endDate, catIds, generationTypeValue, repeatUntil);
 	}
 }

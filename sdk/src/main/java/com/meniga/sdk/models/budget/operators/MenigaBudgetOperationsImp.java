@@ -10,9 +10,12 @@ import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.webservices.requests.GetBudgetEntries;
 import com.meniga.sdk.webservices.requests.GetBudgets;
+import com.meniga.sdk.webservices.requests.UpdateBudget;
 
 import org.joda.time.DateTime;
+import org.joda.time.Months;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,5 +53,33 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
         req.offset = 0;
 
         return MenigaSDK.executor().createBudget(req);
+    }
+
+    @Override
+    public Result<Void> updateBudget(long budgetId, MenigaDecimal targetAmount, DateTime startDate,
+                                     DateTime endDate, List<Long> catIds, int generationTypeValue,
+                                     DateTime repeatUntil) {
+        UpdateBudget req = new UpdateBudget();
+        req.budgetId = budgetId;
+
+        UpdateBudget.UpdateBudgetData data = new UpdateBudget.UpdateBudgetData();
+        data.targetAmount = targetAmount;
+        data.startDate = startDate;
+        data.endDate = endDate;
+        data.categoryIds = catIds;
+        data.generationType = generationTypeValue;
+
+        if (endDate == null/*endDate.getYear() == DateTime.now().getYear() && endDate.getMonthOfYear() == DateTime.now().getMonthOfYear()*/) {
+            data.recurringPattern = null;
+            data.repeatUntil = null;
+        } else {
+            data.recurringPattern = new UpdateBudget.RecurringPattern();
+            data.recurringPattern.monthInterval = Months.monthsBetween(endDate, startDate).getMonths();;
+            data.repeatUntil = endDate;
+        }
+
+        req.rules = new ArrayList<>();
+        req.rules.add(data);
+        return MenigaSDK.executor().updateBudget(req);
     }
 }
