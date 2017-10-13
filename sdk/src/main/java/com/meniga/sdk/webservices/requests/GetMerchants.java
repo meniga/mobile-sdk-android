@@ -13,11 +13,7 @@ public class GetMerchants extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		long hash = 0;
-		for (int i = 0; i < ids.size(); i++) {
-			hash = hash + ids.get(i);
-		}
-		return hash;
+		return ids != null ? ids.hashCode() : 0;
 	}
 
 	@Override
@@ -37,5 +33,4 @@ public class GetMerchants extends QueryRequestObject {
 
 		return map;
 	}
-
 }

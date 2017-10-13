@@ -10,6 +10,6 @@ public class DeleteTransaction extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return transactionId;
+		return (int) (transactionId ^ (transactionId >>> 32));
 	}
 }

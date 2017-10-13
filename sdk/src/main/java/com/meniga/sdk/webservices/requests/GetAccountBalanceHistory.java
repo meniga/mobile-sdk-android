@@ -19,7 +19,11 @@ public class GetAccountBalanceHistory extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.id;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (dateFrom != null ? dateFrom.hashCode() : 0);
+		result = 31 * result + (dateTo != null ? dateTo.hashCode() : 0);
+		result = 31 * result + (sort != null ? sort.hashCode() : 0);
+		return result;
 	}
 
 	@Override

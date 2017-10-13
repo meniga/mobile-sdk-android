@@ -15,7 +15,10 @@ public class RecategorizeTransactions extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		// not used for POST only method recategorize transactions
-		return -1;
+		int result = transactionTexts != null ? transactionTexts.hashCode() : 0;
+		result = 31 * result + (recategorizeUnreadOnly != null ? recategorizeUnreadOnly.hashCode() : 0);
+		result = 31 * result + (useSubTextInRecat != null ? useSubTextInRecat.hashCode() : 0);
+		result = 31 * result + (markAsRead != null ? markAsRead.hashCode() : 0);
+		return result;
 	}
 }

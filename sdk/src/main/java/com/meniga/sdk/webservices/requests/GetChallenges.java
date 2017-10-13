@@ -23,6 +23,9 @@ public class GetChallenges extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return -1;
+		int result = (includeExpired ? 1 : 0);
+		result = 31 * result + (excludeSuggested ? 1 : 0);
+		result = 31 * result + (excludeAccepted ? 1 : 0);
+		return result;
 	}
 }

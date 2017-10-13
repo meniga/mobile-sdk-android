@@ -13,7 +13,9 @@ public class GetCategoryById extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.categoryId;
+		int result = (int) (categoryId ^ (categoryId >>> 32));
+		result = 31 * result + (culture != null ? culture.hashCode() : 0);
+		return result;
 	}
 
 	@Override

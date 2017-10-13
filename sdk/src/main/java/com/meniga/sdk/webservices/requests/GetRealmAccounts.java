@@ -9,6 +9,6 @@ public class GetRealmAccounts extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return realmUserId;
+		return (int) (realmUserId ^ (realmUserId >>> 32));
 	}
 }

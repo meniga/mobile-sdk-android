@@ -52,6 +52,11 @@ public class GetOffers extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return 0;
+		int result = skip;
+		result = 31 * result + take;
+		result = 31 * result + (filterStates != null ? filterStates.hashCode() : 0);
+		result = 31 * result + (filterOfferIds != null ? filterOfferIds.hashCode() : 0);
+		result = 31 * result + (filterExpiredWithCashBackOnly ? 1 : 0);
+		return result;
 	}
 }

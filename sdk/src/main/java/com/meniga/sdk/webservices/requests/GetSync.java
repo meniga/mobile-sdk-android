@@ -9,6 +9,6 @@ public class GetSync extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.syncHistoryId;
+		return (int) (syncHistoryId ^ (syncHistoryId >>> 32));
 	}
 }

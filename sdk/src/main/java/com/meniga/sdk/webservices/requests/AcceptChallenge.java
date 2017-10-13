@@ -16,8 +16,11 @@ public class AcceptChallenge extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return id.hashCode() + targetAmount.hashCode();
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (targetAmount != null ? targetAmount.hashCode() : 0);
+		return result;
 	}
+
 
 	@Override
 	public Map<String, String> toQueryMap() {

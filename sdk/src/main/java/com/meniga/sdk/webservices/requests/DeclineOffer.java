@@ -13,6 +13,6 @@ public class DeclineOffer extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.id;
+		return (int) (id ^ (id >>> 32));
 	}
 }

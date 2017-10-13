@@ -13,6 +13,11 @@ public class UpdateAccount extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.id;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (isHidden ? 1 : 0);
+		result = 31 * result + (isDisabled ? 1 : 0);
+		result = 31 * result + (emergencyFundBalanceLimit != null ? emergencyFundBalanceLimit.hashCode() : 0);
+		return result;
 	}
 }

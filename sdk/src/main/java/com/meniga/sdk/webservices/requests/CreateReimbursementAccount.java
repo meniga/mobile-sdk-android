@@ -11,6 +11,9 @@ public class CreateReimbursementAccount extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return -1;
+		int result = name != null ? name.hashCode() : 0;
+		result = 31 * result + (accountType != null ? accountType.hashCode() : 0);
+		result = 31 * result + (accountInfo != null ? accountInfo.hashCode() : 0);
+		return result;
 	}
 }

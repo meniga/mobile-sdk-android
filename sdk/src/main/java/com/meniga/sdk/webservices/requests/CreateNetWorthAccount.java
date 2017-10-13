@@ -23,8 +23,13 @@ public class CreateNetWorthAccount extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		// Not used for creating NetWorth Account
-		return -1;
+		int result = initialBalance != null ? initialBalance.hashCode() : 0;
+		result = 31 * result + (balance != null ? balance.hashCode() : 0);
+		result = 31 * result + (accountIdentifier != null ? accountIdentifier.hashCode() : 0);
+		result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+		result = 31 * result + (networthType != null ? networthType.hashCode() : 0);
+		result = 31 * result + (initialBalanceDate != null ? initialBalanceDate.hashCode() : 0);
+		return result;
 	}
 
 	@Override
@@ -40,4 +45,5 @@ public class CreateNetWorthAccount extends QueryRequestObject {
 
 		return query;
 	}
+
 }

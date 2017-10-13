@@ -26,7 +26,17 @@ public class UpdateTransactions extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return -1;
+		int result = transactionIds != null ? transactionIds.hashCode() : 0;
+		result = 31 * result + (date != null ? date.hashCode() : 0);
+		result = 31 * result + (text != null ? text.hashCode() : 0);
+		result = 31 * result + (amount != null ? amount.hashCode() : 0);
+		result = 31 * result + (int) (categoryId ^ (categoryId >>> 32));
+		result = 31 * result + (hasUncertainCategorization ? 1 : 0);
+		result = 31 * result + (useSubTextInRecat != null ? useSubTextInRecat.hashCode() : 0);
+		result = 31 * result + (isRead != null ? isRead.hashCode() : 0);
+		result = 31 * result + (isFlagged != null ? isFlagged.hashCode() : 0);
+		result = 31 * result + (userData != null ? userData.hashCode() : 0);
+		return result;
 	}
 
 	@Override

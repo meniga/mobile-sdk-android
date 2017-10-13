@@ -14,7 +14,10 @@ public class DeleteUserCategory extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return -1;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (deleteConnectedRules ? 1 : 0);
+		result = 31 * result + (newCategoryId != null ? newCategoryId.hashCode() : 0);
+		return result;
 	}
 
 	@Override

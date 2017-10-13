@@ -16,6 +16,10 @@ public class GetRealmAuthMethod extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return id;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (parameters != null ? parameters.hashCode() : 0);
+		result = 31 * result + (saveDetails != null ? saveDetails.hashCode() : 0);
+		result = 31 * result + (realmUserIdentifier != null ? realmUserIdentifier.hashCode() : 0);
+		return result;
 	}
 }

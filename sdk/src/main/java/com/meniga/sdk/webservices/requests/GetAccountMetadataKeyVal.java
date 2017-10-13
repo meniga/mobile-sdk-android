@@ -10,6 +10,8 @@ public class GetAccountMetadataKeyVal extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.id;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		return result;
 	}
 }

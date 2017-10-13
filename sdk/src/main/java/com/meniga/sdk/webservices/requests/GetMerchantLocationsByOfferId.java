@@ -38,30 +38,6 @@ public class GetMerchantLocationsByOfferId extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.hashCode();
-	}
-
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		GetMerchantLocationsByOfferId that = (GetMerchantLocationsByOfferId) o;
-
-		if (offerId != that.offerId) return false;
-		if (latitude != null ? !latitude.equals(that.latitude) : that.latitude != null)
-			return false;
-		if (longitude != null ? !longitude.equals(that.longitude) : that.longitude != null)
-			return false;
-		if (radiusKm != null ? !radiusKm.equals(that.radiusKm) : that.radiusKm != null)
-			return false;
-		return limitLocations != null ? limitLocations.equals(that.limitLocations) : that.limitLocations == null;
-
-	}
-
-	@Override
-	public int hashCode() {
 		int result = (int) (offerId ^ (offerId >>> 32));
 		result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
 		result = 31 * result + (longitude != null ? longitude.hashCode() : 0);

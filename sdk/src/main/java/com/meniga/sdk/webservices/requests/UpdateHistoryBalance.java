@@ -16,6 +16,11 @@ public class UpdateHistoryBalance extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.accountId + this.balanceId;
+		int result = (int) (accountId ^ (accountId >>> 32));
+		result = 31 * result + (int) (balanceId ^ (balanceId >>> 32));
+		result = 31 * result + (balance != null ? balance.hashCode() : 0);
+		result = 31 * result + (balanceDate != null ? balanceDate.hashCode() : 0);
+		return result;
 	}
+
 }

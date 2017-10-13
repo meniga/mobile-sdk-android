@@ -14,8 +14,7 @@ public class GetTransactions extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		long valueHash = this.filter.getValueHash();
-		return String.valueOf(valueHash).hashCode();
+		return filter != null ? filter.hashCode() : 0;
 	}
 
 	@Override

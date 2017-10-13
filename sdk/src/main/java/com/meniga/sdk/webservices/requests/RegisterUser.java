@@ -11,10 +11,9 @@ public class RegisterUser extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		int val = 0;
-		val += email == null ? 1 : email.hashCode();
-		val += password == null ? 1 : password.hashCode();
-		val += culture == null ? 1 : culture.hashCode();
-		return val;
+		int result = email != null ? email.hashCode() : 0;
+		result = 31 * result + (password != null ? password.hashCode() : 0);
+		result = 31 * result + (culture != null ? culture.hashCode() : 0);
+		return result;
 	}
 }

@@ -17,16 +17,9 @@ public class GetTransactionSeries extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		int optionsHash = options != null ? options.hashCode() : 0;
-		int transactionFilterHash = transactionFilter != null ? transactionFilter.hashCode() : 0;
-		int seriesSelectorsHash = 0;
-		for (SeriesSelector selector : seriesSelectors) {
-			seriesSelectorsHash += selector.hashCode();
-		}
-
-		int result = optionsHash;
-		result = 31 * result + (transactionFilterHash);
-		result = 31 * result + (seriesSelectorsHash);
+		int result = options != null ? options.hashCode() : 0;
+		result = 31 * result + (transactionFilter != null ? transactionFilter.hashCode() : 0);
+		result = 31 * result + (seriesSelectors != null ? seriesSelectors.hashCode() : 0);
 		return result;
 	}
 }

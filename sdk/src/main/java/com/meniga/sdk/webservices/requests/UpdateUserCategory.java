@@ -13,6 +13,11 @@ public class UpdateUserCategory extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.id;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (isFixedExpenses ? 1 : 0);
+		result = 31 * result + categoryType;
+		result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
+		return result;
 	}
 }

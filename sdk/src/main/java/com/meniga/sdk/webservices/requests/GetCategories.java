@@ -14,8 +14,12 @@ public class GetCategories extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.getClass().getName().hashCode() + (this.isPublic == null ? 0 : this.isPublic ? 1 : 2);
+		int result = isPublic != null ? isPublic.hashCode() : 0;
+		result = 31 * result + (flat ? 1 : 0);
+		result = 31 * result + (culture != null ? culture.hashCode() : 0);
+		return result;
 	}
+
 
 	@Override
 	public Map<String, String> toQueryMap() {

@@ -15,13 +15,11 @@ public class SplitTransaction extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		StringBuilder bld = new StringBuilder();
-		long rest = this.transactionId + this.categoryId;
-		bld.append(rest);
-		try {
-			return Long.parseLong(bld.toString());
-		} catch (Exception ex) {
-			return this.transactionId + (this.amount == null ? 0 : this.amount.intValue());
-		}
+		int result = (int) (transactionId ^ (transactionId >>> 32));
+		result = 31 * result + (amount != null ? amount.hashCode() : 0);
+		result = 31 * result + (text != null ? text.hashCode() : 0);
+		result = 31 * result + (int) (categoryId ^ (categoryId >>> 32));
+		result = 31 * result + (isFlagged ? 1 : 0);
+		return result;
 	}
 }

@@ -11,11 +11,13 @@ public class GetUserEvents extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.getClass().toString().hashCode();
+		return -1;
 	}
 
 	@Override
 	public Map<String, String> toQueryMap() {
 		return new HashMap<>();
 	}
+
+
 }

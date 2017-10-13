@@ -9,6 +9,6 @@ public class DeleteUpcomingSeries extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return id;
+		return (int) (id ^ (id >>> 32));
 	}
 }

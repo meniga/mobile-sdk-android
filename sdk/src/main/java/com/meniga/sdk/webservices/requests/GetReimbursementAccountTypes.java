@@ -26,7 +26,8 @@ public class GetReimbursementAccountTypes extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		// Not used
-		return -1;
+		int result = skip != null ? skip.hashCode() : 0;
+		result = 31 * result + (take != null ? take.hashCode() : 0);
+		return result;
 	}
 }

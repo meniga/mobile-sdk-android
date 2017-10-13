@@ -13,6 +13,6 @@ public class GetRedemptionsByOfferId extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.offerId;
+		return (int) (offerId ^ (offerId >>> 32));
 	}
 }

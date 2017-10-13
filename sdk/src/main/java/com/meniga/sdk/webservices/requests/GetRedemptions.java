@@ -36,26 +36,6 @@ public class GetRedemptions extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		GetRedemptions that = (GetRedemptions) o;
-
-		if (skip != null ? !skip.equals(that.skip) : that.skip != null) return false;
-		if (take != null ? !take.equals(that.take) : that.take != null) return false;
-		if (dateFrom != null ? !dateFrom.equals(that.dateFrom) : that.dateFrom != null)
-			return false;
-		return dateTo != null ? dateTo.equals(that.dateTo) : that.dateTo == null;
-
-	}
-
-	@Override
-	public int hashCode() {
 		int result = skip != null ? skip.hashCode() : 0;
 		result = 31 * result + (take != null ? take.hashCode() : 0);
 		result = 31 * result + (dateFrom != null ? dateFrom.hashCode() : 0);

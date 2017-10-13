@@ -15,6 +15,11 @@ public class UpdateSplits extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return -1;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (amount != null ? amount.hashCode() : 0);
+		result = 31 * result + (text != null ? text.hashCode() : 0);
+		result = 31 * result + (int) (categoryId ^ (categoryId >>> 32));
+		result = 31 * result + (isFlagged ? 1 : 0);
+		return result;
 	}
 }

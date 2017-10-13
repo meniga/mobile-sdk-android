@@ -12,6 +12,8 @@ public class DeleteComment extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return transactionId;
+		int result = (int) (transactionId ^ (transactionId >>> 32));
+		result = 31 * result + (int) (commentId ^ (commentId >>> 32));
+		return result;
 	}
 }

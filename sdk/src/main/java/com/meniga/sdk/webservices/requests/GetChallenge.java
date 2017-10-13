@@ -11,6 +11,6 @@ public class GetChallenge extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return id.hashCode();
+		return id != null ? id.hashCode() : 0;
 	}
 }

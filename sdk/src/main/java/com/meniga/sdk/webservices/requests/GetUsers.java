@@ -7,6 +7,6 @@ public class GetUsers extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.getClass().getName().hashCode();
+		return -1;
 	}
 }
