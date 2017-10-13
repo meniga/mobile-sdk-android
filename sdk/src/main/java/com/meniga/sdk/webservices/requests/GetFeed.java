@@ -20,7 +20,11 @@ public class GetFeed extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.dateFrom.getMillis() + this.dateTo.getMillis();
+		int result = dateFrom != null ? dateFrom.hashCode() : 0;
+		result = 31 * result + (dateTo != null ? dateTo.hashCode() : 0);
+		result = 31 * result + skip;
+		result = 31 * result + take;
+		return result;
 	}
 
 	@Override

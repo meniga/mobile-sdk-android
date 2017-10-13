@@ -12,4 +12,6 @@ public class AcceptOffersTermsAndConditions extends QueryRequestObject {
 	public long getValueHash() {
 		return -1;
 	}
+
+
 }

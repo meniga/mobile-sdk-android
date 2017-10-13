@@ -9,6 +9,6 @@ public class DeleteAccount extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.accountId;
+		return (int) (accountId ^ (accountId >>> 32));
 	}
 }

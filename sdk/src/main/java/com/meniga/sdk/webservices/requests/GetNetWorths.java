@@ -32,10 +32,11 @@ public class GetNetWorths extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.startDate.getMillis() +
-				this.endDate.getMillis() +
-				this.skip +
-				this.take +
-				(this.useInterpolation == null ? 1 : this.useInterpolation ? 2 : 1);
+		int result = startDate != null ? startDate.hashCode() : 0;
+		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+		result = 31 * result + (useInterpolation != null ? useInterpolation.hashCode() : 0);
+		result = 31 * result + skip;
+		result = 31 * result + take;
+		return result;
 	}
 }

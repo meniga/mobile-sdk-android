@@ -21,7 +21,10 @@ public class CreateNetWorthBalanceHistory extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return 0;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (balance != null ? balance.hashCode() : 0);
+		result = 31 * result + (balanceDate != null ? balanceDate.hashCode() : 0);
+		return result;
 	}
 
 	@Override
@@ -33,4 +36,5 @@ public class CreateNetWorthBalanceHistory extends QueryRequestObject {
 
 		return query;
 	}
+
 }

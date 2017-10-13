@@ -18,4 +18,5 @@ public class GetTopMerchants extends QueryRequestObject {
 		result = 31 * result + (options != null ? options.hashCode() : 0);
 		return result;
 	}
+
 }

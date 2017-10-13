@@ -13,6 +13,7 @@ public class ActivateOfferByToken extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.validationToken.hashCode();
+		return validationToken != null ? validationToken.hashCode() : 0;
 	}
+
 }

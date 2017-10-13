@@ -11,6 +11,9 @@ public class UpdatedNetWorthAccount extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.id;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (isExcluded != null ? isExcluded.hashCode() : 0);
+		result = 31 * result + (accountName != null ? accountName.hashCode() : 0);
+		return result;
 	}
 }

@@ -22,8 +22,12 @@ public class CreateTransaction extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		// Not used for creating transactions;
-		return -1;
+		int result = date != null ? date.hashCode() : 0;
+		result = 31 * result + (text != null ? text.hashCode() : 0);
+		result = 31 * result + (amount != null ? amount.hashCode() : 0);
+		result = 31 * result + (int) (categoryId ^ (categoryId >>> 32));
+		result = 31 * result + (setAsRead ? 1 : 0);
+		return result;
 	}
 
 	@Override

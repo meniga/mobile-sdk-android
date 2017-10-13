@@ -9,7 +9,6 @@ public class StartSync extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		// Does not apply to this object
-		return -1;
+		return (int) (waitForCompleteMilliseconds ^ (waitForCompleteMilliseconds >>> 32));
 	}
 }

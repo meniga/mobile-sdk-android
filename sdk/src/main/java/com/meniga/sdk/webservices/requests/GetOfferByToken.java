@@ -13,6 +13,6 @@ public class GetOfferByToken extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return token.hashCode();
+		return token != null ? token.hashCode() : 0;
 	}
 }

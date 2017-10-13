@@ -12,7 +12,7 @@ public class SetCulture extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return culture.hashCode();
+		return culture != null ? culture.hashCode() : 0;
 	}
 
 	@Override

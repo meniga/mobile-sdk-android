@@ -14,6 +14,8 @@ public class AddRealmAccountsToMeniga extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return 0;
+		int result = (int) (realmUserId ^ (realmUserId >>> 32));
+		result = 31 * result + (realmAccounts != null ? realmAccounts.hashCode() : 0);
+		return result;
 	}
 }

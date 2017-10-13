@@ -7,6 +7,6 @@ public class GetUserProfile extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.getClass().toString().hashCode();
+		return -1;
 	}
 }

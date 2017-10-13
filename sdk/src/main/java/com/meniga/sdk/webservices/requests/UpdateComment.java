@@ -14,6 +14,10 @@ public class UpdateComment extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.transactionId + this.commentId + this.comment.hashCode();
+		int result = (int) (transactionId ^ (transactionId >>> 32));
+		result = 31 * result + (int) (commentId ^ (commentId >>> 32));
+		result = 31 * result + (comment != null ? comment.hashCode() : 0);
+		return result;
 	}
+
 }

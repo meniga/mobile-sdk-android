@@ -15,6 +15,9 @@ public class CreateChallengeTypeData extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return 0;
+		int result = categoryIds != null ? categoryIds.hashCode() : 0;
+		result = 31 * result + (targetAmount != null ? targetAmount.hashCode() : 0);
+		result = 31 * result + (metaData != null ? metaData.hashCode() : 0);
+		return result;
 	}
 }

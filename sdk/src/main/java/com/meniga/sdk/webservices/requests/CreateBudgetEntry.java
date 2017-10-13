@@ -20,6 +20,11 @@ public class CreateBudgetEntry extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return 0;
+		int result = targetAmount != null ? targetAmount.hashCode() : 0;
+		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+		result = 31 * result + (categoryIds != null ? categoryIds.hashCode() : 0);
+		result = 31 * result + autoFillType;
+		return result;
 	}
 }

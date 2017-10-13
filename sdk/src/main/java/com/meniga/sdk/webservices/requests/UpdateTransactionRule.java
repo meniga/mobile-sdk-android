@@ -38,7 +38,26 @@ public class UpdateTransactionRule extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.id;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (textCriteria != null ? textCriteria.hashCode() : 0);
+		result = 31 * result + (textCriteriaOperatorType != null ? textCriteriaOperatorType.hashCode() : 0);
+		result = 31 * result + (dateMatchTypeCriteria != null ? dateMatchTypeCriteria.hashCode() : 0);
+		result = 31 * result + (daysLimitCriteria != null ? daysLimitCriteria.hashCode() : 0);
+		result = 31 * result + (amountLimitTypeCriteria != null ? amountLimitTypeCriteria.hashCode() : 0);
+		result = 31 * result + (amountLimitSignCriteria != null ? amountLimitSignCriteria.hashCode() : 0);
+		result = 31 * result + (amountCriteria != null ? amountCriteria.hashCode() : 0);
+		result = 31 * result + (accountCategoryCriteria != null ? accountCategoryCriteria.hashCode() : 0);
+		result = 31 * result + (acceptAction != null ? acceptAction.hashCode() : 0);
+		result = 31 * result + (monthShiftAction != null ? monthShiftAction.hashCode() : 0);
+		result = 31 * result + (removeAction != null ? removeAction.hashCode() : 0);
+		result = 31 * result + (textAction != null ? textAction.hashCode() : 0);
+		result = 31 * result + (commentAction != null ? commentAction.hashCode() : 0);
+		result = 31 * result + (categoryIdAction != null ? categoryIdAction.hashCode() : 0);
+		result = 31 * result + (splitActions != null ? splitActions.hashCode() : 0);
+		result = 31 * result + (flagAction != null ? flagAction.hashCode() : 0);
+		result = 31 * result + (applyOnExisting ? 1 : 0);
+		return result;
 	}
 
 	@Override

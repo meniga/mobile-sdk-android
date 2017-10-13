@@ -10,6 +10,8 @@ public class DeleteNetWorthBalance extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.id;
+		int result = (int) (accountId ^ (accountId >>> 32));
+		result = 31 * result + (int) (id ^ (id >>> 32));
+		return result;
 	}
 }

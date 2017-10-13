@@ -9,6 +9,6 @@ public class GetSplitTransactions extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return this.parentId;
+		return (int) (parentId ^ (parentId >>> 32));
 	}
 }

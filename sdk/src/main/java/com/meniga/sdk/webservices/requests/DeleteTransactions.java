@@ -13,9 +13,7 @@ public class DeleteTransactions extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		if (this.transactionIds == null || this.transactionIds.size() == 0)
-			return -1;
-		return this.transactionIds.get(0);
+		return transactionIds != null ? transactionIds.hashCode() : 0;
 	}
 
 	@Override

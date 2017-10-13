@@ -11,6 +11,9 @@ public class UpdateAccountMetadata extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return -1;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (key != null ? key.hashCode() : 0);
+		result = 31 * result + (value != null ? value.hashCode() : 0);
+		return result;
 	}
 }

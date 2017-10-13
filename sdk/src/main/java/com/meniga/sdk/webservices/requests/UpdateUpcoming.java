@@ -38,7 +38,8 @@ public class UpdateUpcoming extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		int result = text != null ? text.hashCode() : 0;
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (text != null ? text.hashCode() : 0);
 		result = 31 * result + (amountInCurrency != null ? amountInCurrency.hashCode() : 0);
 		result = 31 * result + (currencyCode != null ? currencyCode.hashCode() : 0);
 		result = 31 * result + (date != null ? date.hashCode() : 0);

@@ -10,6 +10,8 @@ public class GetBudgetEntryById extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return budgetId * 31 + entryId;
+		int result = (int) (budgetId ^ (budgetId >>> 32));
+		result = 31 * result + (int) (entryId ^ (entryId >>> 32));
+		return result;
 	}
 }

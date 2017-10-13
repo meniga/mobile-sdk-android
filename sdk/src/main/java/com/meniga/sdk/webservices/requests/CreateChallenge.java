@@ -16,6 +16,13 @@ public class CreateChallenge extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return 0;
+		int result = title != null ? title.hashCode() : 0;
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+		result = 31 * result + (iconId != null ? iconId.hashCode() : 0);
+		result = 31 * result + (typeData != null ? typeData.hashCode() : 0);
+		return result;
 	}
+
 }

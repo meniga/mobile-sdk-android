@@ -30,6 +30,9 @@ public class GetReimbursementAccounts extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return -1;
+		int result = includeInactive != null ? includeInactive.hashCode() : 0;
+		result = 31 * result + (skip != null ? skip.hashCode() : 0);
+		result = 31 * result + (take != null ? take.hashCode() : 0);
+		return result;
 	}
 }

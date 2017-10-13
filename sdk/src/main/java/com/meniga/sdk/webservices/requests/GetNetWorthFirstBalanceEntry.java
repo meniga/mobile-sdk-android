@@ -19,6 +19,6 @@ public class GetNetWorthFirstBalanceEntry extends QueryRequestObject {
 
 	@Override
 	public long getValueHash() {
-		return -1;
+		return (excludeAccountsExcludedFromNetWorth ? 1 : 0);
 	}
 }
