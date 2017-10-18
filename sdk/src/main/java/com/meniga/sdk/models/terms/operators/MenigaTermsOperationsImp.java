@@ -6,6 +6,7 @@ import com.meniga.sdk.models.terms.MenigaTermType;
 import com.meniga.sdk.models.terms.MenigaTerms;
 import com.meniga.sdk.webservices.requests.AcceptTerms;
 import com.meniga.sdk.webservices.requests.DeclineTerms;
+import com.meniga.sdk.webservices.requests.GetTerm;
 import com.meniga.sdk.webservices.requests.GetTermTypes;
 import com.meniga.sdk.webservices.requests.GetTerms;
 
@@ -21,6 +22,14 @@ public class MenigaTermsOperationsImp implements MenigaTermsOperations {
 		GetTerms req = new GetTerms();
 		req.culture = culture;
 		return MenigaSDK.executor().getTerms(req);
+	}
+
+	@Override
+	public Result<MenigaTerms> getTerm(String culture, long typeId) {
+		GetTerm req = new GetTerm();
+		req.culture = culture;
+		req.typeId = typeId;
+		return MenigaSDK.executor().getTerm(req);
 	}
 
 	@Override

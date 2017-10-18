@@ -153,6 +153,10 @@ public class MenigaTerms implements Parcelable, Serializable, Cloneable {
 		return MenigaTerms.apiOperator.getTerms(MenigaSDK.getMenigaSettings().getCulture());
 	}
 
+	public static Result<MenigaTerms> fetch(long typeId) {
+		return MenigaTerms.apiOperator.getTerm(MenigaSDK.getMenigaSettings().getCulture(), typeId);
+	}
+
 	public static Result<List<MenigaTermType>> fetchTypes() {
 		return MenigaTerms.apiOperator.getTermTypes(MenigaSDK.getMenigaSettings().getCulture());
 	}

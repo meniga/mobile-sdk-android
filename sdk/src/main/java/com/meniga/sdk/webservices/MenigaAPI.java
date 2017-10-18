@@ -407,6 +407,9 @@ public interface MenigaAPI {
 	@GET(APIConst.URL_TERMS)
 	Call<List<MenigaTerms>> getTerms(@Header("Accept-Language") String culture);
 
+	@GET(APIConst.URL_TERMS + "/{typeId}")
+	Call<MenigaTerms> getTerm(@Header("Accept-Language") String culture, @Path("typeId") long typeId);
+
 	@GET(APIConst.URL_TERMS + APIConst.TYPES)
 	Call<List<MenigaTermType>> getTermTypes(@Header("Accept-Language") String culture);
 
