@@ -45,7 +45,7 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 	}
 
 	public MenigaDecimal getTargetAmount() {
-		return targetAmount;
+		return targetAmount == null ? MenigaDecimal.ZERO : targetAmount;
 	}
 
 	public DateTime getStartDate() {
