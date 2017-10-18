@@ -13,6 +13,8 @@ import java.util.List;
 public interface MenigaTermsOperations {
 	Result<List<MenigaTerms>> getTerms(String culture);
 
+    Result<MenigaTerms> getTerm(String culture, long typeId);
+
     Result<List<MenigaTermType>> getTermTypes(String culture);
 
     Result<Void> acceptTerms(long typeId);

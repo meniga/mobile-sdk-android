@@ -137,10 +137,6 @@ public class MenigaOfferPage extends ArrayList<MenigaOffer> implements Serializa
 		return offersEnabledTimestamp;
 	}
 
-	public boolean isTermsAndConditionsAccepted() {
-		return termsAndConditionsAccepted;
-	}
-
 	public boolean isReimbursementAccountValid() {
 		return isReimbursementAccountValid;
 	}
