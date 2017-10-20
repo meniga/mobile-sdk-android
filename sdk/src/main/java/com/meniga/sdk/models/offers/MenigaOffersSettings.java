@@ -57,4 +57,8 @@ public class MenigaOffersSettings implements Parcelable, Serializable {
 	public static Result<Void> disable() {
 		return MenigaOffersSettings.apiOperator.disableOffers();
 	}
+
+    public static Result<Void> acceptTermsAndConditions() {
+        return MenigaOffersSettings.apiOperator.acceptTermsAndConditions();
+    }
 }
