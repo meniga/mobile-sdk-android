@@ -47,7 +47,7 @@ public class MenigaOfferPage extends ArrayList<MenigaOffer> implements Serializa
 	@MetaProperty
 	private int totalCount;
 
-	protected MenigaOfferPage() {
+	public MenigaOfferPage() {
 	}
 
 	protected MenigaOfferPage(Parcel in) {
@@ -101,12 +101,16 @@ public class MenigaOfferPage extends ArrayList<MenigaOffer> implements Serializa
 		return expiredWithRedemptionOnly;
 	}
 
-	public boolean isHasMorePages() {
+	public boolean hasMorePages() {
 		return hasMorePages;
 	}
 
 	public int getAvailableOffers() {
 		return availableOffers;
+	}
+
+	public boolean isTermsAndConditionsAccepted() {
+		return termsAndConditionsAccepted;
 	}
 
 	public int getAvailableOffersActivated() {
