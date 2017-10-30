@@ -20,6 +20,7 @@ import com.meniga.sdk.converters.MenigaTransactionsConverter;
 import com.meniga.sdk.helpers.ChallengeItemFactory;
 import com.meniga.sdk.helpers.FeedItemFactory;
 import com.meniga.sdk.helpers.GsonProvider;
+import com.meniga.sdk.webservices.interceptors.AcceptLanguageInterceptor;
 
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
@@ -82,6 +83,8 @@ public class WebClient {
 		for (Interceptor interceptor : settings.getNetworkInterceptors()) {
 			builder = builder.addNetworkInterceptor(interceptor);
 		}
+
+		builder = builder.addInterceptor(new AcceptLanguageInterceptor());
 
 		OkHttpClient client = builder.build();
 

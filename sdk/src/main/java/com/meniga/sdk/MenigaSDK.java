@@ -75,7 +75,6 @@ public class MenigaSDK {
 	private static PersistenceDelegate persistenceDelegate;
 
 	private static MenigaSettings settings;
-	private static Map<String, WebClient> clients;
 
 	@Inject
 	MenigaTransactionOperations transactionOperator;
