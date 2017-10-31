@@ -121,7 +121,7 @@ public class MenigaTransactionOperationsMock implements MenigaTransactionOperati
 	}
 
 	private MenigaTransactionPage gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		MenigaTransactionPage transactionPage = null;
 		try {
 			String body = FileImporter.getJsonFileFromRaw("transactions.json");

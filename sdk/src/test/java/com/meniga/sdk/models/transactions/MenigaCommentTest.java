@@ -104,7 +104,7 @@ public class MenigaCommentTest {
 	}
 
 	private List<MenigaComment> gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		List<MenigaComment> categories = null;
 		try {
 			categories = Arrays.asList(

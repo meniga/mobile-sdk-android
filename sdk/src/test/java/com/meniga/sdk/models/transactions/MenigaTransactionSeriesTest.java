@@ -75,7 +75,7 @@ public class MenigaTransactionSeriesTest{
 	}
 
 	private List<MenigaTransactionSeries> gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return Arrays.asList(gson.fromJson(MenigaConverter.getAsArray(
 					FileImporter.getJsonFileFromRaw("transactionseries.json")),

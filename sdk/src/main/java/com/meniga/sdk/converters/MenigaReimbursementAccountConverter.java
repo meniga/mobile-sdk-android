@@ -13,6 +13,7 @@ import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAcc
 import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAccountTypePage;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -40,22 +41,25 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaReimbursementAccount>() {
 				@Override
 				public MenigaReimbursementAccount convert(ResponseBody resBody) throws IOException {
-					String body = convertStreamToString((resBody.byteStream()));
-
-					Gson gson = GsonProvider.getGsonBuilder()
-							.create();
-
-					return gson.fromJson(getAsObject(body), MenigaReimbursementAccount.class);
+					Gson gson = GsonProvider.getGsonBuilder();
+					return gson.fromJson(getAsObject(resBody.byteStream()), MenigaReimbursementAccount.class);
 				}
 			};
 		} else if (typeOfAccounts.equals(type)) {
 			return new Converter<ResponseBody, MenigaReimbursementAccountPage>() {
 				@Override
 				public MenigaReimbursementAccountPage convert(ResponseBody resBody) throws IOException {
-					String body = MenigaReimbursementAccountConverter.this.convertStreamToString((resBody.byteStream()));
-					Gson gson = GsonProvider.getGsonBuilder().create();
+
+					Gson gson = GsonProvider.getGsonBuilder();
 					MenigaReimbursementAccountPage page = new MenigaReimbursementAccountPage();
-					JsonElement jelement = new JsonParser().parse(body);
+					InputStreamReader isr = new InputStreamReader(resBody.byteStream());
+					JsonElement jelement;
+					try {
+						jelement = new JsonParser().parse(isr);
+					}
+					finally {
+						isr.close();
+					}
 					JsonObject jobject = jelement.getAsJsonObject();
 					JsonArray arr = jobject.getAsJsonArray("data");
 
@@ -70,10 +74,17 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaReimbursementAccountTypePage>() {
 				@Override
 				public MenigaReimbursementAccountTypePage convert(ResponseBody resBody) throws IOException {
-					String body = MenigaReimbursementAccountConverter.this.convertStreamToString((resBody.byteStream()));
-					Gson gson = GsonProvider.getGsonBuilder().create();
+					Gson gson = GsonProvider.getGsonBuilder();
 					MenigaReimbursementAccountTypePage page = new MenigaReimbursementAccountTypePage();
-					JsonElement jelement = new JsonParser().parse(body);
+
+					InputStreamReader isr = new InputStreamReader(resBody.byteStream());
+					JsonElement jelement;
+					try {
+						jelement = new JsonParser().parse(isr);
+					}
+					finally {
+						isr.close();
+					}
 					JsonObject jobject = jelement.getAsJsonObject();
 					JsonArray arr = jobject.getAsJsonArray("data");
 					Collections.addAll(page, gson.fromJson(arr, MenigaReimbursementAccountType[].class));

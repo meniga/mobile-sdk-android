@@ -35,9 +35,7 @@ public class MenigaFeedItemConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public Object convert(ResponseBody resBody) throws IOException {
-					String body = MenigaFeedItemConverter.this.convertStreamToString((resBody.byteStream()));
-					Gson gson = GsonProvider.getGsonBuilder().create();
-					JsonObject obj = getAsObject(body);
+					JsonObject obj = getAsObject(resBody.byteStream());
 					return feedItemFactory.getMenigaFeetItem(obj);
 				}
 			};

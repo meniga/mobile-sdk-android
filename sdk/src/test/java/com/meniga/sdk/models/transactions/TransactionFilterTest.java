@@ -43,7 +43,7 @@ public class TransactionFilterTest{
 				.timeGroup(FilterTimeGroup.CUSTOM)
 				.build();
 
-		JsonElement obj = GsonProvider.getGsonBuilder().create().toJsonTree(filter1);
+		JsonElement obj = GsonProvider.getGsonBuilder().toJsonTree(filter1);
 		JsonObject jsonFilter = obj.getAsJsonObject();
 
 		TransactionsFilter merged = new TransactionsFilter.Builder().mergeFilters(filter1, filter2).build();

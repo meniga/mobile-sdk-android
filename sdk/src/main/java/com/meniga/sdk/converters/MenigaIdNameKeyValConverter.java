@@ -29,10 +29,8 @@ public class MenigaIdNameKeyValConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public Object convert(ResponseBody value) throws IOException {
-					String body = MenigaIdNameKeyValConverter.this.convertStreamToString((value.byteStream()));
-
 					List<KeyVal<Long, String>> list = new ArrayList<>();
-					JsonArray arr = getAsArray(body);
+					JsonArray arr = getAsArray(value.byteStream());
 					for (int i = 0; i < arr.size(); i++) {
 						JsonObject entry = (JsonObject) arr.get(i);
 						KeyVal<Long, String> item = new KeyVal<>(entry.get("id").getAsLong(), entry.get("name").getAsString());

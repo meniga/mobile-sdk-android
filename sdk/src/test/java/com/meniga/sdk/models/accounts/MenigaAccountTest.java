@@ -120,7 +120,7 @@ public class MenigaAccountTest {
 	}
 
 	public List<MenigaAccount> gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return Arrays.asList(
 					gson.fromJson(

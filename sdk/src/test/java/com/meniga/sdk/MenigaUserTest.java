@@ -33,7 +33,7 @@ public class MenigaUserTest extends MenigaConverter  {
 		FileInputStream fin = new FileInputStream(file);
 		String body = this.convertStreamToString(fin);
 		Type typeOfMenigaAccountList = new TypeToken<List<MenigaAccount>>() {}.getType();
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		List<MenigaUser> users = gson.fromJson(getAsArray(body), new TypeToken<List<MenigaUser>>(){}.getType());
 
 	}

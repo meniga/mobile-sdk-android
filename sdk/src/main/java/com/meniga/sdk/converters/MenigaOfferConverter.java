@@ -11,6 +11,8 @@ import com.meniga.sdk.models.offers.MenigaOffer;
 import com.meniga.sdk.models.offers.MenigaOfferPage;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -36,10 +38,17 @@ public class MenigaOfferConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaOfferPage>() {
 				@Override
 				public MenigaOfferPage convert(ResponseBody resBody) throws IOException {
-					String body = MenigaOfferConverter.this.convertStreamToString((resBody.byteStream()));
-					Gson gson = GsonProvider.getGsonBuilder().create();
+					Gson gson = GsonProvider.getGsonBuilder();
 					MenigaOfferPage page = gson.fromJson(new JsonArray(), MenigaOfferPage.class);
-					JsonElement element = new JsonParser().parse(body);
+					InputStreamReader isr = new InputStreamReader(resBody.byteStream());
+					JsonElement element;
+					try {
+						element = new JsonParser().parse(isr);
+					}
+					finally {
+						isr.close();
+					}
+
 					JsonObject object = element.getAsJsonObject();
 					JsonArray arr = object.getAsJsonArray("data");
 
@@ -54,9 +63,8 @@ public class MenigaOfferConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public Object convert(ResponseBody resBody) throws IOException {
-					String body = convertStreamToString((resBody.byteStream()));
-					Gson gson = GsonProvider.getGsonBuilder().create();
-					return gson.fromJson(getAsObject(body), MenigaOffer.class);
+					Gson gson = GsonProvider.getGsonBuilder();
+					return gson.fromJson(getAsObject(resBody.byteStream()), MenigaOffer.class);
 				}
 			};
 		}

@@ -124,7 +124,7 @@ public class MenigaTransactionRuleTest{
 	}
 
 	private List<MenigaTransactionRule> gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		List<MenigaTransactionRule> categories = null;
 		try {
 			categories = Arrays.asList(gson.fromJson(MenigaConverter.getAsArray(FileImporter.getJsonFileFromRaw("transactionrules.json")), MenigaTransactionRule[].class));

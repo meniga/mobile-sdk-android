@@ -45,14 +45,32 @@ public abstract class MenigaConverter extends Converter.Factory {
 		return sb.toString();
 	}
 
-	public static JsonArray getAsArray(String body) {
-		JsonElement jelement = new JsonParser().parse(body);
+	public static JsonArray getAsArray(InputStream stream) throws IOException {
+		JsonObject jobject;
+		InputStreamReader isr = new InputStreamReader(stream);
+		try {
+			JsonElement jelement = new JsonParser().parse(isr);
+			isr.close();
+			jobject = jelement.getAsJsonObject();
+		} finally {
+			isr.close();
+		}
+		return jobject.getAsJsonArray("data");
+	}
+
+	public static JsonArray getAsArray(JsonElement jelement) {
 		JsonObject jobject = jelement.getAsJsonObject();
 		return jobject.getAsJsonArray("data");
 	}
 
-	public static JsonObject getAsObject(String body) {
-		JsonElement jelement = new JsonParser().parse(body);
+	public static JsonObject getAsObject(InputStream stream) throws IOException {
+		InputStreamReader isr = new InputStreamReader(stream);
+		JsonElement jelement;
+		try {
+			jelement = new JsonParser().parse(isr);
+		} finally {
+			isr.close();
+		}
 		JsonObject jobject = jelement.getAsJsonObject();
 		return jobject.getAsJsonObject("data");
 	}

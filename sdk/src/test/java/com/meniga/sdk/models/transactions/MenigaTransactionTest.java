@@ -153,7 +153,7 @@ public class MenigaTransactionTest{
 	}
 
 	private List<MenigaTransaction> gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		List<MenigaTransaction> transactions = null;
 		try {
 			transactions = Arrays.asList(

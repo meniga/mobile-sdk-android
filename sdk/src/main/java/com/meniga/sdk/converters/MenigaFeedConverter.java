@@ -9,6 +9,7 @@ import com.meniga.sdk.helpers.FeedItemFactory;
 import com.meniga.sdk.models.feed.MenigaFeed;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -37,17 +38,16 @@ public class MenigaFeedConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaFeed>() {
 				@Override
 				public MenigaFeed convert(ResponseBody resBody) throws IOException {
-					String body = convertStreamToString((resBody.byteStream()));
-
 					MenigaFeed feed = new MenigaFeed();
 
-					JsonArray arr = getAsArray(body);
+					JsonArray arr = getAsArray(resBody.byteStream());
 					for (JsonElement element : arr) {
 						feed.add(feedItemFactory.getMenigaFeetItem((JsonObject) element));
 					}
 
 					try {
-						JsonElement jelement = new JsonParser().parse(body);
+						InputStreamReader isr = new InputStreamReader(resBody.byteStream());
+						JsonElement jelement = new JsonParser().parse(isr);
 						JsonObject jobject = jelement.getAsJsonObject();
 						if (jobject.has("meta")) {
 							JsonObject meta = jobject.getAsJsonObject("meta");

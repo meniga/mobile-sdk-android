@@ -103,7 +103,7 @@ public class WebClient {
 				.addConverterFactory(new MenigaChallengesConverter(new ChallengeItemFactory()))
 				.addConverterFactory(new MenigaFeedItemConverter(new FeedItemFactory()))
 				.addConverterFactory(new MenigaBaseConverter())
-				.addConverterFactory(GsonConverterFactory.create(GsonProvider.getGsonBuilder().create()))
+				.addConverterFactory(GsonConverterFactory.create(GsonProvider.getGsonBuilder()))
 				.client(client)
 				.build();
 	}

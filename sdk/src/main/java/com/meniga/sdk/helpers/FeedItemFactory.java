@@ -21,7 +21,7 @@ import java.util.List;
 public class FeedItemFactory {
 
 	public MenigaFeedItem getMenigaFeetItem(JsonObject element) {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		String type = element.get("typeName").getAsString();
 
 		switch (type) {

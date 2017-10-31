@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import com.meniga.sdk.helpers.GsonProvider;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -25,10 +26,10 @@ public class MenigaBaseConverter<T> extends MenigaConverter {
 		return new Converter<ResponseBody, T>() {
 			@Override
 			public T convert(ResponseBody resBody) throws IOException {
-				String body = MenigaBaseConverter.this.convertStreamToString((resBody.byteStream()));
-				Gson gson = GsonProvider.getGsonBuilder().create();
+				Gson gson = GsonProvider.getGsonBuilder();
+				InputStreamReader isr = new InputStreamReader(resBody.byteStream());
 				JsonParser parser = new JsonParser();
-				JsonObject jsonObject = parser.parse(body).getAsJsonObject();
+				JsonObject jsonObject = parser.parse(isr).getAsJsonObject();
 				JsonElement jsonElement = null;
 				if (jsonObject.has("data")) {
 					jsonElement = jsonObject.get("data");

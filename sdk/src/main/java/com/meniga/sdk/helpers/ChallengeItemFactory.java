@@ -15,7 +15,7 @@ public class ChallengeItemFactory {
 
 	public MenigaChallenge getMenigaChallengeItem(JsonObject element) {
 		if (gson == null) {
-			gson = GsonProvider.getGsonBuilder().create();
+			gson = GsonProvider.getGsonBuilder();
 		}
 
 		MenigaChallenge topLevel = gson.fromJson(element, MenigaChallenge.class);

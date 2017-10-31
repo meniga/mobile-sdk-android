@@ -29,16 +29,15 @@ public class MenigaConvertersTest extends MenigaConverter {
 		File file = new File(resource.getPath());
 
 		FileInputStream fin = new FileInputStream(file);
-		String body = this.convertStreamToString(fin);
 
 		String comparison = FileImporter.getJsonFileFromRaw("transactions.json");
 
-		List<MenigaTransaction> fromTest = GsonProvider.getGsonBuilder().create().fromJson(
-				MenigaConverter.getAsArray(body),
+		List<MenigaTransaction> fromTest = GsonProvider.getGsonBuilder().fromJson(
+				MenigaConverter.getAsArray(fin),
 				new TypeToken<List<MenigaTransaction>>(){}.getType()
 		);
-		List<MenigaTransaction> comparativeResult = GsonProvider.getGsonBuilder().create().fromJson(
-				MenigaConverter.getAsArray(comparison),
+		List<MenigaTransaction> comparativeResult = GsonProvider.getGsonBuilder().fromJson(
+				MenigaConverter.getAsArray(fin),
 				new TypeToken<List<MenigaTransaction>>(){}.getType()
 		);
 

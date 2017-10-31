@@ -27,7 +27,7 @@ import java.util.List;
 public class MenigaAccountOperationsMock implements MenigaAccountOperations {
 
 	private static List<MenigaAccount> gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return Arrays.asList(
 					gson.fromJson(

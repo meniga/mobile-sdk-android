@@ -10,6 +10,7 @@ import com.meniga.sdk.models.offers.redemptions.MenigaRedemptions;
 import com.meniga.sdk.models.offers.redemptions.MenigaScheduledReimbursement;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -33,12 +34,18 @@ public class MenigaRedemptionConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaRedemptions>() {
 				@Override
 				public MenigaRedemptions convert(ResponseBody resBody) throws IOException {
-					String body = MenigaRedemptionConverter.this.convertStreamToString((resBody.byteStream()));
+					InputStreamReader isr = new InputStreamReader(resBody.byteStream());
+					JsonElement element;
+					try {
+						element = new JsonParser().parse(isr);
+					} finally {
+						isr.close();
+					}
 
-					Gson gson = GsonProvider.getGsonBuilder().create();
-					MenigaRedemptions page = gson.fromJson(getAsArray(body), MenigaRedemptions.class);
 
-					JsonElement element = new JsonParser().parse(body);
+					Gson gson = GsonProvider.getGsonBuilder();
+					MenigaRedemptions page = gson.fromJson(getAsArray(element), MenigaRedemptions.class);
+
 					JsonObject object = element.getAsJsonObject();
 
 					JsonObject meta = object.getAsJsonObject("meta");

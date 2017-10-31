@@ -65,7 +65,7 @@ public class MenigaMerchantTest {
 	}
 
 	private MenigaMerchant gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		MenigaMerchant item = null;
 		try {
 			item = gson.fromJson(

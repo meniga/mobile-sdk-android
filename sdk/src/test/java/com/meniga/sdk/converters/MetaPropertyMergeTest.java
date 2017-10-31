@@ -58,7 +58,7 @@ public class MetaPropertyMergeTest extends MenigaConverter {
 		FileInputStream fin = new FileInputStream(file);
 		String body = this.convertStreamToString(fin);
 
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		JsonElement jelement = new JsonParser().parse(body);
 		JsonObject jobject = jelement.getAsJsonObject();
 

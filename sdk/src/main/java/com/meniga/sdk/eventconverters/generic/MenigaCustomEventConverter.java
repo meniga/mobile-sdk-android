@@ -14,7 +14,7 @@ public class MenigaCustomEventConverter implements EventBaseConverter<MenigaCust
 
 	@Override
 	public MenigaCustomEvent eventConverter(JsonElement element) {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		return gson.fromJson(element, MenigaCustomEvent.class);
 	}
 

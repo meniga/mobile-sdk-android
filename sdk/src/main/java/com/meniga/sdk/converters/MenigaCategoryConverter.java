@@ -7,6 +7,7 @@ import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -37,11 +38,8 @@ public class MenigaCategoryConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public List<MenigaCategory> convert(ResponseBody resBody) throws IOException {
-					String body = MenigaCategoryConverter.this.convertStreamToString((resBody.byteStream()));
-
-					Gson gson = GsonProvider.getGsonBuilder().create();
-
-					MenigaCategory[] catsRaw = gson.fromJson(getAsArray(body), MenigaCategory[].class);
+					Gson gson = GsonProvider.getGsonBuilder();
+					MenigaCategory[] catsRaw = gson.fromJson(getAsArray(resBody.byteStream()), MenigaCategory[].class);
 
 					List<MenigaCategory> cats = new ArrayList<>();
 					for (MenigaCategory cat : catsRaw) {
@@ -66,11 +64,10 @@ public class MenigaCategoryConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public MenigaCategory convert(ResponseBody resBody) throws IOException {
-					String body = MenigaCategoryConverter.this.convertStreamToString((resBody.byteStream()));
 
-					Gson gson = GsonProvider.getGsonBuilder().create();
+					Gson gson = GsonProvider.getGsonBuilder();
 
-					MenigaCategory catRaw = gson.fromJson(getAsObject(body), MenigaCategory.class);
+					MenigaCategory catRaw = gson.fromJson(getAsObject(resBody.byteStream()), MenigaCategory.class);
 					if (catRaw.getIsPublic()) {
 						return catRaw;
 					} else {

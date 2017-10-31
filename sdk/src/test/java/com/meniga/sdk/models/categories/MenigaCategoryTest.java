@@ -114,7 +114,7 @@ public class MenigaCategoryTest {
 	}
 
 	private List<MenigaCategory> gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		List<MenigaCategory> categories = null;
 		try {
 			categories = Arrays.asList(gson.fromJson(MenigaConverter.getAsArray(FileImporter.getJsonFileFromRaw("categories.json")), MenigaCategory[].class));

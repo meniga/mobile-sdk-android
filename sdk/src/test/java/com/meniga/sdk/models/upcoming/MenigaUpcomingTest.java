@@ -143,7 +143,7 @@ public class MenigaUpcomingTest {
 
 
 	private List<MenigaUpcoming> gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		MenigaUpcoming[] items = null;
 		try {
 			items = gson.fromJson(

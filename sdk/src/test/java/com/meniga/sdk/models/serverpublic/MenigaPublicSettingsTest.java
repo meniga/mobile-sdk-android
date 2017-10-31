@@ -62,7 +62,7 @@ public class MenigaPublicSettingsTest{
 	}
 
 	private MenigaPublicSettings gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		MenigaPublicSettings item = null;
 		try {
 			item = gson.fromJson(FileImporter.getJsonFileFromRaw("publicsettings.json"), MenigaPublicSettings.class);

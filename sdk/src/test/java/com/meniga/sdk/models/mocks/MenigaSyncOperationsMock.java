@@ -36,7 +36,7 @@ public class MenigaSyncOperationsMock implements MenigaSyncOperations {
 	}
 
 	private MenigaSync gson() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return gson.fromJson(
 					MenigaConverter.getAsObject(FileImporter.getJsonFileFromRaw("syncresponse.json")),
@@ -49,7 +49,7 @@ public class MenigaSyncOperationsMock implements MenigaSyncOperations {
 	}
 
 	private MenigaSyncStatus gsonStatus() {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return gson.fromJson(
 					MenigaConverter.getAsObject(FileImporter.getJsonFileFromRaw("syncstatus.json")),

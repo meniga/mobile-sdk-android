@@ -18,7 +18,7 @@ public class MenigaTransactionEventConverter implements EventBaseConverter<Menig
 
 	@Override
 	public MenigaEvent eventConverter(JsonElement element) {
-		Gson gson = GsonProvider.getGsonBuilder().create();
+		Gson gson = GsonProvider.getGsonBuilder();
 		JsonElement je = element.getAsJsonObject().get(MESSAGE_DATA);
 
 		if (!je.isJsonObject()) {

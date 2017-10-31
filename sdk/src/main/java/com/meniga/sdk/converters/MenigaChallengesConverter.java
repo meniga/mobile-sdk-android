@@ -41,18 +41,14 @@ public class MenigaChallengesConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaChallenge>() {
 				@Override
 				public MenigaChallenge convert(ResponseBody resBody) throws IOException {
-					String body = convertStreamToString((resBody.byteStream()));
-
-					return factory.getMenigaChallengeItem(getAsObject(body));
+					return factory.getMenigaChallengeItem(getAsObject(resBody.byteStream()));
 				}
 			};
 		} else if (typeOfChallenges.equals(type)) {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public Object convert(ResponseBody resBody) throws IOException {
-					String body = convertStreamToString((resBody.byteStream()));
-
-					JsonArray arr = getAsArray(body);
+					JsonArray arr = getAsArray(resBody.byteStream());
 					List<MenigaChallenge> challenges = new ArrayList<>();
 					for (JsonElement element : arr) {
 						MenigaChallenge challenge = factory.getMenigaChallengeItem((JsonObject) element);

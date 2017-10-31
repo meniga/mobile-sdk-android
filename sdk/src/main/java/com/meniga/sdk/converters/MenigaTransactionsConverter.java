@@ -11,6 +11,7 @@ import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -38,11 +39,9 @@ public class MenigaTransactionsConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public Object convert(ResponseBody resBody) throws IOException {
-					String body = MenigaTransactionsConverter.this.convertStreamToString((resBody.byteStream()));
+					Gson gson = GsonProvider.getGsonBuilder();
 
-					Gson gson = GsonProvider.getGsonBuilder().create();
-
-					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(body), new TypeToken<List<MenigaTransaction>>() {
+					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(resBody.byteStream()), new TypeToken<List<MenigaTransaction>>() {
 					}.getType());
 					for (MenigaTransaction trans : menigaTransactions) {
 						if (trans.getComments() == null) {
@@ -60,11 +59,9 @@ public class MenigaTransactionsConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public Object convert(ResponseBody resBody) throws IOException {
-					String body = MenigaTransactionsConverter.this.convertStreamToString((resBody.byteStream()));
+					Gson gson = GsonProvider.getGsonBuilder();
 
-					Gson gson = GsonProvider.getGsonBuilder().create();
-
-					MenigaTransaction menigaTransaction = gson.fromJson(getAsObject(body), MenigaTransaction.class);
+					MenigaTransaction menigaTransaction = gson.fromJson(getAsObject(resBody.byteStream()), MenigaTransaction.class);
 					if (menigaTransaction.getComments() != null) {
 						for (MenigaComment comm : menigaTransaction.getComments()) {
 							comm.setTransactionId(menigaTransaction.getId());
@@ -78,15 +75,21 @@ public class MenigaTransactionsConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public Object convert(ResponseBody resBody) throws IOException {
-					String body = MenigaTransactionsConverter.this.convertStreamToString((resBody.byteStream()));
+					Gson gson = GsonProvider.getGsonBuilder();
 
-					Gson gson = GsonProvider.getGsonBuilder().create();
+					InputStreamReader isr = new InputStreamReader(resBody.byteStream());
+					JsonElement element;
+					try {
+						element = new JsonParser().parse(isr);
+					} finally {
+						isr.close();
+					}
 
-					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(body), new TypeToken<List<MenigaTransaction>>() {
+					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(element), new TypeToken<List<MenigaTransaction>>() {
 					}.getType());
 					MenigaTransactionPage list = new MenigaTransactionPage();
+
 					list.addAll(menigaTransactions);
-					JsonElement element = new JsonParser().parse(body);
 					JsonObject object = element.getAsJsonObject();
 					JsonObject meta = object.getAsJsonObject("meta");
 					list.setTotalNumTransactions(meta.get("totalCount").getAsInt());
