@@ -57,6 +57,7 @@ project.ext.set('libraryVersion', android.defaultConfig.versionName)
 
 repositories {
     mavenCentral()
+    google()
 }
 
 dependencies {
