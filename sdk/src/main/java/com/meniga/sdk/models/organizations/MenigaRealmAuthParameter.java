@@ -71,7 +71,7 @@ public class MenigaRealmAuthParameter implements Parcelable, Serializable {
 		if (isDropDown) {
 			return AuthParameterType.MULTI_SELECT;
 		}
-		if (name.equals("message") || name.equals("otp_message") || name.equals("captcha_message")) {
+		if (isHidden) {
 			return AuthParameterType.MESSAGE;
 		} else if (name.equals("username")) {
 			return AuthParameterType.USERNAME;
