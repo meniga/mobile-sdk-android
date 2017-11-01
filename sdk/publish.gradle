@@ -7,7 +7,7 @@ publishing {
 
             // Tell maven to prepare the generated "*.aar" file for publishing
             artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-            
+
             pom.withXml {
                 configurations
                 configurations.compile.allDependencies.each {

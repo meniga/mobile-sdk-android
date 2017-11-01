@@ -8,19 +8,43 @@ logger.info("BINTRAY " + project.libraryVersion)
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/sdk-release.aar")
+            from components.android
             groupId 'com.meniga'
             artifactId 'sdk'
             version android.defaultConfig.versionName
-            //The publication doesn't know about our dependencies, so we have to manually add them to the pom
-            from components.android
+            artifact("$buildDir/outputs/aar/sdk-release.aar")
+            pom.withXml {
+                def children = asNode().children()
+                def packaging = children.get(children.indexOf(children.find {it.name().localPart == 'packaging'}))
+                packaging.setValue('aar')
+            }
+
         }
         maven(MavenPublication){
             from components.android
+            groupId 'com.meniga'
+            artifactId 'sdk'
+            version android.defaultConfig.versionName
+            artifact("$buildDir/outputs/aar/sdk-release.aar")
+            pom.withXml {
+                def children = asNode().children()
+                def packaging = children.get(children.indexOf(children.find {it.name().localPart == 'packaging'}))
+                packaging.setValue('aar')
+            }
         }
         aar(MavenPublication) {
             from components.android
+            groupId 'com.meniga'
+            artifactId 'sdk'
+            version android.defaultConfig.versionName
+            artifact("$buildDir/outputs/aar/sdk-release.aar")
+            pom.withXml {
+                def children = asNode().children()
+                def packaging = children.get(children.indexOf(children.find {it.name().localPart == 'packaging'}))
+                packaging.setValue('aar')
+            }
         }
+
     }
 }
 version = android.defaultConfig.versionName
