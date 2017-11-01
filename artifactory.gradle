@@ -1,21 +1,21 @@
+apply plugin: "digital.wup.android-maven-publish"
+
 publishing {
     publications {
         aar(MavenPublication) {
+            from components.android
             groupId project.groupIdConst
             version = project.libraryVersion
             artifactId = project.artifactIdConst
 
             // Tell maven to prepare the generated "*.aar" file for publishing
             artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-
             pom.withXml {
-                configurations
-                configurations.compile.allDependencies.each {
-                    def dependency = dependencies.appendNode('dependency')
-                    dependency.appendNode('groupId', it.group)
-                    dependency.appendNode('artifactId', it.name)
-                    dependency.appendNode('version', it.version)
-                }
+                def children = asNode().children()
+                def packaging = children.get(children.indexOf(children.find {
+                    it.name().localPart == "packaging"
+                }))
+                packaging.setValue("aar")
             }
         }
     }
@@ -32,10 +32,10 @@ artifactory {
         }
         defaults {
             // Tell the Artifactory Plugin which artifacts should be published to Artifactory.
-            publications('aar')
+            publications("aar")
             publishArtifacts = true
             // Properties to be attached to the published artifacts.
-            properties = ['qa.level': 'basic', 'dev.team': 'core']
+            properties = ["qa.level": "basic", "dev.team": "core"]
             // Publish generated POM files to Artifactory (true by default)
             publishPom = true
         }

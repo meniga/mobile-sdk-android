@@ -1,7 +1,5 @@
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'digital.wup.android-maven-publish'
-
-
+apply plugin: "com.jfrog.bintray"
+apply plugin: "digital.wup.android-maven-publish"
 
 logger.info("BINTRAY " + project.libraryVersion)
 
@@ -9,42 +7,13 @@ publishing {
     publications {
         Production(MavenPublication) {
             from components.android
-            groupId 'com.meniga'
-            artifactId 'sdk'
+            groupId "com.meniga"
+            artifactId "sdk"
             version android.defaultConfig.versionName
-            artifact("$buildDir/outputs/aar/sdk-release.aar")
-            pom.withXml {
-                def children = asNode().children()
-                def packaging = children.get(children.indexOf(children.find {it.name().localPart == 'packaging'}))
-                packaging.setValue('aar')
-            }
-
-        }
-        maven(MavenPublication){
-            from components.android
-            groupId 'com.meniga'
-            artifactId 'sdk'
-            version android.defaultConfig.versionName
-            artifact("$buildDir/outputs/aar/sdk-release.aar")
-            pom.withXml {
-                def children = asNode().children()
-                def packaging = children.get(children.indexOf(children.find {it.name().localPart == 'packaging'}))
-                packaging.setValue('aar')
+            artifact("$buildDir/outputs/aar/sdk-release.aar"){
+                classifier "sources"
             }
         }
-        aar(MavenPublication) {
-            from components.android
-            groupId 'com.meniga'
-            artifactId 'sdk'
-            version android.defaultConfig.versionName
-            artifact("$buildDir/outputs/aar/sdk-release.aar")
-            pom.withXml {
-                def children = asNode().children()
-                def packaging = children.get(children.indexOf(children.find {it.name().localPart == 'packaging'}))
-                packaging.setValue('aar')
-            }
-        }
-
     }
 }
 version = android.defaultConfig.versionName
@@ -64,5 +33,5 @@ bintray {
         userOrg = "meniga"
         publicDownloadNumbers = true
     }
-    publications = ['Production']
+    publications = ["Production"]
 }
