@@ -24,6 +24,8 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 	private UserEventType eventTypeIdentifier;
 	private Map<String, String> messageData;
 
+	private String topicName;
+
 	protected MenigaEvent() {
 	}
 
@@ -53,11 +55,21 @@ public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Par
 		return date;
 	}
 
+	@Override
+	public String getEventTypeIdentifier() {
+		return eventTypeIdentifier.toString();
+	}
+
+	@Override
+	public String getTopicName() {
+		return null;
+	}
+
 	public String getBody() {
 		return this.body;
 	}
 
-	public UserEventType getEventTypeIdentifier() {
+	public UserEventType getEventTypeIdentifierEnum() {
 		if (this.eventTypeIdentifier == null) {
 			return UserEventType.UNKNOWN;
 		}

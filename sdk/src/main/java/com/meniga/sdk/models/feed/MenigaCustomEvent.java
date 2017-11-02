@@ -18,6 +18,9 @@ public class MenigaCustomEvent implements MenigaFeedItem, Parcelable, Serializab
 	private String body;
 	private String title;
 
+	private String eventTypeIdentifier;
+	private String topicName;
+
 	protected MenigaCustomEvent() {
 	}
 
@@ -45,6 +48,16 @@ public class MenigaCustomEvent implements MenigaFeedItem, Parcelable, Serializab
 	@Override
 	public DateTime getOriginalDate() {
 		return this.date;
+	}
+
+	@Override
+	public String getEventTypeIdentifier() {
+		return eventTypeIdentifier;
+	}
+
+	@Override
+	public String getTopicName() {
+		return topicName;
 	}
 
 	@Override

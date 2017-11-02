@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.meniga.sdk.models.userevents.enums.UserEventType;
 
 import org.joda.time.DateTime;
 
@@ -22,6 +23,9 @@ public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializa
 	private DateTime date;
 	private String title;
 	private String body;
+
+	private UserEventType eventTypeIdentifier;
+	private String topicName;
 
 	protected MenigaAccountEvent() {
 	}
@@ -45,6 +49,16 @@ public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializa
 	@Override
 	public DateTime getOriginalDate() {
 		return date;
+	}
+
+	@Override
+	public String getEventTypeIdentifier() {
+		return eventTypeIdentifier.toString();
+	}
+
+	@Override
+	public String getTopicName() {
+		return topicName;
 	}
 
 	public String getTitle() {
