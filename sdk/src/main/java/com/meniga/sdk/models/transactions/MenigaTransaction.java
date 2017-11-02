@@ -85,6 +85,9 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	protected long timeStamp;
 	protected String userData;
 
+	private String eventTypeIdentifier;
+	private String topicName;
+
 	protected MenigaTransaction() {
 	}
 
@@ -294,6 +297,16 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public DateTime getOriginalDate() {
 		return this.originalDate;
+	}
+
+	@Override
+	public String getEventTypeIdentifier() {
+		return eventTypeIdentifier;
+	}
+
+	@Override
+	public String getTopicName() {
+		return topicName;
 	}
 
 	/**

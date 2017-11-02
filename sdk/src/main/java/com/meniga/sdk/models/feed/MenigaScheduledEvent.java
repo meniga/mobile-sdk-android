@@ -44,10 +44,12 @@ public class MenigaScheduledEvent implements MenigaFeedItem, Serializable, Clone
 	private List<ScheduledDayTransactions> transactionsPerDay;
 	private Long topicId;
 	private DateTime date;
-	private String topicName;
 	private String title;
 	private String body;
 	private String typeName;
+
+	private String eventTypeIdentifier;
+	private String topicName;
 
 	protected MenigaScheduledEvent() {
 	}
@@ -151,6 +153,11 @@ public class MenigaScheduledEvent implements MenigaFeedItem, Serializable, Clone
 	@Override
 	public DateTime getOriginalDate() {
 		return date;
+	}
+
+	@Override
+	public String getEventTypeIdentifier() {
+		return eventTypeIdentifier;
 	}
 
 	public String getTopicName() {

@@ -27,11 +27,13 @@ public class MenigaOfferEvent implements MenigaFeedItem, Serializable, Cloneable
 	private MenigaDecimal maximumCashbackPerPurchase;
 	private DateTime date;
 	private long topicId;
-	private String topicName;
 	private String title;
 	private String body;
 	private String typeName;
 	private RewardType rewardType;
+
+	private String eventTypeIdentifier;
+	private String topicName;
 
 	protected MenigaOfferEvent() {
 	}
@@ -100,6 +102,11 @@ public class MenigaOfferEvent implements MenigaFeedItem, Serializable, Cloneable
 	@Override
 	public DateTime getOriginalDate() {
 		return date;
+	}
+
+	@Override
+	public String getEventTypeIdentifier() {
+		return eventTypeIdentifier;
 	}
 
 	public long getTopicId() {

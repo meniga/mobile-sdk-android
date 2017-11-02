@@ -9,53 +9,59 @@ import java.util.Locale;
  */
 public enum UserEventType {
 	@SerializedName("accounts")
-	ACCOUNTS,
+	ACCOUNTS("accounts"),
 	@SerializedName("transactions")
-	TRANSACTIONS,
+	TRANSACTIONS("transactions"),
 	@SerializedName("scheduled_user_event")
-	SCHEDULED_USER_EVENT,
+	SCHEDULED_USER_EVENT("scheduled_user_event"),
 	@SerializedName("cashback_offer")
-	CASHBACK_OFFER,
+	CASHBACK_OFFER("cashback_offer"),
 	@SerializedName("dialog")
-	DIALOG,
+	DIALOG("dialog"),
 	@SerializedName("challenge")
-	CHALLENGE,
+	CHALLENGE("challenge"),
 	@SerializedName("accounts_available_amount")
-	ACCOUNTS_AVAILABLE_AMOUNT,
+	ACCOUNTS_AVAILABLE_AMOUNT("accounts_available_amount"),
 	@SerializedName("scheduled_monthly_transaction_report")
-	SCHEDULED_MONTHLY_TRANSACTION_REPORT,
+	SCHEDULED_MONTHLY_TRANSACTION_REPORT("scheduled_monthly_transaction_report"),
 	@SerializedName("scheduled_weekly_transaction_report")
-	SCHEDULED_WEEKLY_TRANSACTION_REPORT,
+	SCHEDULED_WEEKLY_TRANSACTION_REPORT("scheduled_weekly_transaction_report"),
 	@SerializedName("transactions_merchant_count")
-	TRANSACTIONS_MERCHANT_COUNT,
+	TRANSACTIONS_MERCHANT_COUNT("transactions_merchant_count"),
 	@SerializedName("transactions_category_budget_watch")
-	TRANSACTIONS_CATEGORY_BUDGET_WATCH,
+	TRANSACTIONS_CATEGORY_BUDGET_WATCH("transactions_category_budget_watch"),
 	@SerializedName("transactions_threshold_deposit")
-	TRANSACTIONS_THRESHOLD_DEPOSIT,
+	TRANSACTIONS_THRESHOLD_DEPOSIT("transactions_threshold_deposit"),
 	@SerializedName("transactions_threshold_expenses")
-	TRANSACTIONS_THRESHOLD_EXPENSES,
+	TRANSACTIONS_THRESHOLD_EXPENSES("transactions_threshold_expenses"),
 	@SerializedName("transactions_unusual_spending")
-	TRANSACTIONS_UNUSUAL_SPENDING,
+	TRANSACTIONS_UNUSUAL_SPENDING("transactions_unusual_spending"),
 	@SerializedName("cashback_offer_redemption")
-	CASHBACK_OFFER_REDEMPTION,
+	CASHBACK_OFFER_REDEMPTION("cashback_offer_redemption"),
 	@SerializedName("challenge_started")
-	CHALLENGE_STARTED,
+	CHALLENGE_STARTED("challenge_started"),
 	@SerializedName("challenge_progress")
-	CHALLENGE_PROGRESS,
+	CHALLENGE_PROGRESS("challenge_progress"),
 	@SerializedName("challenge_completed")
-	CHALLENGE_COMPLETED,
+	CHALLENGE_COMPLETED("challenge_completed"),
 	@SerializedName("cashback_offer_available")
-	CASHBACK_OFFER_AVAILABLE,
+	CASHBACK_OFFER_AVAILABLE("cashback_offer_available"),
 	@SerializedName("cashback_offer_days_left")
-	CASHBACK_OFFER_DAYS_LEFT,
+	CASHBACK_OFFER_DAYS_LEFT("cashback_offer_days_left"),
 	@SerializedName("cashback_repayment")
-	CASHBACK_REPAYMENT,
+	CASHBACK_REPAYMENT("cashback_repayment"),
 	@SerializedName("dialog_message")
-	DIALOG_MESSAGE,
-	UNKNOWN;
+	DIALOG_MESSAGE("dialog_message"),
+	UNKNOWN("unknown");
+
+	private String tag;
+
+	UserEventType(String tagIn) {
+		tag = tagIn;
+	}
 
 	@Override
 	public String toString() {
-		return super.toString().toLowerCase(Locale.getDefault());
+		return tag;
 	}
 }
