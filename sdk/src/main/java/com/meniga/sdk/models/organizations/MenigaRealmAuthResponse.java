@@ -21,6 +21,7 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 	private long realmUserId;
 	private boolean canSave;
 	private String loginHelp;
+	private String sessionToken;
 
 	protected MenigaRealmAuthResponse() {
 	}
@@ -36,6 +37,7 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		this.realmUserId = in.readLong();
 		this.canSave = in.readByte() != 0;
 		this.loginHelp = in.readString();
+		this.sessionToken = in.readString();
 	}
 
 	public boolean isAuthenticationDone() {
@@ -78,6 +80,10 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		return loginHelp;
 	}
 
+	public String getSessionToken() {
+		return sessionToken;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -116,6 +122,9 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		if (userIdentifier != null ? !userIdentifier.equals(that.userIdentifier) : that.userIdentifier != null) {
 			return false;
 		}
+		if (sessionToken != null ? !sessionToken.equals(that.sessionToken) : that.sessionToken != null) {
+			return false;
+		}
 		return loginHelp != null ? loginHelp.equals(that.loginHelp) : that.loginHelp == null;
 	}
 
@@ -131,6 +140,7 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		result = 31 * result + (int) (realmUserId ^ (realmUserId >>> 32));
 		result = 31 * result + (canSave ? 1 : 0);
 		result = 31 * result + (loginHelp != null ? loginHelp.hashCode() : 0);
+		result = 31 * result + (sessionToken != null ? sessionToken.hashCode() : 0);
 		return result;
 	}
 
@@ -151,6 +161,7 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		dest.writeLong(this.realmUserId);
 		dest.writeByte(this.canSave ? (byte) 1 : (byte) 0);
 		dest.writeString(this.loginHelp);
+		dest.writeString(this.sessionToken);
 	}
 
 	public static final Parcelable.Creator<MenigaRealmAuthResponse> CREATOR = new Parcelable.Creator<MenigaRealmAuthResponse>() {

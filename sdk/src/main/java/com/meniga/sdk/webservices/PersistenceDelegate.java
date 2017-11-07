@@ -252,7 +252,7 @@ public class PersistenceDelegate {
 	}
 
 	public Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(AddRealmAccountsToMeniga req) {
-		return persist(req, getClient(Service.SYNC).addRealmAccountsToMeniga(req.realmUserId, req.realmAccounts));
+		return persist(req, getClient(Service.SYNC).addRealmAccountsToMeniga(req.realmUserId, req.realmAccounts, req.toQueryMap()));
 	}
 
 	// --

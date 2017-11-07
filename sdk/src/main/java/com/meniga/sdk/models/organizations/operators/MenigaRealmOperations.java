@@ -16,5 +16,5 @@ public interface MenigaRealmOperations {
 
 	Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId);
 
-	Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts);
+	Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts, String sessionToken);
 }
