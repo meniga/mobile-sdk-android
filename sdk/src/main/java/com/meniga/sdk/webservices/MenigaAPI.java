@@ -237,7 +237,7 @@ public interface MenigaAPI {
 	Call<List<MenigaRealmAccount>> getRealmAccounts(@Path("id") long id);
 
 	@POST(APIConst.URL_SYNC + APIConst.ACCOUNTS + "/{id}" + APIConst.AUTHORIZE)
-	Call<List<MenigaRealmAccount>> addRealmAccountsToMeniga(@Path("id") long realmUserId, @Body List<MenigaRealmAccount> realmAccounts);
+	Call<List<MenigaRealmAccount>> addRealmAccountsToMeniga(@Path("id") long realmUserId, @Body List<MenigaRealmAccount> realmAccounts, @QueryMap Map<String, String> query);
 
 	// --
 	// UserEvents

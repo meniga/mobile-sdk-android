@@ -42,10 +42,11 @@ public class MenigaRealmOperationsImp implements MenigaRealmOperations {
 	}
 
 	@Override
-	public Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts) {
+	public Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts, String sessionToken) {
 		AddRealmAccountsToMeniga req = new AddRealmAccountsToMeniga();
 		req.realmUserId = realmUserId;
 		req.realmAccounts = accounts;
+		req.sessionToken = sessionToken;
 
 		return MenigaSDK.executor().addRealmAccountsToMeniga(req);
 	}
