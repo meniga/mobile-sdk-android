@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface MenigaRealmOperations {
 
-	Result<MenigaRealmAuthResponse> performBankAuthenticationStep(long id, List<MenigaRealmAuthParameter> authParams, String userId);
+	Result<MenigaRealmAuthResponse> performBankAuthenticationStep(long id, List<MenigaRealmAuthParameter> authParams, String userId, String sessionToken);
 
 	Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId);
 

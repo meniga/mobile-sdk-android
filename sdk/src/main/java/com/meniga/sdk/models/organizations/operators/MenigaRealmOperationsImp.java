@@ -18,7 +18,7 @@ import java.util.List;
 public class MenigaRealmOperationsImp implements MenigaRealmOperations {
 
 	@Override
-	public Result<MenigaRealmAuthResponse> performBankAuthenticationStep(long id, List<MenigaRealmAuthParameter> authPars, String userId) {
+	public Result<MenigaRealmAuthResponse> performBankAuthenticationStep(long id, List<MenigaRealmAuthParameter> authPars, String userId, String sessionToken) {
 		GetRealmAuthMethod req = new GetRealmAuthMethod();
 		req.id = id;
 		if (authPars != null && authPars.size() > 0) {
@@ -30,6 +30,7 @@ public class MenigaRealmOperationsImp implements MenigaRealmOperations {
 			req.saveDetails = true;
 		}
 		req.realmUserIdentifier = userId;
+		req.sessionToken = sessionToken;
 		return MenigaSDK.executor().performBankAuthenticationStep(req);
 	}
 

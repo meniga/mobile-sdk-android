@@ -156,10 +156,10 @@ public class MenigaRealm implements Parcelable, Serializable {
 	}
 
 	public Result<MenigaRealmAuthResponse> getInitialRealmAuthenticationSteps() {
-		return apiOperations.performBankAuthenticationStep(id, null, "");
+		return apiOperations.performBankAuthenticationStep(id, null, "", null);
 	}
 
-	public Result<MenigaRealmAuthResponse> performBankAuthenticationStep(List<MenigaRealmAuthParameter> authPars, String userId) {
-		return apiOperations.performBankAuthenticationStep(id, authPars, userId);
+	public Result<MenigaRealmAuthResponse> performBankAuthenticationStep(List<MenigaRealmAuthParameter> authPars, String userId, String sessionToken) {
+		return apiOperations.performBankAuthenticationStep(id, authPars, userId, sessionToken);
 	}
 }

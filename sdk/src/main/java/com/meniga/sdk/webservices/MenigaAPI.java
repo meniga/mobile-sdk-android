@@ -231,7 +231,7 @@ public interface MenigaAPI {
 	Call<MenigaSync> getSync(@Path("id") long id);
 
 	@POST(APIConst.URL_SYNC + APIConst.REALM + "/{id}" + APIConst.AUTH)
-	Call<MenigaRealmAuthResponse> getRealmAuthMethod(@Path("id") long id, @Body GetRealmAuthMethod req);
+	Call<MenigaRealmAuthResponse> getRealmAuthMethod(@Path("id") long id, @Body GetRealmAuthMethod req, @QueryMap Map<String, String> query);
 
 	@GET(APIConst.URL_SYNC + APIConst.ACCOUNTS + "/{id}")
 	Call<List<MenigaRealmAccount>> getRealmAccounts(@Path("id") long id);

@@ -244,7 +244,7 @@ public class PersistenceDelegate {
 	}
 
 	public Result<MenigaRealmAuthResponse> performBankAuthenticationStep(GetRealmAuthMethod req) {
-		return persist(req, getClient(Service.SYNC).getRealmAuthMethod(req.id, req));
+		return persist(req, getClient(Service.SYNC).getRealmAuthMethod(req.id, req, req.toQueryMap()));
 	}
 
 	public Result<List<MenigaRealmAccount>> getRealmAccounts(GetRealmAccounts req) {
