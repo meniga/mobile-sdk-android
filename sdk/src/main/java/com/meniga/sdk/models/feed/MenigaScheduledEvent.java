@@ -151,11 +151,6 @@ public class MenigaScheduledEvent implements MenigaFeedItem, Serializable, Clone
 	}
 
 	@Override
-	public DateTime getOriginalDate() {
-		return date;
-	}
-
-	@Override
 	public String getEventTypeIdentifier() {
 		return eventTypeIdentifier;
 	}

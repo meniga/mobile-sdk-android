@@ -9,7 +9,7 @@ public interface MenigaFeedItem {
 
 	MenigaFeedItem clone() throws CloneNotSupportedException;
 
-	DateTime getOriginalDate();
+	DateTime getDate();
 
 	String getEventTypeIdentifier();
 

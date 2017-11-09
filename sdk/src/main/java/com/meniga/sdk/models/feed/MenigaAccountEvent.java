@@ -47,11 +47,6 @@ public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializa
 	}
 
 	@Override
-	public DateTime getOriginalDate() {
-		return date;
-	}
-
-	@Override
 	public String getEventTypeIdentifier() {
 		return eventTypeIdentifier.toString();
 	}
