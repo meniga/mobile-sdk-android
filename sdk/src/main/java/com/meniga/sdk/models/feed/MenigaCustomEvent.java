@@ -46,11 +46,6 @@ public class MenigaCustomEvent implements MenigaFeedItem, Parcelable, Serializab
 	}
 
 	@Override
-	public DateTime getOriginalDate() {
-		return this.date;
-	}
-
-	@Override
 	public String getEventTypeIdentifier() {
 		return eventTypeIdentifier;
 	}
