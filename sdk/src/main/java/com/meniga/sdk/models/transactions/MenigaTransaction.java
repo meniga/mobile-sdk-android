@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Interceptor;
+import com.meniga.sdk.helpers.MTask;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.Merge;
@@ -12,12 +13,17 @@ import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.categories.MenigaCategoryScore;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
 import com.meniga.sdk.models.transactions.operators.MenigaTransactionOperations;
+import com.meniga.sdk.providers.tasks.Capture;
+import com.meniga.sdk.providers.tasks.Continuation;
+import com.meniga.sdk.providers.tasks.Task;
+import com.meniga.sdk.providers.tasks.TaskCompletionSource;
 import com.meniga.sdk.webservices.requests.UpdateSplits;
 
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -1028,6 +1034,54 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 				userData
 		);
 	}
+
+	/**
+	 * Combines multiple calls to the transactions endpoint with multiple filters
+	 *
+	 * @param filters A list containing all the filters. Each filter will be used for a call. The results will be combined, sorted by date, and returned
+	 * @return A list of the transactions that match the filters (individually - does not combine criteria - may contain duplicate transactions)
+	 */
+	public static Result<MenigaTransactionPage> fetch(List<TransactionsFilter> filters) {
+	    if (filters == null || filters.size() == 0) {
+	    	return fetch(new TransactionsFilter.Builder().build());
+		} else if (filters.size() == 1) {
+	    	return fetch(filters.get(0));
+		}
+		final TaskCompletionSource<MenigaTransactionPage> src = new TaskCompletionSource<>();
+		final Task<MenigaTransactionPage> task = src.getTask();
+
+		MenigaTransactionPage page = new MenigaTransactionPage();
+		final Capture<Integer> step = new Capture<>();
+		step.set(0);
+		final int total = filters.size();
+		for (TransactionsFilter filter : filters) {
+	    	fetch(filter).getTask().continueWith(new Continuation<MenigaTransactionPage, Object>() {
+				@Override
+				public Object then(Task<MenigaTransactionPage> task) throws Exception {
+					step.set(step.get() + 1);
+					if (!task.isFaulted()) {
+						page.addAll(task.getResult());
+					}
+					if (step.get() >= total) {
+						Collections.sort(page, new Comparator<MenigaTransaction>() {
+							@Override
+							public int compare(MenigaTransaction left, MenigaTransaction right) {
+								if (left == null || left.getDate() == null) {
+									return 1;
+								} else if (right == null || right.getDate() == null) {
+									return -1;
+								}
+								return right.getDate().compareTo(left.getDate());
+							}
+						});
+						src.setResult(page);
+					}
+					return null;
+				}
+			});
+		}
+		return new MTask<>(task, src);
+    }
 
 	/**
 	 * Returns all transactions that meet the filter criteria in transFilter
