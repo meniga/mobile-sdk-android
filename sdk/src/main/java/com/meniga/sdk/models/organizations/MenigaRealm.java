@@ -147,8 +147,8 @@ public class MenigaRealm implements Parcelable, Serializable {
     API methods below
      */
 
-	public static Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId) {
-		return apiOperations.getRealmAccounts(realmUserId);
+	public static Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId, String sessionToken) {
+		return apiOperations.getRealmAccounts(realmUserId, sessionToken);
 	}
 
 	public static Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts, String sessionToken) {
