@@ -15,7 +15,7 @@ public class GetRealmAuthMethod extends QueryRequestObject {
 	public List<MenigaRealmAuthParameter.SimpleAuthParameter> parameters;
 	public Boolean saveDetails;
 	public String realmUserIdentifier;
-	public transient String sessionToken;
+	public String sessionToken;
 
     @Override
 	public long getValueHash() {
@@ -25,14 +25,5 @@ public class GetRealmAuthMethod extends QueryRequestObject {
 		result = 31 * result + (realmUserIdentifier != null ? realmUserIdentifier.hashCode() : 0);
 		result = 31 * result + (sessionToken != null ? sessionToken.hashCode() : 0);
 		return result;
-	}
-
-	@Override
-	public Map<String, String> toQueryMap() {
-		Map<String, String> query = new HashMap<>();
-		if (sessionToken != null) {
-			query.put("sessionToken", sessionToken);
-		}
-		return query;
 	}
 }

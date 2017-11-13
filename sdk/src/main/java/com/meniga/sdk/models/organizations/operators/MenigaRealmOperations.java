@@ -14,7 +14,7 @@ public interface MenigaRealmOperations {
 
 	Result<MenigaRealmAuthResponse> performBankAuthenticationStep(long id, List<MenigaRealmAuthParameter> authParams, String userId, String sessionToken);
 
-	Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId);
+	Result<List<MenigaRealmAccount>> getRealmAccounts(long realmUserId, String sessionToken);
 
 	Result<List<MenigaRealmAccount>> addRealmAccountsToMeniga(long realmUserId, List<MenigaRealmAccount> accounts, String sessionToken);
 }
