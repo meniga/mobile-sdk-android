@@ -30,12 +30,9 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeOfAccount = new TypeToken<MenigaReimbursementAccount>() {
-		}.getType();
-		Type typeOfAccounts = new TypeToken<MenigaReimbursementAccountPage>() {
-		}.getType();
-		Type typeOfAccountTypes = new TypeToken<MenigaReimbursementAccountTypePage>() {
-		}.getType();
+		Type typeOfAccount = new TypeToken<MenigaReimbursementAccount>() {}.getType();
+		Type typeOfAccounts = new TypeToken<MenigaReimbursementAccountPage>() {}.getType();
+		Type typeOfAccountTypes = new TypeToken<MenigaReimbursementAccountTypePage>() {}.getType();
 
 		if (typeOfAccount.equals(type)) {
 			return new Converter<ResponseBody, MenigaReimbursementAccount>() {
@@ -103,5 +100,4 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 	public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
 		return null;
 	}
-
 }

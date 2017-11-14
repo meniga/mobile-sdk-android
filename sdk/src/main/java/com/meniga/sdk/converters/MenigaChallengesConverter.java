@@ -32,10 +32,8 @@ public class MenigaChallengesConverter extends MenigaConverter {
 
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeOfChallenge = new TypeToken<MenigaChallenge>() {
-		}.getType();
-		Type typeOfChallenges = new TypeToken<List<MenigaChallenge>>() {
-		}.getType();
+		Type typeOfChallenge = new TypeToken<MenigaChallenge>() {}.getType();
+		Type typeOfChallenges = new TypeToken<List<MenigaChallenge>>() {}.getType();
 
 		if (typeOfChallenge.equals(type)) {
 			return new Converter<ResponseBody, MenigaChallenge>() {
