@@ -15,7 +15,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class AccountSyncStatus implements Serializable, Parcelable {
-
 	protected long accountId;
 	protected Integer transactionsProcessed;
 	protected MenigaDecimal balance;
@@ -24,6 +23,20 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 	protected DateTime startDate;
 	protected DateTime endDate;
 	protected String accountStatus;
+
+	protected AccountSyncStatus() {
+	}
+
+	protected AccountSyncStatus(Parcel in) {
+		this.accountId = in.readLong();
+		this.transactionsProcessed = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.balance = (MenigaDecimal) in.readSerializable();
+		this.limit = (MenigaDecimal) in.readSerializable();
+		this.totalTransactions = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.startDate = (DateTime) in.readSerializable();
+		this.endDate = (DateTime) in.readSerializable();
+		this.accountStatus = in.readString();
+	}
 
 	/**
 	 * @return Total number of transactions that has already been processed during this synchronization.
@@ -81,23 +94,37 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		AccountSyncStatus that = (AccountSyncStatus) o;
 
-		if (accountId != that.accountId) return false;
-		if (transactionsProcessed != null ? !transactionsProcessed.equals(that.transactionsProcessed) : that.transactionsProcessed != null)
+		if (accountId != that.accountId) {
 			return false;
-		if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
-		if (limit != null ? !limit.equals(that.limit) : that.limit != null) return false;
-		if (totalTransactions != null ? !totalTransactions.equals(that.totalTransactions) : that.totalTransactions != null)
+		}
+		if (transactionsProcessed != null ? !transactionsProcessed.equals(that.transactionsProcessed) : that.transactionsProcessed != null) {
 			return false;
-		if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null)
+		}
+		if (balance != null ? !balance.equals(that.balance) : that.balance != null) {
 			return false;
-		if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
+		}
+		if (limit != null ? !limit.equals(that.limit) : that.limit != null) {
+			return false;
+		}
+		if (totalTransactions != null ? !totalTransactions.equals(that.totalTransactions) : that.totalTransactions != null) {
+			return false;
+		}
+		if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) {
+			return false;
+		}
+		if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) {
+			return false;
+		}
 		return accountStatus != null ? accountStatus.equals(that.accountStatus) : that.accountStatus == null;
-
 	}
 
 	@Override
@@ -128,20 +155,6 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 		dest.writeSerializable(this.startDate);
 		dest.writeSerializable(this.endDate);
 		dest.writeString(this.accountStatus);
-	}
-
-	public AccountSyncStatus() {
-	}
-
-	protected AccountSyncStatus(Parcel in) {
-		this.accountId = in.readLong();
-		this.transactionsProcessed = (Integer) in.readValue(Integer.class.getClassLoader());
-		this.balance = (MenigaDecimal) in.readSerializable();
-		this.limit = (MenigaDecimal) in.readSerializable();
-		this.totalTransactions = (Integer) in.readValue(Integer.class.getClassLoader());
-		this.startDate = (DateTime) in.readSerializable();
-		this.endDate = (DateTime) in.readSerializable();
-		this.accountStatus = in.readString();
 	}
 
 	public static final Creator<AccountSyncStatus> CREATOR = new Creator<AccountSyncStatus>() {

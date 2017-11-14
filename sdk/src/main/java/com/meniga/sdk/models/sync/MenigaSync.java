@@ -157,10 +157,10 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * Copyright 2017 Meniga Iceland Inc.
 	 */
 	public static abstract class PostSyncCallback {
-
 		protected boolean hasNewData;
 		protected Long timeStamp;
 		protected int numNewTransactions;
+		protected MenigaSync sync;
 
 		public boolean getHasNewData() {
 			return this.hasNewData;
@@ -224,6 +224,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 									}
 									postSync.hasNewData = result != null && result.hasNewData();
 									postSync.numNewTransactions = result != null ? result.getNumNewTransactions() : 0;
+									postSync.sync = result;
 									postSync.onFinished();
 								}
 							});
@@ -283,7 +284,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 					@Override
 					public void onFinished() {
 						if (onDone != null) {
-							onDone.onFinished(result, false);
+							onDone.onFinished(sync, false);
 						}
 					}
 
