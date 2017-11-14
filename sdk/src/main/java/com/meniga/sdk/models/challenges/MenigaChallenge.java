@@ -49,6 +49,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 	@SerializedName("color")
 	protected CustomChallengeColor customChallengeColor;
 	protected boolean categoryIdsDirty;
+	protected Long parentTopicId;
 
 	protected MenigaChallenge() {
 	}
@@ -82,6 +83,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 		dest.writeString(this.iconUrl);
 		dest.writeInt(this.recurringInterval == null ? -1 : this.recurringInterval.ordinal());
 		dest.writeInt(this.customChallengeColor == null ? -1 : this.customChallengeColor.ordinal());
+		dest.writeValue(this.parentTopicId);
 	}
 
 	protected MenigaChallenge(Parcel in) {
@@ -109,6 +111,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 		this.recurringInterval = tmpRecurringInterval == -1 ? null : ChallengeInterval.values()[tmpRecurringInterval];
 		int tmpcustmChallengeColorInterval = in.readInt();
 		this.customChallengeColor = tmpcustmChallengeColorInterval == -1 ? null : CustomChallengeColor.values()[tmpcustmChallengeColorInterval];
+		this.parentTopicId = (Long) in.readValue(Long.class.getClassLoader());
 	}
 
 	public static final Parcelable.Creator<MenigaChallenge> CREATOR = new Parcelable.Creator<MenigaChallenge>() {
@@ -137,6 +140,10 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	public Long getTopicId() {
 		return topicId;
+	}
+
+	public Long getParentTopicId() {
+		return parentTopicId;
 	}
 
 	public String getTitle() {
@@ -341,6 +348,9 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 		if (topicId != null ? !topicId.equals(challenge.topicId) : challenge.topicId != null) {
 			return false;
 		}
+		if (parentTopicId != null ? !parentTopicId.equals(challenge.parentTopicId) : challenge.parentTopicId != null) {
+			return false;
+		}
 		if (title != null ? !title.equals(challenge.title) : challenge.title != null) {
 			return false;
 		}
@@ -399,6 +409,7 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 		result = 31 * result + (iconUrl != null ? iconUrl.hashCode() : 0);
 		result = 31 * result + (recurringInterval != null ? recurringInterval.hashCode() : 0);
 		result = 31 * result + (customChallengeColor != null ? customChallengeColor.hashCode() : 0);
+		result = 31 * result + (parentTopicId != null ? parentTopicId.hashCode() : 0);
 		return result;
 	}
 
