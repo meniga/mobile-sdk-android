@@ -25,7 +25,6 @@ public class RealmSyncResponse implements Serializable, Parcelable {
 	protected AuthenticationChallenge authenticationChallenge;
 
 	protected RealmSyncResponse() {
-		Log.e("Meniga", Log.getStackTraceString(new Exception()));
 	}
 
 	protected RealmSyncResponse(Parcel in) {
