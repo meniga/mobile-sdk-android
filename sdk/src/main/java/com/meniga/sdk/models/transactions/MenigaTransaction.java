@@ -1060,7 +1060,18 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 				public Object then(Task<MenigaTransactionPage> task) throws Exception {
 					step.set(step.get() + 1);
 					if (!task.isFaulted()) {
-						page.addAll(task.getResult());
+						for (MenigaTransaction sub : task.getResult()) {
+							boolean exists = false;
+							for (MenigaTransaction item : page) {
+								if (item.getId() == sub.getId()) {
+									exists = true;
+									break;
+								}
+							}
+							if (!exists) {
+								page.add(sub);
+							}
+						}
 					}
 					if (step.get() >= total) {
 						Collections.sort(page, new Comparator<MenigaTransaction>() {
