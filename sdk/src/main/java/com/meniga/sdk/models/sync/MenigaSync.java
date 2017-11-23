@@ -273,6 +273,12 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaSync>() {
 			@Override
 			public void onFinished(final MenigaSync result, boolean failed) {
+				if (result == null) {
+					if (onDone != null) {
+						onDone.onFinished(null, true);
+					}
+					return;
+				}
 				result.checkSync(new PostSyncCallback() {
 					@Override
 					public void onFailure(Exception excp) {
