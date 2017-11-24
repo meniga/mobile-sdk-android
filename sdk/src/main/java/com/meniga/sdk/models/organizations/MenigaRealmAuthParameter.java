@@ -68,9 +68,6 @@ public class MenigaRealmAuthParameter implements Parcelable, Serializable {
 	}
 
 	public AuthParameterType getAuthParameterType() {
-		if (isDropDown) {
-			return AuthParameterType.MULTI_SELECT;
-		}
 		if (isHidden) {
 			return AuthParameterType.MESSAGE;
 		} else if (name.equals("username")) {
@@ -83,10 +80,13 @@ public class MenigaRealmAuthParameter implements Parcelable, Serializable {
 		String[] parts = displayName.split("\\|");
 		switch (parts[0]) {
 			case "@Username":
+				if (isDropDown) {
+					return AuthParameterType.USER_MULTI_SELECT;
+				}
 				return AuthParameterType.USERNAME;
 
 			case "@AuthMethod":
-				return AuthParameterType.MULTI_SELECT;
+				return AuthParameterType.AUTH_METHOD_MULTI_SELECT;
 
 			case "@AuthMethodTodos":
 				return AuthParameterType.AUTHENTICATION_METHOD_TODOS;
