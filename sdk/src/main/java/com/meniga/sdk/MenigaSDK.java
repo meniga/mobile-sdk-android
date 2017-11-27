@@ -2,6 +2,7 @@ package com.meniga.sdk;
 
 import com.meniga.sdk.interfaces.PersistenceProvider;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
+import com.meniga.sdk.models.feed.MenigaScheduledEvent;
 import com.meniga.sdk.models.merchants.MenigaTopMerchant;
 import com.meniga.sdk.models.merchants.operators.MenigaTopMerchantOperations;
 import com.meniga.sdk.models.offers.MenigaOffer;
@@ -170,6 +171,7 @@ public class MenigaSDK {
 		MenigaChallenge.setOperator(challengesOperations);
 		MenigaOrganization.setOperator(organizationsOperations);
 		MenigaRealm.setOperations(realmOperations);
+		MenigaScheduledEvent.setApiOperator(feedOperator);
 	}
 
 	/**

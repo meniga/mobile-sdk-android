@@ -35,7 +35,9 @@ class APIConst {
 
 	// Feed
 	static final String URL_FEED = "feed";
-	static final String URL_EVENT = "feed/userevents";
+
+	// Events
+	static final String URL_EVENTS = "userevents";
 
 	// User/MenigaUser
 	static final String URL_ME = "me";
@@ -49,7 +51,8 @@ class APIConst {
 	static final String URL_CATEGORIES = "categories";
 
 	// User Events
-	static final String URL_USER_EVENTS = "userevents/subscription";
+	static final String URL_USER_EVENTS = "userevents";
+	static final String URL_USER_EVENT_SUBSCRIPTIONS = "userevents/subscription";
 	static final String UE_DETAILS = "/details";
 
 	// Offers
