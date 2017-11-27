@@ -13,6 +13,7 @@ import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
 import com.meniga.sdk.models.feed.MenigaFeed;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
+import com.meniga.sdk.models.feed.MenigaScheduledEvent;
 import com.meniga.sdk.models.merchants.MenigaMerchant;
 import com.meniga.sdk.models.merchants.MenigaTopMerchant;
 import com.meniga.sdk.models.networth.MenigaNetWorth;
@@ -242,13 +243,13 @@ public interface MenigaAPI {
 	// --
 	// UserEvents
 	// --
-	@GET(APIConst.URL_USER_EVENTS + APIConst.UE_DETAILS)
+	@GET(APIConst.URL_USER_EVENT_SUBSCRIPTIONS + APIConst.UE_DETAILS)
 	Call<List<MenigaUserEvent>> getUserEvents();
 
-	@PUT(APIConst.URL_USER_EVENTS)
+	@PUT(APIConst.URL_USER_EVENT_SUBSCRIPTIONS)
 	Call<Void> setSubscription(@Body SetSubscription req);
 
-	@PUT(APIConst.URL_USER_EVENTS + APIConst.UE_DETAILS)
+	@PUT(APIConst.URL_USER_EVENT_SUBSCRIPTIONS + APIConst.UE_DETAILS)
 	Call<Void> updateSettings(@Body SetSubscriptionSettings req);
 
 	// --
@@ -257,7 +258,14 @@ public interface MenigaAPI {
 	@GET(APIConst.URL_FEED)
 	Call<MenigaFeed> getFeed(@QueryMap Map<String, String> query);
 
-	@GET(APIConst.URL_EVENT + "/{id}")
+	// --
+	// User events
+	// --
+
+	@GET(APIConst.URL_USER_EVENTS + "/{id}")
+	Call<MenigaScheduledEvent> getScheduledEvent(@Path("id") long id);
+
+	@GET(APIConst.URL_USER_EVENTS + "/{id}")
 	Call<MenigaFeedItem> getEvent(@Path("id") long id);
 
 	// --

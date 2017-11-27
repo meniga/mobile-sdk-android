@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.meniga.sdk.helpers.MenigaDecimal;
+import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.feed.enums.ScheduledEventType;
+import com.meniga.sdk.models.feed.operators.MenigaFeedOperations;
 
 import org.joda.time.DateTime;
 
@@ -18,18 +20,18 @@ import java.util.Map;
  * Model class for the scheduled event, such as a weekly/monthly expense report.
  */
 public class MenigaScheduledEvent implements MenigaFeedItem, Serializable, Cloneable, Parcelable {
-
 	public static final Parcelable.Creator<MenigaScheduledEvent> CREATOR = new Parcelable.Creator<MenigaScheduledEvent>() {
 		@Override
 		public MenigaScheduledEvent createFromParcel(Parcel source) {
 			return new MenigaScheduledEvent(source);
 		}
-
 		@Override
 		public MenigaScheduledEvent[] newArray(int size) {
 			return new MenigaScheduledEvent[size];
 		}
 	};
+
+	protected static MenigaFeedOperations apiOperator;
 
 	private long id;
 	private MenigaDecimal totalExpenses;
@@ -91,6 +93,10 @@ public class MenigaScheduledEvent implements MenigaFeedItem, Serializable, Clone
 		this.title = in.readString();
 		this.body = in.readString();
 		this.typeName = in.readString();
+	}
+
+	public static void setApiOperator(MenigaFeedOperations apiOperatorIn) {
+		apiOperator = apiOperatorIn;
 	}
 
 	@Override
@@ -293,4 +299,11 @@ public class MenigaScheduledEvent implements MenigaFeedItem, Serializable, Clone
 		dest.writeString(this.typeName);
 	}
 
+	/*
+	API methods below
+	 */
+
+	public static Result<MenigaScheduledEvent> fetch(long id) {
+		return apiOperator.getScheduledEvent(id);
+	}
 }

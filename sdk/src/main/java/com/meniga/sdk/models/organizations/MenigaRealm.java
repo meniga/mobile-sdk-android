@@ -14,7 +14,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaRealm implements Parcelable, Serializable {
-
 	private static MenigaRealmOperations apiOperations;
 
 	private long id;

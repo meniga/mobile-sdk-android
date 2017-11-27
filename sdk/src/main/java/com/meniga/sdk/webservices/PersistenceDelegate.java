@@ -17,6 +17,7 @@ import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
 import com.meniga.sdk.models.feed.MenigaFeed;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
+import com.meniga.sdk.models.feed.MenigaScheduledEvent;
 import com.meniga.sdk.models.merchants.MenigaMerchant;
 import com.meniga.sdk.models.merchants.MenigaTopMerchant;
 import com.meniga.sdk.models.networth.MenigaNetWorth;
@@ -374,11 +375,22 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.FEED).getFeed(req.toQueryMap()));
 	}
 
+	// --
+	// User events
+	// --
+
 	public Result<MenigaFeedItem> getEvent(GetEvent req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.FEED).getEvent(req.id));
+		return persist(req, getClient(Service.USER_EVENTS).getEvent(req.id));
+	}
+
+	public Result<MenigaScheduledEvent> getScheduledEvent(GetScheduledEvent req) {
+		if (provider.hasKey(req)) {
+			return createTask(provider.fetch(req));
+		}
+		return persist(req, getClient(Service.USER_EVENTS).getScheduledEvent(req.id));
 	}
 
 	// --
