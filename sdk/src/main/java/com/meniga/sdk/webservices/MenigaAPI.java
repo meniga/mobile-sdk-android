@@ -258,13 +258,12 @@ public interface MenigaAPI {
 	@GET(APIConst.URL_FEED)
 	Call<MenigaFeed> getFeed(@QueryMap Map<String, String> query);
 
+	@GET(APIConst.URL_FEED + "/{type}/{id}")
+	Call<MenigaScheduledEvent> getScheduledEvent(@Path("type") String type, @Path("id") long id);
+
 	// --
 	// User events
 	// --
-
-	@GET(APIConst.URL_USER_EVENTS + "/{id}")
-	Call<MenigaScheduledEvent> getScheduledEvent(@Path("id") long id);
-
 	@GET(APIConst.URL_USER_EVENTS + "/{id}")
 	Call<MenigaFeedItem> getEvent(@Path("id") long id);
 

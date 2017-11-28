@@ -21,6 +21,7 @@ public class MenigaFeedOperationsImp implements MenigaFeedOperations {
 	public Result<MenigaScheduledEvent> getScheduledEvent(long id) {
 		GetScheduledEvent req = new GetScheduledEvent();
 		req.id = id;
+		req.type = "UserEvents";
 		return MenigaSDK.executor().getScheduledEvent(req);
 	}
 
