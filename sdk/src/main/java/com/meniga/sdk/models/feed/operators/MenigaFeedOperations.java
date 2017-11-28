@@ -16,7 +16,5 @@ public interface MenigaFeedOperations {
 
 	Result<MenigaFeed> getFeed(DateTime from, DateTime to, int skip, int take);
 
-	Result<MenigaFeedItem> getEvent(long id);
-
     Result<MenigaScheduledEvent> getScheduledEvent(long id);
 }

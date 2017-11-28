@@ -375,6 +375,13 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.FEED).getFeed(req.toQueryMap()));
 	}
 
+	public Result<MenigaScheduledEvent> getScheduledEvent(GetScheduledEvent req) {
+		if (provider.hasKey(req)) {
+			return createTask(provider.fetch(req));
+		}
+		return persist(req, getClient(Service.FEED).getScheduledEvent(req.type, req.id));
+	}
+
 	// --
 	// User events
 	// --
@@ -384,13 +391,6 @@ public class PersistenceDelegate {
 			return createTask(provider.fetch(req));
 		}
 		return persist(req, getClient(Service.USER_EVENTS).getEvent(req.id));
-	}
-
-	public Result<MenigaScheduledEvent> getScheduledEvent(GetScheduledEvent req) {
-		if (provider.hasKey(req)) {
-			return createTask(provider.fetch(req));
-		}
-		return persist(req, getClient(Service.USER_EVENTS).getScheduledEvent(req.id));
 	}
 
 	// --
