@@ -109,7 +109,7 @@ public class BasicTaskAdapter implements TaskAdapter {
 
 			@Override
 			public void cancel() {
-
+				request.cancel();
 			}
 		};
 	}
