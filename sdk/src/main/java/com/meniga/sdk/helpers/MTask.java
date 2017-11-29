@@ -7,7 +7,6 @@ import com.meniga.sdk.providers.tasks.TaskCompletionSource;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MTask<T> implements Result<T> {
-
 	private final Task<T> task;
 	private final TaskCompletionSource<T> tcs;
 
