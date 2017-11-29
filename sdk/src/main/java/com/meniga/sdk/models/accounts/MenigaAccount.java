@@ -46,6 +46,7 @@ public class MenigaAccount extends StateObject implements Parcelable, Serializab
 	protected String accountIdentifier;
 	protected String realmIdentifier;
 	protected int realmAccountTypeId;
+	protected int accountTypeId;
 	protected String name;
 	protected MenigaDecimal balance;
 	protected MenigaDecimal originalBalance;
@@ -78,6 +79,7 @@ public class MenigaAccount extends StateObject implements Parcelable, Serializab
 		this.accountIdentifier = in.readString();
 		this.realmIdentifier = in.readString();
 		this.realmAccountTypeId = in.readInt();
+		this.accountTypeId = in.readInt();
 		this.name = in.readString();
 		this.balance = (MenigaDecimal) in.readSerializable();
 		this.originalBalance = (MenigaDecimal) in.readSerializable();
@@ -181,6 +183,10 @@ public class MenigaAccount extends StateObject implements Parcelable, Serializab
 	 */
 	public int getRealmAccountTypeId() {
 		return this.realmAccountTypeId;
+	}
+
+	public int getAccountTypeId() {
+		return accountTypeId;
 	}
 
 	/**
@@ -474,6 +480,9 @@ public class MenigaAccount extends StateObject implements Parcelable, Serializab
 		if (realmAccountTypeId != that.realmAccountTypeId) {
 			return false;
 		}
+		if (accountTypeId != that.accountTypeId) {
+			return false;
+		}
 		if (orderId != that.orderId) {
 			return false;
 		}
@@ -552,6 +561,7 @@ public class MenigaAccount extends StateObject implements Parcelable, Serializab
 		result = 31 * result + (accountIdentifier != null ? accountIdentifier.hashCode() : 0);
 		result = 31 * result + (realmIdentifier != null ? realmIdentifier.hashCode() : 0);
 		result = 31 * result + realmAccountTypeId;
+		result = 31 * result + accountTypeId;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (balance != null ? balance.hashCode() : 0);
 		result = 31 * result + (originalBalance != null ? originalBalance.hashCode() : 0);
@@ -588,6 +598,7 @@ public class MenigaAccount extends StateObject implements Parcelable, Serializab
 		dest.writeString(this.accountIdentifier);
 		dest.writeString(this.realmIdentifier);
 		dest.writeInt(this.realmAccountTypeId);
+		dest.writeInt(this.accountTypeId);
 		dest.writeString(this.name);
 		dest.writeSerializable(this.balance);
 		dest.writeSerializable(this.originalBalance);
