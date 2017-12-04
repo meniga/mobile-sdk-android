@@ -3,7 +3,6 @@ package com.meniga.sdk.helpers;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.meniga.sdk.MenigaSDK;
-import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaTransactionEventConverter;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
@@ -17,15 +16,12 @@ import java.util.List;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public class FeedItemFactory {
-
 	public MenigaFeedItem getMenigaFeetItem(JsonObject element) {
 		Gson gson = GsonProvider.getGsonBuilder();
 		String type = element.get("typeName").getAsString();
 
 		switch (type) {
-
 			case "TransactionFeedItemModel":
 				return gson.fromJson(element, MenigaTransaction.class);
 
@@ -45,7 +41,6 @@ public class FeedItemFactory {
 		}
 	}
 
-
 	protected List<EventBaseConverter> getUserEventFeedConverters() {
 		return MenigaSDK.getMenigaSettings().getUserEventFeedConverters();
 	}
@@ -53,8 +48,9 @@ public class FeedItemFactory {
 	private EventBaseConverter resolveConverter(String eventName) {
 		List<EventBaseConverter> converters = getUserEventFeedConverters();
 		for (EventBaseConverter converter : converters) {
-			if (converter.eventName().equals(eventName))
+			if (converter.eventName().equals(eventName)) {
 				return converter;
+			}
 		}
 		return new MenigaTransactionEventConverter();
 	}
