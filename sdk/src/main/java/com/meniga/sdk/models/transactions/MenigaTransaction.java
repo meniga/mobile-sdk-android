@@ -257,6 +257,11 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 		this.isRead = isRead;
 	}
 
+	public void setIsReadAndUpdate() {
+		setIsRead(true);
+		update();
+	}
+
 	/**
 	 * @return Whether or not the transaction has been flagged.
 	 */
