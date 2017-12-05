@@ -1,5 +1,7 @@
 package com.meniga.sdk.converters;
 
+import android.util.Log;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -31,8 +33,7 @@ public class MenigaFeedConverter extends MenigaConverter {
 
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeOfFeed = new TypeToken<MenigaFeed>() {
-		}.getType();
+		Type typeOfFeed = new TypeToken<MenigaFeed>() {}.getType();
 
 		if (typeOfFeed.equals(type)) {
 			return new Converter<ResponseBody, MenigaFeed>() {
