@@ -12,7 +12,6 @@ import com.meniga.sdk.models.feed.MenigaTransactionCountEventData;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransactionCountEventConverter implements EventBaseConverter<MenigaTransactionCountEvent> {
-
 	private final String MESSAGE_DATA = "messageData";
 
 	@Override
