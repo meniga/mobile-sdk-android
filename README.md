@@ -11,9 +11,11 @@ Developers for institutions implementing the Meniga REST API can usi this sdk to
 
 ```groovy
 dependencies {
-  compile 'com.meniga.sdk:1.0.9'
+  compile 'com.meniga.sdk:x.x.xx'
 }
 ```
+
+For the latest release version code, check out https://github.com/meniga/mobile-sdk-android/releases
 
 # Changelog
 The changelog can be found in the [release section](https://github.com/meniga/mobile-sdk-android/releases)
