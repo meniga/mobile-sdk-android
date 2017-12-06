@@ -9,9 +9,7 @@ import com.meniga.sdk.models.feed.MenigaCustomEvent;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public class MenigaCustomEventConverter implements EventBaseConverter<MenigaCustomEvent> {
-
 	@Override
 	public MenigaCustomEvent eventConverter(JsonElement element) {
 		Gson gson = GsonProvider.getGsonBuilder();

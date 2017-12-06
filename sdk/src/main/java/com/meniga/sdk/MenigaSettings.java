@@ -2,6 +2,7 @@ package com.meniga.sdk;
 
 import com.meniga.sdk.adapters.TaskAdapter;
 import com.meniga.sdk.eventconverters.generic.MenigaAccountAvailableAmountEventConverter;
+import com.meniga.sdk.eventconverters.generic.MenigaChallengeEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaCustomEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaDialogEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaTransactionEventConverter;
@@ -382,6 +383,7 @@ public class MenigaSettings {
 			userEventFeedConverters.add(new MenigaCustomEventConverter());
 			userEventFeedConverters.add(new MenigaTransactionCountEventConverter());
 			userEventFeedConverters.add(new MenigaDialogEventConverter());
+			userEventFeedConverters.add(new MenigaChallengeEventConverter());
 		}
 	}
 }

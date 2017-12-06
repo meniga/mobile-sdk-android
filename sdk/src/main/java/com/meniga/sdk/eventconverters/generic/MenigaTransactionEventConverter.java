@@ -11,9 +11,7 @@ import com.meniga.sdk.models.feed.MenigaTransactionEvent;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public class MenigaTransactionEventConverter implements EventBaseConverter<MenigaTransactionEvent> {
-
 	private final String MESSAGE_DATA = "messageData";
 
 	@Override
