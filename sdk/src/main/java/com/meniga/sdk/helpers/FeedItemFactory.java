@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
+import com.meniga.sdk.eventconverters.generic.BaseEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaTransactionEventConverter;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
 import com.meniga.sdk.models.feed.MenigaOfferEvent;
@@ -11,13 +12,15 @@ import com.meniga.sdk.models.feed.MenigaScheduledEvent;
 import com.meniga.sdk.models.feed.MenigaTransactionEvent;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class FeedItemFactory {
-	public MenigaFeedItem getMenigaFeetItem(JsonObject element) {
+	public MenigaFeedItem getMenigaFeetItem(final JsonObject element) {
 		Gson gson = GsonProvider.getGsonBuilder();
 		String type = element.get("typeName").getAsString();
 
@@ -37,7 +40,27 @@ public class FeedItemFactory {
 				return gson.fromJson(element, MenigaOfferEvent.class);
 
 			default:
-				return gson.fromJson(element, MenigaTransactionEvent.class);
+				return new MenigaFeedItem() {
+					@Override
+					public MenigaFeedItem clone() throws CloneNotSupportedException {
+						return this;
+					}
+
+					@Override
+					public DateTime getDate() {
+						return DateTime.now();
+					}
+
+					@Override
+					public String getEventTypeIdentifier() {
+						return element.get("eventTypeIdentifier").getAsString();
+					}
+
+					@Override
+					public String getTopicName() {
+						return element.get("topicName").getAsString();
+					}
+				};
 		}
 	}
 
@@ -52,6 +75,6 @@ public class FeedItemFactory {
 				return converter;
 			}
 		}
-		return new MenigaTransactionEventConverter();
+		return new BaseEventConverter();
 	}
 }
