@@ -212,6 +212,6 @@ public class MenigaDecimal implements Serializable, Comparable {
 
 	@Override
 	public String toString() {
-		return Double.toString(this.floatValue());
+		return getBigDecimal().toString();
 	}
 }
