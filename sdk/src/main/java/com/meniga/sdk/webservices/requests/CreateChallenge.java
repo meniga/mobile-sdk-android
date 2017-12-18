@@ -1,12 +1,13 @@
 package com.meniga.sdk.webservices.requests;
 
+import com.meniga.sdk.models.challenges.enums.ChallengeInterval;
+
 import org.joda.time.DateTime;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class CreateChallenge extends QueryRequestObject {
-
 	public String title;
 	public String description;
 	public DateTime startDate;
@@ -14,7 +15,7 @@ public class CreateChallenge extends QueryRequestObject {
 	public Long iconId;
 	public CreateChallengeTypeData typeData;
 
-	@Override
+    @Override
 	public long getValueHash() {
 		int result = title != null ? title.hashCode() : 0;
 		result = 31 * result + (description != null ? description.hashCode() : 0);

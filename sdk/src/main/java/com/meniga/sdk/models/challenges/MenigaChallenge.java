@@ -27,7 +27,6 @@ import java.util.UUID;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaChallenge extends StateObject implements Serializable, Cloneable, Parcelable {
-
 	private static MenigaChallengesOperations apiOperations;
 
 	protected UUID id;
@@ -510,7 +509,6 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 					merge(result);
 					accepted = true;
 				}
-
 			}
 		});
 	}
@@ -530,7 +528,25 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
 	                                             DateTime endDate, List<Long> categoryIds,
 	                                             MenigaDecimal targetAmount, CustomChallengeColor color) {
-		return MenigaChallenge.create(title, description, startDate, endDate, categoryIds, targetAmount, null, color);
+		return create(title, description, startDate, endDate, categoryIds, targetAmount, null, color);
+	}
+
+	/**
+	 * Creates a new custom challenge object with a default value for iconId
+	 *
+	 * @param title        Title of the challenge
+	 * @param description  Description of the challange
+	 * @param startDate    Time period start for when the challenge starts
+	 * @param endDate      Time period end for when the challenge starts
+	 * @param categoryIds  Category ids that this challenge applies to
+	 * @param targetAmount The budget target amount for the challenge
+	 * @param color        Color of the challenge being created
+	 * @return A task containing the newly created custom challenge
+	 */
+	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
+												 DateTime endDate, List<Long> categoryIds,
+												 MenigaDecimal targetAmount, CustomChallengeColor color, ChallengeInterval interval) {
+		return create(title, description, startDate, endDate, categoryIds, targetAmount, null, color, interval);
 	}
 
 	/**
@@ -549,7 +565,28 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
 	                                             DateTime endDate, List<Long> categoryIds,
 	                                             MenigaDecimal targetAmount, Long iconId, CustomChallengeColor color) {
-		return MenigaChallenge.apiOperations.createChallenge(
+		return create(title, description, startDate, endDate, categoryIds, targetAmount, iconId, color,null);
+	}
+
+	/**
+	 * Creates a new custom challenge object with a recurring interval
+	 *
+	 * @param title        Title of the challenge
+	 * @param description  Description of the challange
+	 * @param startDate    Time period start for when the challenge starts
+	 * @param endDate      Time period end for when the challenge starts
+	 * @param categoryIds  Category ids that this challenge applies to
+	 * @param targetAmount The budget target amount for the challenge
+	 * @param iconId       Id of the icon associated with the challenge
+	 * @param color        Color of the challenge being created
+	 * @param interval     The interval between repeats, e.g. monthly, annually etc.
+	 * @return A task containing the newly created custom challenge
+	 */
+	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
+												 DateTime endDate, List<Long> categoryIds,
+												 MenigaDecimal targetAmount, Long iconId, CustomChallengeColor color,
+												 ChallengeInterval interval) {
+		return apiOperations.createChallenge(
 				title,
 				description,
 				startDate,
@@ -557,7 +594,8 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 				categoryIds,
 				targetAmount,
 				iconId,
-				color
+				color,
+				interval
 		);
 	}
 }

@@ -4,6 +4,7 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
+import com.meniga.sdk.models.challenges.enums.ChallengeInterval;
 import com.meniga.sdk.models.challenges.enums.CustomChallengeColor;
 import com.meniga.sdk.webservices.requests.AcceptChallenge;
 import com.meniga.sdk.webservices.requests.CreateChallenge;
@@ -52,9 +53,9 @@ public class MenigaChallengesOperationsImp implements MenigaChallengesOperations
 
 	@Override
 	public Result<MenigaChallenge> createChallenge(String title, String description,
-	                                               DateTime startDate, DateTime endDate,
-	                                               List<Long> categoryIds, MenigaDecimal targetAmount,
-	                                               Long iconId, CustomChallengeColor color) {
+												   DateTime startDate, DateTime endDate,
+												   List<Long> categoryIds, MenigaDecimal targetAmount,
+												   Long iconId, CustomChallengeColor color, ChallengeInterval interval) {
 		CreateChallenge req = new CreateChallenge();
 		req.title = title;
 		req.description = description;
@@ -63,6 +64,7 @@ public class MenigaChallengesOperationsImp implements MenigaChallengesOperations
 		req.typeData = new CreateChallengeTypeData();
 		req.typeData.categoryIds = categoryIds;
 		req.typeData.targetAmount = targetAmount;
+		req.typeData.recurringInterval = interval;
 		req.iconId = iconId;
 		if (color != null) {
 			req.typeData.metaData = "{\"color\": \"" + color.toColorString() + "\"}";

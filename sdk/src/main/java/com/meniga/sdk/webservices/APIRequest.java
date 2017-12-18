@@ -10,7 +10,6 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class APIRequest {
-
 	public static Result<Object> genericRequest(HttpMethod method, String path, String body, Map<String, String> query) {
 		if (method == HttpMethod.GET && query == null) {
 			query = new HashMap<>();
