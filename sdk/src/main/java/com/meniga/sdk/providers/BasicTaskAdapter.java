@@ -20,7 +20,6 @@ import retrofit2.Response;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class BasicTaskAdapter implements TaskAdapter {
-
 	@Override
 	public <T> Result<T> adapt(Call<T> call, Callback<T> callBack) {
 		if (callBack == null) {
@@ -92,11 +91,14 @@ public class BasicTaskAdapter implements TaskAdapter {
 		res.continueWithTask(new Continuation<T, Task<T>>() {
 			@Override
 			public Task<T> then(Task<T> task) throws Exception {
-				if (task.isFaulted())
-					tcs.setError(task.getError());
-				else
-					tcs.setResult(task.getResult());
-				intercept.onFinished(task.getResult(), task.isFaulted());
+				if (!task.isCancelled()) {
+					if (task.isFaulted()) {
+						tcs.setError(task.getError());
+					} else {
+						tcs.setResult(task.getResult());
+					}
+					intercept.onFinished(task.getResult(), task.isFaulted());
+				}
 				return tcs.getTask();
 			}
 		});
