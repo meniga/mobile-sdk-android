@@ -1055,7 +1055,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 		final TaskCompletionSource<MenigaTransactionPage> src = new TaskCompletionSource<>();
 		final Task<MenigaTransactionPage> task = src.getTask();
 
-		MenigaTransactionPage page = new MenigaTransactionPage();
+		final MenigaTransactionPage page = new MenigaTransactionPage();
 		final Capture<Integer> step = new Capture<>();
 		step.set(0);
 		final int total = filters.size();

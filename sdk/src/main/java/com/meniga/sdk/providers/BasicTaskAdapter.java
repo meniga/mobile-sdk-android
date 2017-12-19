@@ -89,6 +89,7 @@ public class BasicTaskAdapter implements TaskAdapter {
 	public <T> Result<T> intercept(Result<T> request, final Interceptor<T> intercept) {
 		final TaskCompletionSource<T> tcs = new TaskCompletionSource<>();
 		final Task<T> res = request.getTask();
+		final Result<T> finalRequest = request;
 		res.continueWithTask(new Continuation<T, Task<T>>() {
 			@Override
 			public Task<T> then(Task<T> task) throws Exception {
@@ -109,7 +110,7 @@ public class BasicTaskAdapter implements TaskAdapter {
 
 			@Override
 			public void cancel() {
-				request.cancel();
+				finalRequest.cancel();
 			}
 		};
 	}
