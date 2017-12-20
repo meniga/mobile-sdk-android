@@ -17,7 +17,6 @@ import java.util.Map;
  */
 
 public class UserEventSetting implements Parcelable, Serializable {
-
 	protected String identifier;
 	protected String value;
 	protected String dataType;

@@ -12,7 +12,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaOffersSettings implements Parcelable, Serializable {
-
 	protected static MenigaOfferOperations apiOperator;
 
 	protected MenigaOffersSettings() {

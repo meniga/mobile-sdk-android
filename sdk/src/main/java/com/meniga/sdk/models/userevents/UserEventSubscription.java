@@ -10,11 +10,9 @@ import java.io.Serializable;
  */
 
 public class UserEventSubscription implements Parcelable, Serializable {
-
 	protected String channelName;
 	protected Boolean isSubscribed;
 	protected Boolean canUpdateSubscription;
-
 
 	@Override
 	public int describeContents() {
@@ -28,7 +26,7 @@ public class UserEventSubscription implements Parcelable, Serializable {
 		dest.writeValue(this.canUpdateSubscription);
 	}
 
-	public UserEventSubscription() {
+	protected UserEventSubscription() {
 	}
 
 	protected UserEventSubscription(Parcel in) {

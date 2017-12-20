@@ -16,7 +16,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUser implements Serializable, Parcelable, Cloneable {
-
 	public static final Parcelable.Creator<MenigaUser> CREATOR = new Parcelable.Creator<MenigaUser>() {
 		@Override
 		public MenigaUser createFromParcel(Parcel source) {

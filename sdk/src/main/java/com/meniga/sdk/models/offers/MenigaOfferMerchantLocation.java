@@ -9,7 +9,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaOfferMerchantLocation implements Serializable, Parcelable {
-
 	protected long id;
 	protected String identifier;
 	protected Double latitude;

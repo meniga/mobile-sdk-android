@@ -10,7 +10,6 @@ import java.io.Serializable;
  * Represents further data on the type of account.
  */
 public class MenigaAccountType implements Parcelable, Serializable {
-
 	public static final Creator<MenigaAccountType> CREATOR = new Creator<MenigaAccountType>() {
 		@Override
 		public MenigaAccountType createFromParcel(Parcel source) {
@@ -23,10 +22,10 @@ public class MenigaAccountType implements Parcelable, Serializable {
 		}
 	};
 
-	private long id;
-	private String name;
-	private long parentId;
-	private String parentName;
+	protected long id;
+	protected String name;
+	protected long parentId;
+	protected String parentName;
 
 	protected MenigaAccountType(Parcel in) {
 		this.id = in.readLong();

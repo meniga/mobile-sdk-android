@@ -8,19 +8,15 @@ import java.io.Serializable;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public class MenigaTransactionCountEvent extends MenigaTransactionEvent implements MenigaFeedItem, Parcelable, Serializable {
-
-	private MenigaTransactionCountEventData countEventData;
+	protected MenigaTransactionCountEventData countEventData;
 
 	public MenigaTransactionCountEvent() {
 	}
 
-
 	public void setMessageData(MenigaTransactionCountEventData countEventData) {
 		this.countEventData = countEventData;
 	}
-
 
 	@Override
 	public int describeContents() {

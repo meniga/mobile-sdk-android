@@ -11,7 +11,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaBrandSpending implements Parcelable, Serializable {
-
 	public static final Creator<MenigaBrandSpending> CREATOR = new Creator<MenigaBrandSpending>() {
 		@Override
 		public MenigaBrandSpending createFromParcel(Parcel in) {

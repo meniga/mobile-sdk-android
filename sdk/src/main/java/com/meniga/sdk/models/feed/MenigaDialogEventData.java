@@ -12,10 +12,10 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaDialogEventData implements Parcelable, Serializable {
-	private String imageUrl;
-	private String mobileUrl;
-	private String webUrl;
-	private long dialogId;
+	protected String imageUrl;
+	protected String mobileUrl;
+	protected String webUrl;
+	protected long dialogId;
 
 	protected MenigaDialogEventData() {
 	}

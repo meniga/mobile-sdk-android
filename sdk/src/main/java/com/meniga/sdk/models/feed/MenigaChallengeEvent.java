@@ -14,17 +14,17 @@ import java.io.Serializable;
  * Created by agustk on 6.12.2017.
  */
 public class MenigaChallengeEvent implements MenigaFeedItem, Parcelable, Serializable {
-    private long id;
-    private String actionText;
-    private MenigaChallengeEventData messageData;
-    private DateTime date;
-    private long topicId;
-    private String title;
-    private String body;
-    private String typeName;
-    private String type;
-    private UserEventType eventTypeIdentifier;
-    private String topicName;
+    protected long id;
+    protected String actionText;
+    protected MenigaChallengeEventData messageData;
+    protected DateTime date;
+    protected long topicId;
+    protected String title;
+    protected String body;
+    protected String typeName;
+    protected String type;
+    protected UserEventType eventTypeIdentifier;
+    protected String topicName;
 
     protected MenigaChallengeEvent() {
     }

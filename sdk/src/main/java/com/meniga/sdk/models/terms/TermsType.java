@@ -8,9 +8,7 @@ import java.io.Serializable;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public class TermsType implements Parcelable, Serializable, Cloneable {
-
 	protected int id;
 	protected String name;
 	protected String description;

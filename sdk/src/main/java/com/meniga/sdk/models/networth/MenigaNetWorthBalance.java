@@ -22,7 +22,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaNetWorthBalance extends StateObject implements Parcelable, Serializable, Cloneable, Comparable<MenigaNetWorthBalance> {
-
 	public static final Parcelable.Creator<MenigaNetWorthBalance> CREATOR = new Parcelable.Creator<MenigaNetWorthBalance>() {
 		public MenigaNetWorthBalance createFromParcel(Parcel in) {
 			return new MenigaNetWorthBalance(in);

@@ -33,25 +33,25 @@ public class MenigaScheduledEvent implements MenigaFeedItem, Serializable, Clone
 
 	protected static MenigaFeedOperations apiOperator;
 
-	private long id;
-	private MenigaDecimal totalExpenses;
-	private MenigaDecimal totalIncome;
-	private int transactionCount;
-	private Map<Long, MenigaDecimal> expensesPerCategory;
-	private Map<Long, MenigaDecimal> incomePerCategory;
-	private Map<Long, Integer> transactionCountPerMerchant;
-	private ScheduledEventType scheduledEventType;
-	private DateTime startDate;
-	private DateTime endDate;
-	private List<ScheduledDayTransactions> transactionsPerDay;
-	private Long topicId;
-	private DateTime date;
-	private String title;
-	private String body;
-	private String typeName;
+	protected long id;
+	protected MenigaDecimal totalExpenses;
+	protected MenigaDecimal totalIncome;
+	protected int transactionCount;
+	protected Map<Long, MenigaDecimal> expensesPerCategory;
+	protected Map<Long, MenigaDecimal> incomePerCategory;
+	protected Map<Long, Integer> transactionCountPerMerchant;
+	protected ScheduledEventType scheduledEventType;
+	protected DateTime startDate;
+	protected DateTime endDate;
+	protected List<ScheduledDayTransactions> transactionsPerDay;
+	protected Long topicId;
+	protected DateTime date;
+	protected String title;
+	protected String body;
+	protected String typeName;
 
-	private String eventTypeIdentifier;
-	private String topicName;
+	protected String eventTypeIdentifier;
+	protected String topicName;
 
 	protected MenigaScheduledEvent() {
 	}

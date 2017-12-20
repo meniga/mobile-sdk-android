@@ -13,7 +13,6 @@ import java.util.List;
  */
 
 public class AuthenticationChallenge implements Parcelable, Serializable {
-
 	protected ChallengeContentType contentType;
 	protected String textChallenge;
 	protected String errorMessage;

@@ -20,7 +20,6 @@ import com.meniga.sdk.models.sync.operators.MenigaSyncOperations;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSync implements Serializable, Parcelable, Cloneable {
-
 	protected static MenigaSyncOperations apiOperator;
 
 	protected long syncHistoryId;

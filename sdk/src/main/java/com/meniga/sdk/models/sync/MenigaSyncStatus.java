@@ -11,7 +11,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSyncStatus implements Parcelable, Serializable {
-
 	protected boolean hasCompletedSyncSession;
 	protected boolean isSynchronizationNeeded;
 	protected String synchronizationStatus;

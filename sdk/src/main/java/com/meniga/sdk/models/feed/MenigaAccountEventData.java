@@ -12,9 +12,9 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaAccountEventData implements Parcelable, Serializable {
-	private String accountName;
-	private String accountCategory;
-	private MenigaDecimal thresholdAmountTrigger;
+	protected String accountName;
+	protected String accountCategory;
+	protected MenigaDecimal thresholdAmountTrigger;
 
 	protected MenigaAccountEventData() {
 	}

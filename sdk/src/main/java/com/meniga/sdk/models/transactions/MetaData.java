@@ -9,7 +9,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MetaData implements Parcelable, Serializable {
-
 	public static final Parcelable.Creator<MetaData> CREATOR = new Parcelable.Creator<MetaData>() {
 		@Override
 		public MetaData createFromParcel(Parcel source) {
@@ -21,8 +20,9 @@ public class MetaData implements Parcelable, Serializable {
 			return new MetaData[size];
 		}
 	};
-	private String name;
-	private String value;
+
+	protected String name;
+	protected String value;
 
 	public MetaData() {
 	}

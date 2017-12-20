@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * used to generate the list.
  */
 public class MenigaTransactionPage extends ArrayList<MenigaTransaction> implements Serializable {
-
 	protected int totalNumTransactions;
 	protected int numPages;
 	protected int page;

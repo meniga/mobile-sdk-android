@@ -19,7 +19,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransactionSeries implements Serializable, Parcelable, Cloneable {
-
 	public static final Parcelable.Creator<MenigaTransactionSeries> CREATOR = new Parcelable.Creator<MenigaTransactionSeries>() {
 		@Override
 		public MenigaTransactionSeries createFromParcel(Parcel source) {
@@ -41,7 +40,6 @@ public class MenigaTransactionSeries implements Serializable, Parcelable, Clonea
 	protected List<Long> transactionIds;
 
 	protected MenigaTransactionSeries() {
-
 	}
 
 	protected MenigaTransactionSeries(Parcel in) {

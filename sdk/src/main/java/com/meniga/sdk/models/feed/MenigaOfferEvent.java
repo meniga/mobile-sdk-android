@@ -16,24 +16,23 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaOfferEvent implements MenigaFeedItem, Serializable, Cloneable, Parcelable {
+	protected String validationToken;
+	protected MenigaDecimal reward;
+	protected RelevanceHook relevanceHook;
+	protected OfferState state;
+	protected int daysLeft;
+	protected String merchantName;
+	protected MenigaDecimal minimumPurchaseAmount;
+	protected MenigaDecimal maximumCashbackPerPurchase;
+	protected DateTime date;
+	protected long topicId;
+	protected String title;
+	protected String body;
+	protected String typeName;
+	protected RewardType rewardType;
 
-	private String validationToken;
-	private MenigaDecimal reward;
-	private RelevanceHook relevanceHook;
-	public OfferState state;
-	private int daysLeft;
-	private String merchantName;
-	private MenigaDecimal minimumPurchaseAmount;
-	private MenigaDecimal maximumCashbackPerPurchase;
-	private DateTime date;
-	private long topicId;
-	private String title;
-	private String body;
-	private String typeName;
-	private RewardType rewardType;
-
-	private String eventTypeIdentifier;
-	private String topicName;
+	protected String eventTypeIdentifier;
+	protected String topicName;
 
 	protected MenigaOfferEvent() {
 	}

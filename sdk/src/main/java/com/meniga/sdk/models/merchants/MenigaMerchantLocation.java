@@ -11,7 +11,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaMerchantLocation implements Serializable, Parcelable {
-
 	public static final Creator<MenigaMerchantLocation> CREATOR = new Creator<MenigaMerchantLocation>() {
 		@Override
 		public MenigaMerchantLocation createFromParcel(Parcel source) {

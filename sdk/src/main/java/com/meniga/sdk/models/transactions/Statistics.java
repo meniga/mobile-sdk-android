@@ -13,7 +13,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class Statistics implements Serializable, Parcelable {
-
 	public static final Creator<Statistics> CREATOR = new Creator<Statistics>() {
 		@Override
 		public Statistics createFromParcel(Parcel source) {
@@ -26,9 +25,9 @@ public class Statistics implements Serializable, Parcelable {
 		}
 	};
 
-	private MenigaDecimal currentMonthTotal;
-	private MenigaDecimal total;
-	private MenigaDecimal average;
+	protected MenigaDecimal currentMonthTotal;
+	protected MenigaDecimal total;
+	protected MenigaDecimal average;
 
 	protected Statistics(Parcel in) {
 		this.currentMonthTotal = (MenigaDecimal) in.readSerializable();

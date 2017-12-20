@@ -10,7 +10,6 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class BudgetFilter {
-
 	/**
 	 * Category Ids linked to budget buckets.
 	 */

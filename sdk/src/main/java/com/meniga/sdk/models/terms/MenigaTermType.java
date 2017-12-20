@@ -9,9 +9,9 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTermType implements Parcelable, Serializable {
-    private long id;
-    private String name;
-    private String description;
+    protected long id;
+    protected String name;
+    protected String description;
 
     protected MenigaTermType() {
     }

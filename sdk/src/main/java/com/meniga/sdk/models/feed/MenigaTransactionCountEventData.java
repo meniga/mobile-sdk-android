@@ -8,17 +8,13 @@ import java.io.Serializable;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public class MenigaTransactionCountEventData implements Parcelable, Serializable {
-
-
-	private long transactionId;
-	private long merchantId;
-	private String merchantName;
-	private int totalCount;
-	private int periodCount;
-	private String categoryName;
-
+	protected long transactionId;
+	protected long merchantId;
+	protected String merchantName;
+	protected int totalCount;
+	protected int periodCount;
+	protected String categoryName;
 
 	public long getTransactionId() {
 		return transactionId;
@@ -44,15 +40,20 @@ public class MenigaTransactionCountEventData implements Parcelable, Serializable
 		return categoryName;
 	}
 
-
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		MenigaTransactionCountEventData that = (MenigaTransactionCountEventData) o;
 
-		if (transactionId != that.transactionId) return false;
+		if (transactionId != that.transactionId) {
+			return false;
+		}
 		if (merchantId != that.merchantId) return false;
 		if (totalCount != that.totalCount) return false;
 		if (periodCount != that.periodCount) return false;

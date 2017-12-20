@@ -12,14 +12,13 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaCustomEvent implements MenigaFeedItem, Parcelable, Serializable {
+	protected DateTime date;
+	protected long id;
+	protected String body;
+	protected String title;
 
-	private DateTime date;
-	private long id;
-	private String body;
-	private String title;
-
-	private String eventTypeIdentifier;
-	private String topicName;
+	protected String eventTypeIdentifier;
+	protected String topicName;
 
 	protected MenigaCustomEvent() {
 	}

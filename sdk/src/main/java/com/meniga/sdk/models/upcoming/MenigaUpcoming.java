@@ -20,26 +20,25 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcoming extends StateObject implements Serializable, Parcelable, Cloneable {
-
-	private long id;
-	private String bankReference;
-	private String text;
-	private MenigaDecimal amount;
-	private MenigaDecimal amountInCurrency;
-	private String currencyCode;
-	private DateTime date;
-	private PaymentStatus paymentStatus;
-	private Boolean isFlagged;
-	private Boolean isWatched;
-	private Long accountId;
-	private Long transactionId;
-	private Long invoiceId;
-	private Long scheduledPaymentId;
-	private Long categoryId;
-	private MenigaUpcomingRecurringPattern recurringPattern;
-	private List<MenigaUpcomingComment> comments;
-	private List<MenigaUpcomingReconcileScore> reconcileScores;
-	private MenigaUpcomingDetails details;
+	protected long id;
+	protected String bankReference;
+	protected String text;
+	protected MenigaDecimal amount;
+	protected MenigaDecimal amountInCurrency;
+	protected String currencyCode;
+	protected DateTime date;
+	protected PaymentStatus paymentStatus;
+	protected Boolean isFlagged;
+	protected Boolean isWatched;
+	protected Long accountId;
+	protected Long transactionId;
+	protected Long invoiceId;
+	protected Long scheduledPaymentId;
+	protected Long categoryId;
+	protected MenigaUpcomingRecurringPattern recurringPattern;
+	protected List<MenigaUpcomingComment> comments;
+	protected List<MenigaUpcomingReconcileScore> reconcileScores;
+	protected MenigaUpcomingDetails details;
 
 	private static MenigaUpcomingOperations apiOperator;
 

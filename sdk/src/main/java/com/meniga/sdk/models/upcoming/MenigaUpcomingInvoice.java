@@ -14,30 +14,29 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingInvoice implements Serializable, Parcelable, Cloneable {
-
-	private long id;
-	private String identifier;
-	private String bankReference;
-	private String invoiceText;
-	private MenigaDecimal amountInCurrency;
-	private MenigaDecimal feeAmount;
-	private MenigaDecimal vatAmount;
-	private String currencyCode;
-	private DateTime issuedDate;
-	private DateTime dueDate;
-	private DateTime finalDueDate;
-	private DateTime bookingDate;
-	private PaymentStatus paymentStatus;
-	private String parsedData;
-	private Boolean isReceivable;
-	private String issuerName;
-	private String issuerIdentifier;
-	private String issuerAccIdentifier;
-	private String issuerReferenceText;
-	private String counterpartyName;
-	private String counterpartyIdentifier;
-	private String counterpartyAccIdentifier;
-	private String counterpartyReferenceText;
+	protected long id;
+	protected String identifier;
+	protected String bankReference;
+	protected String invoiceText;
+	protected MenigaDecimal amountInCurrency;
+	protected MenigaDecimal feeAmount;
+	protected MenigaDecimal vatAmount;
+	protected String currencyCode;
+	protected DateTime issuedDate;
+	protected DateTime dueDate;
+	protected DateTime finalDueDate;
+	protected DateTime bookingDate;
+	protected PaymentStatus paymentStatus;
+	protected String parsedData;
+	protected Boolean isReceivable;
+	protected String issuerName;
+	protected String issuerIdentifier;
+	protected String issuerAccIdentifier;
+	protected String issuerReferenceText;
+	protected String counterpartyName;
+	protected String counterpartyIdentifier;
+	protected String counterpartyAccIdentifier;
+	protected String counterpartyReferenceText;
 
 	protected MenigaUpcomingInvoice() {
 	}

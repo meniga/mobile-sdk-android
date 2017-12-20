@@ -12,11 +12,10 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaRealmAccount extends QueryRequestObject implements Parcelable, Serializable {
-
-	private String name;
-	private String accountIdentifier;
-	private long accountTypeId;
-	private boolean accountExists;
+	protected String name;
+	protected String accountIdentifier;
+	protected long accountTypeId;
+	protected boolean accountExists;
 
 	protected MenigaRealmAccount() {
 	}

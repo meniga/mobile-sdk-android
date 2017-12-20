@@ -16,7 +16,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaOfferPage extends ArrayList<MenigaOffer> implements Serializable, Parcelable {
-
 	protected int skip;
 	protected int take;
 	protected List<OfferFilterState> states = new ArrayList<>();

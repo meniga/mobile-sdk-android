@@ -17,7 +17,6 @@ import java.util.ArrayList;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable, Serializable, Cloneable {
-
 	public static final Parcelable.Creator<MenigaFeed> CREATOR = new Parcelable.Creator<MenigaFeed>() {
 		public MenigaFeed createFromParcel(Parcel source) {
 			return new MenigaFeed(source);

@@ -10,7 +10,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class RelevanceHook implements Parcelable, Serializable, Cloneable {
-
 	protected String text;
 	protected String detailsUrl;
 
