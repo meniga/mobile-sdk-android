@@ -5,9 +5,7 @@ import java.util.UUID;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public class DeleteChallenge extends QueryRequestObject {
-
 	public UUID id;
 
 	@Override
