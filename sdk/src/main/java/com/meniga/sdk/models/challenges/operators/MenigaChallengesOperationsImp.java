@@ -11,6 +11,7 @@ import com.meniga.sdk.webservices.requests.CreateChallenge;
 import com.meniga.sdk.webservices.requests.CreateChallengeTypeData;
 import com.meniga.sdk.webservices.requests.DeleteChallenge;
 import com.meniga.sdk.webservices.requests.GetChallenge;
+import com.meniga.sdk.webservices.requests.GetChallengeHistory;
 import com.meniga.sdk.webservices.requests.GetChallenges;
 import com.meniga.sdk.webservices.requests.UpdateChallenge;
 
@@ -102,5 +103,14 @@ public class MenigaChallengesOperationsImp implements MenigaChallengesOperations
 		DeleteChallenge req = new DeleteChallenge();
 		req.id = id;
 		return MenigaSDK.executor().deleteChallenge(req);
+	}
+
+	@Override
+	public Result<List<MenigaChallenge>> getChallengeHistory(UUID id, int page, int numPerPage) {
+		GetChallengeHistory req = new GetChallengeHistory();
+		req.id = id;
+		req.skip = page;
+		req.take = numPerPage;
+		return MenigaSDK.executor().getChallengeHistory(req);
 	}
 }

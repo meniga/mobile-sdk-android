@@ -598,4 +598,14 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 				interval
 		);
 	}
+
+	/**
+	 * Fetches previous completed instances of this challenge, if it was a recurring challenge
+	 * @param page The page to fetch if the number of results are more than numPerPage
+	 * @param numPerPage The number of challenges per page
+	 * @return A list of completed challenges if this is a recurring challenge
+	 */
+	public Result<List<MenigaChallenge>> history(int page, int numPerPage) {
+		return apiOperations.getChallengeHistory(id, page, numPerPage);
+	}
 }

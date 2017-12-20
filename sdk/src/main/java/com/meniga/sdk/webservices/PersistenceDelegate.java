@@ -670,6 +670,13 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.CHALLENGES).updateChallenge(req.id.toString(), req));
 	}
 
+	public Result<List<MenigaChallenge>> getChallengeHistory(GetChallengeHistory req) {
+		if (provider.hasKey(req)) {
+			return createTask(provider.fetch(req));
+		}
+		return persist(req, getClient(Service.CHALLENGES).getChallengeHistory(req.id.toString(), req.toQueryMap()));
+	}
+
 	// --
 	// Budget
 	// --

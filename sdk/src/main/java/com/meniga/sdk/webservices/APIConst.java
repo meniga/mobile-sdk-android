@@ -86,6 +86,7 @@ class APIConst {
 	// Challenges
 	static final String URL_CHALLENGES = "challenges";
 	static final String CHALLENGES_ACCEPT = "/accept";
+	static final String CHALLENGES_HISTORY = "/history";
 
 	// Budget
 	static final String URL_BUDGETS = "budgets";

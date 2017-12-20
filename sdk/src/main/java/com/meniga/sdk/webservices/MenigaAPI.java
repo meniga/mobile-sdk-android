@@ -483,6 +483,9 @@ public interface MenigaAPI {
 	@PUT(APIConst.URL_CHALLENGES + "/{id}")
 	Call<Void> updateChallenge(@Path("id") String id, @Body UpdateChallenge req);
 
+	@GET(APIConst.URL_CHALLENGES + "/{id}" + APIConst.CHALLENGES_HISTORY)
+	Call<List<MenigaChallenge>> getChallengeHistory(@Path("id") String id, @QueryMap Map<String, String> query);
+
 	// --
 	// Organizations
 	// --
