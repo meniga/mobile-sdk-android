@@ -10,18 +10,17 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaRealmAuthResponse implements Parcelable, Serializable {
-
-	private boolean authenticationDone;
-	private List<MenigaRealmAuthParameter> requiredParameters;
-	private String contentType;
-	private String textChallenge;
-	private String binaryChallenge;
-	private String errorMessage;
-	private String userIdentifier;
-	private long realmUserId;
-	private boolean canSave;
-	private String loginHelp;
-	private String sessionToken;
+	protected boolean authenticationDone;
+	protected List<MenigaRealmAuthParameter> requiredParameters;
+	protected String contentType;
+	protected String textChallenge;
+	protected String binaryChallenge;
+	protected String errorMessage;
+	protected String userIdentifier;
+	protected long realmUserId;
+	protected boolean canSave;
+	protected String loginHelp;
+	protected String sessionToken;
 
 	protected MenigaRealmAuthResponse() {
 	}

@@ -19,22 +19,22 @@ import java.util.UUID;
  * Created by agustk on 6.12.2017.
  */
 public class MenigaChallengeEventData implements Parcelable, Serializable {
-    private UUID challengeId;
-    private String title;
-    private boolean challengeSuccessful;
-    private MenigaDecimal targetAmount;
-    private String targetAmountFormatted;
-    private MenigaDecimal spentAmount;
-    private String spentAmountFormatted;
-    private MenigaDecimal amountDifference;
-    private String amountDifferenceFormatted;
-    private DateTime startDate;
-    private DateTime endDate;
-    private DateTime periodStart;
-    private DateTime periodEnd;
-    private String iconUrl;
-    private CustomChallengeColor metadata;
-    private List<Long> categoryIds;
+    protected UUID challengeId;
+    protected String title;
+    protected boolean challengeSuccessful;
+    protected MenigaDecimal targetAmount;
+    protected String targetAmountFormatted;
+    protected MenigaDecimal spentAmount;
+    protected String spentAmountFormatted;
+    protected MenigaDecimal amountDifference;
+    protected String amountDifferenceFormatted;
+    protected DateTime startDate;
+    protected DateTime endDate;
+    protected DateTime periodStart;
+    protected DateTime periodEnd;
+    protected String iconUrl;
+    protected CustomChallengeColor metadata;
+    protected List<Long> categoryIds;
 
     protected MenigaChallengeEventData() {
     }

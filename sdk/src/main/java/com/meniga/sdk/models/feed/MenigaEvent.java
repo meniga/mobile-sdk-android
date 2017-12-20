@@ -15,16 +15,15 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaEvent implements MenigaFeedItem, Serializable, Cloneable, Parcelable {
+	protected long id;
+	protected long topicId;
+	protected String title;
+	protected DateTime date;
+	protected String body;
+	protected UserEventType eventTypeIdentifier;
+	protected Map<String, String> messageData;
 
-	private long id;
-	private long topicId;
-	private String title;
-	private DateTime date;
-	private String body;
-	private UserEventType eventTypeIdentifier;
-	private Map<String, String> messageData;
-
-	private String topicName;
+	protected String topicName;
 
 	protected MenigaEvent() {
 	}

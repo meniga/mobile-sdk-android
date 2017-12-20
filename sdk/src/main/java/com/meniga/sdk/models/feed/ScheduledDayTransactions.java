@@ -17,7 +17,6 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class ScheduledDayTransactions implements Serializable, Cloneable, Parcelable {
-
 	public static final Creator<ScheduledDayTransactions> CREATOR = new Creator<ScheduledDayTransactions>() {
 		@Override
 		public ScheduledDayTransactions createFromParcel(Parcel source) {
@@ -30,12 +29,12 @@ public class ScheduledDayTransactions implements Serializable, Cloneable, Parcel
 		}
 	};
 
-	private DateTime date;
-	private MenigaDecimal income;
-	private MenigaDecimal expenses;
-	private List<Long> merchantIds;
-	private Map<Long, MenigaDecimal> expensesPerCategory;
-	private Map<Long, MenigaDecimal> incomePerCategory;
+	protected DateTime date;
+	protected MenigaDecimal income;
+	protected MenigaDecimal expenses;
+	protected List<Long> merchantIds;
+	protected Map<Long, MenigaDecimal> expensesPerCategory;
+	protected Map<Long, MenigaDecimal> incomePerCategory;
 
 	protected ScheduledDayTransactions() {
 	}

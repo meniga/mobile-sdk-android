@@ -27,7 +27,6 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaCategory extends StateObject implements Parcelable, Serializable, Cloneable {
-
 	public static final Creator<MenigaCategory> CREATOR = new Creator<MenigaCategory>() {
 		public MenigaCategory createFromParcel(Parcel source) {
 			return new MenigaCategory(source);

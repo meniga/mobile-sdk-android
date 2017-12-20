@@ -7,7 +7,6 @@ import java.io.Serializable;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public enum TermsState implements Serializable {
 	@SerializedName("Declined")
 	DECLINED,

@@ -28,7 +28,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransactionRule extends StateObject implements Parcelable, Serializable, Cloneable {
-
 	public static final Creator<MenigaTransactionRule> CREATOR = new Creator<MenigaTransactionRule>() {
 		@Override
 		public MenigaTransactionRule createFromParcel(Parcel source) {

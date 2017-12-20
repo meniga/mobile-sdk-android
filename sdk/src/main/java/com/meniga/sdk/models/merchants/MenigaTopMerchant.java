@@ -16,7 +16,6 @@ import java.util.List;
  */
 
 public class MenigaTopMerchant implements Parcelable, Serializable {
-
 	protected long merchantId;
 	protected String text;
 	protected MenigaDecimal nettoAmount;

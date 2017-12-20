@@ -17,7 +17,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class Value implements Serializable, Parcelable {
-
 	public static final Creator<Value> CREATOR = new Creator<Value>() {
 		@Override
 		public Value createFromParcel(Parcel source) {
@@ -30,11 +29,11 @@ public class Value implements Serializable, Parcelable {
 		}
 	};
 
-	private MenigaDecimal nettoAmount;
-	private MenigaDecimal totalPositive;
-	private MenigaDecimal totalNegative;
-	private DateTime date;
-	private List<Long> transactionIds;
+	protected MenigaDecimal nettoAmount;
+	protected MenigaDecimal totalPositive;
+	protected MenigaDecimal totalNegative;
+	protected DateTime date;
+	protected List<Long> transactionIds;
 
 	protected Value(Parcel in) {
 		this.nettoAmount = (MenigaDecimal) in.readSerializable();

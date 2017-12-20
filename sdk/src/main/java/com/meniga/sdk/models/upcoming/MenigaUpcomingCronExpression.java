@@ -14,15 +14,14 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingCronExpression implements Serializable, Parcelable, Cloneable {
-
-	private Integer dayOfMonth;
-	private Integer dayOfMonthInterval;
-	private CronMonth month;
-	private Integer monthInterval;
-	private CronDayOfWeek dayOfWeek;
-	private Integer dayOfWeekInterval;
-	private DateTime weekOfYear;
-	private Integer weekInterval;
+	protected Integer dayOfMonth;
+	protected Integer dayOfMonthInterval;
+	protected CronMonth month;
+	protected Integer monthInterval;
+	protected CronDayOfWeek dayOfWeek;
+	protected Integer dayOfWeekInterval;
+	protected DateTime weekOfYear;
+	protected Integer weekInterval;
 
 	public MenigaUpcomingCronExpression() {
 	}

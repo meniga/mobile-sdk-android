@@ -8,13 +8,11 @@ import java.io.Serializable;
  */
 
 public class TopMerchantOptions implements Serializable {
-
-	private Integer maxMerchants;
-	private Boolean includeUnMappedMerchants;
-	private Boolean useParentMerchantIds;
+	protected Integer maxMerchants;
+	protected Boolean includeUnMappedMerchants;
+	protected Boolean useParentMerchantIds;
 
 	public static class Builder {
-
 		private Integer maxMerchants;
 		private Boolean includeUnMappedMerchants;
 		private Boolean useParentMerchantIds;

@@ -14,17 +14,17 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializable {
-	private long id;
+	protected long id;
 	@SerializedName("topicId")
-	private long accountId;
-	private String actionText;
-	private transient MenigaAccountEventData messageData;
-	private DateTime date;
-	private String title;
-	private String body;
+	protected long accountId;
+	protected String actionText;
+	protected transient MenigaAccountEventData messageData;
+	protected DateTime date;
+	protected String title;
+	protected String body;
 
-	private UserEventType eventTypeIdentifier;
-	private String topicName;
+	protected UserEventType eventTypeIdentifier;
+	protected String topicName;
 
 	protected MenigaAccountEvent() {
 	}

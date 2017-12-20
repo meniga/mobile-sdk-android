@@ -34,7 +34,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransaction extends StateObject implements Serializable, MenigaFeedItem, Cloneable, Parcelable {
-
 	public static final Parcelable.Creator<MenigaTransaction> CREATOR = new Parcelable.Creator<MenigaTransaction>() {
 		public MenigaTransaction createFromParcel(Parcel source) {
 			return new MenigaTransaction(source);
@@ -91,8 +90,8 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	protected long timeStamp;
 	protected String userData;
 
-	private String eventTypeIdentifier;
-	private String topicName;
+	protected String eventTypeIdentifier;
+	protected String topicName;
 
 	protected MenigaTransaction() {
 	}

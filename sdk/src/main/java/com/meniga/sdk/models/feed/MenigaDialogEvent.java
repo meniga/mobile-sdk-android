@@ -15,17 +15,17 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaDialogEvent implements MenigaFeedItem, Parcelable, Serializable {
-	private long id;
-	private UserEventType eventTypeIdentifier;
-	private String actionText;
-	private MenigaDialogEventData messageData;
-	private DateTime date;
-	private long topicId;
-	private String topicName;
-	private String title;
-	private String body;
-	private String typeName;
-	private String type;
+	protected long id;
+	protected UserEventType eventTypeIdentifier;
+	protected String actionText;
+	protected MenigaDialogEventData messageData;
+	protected DateTime date;
+	protected long topicId;
+	protected String topicName;
+	protected String title;
+	protected String body;
+	protected String typeName;
+	protected String type;
 
 	protected MenigaDialogEvent() {
 	}

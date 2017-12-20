@@ -11,7 +11,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaNetWorthAccountType implements Parcelable, Serializable {
-
 	public static final Creator<MenigaNetWorthAccountType> CREATOR = new Creator<MenigaNetWorthAccountType>() {
 		@Override
 		public MenigaNetWorthAccountType createFromParcel(Parcel source) {

@@ -20,18 +20,17 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaBudgetEntry implements Parcelable, Serializable {
-
 	protected static MenigaBudgetOperations apiOperator;
 
-	private long id;
-	private MenigaDecimal targetAmount;
-	private DateTime startDate;
-	private DateTime endDate;
-	private DateTime updatedAt;
-	private long budgetId;
-	private int generationType;
-	private MenigaDecimal spentAmount;
-	private List<Long> categoryIds;
+	protected long id;
+	protected MenigaDecimal targetAmount;
+	protected DateTime startDate;
+	protected DateTime endDate;
+	protected DateTime updatedAt;
+	protected long budgetId;
+	protected int generationType;
+	protected MenigaDecimal spentAmount;
+	protected List<Long> categoryIds;
 
 	protected MenigaBudgetEntry() {
 	}

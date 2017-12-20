@@ -9,14 +9,12 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransactionEvent extends MenigaEvent implements Parcelable, Serializable {
-
 	public MenigaTransactionEvent() {
 	}
 
 	public long getTransactionId() {
 		return super.getTopicId();
 	}
-
 
 	@Override
 	public int describeContents() {

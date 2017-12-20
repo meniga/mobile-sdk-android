@@ -31,7 +31,6 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class TransactionsFilter implements Serializable, Parcelable, Cloneable, ValueHashable {
-
 	public static final Parcelable.Creator<TransactionsFilter> CREATOR = new Parcelable.Creator<TransactionsFilter>() {
 		@Override
 		public TransactionsFilter createFromParcel(Parcel source) {
@@ -44,55 +43,55 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		}
 	};
 
-	private final String type;
-	private final String orderBy;
-	private final Integer skip;
-	private final Integer take;
-	private final MenigaDecimal amountTo;
-	private final MenigaDecimal amountFrom;
-	private final List<Long> categoryIds;
-	private final List<Long> accountIds;
-	private final List<Long> accountTypeIds;
-	private final List<String> accountIdentifiers;
-	private final List<Long> merchantIds;
-	private final List<String> merchantTexts;
-	private final String searchText;
-	private final List<String> tags;
-	private final DateTime periodTo;
-	private final DateTime periodFrom;
-	private final List<Long> ids;
-	private final Boolean onlyUnread;
-	private final Boolean onlyUncertain;
-	private final Boolean onlyFlagged;
-	private final Boolean useExactMerchantTexts;
-	private final Boolean uncertainOrFlagged;
-	private final Boolean useAbsoluteAmountSearch;
-	private final Boolean useAccentInsensitiveSearch;
-	private final Boolean useAmountInCurrencySearch;
-	private final Boolean useAndSearchForTags;
-	private final Boolean useEqualsSearchForBankId;
-	private final Boolean useExactDescription;
-	private final Boolean useParentMerchantIds;
-	private final Boolean onlyUncategorized;
-	private final Boolean ascendingOrder;
-	private final Boolean hideExcluded;
-	private final List<String> bankIds;
-	private final List<CategoryType> categoryTypes;
-	private final String comment;
-	private final List<String> counterpartyAccountIdentifiers;
-	private final String description;
-	private final List<Integer> excludeMerchantIds;
-	private final List<String> excludeMerchantTexts;
-	private final List<String> fields;
-	private final DateTime insertedBefore;
-	private final DateTime originalPeriodFrom;
-	private final DateTime originalPeriodTo;
-	private final String parsedData;
-	private final List<String> parsedDataExactKeys;
-	private final String parsedDataNameToOrderBy;
-	private transient final double amountScale;
-	private transient final FilterTimeGroup timeGroup;
-	private transient final boolean isFiltering;
+	protected final String type;
+	protected final String orderBy;
+	protected final Integer skip;
+	protected final Integer take;
+	protected final MenigaDecimal amountTo;
+	protected final MenigaDecimal amountFrom;
+	protected final List<Long> categoryIds;
+	protected final List<Long> accountIds;
+	protected final List<Long> accountTypeIds;
+	protected final List<String> accountIdentifiers;
+	protected final List<Long> merchantIds;
+	protected final List<String> merchantTexts;
+	protected final String searchText;
+	protected final List<String> tags;
+	protected final DateTime periodTo;
+	protected final DateTime periodFrom;
+	protected final List<Long> ids;
+	protected final Boolean onlyUnread;
+	protected final Boolean onlyUncertain;
+	protected final Boolean onlyFlagged;
+	protected final Boolean useExactMerchantTexts;
+	protected final Boolean uncertainOrFlagged;
+	protected final Boolean useAbsoluteAmountSearch;
+	protected final Boolean useAccentInsensitiveSearch;
+	protected final Boolean useAmountInCurrencySearch;
+	protected final Boolean useAndSearchForTags;
+	protected final Boolean useEqualsSearchForBankId;
+	protected final Boolean useExactDescription;
+	protected final Boolean useParentMerchantIds;
+	protected final Boolean onlyUncategorized;
+	protected final Boolean ascendingOrder;
+	protected final Boolean hideExcluded;
+	protected final List<String> bankIds;
+	protected final List<CategoryType> categoryTypes;
+	protected final String comment;
+	protected final List<String> counterpartyAccountIdentifiers;
+	protected final String description;
+	protected final List<Integer> excludeMerchantIds;
+	protected final List<String> excludeMerchantTexts;
+	protected final List<String> fields;
+	protected final DateTime insertedBefore;
+	protected final DateTime originalPeriodFrom;
+	protected final DateTime originalPeriodTo;
+	protected final String parsedData;
+	protected final List<String> parsedDataExactKeys;
+	protected final String parsedDataNameToOrderBy;
+	protected transient final double amountScale;
+	protected transient final FilterTimeGroup timeGroup;
+	protected transient final boolean isFiltering;
 
 	protected TransactionsFilter(Parcel in) {
 		type = in.readString();

@@ -11,7 +11,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class ParsedData implements Serializable, Parcelable {
-
 	public static final Creator<ParsedData> CREATOR = new Creator<ParsedData>() {
 		@Override
 		public ParsedData createFromParcel(Parcel source) {
@@ -24,8 +23,8 @@ public class ParsedData implements Serializable, Parcelable {
 		}
 	};
 
-	public String key;
-	public String val;
+	protected String key;
+	protected String val;
 
 	protected ParsedData() {
 	}

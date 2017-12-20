@@ -15,7 +15,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaRepaymentRecord extends StateObject implements Parcelable, Serializable, Cloneable {
-
 	public static final Parcelable.Creator<MenigaRepaymentRecord> CREATOR = new Parcelable.Creator<MenigaRepaymentRecord>() {
 		public MenigaRepaymentRecord createFromParcel(Parcel source) {
 			return new MenigaRepaymentRecord(source);

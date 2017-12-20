@@ -17,18 +17,17 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaOrganization implements Serializable, Parcelable {
-
 	private static MenigaOrganizationOperations apiOperator;
 
-	private long id;
-	private String name;
-	private String altName;
-	private String identifier;
-	private int orderIndex;
-	private String iconFilename;
-	private long imageDataId;
-	private String imageData;
-	private List<MenigaRealm> realms;
+	protected long id;
+	protected String name;
+	protected String altName;
+	protected String identifier;
+	protected int orderIndex;
+	protected String iconFilename;
+	protected long imageDataId;
+	protected String imageData;
+	protected List<MenigaRealm> realms;
 
 	protected MenigaOrganization() {
 	}

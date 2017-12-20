@@ -11,11 +11,10 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingComment implements Serializable, Parcelable, Cloneable {
-
-	private long id;
-	private DateTime created;
-	private DateTime modified;
-	private String comment;
+	protected long id;
+	protected DateTime created;
+	protected DateTime modified;
+	protected String comment;
 
 	protected MenigaUpcomingComment() {
 	}

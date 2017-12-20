@@ -9,11 +9,10 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingReconcileScore implements Serializable, Parcelable, Cloneable {
-
-	private long upcomingId;
-	private Long transactionId;
-	private Float confidenceScore;
-	private Boolean isConfirmed;
+	protected long upcomingId;
+	protected Long transactionId;
+	protected Float confidenceScore;
+	protected Boolean isConfirmed;
 
 	protected MenigaUpcomingReconcileScore() {
 	}

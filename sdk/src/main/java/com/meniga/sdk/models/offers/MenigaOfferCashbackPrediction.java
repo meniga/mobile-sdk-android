@@ -12,7 +12,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaOfferCashbackPrediction extends StateObject implements Parcelable, Serializable, Cloneable {
-
 	public static final Parcelable.Creator<MenigaOfferCashbackPrediction> CREATOR = new Parcelable.Creator<MenigaOfferCashbackPrediction>() {
 		public MenigaOfferCashbackPrediction createFromParcel(Parcel source) {
 			return new MenigaOfferCashbackPrediction(source);

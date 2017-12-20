@@ -17,7 +17,6 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUserEvent implements Serializable, Parcelable, Cloneable {
-
 	protected static MenigaUserEventsOperations apiOperations;
 
 	protected UserEventType userEventTypeIdentifier;

@@ -13,7 +13,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class Options implements Serializable, Parcelable {
-
 	public static final Creator<Options> CREATOR = new Creator<Options>() {
 		@Override
 		public Options createFromParcel(Parcel source) {
@@ -26,10 +25,10 @@ public class Options implements Serializable, Parcelable {
 		}
 	};
 
-	private TimeResolution timeResolution;
-	private boolean overTime = true;
-	private Boolean includeTransactions;
-	private Boolean includeTransactionIds;
+	protected TimeResolution timeResolution;
+	protected boolean overTime = true;
+	protected Boolean includeTransactions;
+	protected Boolean includeTransactionIds;
 
 	public Options(TimeResolution tr, boolean overTime) {
 		this(tr, overTime, null, null);

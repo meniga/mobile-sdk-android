@@ -12,7 +12,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSimilarBrandSpendingDetails implements Parcelable, Serializable {
-
 	public static final Creator<MenigaSimilarBrandSpendingDetails> CREATOR = new Creator<MenigaSimilarBrandSpendingDetails>() {
 		@Override
 		public MenigaSimilarBrandSpendingDetails createFromParcel(Parcel source) {
@@ -28,7 +27,6 @@ public class MenigaSimilarBrandSpendingDetails implements Parcelable, Serializab
 	protected DateTime startDate;
 	protected DateTime endDate;
 	protected List<MenigaBrandSpending> brandSpendings;
-
 
 	protected MenigaSimilarBrandSpendingDetails() {
 	}

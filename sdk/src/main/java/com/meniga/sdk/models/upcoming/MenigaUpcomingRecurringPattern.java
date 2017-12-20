@@ -15,19 +15,18 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingRecurringPattern implements Serializable, Parcelable, Cloneable {
-
-	private long id;
-	private String text;
-	private MenigaDecimal amountInCurrency;
-	private String currencyCode;
-	private Long categoryId;
-	private Long accountId;
-	private MenigaUpcomingCronExpression pattern;
-	private DateTime repeatUntil;
-	private Boolean isWatched;
-	private Boolean isFlagged;
-	private RecurringPatternType type;
-	private RecurringPatternStatus status;
+	protected long id;
+	protected String text;
+	protected MenigaDecimal amountInCurrency;
+	protected String currencyCode;
+	protected Long categoryId;
+	protected Long accountId;
+	protected MenigaUpcomingCronExpression pattern;
+	protected DateTime repeatUntil;
+	protected Boolean isWatched;
+	protected Boolean isFlagged;
+	protected RecurringPatternType type;
+	protected RecurringPatternStatus status;
 
 	public MenigaUpcomingRecurringPattern() {
 	}

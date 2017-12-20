@@ -16,13 +16,13 @@ import java.util.List;
 public class MenigaRealm implements Parcelable, Serializable {
 	private static MenigaRealmOperations apiOperations;
 
-	private long id;
-	private String description;
-	private String identifier;
-	private AuthorizationType authorizationType;
-	private String contentPageId;
-	private String externalRegistrationUrl;
-	private boolean showDuringSignup;
+	protected long id;
+	protected String description;
+	protected String identifier;
+	protected AuthorizationType authorizationType;
+	protected String contentPageId;
+	protected String externalRegistrationUrl;
+	protected boolean showDuringSignup;
 
 	protected MenigaRealm() {
 	}

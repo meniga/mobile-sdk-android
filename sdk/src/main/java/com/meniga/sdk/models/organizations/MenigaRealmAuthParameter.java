@@ -18,21 +18,20 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaRealmAuthParameter implements Parcelable, Serializable {
-
-	private String name;
-	private String displayName;
-	private String regularExpression;
-	private Integer minLength;
-	private Integer maxLength;
-	private boolean isPassword;
-	private boolean isHidden;
-	private boolean isDropDown;
-	private String dropDownValues;
-	private Long parentId;
-	private boolean canSave;
-	private boolean isEncrypted;
-	private boolean isIdentity;
-	private transient String selectedValue;
+	protected String name;
+	protected String displayName;
+	protected String regularExpression;
+	protected Integer minLength;
+	protected Integer maxLength;
+	protected boolean isPassword;
+	protected boolean isHidden;
+	protected boolean isDropDown;
+	protected String dropDownValues;
+	protected Long parentId;
+	protected boolean canSave;
+	protected boolean isEncrypted;
+	protected boolean isIdentity;
+	protected transient String selectedValue;
 
 	public static class SimpleAuthParameter {
 

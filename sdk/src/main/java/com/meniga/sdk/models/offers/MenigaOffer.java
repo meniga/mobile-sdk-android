@@ -25,7 +25,6 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public class MenigaOffer implements Parcelable, Serializable {
-
 	protected static MenigaOfferOperations apiOperator;
 
 	protected long id;

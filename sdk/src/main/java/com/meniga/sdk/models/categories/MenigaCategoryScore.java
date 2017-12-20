@@ -11,7 +11,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaCategoryScore implements Parcelable, Serializable, Cloneable {
-
 	public static final Parcelable.Creator<MenigaCategoryScore> CREATOR = new Parcelable.Creator<MenigaCategoryScore>() {
 		public MenigaCategoryScore createFromParcel(Parcel in) {
 			return new MenigaCategoryScore(in);

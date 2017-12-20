@@ -15,7 +15,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaAccountBalanceHistory implements Parcelable, Serializable {
-
 	public static final Creator<MenigaAccountBalanceHistory> CREATOR = new Creator<MenigaAccountBalanceHistory>() {
 		@Override
 		public MenigaAccountBalanceHistory createFromParcel(Parcel source) {
@@ -28,11 +27,11 @@ public class MenigaAccountBalanceHistory implements Parcelable, Serializable {
 		}
 	};
 
-	private long id;
-	private long accountId;
-	private MenigaDecimal balance;
-	private DateTime balanceDate;
-	private boolean isDefault;
+	protected long id;
+	protected long accountId;
+	protected MenigaDecimal balance;
+	protected DateTime balanceDate;
+	protected boolean isDefault;
 
 	protected MenigaAccountBalanceHistory(Parcel in) {
 		this.id = in.readLong();

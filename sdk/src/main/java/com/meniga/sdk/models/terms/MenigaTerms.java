@@ -15,9 +15,7 @@ import java.util.List;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public class MenigaTerms implements Parcelable, Serializable, Cloneable {
-
 	protected static MenigaTermsOperations apiOperator;
 
 	protected DateTime creationDate;

@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaOfferMerchantLocationPage extends ArrayList<MenigaOfferMerchantLocation> implements Parcelable, Serializable {
-
 	protected MenigaOfferMerchantLocationPage() {
 	}
 

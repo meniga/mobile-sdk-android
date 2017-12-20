@@ -17,7 +17,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTag implements Parcelable, Serializable, Cloneable {
-
 	public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
 		public MenigaTag createFromParcel(Parcel in) {
 			return new MenigaTag(in);
@@ -34,7 +33,6 @@ public class MenigaTag implements Parcelable, Serializable, Cloneable {
 	protected String name;
 
 	protected MenigaTag() {
-
 	}
 
 	protected MenigaTag(Parcel data) {
