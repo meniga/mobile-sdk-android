@@ -225,16 +225,16 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	}
 
 	public Map<String, String> toQueryMap() {
-		List<Field> privateFields = new ArrayList<>();
+		List<Field> mappableFields = new ArrayList<>();
 		Field[] allFields = TransactionsFilter.class.getDeclaredFields();
 		for (Field field : allFields) {
-			if (Modifier.isPrivate(field.getModifiers())) {
-				privateFields.add(field);
+			if (Modifier.isPrivate(field.getModifiers()) || Modifier.isProtected(field.getModifiers())) {
+				mappableFields.add(field);
 			}
 		}
 
 		Map<String, String> map = new HashMap<>();
-		for (Field member : privateFields) {
+		for (Field member : mappableFields) {
 			try {
 				Object value = member.get(this);
 				if (value != null && !member.getName().startsWith("$")) {
