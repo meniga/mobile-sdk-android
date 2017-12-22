@@ -21,6 +21,8 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 	protected boolean canSave;
 	protected String loginHelp;
 	protected String sessionToken;
+	protected String errorMessageCode;
+	protected String realmUserPersonEmail;
 
 	protected MenigaRealmAuthResponse() {
 	}
@@ -37,6 +39,8 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		this.canSave = in.readByte() != 0;
 		this.loginHelp = in.readString();
 		this.sessionToken = in.readString();
+		this.errorMessageCode = in.readString();
+		this.realmUserPersonEmail = in.readString();
 	}
 
 	public boolean isAuthenticationDone() {
@@ -83,6 +87,14 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		return sessionToken;
 	}
 
+	public String getErrorMessageCode() {
+		return errorMessageCode;
+	}
+
+	public String getRealmUserPersonEmail() {
+		return realmUserPersonEmail;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -124,6 +136,12 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		if (sessionToken != null ? !sessionToken.equals(that.sessionToken) : that.sessionToken != null) {
 			return false;
 		}
+		if (errorMessageCode != null ? !errorMessageCode.equals(that.errorMessageCode) : that.errorMessageCode != null) {
+			return false;
+		}
+		if (realmUserPersonEmail != null ? !realmUserPersonEmail.equals(that.realmUserPersonEmail) : that.realmUserPersonEmail != null) {
+			return false;
+		}
 		return loginHelp != null ? loginHelp.equals(that.loginHelp) : that.loginHelp == null;
 	}
 
@@ -140,6 +158,9 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		result = 31 * result + (canSave ? 1 : 0);
 		result = 31 * result + (loginHelp != null ? loginHelp.hashCode() : 0);
 		result = 31 * result + (sessionToken != null ? sessionToken.hashCode() : 0);
+		result = 31 * result + (errorMessageCode != null ? errorMessageCode.hashCode() : 0);
+		result = 31 * result + (realmUserPersonEmail != null ? realmUserPersonEmail.hashCode() : 0);
+
 		return result;
 	}
 
@@ -161,6 +182,8 @@ public class MenigaRealmAuthResponse implements Parcelable, Serializable {
 		dest.writeByte(this.canSave ? (byte) 1 : (byte) 0);
 		dest.writeString(this.loginHelp);
 		dest.writeString(this.sessionToken);
+		dest.writeString(this.errorMessageCode);
+		dest.writeString(this.realmUserPersonEmail);
 	}
 
 	public static final Parcelable.Creator<MenigaRealmAuthResponse> CREATOR = new Parcelable.Creator<MenigaRealmAuthResponse>() {

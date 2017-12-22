@@ -234,6 +234,7 @@ public class MenigaRealmAuthParameter implements Parcelable, Serializable {
 		result = 31 * result + (canSave ? 1 : 0);
 		result = 31 * result + (isEncrypted ? 1 : 0);
 		result = 31 * result + (isIdentity ? 1 : 0);
+
 		return result;
 	}
 
