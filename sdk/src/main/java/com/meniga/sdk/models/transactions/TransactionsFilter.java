@@ -29,7 +29,8 @@ import java.util.Map;
  * A filter that can be passed to a Meniga endpoint and returns given transactions based on that filter.
  * <p>
  * Copyright 2017 Meniga Iceland Inc.
- */
+ *
+*/
 public class TransactionsFilter implements Serializable, Parcelable, Cloneable, ValueHashable {
 	public static final Parcelable.Creator<TransactionsFilter> CREATOR = new Parcelable.Creator<TransactionsFilter>() {
 		@Override
@@ -89,8 +90,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	protected final String parsedData;
 	protected final List<String> parsedDataExactKeys;
 	protected final String parsedDataNameToOrderBy;
-	protected transient final double amountScale;
-	protected transient final FilterTimeGroup timeGroup;
 	protected transient final boolean isFiltering;
 
 	protected TransactionsFilter(Parcel in) {
@@ -147,8 +146,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		parsedData = in.readString();
 		parsedDataExactKeys = in.createStringArrayList();
 		parsedDataNameToOrderBy = in.readString();
-		amountScale = in.readDouble();
-		timeGroup = FilterTimeGroup.values()[in.readInt()];
 		isFiltering = in.readInt() == 1;
 	}
 
@@ -199,8 +196,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		parsedData = builder.parsedData;
 		parsedDataExactKeys = builder.parsedDataExactKeys;
 		parsedDataNameToOrderBy = builder.parsedDataNameToOrderBy;
-		amountScale = builder.amountScale;
-		timeGroup = builder.timeGroup;
 		isFiltering = builder.isFiltering;
 	}
 
@@ -234,17 +229,42 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		}
 
 		Map<String, String> map = new HashMap<>();
+		Field skipField = null;
+		Field takeField = null;
 		for (Field member : mappableFields) {
-			try {
-				Object value = member.get(this);
-				if (value != null && !member.getName().startsWith("$")) {
-					map.put(member.getName(), fieldTypeToString(value));
-				}
-			} catch (IllegalAccessException ex) {
-				ErrorHandler.reportAndHandle(ex);
+			if (member.getName().equals("isFiltering")) {
+				continue;
 			}
+			if (member.getName().equals("skip")) {
+				skipField = member;
+				continue;
+			} else if (member.getName().equals("take")) {
+				takeField = member;
+				continue;
+			}
+			addToMap(member, map);
+		}
+		if (skipField != null) {
+			addToMap(skipField, map);
+		}
+		if (takeField != null) {
+			addToMap(takeField, map);
 		}
 		return map;
+	}
+
+	private void addToMap(Field member, Map<String, String> map ) {
+		try {
+			Object value = member.get(this);
+			if (value != null && !member.getName().startsWith("$")) {
+				if (value instanceof ArrayList && ((ArrayList) value).size() == 0) {
+					return;
+				}
+				map.put(member.getName(), fieldTypeToString(value));
+			}
+		} catch (IllegalAccessException ex) {
+			ErrorHandler.reportAndHandle(ex);
+		}
 	}
 
 	private String fieldTypeToString(Object fieldValue) {
@@ -331,8 +351,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		dest.writeString(parsedData);
 		dest.writeStringList(parsedDataExactKeys);
 		dest.writeString(parsedDataNameToOrderBy);
-		dest.writeDouble(amountScale);
-		dest.writeInt(timeGroup.ordinal());
 		dest.writeInt(isFiltering ? 1 : 0);
 	}
 
@@ -520,14 +538,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		return parsedDataNameToOrderBy;
 	}
 
-	public double getAmountScale() {
-		return amountScale;
-	}
-
-	public FilterTimeGroup getTimeGroup() {
-		return timeGroup;
-	}
-
 	public boolean getIsFiltering() {
 		return isFiltering;
 	}
@@ -543,7 +553,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 
 		TransactionsFilter that = (TransactionsFilter) o;
 
-		if (Double.compare(that.amountScale, amountScale) != 0) return false;
 		if (isFiltering != that.isFiltering) return false;
 		if (type != null ? !type.equals(that.type) : that.type != null) return false;
 		if (orderBy != null ? !orderBy.equals(that.orderBy) : that.orderBy != null) return false;
@@ -628,8 +637,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 			return false;
 		if (parsedDataNameToOrderBy != null ? !parsedDataNameToOrderBy.equals(that.parsedDataNameToOrderBy) : that.parsedDataNameToOrderBy != null)
 			return false;
-		return timeGroup == that.timeGroup;
-
+		return true;
 	}
 
 	@Override
@@ -686,9 +694,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		result = 31 * result + (parsedData != null ? parsedData.hashCode() : 0);
 		result = 31 * result + (parsedDataExactKeys != null ? parsedDataExactKeys.hashCode() : 0);
 		result = 31 * result + (parsedDataNameToOrderBy != null ? parsedDataNameToOrderBy.hashCode() : 0);
-		temp = Double.doubleToLongBits(amountScale);
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
-		result = 31 * result + (timeGroup != null ? timeGroup.hashCode() : 0);
 		result = 31 * result + (isFiltering ? 1 : 0);
 		return result;
 	}
@@ -699,7 +704,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	 * Copyright 2017 Meniga Iceland Inc.
 	 */
 	public static class Builder {
-
 		private String type;
 		private String orderBy;
 		private Integer take = 50;
@@ -746,8 +750,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		private String parsedData;
 		private List<String> parsedDataExactKeys;
 		private String parsedDataNameToOrderBy;
-		private double amountScale = 1;
-		private FilterTimeGroup timeGroup = FilterTimeGroup.ALL_TIME;
 		private boolean isFiltering;
 
 		public Builder() {
@@ -815,26 +817,12 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 				parsedData = preserveNonNull(filter.parsedData, parsedData);
 				parsedDataExactKeys = preserveNonNull(filter.parsedDataExactKeys, parsedDataExactKeys);
 				parsedDataNameToOrderBy = preserveNonNull(filter.parsedDataNameToOrderBy, parsedDataNameToOrderBy);
-				amountScale = preserveNonNull(filter.amountScale, amountScale);
-				timeGroup = preserveNonNull(filter.timeGroup, timeGroup);
 				isFiltering = preserveNonNull(filter.isFiltering, isFiltering);
 			}
 		}
 
 		private <T> T preserveNonNull(T otherField, T myField) {
 			return (otherField == null && myField != null) ? myField : otherField;
-		}
-
-		public Builder amountScale(double scale) {
-			amountScale = scale;
-			isFiltering = true;
-			return this;
-		}
-
-		public Builder timeGroup(FilterTimeGroup group) {
-			timeGroup = group;
-			isFiltering = true;
-			return this;
 		}
 
 		public Builder type(String type) {

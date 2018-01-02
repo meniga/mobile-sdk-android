@@ -22,6 +22,6 @@ public class GetTransactions extends QueryRequestObject {
 		if (this.filter == null) {
 			return new HashMap<>();
 		}
-		return this.filter.toQueryMap();
+		return filter.toQueryMap();
 	}
 }
