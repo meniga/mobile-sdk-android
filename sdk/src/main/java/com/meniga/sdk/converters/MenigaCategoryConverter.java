@@ -25,14 +25,10 @@ public class MenigaCategoryConverter extends MenigaConverter {
 
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeOfMenigaCategoryList = new TypeToken<List<MenigaCategory>>() {
-		}.getType();
-		Type typeOfMenigaCategory = new TypeToken<MenigaCategory>() {
-		}.getType();
-		Type typeOfMenigaUserCategoryList = new TypeToken<List<MenigaUserCategory>>() {
-		}.getType();
-		Type typeOfMenigaUserCategory = new TypeToken<MenigaUserCategory>() {
-		}.getType();
+		Type typeOfMenigaCategoryList = new TypeToken<List<MenigaCategory>>() {}.getType();
+		Type typeOfMenigaCategory = new TypeToken<MenigaCategory>() {}.getType();
+		Type typeOfMenigaUserCategoryList = new TypeToken<List<MenigaUserCategory>>() {}.getType();
+		Type typeOfMenigaUserCategory = new TypeToken<MenigaUserCategory>() {}.getType();
 
 		if (typeOfMenigaCategoryList.equals(type) || typeOfMenigaUserCategoryList.equals(type)) {
 			return new Converter<ResponseBody, Object>() {
