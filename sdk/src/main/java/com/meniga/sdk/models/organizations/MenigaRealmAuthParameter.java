@@ -96,6 +96,9 @@ public class MenigaRealmAuthParameter implements Parcelable, Serializable {
 			case "@PhoneNumber":
 				return AuthParameterType.PHONE_NUMBER;
 
+			case "@SecurityNumber":
+				return AuthParameterType.PIN;
+
 			default:
 				return AuthParameterType.UNKNOWN;
 		}
