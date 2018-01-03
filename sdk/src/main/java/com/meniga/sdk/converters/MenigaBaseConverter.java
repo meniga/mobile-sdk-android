@@ -35,7 +35,6 @@ public class MenigaBaseConverter<T> extends MenigaConverter {
 				JsonObject jsonObject = parser.parse(isr).getAsJsonObject();
 				JsonElement jsonElement;
 
-				Log.e("Derp", "type " + type.equals(typeOfObject));
 				if (jsonObject.has("data") && !type.equals(typeOfObject)) {
 					jsonElement = jsonObject.get("data");
 				} else {
