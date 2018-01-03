@@ -1,9 +1,12 @@
 package com.meniga.sdk.converters;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.meniga.sdk.helpers.GsonProvider;
 
 import java.io.IOException;
@@ -18,8 +21,8 @@ import retrofit2.Retrofit;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
 public class MenigaBaseConverter<T> extends MenigaConverter {
+	private Type typeOfObject = new TypeToken<Object>() {}.getType();
 
 	@Override
 	public Converter<ResponseBody, T> responseBodyConverter(final Type type, Annotation[] annotations, Retrofit retrofit) {
@@ -30,9 +33,12 @@ public class MenigaBaseConverter<T> extends MenigaConverter {
 				InputStreamReader isr = new InputStreamReader(resBody.byteStream());
 				JsonParser parser = new JsonParser();
 				JsonObject jsonObject = parser.parse(isr).getAsJsonObject();
-				JsonElement jsonElement = null;
-				if (jsonObject.has("data")) {
+				JsonElement jsonElement;
+
+				if (jsonObject.has("data") && !type.equals(typeOfObject)) {
 					jsonElement = jsonObject.get("data");
+				} else {
+					jsonElement = jsonObject;
 				}
 
 				return gson.fromJson(jsonElement, type);
