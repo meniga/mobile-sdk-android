@@ -8,6 +8,9 @@ import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.models.feed.MenigaAccountEvent;
 import com.meniga.sdk.models.feed.MenigaAccountEventData;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -32,8 +35,8 @@ public class MenigaAccountAvailableAmountEventConverter implements EventBaseConv
 	}
 
 	@Override
-	public String eventName() {
-		return "accounts_available_amount";
+	public List<String> eventNames() {
+		return Collections.singletonList("accounts_available_amount");
 	}
 
 	private JsonElement convertToObject(String stringified) {

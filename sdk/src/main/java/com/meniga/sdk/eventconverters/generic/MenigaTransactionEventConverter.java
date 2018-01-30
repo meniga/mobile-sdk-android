@@ -8,6 +8,9 @@ import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.models.feed.MenigaEvent;
 import com.meniga.sdk.models.feed.MenigaTransactionEvent;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -28,8 +31,8 @@ public class MenigaTransactionEventConverter implements EventBaseConverter<Menig
 	}
 
 	@Override
-	public String eventName() {
-		return "";
+	public List<String> eventNames() {
+		return Collections.singletonList("");
 	}
 
 	private JsonElement convertToObject(String stringified) {

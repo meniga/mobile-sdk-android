@@ -6,6 +6,9 @@ import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.models.feed.MenigaCustomEvent;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -17,7 +20,7 @@ public class MenigaCustomEventConverter implements EventBaseConverter<MenigaCust
 	}
 
 	@Override
-	public String eventName() {
-		return "segment_based_custom_content";
+	public List<String> eventNames() {
+		return Collections.singletonList("segment_based_custom_content");
 	}
 }

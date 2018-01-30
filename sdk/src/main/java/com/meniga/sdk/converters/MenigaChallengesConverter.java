@@ -23,7 +23,6 @@ import retrofit2.Retrofit;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaChallengesConverter extends MenigaConverter {
-
 	private final ChallengeItemFactory factory;
 
 	public MenigaChallengesConverter(ChallengeItemFactory factory) {

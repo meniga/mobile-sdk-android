@@ -7,6 +7,9 @@ import com.meniga.sdk.models.feed.MenigaFeedItem;
 
 import org.joda.time.DateTime;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  * Created by agustk on 6.12.2017.
@@ -39,7 +42,7 @@ public class BaseEventConverter implements EventBaseConverter<MenigaFeedItem> {
     }
 
     @Override
-    public String eventName() {
-        return "any";
+    public List<String> eventNames() {
+        return Collections.singletonList("any");
     }
 }

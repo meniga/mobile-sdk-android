@@ -10,7 +10,6 @@ import com.meniga.sdk.models.challenges.MenigaChallenge;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class ChallengeItemFactory {
-
 	private Gson gson;
 
 	public MenigaChallenge getMenigaChallengeItem(JsonObject element) {
