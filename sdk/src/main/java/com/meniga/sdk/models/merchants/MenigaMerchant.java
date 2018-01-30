@@ -17,18 +17,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaMerchant implements Serializable, Parcelable, Cloneable {
-	public static final Parcelable.Creator<MenigaMerchant> CREATOR = new Parcelable.Creator<MenigaMerchant>() {
-		@Override
-		public MenigaMerchant createFromParcel(Parcel source) {
-			return new MenigaMerchant(source);
-		}
-
-		@Override
-		public MenigaMerchant[] newArray(int size) {
-			return new MenigaMerchant[size];
-		}
-	};
-
 	protected static MenigaMerchantOperations apiOperations;
 
 	protected long id;
@@ -43,7 +31,7 @@ public class MenigaMerchant implements Serializable, Parcelable, Cloneable {
 	protected MenigaMerchantLocation address;
 	protected List<MenigaCategoryScore> categoryScores;
 	protected List<MenigaMerchant> childMerchants;
-	protected MenigaCategoryScore detectedCategory;
+	protected List<MenigaCategoryScore> detectedCategory;
 	protected String directoryLink;
 	protected String email;
 	protected String offersLink;
@@ -51,32 +39,6 @@ public class MenigaMerchant implements Serializable, Parcelable, Cloneable {
 	protected String webpage;
 
 	protected MenigaMerchant() {
-	}
-
-	protected MenigaMerchant(Parcel in) {
-		this.id = in.readLong();
-		this.parentId = in.readLong();
-		this.parentMerchant = (MenigaMerchant) in.readSerializable();
-		this.identifier = in.readString();
-		this.masterIdentifier = in.readString();
-		this.merchantCategoryIdentifier = in.readString();
-		this.publicIdentifier = in.readString();
-		this.name = in.readString();
-		this.parentName = in.readString();
-		this.address = in.readParcelable(MenigaMerchantLocation.class.getClassLoader());
-		this.categoryScores = in.createTypedArrayList(MenigaCategoryScore.CREATOR);
-		this.childMerchants = new ArrayList<>();
-		byte childsNull = in.readByte();
-		in.readList(this.childMerchants, MenigaMerchant.class.getClassLoader());
-		if (childsNull == 1) {
-			this.childMerchants = null;
-		}
-		this.detectedCategory = in.readParcelable(MenigaCategoryScore.class.getClassLoader());
-		this.directoryLink = in.readString();
-		this.email = in.readString();
-		this.offersLink = in.readString();
-		this.telephone = in.readString();
-		this.webpage = in.readString();
 	}
 
 	@Override
@@ -180,7 +142,7 @@ public class MenigaMerchant implements Serializable, Parcelable, Cloneable {
 	/**
 	 * @return The detected category for this merchant.
 	 */
-	public MenigaCategoryScore getDetectedCategory() {
+	public List<MenigaCategoryScore> getDetectedCategory() {
 		return detectedCategory;
 	}
 
@@ -218,6 +180,86 @@ public class MenigaMerchant implements Serializable, Parcelable, Cloneable {
 	public String getWebpage() {
 		return webpage;
 	}
+
+	/**
+	 * Gets a merchant by id
+	 *
+	 * @param id The id of the merchant to retrieve
+	 * @return The merchant object
+	 */
+	public static Result<MenigaMerchant> fetch(long id) {
+		return MenigaMerchant.apiOperations.getMerchant(id);
+	}
+
+	/**
+	 * Gets a merchant by ids
+	 *
+	 * @param ids List of ids of the merchants to retrieve
+	 * @return List of merchant objects
+	 */
+	public static Result<List<MenigaMerchant>> fetch(List<Long> ids) {
+		return MenigaMerchant.apiOperations.getMerchants(ids);
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeLong(this.id);
+		dest.writeLong(this.parentId);
+		dest.writeParcelable(this.parentMerchant, flags);
+		dest.writeString(this.identifier);
+		dest.writeString(this.masterIdentifier);
+		dest.writeString(this.merchantCategoryIdentifier);
+		dest.writeString(this.publicIdentifier);
+		dest.writeString(this.name);
+		dest.writeString(this.parentName);
+		dest.writeParcelable(this.address, flags);
+		dest.writeTypedList(this.categoryScores);
+		dest.writeTypedList(this.childMerchants);
+		dest.writeTypedList(this.detectedCategory);
+		dest.writeString(this.directoryLink);
+		dest.writeString(this.email);
+		dest.writeString(this.offersLink);
+		dest.writeString(this.telephone);
+		dest.writeString(this.webpage);
+	}
+
+	protected MenigaMerchant(Parcel in) {
+		this.id = in.readLong();
+		this.parentId = in.readLong();
+		this.parentMerchant = in.readParcelable(MenigaMerchant.class.getClassLoader());
+		this.identifier = in.readString();
+		this.masterIdentifier = in.readString();
+		this.merchantCategoryIdentifier = in.readString();
+		this.publicIdentifier = in.readString();
+		this.name = in.readString();
+		this.parentName = in.readString();
+		this.address = in.readParcelable(MenigaMerchantLocation.class.getClassLoader());
+		this.categoryScores = in.createTypedArrayList(MenigaCategoryScore.CREATOR);
+		this.childMerchants = in.createTypedArrayList(MenigaMerchant.CREATOR);
+		this.detectedCategory = in.createTypedArrayList(MenigaCategoryScore.CREATOR);
+		this.directoryLink = in.readString();
+		this.email = in.readString();
+		this.offersLink = in.readString();
+		this.telephone = in.readString();
+		this.webpage = in.readString();
+	}
+
+	public static final Creator<MenigaMerchant> CREATOR = new Creator<MenigaMerchant>() {
+		@Override
+		public MenigaMerchant createFromParcel(Parcel source) {
+			return new MenigaMerchant(source);
+		}
+
+		@Override
+		public MenigaMerchant[] newArray(int size) {
+			return new MenigaMerchant[size];
+		}
+	};
 
 	@Override
 	public boolean equals(Object o) {
@@ -305,54 +347,5 @@ public class MenigaMerchant implements Serializable, Parcelable, Cloneable {
 		result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
 		result = 31 * result + (webpage != null ? webpage.hashCode() : 0);
 		return result;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeLong(this.id);
-		dest.writeLong(this.parentId);
-		dest.writeSerializable(this.parentMerchant);
-		dest.writeString(this.identifier);
-		dest.writeString(this.masterIdentifier);
-		dest.writeString(this.merchantCategoryIdentifier);
-		dest.writeString(this.publicIdentifier);
-		dest.writeString(this.name);
-		dest.writeString(this.parentName);
-		dest.writeParcelable(this.address, flags);
-		dest.writeTypedList(categoryScores);
-		dest.writeByte(this.childMerchants == null ? (byte) 1 : (byte) 0);
-		dest.writeList(this.childMerchants);
-		dest.writeParcelable(this.detectedCategory, flags);
-		dest.writeString(this.directoryLink);
-		dest.writeString(this.email);
-		dest.writeString(this.offersLink);
-		dest.writeString(this.telephone);
-		dest.writeString(this.webpage);
-	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-
-	/**
-	 * Gets a merchant by id
-	 *
-	 * @param id The id of the merchant to retrieve
-	 * @return The merchant object
-	 */
-	public static Result<MenigaMerchant> fetch(long id) {
-		return MenigaMerchant.apiOperations.getMerchant(id);
-	}
-
-	/**
-	 * Gets a merchant by ids
-	 *
-	 * @param ids List of ids of the merchants to retrieve
-	 * @return List of merchant objects
-	 */
-	public static Result<List<MenigaMerchant>> fetch(List<Long> ids) {
-		return MenigaMerchant.apiOperations.getMerchants(ids);
 	}
 }
