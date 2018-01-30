@@ -694,7 +694,7 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.BUDGET).getBudgetEntries(Long.toString(req.id), req.toQueryMap()));
 	}
 
-	public Result<Void> createBudget(CreateBudget req) {
+	public Result<MenigaBudget> createBudget(CreateBudget req) {
 		return persist(req, getClient(Service.BUDGET).createBudget(req));
 	}
 

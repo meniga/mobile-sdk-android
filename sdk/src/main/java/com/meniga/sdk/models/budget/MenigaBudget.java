@@ -170,12 +170,19 @@ public class MenigaBudget implements Parcelable, Serializable {
 	* API Calls
 	*/
 
+	public static Result<List<MenigaBudget>> fetch(BudgetType type) {
+		return apiOperator.getBudgets(type);
+	}
+
 	public static Result<List<MenigaBudget>> fetch() {
-		return apiOperator.getBudgets(BudgetType.PLANNING);
+		return fetch(BudgetType.PLANNING);
 	}
 
-	public static Result<Void> create(String name, String description, List<Long> accountIds) {
-		return apiOperator.createBudget(name, description, accountIds);
+	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period) {
+		return apiOperator.createBudget(type, name, description, accountIds, period, null);
 	}
 
+	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset) {
+		return apiOperator.createBudget(type, name, description, accountIds, period, periodOffset);
+	}
 }

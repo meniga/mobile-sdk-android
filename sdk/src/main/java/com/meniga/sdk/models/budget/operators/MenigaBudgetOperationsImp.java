@@ -3,7 +3,6 @@ package com.meniga.sdk.models.budget.operators;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.budget.BudgetFilter;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
@@ -43,14 +42,14 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     }
 
     @Override
-    public Result<Void> createBudget(String name, String description, List<Long> accountIds) {
+    public Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset) {
         CreateBudget req = new CreateBudget();
-        req.type = BudgetType.PLANNING;
+        req.type = type;
         req.name = name;
         req.description = description;
         req.accountIds = accountIds;
-        req.period = BudgetPeriod.MONTH.toString();
-        req.offset = 0;
+        req.period = period.toString();
+        req.offset = periodOffset;
 
         return MenigaSDK.executor().createBudget(req);
     }

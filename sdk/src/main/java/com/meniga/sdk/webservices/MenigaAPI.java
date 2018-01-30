@@ -457,7 +457,7 @@ public interface MenigaAPI {
 	Call<List<MenigaBudgetEntry>> getBudgetEntries(@Path("id") String id, @QueryMap Map<String, String> query);
 
 	@POST(APIConst.URL_BUDGETS)
-	Call<Void> createBudget(@Body CreateBudget req);
+	Call<MenigaBudget> createBudget(@Body CreateBudget req);
 
 	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_RULES)
 	Call<Void> updateBudget(@Path("id") String id, @Body UpdateBudget req);
