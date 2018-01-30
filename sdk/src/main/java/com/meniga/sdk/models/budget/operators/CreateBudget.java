@@ -23,7 +23,7 @@ public class CreateBudget extends QueryRequestObject {
     public String description;
     public List<Long> accountIds;
     public String period;
-    public int offset;
+    public Integer offset;
 
     @Override
     public long getValueHash() {
@@ -32,7 +32,7 @@ public class CreateBudget extends QueryRequestObject {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (accountIds != null ? accountIds.hashCode() : 0);
         result = 31 * result + (period != null ? period.hashCode() : 0);
-        result = 31 * result + offset;
+        result = 31 * result + (offset != null ? offset.hashCode() : 0);
         return result;
     }
 }
