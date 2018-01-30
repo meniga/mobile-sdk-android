@@ -10,6 +10,9 @@ import com.meniga.sdk.models.feed.MenigaAccountEventData;
 import com.meniga.sdk.models.feed.MenigaDialogEvent;
 import com.meniga.sdk.models.feed.MenigaDialogEventData;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -34,8 +37,8 @@ public class MenigaDialogEventConverter implements EventBaseConverter<MenigaAcco
 	}
 
 	@Override
-	public String eventName() {
-		return "dialog_message";
+	public List<String> eventNames() {
+		return Collections.singletonList("dialog_message");
 	}
 
 	private JsonElement convertToObject(String stringified) {

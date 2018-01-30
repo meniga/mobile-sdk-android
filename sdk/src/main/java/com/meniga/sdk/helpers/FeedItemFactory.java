@@ -1,15 +1,15 @@
 package com.meniga.sdk.helpers;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.eventconverters.generic.BaseEventConverter;
-import com.meniga.sdk.eventconverters.generic.MenigaTransactionEventConverter;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
 import com.meniga.sdk.models.feed.MenigaOfferEvent;
 import com.meniga.sdk.models.feed.MenigaScheduledEvent;
-import com.meniga.sdk.models.feed.MenigaTransactionEvent;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 
 import org.joda.time.DateTime;
@@ -70,8 +70,9 @@ public class FeedItemFactory {
 
 	private EventBaseConverter resolveConverter(String eventName) {
 		List<EventBaseConverter> converters = getUserEventFeedConverters();
+		Log.e("Meniga", "resolveConverter: " + eventName);
 		for (EventBaseConverter converter : converters) {
-			if (converter.eventName().equals(eventName)) {
+			if (converter.eventNames().contains(eventName)) {
 				return converter;
 			}
 		}

@@ -11,6 +11,9 @@ import com.meniga.sdk.models.feed.MenigaChallengeEventData;
 import com.meniga.sdk.models.feed.MenigaDialogEvent;
 import com.meniga.sdk.models.feed.MenigaDialogEventData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  * Created by agustk on 6.12.2017.
@@ -36,8 +39,12 @@ public class MenigaChallengeEventConverter implements EventBaseConverter<MenigaC
     }
 
     @Override
-    public String eventName() {
-        return "challenge_started";
+    public List<String> eventNames() {
+        List<String> handles = new ArrayList<>();
+        handles.add("challenge_started");
+        handles.add("challenge_progress");
+        handles.add("challenge_completed");
+        return handles;
     }
 
     private JsonElement convertToObject(String stringified) {
