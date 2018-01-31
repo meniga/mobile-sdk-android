@@ -29,21 +29,6 @@ public class MenigaChallengeEvent implements MenigaFeedItem, Parcelable, Seriali
     protected MenigaChallengeEvent() {
     }
 
-    protected MenigaChallengeEvent(Parcel in) {
-        this.id = in.readLong();
-        this.actionText = in.readString();
-        this.messageData = in.readParcelable(MenigaChallengeEventData.class.getClassLoader());
-        this.date = (DateTime) in.readSerializable();
-        this.topicId = in.readLong();
-        this.title = in.readString();
-        this.body = in.readString();
-        this.typeName = in.readString();
-        this.type = in.readString();
-        int tmpEventTypeIdentifier = in.readInt();
-        this.eventTypeIdentifier = tmpEventTypeIdentifier == -1 ? null : UserEventType.values()[tmpEventTypeIdentifier];
-        this.topicName = in.readString();
-    }
-
     public long getId() {
         return id;
     }
@@ -112,6 +97,57 @@ public class MenigaChallengeEvent implements MenigaFeedItem, Parcelable, Seriali
         return topicName;
     }
 
+    public void setMessageData(MenigaChallengeEventData messageData) {
+        this.messageData = messageData;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.actionText);
+        dest.writeParcelable(this.messageData, flags);
+        dest.writeSerializable(this.date);
+        dest.writeLong(this.topicId);
+        dest.writeString(this.title);
+        dest.writeString(this.body);
+        dest.writeString(this.typeName);
+        dest.writeString(this.type);
+        dest.writeInt(this.eventTypeIdentifier == null ? -1 : this.eventTypeIdentifier.ordinal());
+        dest.writeString(this.topicName);
+    }
+
+    protected MenigaChallengeEvent(Parcel in) {
+        this.id = in.readLong();
+        this.actionText = in.readString();
+        this.messageData = in.readParcelable(MenigaChallengeEventData.class.getClassLoader());
+        this.date = (DateTime) in.readSerializable();
+        this.topicId = in.readLong();
+        this.title = in.readString();
+        this.body = in.readString();
+        this.typeName = in.readString();
+        this.type = in.readString();
+        int tmpEventTypeIdentifier = in.readInt();
+        this.eventTypeIdentifier = tmpEventTypeIdentifier == -1 ? null : UserEventType.values()[tmpEventTypeIdentifier];
+        this.topicName = in.readString();
+    }
+
+    public static final Creator<MenigaChallengeEvent> CREATOR = new Creator<MenigaChallengeEvent>() {
+        @Override
+        public MenigaChallengeEvent createFromParcel(Parcel source) {
+            return new MenigaChallengeEvent(source);
+        }
+
+        @Override
+        public MenigaChallengeEvent[] newArray(int size) {
+            return new MenigaChallengeEvent[size];
+        }
+    };
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -170,41 +206,5 @@ public class MenigaChallengeEvent implements MenigaFeedItem, Parcelable, Seriali
         result = 31 * result + (eventTypeIdentifier != null ? eventTypeIdentifier.hashCode() : 0);
         result = 31 * result + (topicName != null ? topicName.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.id);
-        dest.writeString(this.actionText);
-        dest.writeParcelable(this.messageData, flags);
-        dest.writeSerializable(this.date);
-        dest.writeLong(this.topicId);
-        dest.writeString(this.title);
-        dest.writeString(this.body);
-        dest.writeString(this.typeName);
-        dest.writeString(this.type);
-        dest.writeInt(this.eventTypeIdentifier == null ? -1 : this.eventTypeIdentifier.ordinal());
-        dest.writeString(this.topicName);
-    }
-
-    public static final Creator<MenigaChallengeEvent> CREATOR = new Creator<MenigaChallengeEvent>() {
-        @Override
-        public MenigaChallengeEvent createFromParcel(Parcel source) {
-            return new MenigaChallengeEvent(source);
-        }
-
-        @Override
-        public MenigaChallengeEvent[] newArray(int size) {
-            return new MenigaChallengeEvent[size];
-        }
-    };
-
-    public void setMessageData(MenigaChallengeEventData messageData) {
-        this.messageData = messageData;
     }
 }

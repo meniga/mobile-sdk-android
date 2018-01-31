@@ -3,7 +3,6 @@ package com.meniga.sdk.models.feed;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.JsonObject;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.models.challenges.enums.CustomChallengeColor;
 
@@ -35,32 +34,13 @@ public class MenigaChallengeEventData implements Parcelable, Serializable {
     protected String iconUrl;
     protected CustomChallengeColor metadata;
     protected List<Long> categoryIds;
+    protected Float percentageSpent;
+    protected Integer daysRemaining;
 
     protected MenigaChallengeEventData() {
     }
 
-    protected MenigaChallengeEventData(Parcel in) {
-        this.challengeId = (UUID) in.readSerializable();
-        this.title = in.readString();
-        this.challengeSuccessful = in.readByte() != 0;
-        this.targetAmount = (MenigaDecimal) in.readSerializable();
-        this.targetAmountFormatted = in.readString();
-        this.spentAmount = (MenigaDecimal) in.readSerializable();
-        this.spentAmountFormatted = in.readString();
-        this.amountDifference = (MenigaDecimal) in.readSerializable();
-        this.amountDifferenceFormatted = in.readString();
-        this.startDate = (DateTime) in.readSerializable();
-        this.endDate = (DateTime) in.readSerializable();
-        this.periodStart = (DateTime) in.readSerializable();
-        this.periodEnd = (DateTime) in.readSerializable();
-        this.iconUrl = in.readString();
-        int tmpMetadata = in.readInt();
-        this.metadata = tmpMetadata == -1 ? null : CustomChallengeColor.values()[tmpMetadata];
-        this.categoryIds = new ArrayList<Long>();
-        in.readList(this.categoryIds, Long.class.getClassLoader());
-    }
-
-    public UUID getChallengeId() {
+     public UUID getChallengeId() {
         return challengeId;
     }
 
@@ -124,6 +104,76 @@ public class MenigaChallengeEventData implements Parcelable, Serializable {
         return categoryIds;
     }
 
+    public Float getPercentageSpent() {
+        return percentageSpent;
+    }
+
+    public Integer getDaysRemaining() {
+        return daysRemaining;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeSerializable(this.challengeId);
+        dest.writeString(this.title);
+        dest.writeByte(this.challengeSuccessful ? (byte) 1 : (byte) 0);
+        dest.writeSerializable(this.targetAmount);
+        dest.writeString(this.targetAmountFormatted);
+        dest.writeSerializable(this.spentAmount);
+        dest.writeString(this.spentAmountFormatted);
+        dest.writeSerializable(this.amountDifference);
+        dest.writeString(this.amountDifferenceFormatted);
+        dest.writeSerializable(this.startDate);
+        dest.writeSerializable(this.endDate);
+        dest.writeSerializable(this.periodStart);
+        dest.writeSerializable(this.periodEnd);
+        dest.writeString(this.iconUrl);
+        dest.writeInt(this.metadata == null ? -1 : this.metadata.ordinal());
+        dest.writeList(this.categoryIds);
+        dest.writeValue(this.percentageSpent);
+        dest.writeValue(this.daysRemaining);
+    }
+
+    protected MenigaChallengeEventData(Parcel in) {
+        this.challengeId = (UUID) in.readSerializable();
+        this.title = in.readString();
+        this.challengeSuccessful = in.readByte() != 0;
+        this.targetAmount = (MenigaDecimal) in.readSerializable();
+        this.targetAmountFormatted = in.readString();
+        this.spentAmount = (MenigaDecimal) in.readSerializable();
+        this.spentAmountFormatted = in.readString();
+        this.amountDifference = (MenigaDecimal) in.readSerializable();
+        this.amountDifferenceFormatted = in.readString();
+        this.startDate = (DateTime) in.readSerializable();
+        this.endDate = (DateTime) in.readSerializable();
+        this.periodStart = (DateTime) in.readSerializable();
+        this.periodEnd = (DateTime) in.readSerializable();
+        this.iconUrl = in.readString();
+        int tmpMetadata = in.readInt();
+        this.metadata = tmpMetadata == -1 ? null : CustomChallengeColor.values()[tmpMetadata];
+        this.categoryIds = new ArrayList<Long>();
+        in.readList(this.categoryIds, Long.class.getClassLoader());
+        this.percentageSpent = (Float) in.readValue(Float.class.getClassLoader());
+        this.daysRemaining = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
+
+    public static final Creator<MenigaChallengeEventData> CREATOR = new Creator<MenigaChallengeEventData>() {
+        @Override
+        public MenigaChallengeEventData createFromParcel(Parcel source) {
+            return new MenigaChallengeEventData(source);
+        }
+
+        @Override
+        public MenigaChallengeEventData[] newArray(int size) {
+            return new MenigaChallengeEventData[size];
+        }
+    };
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -180,7 +230,12 @@ public class MenigaChallengeEventData implements Parcelable, Serializable {
         if (metadata != that.metadata) {
             return false;
         }
-        return categoryIds != null ? categoryIds.equals(that.categoryIds) : that.categoryIds == null;
+        if (categoryIds != null ? !categoryIds.equals(that.categoryIds) : that.categoryIds != null)
+            return false;
+        if (percentageSpent != null ? !percentageSpent.equals(that.percentageSpent) : that.percentageSpent != null) {
+            return false;
+        }
+        return daysRemaining != null ? daysRemaining.equals(that.daysRemaining) : that.daysRemaining == null;
     }
 
     @Override
@@ -201,43 +256,8 @@ public class MenigaChallengeEventData implements Parcelable, Serializable {
         result = 31 * result + (iconUrl != null ? iconUrl.hashCode() : 0);
         result = 31 * result + (metadata != null ? metadata.hashCode() : 0);
         result = 31 * result + (categoryIds != null ? categoryIds.hashCode() : 0);
+        result = 31 * result + (percentageSpent != null ? percentageSpent.hashCode() : 0);
+        result = 31 * result + (daysRemaining != null ? daysRemaining.hashCode() : 0);
         return result;
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeSerializable(this.challengeId);
-        dest.writeString(this.title);
-        dest.writeByte(this.challengeSuccessful ? (byte) 1 : (byte) 0);
-        dest.writeSerializable(this.targetAmount);
-        dest.writeString(this.targetAmountFormatted);
-        dest.writeSerializable(this.spentAmount);
-        dest.writeString(this.spentAmountFormatted);
-        dest.writeSerializable(this.amountDifference);
-        dest.writeString(this.amountDifferenceFormatted);
-        dest.writeSerializable(this.startDate);
-        dest.writeSerializable(this.endDate);
-        dest.writeSerializable(this.periodStart);
-        dest.writeSerializable(this.periodEnd);
-        dest.writeString(this.iconUrl);
-        dest.writeInt(this.metadata == null ? -1 : this.metadata.ordinal());
-        dest.writeList(this.categoryIds);
-    }
-
-    public static final Creator<MenigaChallengeEventData> CREATOR = new Creator<MenigaChallengeEventData>() {
-        @Override
-        public MenigaChallengeEventData createFromParcel(Parcel source) {
-            return new MenigaChallengeEventData(source);
-        }
-
-        @Override
-        public MenigaChallengeEventData[] newArray(int size) {
-            return new MenigaChallengeEventData[size];
-        }
-    };
 }
