@@ -1,7 +1,5 @@
 package com.meniga.sdk.helpers;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.meniga.sdk.MenigaSDK;
@@ -70,7 +68,6 @@ public class FeedItemFactory {
 
 	private EventBaseConverter resolveConverter(String eventName) {
 		List<EventBaseConverter> converters = getUserEventFeedConverters();
-		Log.e("Meniga", "resolveConverter: " + eventName);
 		for (EventBaseConverter converter : converters) {
 			if (converter.eventNames().contains(eventName)) {
 				return converter;

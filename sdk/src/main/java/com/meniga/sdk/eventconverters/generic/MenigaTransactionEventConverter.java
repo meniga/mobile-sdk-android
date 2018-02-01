@@ -8,6 +8,7 @@ import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.models.feed.MenigaEvent;
 import com.meniga.sdk.models.feed.MenigaTransactionEvent;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,7 +33,13 @@ public class MenigaTransactionEventConverter implements EventBaseConverter<Menig
 
 	@Override
 	public List<String> eventNames() {
-		return Collections.singletonList("");
+		List<String> types = new ArrayList<>();
+		types.add("transactions_threshold_deposit");
+		types.add("transactions_category_budget_watch");
+		types.add("transactions_merchant_count");
+		types.add("transactions_threshold_expenses");
+		types.add("transactions_unusual_spending");
+		return types;
 	}
 
 	private JsonElement convertToObject(String stringified) {
