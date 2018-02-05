@@ -39,6 +39,7 @@ public class MenigaTransactionEventConverter implements EventBaseConverter<Menig
 		types.add("transactions_merchant_count");
 		types.add("transactions_threshold_expenses");
 		types.add("transactions_unusual_spending");
+		types.add("cashback_offer_redemption");
 		return types;
 	}
 
