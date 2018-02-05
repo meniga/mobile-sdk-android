@@ -69,7 +69,7 @@ public class MenigaMerchantTest {
 		MenigaMerchant item = null;
 		try {
 			item = gson.fromJson(
-					MenigaConverter.getAsObject(FileImporter.getJsonFileFromRaw("merchant.json")),
+					MenigaConverter.getAsObject(FileImporter.getInputStreamFromRaw("merchant.json")),
 					MenigaMerchant.class
 			);
 		} catch (IOException e) {

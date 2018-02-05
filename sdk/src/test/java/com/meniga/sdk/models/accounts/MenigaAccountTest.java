@@ -124,7 +124,7 @@ public class MenigaAccountTest {
 		try {
 			return Arrays.asList(
 					gson.fromJson(
-							MenigaConverter.getAsArray(FileImporter.getJsonFileFromRaw("accounts.json")),
+							MenigaConverter.getAsArray(FileImporter.getInputStreamFromRaw("accounts.json")),
 							MenigaAccount[].class
 					)
 			);

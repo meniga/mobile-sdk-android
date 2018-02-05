@@ -89,7 +89,7 @@ public class MenigaScheduledTest {
 		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return Arrays.asList(gson.fromJson(MenigaConverter.getAsArray(
-					FileImporter.getJsonFileFromRaw("scheduledevents.json")),
+					FileImporter.getInputStreamFromRaw("scheduledevents.json")),
 					MenigaScheduledEvent[].class
 			));
 		} catch (IOException e) {

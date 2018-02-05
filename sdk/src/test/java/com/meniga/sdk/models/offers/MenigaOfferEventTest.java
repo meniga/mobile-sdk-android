@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,7 +58,7 @@ public class MenigaOfferEventTest {
 		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			MenigaOfferEvent[] events = gson.fromJson(MenigaConverter.getAsArray(
-					FileImporter.getJsonFileFromRaw("offerevents.json")),
+					FileImporter.getInputStreamFromRaw("offerevents.json")),
 					MenigaOfferEvent[].class
 			);
 			List<MenigaOfferEvent> eventsList = new ArrayList<>();

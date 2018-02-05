@@ -9,7 +9,6 @@ import com.meniga.sdk.converters.MenigaIdNameKeyValConverter;
 import com.meniga.sdk.converters.MenigaOfferConverter;
 import com.meniga.sdk.converters.MenigaRedemptionConverter;
 import com.meniga.sdk.converters.MenigaReimbursementAccountConverter;
-import com.meniga.sdk.converters.MenigaSyncConverter;
 import com.meniga.sdk.converters.MenigaTransactionsConverter;
 import com.meniga.sdk.helpers.ChallengeItemFactory;
 import com.meniga.sdk.helpers.MockFeedItemFactory;
@@ -40,7 +39,6 @@ public class MockClient {
 				.addConverterFactory(new MenigaChallengesConverter(new ChallengeItemFactory()))
 				.addConverterFactory(new MenigaFeedItemConverter(new MockFeedItemFactory()))
 				.addConverterFactory(new MenigaBaseConverter())
-				.addConverterFactory(new MenigaSyncConverter())
 				.addConverterFactory(GsonConverterFactory.create())
 				.baseUrl("http://meniga.is/api/")
 				.client(client)

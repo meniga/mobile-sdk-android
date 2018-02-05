@@ -67,7 +67,7 @@ public class MenigaNetWorthAccountTypeTest {
 		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return gson.fromJson(MenigaConverter.getAsObject(
-					FileImporter.getJsonFileFromRaw("networthaccounttype.json")),
+					FileImporter.getInputStreamFromRaw("networthaccounttype.json")),
 					MenigaNetWorthAccountType.class
 			);
 		} catch (IOException e) {

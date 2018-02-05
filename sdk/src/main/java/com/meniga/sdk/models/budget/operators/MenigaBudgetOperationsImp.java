@@ -7,8 +7,10 @@ import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
+import com.meniga.sdk.webservices.requests.DeleteBudgetRequest;
 import com.meniga.sdk.webservices.requests.GetBudgetEntries;
 import com.meniga.sdk.webservices.requests.GetBudgets;
+import com.meniga.sdk.webservices.requests.ResetBudgetRequest;
 import com.meniga.sdk.webservices.requests.UpdateBudget;
 
 import org.joda.time.DateTime;
@@ -80,5 +82,21 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
         req.rules = new ArrayList<>();
         req.rules.add(data);
         return MenigaSDK.executor().updateBudget(req);
+    }
+
+    @Override
+    public Result<Void> deleteBudget(long budgetId) {
+        DeleteBudgetRequest request = new DeleteBudgetRequest();
+        request.budgetId = budgetId;
+        return MenigaSDK.executor().deleteBudget(request);
+    }
+
+    @Override
+    public Result<Void> resetBudget(long budgetId) {
+        // TODO Idea change identifiers into String type (what if they change at some point to UUIDs)?
+        ResetBudgetRequest request = new ResetBudgetRequest();
+        // TODO Switch to builders or use AutoValue to generate request classes?
+        request.budgetId = budgetId;
+        return MenigaSDK.executor().resetBudget(request);
     }
 }

@@ -702,6 +702,14 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.BUDGET).updateBudget(Long.toString(req.budgetId), req));
 	}
 
+	public Result<Void> deleteBudget(DeleteBudgetRequest request) {
+		return persist(request, getClient(Service.BUDGET).deleteBudget(Long.toString(request.budgetId)));
+	}
+
+	public Result<Void> resetBudget(ResetBudgetRequest request) {
+		return persist(request, getClient(Service.BUDGET).resetBudget(Long.toString(request.budgetId)));
+	}
+
 	// --
 	// Organizations
 	// --

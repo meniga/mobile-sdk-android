@@ -7,6 +7,7 @@ import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.user.MenigaUser;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -22,6 +23,7 @@ import static com.meniga.sdk.converters.MenigaConverter.getAsArray;
  * Copyright 2017 Meniga Iceland Inc.
  */
 
+@Ignore("TODO Are those still needed?")
 public class MenigaUserTest extends MenigaConverter  {
 
 	@Test
@@ -34,7 +36,7 @@ public class MenigaUserTest extends MenigaConverter  {
 		String body = this.convertStreamToString(fin);
 		Type typeOfMenigaAccountList = new TypeToken<List<MenigaAccount>>() {}.getType();
 		Gson gson = GsonProvider.getGsonBuilder();
-		List<MenigaUser> users = gson.fromJson(getAsArray(body), new TypeToken<List<MenigaUser>>(){}.getType());
+		List<MenigaUser> users = gson.fromJson(getAsArray(fin), new TypeToken<List<MenigaUser>>(){}.getType());
 
 	}
 

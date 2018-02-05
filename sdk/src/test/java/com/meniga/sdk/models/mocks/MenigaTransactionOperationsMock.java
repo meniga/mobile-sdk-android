@@ -4,19 +4,20 @@ import com.google.gson.Gson;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MTask;
-import com.meniga.sdk.providers.tasks.TaskCompletionSource;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 import com.meniga.sdk.models.transactions.TransactionsFilter;
 import com.meniga.sdk.models.transactions.operators.MenigaTransactionOperations;
+import com.meniga.sdk.providers.tasks.TaskCompletionSource;
 import com.meniga.sdk.utils.FileImporter;
 import com.meniga.sdk.webservices.requests.UpdateSplits;
 
 import org.joda.time.DateTime;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -124,8 +125,8 @@ public class MenigaTransactionOperationsMock implements MenigaTransactionOperati
 		Gson gson = GsonProvider.getGsonBuilder();
 		MenigaTransactionPage transactionPage = null;
 		try {
-			String body = FileImporter.getJsonFileFromRaw("transactions.json");
-			MenigaTransaction[] arr = gson.fromJson(MenigaConverter.getAsArray(body), MenigaTransaction[].class);
+			InputStream inputStream = FileImporter.getInputStreamFromRaw("transactions.json");
+			MenigaTransaction[] arr = gson.fromJson(MenigaConverter.getAsArray(inputStream), MenigaTransaction[].class);
 			transactionPage = new MenigaTransactionPage();
 			transactionPage.addAll(Arrays.asList(arr));
 		} catch (IOException e) {
