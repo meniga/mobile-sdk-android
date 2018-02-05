@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -115,7 +114,7 @@ public class MenigaNetWorthBalanceTest {
 		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return Arrays.asList(gson.fromJson(MenigaConverter.getAsArray(
-					FileImporter.getJsonFileFromRaw("networthbalance.json")),
+					FileImporter.getInputStreamFromRaw("networthbalance.json")),
 					MenigaNetWorthBalance[].class
 			));
 		} catch (IOException e) {

@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-
 import java.io.IOException;
 
 /**
@@ -45,7 +44,7 @@ public class MenigaOfferTest{
 		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return gson.fromJson(MenigaConverter.getAsArray(
-					FileImporter.getJsonFileFromRaw("offers.json")),
+					FileImporter.getInputStreamFromRaw("offers.json")),
 					MenigaOfferPage.class
 			);
 		} catch (IOException e) {

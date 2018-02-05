@@ -462,6 +462,12 @@ public interface MenigaAPI {
 	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_RULES)
 	Call<Void> updateBudget(@Path("id") String id, @Body UpdateBudget req);
 
+	@DELETE(APIConst.URL_BUDGETS + "/{id}")
+	Call<Void> deleteBudget(@Path("id") String budgetId);
+
+	@POST(APIConst.URL_BUDGETS + "/{id}/reset")
+	Call<Void> resetBudget(@Path("id") String budgetId);
+
 	// --
 	// Challenges
 	// --

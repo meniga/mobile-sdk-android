@@ -5,9 +5,9 @@ import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MTask;
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.providers.tasks.TaskCompletionSource;
 import com.meniga.sdk.models.transactions.MenigaTag;
 import com.meniga.sdk.models.transactions.operators.MenigaTagOperations;
+import com.meniga.sdk.providers.tasks.TaskCompletionSource;
 import com.meniga.sdk.utils.FileImporter;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class MenigaTagOperationsMock implements MenigaTagOperations {
 		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return Arrays.asList(gson.fromJson(
-					MenigaConverter.getAsArray(FileImporter.getJsonFileFromRaw("tags.json")),
+					MenigaConverter.getAsArray(FileImporter.getInputStreamFromRaw("tags.json")),
 					MenigaTag[].class
 			));
 		} catch (IOException e) {

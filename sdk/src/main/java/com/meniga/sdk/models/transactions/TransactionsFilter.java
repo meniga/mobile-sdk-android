@@ -10,7 +10,6 @@ import com.meniga.sdk.interfaces.ValueHashable;
 import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.enums.CategoryType;
-import com.meniga.sdk.models.transactions.enums.FilterTimeGroup;
 import com.meniga.sdk.models.transactions.enums.SeriesOrderBy;
 
 import org.joda.time.DateTime;

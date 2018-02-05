@@ -25,4 +25,8 @@ public interface MenigaBudgetOperations {
 
     Result<Void> updateBudget(long budgetId, MenigaDecimal targetAmount, DateTime startDate, DateTime endDate,
                               List<Long> catIds, int generationTypeValue, DateTime repeatUntil);
+
+    Result<Void> deleteBudget(long budgetId);
+
+    Result<Void> resetBudget(long budgetId);
 }

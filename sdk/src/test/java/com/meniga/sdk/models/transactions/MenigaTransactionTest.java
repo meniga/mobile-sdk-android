@@ -19,7 +19,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -157,7 +156,7 @@ public class MenigaTransactionTest{
 		List<MenigaTransaction> transactions = null;
 		try {
 			transactions = Arrays.asList(
-					gson.fromJson(MenigaConverter.getAsArray(FileImporter.getJsonFileFromRaw("transactions.json")), MenigaTransaction[].class)
+					gson.fromJson(MenigaConverter.getAsArray(FileImporter.getInputStreamFromRaw("transactions.json")), MenigaTransaction[].class)
 			);
 		} catch (IOException e) {
 			e.printStackTrace();

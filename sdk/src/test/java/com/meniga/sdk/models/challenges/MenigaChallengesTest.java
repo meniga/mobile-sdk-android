@@ -88,7 +88,7 @@ public class MenigaChallengesTest {
 		ChallengeItemFactory factory = new ChallengeItemFactory();
 		List<MenigaChallenge> items = new ArrayList<>();
 		try {
-			JsonArray arr = MenigaConverter.getAsArray(FileImporter.getJsonFileFromRaw(file));
+			JsonArray arr = MenigaConverter.getAsArray(FileImporter.getInputStreamFromRaw(file));
 			for (int i = 0; i < arr.size(); i++) {
 				JsonObject item = arr.get(i).getAsJsonObject();
 				items.add(factory.getMenigaChallengeItem(item));

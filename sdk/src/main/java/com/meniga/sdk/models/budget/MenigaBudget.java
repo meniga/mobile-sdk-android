@@ -185,4 +185,12 @@ public class MenigaBudget implements Parcelable, Serializable {
 	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset) {
 		return apiOperator.createBudget(type, name, description, accountIds, period, periodOffset);
 	}
+
+	public static Result<Void> delete(long budgetId) {
+		return apiOperator.deleteBudget(budgetId);
+	}
+
+	public static Result<Void> reset(long budgetId) {
+		return apiOperator.resetBudget(budgetId);
+	}
 }

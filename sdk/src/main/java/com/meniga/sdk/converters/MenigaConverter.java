@@ -46,16 +46,11 @@ public abstract class MenigaConverter extends Converter.Factory {
 	}
 
 	public static JsonArray getAsArray(InputStream stream) throws IOException {
-		JsonObject jobject;
+		JsonObject jsonObject;
 		InputStreamReader isr = new InputStreamReader(stream);
-		try {
-			JsonElement jelement = new JsonParser().parse(isr);
-			isr.close();
-			jobject = jelement.getAsJsonObject();
-		} finally {
-			isr.close();
-		}
-		return jobject.getAsJsonArray("data");
+		JsonElement jsonElement = new JsonParser().parse(isr);
+		jsonObject = jsonElement.getAsJsonObject();
+		return jsonObject.getAsJsonArray("data");
 	}
 
 	public static JsonArray getAsArray(JsonElement jelement) {
