@@ -39,6 +39,8 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 	protected DateTime publishDate;
 	protected DateTime startDate;
 	protected DateTime endDate;
+	protected DateTime parentEndDate;
+	protected DateTime parentStartDate;
 	protected List<Long> categoryIds;
 	protected Integer targetPercentage;
 	protected MenigaDecimal targetAmount;
@@ -70,18 +72,16 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 		dest.writeSerializable(this.publishDate);
 		dest.writeSerializable(this.startDate);
 		dest.writeSerializable(this.endDate);
-		if (categoryIds == null) {
-			dest.writeInt(1);
-		} else {
-			dest.writeInt(0);
-			dest.writeList(this.categoryIds);
-		}
+		dest.writeSerializable(this.parentEndDate);
+		dest.writeSerializable(this.parentStartDate);
+		dest.writeList(this.categoryIds);
 		dest.writeValue(this.targetPercentage);
 		dest.writeSerializable(this.targetAmount);
 		dest.writeSerializable(this.spentAmount);
 		dest.writeString(this.iconUrl);
 		dest.writeInt(this.recurringInterval == null ? -1 : this.recurringInterval.ordinal());
 		dest.writeInt(this.customChallengeColor == null ? -1 : this.customChallengeColor.ordinal());
+		dest.writeByte(this.categoryIdsDirty ? (byte) 1 : (byte) 0);
 		dest.writeValue(this.parentTopicId);
 	}
 
@@ -97,23 +97,23 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 		this.publishDate = (DateTime) in.readSerializable();
 		this.startDate = (DateTime) in.readSerializable();
 		this.endDate = (DateTime) in.readSerializable();
-		boolean catsWereNull = in.readInt() == 1;
-		if (!catsWereNull) {
-			this.categoryIds = new ArrayList<>();
-			in.readList(this.categoryIds, Long.class.getClassLoader());
-		}
+		this.parentEndDate = (DateTime) in.readSerializable();
+		this.parentStartDate = (DateTime) in.readSerializable();
+		this.categoryIds = new ArrayList<Long>();
+		in.readList(this.categoryIds, Long.class.getClassLoader());
 		this.targetPercentage = (Integer) in.readValue(Integer.class.getClassLoader());
 		this.targetAmount = (MenigaDecimal) in.readSerializable();
 		this.spentAmount = (MenigaDecimal) in.readSerializable();
 		this.iconUrl = in.readString();
 		int tmpRecurringInterval = in.readInt();
 		this.recurringInterval = tmpRecurringInterval == -1 ? null : ChallengeInterval.values()[tmpRecurringInterval];
-		int tmpcustmChallengeColorInterval = in.readInt();
-		this.customChallengeColor = tmpcustmChallengeColorInterval == -1 ? null : CustomChallengeColor.values()[tmpcustmChallengeColorInterval];
+		int tmpCustomChallengeColor = in.readInt();
+		this.customChallengeColor = tmpCustomChallengeColor == -1 ? null : CustomChallengeColor.values()[tmpCustomChallengeColor];
+		this.categoryIdsDirty = in.readByte() != 0;
 		this.parentTopicId = (Long) in.readValue(Long.class.getClassLoader());
 	}
 
-	public static final Parcelable.Creator<MenigaChallenge> CREATOR = new Parcelable.Creator<MenigaChallenge>() {
+	public static final Creator<MenigaChallenge> CREATOR = new Creator<MenigaChallenge>() {
 		@Override
 		public MenigaChallenge createFromParcel(Parcel source) {
 			return new MenigaChallenge(source);
@@ -124,6 +124,106 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 			return new MenigaChallenge[size];
 		}
 	};
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		MenigaChallenge challenge = (MenigaChallenge) o;
+
+		if (accepted != challenge.accepted) {
+			return false;
+		}
+		if (categoryIdsDirty != challenge.categoryIdsDirty) {
+			return false;
+		}
+		if (id != null ? !id.equals(challenge.id) : challenge.id != null) {
+			return false;
+		}
+		if (acceptedDate != null ? !acceptedDate.equals(challenge.acceptedDate) : challenge.acceptedDate != null) {
+			return false;
+		}
+		if (topicId != null ? !topicId.equals(challenge.topicId) : challenge.topicId != null) {
+			return false;
+		}
+		if (title != null ? !title.equals(challenge.title) : challenge.title != null) {
+			return false;
+		}
+		if (description != null ? !description.equals(challenge.description) : challenge.description != null) {
+			return false;
+		}
+		if (type != challenge.type) {
+			return false;
+		}
+		if (publishDate != null ? !publishDate.equals(challenge.publishDate) : challenge.publishDate != null) {
+			return false;
+		}
+		if (startDate != null ? !startDate.equals(challenge.startDate) : challenge.startDate != null) {
+			return false;
+		}
+		if (endDate != null ? !endDate.equals(challenge.endDate) : challenge.endDate != null) {
+			return false;
+		}
+		if (parentEndDate != null ? !parentEndDate.equals(challenge.parentEndDate) : challenge.parentEndDate != null) {
+			return false;
+		}
+		if (parentStartDate != null ? !parentStartDate.equals(challenge.parentStartDate) : challenge.parentStartDate != null) {
+			return false;
+		}
+		if (categoryIds != null ? !categoryIds.equals(challenge.categoryIds) : challenge.categoryIds != null) {
+			return false;
+		}
+		if (targetPercentage != null ? !targetPercentage.equals(challenge.targetPercentage) : challenge.targetPercentage != null) {
+			return false;
+		}
+		if (targetAmount != null ? !targetAmount.equals(challenge.targetAmount) : challenge.targetAmount != null) {
+			return false;
+		}
+		if (spentAmount != null ? !spentAmount.equals(challenge.spentAmount) : challenge.spentAmount != null) {
+			return false;
+		}
+		if (iconUrl != null ? !iconUrl.equals(challenge.iconUrl) : challenge.iconUrl != null) {
+			return false;
+		}
+		if (recurringInterval != challenge.recurringInterval) {
+			return false;
+		}
+		if (customChallengeColor != challenge.customChallengeColor) {
+			return false;
+		}
+		return parentTopicId != null ? parentTopicId.equals(challenge.parentTopicId) : challenge.parentTopicId == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (accepted ? 1 : 0);
+		result = 31 * result + (acceptedDate != null ? acceptedDate.hashCode() : 0);
+		result = 31 * result + (topicId != null ? topicId.hashCode() : 0);
+		result = 31 * result + (title != null ? title.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + (type != null ? type.hashCode() : 0);
+		result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
+		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+		result = 31 * result + (parentEndDate != null ? parentEndDate.hashCode() : 0);
+		result = 31 * result + (parentStartDate != null ? parentStartDate.hashCode() : 0);
+		result = 31 * result + (categoryIds != null ? categoryIds.hashCode() : 0);
+		result = 31 * result + (targetPercentage != null ? targetPercentage.hashCode() : 0);
+		result = 31 * result + (targetAmount != null ? targetAmount.hashCode() : 0);
+		result = 31 * result + (spentAmount != null ? spentAmount.hashCode() : 0);
+		result = 31 * result + (iconUrl != null ? iconUrl.hashCode() : 0);
+		result = 31 * result + (recurringInterval != null ? recurringInterval.hashCode() : 0);
+		result = 31 * result + (customChallengeColor != null ? customChallengeColor.hashCode() : 0);
+		result = 31 * result + (categoryIdsDirty ? 1 : 0);
+		result = 31 * result + (parentTopicId != null ? parentTopicId.hashCode() : 0);
+		return result;
+	}
 
 	public UUID getId() {
 		return id;
@@ -159,6 +259,34 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 
 	public DateTime getPublishDate() {
 		return publishDate;
+	}
+
+	/**
+	 * @return Returns parentStartDate if startDate is invalid, otherwise returns startDate
+	 */
+	public DateTime getMostValidStartDate() {
+		if ((startDate == null || startDate.getYear() < 1900) && parentStartDate != null && parentStartDate.getYear() > 1900) {
+			return parentStartDate;
+		}
+		return startDate;
+	}
+
+	/**
+	 * @return Returns parentEndDate if endDate is invalid, otherwise returns endDate
+	 */
+	public DateTime getMostValidEndDate() {
+		if ((endDate == null || endDate.getYear() < 1900) && parentEndDate != null && parentEndDate.getYear() > 1900) {
+			return parentEndDate;
+		}
+		return endDate;
+	}
+
+	public DateTime getParentEndDate() {
+		return parentEndDate;
+	}
+
+	public DateTime getParentStartDate() {
+		return parentStartDate;
 	}
 
 	public DateTime getStartDate() {
@@ -322,94 +450,6 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 				e.printStackTrace();
 			}
 		}
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-
-		MenigaChallenge challenge = (MenigaChallenge) o;
-
-		if (accepted != challenge.accepted) {
-			return false;
-		}
-		if (id != null ? !id.equals(challenge.id) : challenge.id != null) {
-			return false;
-		}
-		if (acceptedDate != null ? !acceptedDate.equals(challenge.acceptedDate) : challenge.acceptedDate != null) {
-			return false;
-		}
-		if (topicId != null ? !topicId.equals(challenge.topicId) : challenge.topicId != null) {
-			return false;
-		}
-		if (parentTopicId != null ? !parentTopicId.equals(challenge.parentTopicId) : challenge.parentTopicId != null) {
-			return false;
-		}
-		if (title != null ? !title.equals(challenge.title) : challenge.title != null) {
-			return false;
-		}
-		if (description != null ? !description.equals(challenge.description) : challenge.description != null) {
-			return false;
-		}
-		if (type != challenge.type) {
-			return false;
-		}
-		if (publishDate != null ? !publishDate.equals(challenge.publishDate) : challenge.publishDate != null) {
-			return false;
-		}
-		if (startDate != null ? !startDate.equals(challenge.startDate) : challenge.startDate != null) {
-			return false;
-		}
-		if (endDate != null ? !endDate.equals(challenge.endDate) : challenge.endDate != null) {
-			return false;
-		}
-		if (categoryIds != null ? !categoryIds.equals(challenge.categoryIds) : challenge.categoryIds != null) {
-			return false;
-		}
-		if (targetPercentage != null ? !targetPercentage.equals(challenge.targetPercentage) : challenge.targetPercentage != null) {
-			return false;
-		}
-		if (targetAmount != null ? !targetAmount.equals(challenge.targetAmount) : challenge.targetAmount != null) {
-			return false;
-		}
-		if (spentAmount != null ? !spentAmount.equals(challenge.spentAmount) : challenge.spentAmount != null) {
-			return false;
-		}
-		if (iconUrl != null ? !iconUrl.equals(challenge.iconUrl) : challenge.iconUrl != null) {
-			return false;
-		}
-		if (recurringInterval != challenge.recurringInterval) {
-			return false;
-		}
-		return customChallengeColor == challenge.customChallengeColor;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (accepted ? 1 : 0);
-		result = 31 * result + (acceptedDate != null ? acceptedDate.hashCode() : 0);
-		result = 31 * result + (topicId != null ? topicId.hashCode() : 0);
-		result = 31 * result + (title != null ? title.hashCode() : 0);
-		result = 31 * result + (description != null ? description.hashCode() : 0);
-		result = 31 * result + (type != null ? type.hashCode() : 0);
-		result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
-		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
-		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-		result = 31 * result + (categoryIds != null ? categoryIds.hashCode() : 0);
-		result = 31 * result + (targetPercentage != null ? targetPercentage.hashCode() : 0);
-		result = 31 * result + (targetAmount != null ? targetAmount.hashCode() : 0);
-		result = 31 * result + (spentAmount != null ? spentAmount.hashCode() : 0);
-		result = 31 * result + (iconUrl != null ? iconUrl.hashCode() : 0);
-		result = 31 * result + (recurringInterval != null ? recurringInterval.hashCode() : 0);
-		result = 31 * result + (customChallengeColor != null ? customChallengeColor.hashCode() : 0);
-		result = 31 * result + (parentTopicId != null ? parentTopicId.hashCode() : 0);
-		return result;
 	}
 
 	/**
