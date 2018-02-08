@@ -34,9 +34,17 @@ android {
         }
     }
     testOptions {
-        unitTests.returnDefaultValues = true
+        unitTests {
+            returnDefaultValues = true
+            all {
+                systemProperty "file.encoding", "UTF-8"
+            }
+        }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     packagingOptions {
         exclude "META-INF/LICENSE.txt"
         exclude "META-INF/NOTICE.txt"
@@ -57,6 +65,7 @@ repositories {
 }
 
 dependencies {
+    implementation "com.annimon:stream:1.1.9"
     implementation "com.squareup.okhttp3:okhttp:3.9.1"
     implementation "com.squareup.okhttp3:okhttp-urlconnection:3.9.1"
     api "net.danlew:android.joda:2.9.9"
@@ -109,4 +118,3 @@ if (project.hasProperty("artifactory_username") && (file("../artifactory.gradle"
 if (project.hasProperty("bintray_user") && (file("../bintray.gradle").exists())) {
     apply from: "../bintray.gradle"
 }
-

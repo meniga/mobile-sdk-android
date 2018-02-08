@@ -687,6 +687,13 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.BUDGET).getBudgets(req.toQueryMap()));
 	}
 
+	public Result<MenigaBudget> getBudget(GetBudget getBudget) {
+		if (provider.hasKey(getBudget)) {
+			return createTask(provider.fetch(getBudget));
+		}
+		return persist(getBudget, getClient(Service.BUDGET).getBudget(getBudget.toQueryMap()));
+	}
+
 	public Result<List<MenigaBudgetEntry>> getBudgetEntries(GetBudgetEntries req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
@@ -694,12 +701,20 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.BUDGET).getBudgetEntries(Long.toString(req.id), req.toQueryMap()));
 	}
 
+	public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntry createBudgetEntry) {
+		return persist(createBudgetEntry, getClient(Service.BUDGET).createBudgetEntry(Long.toString(budgetId), createBudgetEntry));
+	}
+
 	public Result<MenigaBudget> createBudget(CreateBudget req) {
 		return persist(req, getClient(Service.BUDGET).createBudget(req));
 	}
 
-	public Result<Void> updateBudget(UpdateBudget req) {
-		return persist(req, getClient(Service.BUDGET).updateBudget(Long.toString(req.budgetId), req));
+	public Result<MenigaBudget> updateBudget(long budgetId, UpdateBudget updateBudget) {
+		return persist(updateBudget, getClient(Service.BUDGET).updateBudget(Long.toString(budgetId), updateBudget));
+	}
+
+	public Result<Void> updateBudgetRules(UpdateBudgetRules req) {
+		return persist(req, getClient(Service.BUDGET).updateBudgetRules(Long.toString(req.budgetId), req));
 	}
 
 	public Result<Void> deleteBudget(DeleteBudgetRequest request) {

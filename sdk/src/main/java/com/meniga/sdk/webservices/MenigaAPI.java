@@ -45,6 +45,7 @@ import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.requests.AcceptChallenge;
+import com.meniga.sdk.webservices.requests.CreateBudgetEntry;
 import com.meniga.sdk.webservices.requests.CreateChallenge;
 import com.meniga.sdk.webservices.requests.CreateComment;
 import com.meniga.sdk.webservices.requests.CreateNetWorthAccount;
@@ -67,6 +68,7 @@ import com.meniga.sdk.webservices.requests.StartSync;
 import com.meniga.sdk.webservices.requests.UpdateAccount;
 import com.meniga.sdk.webservices.requests.UpdateAccountMetadata;
 import com.meniga.sdk.webservices.requests.UpdateBudget;
+import com.meniga.sdk.webservices.requests.UpdateBudgetRules;
 import com.meniga.sdk.webservices.requests.UpdateChallenge;
 import com.meniga.sdk.webservices.requests.UpdateComment;
 import com.meniga.sdk.webservices.requests.UpdateHistoryBalance;
@@ -453,20 +455,29 @@ public interface MenigaAPI {
 	@GET(APIConst.URL_BUDGETS)
 	Call<List<MenigaBudget>> getBudgets(@QueryMap Map<String, String> query);
 
+	@GET(APIConst.URL_BUDGETS)
+	Call<MenigaBudget> getBudget(@QueryMap Map<String, String> query);
+
 	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES)
 	Call<List<MenigaBudgetEntry>> getBudgetEntries(@Path("id") String id, @QueryMap Map<String, String> query);
+
+	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES)
+	Call<List<MenigaBudgetEntry>> createBudgetEntry(@Path("id") String s, @Body CreateBudgetEntry createBudgetEntry);
 
 	@POST(APIConst.URL_BUDGETS)
 	Call<MenigaBudget> createBudget(@Body CreateBudget req);
 
-	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_RULES)
-	Call<Void> updateBudget(@Path("id") String id, @Body UpdateBudget req);
+	@PUT(APIConst.URL_BUDGETS + "/{id}")
+	Call<MenigaBudget> updateBudget(@Path("id") String id, @Body UpdateBudget req);
 
 	@DELETE(APIConst.URL_BUDGETS + "/{id}")
 	Call<Void> deleteBudget(@Path("id") String budgetId);
 
 	@POST(APIConst.URL_BUDGETS + "/{id}/reset")
 	Call<Void> resetBudget(@Path("id") String budgetId);
+
+	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_RULES)
+	Call<Void> updateBudgetRules(@Path("id") String id, @Body UpdateBudgetRules req);
 
 	// --
 	// Challenges

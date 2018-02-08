@@ -1,10 +1,10 @@
 package com.meniga.sdk.webservices.requests;
 
-import com.meniga.sdk.models.budget.enums.BudgetType;
+import com.annimon.stream.Optional;
+import com.meniga.sdk.helpers.DateTimeUtils;
+import com.meniga.sdk.helpers.Joiner;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +19,7 @@ public class GetBudgetEntries extends QueryRequestObject {
 	public DateTime startDate;
 	public DateTime endDate;
 	public boolean allowOverlappingEntries;
+	public boolean includeOptionalHistoricalData;
 
 	@Override
 	public long getValueHash() {
@@ -27,31 +28,28 @@ public class GetBudgetEntries extends QueryRequestObject {
 		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
 		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
 		result = 31 * result + (allowOverlappingEntries ? 1 : 0);
+		result = 31 * result + (includeOptionalHistoricalData ? 1 : 0);
 		return result;
 	}
 
 	@Override
 	public Map<String, String> toQueryMap() {
-		Map<String, String> map = new HashMap<>();
-		if (categoryIds != null && categoryIds.size() > 0) {
-			StringBuilder bld = new StringBuilder();
-			for (int i = 0; i < categoryIds.size(); i++) {
-				if (i > 0) {
-					bld.append(",");
-				}
-				bld.append(categoryIds.get(i));
-			}
-			map.put("categoryIds", bld.toString());
-		}
-		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
-		if (startDate != null) {
-			map.put("startDate", fmt.print(startDate));
-		}
-		if (endDate != null) {
-			map.put("endDate", fmt.print(endDate));
-		}
-		map.put("allowOverlappingEntries", Boolean.toString(allowOverlappingEntries));
+		Map<String, String> queryMap = new HashMap<>();
+		Optional.ofNullable(categoryIds)
+				.executeIfPresent(categoryIds ->
+						queryMap.put("categoryIds", Joiner.join(categoryIds, ",")));
 
-		return map;
+		Optional.ofNullable(startDate)
+				.map(DateTimeUtils::toString)
+				.executeIfPresent(dateTime -> queryMap.put("startDate", dateTime));
+
+		Optional.ofNullable(endDate)
+				.map(DateTimeUtils::toString)
+				.executeIfPresent(dateTime -> queryMap.put("endDate", dateTime));
+
+		queryMap.put("allowOverlappingEntries", Boolean.toString(allowOverlappingEntries));
+		queryMap.put("includeOptionalHistoricalData", Boolean.toString(includeOptionalHistoricalData));
+
+		return queryMap;
 	}
 }

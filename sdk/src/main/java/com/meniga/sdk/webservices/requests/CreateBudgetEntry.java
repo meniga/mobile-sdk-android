@@ -16,7 +16,6 @@ public class CreateBudgetEntry extends QueryRequestObject {
 	public DateTime startDate;
 	public DateTime endDate;
 	public List<Long> categoryIds;
-	public int autoFillType;
 
 	@Override
 	public long getValueHash() {
@@ -24,7 +23,6 @@ public class CreateBudgetEntry extends QueryRequestObject {
 		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
 		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
 		result = 31 * result + (categoryIds != null ? categoryIds.hashCode() : 0);
-		result = 31 * result + autoFillType;
 		return result;
 	}
 }

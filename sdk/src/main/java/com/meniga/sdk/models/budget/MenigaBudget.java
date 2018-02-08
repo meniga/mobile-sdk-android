@@ -4,10 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
+import com.meniga.sdk.webservices.requests.GetBudget;
+import com.meniga.sdk.webservices.requests.GetBudgets;
+import com.meniga.sdk.webservices.requests.UpdateBudget;
 
 import org.joda.time.DateTime;
 
@@ -146,7 +148,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 		this.type = tmpType == -1 ? null : BudgetType.values()[tmpType];
 		this.name = in.readString();
 		this.description = in.readString();
-		this.accountIds = new ArrayList<Long>();
+		this.accountIds = new ArrayList<>();
 		in.readList(this.accountIds, Long.class.getClassLoader());
 		int tmpPeriod = in.readInt();
 		this.period = tmpPeriod == -1 ? null : BudgetPeriod.values()[tmpPeriod];
@@ -166,16 +168,12 @@ public class MenigaBudget implements Parcelable, Serializable {
 		}
 	};
 
-	/*
-	* API Calls
-	*/
-
-	public static Result<List<MenigaBudget>> fetch(BudgetType type) {
-		return apiOperator.getBudgets(type);
+	public static Result<List<MenigaBudget>> fetch(GetBudgets getBudgets) {
+		return apiOperator.getBudgets(getBudgets);
 	}
 
-	public static Result<List<MenigaBudget>> fetch() {
-		return fetch(BudgetType.PLANNING);
+	public static Result<MenigaBudget> fetch(GetBudget getBudget) {
+		return apiOperator.getBudget(getBudget);
 	}
 
 	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period) {
@@ -186,11 +184,15 @@ public class MenigaBudget implements Parcelable, Serializable {
 		return apiOperator.createBudget(type, name, description, accountIds, period, periodOffset);
 	}
 
-	public static Result<Void> delete(long budgetId) {
-		return apiOperator.deleteBudget(budgetId);
+	public Result<Void> delete() {
+		return apiOperator.deleteBudget(id);
 	}
 
-	public static Result<Void> reset(long budgetId) {
-		return apiOperator.resetBudget(budgetId);
+	public Result<Void> reset() {
+		return apiOperator.resetBudget(id);
+	}
+
+	public Result<MenigaBudget> update(UpdateBudget updateBudget) {
+		return apiOperator.updateBudget(id, updateBudget);
 	}
 }

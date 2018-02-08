@@ -36,13 +36,13 @@ public class GetBudgets extends QueryRequestObject {
 			}
 			map.put("ids", bld.toString());
 		}
-		if (ids != null && accountIds.size() > 0) {
+		if (accountIds != null && accountIds.size() > 0) {
 			StringBuilder bld = new StringBuilder();
 			for (int i = 0; i < accountIds.size(); i++) {
 				if (i > 0) {
 					bld.append(",");
 				}
-				bld.append(ids.get(i));
+				bld.append(accountIds.get(i));
 			}
 			map.put("accountIds", bld.toString());
 		}
