@@ -11,6 +11,7 @@ import com.meniga.sdk.webservices.requests.CreateBudgetEntry;
 import com.meniga.sdk.webservices.requests.DeleteBudgetRequest;
 import com.meniga.sdk.webservices.requests.GetBudget;
 import com.meniga.sdk.webservices.requests.GetBudgetEntries;
+import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
 import com.meniga.sdk.webservices.requests.GetBudgets;
 import com.meniga.sdk.webservices.requests.ResetBudgetRequest;
 import com.meniga.sdk.webservices.requests.UpdateBudget;
@@ -57,6 +58,19 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     @Override
     public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntry createBudgetEntry) {
         return MenigaSDK.executor().createBudgetEntry(budgetId, createBudgetEntry);
+    }
+
+    @Override
+    public Result<Void> deleteBudgetEntry(long budgetId, long entryId) {
+        DeleteBudgetEntry deleteBudgetEntry = new DeleteBudgetEntry();
+        deleteBudgetEntry.budgetId = budgetId;
+        deleteBudgetEntry.entryId = entryId;
+        return MenigaSDK.executor().deleteBudgetEntry(deleteBudgetEntry);
+    }
+
+    @Override
+    public Result<MenigaBudgetEntry> getBudgetEntry(GetBudgetEntryById getBudgetEntryById) {
+        return MenigaSDK.executor().getBudgetEntry(getBudgetEntryById);
     }
 
     @Override

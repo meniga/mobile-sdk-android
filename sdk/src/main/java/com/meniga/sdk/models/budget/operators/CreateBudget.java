@@ -1,16 +1,7 @@
 package com.meniga.sdk.models.budget.operators;
 
-import com.meniga.sdk.MenigaSDK;
-import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.budget.MenigaBudget;
-import com.meniga.sdk.models.budget.MenigaBudgetEntry;
-import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
-import com.meniga.sdk.webservices.requests.GetBudgetEntries;
-import com.meniga.sdk.webservices.requests.GetBudgets;
 import com.meniga.sdk.webservices.requests.QueryRequestObject;
-
-import org.joda.time.DateTime;
 
 import java.util.List;
 

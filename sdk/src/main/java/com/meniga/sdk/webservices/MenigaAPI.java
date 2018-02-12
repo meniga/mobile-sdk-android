@@ -1,6 +1,7 @@
 package com.meniga.sdk.webservices;
 
 import com.meniga.sdk.helpers.KeyVal;
+import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.accounts.MenigaAccountBalanceHistory;
 import com.meniga.sdk.models.accounts.MenigaAccountType;
@@ -56,6 +57,7 @@ import com.meniga.sdk.webservices.requests.CreateTransactionRule;
 import com.meniga.sdk.webservices.requests.CreateUpcoming;
 import com.meniga.sdk.webservices.requests.CreateUserCategory;
 import com.meniga.sdk.webservices.requests.ForgotPassword;
+import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
 import com.meniga.sdk.webservices.requests.GetRealmAuthMethod;
 import com.meniga.sdk.webservices.requests.GetTopMerchants;
 import com.meniga.sdk.webservices.requests.GetTransactionSeries;
@@ -462,7 +464,13 @@ public interface MenigaAPI {
 	Call<List<MenigaBudgetEntry>> getBudgetEntries(@Path("id") String id, @QueryMap Map<String, String> query);
 
 	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES)
-	Call<List<MenigaBudgetEntry>> createBudgetEntry(@Path("id") String s, @Body CreateBudgetEntry createBudgetEntry);
+	Call<List<MenigaBudgetEntry>> createBudgetEntry(@Path("id") String id, @Body CreateBudgetEntry createBudgetEntry);
+
+	@DELETE(APIConst.URL_BUDGETS + "/{budgetId}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
+	Call<Void> deleteBudgetEntry(@Path("budgetId") String budgetId, @Path("entryId") String entryId);
+
+	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
+	Call<MenigaBudgetEntry> getBudgetEntry(@Path("id") String id, @Path("entryId") String entryId);
 
 	@POST(APIConst.URL_BUDGETS)
 	Call<MenigaBudget> createBudget(@Body CreateBudget req);

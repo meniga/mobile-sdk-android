@@ -1,16 +1,15 @@
 {
-  "data": [
-    {
-      "id": 0,
-      "budgetId": 0,
-      "targetAmount": 0,
-      "spentAmount": 0,
-      "startDate": "2018-02-08T08:34:22.497Z",
-      "endDate": "2018-02-08T08:34:22.497Z",
-      "updatedAt": "2018-02-08T08:34:22.497Z",
-      "categoryIds": [
-        0
-      ]
-    }
-  ]
+  "data": {
+    "id": 0,
+    "targetAmount": 0,
+    "startDate": "2018-02-08T08:34:22.525Z",
+    "endDate": "2018-02-08T08:34:22.525Z",
+    "updatedAt": "2018-02-08T08:34:22.525Z",
+    "budgetId": 0,
+    "generationType": 0,
+    "spentAmount": 0,
+    "categoryIds": [
+      0
+    ]
+  }
 }

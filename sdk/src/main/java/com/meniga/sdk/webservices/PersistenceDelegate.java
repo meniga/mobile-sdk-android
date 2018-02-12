@@ -12,6 +12,7 @@ import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.operators.CreateBudget;
+import com.meniga.sdk.models.budget.operators.DeleteBudgetEntry;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -703,6 +704,18 @@ public class PersistenceDelegate {
 
 	public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntry createBudgetEntry) {
 		return persist(createBudgetEntry, getClient(Service.BUDGET).createBudgetEntry(Long.toString(budgetId), createBudgetEntry));
+	}
+
+
+	public Result<Void> deleteBudgetEntry(DeleteBudgetEntry deleteBudgetEntry) {
+		return persist(deleteBudgetEntry, getClient(Service.BUDGET).deleteBudgetEntry(Long.toString(deleteBudgetEntry.budgetId), Long.toString(deleteBudgetEntry.entryId)));
+	}
+
+	public Result<MenigaBudgetEntry> getBudgetEntry(GetBudgetEntryById request) {
+		if (provider.hasKey(request)) {
+			return createTask(provider.fetch(request));
+		}
+		return persist(request, getClient(Service.BUDGET).getBudgetEntry(Long.toString(request.budgetId), Long.toString(request.entryId)));
 	}
 
 	public Result<MenigaBudget> createBudget(CreateBudget req) {

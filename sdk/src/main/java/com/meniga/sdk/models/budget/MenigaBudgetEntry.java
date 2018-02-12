@@ -10,6 +10,7 @@ import com.meniga.sdk.models.budget.enums.GenerationTypeValue;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntry;
+import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
 
 import org.joda.time.DateTime;
 
@@ -211,6 +212,10 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 		return apiOperator.getBudgetEntries(budgetId, from, to, categoryIds, true);
 	}
 
+	public static Result<MenigaBudgetEntry> fetch(GetBudgetEntryById getBudgetEntryById) {
+		return apiOperator.getBudgetEntry(getBudgetEntryById);
+	}
+
 	public static Result<Void> update(long budgetId, MenigaDecimal targetAmount, DateTime startDate, DateTime endDate,
 									  MenigaCategory category, GenerationType generationType, int generationTypeValue,
 									  DateTime repeatUntil) {
@@ -226,5 +231,9 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 
 	public static Result<List<MenigaBudgetEntry>> create(long budgetId, CreateBudgetEntry createBudgetEntry) {
 		return apiOperator.createBudgetEntry(budgetId, createBudgetEntry);
+	}
+
+	public Result<Void> delete() {
+		return apiOperator.deleteBudgetEntry(budgetId, id);
 	}
 }
