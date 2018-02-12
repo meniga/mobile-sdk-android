@@ -8,6 +8,7 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.budget.enums.GenerationType;
 import com.meniga.sdk.models.budget.enums.GenerationTypeValue;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
+import com.meniga.sdk.models.budget.operators.UpdateBudgetEntry;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntry;
 import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
@@ -216,6 +217,10 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 		return apiOperator.getBudgetEntry(getBudgetEntryById);
 	}
 
+	/**
+	 *  Use {@link #update(UpdateBudgetEntry)} instead.
+	 */
+	@Deprecated
 	public static Result<Void> update(long budgetId, MenigaDecimal targetAmount, DateTime startDate, DateTime endDate,
 									  MenigaCategory category, GenerationType generationType, int generationTypeValue,
 									  DateTime repeatUntil) {
@@ -227,6 +232,10 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 			generationTypeValue = Math.abs(generationTypeValue);
 		}
 		return apiOperator.updateBudgetRules(budgetId, targetAmount, startDate, endDate, catIds, generationTypeValue, repeatUntil);
+	}
+
+	public Result<MenigaBudgetEntry> update(UpdateBudgetEntry updateBudgetEntry) {
+		return apiOperator.updateBudgetEntry(budgetId, id, updateBudgetEntry);
 	}
 
 	public static Result<List<MenigaBudgetEntry>> create(long budgetId, CreateBudgetEntry createBudgetEntry) {

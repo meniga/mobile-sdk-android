@@ -74,6 +74,11 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     }
 
     @Override
+    public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry) {
+        return MenigaSDK.executor().updateBudgetEntry(budgetId, entryId, updateBudgetEntry);
+    }
+
+    @Override
     public Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset) {
         CreateBudget req = new CreateBudget();
         req.type = type;

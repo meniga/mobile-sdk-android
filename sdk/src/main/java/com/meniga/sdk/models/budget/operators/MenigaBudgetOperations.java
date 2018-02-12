@@ -37,6 +37,8 @@ public interface MenigaBudgetOperations {
 
     Result<MenigaBudgetEntry> getBudgetEntry(GetBudgetEntryById getBudgetEntryById);
 
+    Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry);
+
     Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset);
 
     Result<Void> updateBudgetRules(long budgetId, MenigaDecimal targetAmount, DateTime startDate, DateTime endDate,

@@ -1,7 +1,6 @@
 package com.meniga.sdk.webservices;
 
 import com.meniga.sdk.helpers.KeyVal;
-import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.accounts.MenigaAccountBalanceHistory;
 import com.meniga.sdk.models.accounts.MenigaAccountType;
@@ -9,6 +8,7 @@ import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.operators.CreateBudget;
+import com.meniga.sdk.models.budget.operators.UpdateBudgetEntry;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -31,6 +31,8 @@ import com.meniga.sdk.models.organizations.MenigaOrganization;
 import com.meniga.sdk.models.organizations.MenigaRealmAccount;
 import com.meniga.sdk.models.organizations.MenigaRealmAuthResponse;
 import com.meniga.sdk.models.serverpublic.MenigaPublicSettings;
+import com.meniga.sdk.models.sync.MenigaSync;
+import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.models.terms.MenigaTermType;
 import com.meniga.sdk.models.terms.MenigaTerms;
 import com.meniga.sdk.models.transactions.MenigaComment;
@@ -40,8 +42,6 @@ import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 import com.meniga.sdk.models.transactions.MenigaTransactionRule;
 import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
-import com.meniga.sdk.models.sync.MenigaSync;
-import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
@@ -57,7 +57,6 @@ import com.meniga.sdk.webservices.requests.CreateTransactionRule;
 import com.meniga.sdk.webservices.requests.CreateUpcoming;
 import com.meniga.sdk.webservices.requests.CreateUserCategory;
 import com.meniga.sdk.webservices.requests.ForgotPassword;
-import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
 import com.meniga.sdk.webservices.requests.GetRealmAuthMethod;
 import com.meniga.sdk.webservices.requests.GetTopMerchants;
 import com.meniga.sdk.webservices.requests.GetTransactionSeries;
@@ -466,11 +465,14 @@ public interface MenigaAPI {
 	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES)
 	Call<List<MenigaBudgetEntry>> createBudgetEntry(@Path("id") String id, @Body CreateBudgetEntry createBudgetEntry);
 
-	@DELETE(APIConst.URL_BUDGETS + "/{budgetId}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
-	Call<Void> deleteBudgetEntry(@Path("budgetId") String budgetId, @Path("entryId") String entryId);
+	@DELETE(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
+	Call<Void> deleteBudgetEntry(@Path("id") String id, @Path("entryId") String entryId);
 
 	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
 	Call<MenigaBudgetEntry> getBudgetEntry(@Path("id") String id, @Path("entryId") String entryId);
+
+	@PUT(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
+	Call<MenigaBudgetEntry> updateBudgetEntries(@Path("id") String id, @Path("entryId") String entryId, @Body UpdateBudgetEntry updateBudgetEntry);
 
 	@POST(APIConst.URL_BUDGETS)
 	Call<MenigaBudget> createBudget(@Body CreateBudget req);
