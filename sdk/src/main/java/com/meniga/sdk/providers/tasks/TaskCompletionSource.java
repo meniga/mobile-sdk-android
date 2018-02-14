@@ -21,7 +21,7 @@ public class TaskCompletionSource<TResult> {
 	 * be solely responsible for its completion.
 	 */
 	public TaskCompletionSource() {
-		task = new Task<>();
+		task = new Task<>("");
 		call = null;
 	}
 
@@ -30,7 +30,7 @@ public class TaskCompletionSource<TResult> {
 	 * be solely responsible for its completion.
 	 */
 	public TaskCompletionSource(Call<TResult> callIn) {
-		task = new Task<>();
+		task = new Task<>(callIn == null ? "" : callIn.request().url().toString());
 		call = callIn;
 	}
 
