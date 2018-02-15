@@ -244,7 +244,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @param amount The amount of the transaction. This field can only be persisted in the api for user-created transactions
 	 */
 	public void setAmount(MenigaDecimal amount) {
-		amount = amount;
+		this.amount = amount;
 	}
 
 	/**
