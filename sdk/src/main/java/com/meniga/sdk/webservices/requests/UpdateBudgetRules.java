@@ -11,14 +11,11 @@ import java.util.List;
  */
 
 public class UpdateBudgetRules extends QueryRequestObject {
-    public transient long budgetId;
     public List<UpdateBudgetData> rules;
 
     @Override
     public long getValueHash() {
-        int result = (int) (budgetId ^ (budgetId >>> 32));
-        result = 31 * result + (rules != null ? rules.hashCode() : 0);
-        return result;
+        return rules != null ? rules.hashCode() : 0;
     }
 
     public static class UpdateBudgetData {

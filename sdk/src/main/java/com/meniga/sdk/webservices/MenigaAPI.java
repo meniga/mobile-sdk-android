@@ -8,7 +8,7 @@ import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.operators.CreateBudget;
-import com.meniga.sdk.models.budget.operators.UpdateBudgetEntry;
+import com.meniga.sdk.models.budget.operators.UpdateBudgetEntryParameters;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -453,6 +453,7 @@ public interface MenigaAPI {
 	// --
 	// Budget
 	// --
+	// TODO Extract Budget API methods to separate Retrofit service
 	@GET(APIConst.URL_BUDGETS)
 	Call<List<MenigaBudget>> getBudgets(@QueryMap Map<String, String> query);
 
@@ -472,7 +473,7 @@ public interface MenigaAPI {
 	Call<MenigaBudgetEntry> getBudgetEntry(@Path("id") String id, @Path("entryId") String entryId);
 
 	@PUT(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
-	Call<MenigaBudgetEntry> updateBudgetEntries(@Path("id") String id, @Path("entryId") String entryId, @Body UpdateBudgetEntry updateBudgetEntry);
+	Call<MenigaBudgetEntry> updateBudgetEntries(@Path("id") String id, @Path("entryId") String entryId, @Body UpdateBudgetEntryParameters updateBudgetEntry);
 
 	@POST(APIConst.URL_BUDGETS)
 	Call<MenigaBudget> createBudget(@Body CreateBudget req);
@@ -487,7 +488,7 @@ public interface MenigaAPI {
 	Call<Void> resetBudget(@Path("id") String budgetId);
 
 	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_RULES)
-	Call<Void> updateBudgetRules(@Path("id") String id, @Body UpdateBudgetRules req);
+	Call<Void> createBudgetRules(@Path("id") String id, @Body UpdateBudgetRules req);
 
 	// --
 	// Challenges

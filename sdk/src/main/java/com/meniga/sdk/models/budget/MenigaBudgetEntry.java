@@ -8,7 +8,7 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.budget.enums.GenerationType;
 import com.meniga.sdk.models.budget.enums.GenerationTypeValue;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
-import com.meniga.sdk.models.budget.operators.UpdateBudgetEntry;
+import com.meniga.sdk.models.budget.operators.UpdateBudgetEntryParameters;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntry;
 import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
@@ -17,6 +17,7 @@ import org.joda.time.DateTime;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -218,23 +219,33 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 	}
 
 	/**
-	 *  Use {@link #update(UpdateBudgetEntry)} instead.
+	 * Use {@link #createBudgetRules(long, CreateBudgetRulesParameters)} instead.
 	 */
 	@Deprecated
-	public static Result<Void> update(long budgetId, MenigaDecimal targetAmount, DateTime startDate, DateTime endDate,
-									  MenigaCategory category, GenerationType generationType, int generationTypeValue,
-									  DateTime repeatUntil) {
-		List<Long> catIds = new ArrayList<>();
-		catIds.add(category.getId());
-		if (generationType == GenerationType.SAME_AS_MONTH) {
-			generationTypeValue = -Math.abs(generationTypeValue);
-		} else if (generationType == GenerationType.AVERAGE_MONTHS) {
-			generationTypeValue = Math.abs(generationTypeValue);
-		}
-		return apiOperator.updateBudgetRules(budgetId, targetAmount, startDate, endDate, catIds, generationTypeValue, repeatUntil);
+	public static Result<Void> update(long budgetId,
+									  MenigaDecimal targetAmount,
+									  DateTime startDate,
+									  DateTime endDate,
+									  MenigaCategory category,
+									  GenerationType generationType,
+									  int generationTypeValue,
+									  DateTime wasNotUsed) {
+		CreateBudgetRulesParameters parameters = CreateBudgetRulesParameters.builder()
+				.targetAmount(targetAmount)
+				.startDate(startDate)
+				.endDate(endDate)
+				.category(category)
+				.generationType(generationType)
+				.generationTypeValue(generationTypeValue)
+				.build();
+		return createBudgetRules(budgetId, parameters);
 	}
 
-	public Result<MenigaBudgetEntry> update(UpdateBudgetEntry updateBudgetEntry) {
+	public static Result<Void> createBudgetRules(long budgetId, CreateBudgetRulesParameters parameters) {
+		return apiOperator.updateBudgetRules(budgetId, parameters);
+	}
+
+	public Result<MenigaBudgetEntry> update(UpdateBudgetEntryParameters updateBudgetEntry) {
 		return apiOperator.updateBudgetEntry(budgetId, id, updateBudgetEntry);
 	}
 

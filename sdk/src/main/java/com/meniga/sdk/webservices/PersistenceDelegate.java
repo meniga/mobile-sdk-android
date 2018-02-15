@@ -12,8 +12,7 @@ import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.operators.CreateBudget;
-import com.meniga.sdk.models.budget.operators.DeleteBudgetEntry;
-import com.meniga.sdk.models.budget.operators.UpdateBudgetEntry;
+import com.meniga.sdk.models.budget.operators.UpdateBudgetEntryParameters;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -36,6 +35,8 @@ import com.meniga.sdk.models.organizations.MenigaOrganization;
 import com.meniga.sdk.models.organizations.MenigaRealmAccount;
 import com.meniga.sdk.models.organizations.MenigaRealmAuthResponse;
 import com.meniga.sdk.models.serverpublic.MenigaPublicSettings;
+import com.meniga.sdk.models.sync.MenigaSync;
+import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.models.terms.MenigaTermType;
 import com.meniga.sdk.models.terms.MenigaTerms;
 import com.meniga.sdk.models.transactions.MenigaComment;
@@ -45,8 +46,6 @@ import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 import com.meniga.sdk.models.transactions.MenigaTransactionRule;
 import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
-import com.meniga.sdk.models.sync.MenigaSync;
-import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
@@ -89,6 +88,10 @@ public class PersistenceDelegate {
 
 			}
 		});
+	}
+
+	private <E> Result<E> call(Call<E> call) {
+		return MenigaSDK.getMenigaSettings().getTaskAdapter().adapt(call, null);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -708,8 +711,8 @@ public class PersistenceDelegate {
 	}
 
 
-	public Result<Void> deleteBudgetEntry(DeleteBudgetEntry deleteBudgetEntry) {
-		return persist(deleteBudgetEntry, getClient(Service.BUDGET).deleteBudgetEntry(Long.toString(deleteBudgetEntry.budgetId), Long.toString(deleteBudgetEntry.entryId)));
+	public Result<Void> deleteBudgetEntry(long budgetId, long entryId) {
+		return call(getClient(Service.BUDGET).deleteBudgetEntry(Long.toString(budgetId), Long.toString(entryId)));
 	}
 
 	public Result<MenigaBudgetEntry> getBudgetEntry(GetBudgetEntryById request) {
@@ -719,7 +722,7 @@ public class PersistenceDelegate {
 		return persist(request, getClient(Service.BUDGET).getBudgetEntry(Long.toString(request.budgetId), Long.toString(request.entryId)));
 	}
 
-	public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry) {
+	public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryParameters updateBudgetEntry) {
 		return persist(updateBudgetEntry, getClient(Service.BUDGET).updateBudgetEntries(Long.toString(budgetId), Long.toString(entryId), updateBudgetEntry));
 	}
 
@@ -731,16 +734,16 @@ public class PersistenceDelegate {
 		return persist(updateBudget, getClient(Service.BUDGET).updateBudget(Long.toString(budgetId), updateBudget));
 	}
 
-	public Result<Void> updateBudgetRules(UpdateBudgetRules req) {
-		return persist(req, getClient(Service.BUDGET).updateBudgetRules(Long.toString(req.budgetId), req));
+	public Result<Void> updateBudgetRules(long budgetId, UpdateBudgetRules req) {
+		return call(getClient(Service.BUDGET).createBudgetRules(Long.toString(budgetId), req));
 	}
 
-	public Result<Void> deleteBudget(DeleteBudgetRequest request) {
-		return persist(request, getClient(Service.BUDGET).deleteBudget(Long.toString(request.budgetId)));
+	public Result<Void> deleteBudget(long budgetId) {
+		return call(getClient(Service.BUDGET).deleteBudget(Long.toString(budgetId)));
 	}
 
-	public Result<Void> resetBudget(ResetBudgetRequest request) {
-		return persist(request, getClient(Service.BUDGET).resetBudget(Long.toString(request.budgetId)));
+	public Result<Void> resetBudget(long budgetId) {
+		return call(getClient(Service.BUDGET).resetBudget(Long.toString(budgetId)));
 	}
 
 	// --

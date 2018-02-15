@@ -1,26 +1,21 @@
 package com.meniga.sdk.models.budget.operators;
 
 import com.meniga.sdk.MenigaSDK;
-import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.models.budget.CreateBudgetRulesParameters;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntry;
-import com.meniga.sdk.webservices.requests.DeleteBudgetRequest;
 import com.meniga.sdk.webservices.requests.GetBudget;
 import com.meniga.sdk.webservices.requests.GetBudgetEntries;
 import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
 import com.meniga.sdk.webservices.requests.GetBudgets;
-import com.meniga.sdk.webservices.requests.ResetBudgetRequest;
 import com.meniga.sdk.webservices.requests.UpdateBudget;
-import com.meniga.sdk.webservices.requests.UpdateBudgetRules;
 
 import org.joda.time.DateTime;
-import org.joda.time.Months;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,10 +57,7 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
 
     @Override
     public Result<Void> deleteBudgetEntry(long budgetId, long entryId) {
-        DeleteBudgetEntry deleteBudgetEntry = new DeleteBudgetEntry();
-        deleteBudgetEntry.budgetId = budgetId;
-        deleteBudgetEntry.entryId = entryId;
-        return MenigaSDK.executor().deleteBudgetEntry(deleteBudgetEntry);
+        return MenigaSDK.executor().deleteBudgetEntry(budgetId, entryId);
     }
 
     @Override
@@ -74,7 +66,7 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     }
 
     @Override
-    public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry) {
+    public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryParameters updateBudgetEntry) {
         return MenigaSDK.executor().updateBudgetEntry(budgetId, entryId, updateBudgetEntry);
     }
 
@@ -92,44 +84,17 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     }
 
     @Override
-    public Result<Void> updateBudgetRules(long budgetId, MenigaDecimal targetAmount, DateTime startDate,
-                                          DateTime endDate, List<Long> catIds, int generationTypeValue,
-                                          DateTime repeatUntil) {
-        UpdateBudgetRules req = new UpdateBudgetRules();
-        req.budgetId = budgetId;
-
-        UpdateBudgetRules.UpdateBudgetData data = new UpdateBudgetRules.UpdateBudgetData();
-        data.targetAmount = targetAmount;
-        data.startDate = startDate;
-        data.endDate = endDate;
-        data.categoryIds = catIds;
-        data.generationType = generationTypeValue;
-
-        if (endDate == null/*endDate.getYear() == DateTime.now().getYear() && endDate.getMonthOfYear() == DateTime.now().getMonthOfYear()*/) {
-            data.recurringPattern = null;
-            data.repeatUntil = null;
-        } else {
-            data.recurringPattern = new UpdateBudgetRules.RecurringPattern();
-            data.recurringPattern.monthInterval = Months.monthsBetween(endDate, startDate).getMonths();;
-            data.repeatUntil = endDate;
-        }
-
-        req.rules = new ArrayList<>();
-        req.rules.add(data);
-        return MenigaSDK.executor().updateBudgetRules(req);
+    public Result<Void> updateBudgetRules(long budgetId, CreateBudgetRulesParameters parameters) {
+        return MenigaSDK.executor().updateBudgetRules(budgetId, parameters.toUpdateBudgetRules());
     }
 
     @Override
     public Result<Void> deleteBudget(long budgetId) {
-        DeleteBudgetRequest request = new DeleteBudgetRequest();
-        request.budgetId = budgetId;
-        return MenigaSDK.executor().deleteBudget(request);
+        return MenigaSDK.executor().deleteBudget(budgetId);
     }
 
     @Override
     public Result<Void> resetBudget(long budgetId) {
-        ResetBudgetRequest request = new ResetBudgetRequest();
-        request.budgetId = budgetId;
-        return MenigaSDK.executor().resetBudget(request);
+        return MenigaSDK.executor().resetBudget(budgetId);
     }
 }

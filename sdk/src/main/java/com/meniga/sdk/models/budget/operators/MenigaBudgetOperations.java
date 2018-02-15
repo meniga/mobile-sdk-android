@@ -1,17 +1,17 @@
 package com.meniga.sdk.models.budget.operators;
 
-import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.models.budget.CreateBudgetRulesParameters;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntry;
-import com.meniga.sdk.webservices.requests.DeleteBudgetRequest;
 import com.meniga.sdk.webservices.requests.GetBudget;
 import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
 import com.meniga.sdk.webservices.requests.GetBudgets;
 import com.meniga.sdk.webservices.requests.UpdateBudget;
+import com.meniga.sdk.webservices.requests.UpdateBudgetRules;
 
 import org.joda.time.DateTime;
 
@@ -37,14 +37,13 @@ public interface MenigaBudgetOperations {
 
     Result<MenigaBudgetEntry> getBudgetEntry(GetBudgetEntryById getBudgetEntryById);
 
-    Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry);
+    Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryParameters updateBudgetEntry);
 
     Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset);
-
-    Result<Void> updateBudgetRules(long budgetId, MenigaDecimal targetAmount, DateTime startDate, DateTime endDate,
-                                   List<Long> catIds, int generationTypeValue, DateTime repeatUntil);
 
     Result<Void> deleteBudget(long budgetId);
 
     Result<Void> resetBudget(long budgetId);
+
+    Result<Void> updateBudgetRules(long budgetId, CreateBudgetRulesParameters parameters);
 }
