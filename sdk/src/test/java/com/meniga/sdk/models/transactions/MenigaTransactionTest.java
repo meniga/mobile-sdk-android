@@ -61,7 +61,7 @@ public class MenigaTransactionTest{
 		trans.setIsRead(orgIsRead == null || !orgIsRead);
 
 		Assert.assertFalse(trans.getIsFlagged() == orgFlagged);
-		Assert.assertFalse(trans.getAmount().toPlainString().equals(orgAmt.toPlainString()));
+		assertThat(trans.getAmount().toPlainString()).isNotEqualTo(orgAmt.toPlainString());
 		if (comment != null) {
 			Assert.assertFalse(orgCommentTxt.equals(comment.getComment()));
 		}
@@ -86,7 +86,7 @@ public class MenigaTransactionTest{
 
 		items2.get(0).setAmount(new MenigaDecimal(937403));
 
-		assertThat(items1.get(0).equals(items2.get(0))).isFalse();
+		assertThat(items1.get(0)).isNotEqualTo(items2.get(0));
 	}
 
 	@Test

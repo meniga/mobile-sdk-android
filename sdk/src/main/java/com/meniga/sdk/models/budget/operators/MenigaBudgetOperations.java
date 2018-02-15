@@ -11,7 +11,6 @@ import com.meniga.sdk.webservices.requests.GetBudget;
 import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
 import com.meniga.sdk.webservices.requests.GetBudgets;
 import com.meniga.sdk.webservices.requests.UpdateBudget;
-import com.meniga.sdk.webservices.requests.UpdateBudgetRules;
 
 import org.joda.time.DateTime;
 

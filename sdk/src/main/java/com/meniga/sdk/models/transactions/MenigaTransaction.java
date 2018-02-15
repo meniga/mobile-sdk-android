@@ -12,6 +12,7 @@ import com.meniga.sdk.models.Merge;
 import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.categories.MenigaCategoryScore;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
+import com.meniga.sdk.models.merchants.MenigaMerchant;
 import com.meniga.sdk.models.transactions.operators.MenigaTransactionOperations;
 import com.meniga.sdk.providers.tasks.Capture;
 import com.meniga.sdk.providers.tasks.Continuation;
@@ -23,7 +24,6 @@ import org.joda.time.DateTime;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -34,16 +34,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransaction extends StateObject implements Serializable, MenigaFeedItem, Cloneable, Parcelable {
-	public static final Parcelable.Creator<MenigaTransaction> CREATOR = new Parcelable.Creator<MenigaTransaction>() {
-		public MenigaTransaction createFromParcel(Parcel source) {
-			return new MenigaTransaction(source);
-		}
-
-		public MenigaTransaction[] newArray(int size) {
-			return new MenigaTransaction[size];
-		}
-	};
-
 	protected static MenigaTransactionOperations apiOperator;
 
 	protected String parentIdentifier;
@@ -67,6 +57,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	protected MenigaDecimal amountInCurrency;
 	protected Integer dataFormat;
 	protected Long merchantId;
+	protected List<MenigaMerchant> merchants;
 	protected String bankId;
 	protected DateTime insertTime;
 	protected Boolean hasUserClearedCategoryUncertainty;
@@ -96,59 +87,121 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	protected MenigaTransaction() {
 	}
 
-	@SuppressWarnings("unchecked")
 	protected MenigaTransaction(Parcel in) {
-		this.parentIdentifier = in.readString();
-		this.id = in.readLong();
-		this.amount = (MenigaDecimal) in.readSerializable();
-		this.tags = in.createStringArrayList();
-		Parcelable[] comms = in.readParcelableArray(MenigaComment.class.getClassLoader());
-		if (comms != null) {
-			this.comments.clear();
-			for (Parcelable comm : comms) {
-				this.comments.add((MenigaComment) comm);
-			}
-		}
-		this.categoryId = (Long) in.readValue(Long.class.getClassLoader());
-		this.date = (DateTime) in.readSerializable();
-		this.text = in.readString();
-		this.originalDate = (DateTime) in.readSerializable();
-		this.originalText = in.readString();
-		this.originalAmount = (MenigaDecimal) in.readSerializable();
-		this.isRead = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		this.isFlagged = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		this.hasUncertainCategorization = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		this.accountId = (Long) in.readValue(Long.class.getClassLoader());
-		this.mcc = (Integer) in.readValue(Integer.class.getClassLoader());
-		this.detectedCategories = in.createTypedArrayList(MenigaCategoryScore.CREATOR);
-		this.currency = in.readString();
-		this.amountInCurrency = (MenigaDecimal) in.readSerializable();
-		this.dataFormat = (Integer) in.readValue(Integer.class.getClassLoader());
-		this.merchantId = (Long) in.readValue(Long.class.getClassLoader());
-		this.bankId = in.readString();
-		this.insertTime = (DateTime) in.readSerializable();
-		this.hasUserClearedCategoryUncertainty = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		this.isUncleared = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		this.balance = (MenigaDecimal) in.readSerializable();
-		this.categoryChangedTime = (DateTime) in.readSerializable();
-		this.changedByRule = (Long) in.readValue(Long.class.getClassLoader());
-		this.changedByRuleTime = (DateTime) in.readSerializable();
-		this.counterpartyAccountIdentifier = in.readString();
-		this.dueDate = (DateTime) in.readSerializable();
-		this.lastModifiedTime = (DateTime) in.readSerializable();
-		this.timestamp = (DateTime) in.readSerializable();
-		this.parsedData = new ArrayList<>();
-		this.parsedData = (ArrayList<ParsedData>) in.readSerializable();
-		this.data = in.readString();
-		this.redeemed = (MenigaDecimal) in.readSerializable();
-		this.toRedeem = (MenigaDecimal) in.readSerializable();
-		this.remainingToSpend = (MenigaDecimal) in.readSerializable();
-		this.belongsToExpiredOffer = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		this.reason = in.readString();
-		int splitChild = in.readInt();
-		this.isSplitChild = splitChild == -1 ? null : splitChild == 1;
-		this.userData = in.readString();
+		parentIdentifier = in.readString();
+		id = in.readLong();
+		amount = (MenigaDecimal) in.readSerializable();
+		tags = in.createStringArrayList();
+		comments = in.createTypedArrayList(MenigaComment.CREATOR);
+		categoryId = (Long) in.readValue(Long.class.getClassLoader());
+		date = (DateTime) in.readSerializable();
+		text = in.readString();
+		originalDate = (DateTime) in.readSerializable();
+		originalText = in.readString();
+		originalAmount = (MenigaDecimal) in.readSerializable();
+		isRead = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		isFlagged = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		hasUncertainCategorization = in.readByte() != 0;
+		accountId = (Long) in.readValue(Long.class.getClassLoader());
+		mcc = (Integer) in.readValue(Integer.class.getClassLoader());
+		detectedCategories = in.createTypedArrayList(MenigaCategoryScore.CREATOR);
+		currency = in.readString();
+		amountInCurrency = (MenigaDecimal) in.readSerializable();
+		dataFormat = (Integer) in.readValue(Integer.class.getClassLoader());
+		merchantId = (Long) in.readValue(Long.class.getClassLoader());
+		merchants = in.createTypedArrayList(MenigaMerchant.CREATOR);
+		bankId = in.readString();
+		insertTime = (DateTime) in.readSerializable();
+		hasUserClearedCategoryUncertainty = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		isUncleared = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		balance = (MenigaDecimal) in.readSerializable();
+		categoryChangedTime = (DateTime) in.readSerializable();
+		changedByRule = (Long) in.readValue(Long.class.getClassLoader());
+		changedByRuleTime = (DateTime) in.readSerializable();
+		counterpartyAccountIdentifier = in.readString();
+		dueDate = (DateTime) in.readSerializable();
+		lastModifiedTime = (DateTime) in.readSerializable();
+		timestamp = (DateTime) in.readSerializable();
+		parsedData = in.createTypedArrayList(ParsedData.CREATOR);
+		data = in.readString();
+		redeemed = (MenigaDecimal) in.readSerializable();
+		toRedeem = (MenigaDecimal) in.readSerializable();
+		remainingToSpend = (MenigaDecimal) in.readSerializable();
+		belongsToExpiredOffer = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		reason = in.readString();
+		isSplitChild = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		timeStamp = in.readLong();
+		userData = in.readString();
+		eventTypeIdentifier = in.readString();
+		topicName = in.readString();
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(parentIdentifier);
+		dest.writeLong(id);
+		dest.writeSerializable(amount);
+		dest.writeStringList(tags);
+		dest.writeTypedList(comments);
+		dest.writeValue(categoryId);
+		dest.writeSerializable(date);
+		dest.writeString(text);
+		dest.writeSerializable(originalDate);
+		dest.writeString(originalText);
+		dest.writeSerializable(originalAmount);
+		dest.writeValue(isRead);
+		dest.writeValue(isFlagged);
+		dest.writeByte(hasUncertainCategorization ? (byte) 1 : (byte) 0);
+		dest.writeValue(accountId);
+		dest.writeValue(mcc);
+		dest.writeTypedList(detectedCategories);
+		dest.writeString(currency);
+		dest.writeSerializable(amountInCurrency);
+		dest.writeValue(dataFormat);
+		dest.writeValue(merchantId);
+		dest.writeTypedList(merchants);
+		dest.writeString(bankId);
+		dest.writeSerializable(insertTime);
+		dest.writeValue(hasUserClearedCategoryUncertainty);
+		dest.writeValue(isUncleared);
+		dest.writeSerializable(balance);
+		dest.writeSerializable(categoryChangedTime);
+		dest.writeValue(changedByRule);
+		dest.writeSerializable(changedByRuleTime);
+		dest.writeString(counterpartyAccountIdentifier);
+		dest.writeSerializable(dueDate);
+		dest.writeSerializable(lastModifiedTime);
+		dest.writeSerializable(timestamp);
+		dest.writeTypedList(parsedData);
+		dest.writeString(data);
+		dest.writeSerializable(redeemed);
+		dest.writeSerializable(toRedeem);
+		dest.writeSerializable(remainingToSpend);
+		dest.writeValue(belongsToExpiredOffer);
+		dest.writeString(reason);
+		dest.writeValue(isSplitChild);
+		dest.writeLong(timeStamp);
+		dest.writeString(userData);
+		dest.writeString(eventTypeIdentifier);
+		dest.writeString(topicName);
+	}
+
+	public static final Creator<MenigaTransaction> CREATOR = new Creator<MenigaTransaction>() {
+		@Override
+		public MenigaTransaction createFromParcel(Parcel source) {
+			return new MenigaTransaction(source);
+		}
+
+		@Override
+		public MenigaTransaction[] newArray(int size) {
+			return new MenigaTransaction[size];
+		}
+	};
 
 	/**
 	 * Sets the api operator for doing api calls
@@ -170,7 +223,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return The ID of the parent transaction, null if the transactions isn't a child.
 	 */
 	public String getParentIdentifier() {
-		return this.parentIdentifier;
+		return parentIdentifier;
 	}
 
 	/**
@@ -205,9 +258,10 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @param categoryId Sets a new category for the transaction.
 	 */
 	public void setCategoryId(long categoryId) {
-		if (this.hasChanged(this.categoryId, categoryId))
+		if (hasChanged(this.categoryId, categoryId)) {
 			return;
-		this.changed();
+		}
+		changed();
 		this.categoryId = categoryId;
 	}
 
@@ -215,26 +269,27 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return The comments in the transaction.
 	 */
 	public List<MenigaComment> getComments() {
-		if (this.comments == null) {
-			this.comments = new ArrayList<>();
+		if (comments == null) {
+			comments = new ArrayList<>();
 		}
-		return this.comments;
+		return comments;
 	}
 
 	/**
 	 * @return The date of the transaction.
 	 */
 	public DateTime getDate() {
-		return this.date;
+		return date;
 	}
 
 	/**
 	 * @param date The new date for the transaction.
 	 */
 	public void setDate(DateTime date) {
-		if (this.hasChanged(this.date, date))
+		if (hasChanged(this.date, date)) {
 			return;
-		this.changed();
+		}
+		changed();
 		this.date = date;
 	}
 
@@ -242,17 +297,17 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return Weather or not the transaction has been read.
 	 */
 	public Boolean getIsRead() {
-		return this.isRead;
+		return isRead;
 	}
 
 	/**
 	 * @param isRead Sets the transaction to be read or not.
 	 */
 	public void setIsRead(boolean isRead) {
-		if (this.hasChanged(this.isRead, isRead)) {
+		if (hasChanged(this.isRead, isRead)) {
 			return;
 		}
-		this.changed();
+		changed();
 		this.isRead = isRead;
 	}
 
@@ -265,16 +320,17 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return Whether or not the transaction has been flagged.
 	 */
 	public Boolean getIsFlagged() {
-		return this.isFlagged;
+		return isFlagged;
 	}
 
 	/**
 	 * @param isFlagged If you want the transaction to be flagged or not.
 	 */
 	public void setIsFlagged(boolean isFlagged) {
-		if (this.hasChanged(this.isFlagged, isFlagged))
+		if (hasChanged(this.isFlagged, isFlagged)) {
 			return;
-		this.changed();
+		}
+		changed();
 		this.isFlagged = isFlagged;
 	}
 
@@ -282,16 +338,17 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return Whether or not the transaction has uncertain categorization.
 	 */
 	public boolean getHasUncertainCategorization() {
-		return this.hasUncertainCategorization;
+		return hasUncertainCategorization;
 	}
 
 	/**
 	 * @param uncertain Sets the transaction to have uncertain categorization or not.
 	 */
 	public void setHasUncertainCategorization(boolean uncertain) {
-		if (this.hasChanged(this.hasUncertainCategorization, uncertain))
+		if (hasChanged(this.hasUncertainCategorization, uncertain)) {
 			return;
-		this.changed();
+		}
+		changed();
 		this.hasUncertainCategorization = uncertain;
 	}
 
@@ -299,14 +356,14 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return The tags in the transaction.
 	 */
 	public List<String> getTags() {
-		return this.tags;
+		return tags;
 	}
 
 	/**
 	 * @return The original date if the transaction "date" is different.
 	 */
 	public DateTime getOriginalDate() {
-		return this.originalDate;
+		return originalDate;
 	}
 
 	@Override
@@ -323,175 +380,182 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return The original text if the transaction "text" is different.
 	 */
 	public String getOriginalText() {
-		return this.originalText;
+		return originalText;
 	}
 
 	/**
 	 * @return The original amount of this transaction. Sum of split transactions result in the OriginalAmount.
 	 */
 	public MenigaDecimal getOriginalAmount() {
-		return this.originalAmount;
+		return originalAmount;
 	}
 
 	/**
 	 * @return The id of the account this transaction belongs to.
 	 */
 	public Long getAccountId() {
-		return this.accountId;
+		return accountId;
 	}
 
 	/**
 	 * @return The merchant category code mapping used when detecting categories.
 	 */
 	public Integer getMcc() {
-		return this.mcc;
+		return mcc;
 	}
 
 	/**
 	 * @return A list of detected categories.
 	 */
 	public List<MenigaCategoryScore> getDetectedCategories() {
-		return this.detectedCategories;
+		return detectedCategories;
 	}
 
 	/**
 	 * @return The currency of the transaction.
 	 */
 	public String getCurrency() {
-		return this.currency;
+		return currency;
 	}
 
 	/**
 	 * @return The amount in currency of the transaction.
 	 */
 	public MenigaDecimal getAmountInCurrency() {
-		return this.amountInCurrency;
+		return amountInCurrency;
 	}
 
 	/**
 	 * @return Id of the Meniga.Core.Extensions.ITransactionDataFormatParser used for this transaction.
 	 */
 	public Integer getDataFormat() {
-		return this.dataFormat;
+		return dataFormat;
 	}
 
 	/**
 	 * @return Id of a Merchant if this transaction was linked to a merchant.
 	 */
 	public Long getMerchantId() {
-		return this.merchantId;
+		return merchantId;
+	}
+
+	/**
+	 * @return List of merchants if this transaction was linked to a merchant(s).
+	 */
+	public List<MenigaMerchant> getMerchants() {
+		return merchants;
 	}
 
 	/**
 	 * @return The bank's unique identifier for the transaction (transaction identifier).
 	 */
 	public String getBankId() {
-		return this.bankId;
+		return bankId;
 	}
 
 	/**
 	 * @return The insert time of the transaction into the Meniga system.
 	 */
 	public DateTime getInsertTime() {
-		return this.insertTime;
+		return insertTime;
 	}
 
 	/**
 	 * @return Weather or not the user has cleared the uncertain flag or not
 	 */
 	public Boolean getHasUserClearedCategoryUncertainty() {
-		return this.hasUserClearedCategoryUncertainty;
+		return hasUserClearedCategoryUncertainty;
 	}
 
 	/**
 	 * @return True if the transaction is uncleared.
 	 */
 	public Boolean getIsUncleared() {
-		return this.isUncleared;
+		return isUncleared;
 	}
 
 	/**
 	 * @return Balance of the account after this transaction.
 	 */
 	public MenigaDecimal getBalance() {
-		return this.balance;
+		return balance;
 	}
 
 	/**
 	 * @return The time when the category was last changed, or null if the category has never been changed by the end user.
 	 */
 	public DateTime getCategoryChangedTime() {
-		return this.categoryChangedTime;
+		return categoryChangedTime;
 	}
 
 	/**
 	 * @return Contains Id of a rule that changed this transaction, or null if this transaction has not been modified by a rule.
 	 */
 	public Long getChangedByRule() {
-		return this.changedByRule;
+		return changedByRule;
 	}
 
 	/**
 	 * @return The time when the category was last changed, or null if the category has never been changed by the end user.
 	 */
 	public DateTime getChangedByRuleTime() {
-		return this.changedByRuleTime;
+		return changedByRuleTime;
 	}
 
 	/**
 	 * @return Identifier of a counterpart account in the same realm that was transferred from/to during this transaction.
 	 */
 	public String getCounterpartyAccountIdentifier() {
-		return this.counterpartyAccountIdentifier;
+		return counterpartyAccountIdentifier;
 	}
 
 	/**
 	 * @return The due date when the user needs to pay for this transaction, e.g. when the credit card bill has to be paid for credit card transactions.
 	 */
 	public DateTime getDueDate() {
-		return this.dueDate;
+		return dueDate;
 	}
 
 	/**
 	 * @return Time when this transaction was last modified.
 	 */
 	public DateTime getLastModifiedTime() {
-		return this.lastModifiedTime;
+		return lastModifiedTime;
 	}
 
 	/**
 	 * @return The transaction timestamp.
 	 */
 	public long getTimeStamp() {
-		return this.timeStamp;
+		return timeStamp;
 	}
 
 	/**
 	 * @return Extra fields for this transaction having field names as keys.
 	 */
 	public List<ParsedData> getParsedData() {
-		return this.parsedData;
+		return parsedData;
 	}
 
 	/**
 	 * @return The raw data that comes with the transaction from the financial data realm. Parsed data is normally more useful.
 	 */
 	public String getData() {
-		return this.data;
+		return data;
 	}
 
 	/**
 	 * @return Amount of monetary reward amount this transaction generated as a part of a rewards scheme. Only has meaning in relation to the Offers system.
 	 */
 	public MenigaDecimal getRedeemed() {
-		return this.redeemed;
+		return redeemed;
 	}
 
 	/**
 	 * @return Money that has yet to be redeemed for this transaction. Only has meaning in relation to the Offers system.
 	 */
 	public MenigaDecimal getToRedeem() {
-		return this.toRedeem;
+		return toRedeem;
 	}
 
 	// -- Setters end --
@@ -500,41 +564,41 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return Amount you need to spend at this transactions merchant to be able to activate an Offer. Only has meaning in relation to the Offers system.
 	 */
 	public MenigaDecimal getRemainingToSpend() {
-		return this.remainingToSpend;
+		return remainingToSpend;
 	}
 
 	/**
 	 * @return True if this transaction was used in an Offer. Only has meaning in relation to the Offers system.
 	 */
 	public Boolean getBelongsToExpiredOffer() {
-		return this.belongsToExpiredOffer;
+		return belongsToExpiredOffer;
 	}
 
 	/**
 	 * @return Type of redemption type for the transaction. Only has meaning in relation to the Offers system.
 	 */
 	public String getReason() {
-		return this.reason;
+		return reason;
 	}
 
 	/**
 	 * @return True if a transaction is a split child.
 	 */
 	public boolean getIsSplitChild() {
-		if (this.isSplitChild == null) {
+		if (isSplitChild == null) {
 			return false;
 		}
-		return this.isSplitChild;
+		return isSplitChild;
 	}
 
 	/**
 	 * @return True if a transaction is a split parent.
 	 */
 	public boolean getIsSplitParent() {
-		if (this.isSplitChild == null) {
+		if (isSplitChild == null) {
 			return false;
 		}
-		return !this.isSplitChild;
+		return !isSplitChild;
 	}
 
 	/**
@@ -543,178 +607,18 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	public void setIsSplitParent(boolean splitParent) {
 		if (!splitParent) {
 			// This can really only mean that this is not a split transaction any more
-			this.isSplitChild = null;
+			isSplitChild = null;
 			return;
 		}
 		// You can only be a split parent if isSplitChild is false
-		this.isSplitChild = false;
+		isSplitChild = false;
 	}
 
 	/**
 	 * @return True if a transaction is split, either parent or child.
 	 */
 	public boolean getIsSplit() {
-		return this.isSplitChild != null;
-	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(this.parentIdentifier);
-		dest.writeLong(this.id);
-		dest.writeSerializable(this.amount);
-		dest.writeStringList(this.tags);
-		dest.writeParcelableArray(this.comments.toArray(new MenigaComment[this.comments.size()]), 0);
-		dest.writeValue(this.categoryId);
-		dest.writeSerializable(this.date);
-		dest.writeString(this.text);
-		dest.writeSerializable(this.originalDate);
-		dest.writeString(this.originalText);
-		dest.writeSerializable(this.originalAmount);
-		dest.writeValue(this.isRead);
-		dest.writeValue(this.isFlagged);
-		dest.writeValue(this.hasUncertainCategorization);
-		dest.writeValue(this.accountId);
-		dest.writeValue(this.mcc);
-		dest.writeTypedList(detectedCategories);
-		dest.writeString(this.currency);
-		dest.writeSerializable(this.amountInCurrency);
-		dest.writeValue(this.dataFormat);
-		dest.writeValue(this.merchantId);
-		dest.writeString(this.bankId);
-		dest.writeSerializable(this.insertTime);
-		dest.writeValue(this.hasUserClearedCategoryUncertainty);
-		dest.writeValue(this.isUncleared);
-		dest.writeSerializable(this.balance);
-		dest.writeSerializable(this.categoryChangedTime);
-		dest.writeValue(this.changedByRule);
-		dest.writeSerializable(this.changedByRuleTime);
-		dest.writeString(this.counterpartyAccountIdentifier);
-		dest.writeSerializable(this.dueDate);
-		dest.writeSerializable(this.lastModifiedTime);
-		dest.writeSerializable(this.timestamp);
-		dest.writeSerializable((Serializable) this.parsedData);
-		dest.writeString(this.data);
-		dest.writeSerializable(this.redeemed);
-		dest.writeSerializable(this.toRedeem);
-		dest.writeSerializable(this.remainingToSpend);
-		dest.writeValue(this.belongsToExpiredOffer);
-		dest.writeString(this.reason);
-		dest.writeInt(this.isSplitChild == null ? -1 : this.isSplitChild ? 1 : 0);
-		dest.writeString(this.userData);
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		MenigaTransaction that = (MenigaTransaction) o;
-
-		if (id != that.id)
-			return false;
-		if (parentIdentifier != null ? !parentIdentifier.equals(that.parentIdentifier) : that.parentIdentifier != null)
-			return false;
-		if (amount != null ? !amount.equals(that.amount) : that.amount != null)
-			return false;
-		if (tags != null ? !tags.equals(that.tags) : that.tags != null)
-			return false;
-
-		if (this.comments == null && that.comments != null || this.comments != null && that.comments == null) {
-			return false;
-		}
-		if (this.comments.size() != that.comments.size()) {
-			return false;
-		}
-		for (int i = 0; i < this.comments.size(); i++) {
-			if (!this.comments.get(i).equals(that.comments.get(i))) {
-				return false;
-			}
-		}
-
-		if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null)
-			return false;
-		if (date != null ? !date.equals(that.date) : that.date != null)
-			return false;
-		if (text != null ? !text.equals(that.text) : that.text != null)
-			return false;
-		if (originalDate != null ? !originalDate.equals(that.originalDate) : that.originalDate != null)
-			return false;
-		if (originalText != null ? !originalText.equals(that.originalText) : that.originalText != null)
-			return false;
-		if (originalAmount != null ? !originalAmount.equals(that.originalAmount) : that.originalAmount != null)
-			return false;
-		if (isRead != null ? !isRead.equals(that.isRead) : that.isRead != null)
-			return false;
-		if (isFlagged != null ? !isFlagged.equals(that.isFlagged) : that.isFlagged != null)
-			return false;
-		if (hasUncertainCategorization != that.hasUncertainCategorization)
-			return false;
-		if (accountId != null ? !accountId.equals(that.accountId) : that.accountId != null)
-			return false;
-		if (mcc != null ? !mcc.equals(that.mcc) : that.mcc != null)
-			return false;
-		if (detectedCategories != null ? !detectedCategories.equals(that.detectedCategories) : that.detectedCategories != null)
-			return false;
-		if (currency != null ? !currency.equals(that.currency) : that.currency != null)
-			return false;
-		if (amountInCurrency != null ? !amountInCurrency.equals(that.amountInCurrency) : that.amountInCurrency != null)
-			return false;
-		if (dataFormat != null ? !dataFormat.equals(that.dataFormat) : that.dataFormat != null)
-			return false;
-		if (insertTime != null ? !insertTime.equals(that.insertTime) : that.insertTime != null)
-			return false;
-		if (bankId != null ? !bankId.equals(that.bankId) : that.bankId != null)
-			return false;
-		if (insertTime != null ? !insertTime.equals(that.insertTime) : that.insertTime != null)
-			return false;
-		if (hasUserClearedCategoryUncertainty != null ? !hasUserClearedCategoryUncertainty.equals(that.hasUserClearedCategoryUncertainty) : that.hasUserClearedCategoryUncertainty != null)
-			return false;
-		if (isUncleared != null ? !isUncleared.equals(that.isUncleared) : that.isUncleared != null)
-			return false;
-		if (balance != null ? !balance.equals(that.balance) : that.balance != null)
-			return false;
-		if (categoryChangedTime != null ? !categoryChangedTime.equals(that.categoryChangedTime) : that.categoryChangedTime != null)
-			return false;
-		if (changedByRule != null ? !changedByRule.equals(that.changedByRule) : that.changedByRule != null)
-			return false;
-		if (changedByRuleTime != null ? !changedByRuleTime.equals(that.changedByRuleTime) : that.changedByRuleTime != null)
-			return false;
-		if (counterpartyAccountIdentifier != null ? !counterpartyAccountIdentifier.equals(that.counterpartyAccountIdentifier) : that.counterpartyAccountIdentifier != null)
-			return false;
-		if (dueDate != null ? !dueDate.equals(that.dueDate) : that.dueDate != null)
-			return false;
-		if (lastModifiedTime != null ? !lastModifiedTime.equals(that.lastModifiedTime) : that.lastModifiedTime != null)
-			return false;
-		if (timestamp != null ? !timestamp.equals(that.timestamp) : that.timestamp != null)
-			return false;
-		if (parsedData != null ? !parsedData.equals(that.parsedData) : that.parsedData != null)
-			return false;
-		if (data != null ? !data.equals(that.data) : that.data != null)
-			return false;
-		if (redeemed != null ? !redeemed.equals(that.redeemed) : that.redeemed != null)
-			return false;
-		if (toRedeem != null ? !toRedeem.equals(that.toRedeem) : that.toRedeem != null)
-			return false;
-		if (remainingToSpend != null ? !remainingToSpend.equals(that.remainingToSpend) : that.remainingToSpend != null)
-			return false;
-		if (belongsToExpiredOffer != null ? !belongsToExpiredOffer.equals(that.belongsToExpiredOffer) : that.belongsToExpiredOffer != null)
-			return false;
-		if (isSplitChild != that.isSplitChild)
-			return false;
-		if (this.userData == null && that.userData != null)
-			return false;
-		if (this.userData != null && that.userData == null)
-			return false;
-		if (this.userData != null && that.userData != null && !this.userData.equals(that.userData))
-			return false;
-		return !(reason != null ? !reason.equals(that.reason) : that.reason != null);
+		return isSplitChild != null;
 	}
 
     /*
@@ -729,16 +633,165 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 
 		// Revert all settable fields to last revision
 		MenigaTransaction prevRevision = (MenigaTransaction) lastRevision;
-		this.isRead = prevRevision.isRead;
-		this.amount = prevRevision.amount;
-		this.comments = prevRevision.comments;
-		this.date = prevRevision.date;
-		this.isFlagged = prevRevision.isFlagged;
-		this.text = prevRevision.text;
-		this.categoryId = prevRevision.categoryId;
-		this.tags = prevRevision.tags;
-		this.hasUncertainCategorization = prevRevision.hasUncertainCategorization;
-		this.userData = prevRevision.userData;
+		isRead = prevRevision.isRead;
+		amount = prevRevision.amount;
+		comments = prevRevision.comments;
+		date = prevRevision.date;
+		isFlagged = prevRevision.isFlagged;
+		text = prevRevision.text;
+		categoryId = prevRevision.categoryId;
+		tags = prevRevision.tags;
+		hasUncertainCategorization = prevRevision.hasUncertainCategorization;
+		userData = prevRevision.userData;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		MenigaTransaction that = (MenigaTransaction) o;
+
+		if (id != that.id) {
+			return false;
+		}
+		if (hasUncertainCategorization != that.hasUncertainCategorization) {
+			return false;
+		}
+		if (timeStamp != that.timeStamp) {
+			return false;
+		}
+		if (parentIdentifier != null ? !parentIdentifier.equals(that.parentIdentifier) : that.parentIdentifier != null) {
+			return false;
+		}
+		if (amount != null ? !amount.equals(that.amount) : that.amount != null) {
+			return false;
+		}
+		if (tags != null ? !tags.equals(that.tags) : that.tags != null) {
+			return false;
+		}
+		if (comments != null ? !comments.equals(that.comments) : that.comments != null) {
+			return false;
+		}
+		if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) {
+			return false;
+		}
+		if (date != null ? !date.equals(that.date) : that.date != null) {
+			return false;
+		}
+		if (text != null ? !text.equals(that.text) : that.text != null) {
+			return false;
+		}
+		if (originalDate != null ? !originalDate.equals(that.originalDate) : that.originalDate != null) {
+			return false;
+		}
+		if (originalText != null ? !originalText.equals(that.originalText) : that.originalText != null) {
+			return false;
+		}
+		if (originalAmount != null ? !originalAmount.equals(that.originalAmount) : that.originalAmount != null) {
+			return false;
+		}
+		if (isRead != null ? !isRead.equals(that.isRead) : that.isRead != null) {
+			return false;
+		}
+		if (isFlagged != null ? !isFlagged.equals(that.isFlagged) : that.isFlagged != null) {
+			return false;
+		}
+		if (accountId != null ? !accountId.equals(that.accountId) : that.accountId != null) {
+			return false;
+		}
+		if (mcc != null ? !mcc.equals(that.mcc) : that.mcc != null) {
+			return false;
+		}
+		if (detectedCategories != null ? !detectedCategories.equals(that.detectedCategories) : that.detectedCategories != null) {
+			return false;
+		}
+		if (currency != null ? !currency.equals(that.currency) : that.currency != null) {
+			return false;
+		}
+		if (amountInCurrency != null ? !amountInCurrency.equals(that.amountInCurrency) : that.amountInCurrency != null) {
+			return false;
+		}
+		if (dataFormat != null ? !dataFormat.equals(that.dataFormat) : that.dataFormat != null) {
+			return false;
+		}
+		if (merchantId != null ? !merchantId.equals(that.merchantId) : that.merchantId != null) {
+			return false;
+		}
+		if (merchants != null ? !merchants.equals(that.merchants) : that.merchants != null) {
+			return false;
+		}
+		if (bankId != null ? !bankId.equals(that.bankId) : that.bankId != null) {
+			return false;
+		}
+		if (insertTime != null ? !insertTime.equals(that.insertTime) : that.insertTime != null) {
+			return false;
+		}
+		if (hasUserClearedCategoryUncertainty != null ? !hasUserClearedCategoryUncertainty.equals(that.hasUserClearedCategoryUncertainty) : that.hasUserClearedCategoryUncertainty != null) {
+			return false;
+		}
+		if (isUncleared != null ? !isUncleared.equals(that.isUncleared) : that.isUncleared != null) {
+			return false;
+		}
+		if (balance != null ? !balance.equals(that.balance) : that.balance != null) {
+			return false;
+		}
+		if (categoryChangedTime != null ? !categoryChangedTime.equals(that.categoryChangedTime) : that.categoryChangedTime != null) {
+			return false;
+		}
+		if (changedByRule != null ? !changedByRule.equals(that.changedByRule) : that.changedByRule != null) {
+			return false;
+		}
+		if (changedByRuleTime != null ? !changedByRuleTime.equals(that.changedByRuleTime) : that.changedByRuleTime != null) {
+			return false;
+		}
+		if (counterpartyAccountIdentifier != null ? !counterpartyAccountIdentifier.equals(that.counterpartyAccountIdentifier) : that.counterpartyAccountIdentifier != null) {
+			return false;
+		}
+		if (dueDate != null ? !dueDate.equals(that.dueDate) : that.dueDate != null) {
+			return false;
+		}
+		if (lastModifiedTime != null ? !lastModifiedTime.equals(that.lastModifiedTime) : that.lastModifiedTime != null) {
+			return false;
+		}
+		if (timestamp != null ? !timestamp.equals(that.timestamp) : that.timestamp != null) {
+			return false;
+		}
+		if (parsedData != null ? !parsedData.equals(that.parsedData) : that.parsedData != null) {
+			return false;
+		}
+		if (data != null ? !data.equals(that.data) : that.data != null) {
+			return false;
+		}
+		if (redeemed != null ? !redeemed.equals(that.redeemed) : that.redeemed != null) {
+			return false;
+		}
+		if (toRedeem != null ? !toRedeem.equals(that.toRedeem) : that.toRedeem != null) {
+			return false;
+		}
+		if (remainingToSpend != null ? !remainingToSpend.equals(that.remainingToSpend) : that.remainingToSpend != null) {
+			return false;
+		}
+		if (belongsToExpiredOffer != null ? !belongsToExpiredOffer.equals(that.belongsToExpiredOffer) : that.belongsToExpiredOffer != null) {
+			return false;
+		}
+		if (reason != null ? !reason.equals(that.reason) : that.reason != null) {
+			return false;
+		}
+		if (isSplitChild != null ? !isSplitChild.equals(that.isSplitChild) : that.isSplitChild != null) {
+			return false;
+		}
+		if (userData != null ? !userData.equals(that.userData) : that.userData != null) {
+			return false;
+		}
+		if (eventTypeIdentifier != null ? !eventTypeIdentifier.equals(that.eventTypeIdentifier) : that.eventTypeIdentifier != null) {
+			return false;
+		}
+		return topicName != null ? topicName.equals(that.topicName) : that.topicName == null;
 	}
 
 	@Override
@@ -747,7 +800,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 		result = 31 * result + (int) (id ^ (id >>> 32));
 		result = 31 * result + (amount != null ? amount.hashCode() : 0);
 		result = 31 * result + (tags != null ? tags.hashCode() : 0);
-		result = 31 * result + (this.comments != null ? this.comments.hashCode() : 0);
+		result = 31 * result + (comments != null ? comments.hashCode() : 0);
 		result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
 		result = 31 * result + (date != null ? date.hashCode() : 0);
 		result = 31 * result + (text != null ? text.hashCode() : 0);
@@ -796,16 +849,16 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	}
 
 	public String getUserData() {
-		return this.userData;
+		return userData;
 	}
 
 	public void setUserData(String data) {
-		this.userData = data;
+		userData = data;
 	}
 
 	@Override
 	public String toString() {
-		return Long.toString(this.id) + ": " + this.amount.doubleValue() + ": " + this.text + " (" + this.date.toString() + ")";
+		return Long.toString(id) + ": " + amount.doubleValue() + ": " + text + " (" + date.toString() + ")";
 	}
 
 	/*
@@ -827,7 +880,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return A task of type Void. The task will indicate if the deleteUpcoming was successful or not
 	 */
 	public Result<Void> delete() {
-		return MenigaTransaction.apiOperator.deleteTransaction(this.id);
+		return MenigaTransaction.apiOperator.deleteTransaction(id);
 	}
 
 	/**
@@ -838,7 +891,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public Result<List<MenigaTransaction>> fetchSplitChildren() {
 		Result<List<MenigaTransaction>> task = MenigaTransaction.apiOperator.fetchSplitTransactions(this);
-		if (this.isSplitChild != null && this.isSplitChild) {
+		if (isSplitChild != null && isSplitChild) {
 			return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<List<MenigaTransaction>>() {
 				@Override
 				public void onFinished(List<MenigaTransaction> result, boolean failed) {
@@ -856,7 +909,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 				}
 				List<MenigaTransaction> toReturn = new ArrayList<>();
 				for (MenigaTransaction trans : result) {
-					if (trans.getId() == MenigaTransaction.this.getId()) {
+					if (trans.getId() == getId()) {
 						continue;
 					}
 					toReturn.add(trans);
@@ -880,7 +933,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public Result<List<MenigaTransaction>> fetchSplitParent() {
 		Result<List<MenigaTransaction>> task = MenigaTransaction.apiOperator.fetchSplitTransactions(this);
-		if (this.isSplitChild != null && !this.isSplitChild) {
+		if (isSplitChild != null && !isSplitChild) {
 			return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<List<MenigaTransaction>>() {
 				@Override
 				public void onFinished(List<MenigaTransaction> result, boolean failed) {
@@ -955,7 +1008,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return A list with a parent transaction and its children.
 	 */
 	public Result<List<MenigaTransaction>> split(final MenigaDecimal amount, String text, long categoryId, boolean isFlagged) {
-		Result<List<MenigaTransaction>> task = MenigaTransaction.apiOperator.splitTransaction(this.id, amount, text, categoryId, isFlagged);
+		Result<List<MenigaTransaction>> task = MenigaTransaction.apiOperator.splitTransaction(id, amount, text, categoryId, isFlagged);
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<List<MenigaTransaction>>() {
 			@Override
 			public void onFinished(List<MenigaTransaction> result, boolean failed) {
@@ -974,7 +1027,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return List of updated split transactions
 	 */
 	public Result<List<MenigaTransaction>> updateSplits(List<UpdateSplits> update) {
-		return MenigaTransaction.apiOperator.updateSplits(this.id, update);
+		return MenigaTransaction.apiOperator.updateSplits(id, update);
 	}
 
 	/**
@@ -983,7 +1036,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @return A Task of type void, the task will have an error and be marked as failed if it is not successful
 	 */
 	public Result<MenigaTransaction> refresh() {
-		Result<MenigaTransaction> task = MenigaTransaction.fetch(this.id);
+		Result<MenigaTransaction> task = MenigaTransaction.fetch(id);
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaTransaction>() {
 			@Override
 			public void onFinished(MenigaTransaction result, boolean failed) {
