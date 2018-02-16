@@ -868,9 +868,9 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	/**
 	 * Updates the user created transaction
 	 *
-	 * @return A task of type Void. The task will indicate if the deleteUpcoming was successful or not
+	 * @return A list of other transactions that could have the same category as the updated transaction.
 	 */
-	public Result<Void> update() {
+	public Result<MenigaTransactionUpdate> update() {
 		return MenigaTransaction.apiOperator.updateTransaction(this);
 	}
 
@@ -1067,11 +1067,11 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @param userData                   Holds extra custom data that is not parsed or read via the transaction data format parser
 	 * @return List of the updated transactions
 	 */
-	public static Result<List<MenigaTransaction>> update(
+	public static Result<MenigaTransactionUpdate> update(
 			List<Long> transToUpdate,
 			MenigaDecimal amount,
 			Long categoryId,
-			Boolean hasUncertainCategorization,
+			boolean hasUncertainCategorization,
 			Boolean useSubTextInRecat,
 			String text,
 			DateTime date,

@@ -25,15 +25,11 @@ import retrofit2.Retrofit;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransactionsConverter extends MenigaConverter {
-
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, final Retrofit retrofit) {
-		Type typeOfListTransactions = new TypeToken<List<MenigaTransaction>>() {
-		}.getType();
-		Type typeOfMenigaTransactionPage = new TypeToken<MenigaTransactionPage>() {
-		}.getType();
-		Type typeOfTransaction = new TypeToken<MenigaTransaction>() {
-		}.getType();
+		Type typeOfListTransactions = new TypeToken<List<MenigaTransaction>>() {}.getType();
+		Type typeOfMenigaTransactionPage = new TypeToken<MenigaTransactionPage>() {}.getType();
+		Type typeOfTransaction = new TypeToken<MenigaTransaction>() {}.getType();
 
 		if (typeOfListTransactions.equals(type)) {
 			return new Converter<ResponseBody, Object>() {
@@ -41,8 +37,7 @@ public class MenigaTransactionsConverter extends MenigaConverter {
 				public Object convert(ResponseBody resBody) throws IOException {
 					Gson gson = GsonProvider.getGsonBuilder();
 
-					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(resBody.byteStream()), new TypeToken<List<MenigaTransaction>>() {
-					}.getType());
+					List<MenigaTransaction> menigaTransactions = gson.fromJson(getAsArray(resBody.byteStream()), new TypeToken<List<MenigaTransaction>>() {}.getType());
 					for (MenigaTransaction trans : menigaTransactions) {
 						if (trans.getComments() == null) {
 							continue;

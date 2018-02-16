@@ -4,6 +4,7 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
+import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.transactions.TransactionsFilter;
 import com.meniga.sdk.webservices.requests.UpdateSplits;
 
@@ -22,7 +23,7 @@ public interface MenigaTransactionOperations {
 
 	Result<Void> deleteTransaction(long id);
 
-	Result<Void> updateTransaction(MenigaTransaction menigaTransaction);
+	Result<MenigaTransactionUpdate> updateTransaction(MenigaTransaction menigaTransaction);
 
 	Result<List<MenigaTransaction>> fetchSplitTransactions(MenigaTransaction menigaTransaction);
 
@@ -34,7 +35,7 @@ public interface MenigaTransactionOperations {
 
 	Result<Void> recategorize(List<String> transactionTexts, Boolean recategorizeUnreadOnly, Boolean useSubTextInRecat, Boolean markAsRead);
 
-	Result<List<MenigaTransaction>> updateTransactions(
+	Result<MenigaTransactionUpdate> updateTransactions(
 			List<Long> transToUpdate,
 			MenigaDecimal amount,
 			Long categoryId,

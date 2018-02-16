@@ -22,7 +22,6 @@ import retrofit2.Retrofit;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaCategoryConverter extends MenigaConverter {
-
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
 		Type typeOfMenigaCategoryList = new TypeToken<List<MenigaCategory>>() {}.getType();

@@ -5,6 +5,7 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
+import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.transactions.TransactionsFilter;
 import com.meniga.sdk.webservices.requests.CreateTransaction;
 import com.meniga.sdk.webservices.requests.DeleteTransaction;
@@ -44,7 +45,7 @@ public final class MenigaTransactionOperationsImp implements MenigaTransactionOp
 	}
 
 	@Override
-	public Result<Void> updateTransaction(final MenigaTransaction trans) {
+	public Result<MenigaTransactionUpdate> updateTransaction(final MenigaTransaction trans) {
 		UpdateTransaction update = new UpdateTransaction();
 		update.transactionId = trans.getId();
 		update.amount = trans.getAmount();
@@ -61,7 +62,7 @@ public final class MenigaTransactionOperationsImp implements MenigaTransactionOp
 	}
 
 	@Override
-	public Result<List<MenigaTransaction>> updateTransactions(
+	public Result<MenigaTransactionUpdate> updateTransactions(
 			List<Long> transToUpdate,
 			MenigaDecimal amount,
 			Long categoryId,

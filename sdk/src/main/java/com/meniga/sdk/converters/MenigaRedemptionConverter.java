@@ -24,11 +24,9 @@ import retrofit2.Retrofit;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaRedemptionConverter extends MenigaConverter {
-
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeOfRedemptions = new TypeToken<MenigaRedemptions>() {
-		}.getType();
+		Type typeOfRedemptions = new TypeToken<MenigaRedemptions>() {}.getType();
 
 		if (typeOfRedemptions.equals(type)) {
 			return new Converter<ResponseBody, MenigaRedemptions>() {
@@ -41,7 +39,6 @@ public class MenigaRedemptionConverter extends MenigaConverter {
 					} finally {
 						isr.close();
 					}
-
 
 					Gson gson = GsonProvider.getGsonBuilder();
 					MenigaRedemptions page = gson.fromJson(getAsArray(element), MenigaRedemptions.class);

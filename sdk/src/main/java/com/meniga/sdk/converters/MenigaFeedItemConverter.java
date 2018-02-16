@@ -20,7 +20,6 @@ import retrofit2.Retrofit;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaFeedItemConverter extends MenigaConverter {
-
 	private FeedItemFactory feedItemFactory;
 
 	public MenigaFeedItemConverter(FeedItemFactory feedItemFactory) {
@@ -29,8 +28,8 @@ public class MenigaFeedItemConverter extends MenigaConverter {
 
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeOfMenigaFeedItem = new TypeToken<MenigaFeedItem>() {
-		}.getType();
+		Type typeOfMenigaFeedItem = new TypeToken<MenigaFeedItem>() {}.getType();
+
 		if (typeOfMenigaFeedItem.equals(type)) {
 			return new Converter<ResponseBody, Object>() {
 				@Override

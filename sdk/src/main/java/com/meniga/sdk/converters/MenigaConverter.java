@@ -21,15 +21,15 @@ import retrofit2.Converter;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public abstract class MenigaConverter extends Converter.Factory {
-
 	protected String convertStreamToString(InputStream is) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 		StringBuilder sb = new StringBuilder();
 
 		String line;
 		try {
-			while ((line = reader.readLine()) != null)
+			while ((line = reader.readLine()) != null) {
 				sb.append(line);
+			}
 			sb.append("\n");
 		} catch (IOException ex) {
 			ErrorHandler.reportAndHandle(ex);
@@ -58,8 +58,8 @@ public abstract class MenigaConverter extends Converter.Factory {
 		return jobject.getAsJsonArray("data");
 	}
 
-	public static JsonArray getAsArray(JsonElement jelement) {
-		JsonObject jobject = jelement.getAsJsonObject();
+	public static JsonArray getAsArray(JsonElement element) {
+		JsonObject jobject = element.getAsJsonObject();
 		return jobject.getAsJsonArray("data");
 	}
 
