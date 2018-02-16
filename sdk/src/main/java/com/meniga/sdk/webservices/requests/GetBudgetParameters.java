@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class GetBudget extends QueryRequestObject {
+public class GetBudgetParameters extends QueryRequestObject {
 
     public Long id;
     public List<Long> categoryIds;

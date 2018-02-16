@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class GetBudgets extends QueryRequestObject {
+public class GetBudgetsParameters extends QueryRequestObject {
 
 	public List<Long> ids;
 	public List<Long> accountIds;

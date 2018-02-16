@@ -7,7 +7,7 @@ import com.meniga.sdk.models.accounts.MenigaAccountType;
 import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
-import com.meniga.sdk.models.budget.operators.CreateBudget;
+import com.meniga.sdk.models.budget.operators.CreateBudgetParameters;
 import com.meniga.sdk.models.budget.operators.UpdateBudgetEntryParameters;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
@@ -46,7 +46,7 @@ import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.requests.AcceptChallenge;
-import com.meniga.sdk.webservices.requests.CreateBudgetEntry;
+import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters;
 import com.meniga.sdk.webservices.requests.CreateChallenge;
 import com.meniga.sdk.webservices.requests.CreateComment;
 import com.meniga.sdk.webservices.requests.CreateNetWorthAccount;
@@ -68,7 +68,7 @@ import com.meniga.sdk.webservices.requests.SplitTransaction;
 import com.meniga.sdk.webservices.requests.StartSync;
 import com.meniga.sdk.webservices.requests.UpdateAccount;
 import com.meniga.sdk.webservices.requests.UpdateAccountMetadata;
-import com.meniga.sdk.webservices.requests.UpdateBudget;
+import com.meniga.sdk.webservices.requests.UpdateBudgetParameters;
 import com.meniga.sdk.webservices.requests.UpdateBudgetRules;
 import com.meniga.sdk.webservices.requests.UpdateChallenge;
 import com.meniga.sdk.webservices.requests.UpdateComment;
@@ -464,7 +464,7 @@ public interface MenigaAPI {
 	Call<List<MenigaBudgetEntry>> getBudgetEntries(@Path("id") String id, @QueryMap Map<String, String> query);
 
 	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES)
-	Call<List<MenigaBudgetEntry>> createBudgetEntry(@Path("id") String id, @Body CreateBudgetEntry createBudgetEntry);
+	Call<List<MenigaBudgetEntry>> createBudgetEntry(@Path("id") String id, @Body CreateBudgetEntryParameters parameters);
 
 	@DELETE(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
 	Call<Void> deleteBudgetEntry(@Path("id") String id, @Path("entryId") String entryId);
@@ -476,10 +476,10 @@ public interface MenigaAPI {
 	Call<MenigaBudgetEntry> updateBudgetEntries(@Path("id") String id, @Path("entryId") String entryId, @Body UpdateBudgetEntryParameters updateBudgetEntry);
 
 	@POST(APIConst.URL_BUDGETS)
-	Call<MenigaBudget> createBudget(@Body CreateBudget req);
+	Call<MenigaBudget> createBudget(@Body CreateBudgetParameters req);
 
 	@PUT(APIConst.URL_BUDGETS + "/{id}")
-	Call<MenigaBudget> updateBudget(@Path("id") String id, @Body UpdateBudget req);
+	Call<MenigaBudget> updateBudget(@Path("id") String id, @Body UpdateBudgetParameters req);
 
 	@DELETE(APIConst.URL_BUDGETS + "/{id}")
 	Call<Void> deleteBudget(@Path("id") String budgetId);

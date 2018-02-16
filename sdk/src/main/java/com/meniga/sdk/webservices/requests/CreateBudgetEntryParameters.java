@@ -10,7 +10,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class CreateBudgetEntry extends QueryRequestObject {
+public class CreateBudgetEntryParameters extends QueryRequestObject {
 
 	public MenigaDecimal targetAmount;
 	public DateTime startDate;

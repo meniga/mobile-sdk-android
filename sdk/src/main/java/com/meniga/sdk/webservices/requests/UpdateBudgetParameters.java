@@ -2,7 +2,7 @@ package com.meniga.sdk.webservices.requests;
 
 import java.util.List;
 
-public class UpdateBudget extends QueryRequestObject {
+public class UpdateBudgetParameters extends QueryRequestObject {
 
     public String name;
     public String description;

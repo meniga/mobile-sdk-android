@@ -5,8 +5,6 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
-import static com.annimon.stream.Objects.requireNonNull;
-
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -15,12 +13,11 @@ public class GenerationTypeValue implements Parcelable, Serializable {
     private int value;
     private GenerationType type;
 
-    public GenerationTypeValue(Integer value) {
-        requireNonNull(value, "");
-        this.value = value;
-        if (value == 0) {
+    public GenerationTypeValue(int val) {
+        this.value = val;
+        if (val == 0) {
             type = GenerationType.MANUAL;
-        } else if (value < 0) {
+        } else if (val < 0) {
             type = GenerationType.SAME_AS_MONTH;
         } else {
             type = GenerationType.AVERAGE_MONTHS;

@@ -5,8 +5,8 @@ import com.annimon.stream.Stream;
 
 public final class Joiner {
 
-    public static <T> String join(Iterable<T> categoryIds, CharSequence delimiter) {
-        return Stream.of(categoryIds)
+    public static <T> String join(Iterable<T> iterable, CharSequence delimiter) {
+        return Stream.of(iterable)
                 .map(Object::toString)
                 .collect(Collectors.joining(delimiter));
     }
