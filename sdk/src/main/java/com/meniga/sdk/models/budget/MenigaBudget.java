@@ -1,3 +1,6 @@
+/*
+ * Copyright 2017 Meniga Iceland Inc.
+ */
 package com.meniga.sdk.models.budget;
 
 import android.os.Parcel;
@@ -17,9 +20,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Copyright 2017 Meniga Iceland Inc.
- */
 public class MenigaBudget implements Parcelable, Serializable {
 	protected static MenigaBudgetOperations apiOperator;
 
@@ -167,6 +167,16 @@ public class MenigaBudget implements Parcelable, Serializable {
 			return new MenigaBudget[size];
 		}
 	};
+
+	/**
+	 * Use {@link #fetch(GetBudgetParameters)} instead.
+	 */
+	@Deprecated
+	public static Result<List<MenigaBudget>> fetch() {
+		GetBudgetsParameters parameters = new GetBudgetsParameters();
+		parameters.type = BudgetType.PLANNING;
+		return apiOperator.getBudgets(parameters);
+	}
 
 	public static Result<List<MenigaBudget>> fetch(GetBudgetsParameters parameters) {
 		return apiOperator.getBudgets(parameters);
