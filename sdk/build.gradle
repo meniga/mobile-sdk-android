@@ -39,6 +39,7 @@ android {
             returnDefaultValues = true
             all {
                 systemProperty "file.encoding", "UTF-8"
+                systemProperty "user.timezone", "UTC"
             }
         }
     }
@@ -67,6 +68,7 @@ repositories {
 
 dependencies {
     implementation "com.annimon:stream:1.1.9"
+    compileOnly "com.google.code.findbugs:jsr305:3.0.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "com.squareup.okhttp3:okhttp:3.9.1"
     implementation "com.squareup.okhttp3:okhttp-urlconnection:3.9.1"

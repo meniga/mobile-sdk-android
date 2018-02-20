@@ -1,23 +1,10 @@
 package com.meniga.sdk;
 
 import com.meniga.sdk.interfaces.PersistenceProvider;
-import com.meniga.sdk.models.budget.MenigaBudgetEntry;
-import com.meniga.sdk.models.feed.MenigaScheduledEvent;
-import com.meniga.sdk.models.merchants.MenigaTopMerchant;
-import com.meniga.sdk.models.merchants.operators.MenigaTopMerchantOperations;
-import com.meniga.sdk.models.offers.MenigaOffer;
-import com.meniga.sdk.models.offers.MenigaOffersSettings;
-import com.meniga.sdk.models.offers.operators.MenigaOfferOperations;
-import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAccount;
-import com.meniga.sdk.models.offers.reimbursementaccounts.operators.MenigaReimbursementAccountOperations;
-import com.meniga.sdk.models.organizations.MenigaOrganization;
-import com.meniga.sdk.models.organizations.MenigaRealm;
-import com.meniga.sdk.models.organizations.operators.MenigaOrganizationOperations;
-import com.meniga.sdk.models.organizations.operators.MenigaRealmOperations;
-import com.meniga.sdk.models.serverpublic.MenigaPublicSettings;
 import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.accounts.operators.MenigaAccountOperations;
 import com.meniga.sdk.models.budget.MenigaBudget;
+import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
@@ -25,17 +12,32 @@ import com.meniga.sdk.models.categories.operators.MenigaCategoryOperations;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
 import com.meniga.sdk.models.challenges.operators.MenigaChallengesOperations;
 import com.meniga.sdk.models.feed.MenigaFeed;
+import com.meniga.sdk.models.feed.MenigaScheduledEvent;
 import com.meniga.sdk.models.feed.operators.MenigaFeedOperations;
 import com.meniga.sdk.models.merchants.MenigaMerchant;
+import com.meniga.sdk.models.merchants.MenigaTopMerchant;
 import com.meniga.sdk.models.merchants.operators.MenigaMerchantOperations;
+import com.meniga.sdk.models.merchants.operators.MenigaTopMerchantOperations;
 import com.meniga.sdk.models.networth.MenigaNetWorth;
 import com.meniga.sdk.models.networth.MenigaNetWorthBalance;
 import com.meniga.sdk.models.networth.operators.MenigaNetWorthBalanceOperations;
 import com.meniga.sdk.models.networth.operators.MenigaNetWorthOperations;
-import com.meniga.sdk.models.operators.MenigaClientModule;
-import com.meniga.sdk.models.serverpublic.operators.MenigaPublicSettingsOperations;
+import com.meniga.sdk.models.offers.MenigaOffer;
+import com.meniga.sdk.models.offers.MenigaOffersSettings;
+import com.meniga.sdk.models.offers.operators.MenigaOfferOperations;
 import com.meniga.sdk.models.offers.redemptions.MenigaRedemptions;
 import com.meniga.sdk.models.offers.redemptions.operators.MenigaRedemptionsOperations;
+import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAccount;
+import com.meniga.sdk.models.offers.reimbursementaccounts.operators.MenigaReimbursementAccountOperations;
+import com.meniga.sdk.models.operators.MenigaClientModule;
+import com.meniga.sdk.models.organizations.MenigaOrganization;
+import com.meniga.sdk.models.organizations.MenigaRealm;
+import com.meniga.sdk.models.organizations.operators.MenigaOrganizationOperations;
+import com.meniga.sdk.models.organizations.operators.MenigaRealmOperations;
+import com.meniga.sdk.models.serverpublic.MenigaPublicSettings;
+import com.meniga.sdk.models.serverpublic.operators.MenigaPublicSettingsOperations;
+import com.meniga.sdk.models.sync.MenigaSync;
+import com.meniga.sdk.models.sync.operators.MenigaSyncOperations;
 import com.meniga.sdk.models.terms.MenigaTerms;
 import com.meniga.sdk.models.terms.operators.MenigaTermsOperations;
 import com.meniga.sdk.models.transactions.MenigaComment;
@@ -50,10 +52,8 @@ import com.meniga.sdk.models.transactions.operators.MenigaTransactionRuleOperati
 import com.meniga.sdk.models.transactions.operators.MenigaTransactionSeriesOperations;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.upcoming.operators.MenigaUpcomingOperations;
-import com.meniga.sdk.models.sync.MenigaSync;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
-import com.meniga.sdk.models.sync.operators.MenigaSyncOperations;
 import com.meniga.sdk.models.user.operators.MenigaUserOperations;
 import com.meniga.sdk.models.user.operators.MenigaUserProfileOperations;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
@@ -64,13 +64,12 @@ import com.meniga.sdk.webservices.WebClient;
 
 import org.joda.time.DateTimeZone;
 
-import java.util.Map;
-
 import javax.inject.Inject;
 
 /**
  * Root of the Meniga SDK project.
  */
+@SuppressWarnings("WeakerAccess")
 public class MenigaSDK {
 
 	private static PersistenceDelegate persistenceDelegate;
@@ -186,7 +185,6 @@ public class MenigaSDK {
 		DateTimeZone.setDefault(DateTimeZone.UTC);
 
 		MenigaSDK.settings = settings;
-		MenigaSDK.settings.getAuthenticator();
 		MenigaSDK.persistenceDelegate = new PersistenceDelegate();
 		PersistenceProvider provider = settings.getPersistenceProvider();
 		if (provider == null) {

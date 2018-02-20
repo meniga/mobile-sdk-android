@@ -451,46 +451,6 @@ public interface MenigaAPI {
 	Call<Void> deleteUpcomingSeries(@Path("id") long id);
 
 	// --
-	// Budget
-	// --
-	// TODO Extract Budget API methods to separate Retrofit service
-	@GET(APIConst.URL_BUDGETS)
-	Call<List<MenigaBudget>> getBudgets(@QueryMap Map<String, String> query);
-
-	@GET(APIConst.URL_BUDGETS)
-	Call<MenigaBudget> getBudget(@QueryMap Map<String, String> query);
-
-	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES)
-	Call<List<MenigaBudgetEntry>> getBudgetEntries(@Path("id") String id, @QueryMap Map<String, String> query);
-
-	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES)
-	Call<List<MenigaBudgetEntry>> createBudgetEntry(@Path("id") String id, @Body CreateBudgetEntryParameters parameters);
-
-	@DELETE(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
-	Call<Void> deleteBudgetEntry(@Path("id") String id, @Path("entryId") String entryId);
-
-	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
-	Call<MenigaBudgetEntry> getBudgetEntry(@Path("id") String id, @Path("entryId") String entryId);
-
-	@PUT(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES + "/{entryId}")
-	Call<MenigaBudgetEntry> updateBudgetEntries(@Path("id") String id, @Path("entryId") String entryId, @Body UpdateBudgetEntryParameters updateBudgetEntry);
-
-	@POST(APIConst.URL_BUDGETS)
-	Call<MenigaBudget> createBudget(@Body CreateBudgetParameters req);
-
-	@PUT(APIConst.URL_BUDGETS + "/{id}")
-	Call<MenigaBudget> updateBudget(@Path("id") String id, @Body UpdateBudgetParameters req);
-
-	@DELETE(APIConst.URL_BUDGETS + "/{id}")
-	Call<Void> deleteBudget(@Path("id") String budgetId);
-
-	@POST(APIConst.URL_BUDGETS + "/{id}/reset")
-	Call<Void> resetBudget(@Path("id") String budgetId);
-
-	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_RULES)
-	Call<Void> createBudgetRules(@Path("id") String id, @Body UpdateBudgetRules req);
-
-	// --
 	// Challenges
 	// --
 	@GET(APIConst.URL_CHALLENGES)
