@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.meniga.sdk.MenigaSettings;
+import com.meniga.sdk.converters.MenigaTransactionUpdateConverter;
 import com.meniga.sdk.converters.MenigaTransactionsConverter;
 import com.meniga.sdk.helpers.ChallengeItemFactory;
 import com.meniga.sdk.helpers.FeedItemFactory;
@@ -94,6 +95,7 @@ public class WebClient {
 		return new Retrofit.Builder()
 				.baseUrl(endpoint)
 				.addConverterFactory(new MenigaTransactionsConverter())
+				.addConverterFactory(new MenigaTransactionUpdateConverter())
 				.addConverterFactory(new MenigaFeedConverter(new FeedItemFactory()))
 				.addConverterFactory(new MenigaCategoryConverter())
 				.addConverterFactory(new MenigaOfferConverter())

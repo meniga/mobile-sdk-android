@@ -19,11 +19,9 @@ import retrofit2.Retrofit;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaIdNameKeyValConverter extends MenigaConverter {
-
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-		Type typeListOfNetWorthType = new TypeToken<List<KeyVal<Long, String>>>() {
-		}.getType();
+		Type typeListOfNetWorthType = new TypeToken<List<KeyVal<Long, String>>>() {}.getType();
 
 		if (typeListOfNetWorthType.equals(type)) {
 			return new Converter<ResponseBody, Object>() {
@@ -41,8 +39,6 @@ public class MenigaIdNameKeyValConverter extends MenigaConverter {
 				}
 			};
 		}
-
 		return null;
 	}
-
 }

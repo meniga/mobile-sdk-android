@@ -27,7 +27,6 @@ import retrofit2.Retrofit;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaReimbursementAccountConverter extends MenigaConverter {
-
 	@Override
 	public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
 		Type typeOfAccount = new TypeToken<MenigaReimbursementAccount>() {}.getType();
@@ -46,7 +45,6 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaReimbursementAccountPage>() {
 				@Override
 				public MenigaReimbursementAccountPage convert(ResponseBody resBody) throws IOException {
-
 					Gson gson = GsonProvider.getGsonBuilder();
 					MenigaReimbursementAccountPage page = new MenigaReimbursementAccountPage();
 					InputStreamReader isr = new InputStreamReader(resBody.byteStream());
