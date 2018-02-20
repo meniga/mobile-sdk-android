@@ -22,7 +22,6 @@ import retrofit2.Retrofit;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaFeedConverter extends MenigaConverter {
-
 	private FeedItemFactory feedItemFactory;
 
 	public MenigaFeedConverter(FeedItemFactory feedItemFactory) {
@@ -62,7 +61,6 @@ public class MenigaFeedConverter extends MenigaConverter {
 				}
 			};
 		}
-
 		return null;
 	}
 

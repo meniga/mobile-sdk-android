@@ -45,6 +45,7 @@ import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 import com.meniga.sdk.models.transactions.MenigaTransactionRule;
 import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
+import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
@@ -231,12 +232,12 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.TRANSACTIONS).getTransaction(req.id));
 	}
 
-	public Result<Void> updateTransaction(UpdateTransaction req) {
+	public Result<MenigaTransactionUpdate> updateTransaction(UpdateTransaction req) {
 		return persist(req, getClient(Service.TRANSACTIONS).updateTransaction(req.transactionId, req));
 	}
 
 
-	public Result<List<MenigaTransaction>> updateTransactions(UpdateTransactions req) {
+	public Result<MenigaTransactionUpdate> updateTransactions(UpdateTransactions req) {
 		return persist(req, getClient(Service.TRANSACTIONS).updateTransactions(req.toQueryMap(), req));
 	}
 

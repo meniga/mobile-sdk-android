@@ -41,6 +41,7 @@ import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 import com.meniga.sdk.models.transactions.MenigaTransactionRule;
 import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
+import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
@@ -127,13 +128,13 @@ public interface MenigaAPI {
 	Call<MenigaTransaction> createTransaction(@Body CreateTransaction body);
 
 	@PUT(APIConst.URL_TRANSACTIONS)
-	Call<List<MenigaTransaction>> updateTransactions(@QueryMap Map<String, String> transactionIds, @Body UpdateTransactions req);
+	Call<MenigaTransactionUpdate> updateTransactions(@QueryMap Map<String, String> transactionIds, @Body UpdateTransactions req);
 
 	@GET(APIConst.URL_TRANSACTIONS + "/{id}")
 	Call<MenigaTransaction> getTransaction(@Path("id") long transId);
 
 	@PUT(APIConst.URL_TRANSACTIONS + "/{id}")
-	Call<Void> updateTransaction(@Path("id") long transactionId, @Body UpdateTransaction req);
+	Call<MenigaTransactionUpdate> updateTransaction(@Path("id") long transactionId, @Body UpdateTransaction req);
 
 	@DELETE(APIConst.URL_TRANSACTIONS + "/{id}")
 	Call<Void> deleteTransaction(@Path("id") long transactionId);

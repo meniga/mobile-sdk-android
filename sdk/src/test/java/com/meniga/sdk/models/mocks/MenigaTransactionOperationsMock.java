@@ -8,6 +8,7 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
+import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.transactions.TransactionsFilter;
 import com.meniga.sdk.models.transactions.operators.MenigaTransactionOperations;
 import com.meniga.sdk.providers.tasks.TaskCompletionSource;
@@ -54,8 +55,8 @@ public class MenigaTransactionOperationsMock implements MenigaTransactionOperati
 	}
 
 	@Override
-	public Result<Void> updateTransaction(MenigaTransaction menigaTransaction) {
-		TaskCompletionSource<Void> task = new TaskCompletionSource<>();
+	public Result<MenigaTransactionUpdate> updateTransaction(MenigaTransaction menigaTransaction) {
+		TaskCompletionSource<MenigaTransactionUpdate> task = new TaskCompletionSource<>();
 		task.setResult(null);
 		return new MTask<>(task.getTask(), task);
 	}
@@ -82,7 +83,7 @@ public class MenigaTransactionOperationsMock implements MenigaTransactionOperati
 	}
 
 	@Override
-	public Result<List<MenigaTransaction>> updateTransactions(
+	public Result<MenigaTransactionUpdate> updateTransactions(
 			List<Long> transToUpdate,
 			MenigaDecimal amount,
 			Long categoryId,
@@ -93,7 +94,7 @@ public class MenigaTransactionOperationsMock implements MenigaTransactionOperati
 			Boolean isRead,
 			Boolean isFlagged,
 			String userData) {
-		TaskCompletionSource<List<MenigaTransaction>> task = new TaskCompletionSource<>();
+		TaskCompletionSource<MenigaTransactionUpdate> task = new TaskCompletionSource<>();
 		task.setResult(null);
 		return new MTask<>(task.getTask(), task);
 	}
