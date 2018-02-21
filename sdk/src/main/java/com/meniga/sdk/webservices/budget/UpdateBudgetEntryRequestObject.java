@@ -1,4 +1,4 @@
-package com.meniga.sdk.models.budget.operators;
+package com.meniga.sdk.webservices.budget;
 
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.webservices.requests.QueryRequestObject;
@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 
-public class UpdateBudgetEntryParameters extends QueryRequestObject {
+public class UpdateBudgetEntryRequestObject extends QueryRequestObject {
 
     public MenigaDecimal targetAmount;
     public DateTime startDate;

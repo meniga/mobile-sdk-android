@@ -2,11 +2,12 @@ package com.meniga.sdk.models.budget.operators;
 
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.budget.CreateBudgetRulesParameters;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
+import com.meniga.sdk.webservices.budget.CreateBudgetRequestObject;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters;
 import com.meniga.sdk.webservices.requests.GetBudgetParameters;
 import com.meniga.sdk.webservices.requests.GetBudgetEntries;
@@ -66,13 +67,13 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     }
 
     @Override
-    public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryParameters updateBudgetEntry) {
+    public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryRequestObject updateBudgetEntry) {
         return MenigaSDK.executor().updateBudgetEntry(budgetId, entryId, updateBudgetEntry);
     }
 
     @Override
     public Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset) {
-        CreateBudgetParameters req = new CreateBudgetParameters();
+        CreateBudgetRequestObject req = new CreateBudgetRequestObject();
         req.type = type;
         req.name = name;
         req.description = description;

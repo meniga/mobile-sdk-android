@@ -1,4 +1,4 @@
-package com.meniga.sdk.models.budget
+package com.meniga.sdk.models.budget.operators
 
 import com.meniga.sdk.helpers.MenigaDecimal
 import com.meniga.sdk.models.budget.enums.GenerationType

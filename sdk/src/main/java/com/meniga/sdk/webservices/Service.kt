@@ -3,6 +3,8 @@
  */
 package com.meniga.sdk.webservices
 
+import com.meniga.sdk.webservices.budget.BudgetService
+
 enum class Service(
         private val key: String,
         val serviceClass: Class<*>? = null) {

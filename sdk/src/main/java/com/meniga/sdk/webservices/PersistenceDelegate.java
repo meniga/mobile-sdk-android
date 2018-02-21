@@ -11,8 +11,6 @@ import com.meniga.sdk.models.accounts.MenigaAccountType;
 import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
-import com.meniga.sdk.models.budget.operators.CreateBudgetParameters;
-import com.meniga.sdk.models.budget.operators.UpdateBudgetEntryParameters;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -50,6 +48,9 @@ import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
+import com.meniga.sdk.webservices.budget.BudgetService;
+import com.meniga.sdk.webservices.budget.CreateBudgetRequestObject;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
 import com.meniga.sdk.webservices.requests.*;
 
 import java.util.Collections;
@@ -726,11 +727,11 @@ public class PersistenceDelegate {
 		return persist(request, getService(BudgetService.class).getBudgetEntry(Long.toString(request.budgetId), Long.toString(request.entryId)));
 	}
 
-	public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryParameters updateBudgetEntry) {
+	public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryRequestObject updateBudgetEntry) {
 		return persist(updateBudgetEntry, getService(BudgetService.class).updateBudgetEntries(Long.toString(budgetId), Long.toString(entryId), updateBudgetEntry));
 	}
 
-	public Result<MenigaBudget> createBudget(CreateBudgetParameters req) {
+	public Result<MenigaBudget> createBudget(CreateBudgetRequestObject req) {
 		return persist(req, getService(BudgetService.class).createBudget(req));
 	}
 

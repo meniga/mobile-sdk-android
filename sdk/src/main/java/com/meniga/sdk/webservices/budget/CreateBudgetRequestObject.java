@@ -1,4 +1,4 @@
-package com.meniga.sdk.models.budget.operators;
+package com.meniga.sdk.webservices.budget;
 
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.webservices.requests.QueryRequestObject;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class CreateBudgetParameters extends QueryRequestObject {
+public class CreateBudgetRequestObject extends QueryRequestObject {
     public BudgetType type;
     public String name;
     public String description;

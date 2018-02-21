@@ -1,11 +1,11 @@
 package com.meniga.sdk.models.budget.operators;
 
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.budget.CreateBudgetRulesParameters;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters;
 import com.meniga.sdk.webservices.requests.GetBudgetParameters;
 import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
@@ -36,7 +36,7 @@ public interface MenigaBudgetOperations {
 
     Result<MenigaBudgetEntry> getBudgetEntry(GetBudgetEntryById getBudgetEntryById);
 
-    Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryParameters updateBudgetEntry);
+    Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryRequestObject updateBudgetEntry);
 
     Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset);
 

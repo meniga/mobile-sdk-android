@@ -5,9 +5,9 @@ import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
-import com.meniga.sdk.models.budget.operators.UpdateBudgetEntryParameters;
 import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.utils.FileImporter;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters;
 import com.meniga.sdk.webservices.requests.GetBudgetParameters;
 import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
@@ -216,7 +216,7 @@ public class MenigaBudgetTest {
     @Test
     public void testUpdateSingleBudgetEntry() throws Exception {
         MenigaBudgetEntry menigaBudgetEntry = prepareMenigaBudgetEntry();
-        UpdateBudgetEntryParameters parameters = new UpdateBudgetEntryParameters();
+        UpdateBudgetEntryRequestObject parameters = new UpdateBudgetEntryRequestObject();
         parameters.targetAmount = MenigaDecimal.ZERO;
         parameters.startDate = DateTime.parse("2016-01-08");
         parameters.endDate = DateTime.parse("2019-11-01");

@@ -7,9 +7,10 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.budget.enums.GenerationType;
 import com.meniga.sdk.models.budget.enums.GenerationTypeValue;
+import com.meniga.sdk.models.budget.operators.CreateBudgetRulesParameters;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
-import com.meniga.sdk.models.budget.operators.UpdateBudgetEntryParameters;
 import com.meniga.sdk.models.categories.MenigaCategory;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
 import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters;
 import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
 
@@ -245,7 +246,7 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 		return apiOperator.updateBudgetRules(budgetId, parameters);
 	}
 
-	public Result<MenigaBudgetEntry> update(UpdateBudgetEntryParameters updateBudgetEntry) {
+	public Result<MenigaBudgetEntry> update(UpdateBudgetEntryRequestObject updateBudgetEntry) {
 		return apiOperator.updateBudgetEntry(budgetId, id, updateBudgetEntry);
 	}
 
