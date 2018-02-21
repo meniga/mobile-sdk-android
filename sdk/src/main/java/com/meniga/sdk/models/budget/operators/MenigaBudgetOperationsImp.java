@@ -41,11 +41,11 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     @Override
     public Result<List<MenigaBudgetEntry>> getBudgetEntries(long budgetId, DateTime start, DateTime end, List<Long> categoryIds, boolean allowIntersect) {
         GetBudgetEntries req = new GetBudgetEntries();
-        req.id = budgetId;
-        req.startDate = start;
-        req.endDate = end;
-        req.categoryIds = categoryIds;
-        req.allowOverlappingEntries = allowIntersect;
+        req.setId(budgetId);
+        req.setStartDate(start);
+        req.setEndDate(end);
+        req.setCategoryIds(categoryIds);
+        req.setAllowOverlappingEntries(allowIntersect);
 
         return MenigaSDK.executor().getBudgetEntries(req);
     }

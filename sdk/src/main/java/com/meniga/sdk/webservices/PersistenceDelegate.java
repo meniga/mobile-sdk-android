@@ -60,7 +60,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.annimon.stream.Objects.requireNonNull;
+import static com.meniga.sdk.helpers.Objects.requireNonNull;
 import static java.util.Collections.unmodifiableMap;
 
 /**
@@ -708,7 +708,7 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getService(BudgetService.class).getBudgetEntries(Long.toString(req.id), req.toQueryMap()));
+		return persist(req, getService(BudgetService.class).getBudgetEntries(Long.toString(req.getId()), req.toQueryMap()));
 	}
 
 	public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntryParameters parameters) {
@@ -826,7 +826,7 @@ public class PersistenceDelegate {
 
 	@SuppressWarnings("unchecked")
 	private <T> T getService(Class<T> serviceClass) {
-		return (T) services.get(Service.from(serviceClass));
+		return (T) services.get(Service.Companion.from(serviceClass));
 	}
 
 	Map<Service, ?> getApis() {

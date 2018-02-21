@@ -106,18 +106,18 @@ public class MenigaBudgetTest {
     public void testFetchSingleBudget() throws Exception {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
         GetBudgetParameters parameters = new GetBudgetParameters();
-        parameters.id = 1L;
-        parameters.categoryIds = Arrays.asList(1L, 2L);
-        parameters.startDate = DateTime.parse("2018-01-01");
-        parameters.endDate = DateTime.parse("2018-01-01");
-        parameters.allowOverlappingEntries = true;
-        parameters.includeEntries = true;
-        parameters.includeOptionalHistoricalData = true;
+        parameters.setId(1L);
+        parameters.setCategoryIds(Arrays.asList(1L, 2L));
+        parameters.setStartDate(DateTime.parse("2018-01-01"));
+        parameters.setEndDate(DateTime.parse("2018-01-01"));
+        parameters.setAllowOverlappingEntries(true);
+        parameters.setIncludeEntries(true);
+        parameters.setIncludeOptionalHistoricalData(true);
 
         Task<MenigaBudget> task = MenigaBudget.fetch(parameters).getTask();
         task.waitForCompletion();
 
-        assertThat(server.takeRequest().getPath()).isEqualTo("/v1/budgets?categoryIds=1,2&endDate=2018-01-01T00:00:00.000Z&allowOverlappingEntries=true&id=1&startDate=2018-01-01T00:00:00.000Z");
+        assertThat(server.takeRequest().getPath()).isEqualTo("/v1/budgets?id=1&categoryIds=1,2&startDate=2018-01-01T00:00:00.000Z&endDate=2018-01-01T00:00:00.000Z&allowOverlappingEntries=true");
         MenigaBudget budget = task.getResult();
         assertThat(budget).isNotNull();
     }
@@ -162,7 +162,7 @@ public class MenigaBudgetTest {
 
         List<MenigaBudgetEntry> entries = entriesTask.getResult();
         assertThat(server.takeRequest().getPath())
-                .isEqualTo("/v1/budgets/1/entries?endDate=2018-02-28T00:00:00.000Z&allowOverlappingEntries=true&includeOptionalHistoricalData=false&startDate=2018-02-01T00:00:00.000Z");
+                .isEqualTo("/v1/budgets/1/entries?id=1&startDate=2018-02-01T00:00:00.000Z&endDate=2018-02-28T00:00:00.000Z&allowOverlappingEntries=true&includeOptionalHistoricalData=false");
         assertThat(entries).isNotNull();
     }
 

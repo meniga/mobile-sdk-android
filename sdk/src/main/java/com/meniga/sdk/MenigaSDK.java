@@ -77,6 +77,8 @@ public class MenigaSDK {
 	private static MenigaSettings settings;
 
 	@Inject
+	WebClient webClient;
+	@Inject
 	MenigaTransactionOperations transactionOperator;
 	@Inject
 	MenigaAccountOperations accountOperator;
@@ -191,7 +193,7 @@ public class MenigaSDK {
 			provider = new BasicPersistanceProviderNone();
 		}
 		MenigaSDK.persistenceDelegate.setProvider(provider);
-		MenigaSDK.persistenceDelegate.setApis(WebClient.createApiInterfaces(settings));
+		MenigaSDK.persistenceDelegate.setApis(sdk.webClient.createApiInterfaces(settings));
 	}
 
 	/**

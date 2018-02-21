@@ -9,14 +9,13 @@ import com.meniga.sdk.models.feed.MenigaEvent;
 import com.meniga.sdk.models.feed.MenigaTransactionEvent;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransactionEventConverter implements EventBaseConverter<MenigaTransactionEvent> {
-	private final String MESSAGE_DATA = "messageData";
+	private static final String MESSAGE_DATA = "messageData";
 
 	@Override
 	public MenigaEvent eventConverter(JsonElement element) {

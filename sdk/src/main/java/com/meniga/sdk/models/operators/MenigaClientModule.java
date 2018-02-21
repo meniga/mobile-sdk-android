@@ -119,7 +119,7 @@ public class MenigaClientModule {
 
 	@Provides
 	private WebClient provideWebClient() {
-		return new WebClient();
+		return WebClient.INSTANCE;
 	}
 
 	@Provides

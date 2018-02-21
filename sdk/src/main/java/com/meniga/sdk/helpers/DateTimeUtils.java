@@ -4,9 +4,15 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
+import javax.annotation.Nonnull;
+
+import static com.meniga.sdk.helpers.Objects.requireNonNull;
+
 public final class DateTimeUtils {
 
-    public static String toString(DateTime dateTime) {
+    @Nonnull
+    public static String toString(@Nonnull DateTime dateTime) {
+        requireNonNull(dateTime);
         DateTimeFormatter dateTimeFormatter = ISODateTimeFormat.dateTime();
         return dateTimeFormatter.print(dateTime);
     }
