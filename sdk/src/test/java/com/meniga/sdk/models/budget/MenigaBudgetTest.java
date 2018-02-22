@@ -7,12 +7,12 @@ import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.utils.FileImporter;
-import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
-import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters;
-import com.meniga.sdk.webservices.requests.GetBudgetParameters;
-import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
-import com.meniga.sdk.webservices.requests.GetBudgetsParameters;
-import com.meniga.sdk.webservices.requests.UpdateBudgetParameters;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
+import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
+import com.meniga.sdk.webservices.budget.GetBudget;
+import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.GetBudgets;
+import com.meniga.sdk.webservices.budget.UpdateBudget;
 
 import org.joda.time.DateTime;
 import org.junit.After;
@@ -64,15 +64,15 @@ public class MenigaBudgetTest {
     @Test
     public void testFetchBudgets() throws Exception {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgets.json")));
-        GetBudgetsParameters parameters = new GetBudgetsParameters();
-        parameters.ids = Arrays.asList(1L, 2L);
-        parameters.accountIds = Arrays.asList(10L, 20L);
-        parameters.type = BudgetType.PLANNING;
+        GetBudgets parameters = new GetBudgets();
+        parameters.setIds(Arrays.asList(1L, 2L));
+        parameters.setAccountIds(Arrays.asList(10L, 20L));
+        parameters.setType(BudgetType.PLANNING);
 
         Task<List<MenigaBudget>> budgetTask = MenigaBudget.fetch(parameters).getTask();
         budgetTask.waitForCompletion();
 
-        assertThat(server.takeRequest().getPath()).isEqualTo("/v1/budgets?accountIds=10,20&ids=1,2&type=Planning");
+        assertThat(server.takeRequest().getPath()).isEqualTo("/v1/budgets?ids=1,2&accountIds=10,20&type=Planning");
         List<MenigaBudget> budgets = budgetTask.getResult();
         assertThat(budgets).isNotNull();
     }
@@ -105,7 +105,7 @@ public class MenigaBudgetTest {
     @Test
     public void testFetchSingleBudget() throws Exception {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
-        GetBudgetParameters parameters = new GetBudgetParameters();
+        GetBudget parameters = new GetBudget();
         parameters.setId(1L);
         parameters.setCategoryIds(Arrays.asList(1L, 2L));
         parameters.setStartDate(DateTime.parse("2018-01-01"));
@@ -126,10 +126,10 @@ public class MenigaBudgetTest {
     public void testUpdateSingleBudget() throws Exception {
         MenigaBudget budget = prepareMenigaBudget();
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
-        UpdateBudgetParameters parameters = new UpdateBudgetParameters();
-        parameters.name = "New name";
-        parameters.description = "New description";
-        parameters.accountIds = Arrays.asList(1L, 2L);
+        UpdateBudget parameters = new UpdateBudget();
+        parameters.setName("New name");
+        parameters.setDescription("New description");
+        parameters.setAccountIds(Arrays.asList(1L, 2L));
 
         Task<MenigaBudget> updateBudgetTask = budget.update(parameters).getTask();
         updateBudgetTask.waitForCompletion();
@@ -169,11 +169,11 @@ public class MenigaBudgetTest {
     @Test
     public void testCreateBudgetEntry() throws Exception {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentries.json")));
-        CreateBudgetEntryParameters parameters = new CreateBudgetEntryParameters();
-        parameters.categoryIds = Arrays.asList(1L, 2L);
-        parameters.startDate = DateTime.parse("2018-01-01");
-        parameters.endDate = DateTime.parse("2018-01-01");
-        parameters.targetAmount = MenigaDecimal.ZERO;
+        CreateBudgetEntry parameters = new CreateBudgetEntry();
+        parameters.setCategoryIds(Arrays.asList(1L, 2L));
+        parameters.setStartDate(DateTime.parse("2018-01-01"));
+        parameters.setEndDate(DateTime.parse("2018-01-01"));
+        parameters.setTargetAmount(MenigaDecimal.ZERO);
 
         Task<List<MenigaBudgetEntry>> task = MenigaBudgetEntry.create(1, parameters).getTask();
         task.waitForCompletion();
@@ -201,8 +201,8 @@ public class MenigaBudgetTest {
     public void testGetSingleBudgetEntry() throws Exception {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentry.json")));
         GetBudgetEntryById parameters = new GetBudgetEntryById();
-        parameters.budgetId = 1L;
-        parameters.entryId = 2L;
+        parameters.setBudgetId(1L);
+        parameters.setEntryId(2L);
 
         Task<MenigaBudgetEntry> task = MenigaBudgetEntry.fetch(parameters).getTask();
         task.waitForCompletion();
@@ -216,7 +216,7 @@ public class MenigaBudgetTest {
     @Test
     public void testUpdateSingleBudgetEntry() throws Exception {
         MenigaBudgetEntry menigaBudgetEntry = prepareMenigaBudgetEntry();
-        UpdateBudgetEntryRequestObject parameters = new UpdateBudgetEntryRequestObject();
+        UpdateBudgetEntry parameters = new UpdateBudgetEntry();
         parameters.targetAmount = MenigaDecimal.ZERO;
         parameters.startDate = DateTime.parse("2016-01-08");
         parameters.endDate = DateTime.parse("2019-11-01");
@@ -248,11 +248,11 @@ public class MenigaBudgetTest {
 
     private Task<List<MenigaBudgetEntry>> createMenigaBudgetEntryTask() throws InterruptedException, IOException {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentries.json")));
-        CreateBudgetEntryParameters parameters = new CreateBudgetEntryParameters();
-        parameters.targetAmount = MenigaDecimal.ZERO;
-        parameters.startDate = DateTime.parse("2016-01-08");
-        parameters.endDate = DateTime.parse("2019-11-01");
-        parameters.categoryIds = Arrays.asList(1L, 2L);
+        CreateBudgetEntry parameters = new CreateBudgetEntry();
+        parameters.setTargetAmount(MenigaDecimal.ZERO);
+        parameters.setStartDate(DateTime.parse("2016-01-08"));
+        parameters.setEndDate(DateTime.parse("2019-11-01"));
+        parameters.setCategoryIds(Arrays.asList(1L, 2L));
         Task<List<MenigaBudgetEntry>> task = MenigaBudgetEntry.create(1L, parameters).getTask();
         task.waitForCompletion();
         server.takeRequest();

@@ -7,12 +7,12 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.budget.enums.GenerationType;
 import com.meniga.sdk.models.budget.enums.GenerationTypeValue;
-import com.meniga.sdk.models.budget.operators.CreateBudgetRulesParameters;
+import com.meniga.sdk.models.budget.operators.BudgetUpdate;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 import com.meniga.sdk.models.categories.MenigaCategory;
-import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
-import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters;
-import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
+import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
 
 import org.joda.time.DateTime;
 
@@ -219,7 +219,7 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 	}
 
 	/**
-	 * Use {@link #createBudgetRules(long, CreateBudgetRulesParameters)} instead.
+	 * Use {@link #update(long, BudgetUpdate)} instead.
 	 */
 	@Deprecated
 	public static Result<Void> update(
@@ -231,7 +231,7 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 			GenerationType generationType,
 			int generationTypeValue,
 			DateTime wasNotUsed) {
-		CreateBudgetRulesParameters parameters = CreateBudgetRulesParameters.builder()
+		BudgetUpdate parameters = BudgetUpdate.builder()
 				.targetAmount(targetAmount)
 				.startDate(startDate)
 				.endDate(endDate)
@@ -239,18 +239,18 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 				.generationType(generationType)
 				.generationTypeValue(generationTypeValue)
 				.build();
-		return createBudgetRules(budgetId, parameters);
+		return update(budgetId, parameters);
 	}
 
-	public static Result<Void> createBudgetRules(long budgetId, CreateBudgetRulesParameters parameters) {
-		return apiOperator.updateBudgetRules(budgetId, parameters);
+	public static Result<Void> update(long budgetId, BudgetUpdate parameters) {
+		return apiOperator.updateBudgetRules(budgetId, parameters.toUpdateBudgetRules());
 	}
 
-	public Result<MenigaBudgetEntry> update(UpdateBudgetEntryRequestObject updateBudgetEntry) {
+	public Result<MenigaBudgetEntry> update(UpdateBudgetEntry updateBudgetEntry) {
 		return apiOperator.updateBudgetEntry(budgetId, id, updateBudgetEntry);
 	}
 
-	public static Result<List<MenigaBudgetEntry>> create(long budgetId, CreateBudgetEntryParameters parameters) {
+	public static Result<List<MenigaBudgetEntry>> create(long budgetId, CreateBudgetEntry parameters) {
 		return apiOperator.createBudgetEntry(budgetId, parameters);
 	}
 

@@ -3,20 +3,17 @@ package com.meniga.sdk.models.budget.operators
 import com.meniga.sdk.helpers.MenigaDecimal
 import com.meniga.sdk.models.budget.enums.GenerationType
 import com.meniga.sdk.models.categories.MenigaCategory
-import com.meniga.sdk.webservices.requests.QueryRequestObject
-import com.meniga.sdk.webservices.requests.UpdateBudgetRules
+import com.meniga.sdk.webservices.budget.UpdateBudgetRules
 import org.joda.time.DateTime
 import org.joda.time.Months
 
-data class CreateBudgetRulesParameters(
+data class BudgetUpdate(
         val targetAmount: MenigaDecimal,
         val startDate: DateTime,
         val endDate: DateTime?,
         val category: MenigaCategory,
         val generationType: GenerationType,
-        val generationTypeValue: Int): QueryRequestObject() {
-
-    override fun getValueHash(): Long = hashCode().toLong()
+        val generationTypeValue: Int) {
 
     fun toUpdateBudgetRules(): UpdateBudgetRules {
         val data: UpdateBudgetRules.UpdateBudgetData = UpdateBudgetRules.UpdateBudgetData().also {
@@ -24,7 +21,7 @@ data class CreateBudgetRulesParameters(
             it.startDate = startDate
             it.endDate = endDate
             it.categoryIds = mutableListOf(category.id)
-
+            it.generationType = toGenerationTypeValue(generationType, generationTypeValue)
             if (endDate != null) {
                 it.recurringPattern = UpdateBudgetRules.RecurringPattern().apply {
                     monthInterval = Months.monthsBetween(endDate, startDate).months
@@ -34,6 +31,13 @@ data class CreateBudgetRulesParameters(
         }
         return UpdateBudgetRules().apply { rules = listOf(data) }
     }
+
+    private fun toGenerationTypeValue(generationType: GenerationType, value: Int): Int =
+            when (generationType) {
+                GenerationType.SAME_AS_MONTH -> -Math.abs(value)
+                GenerationType.AVERAGE_MONTHS -> Math.abs(value)
+                else -> value
+            }
 
     companion object {
         @JvmStatic
@@ -59,7 +63,7 @@ data class CreateBudgetRulesParameters(
         private var generationTypeValue: Int = 0
         fun generationTypeValue(value: Int): Builder = apply { generationTypeValue = value }
 
-        fun build() = CreateBudgetRulesParameters(
+        fun build() = BudgetUpdate(
                 targetAmount = targetAmount,
                 startDate = startDate,
                 endDate = endDate,

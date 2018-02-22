@@ -2,9 +2,6 @@ package com.meniga.sdk.webservices.budget
 
 import com.meniga.sdk.models.budget.MenigaBudget
 import com.meniga.sdk.models.budget.MenigaBudgetEntry
-import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters
-import com.meniga.sdk.webservices.requests.UpdateBudgetParameters
-import com.meniga.sdk.webservices.requests.UpdateBudgetRules
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -24,7 +21,7 @@ internal interface BudgetService {
     @POST("budgets/{id}/entries")
     fun createBudgetEntry(
             @Path("id") id: String,
-            @Body parameters: CreateBudgetEntryParameters): Call<List<MenigaBudgetEntry>>
+            @Body parameters: CreateBudgetEntry): Call<List<MenigaBudgetEntry>>
 
     @DELETE("budgets/{id}/entries/{entryId}")
     fun deleteBudgetEntry(@Path("id") id: String, @Path("entryId") entryId: String): Call<Void>
@@ -38,13 +35,13 @@ internal interface BudgetService {
     fun updateBudgetEntries(
             @Path("id") id: String,
             @Path("entryId") entryId: String,
-            @Body updateBudgetEntry: UpdateBudgetEntryRequestObject): Call<MenigaBudgetEntry>
+            @Body updateBudgetEntry: UpdateBudgetEntry): Call<MenigaBudgetEntry>
 
     @POST("budgets")
-    fun createBudget(@Body req: CreateBudgetRequestObject): Call<MenigaBudget>
+    fun createBudget(@Body req: CreateBudget): Call<MenigaBudget>
 
     @PUT("budgets/{id}")
-    fun updateBudget(@Path("id") id: String, @Body req: UpdateBudgetParameters): Call<MenigaBudget>
+    fun updateBudget(@Path("id") id: String, @Body req: UpdateBudget): Call<MenigaBudget>
 
     @DELETE("budgets/{id}")
     fun deleteBudget(@Path("id") budgetId: String): Call<Void>

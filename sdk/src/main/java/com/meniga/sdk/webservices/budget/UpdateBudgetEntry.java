@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 
-public class UpdateBudgetEntryRequestObject extends QueryRequestObject {
+public class UpdateBudgetEntry extends QueryRequestObject {
 
     public MenigaDecimal targetAmount;
     public DateTime startDate;

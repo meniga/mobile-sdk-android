@@ -5,12 +5,13 @@ import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
-import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
-import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters;
-import com.meniga.sdk.webservices.requests.GetBudgetParameters;
-import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
-import com.meniga.sdk.webservices.requests.GetBudgetsParameters;
-import com.meniga.sdk.webservices.requests.UpdateBudgetParameters;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
+import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
+import com.meniga.sdk.webservices.budget.GetBudget;
+import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.GetBudgets;
+import com.meniga.sdk.webservices.budget.UpdateBudget;
+import com.meniga.sdk.webservices.budget.UpdateBudgetRules;
 
 import org.joda.time.DateTime;
 
@@ -21,22 +22,22 @@ import java.util.List;
  */
 public interface MenigaBudgetOperations {
 
-    Result<List<MenigaBudget>> getBudgets(GetBudgetsParameters parameters);
+    Result<List<MenigaBudget>> getBudgets(GetBudgets parameters);
 
-    Result<MenigaBudget> getBudget(GetBudgetParameters parameters);
+    Result<MenigaBudget> getBudget(GetBudget parameters);
 
-    Result<MenigaBudget> updateBudget(long budgetId, UpdateBudgetParameters parameters);
+    Result<MenigaBudget> updateBudget(long budgetId, UpdateBudget parameters);
 
     Result<List<MenigaBudgetEntry>> getBudgetEntries(long budgetId, DateTime start, DateTime end,
                                                      List<Long> categoryIds, boolean allowIntersect);
 
-    Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntryParameters parameters);
+    Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntry parameters);
 
     Result<Void> deleteBudgetEntry(long budgetId, long entryId);
 
     Result<MenigaBudgetEntry> getBudgetEntry(GetBudgetEntryById getBudgetEntryById);
 
-    Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryRequestObject updateBudgetEntry);
+    Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry);
 
     Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset);
 
@@ -44,5 +45,5 @@ public interface MenigaBudgetOperations {
 
     Result<Void> resetBudget(long budgetId);
 
-    Result<Void> updateBudgetRules(long budgetId, CreateBudgetRulesParameters parameters);
+    Result<Void> updateBudgetRules(long budgetId, UpdateBudgetRules parameters);
 }

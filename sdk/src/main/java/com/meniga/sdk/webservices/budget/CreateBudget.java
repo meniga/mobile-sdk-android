@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class CreateBudgetRequestObject extends QueryRequestObject {
+public class CreateBudget extends QueryRequestObject {
     public BudgetType type;
     public String name;
     public String description;

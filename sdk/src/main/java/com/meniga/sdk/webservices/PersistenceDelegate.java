@@ -49,8 +49,15 @@ import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.budget.BudgetService;
-import com.meniga.sdk.webservices.budget.CreateBudgetRequestObject;
-import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
+import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
+import com.meniga.sdk.webservices.budget.CreateBudget;
+import com.meniga.sdk.webservices.budget.GetBudget;
+import com.meniga.sdk.webservices.budget.GetBudgetEntries;
+import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.GetBudgets;
+import com.meniga.sdk.webservices.budget.UpdateBudget;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
+import com.meniga.sdk.webservices.budget.UpdateBudgetRules;
 import com.meniga.sdk.webservices.requests.*;
 
 import java.util.Collections;
@@ -691,14 +698,14 @@ public class PersistenceDelegate {
 	// --
 	// Budget
 	// --
-	public Result<List<MenigaBudget>> getBudgets(GetBudgetsParameters req) {
+	public Result<List<MenigaBudget>> getBudgets(GetBudgets req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
 		return persist(req, getService(BudgetService.class).getBudgets(req.toQueryMap()));
 	}
 
-	public Result<MenigaBudget> getBudget(GetBudgetParameters parameters) {
+	public Result<MenigaBudget> getBudget(GetBudget parameters) {
 		if (provider.hasKey(parameters)) {
 			return createTask(provider.fetch(parameters));
 		}
@@ -712,7 +719,7 @@ public class PersistenceDelegate {
 		return persist(req, getService(BudgetService.class).getBudgetEntries(Long.toString(req.getId()), req.toQueryMap()));
 	}
 
-	public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntryParameters parameters) {
+	public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntry parameters) {
 		return persist(parameters, getService(BudgetService.class).createBudgetEntry(Long.toString(budgetId), parameters));
 	}
 
@@ -724,18 +731,18 @@ public class PersistenceDelegate {
 		if (provider.hasKey(request)) {
 			return createTask(provider.fetch(request));
 		}
-		return persist(request, getService(BudgetService.class).getBudgetEntry(Long.toString(request.budgetId), Long.toString(request.entryId)));
+		return persist(request, getService(BudgetService.class).getBudgetEntry(Long.toString(request.getBudgetId()), Long.toString(request.getEntryId())));
 	}
 
-	public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryRequestObject updateBudgetEntry) {
+	public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry) {
 		return persist(updateBudgetEntry, getService(BudgetService.class).updateBudgetEntries(Long.toString(budgetId), Long.toString(entryId), updateBudgetEntry));
 	}
 
-	public Result<MenigaBudget> createBudget(CreateBudgetRequestObject req) {
+	public Result<MenigaBudget> createBudget(CreateBudget req) {
 		return persist(req, getService(BudgetService.class).createBudget(req));
 	}
 
-	public Result<MenigaBudget> updateBudget(long budgetId, UpdateBudgetParameters parameters) {
+	public Result<MenigaBudget> updateBudget(long budgetId, UpdateBudget parameters) {
 		return persist(parameters, getService(BudgetService.class).updateBudget(Long.toString(budgetId), parameters));
 	}
 

@@ -6,14 +6,15 @@ import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
-import com.meniga.sdk.webservices.budget.CreateBudgetRequestObject;
-import com.meniga.sdk.webservices.budget.UpdateBudgetEntryRequestObject;
-import com.meniga.sdk.webservices.requests.CreateBudgetEntryParameters;
-import com.meniga.sdk.webservices.requests.GetBudgetParameters;
-import com.meniga.sdk.webservices.requests.GetBudgetEntries;
-import com.meniga.sdk.webservices.requests.GetBudgetEntryById;
-import com.meniga.sdk.webservices.requests.GetBudgetsParameters;
-import com.meniga.sdk.webservices.requests.UpdateBudgetParameters;
+import com.meniga.sdk.webservices.budget.CreateBudget;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
+import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
+import com.meniga.sdk.webservices.budget.GetBudget;
+import com.meniga.sdk.webservices.budget.GetBudgetEntries;
+import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.GetBudgets;
+import com.meniga.sdk.webservices.budget.UpdateBudget;
+import com.meniga.sdk.webservices.budget.UpdateBudgetRules;
 
 import org.joda.time.DateTime;
 
@@ -25,17 +26,17 @@ import java.util.List;
 public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
 
     @Override
-    public Result<List<MenigaBudget>> getBudgets(GetBudgetsParameters parameters) {
+    public Result<List<MenigaBudget>> getBudgets(GetBudgets parameters) {
         return MenigaSDK.executor().getBudgets(parameters);
     }
 
     @Override
-    public Result<MenigaBudget> getBudget(GetBudgetParameters parameters) {
+    public Result<MenigaBudget> getBudget(GetBudget parameters) {
         return MenigaSDK.executor().getBudget(parameters);
     }
 
     @Override
-    public Result<MenigaBudget> updateBudget(long budgetId, UpdateBudgetParameters parameters) {
+    public Result<MenigaBudget> updateBudget(long budgetId, UpdateBudget parameters) {
         return MenigaSDK.executor().updateBudget(budgetId, parameters);
     }
 
@@ -52,7 +53,7 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     }
 
     @Override
-    public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntryParameters parameters) {
+    public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntry parameters) {
         return MenigaSDK.executor().createBudgetEntry(budgetId, parameters);
     }
 
@@ -67,13 +68,13 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     }
 
     @Override
-    public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntryRequestObject updateBudgetEntry) {
+    public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry) {
         return MenigaSDK.executor().updateBudgetEntry(budgetId, entryId, updateBudgetEntry);
     }
 
     @Override
     public Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset) {
-        CreateBudgetRequestObject req = new CreateBudgetRequestObject();
+        CreateBudget req = new CreateBudget();
         req.type = type;
         req.name = name;
         req.description = description;
@@ -85,8 +86,8 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     }
 
     @Override
-    public Result<Void> updateBudgetRules(long budgetId, CreateBudgetRulesParameters parameters) {
-        return MenigaSDK.executor().updateBudgetRules(budgetId, parameters.toUpdateBudgetRules());
+    public Result<Void> updateBudgetRules(long budgetId, UpdateBudgetRules parameters) {
+        return MenigaSDK.executor().updateBudgetRules(budgetId, parameters);
     }
 
     @Override
