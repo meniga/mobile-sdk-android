@@ -1,17 +1,28 @@
+/*
+ * Copyright 2017 Meniga Iceland Inc.
+ */
 package com.meniga.sdk.webservices.budget
 
 import com.meniga.sdk.models.budget.MenigaBudget
 import com.meniga.sdk.models.budget.MenigaBudgetEntry
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.QueryMap
 
 internal interface BudgetService {
 
     @GET("budgets")
     fun getBudgets(@QueryMap query: Map<String, String>): Call<List<MenigaBudget>>
 
-    @GET("budgets")
-    fun getBudget(@QueryMap query: Map<String, String>): Call<MenigaBudget>
+    @GET("budgets/{id}")
+    fun getBudget(
+            @Path("id") id: String,
+            @QueryMap query: Map<String, String>): Call<MenigaBudget>
 
     @GET("budgets/{id}/entries")
     fun getBudgetEntries(

@@ -5,7 +5,7 @@ package com.meniga.sdk.webservices.budget
 
 import com.meniga.sdk.webservices.requests.QueryRequestObject
 
-data class GetBudgetEntryById(
+internal data class GetBudgetEntryById(
         var budgetId: Long = 0,
         var entryId: Long = 0
 ) : QueryRequestObject() {

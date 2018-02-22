@@ -33,6 +33,7 @@ enum class Service(
 
     companion object {
 
+        @JvmStatic
         fun <T> from(serviceClass: Class<T>): Service =
                 values().single { it.serviceClass == serviceClass }
     }

@@ -49,8 +49,8 @@ import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.budget.BudgetService;
-import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
 import com.meniga.sdk.webservices.budget.CreateBudget;
+import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
 import com.meniga.sdk.webservices.budget.GetBudget;
 import com.meniga.sdk.webservices.budget.GetBudgetEntries;
 import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
@@ -709,7 +709,7 @@ public class PersistenceDelegate {
 		if (provider.hasKey(parameters)) {
 			return createTask(provider.fetch(parameters));
 		}
-		return persist(parameters, getService(BudgetService.class).getBudget(parameters.toQueryMap()));
+		return persist(parameters, getService(BudgetService.class).getBudget(Long.toString(parameters.getId()), parameters.toQueryMap()));
 	}
 
 	public Result<List<MenigaBudgetEntry>> getBudgetEntries(GetBudgetEntries req) {
@@ -834,7 +834,7 @@ public class PersistenceDelegate {
 
 	@SuppressWarnings("unchecked")
 	private <T> T getService(Class<T> serviceClass) {
-		return (T) services.get(Service.Companion.from(serviceClass));
+		return (T) services.get(Service.from(serviceClass));
 	}
 
 	Map<Service, ?> getApis() {

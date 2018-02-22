@@ -10,9 +10,6 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
-import com.meniga.sdk.webservices.budget.GetBudget;
-import com.meniga.sdk.webservices.budget.GetBudgets;
-import com.meniga.sdk.webservices.budget.UpdateBudget;
 
 import org.joda.time.DateTime;
 
@@ -173,21 +170,21 @@ public class MenigaBudget implements Parcelable, Serializable {
 	 */
 
 	/**
-	 * Use {@link #fetch(GetBudget)} instead.
+	 * Use {@link #fetch(FetchBudgetsFilter)} instead.
 	 */
 	@Deprecated
 	public static Result<List<MenigaBudget>> fetch() {
-		GetBudgets parameters = new GetBudgets();
+		FetchBudgetsFilter parameters = new FetchBudgetsFilter();
 		parameters.setType(BudgetType.PLANNING);
-		return apiOperator.getBudgets(parameters);
+		return fetch(parameters);
 	}
 
-	public static Result<List<MenigaBudget>> fetch(GetBudgets parameters) {
-		return apiOperator.getBudgets(parameters);
+	public static Result<List<MenigaBudget>> fetch(FetchBudgetsFilter filter) {
+		return apiOperator.getBudgets(FetchBudgetsFilterExtensions.toGetBudgets(filter));
 	}
 
-	public static Result<MenigaBudget> fetch(GetBudget parameters) {
-		return apiOperator.getBudget(parameters);
+	public static Result<MenigaBudget> fetch(FetchBudgetFilter filter) {
+		return apiOperator.getBudget(FetchBudgetFilterExtensions.toGetBudget(filter));
 	}
 
 	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period) {
@@ -206,7 +203,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 		return apiOperator.resetBudget(id);
 	}
 
-	public Result<MenigaBudget> update(UpdateBudget parameters) {
-		return apiOperator.updateBudget(id, parameters);
+	public Result<MenigaBudget> update(BudgetUpdate parameters) {
+		return apiOperator.updateBudget(id, BudgetUpdateExtensions.toUpdateBudget(parameters));
 	}
 }

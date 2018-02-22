@@ -8,7 +8,7 @@ import com.meniga.sdk.webservices.requests.QueryRequestObject
 
 import org.joda.time.DateTime
 
-data class UpdateBudgetRules(var rules: List<UpdateBudgetData>? = null) : QueryRequestObject() {
+internal data class UpdateBudgetRules(var rules: List<UpdateBudgetData>? = null) : QueryRequestObject() {
 
     override fun getValueHash(): Long = hashCode().toLong()
 
@@ -17,7 +17,7 @@ data class UpdateBudgetRules(var rules: List<UpdateBudgetData>? = null) : QueryR
             var startDate: DateTime? = null,
             var endDate: DateTime? = null,
             var categoryIds: List<Long>? = null,
-            var generationType: Int = 0,
+            var generationType: Int? = 0,
             var recurringPattern: RecurringPattern? = null,
             var repeatUntil: DateTime? = null)
 
