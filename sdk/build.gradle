@@ -1,8 +1,7 @@
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
-apply plugin: "maven"
-apply plugin: "digital.wup.android-maven-publish"
 apply plugin: "com.jfrog.artifactory"
+apply plugin: 'digital.wup.android-maven-publish'
 
 buildscript {
     repositories {
@@ -20,7 +19,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
-        versionName "1.1.33"
+        versionName "1.1.34"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "proguard-rules.pro"
     }
@@ -56,11 +55,6 @@ android {
 project.ext.set("packageName", "com.meniga.sdk")
 project.ext.set("libraryVersion", android.defaultConfig.versionName)
 
-repositories {
-    mavenCentral()
-    google()
-}
-
 dependencies {
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
@@ -87,27 +81,29 @@ dependencies {
 // Convenience task
 task deploy() {
 }
-deploy.dependsOn uploadArchives
+deploy.dependsOn publishToMavenLocal
 
-project.ext.set("groupIdConst", "com.meniga")
 project.ext.set("artifactIdConst", "sdk")
 
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
 
-// Upload to the local maven repo
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: mavenLocal().url)
-            pom.project {
-                groupId = project.groupIdConst
-                artifactId = project.artifactIdConst
-                packaging "aar"
-                version =  project.libraryVersion
-            }
+artifacts {
+    archives androidSourcesJar
+}
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            from components.android
+            groupId rootProject.name
+            artifactId = project.artifactIdConst
+            version = project.libraryVersion
         }
     }
 }
-
 
 if (project.hasProperty("artifactory_username") && (file("../artifactory.gradle").exists())) {
     apply from: "../artifactory.gradle"
