@@ -6,5 +6,5 @@ package com.meniga.sdk.models.budget.enums;
 public enum GenerationType {
     MANUAL,
     SAME_AS_MONTH,
-    AVERAGE_MONTHS;
+    AVERAGE_MONTHS
 }

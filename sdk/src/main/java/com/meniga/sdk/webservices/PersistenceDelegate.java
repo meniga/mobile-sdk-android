@@ -11,7 +11,6 @@ import com.meniga.sdk.models.accounts.MenigaAccountType;
 import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
-import com.meniga.sdk.models.budget.operators.CreateBudget;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -34,6 +33,8 @@ import com.meniga.sdk.models.organizations.MenigaOrganization;
 import com.meniga.sdk.models.organizations.MenigaRealmAccount;
 import com.meniga.sdk.models.organizations.MenigaRealmAuthResponse;
 import com.meniga.sdk.models.serverpublic.MenigaPublicSettings;
+import com.meniga.sdk.models.sync.MenigaSync;
+import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.models.terms.MenigaTermType;
 import com.meniga.sdk.models.terms.MenigaTerms;
 import com.meniga.sdk.models.transactions.MenigaComment;
@@ -44,13 +45,22 @@ import com.meniga.sdk.models.transactions.MenigaTransactionRule;
 import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
-import com.meniga.sdk.models.sync.MenigaSync;
-import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
+import com.meniga.sdk.webservices.budget.BudgetService;
+import com.meniga.sdk.webservices.budget.CreateBudget;
+import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
+import com.meniga.sdk.webservices.budget.GetBudget;
+import com.meniga.sdk.webservices.budget.GetBudgetEntries;
+import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.GetBudgets;
+import com.meniga.sdk.webservices.budget.UpdateBudget;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
+import com.meniga.sdk.webservices.budget.UpdateBudgetRules;
 import com.meniga.sdk.webservices.requests.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -58,16 +68,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.meniga.sdk.helpers.Objects.requireNonNull;
+import static java.util.Collections.unmodifiableMap;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class PersistenceDelegate {
 
-	private Map<Service, MenigaAPI> clients;
+	private Map<Service, ?> services = Collections.emptyMap();
 	private PersistenceProvider provider;
 
-	public void setApis(Map<Service, MenigaAPI> clients) {
-		this.clients = clients;
+	public void setApis(Map<Service, ?> clients) {
+		this.services = unmodifiableMap(requireNonNull(clients));
 	}
 
 	public void setProvider(PersistenceProvider provider) {
@@ -88,6 +101,10 @@ public class PersistenceDelegate {
 
 			}
 		});
+	}
+
+	private <E> Result<E> call(Call<E> call) {
+		return MenigaSDK.getMenigaSettings().getTaskAdapter().adapt(call, null);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -685,22 +702,60 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.BUDGET).getBudgets(req.toQueryMap()));
+		return persist(req, getService(BudgetService.class).getBudgets(req.toQueryMap()));
+	}
+
+	public Result<MenigaBudget> getBudget(GetBudget parameters) {
+		if (provider.hasKey(parameters)) {
+			return createTask(provider.fetch(parameters));
+		}
+		return persist(parameters, getService(BudgetService.class).getBudget(Long.toString(parameters.getId()), parameters.toQueryMap()));
 	}
 
 	public Result<List<MenigaBudgetEntry>> getBudgetEntries(GetBudgetEntries req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.BUDGET).getBudgetEntries(Long.toString(req.id), req.toQueryMap()));
+		return persist(req, getService(BudgetService.class).getBudgetEntries(Long.toString(req.getId()), req.toQueryMap()));
+	}
+
+	public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntry parameters) {
+		return persist(parameters, getService(BudgetService.class).createBudgetEntry(Long.toString(budgetId), parameters));
+	}
+
+	public Result<Void> deleteBudgetEntry(long budgetId, long entryId) {
+		return call(getService(BudgetService.class).deleteBudgetEntry(Long.toString(budgetId), Long.toString(entryId)));
+	}
+
+	public Result<MenigaBudgetEntry> getBudgetEntry(GetBudgetEntryById request) {
+		if (provider.hasKey(request)) {
+			return createTask(provider.fetch(request));
+		}
+		return persist(request, getService(BudgetService.class).getBudgetEntry(Long.toString(request.getBudgetId()), Long.toString(request.getEntryId())));
+	}
+
+	public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry) {
+		return persist(updateBudgetEntry, getService(BudgetService.class).updateBudgetEntries(Long.toString(budgetId), Long.toString(entryId), updateBudgetEntry));
 	}
 
 	public Result<MenigaBudget> createBudget(CreateBudget req) {
-		return persist(req, getClient(Service.BUDGET).createBudget(req));
+		return persist(req, getService(BudgetService.class).createBudget(req));
 	}
 
-	public Result<Void> updateBudget(UpdateBudget req) {
-		return persist(req, getClient(Service.BUDGET).updateBudget(Long.toString(req.budgetId), req));
+	public Result<MenigaBudget> updateBudget(long budgetId, UpdateBudget parameters) {
+		return persist(parameters, getService(BudgetService.class).updateBudget(Long.toString(budgetId), parameters));
+	}
+
+	public Result<Void> updateBudgetRules(long budgetId, UpdateBudgetRules req) {
+		return call(getService(BudgetService.class).createBudgetRules(Long.toString(budgetId), req));
+	}
+
+	public Result<Void> deleteBudget(long budgetId) {
+		return call(getService(BudgetService.class).deleteBudget(Long.toString(budgetId)));
+	}
+
+	public Result<Void> resetBudget(long budgetId) {
+		return call(getService(BudgetService.class).resetBudget(Long.toString(budgetId)));
 	}
 
 	// --
@@ -772,13 +827,17 @@ public class PersistenceDelegate {
 	}
 
 	private MenigaAPI getClient(Service forService) {
-		if (!clients.containsKey(forService)) {
-			return clients.get(Service.ALL);
-		}
-		return clients.get(forService);
+		return !services.containsKey(forService)
+				? (MenigaAPI) services.get(Service.ALL)
+				: (MenigaAPI) services.get(forService);
 	}
 
-	Map<Service, MenigaAPI> getApis() {
-		return clients;
+	@SuppressWarnings("unchecked")
+	private <T> T getService(Class<T> serviceClass) {
+		return (T) services.get(Service.from(serviceClass));
+	}
+
+	Map<Service, ?> getApis() {
+		return services;
 	}
 }

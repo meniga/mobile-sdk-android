@@ -70,7 +70,7 @@ public class MenigaSyncTest {
 		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return gson.fromJson(
-					MenigaConverter.getAsObject(FileImporter.getJsonFileFromRaw("syncresponse.json")),
+					MenigaConverter.getAsObject(FileImporter.getInputStreamFromRaw("syncresponse.json")),
 					MenigaSync.class
 			);
 		} catch (IOException e) {

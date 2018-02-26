@@ -1,84 +1,93 @@
 package com.meniga.sdk.models.budget.operators;
 
 import com.meniga.sdk.MenigaSDK;
-import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
-import com.meniga.sdk.webservices.requests.GetBudgetEntries;
-import com.meniga.sdk.webservices.requests.GetBudgets;
-import com.meniga.sdk.webservices.requests.UpdateBudget;
+import com.meniga.sdk.webservices.budget.CreateBudget;
+import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
+import com.meniga.sdk.webservices.budget.GetBudget;
+import com.meniga.sdk.webservices.budget.GetBudgetEntries;
+import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.GetBudgets;
+import com.meniga.sdk.webservices.budget.UpdateBudget;
+import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
+import com.meniga.sdk.webservices.budget.UpdateBudgetRules;
 
-import org.joda.time.DateTime;
-import org.joda.time.Months;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
-    @Override
-    public Result<List<MenigaBudget>> getBudgets(BudgetType type) {
-        GetBudgets req = new GetBudgets();
-        req.type = type;
 
-        return MenigaSDK.executor().getBudgets(req);
+    @Override
+    public Result<List<MenigaBudget>> getBudgets(GetBudgets parameters) {
+        return MenigaSDK.executor().getBudgets(parameters);
     }
 
     @Override
-    public Result<List<MenigaBudgetEntry>> getBudgetEntries(long budgetId, DateTime start, DateTime end, List<Long> categoryIds, boolean allowIntersect) {
-        GetBudgetEntries req = new GetBudgetEntries();
-        req.id = budgetId;
-        req.startDate = start;
-        req.endDate = end;
-        req.categoryIds = categoryIds;
-        req.allowOverlappingEntries = allowIntersect;
+    public Result<MenigaBudget> getBudget(GetBudget parameters) {
+        return MenigaSDK.executor().getBudget(parameters);
+    }
 
-        return MenigaSDK.executor().getBudgetEntries(req);
+    @Override
+    public Result<MenigaBudget> updateBudget(long budgetId, UpdateBudget parameters) {
+        return MenigaSDK.executor().updateBudget(budgetId, parameters);
+    }
+
+    @Override
+    public Result<List<MenigaBudgetEntry>> getBudgetEntries(GetBudgetEntries parameters) {
+        return MenigaSDK.executor().getBudgetEntries(parameters);
+    }
+
+    @Override
+    public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntry parameters) {
+        return MenigaSDK.executor().createBudgetEntry(budgetId, parameters);
+    }
+
+    @Override
+    public Result<Void> deleteBudgetEntry(long budgetId, long entryId) {
+        return MenigaSDK.executor().deleteBudgetEntry(budgetId, entryId);
+    }
+
+    @Override
+    public Result<MenigaBudgetEntry> getBudgetEntry(GetBudgetEntryById getBudgetEntryById) {
+        return MenigaSDK.executor().getBudgetEntry(getBudgetEntryById);
+    }
+
+    @Override
+    public Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry) {
+        return MenigaSDK.executor().updateBudgetEntry(budgetId, entryId, updateBudgetEntry);
     }
 
     @Override
     public Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset) {
         CreateBudget req = new CreateBudget();
-        req.type = type;
-        req.name = name;
-        req.description = description;
-        req.accountIds = accountIds;
-        req.period = period.toString();
-        req.offset = periodOffset;
+        req.setType(type);
+        req.setName(name);
+        req.setDescription(description);
+        req.setAccountIds(accountIds);
+        req.setPeriod(period.toString());
+        req.setOffset(periodOffset);
 
         return MenigaSDK.executor().createBudget(req);
     }
 
     @Override
-    public Result<Void> updateBudget(long budgetId, MenigaDecimal targetAmount, DateTime startDate,
-                                     DateTime endDate, List<Long> catIds, int generationTypeValue,
-                                     DateTime repeatUntil) {
-        UpdateBudget req = new UpdateBudget();
-        req.budgetId = budgetId;
+    public Result<Void> updateBudgetRules(long budgetId, UpdateBudgetRules parameters) {
+        return MenigaSDK.executor().updateBudgetRules(budgetId, parameters);
+    }
 
-        UpdateBudget.UpdateBudgetData data = new UpdateBudget.UpdateBudgetData();
-        data.targetAmount = targetAmount;
-        data.startDate = startDate;
-        data.endDate = endDate;
-        data.categoryIds = catIds;
-        data.generationType = generationTypeValue;
+    @Override
+    public Result<Void> deleteBudget(long budgetId) {
+        return MenigaSDK.executor().deleteBudget(budgetId);
+    }
 
-        if (endDate == null/*endDate.getYear() == DateTime.now().getYear() && endDate.getMonthOfYear() == DateTime.now().getMonthOfYear()*/) {
-            data.recurringPattern = null;
-            data.repeatUntil = null;
-        } else {
-            data.recurringPattern = new UpdateBudget.RecurringPattern();
-            data.recurringPattern.monthInterval = Months.monthsBetween(endDate, startDate).getMonths();;
-            data.repeatUntil = endDate;
-        }
-
-        req.rules = new ArrayList<>();
-        req.rules.add(data);
-        return MenigaSDK.executor().updateBudget(req);
+    @Override
+    public Result<Void> resetBudget(long budgetId) {
+        return MenigaSDK.executor().resetBudget(budgetId);
     }
 }

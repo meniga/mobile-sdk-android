@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaDecimal implements Serializable, Comparable {
+public class MenigaDecimal implements Serializable, Comparable<MenigaDecimal> {
 
 	public static MenigaDecimal ZERO = new MenigaDecimal(0);
 
@@ -156,10 +156,6 @@ public class MenigaDecimal implements Serializable, Comparable {
 		}
 	}
 
-	public int compareTo(MenigaDecimal comp) {
-		return this.number.compareTo(comp.number);
-	}
-
 	public float floatValue() {
 		return this.number.floatValue();
 	}
@@ -185,11 +181,8 @@ public class MenigaDecimal implements Serializable, Comparable {
 	}
 
 	@Override
-	public int compareTo(Object another) {
-		if (!(another instanceof MenigaDecimal))
-			return 0;
-
-		return this.number.compareTo(((MenigaDecimal) another).number);
+	public int compareTo(MenigaDecimal another) {
+		return this.number.compareTo(another.number);
 	}
 
 	@Override

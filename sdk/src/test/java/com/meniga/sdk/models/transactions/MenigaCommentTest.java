@@ -109,7 +109,7 @@ public class MenigaCommentTest {
 		try {
 			categories = Arrays.asList(
 					gson.fromJson(MenigaConverter.getAsArray(
-							FileImporter.getJsonFileFromRaw("comments.json")),
+							FileImporter.getInputStreamFromRaw("comments.json")),
 							MenigaComment[].class
 					)
 			);

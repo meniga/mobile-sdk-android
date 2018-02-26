@@ -4,13 +4,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MenigaDecimal;
-import com.meniga.sdk.models.transactions.enums.FilterTimeGroup;
 
 import junit.framework.Assert;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
-
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,20 +34,17 @@ public class TransactionFilterTest{
 				.merchantIds(Arrays.asList(1L, 2L))
 				.tags(Collections.singletonList("test"))
 				.period(new DateTime("2012-08-16T07:00:00Z"), new DateTime("2012-08-16T23:00:00Z"))
+				.build();
+		TransactionsFilter filter2 = new TransactionsFilter.Builder()
 				.merchantTexts(Collections.singletonList("Hagkaup"))
 				.build();
-		TransactionsFilter filter2 = new TransactionsFilter
-				.Builder()
-				.timeGroup(FilterTimeGroup.CUSTOM)
-				.build();
-
-		JsonElement obj = GsonProvider.getGsonBuilder().toJsonTree(filter1);
-		JsonObject jsonFilter = obj.getAsJsonObject();
 
 		TransactionsFilter merged = new TransactionsFilter.Builder().mergeFilters(filter1, filter2).build();
-		Assert.assertTrue(merged.getTimeGroup() == FilterTimeGroup.CUSTOM);
+		Assert.assertEquals(merged.merchantTexts, Collections.singletonList("Hagkaup"));
 		Assert.assertTrue(merged.getSearchText().equals("Example"));
 
+		JsonElement obj = GsonProvider.getGsonBuilder().toJsonTree(merged);
+		JsonObject jsonFilter = obj.getAsJsonObject();
 		Assert.assertNotNull(jsonFilter);
 		Assert.assertEquals("Example", jsonFilter.get("searchText").getAsString());
 		String transIds = jsonFilter.get("ids").getAsJsonArray().toString();

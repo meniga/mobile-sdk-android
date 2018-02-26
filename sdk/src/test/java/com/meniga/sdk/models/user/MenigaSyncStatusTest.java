@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-
 import java.io.IOException;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -66,7 +65,7 @@ public class MenigaSyncStatusTest {
 		Gson gson = GsonProvider.getGsonBuilder();
 		try {
 			return gson.fromJson(
-					MenigaConverter.getAsObject(FileImporter.getJsonFileFromRaw("syncstatus.json")),
+					MenigaConverter.getAsObject(FileImporter.getInputStreamFromRaw("syncstatus.json")),
 					MenigaSyncStatus.class
 			);
 		} catch (IOException e) {

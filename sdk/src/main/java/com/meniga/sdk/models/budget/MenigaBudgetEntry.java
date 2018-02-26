@@ -9,6 +9,7 @@ import com.meniga.sdk.models.budget.enums.GenerationType;
 import com.meniga.sdk.models.budget.enums.GenerationTypeValue;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 import com.meniga.sdk.models.categories.MenigaCategory;
+import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
 
 import org.joda.time.DateTime;
 
@@ -154,7 +155,7 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 		this.budgetId = in.readLong();
 		this.generationType = in.readInt();
 		this.spentAmount = (MenigaDecimal) in.readSerializable();
-		this.categoryIds = new ArrayList<Long>();
+		this.categoryIds = new ArrayList<>();
 		in.readList(this.categoryIds, Long.class.getClassLoader());
 	}
 
@@ -183,43 +184,77 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 	*/
 
 	public static Result<List<MenigaBudgetEntry>> fetch(long budgetId) {
-		return apiOperator.getBudgetEntries(
+		return fetch(
 				budgetId,
 				DateTime.now().withDayOfMonth(1).withTimeAtStartOfDay(),
-				DateTime.now().withDayOfMonth(1).withTimeAtStartOfDay().plusMonths(1).minusDays(1),
-				null,
-				true
-		);
+				DateTime.now().withDayOfMonth(1).withTimeAtStartOfDay().plusMonths(1).minusDays(1));
 	}
 
 	public static Result<List<MenigaBudgetEntry>> fetch(long budgetId, DateTime month) {
-		return apiOperator.getBudgetEntries(
+		return fetch(
 				budgetId,
 				month.withDayOfMonth(1).withTimeAtStartOfDay(),
-				month.withDayOfMonth(1).withTimeAtStartOfDay().plusMonths(1).minusDays(1),
-				null,
-				true
-		);
+				month.withDayOfMonth(1).withTimeAtStartOfDay().plusMonths(1).minusDays(1));
 	}
 
 	public static Result<List<MenigaBudgetEntry>> fetch(long budgetId, DateTime from, DateTime to) {
-		return apiOperator.getBudgetEntries(budgetId, from, to, null, true);
+		return fetch(budgetId, from, to, null);
 	}
 
 	public static Result<List<MenigaBudgetEntry>> fetch(long budgetId, DateTime from, DateTime to, List<Long> categoryIds) {
-		return apiOperator.getBudgetEntries(budgetId, from, to, categoryIds, true);
+		FetchBudgetEntriesFilter filter = new FetchBudgetEntriesFilter(budgetId);
+		filter.setStartDate(from);
+		filter.setEndDate(to);
+		filter.setCategoryIds(categoryIds);
+		filter.setAllowOverlappingEntries(true);
+		return fetch(filter);
 	}
 
-	public static Result<Void> update(long budgetId, MenigaDecimal targetAmount, DateTime startDate, DateTime endDate,
-									  MenigaCategory category, GenerationType generationType, int generationTypeValue,
-									  DateTime repeatUntil) {
-		List<Long> catIds = new ArrayList<>();
-		catIds.add(category.getId());
-		if (generationType == GenerationType.SAME_AS_MONTH) {
-			generationTypeValue = -Math.abs(generationTypeValue);
-		} else if (generationType == GenerationType.AVERAGE_MONTHS) {
-			generationTypeValue = Math.abs(generationTypeValue);
-		}
-		return apiOperator.updateBudget(budgetId, targetAmount, startDate, endDate, catIds, generationTypeValue, repeatUntil);
+	public static Result<List<MenigaBudgetEntry>> fetch(FetchBudgetEntriesFilter filter) {
+		return apiOperator.getBudgetEntries(FetchBudgetEntriesFilterExtensions.toGetBudgetEntries(filter));
+	}
+
+	public static Result<MenigaBudgetEntry> fetch(long budgetId, long entryId) {
+		return apiOperator.getBudgetEntry(new GetBudgetEntryById(budgetId, entryId));
+	}
+
+	/**
+	 * Use {@link #update(long, BudgetRulesUpdate)} instead.
+	 */
+	@Deprecated
+	public static Result<Void> update(
+			long budgetId,
+			MenigaDecimal targetAmount,
+			DateTime startDate,
+			DateTime endDate,
+			MenigaCategory category,
+			GenerationType generationType,
+			int generationValue,
+			DateTime wasNotUsed) {
+		GenerationTypeValue generationTypeValue = new GenerationTypeValue(generationValue);
+		generationTypeValue.setType(generationType);
+
+		BudgetRulesUpdate parameters = new BudgetRulesUpdate(startDate, category.getId());
+		parameters.setTargetAmount(targetAmount);
+		parameters.setEndDate(endDate);
+		parameters.setGenerationTypeValue(generationTypeValue);
+
+		return update(budgetId, parameters);
+	}
+
+	public static Result<Void> update(long budgetId, BudgetRulesUpdate parameters) {
+		return apiOperator.updateBudgetRules(budgetId, BudgetRulesUpdateExtensions.toUpdateBudgetRules(parameters));
+	}
+
+	public static Result<List<MenigaBudgetEntry>> create(long budgetId, NewBudgetEntry parameters) {
+		return apiOperator.createBudgetEntry(budgetId, CreateBudgetEntryExtensions.toCreateBudgetEntry(parameters));
+	}
+
+	public Result<MenigaBudgetEntry> update(BudgetEntryUpdate parameters) {
+		return apiOperator.updateBudgetEntry(budgetId, id, BudgetEntryUpdateExtensions.toUpdateBudgetEntry(parameters));
+	}
+
+	public Result<Void> delete() {
+		return apiOperator.deleteBudgetEntry(budgetId, id);
 	}
 }

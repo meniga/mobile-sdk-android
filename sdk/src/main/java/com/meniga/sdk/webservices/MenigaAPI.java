@@ -5,9 +5,6 @@ import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.accounts.MenigaAccountBalanceHistory;
 import com.meniga.sdk.models.accounts.MenigaAccountType;
 import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
-import com.meniga.sdk.models.budget.MenigaBudget;
-import com.meniga.sdk.models.budget.MenigaBudgetEntry;
-import com.meniga.sdk.models.budget.operators.CreateBudget;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -30,6 +27,8 @@ import com.meniga.sdk.models.organizations.MenigaOrganization;
 import com.meniga.sdk.models.organizations.MenigaRealmAccount;
 import com.meniga.sdk.models.organizations.MenigaRealmAuthResponse;
 import com.meniga.sdk.models.serverpublic.MenigaPublicSettings;
+import com.meniga.sdk.models.sync.MenigaSync;
+import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.models.terms.MenigaTermType;
 import com.meniga.sdk.models.terms.MenigaTerms;
 import com.meniga.sdk.models.transactions.MenigaComment;
@@ -40,8 +39,6 @@ import com.meniga.sdk.models.transactions.MenigaTransactionRule;
 import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
-import com.meniga.sdk.models.sync.MenigaSync;
-import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
@@ -67,7 +64,6 @@ import com.meniga.sdk.webservices.requests.SplitTransaction;
 import com.meniga.sdk.webservices.requests.StartSync;
 import com.meniga.sdk.webservices.requests.UpdateAccount;
 import com.meniga.sdk.webservices.requests.UpdateAccountMetadata;
-import com.meniga.sdk.webservices.requests.UpdateBudget;
 import com.meniga.sdk.webservices.requests.UpdateChallenge;
 import com.meniga.sdk.webservices.requests.UpdateComment;
 import com.meniga.sdk.webservices.requests.UpdateHistoryBalance;
@@ -447,21 +443,6 @@ public interface MenigaAPI {
 
 	@DELETE(APIConst.URL_UPCOMING + APIConst.UPCOMING_RECURRINC + "/{id}")
 	Call<Void> deleteUpcomingSeries(@Path("id") long id);
-
-	// --
-	// Budget
-	// --
-	@GET(APIConst.URL_BUDGETS)
-	Call<List<MenigaBudget>> getBudgets(@QueryMap Map<String, String> query);
-
-	@GET(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_ENTRIES)
-	Call<List<MenigaBudgetEntry>> getBudgetEntries(@Path("id") String id, @QueryMap Map<String, String> query);
-
-	@POST(APIConst.URL_BUDGETS)
-	Call<MenigaBudget> createBudget(@Body CreateBudget req);
-
-	@POST(APIConst.URL_BUDGETS + "/{id}" + APIConst.BUDGET_RULES)
-	Call<Void> updateBudget(@Path("id") String id, @Body UpdateBudget req);
 
 	// --
 	// Challenges

@@ -1,15 +1,17 @@
 package com.meniga.sdk.webservices;
 
-
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.providers.BasicAuthenticator;
 
 import junit.framework.Assert;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import okhttp3.HttpUrl;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -28,7 +30,9 @@ public class WebClientTest {
 				.authenticator(new BasicAuthenticator())
 				.build();
 		MenigaSDK.init(settings);
-		Assert.assertEquals(MenigaSDK.executor().getApis().keySet().size(), 1);
+		assertThat(MenigaSDK.executor().getApis())
+				.containsKey(Service.ALL)
+				.containsKey(Service.BUDGET);
 	}
 
 	@Test
@@ -39,6 +43,9 @@ public class WebClientTest {
 				.addEndpointForService(Service.TRANSACTIONS, "http://example.transactions.com")
 				.build();
 		MenigaSDK.init(settings);
-		Assert.assertEquals(MenigaSDK.executor().getApis().keySet().size(), 2);
+		assertThat(MenigaSDK.executor().getApis())
+				.containsKey(Service.ALL)
+				.containsKey(Service.BUDGET)
+				.containsKey(Service.TRANSACTIONS);
 	}
 }

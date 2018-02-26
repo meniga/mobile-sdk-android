@@ -7,7 +7,6 @@ import com.meniga.sdk.utils.FileImporter;
 
 import org.junit.Test;
 
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -46,7 +45,7 @@ public class MenigaTransactionListTest{
 		try {
 			List<MenigaTransaction> list = Arrays.asList(
 					gson.fromJson(
-							MenigaConverter.getAsArray(FileImporter.getJsonFileFromRaw("transactions.json")), MenigaTransaction[].class
+							MenigaConverter.getAsArray(FileImporter.getInputStreamFromRaw("transactions.json")), MenigaTransaction[].class
 					)
 			);
 			items = new MenigaTransactionPage();

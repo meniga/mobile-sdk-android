@@ -148,7 +148,7 @@ public class MenigaUpcomingTest {
 		try {
 			items = gson.fromJson(
 					MenigaConverter.getAsArray(
-							FileImporter.getJsonFileFromRaw("upcoming.json")),
+							FileImporter.getInputStreamFromRaw("upcoming.json")),
 					MenigaUpcoming[].class
 			);
 		} catch (IOException e) {

@@ -4,6 +4,7 @@ import android.os.Parcel;
 
 import com.meniga.sdk.models.MockClient;
 import com.meniga.sdk.models.MockInterceptor;
+import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.webservices.requests.GetEvent;
 import com.meniga.sdk.webservices.requests.GetFeed;
 
@@ -13,7 +14,6 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-
 
 import java.io.IOException;
 
@@ -58,7 +58,7 @@ public class MenigaFeedTest {
 
 		// Reconstruct object from parcel and asserts:
 		MenigaFeed createdFromParcel = com.meniga.sdk.models.feed.MenigaFeed.CREATOR.createFromParcel(parcel);
-		Assert.assertTrue(feed.equals(createdFromParcel));
+		Assert.assertEquals(feed, createdFromParcel);
 	}
 
 	@Test
@@ -67,10 +67,12 @@ public class MenigaFeedTest {
 		query.dateFrom = DateTime.now();
 		query.dateTo = DateTime.now();
 		query.take = 20;
+
 		Call<MenigaFeed> call = MockClient.getApi(interceptor).getFeed(query.toQueryMap());
 		MenigaFeed feed = call.execute().body();
+
 		Assert.assertNotNull(feed);
-		Assert.assertTrue(feed.get(0) instanceof MenigaTransactionCountEvent);
+		Assert.assertEquals(MenigaTransactionCountEvent.class, feed.get(0).getClass());
 	}
 
 	@Test
@@ -82,7 +84,7 @@ public class MenigaFeedTest {
 		Call<MenigaFeed> call = MockClient.getApi(interceptor).getFeed(query.toQueryMap());
 		MenigaFeed feed = call.execute().body();
 		Assert.assertNotNull(feed);
-		Assert.assertTrue(feed.get(6) instanceof MenigaTransactionEvent);
+		Assert.assertEquals(MenigaTransaction.class, feed.get(6).getClass());
 	}
 
 	@Test

@@ -14,7 +14,7 @@ public class GenerationTypeValue implements Parcelable, Serializable {
     private GenerationType type;
 
     public GenerationTypeValue(int val) {
-        value = val;
+        this.value = val;
         if (val == 0) {
             type = GenerationType.MANUAL;
         } else if (val < 0) {

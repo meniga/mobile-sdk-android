@@ -1,0 +1,88 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "budgetId": 1,
+      "targetAmount": 0,
+      "startDate": "2020-01-01T00:00:00",
+      "endDate": "2020-01-31T00:00:00",
+      "updatedAt": "2018-02-12T15:44:26.6304154+00:00",
+      "categoryIds": [
+        2
+      ],
+      "generationType": 3
+    },
+    {
+      "id": 2,
+      "budgetId": 1,
+      "targetAmount": 0,
+      "startDate": "2020-02-01T00:00:00",
+      "endDate": "2020-02-29T00:00:00",
+      "updatedAt": "2018-02-12T15:44:26.6304154+00:00",
+      "categoryIds": [
+        2
+      ],
+      "generationType": 3
+    },
+    {
+      "id": 3,
+      "budgetId": 1,
+      "targetAmount": 0,
+      "startDate": "2020-03-01T00:00:00",
+      "endDate": "2020-03-31T00:00:00",
+      "updatedAt": "2018-02-12T15:44:26.6304154+00:00",
+      "categoryIds": [
+        2
+      ],
+      "generationType": 3
+    },
+    {
+      "id": 4,
+      "budgetId": 1,
+      "targetAmount": 0,
+      "startDate": "2020-04-01T00:00:00",
+      "endDate": "2020-04-30T00:00:00",
+      "updatedAt": "2018-02-12T15:44:26.6304154+00:00",
+      "categoryIds": [
+        2
+      ],
+      "generationType": 3
+    },
+    {
+      "id": 5,
+      "budgetId": 1,
+      "targetAmount": 0,
+      "startDate": "2020-05-01T00:00:00",
+      "endDate": "2020-05-31T00:00:00",
+      "updatedAt": "2018-02-12T15:44:26.6304154+00:00",
+      "categoryIds": [
+        2
+      ],
+      "generationType": 3
+    },
+    {
+      "id": 6,
+      "budgetId": 1,
+      "targetAmount": 0,
+      "startDate": "2020-06-01T00:00:00",
+      "endDate": "2020-06-30T00:00:00",
+      "updatedAt": "2018-02-12T15:44:26.6304154+00:00",
+      "categoryIds": [
+        2
+      ],
+      "generationType": 3
+    },
+    {
+      "id": 7,
+      "budgetId": 1,
+      "targetAmount": 0,
+      "startDate": "2020-07-01T00:00:00",
+      "endDate": "2020-07-31T00:00:00",
+      "updatedAt": "2018-02-12T15:44:26.6304154+00:00",
+      "categoryIds": [
+        2
+      ],
+      "generationType": 3
+    }
+  ]
+}

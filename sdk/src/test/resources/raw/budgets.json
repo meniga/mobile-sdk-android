@@ -1,29 +1,16 @@
 {
   "data": [
     {
-      "isDefault": false,
+      "id": 0,
+      "type": "Budget",
+      "name": "string",
+      "description": "string",
       "accountIds": [
-        1
+        0
       ],
-      "created": "2017-01-23T04:56:07.000+00:00",
-      "name": "Basic Budget 1",
-      "description": "A basic budget of budget type",
-      "id": 1,
-      "type": "budget"
-    },
-    {
-      "isDefault": true,
-      "period": "month",
+      "period": "Month",
       "offset": 0,
-      "accountIds": [
-        1,
-        2
-      ],
-      "created": "2017-01-23T04:56:07.000+00:00",
-      "name": "My Planning Budget",
-      "description": "This is my favorite planning budget. Good old planning",
-      "id": 2,
-      "type": "planning"
+      "created": "2018-02-02T11:49:03.499Z"
     }
   ]
 }
