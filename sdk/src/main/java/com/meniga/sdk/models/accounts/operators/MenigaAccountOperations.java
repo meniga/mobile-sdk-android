@@ -7,6 +7,7 @@ import com.meniga.sdk.models.accounts.MenigaAccountBalanceHistory;
 import com.meniga.sdk.models.accounts.MenigaAccountType;
 import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.accounts.enums.AccountBalanceHistorySort;
+import com.meniga.sdk.models.accounts.enums.AccountCategory;
 
 import org.joda.time.DateTime;
 
@@ -26,6 +27,8 @@ public interface MenigaAccountOperations {
 	Result<Void> deleteAccount(long accountId);
 
 	Result<List<MenigaAccountType>> getAccountTypes();
+
+	Result<List<AccountCategory>> getCategories();
 
 	Result<List<MenigaAuthorizationType>> getAccountAuthorizationTypes();
 

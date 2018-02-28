@@ -1,14 +1,15 @@
-package com.meniga.sdk.helpers;
+package com.meniga.sdk.models;
 
-import com.meniga.sdk.models.Merge;
 import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.accounts.MenigaAccountTest;
 
 import org.junit.Test;
 import org.junit.runners.model.InitializationError;
 
+import java.util.Collections;
 import java.util.List;
 
+import static com.meniga.sdk.models.accounts.MenigaAccountFactory.createAccount;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
@@ -17,13 +18,8 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class MergeTest {
 	@Test
 	public void testMerge() throws InitializationError, IllegalAccessException {
-		MenigaAccountTest test = new MenigaAccountTest();
-		List<MenigaAccount> accs = test.gson();
-
-		assertThat(accs.size()).isGreaterThan(1);
-
-		MenigaAccount acc1 = accs.get(0);
-		MenigaAccount acc2 = accs.get(1);
+		MenigaAccount acc1 = createAccount(1);
+		MenigaAccount acc2 = createAccount(2);
 
 		String mergeName = "Test that merging works";
 		acc2.setName(mergeName);

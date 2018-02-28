@@ -76,11 +76,10 @@ public class MenigaComment extends StateObject implements Parcelable, Serializab
 	 * @param comment The new comment.
 	 */
 	public void setComment(String comment) {
-		if (this.hasChanged(this.comment, comment)) {
-			return;
+		if (hasChanged(this.comment, comment)) {
+			changed();
+			this.comment = comment;
 		}
-		this.changed();
-		this.comment = comment;
 	}
 
 	/**

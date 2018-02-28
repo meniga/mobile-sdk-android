@@ -31,6 +31,11 @@ public class MenigaAuthorizationType implements Parcelable, Serializable {
 		this.name = in.readString();
 	}
 
+	MenigaAuthorizationType(long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	/**
 	 * @return The ID of the authorization type.
 	 */

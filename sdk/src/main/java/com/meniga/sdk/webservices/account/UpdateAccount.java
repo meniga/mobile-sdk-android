@@ -1,4 +1,6 @@
-package com.meniga.sdk.webservices.requests;
+package com.meniga.sdk.webservices.account;
+
+import com.meniga.sdk.webservices.requests.QueryRequestObject;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.

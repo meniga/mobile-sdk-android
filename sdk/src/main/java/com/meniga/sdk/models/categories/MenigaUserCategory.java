@@ -57,11 +57,10 @@ public class MenigaUserCategory extends MenigaCategory implements Serializable {
 	 * @param name The new name of this user category
 	 */
 	public void setName(String name) {
-		if (this.hasChanged(super.name, name)) {
-			return;
+		if (hasChanged(super.name, name)) {
+			changed();
+			super.name = name;
 		}
-		this.changed();
-		super.name = name;
 	}
 
 	/**
@@ -70,11 +69,10 @@ public class MenigaUserCategory extends MenigaCategory implements Serializable {
 	 * @param isFixedExpenses Wheather this user category is fixed expenses or not
 	 */
 	public void setIsFixedExpenses(boolean isFixedExpenses) {
-		if (this.hasChanged(super.isFixedExpenses, isFixedExpenses)) {
-			return;
+		if (hasChanged(super.isFixedExpenses, isFixedExpenses)) {
+			changed();
+			super.isFixedExpenses = isFixedExpenses;
 		}
-		this.changed();
-		super.isFixedExpenses = isFixedExpenses;
 	}
 
 	/**
@@ -83,11 +81,10 @@ public class MenigaUserCategory extends MenigaCategory implements Serializable {
 	 * @param categoryType The new type of this user category
 	 */
 	public void setCategoryType(CategoryType categoryType) {
-		if (!this.hasChanged(super.categoryType, categoryType)) {
-			return;
+		if (hasChanged(super.categoryType, categoryType)) {
+			changed();
+			super.categoryType = categoryType;
 		}
-		this.changed();
-		super.categoryType = categoryType;
 	}
 
     /*
@@ -100,11 +97,10 @@ public class MenigaUserCategory extends MenigaCategory implements Serializable {
 	 * @param parentCategoryId The new parent category id of this child user category
 	 */
 	public void setParentCategoryId(long parentCategoryId) {
-		if (this.hasChanged(super.parentCategoryId, parentCategoryId)) {
-			return;
+		if (hasChanged(super.parentCategoryId, parentCategoryId)) {
+			changed();
+			super.parentCategoryId = parentCategoryId;
 		}
-		this.changed();
-		super.parentCategoryId = parentCategoryId;
 	}
 
 	@Override

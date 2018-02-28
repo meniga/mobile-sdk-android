@@ -35,6 +35,10 @@ public class MenigaRealmAccount extends QueryRequestObject implements Parcelable
 		return accountIdentifier;
 	}
 
+	/**
+	 * This method is not reliable. Use
+	 */
+	@Deprecated
 	public AccountCategory getAccountTypeId() {
 		return AccountCategory.fromId(accountTypeId);
 	}

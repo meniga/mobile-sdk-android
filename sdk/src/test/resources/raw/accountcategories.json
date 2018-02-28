@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "name": "Unknown",
+      "parentId": null,
+      "parentName": null
+    },
+    {
+      "id": 1,
+      "name": "Current",
+      "parentId": null,
+      "parentName": null
+    },
+    {
+      "id": 2,
+      "name": "Credit",
+      "parentId": null,
+      "parentName": null
+    },
+    {
+      "id": 3,
+      "name": "Savings",
+      "parentId": null,
+      "parentName": null
+    },
+    {
+      "id": 4,
+      "name": "Loan",
+      "parentId": null,
+      "parentName": null
+    },
+    {
+      "id": 5,
+      "name": "Wallet",
+      "parentId": null,
+      "parentName": null
+    },
+    {
+      "id": 21,
+      "name": "Manual",
+      "parentId": null,
+      "parentName": null
+    },
+    {
+      "id": 22,
+      "name": "Asset",
+      "parentId": null,
+      "parentName": null
+    }
+  ]
+}

@@ -147,11 +147,10 @@ public class MenigaNetWorth extends StateObject implements Serializable, Parcela
 	 * @param name Set the name for the NetWorth account.
 	 */
 	public void setName(String name) {
-		if (this.hasChanged(this.accountName, name)) {
-			return;
+		if (hasChanged(this.accountName, name)) {
+			changed();
+			this.accountName = name;
 		}
-		this.changed();
-		this.accountName = name;
 	}
 
 	/**
@@ -192,11 +191,10 @@ public class MenigaNetWorth extends StateObject implements Serializable, Parcela
 	 * @param isExcluded Set if the NetWorth should be excluded or not.
 	 */
 	public void setIsExcluded(Boolean isExcluded) {
-		if (this.hasChanged(this.isExcluded, isExcluded)) {
-			return;
+		if (hasChanged(this.isExcluded, isExcluded)) {
+			changed();
+			this.isExcluded = isExcluded;
 		}
-		this.changed();
-		this.isExcluded = isExcluded;
 	}
 
 	/**
@@ -218,11 +216,10 @@ public class MenigaNetWorth extends StateObject implements Serializable, Parcela
 	 *                       this way, only updating the most recent net worth balance will do that.
 	 */
 	public void setCurrentBalance(MenigaDecimal currentBalance) {
-		if (this.hasChanged(this.currentBalance, currentBalance)) {
-			return;
+		if (hasChanged(this.currentBalance, currentBalance)) {
+			changed();
+			this.currentBalance = currentBalance;
 		}
-		this.changed();
-		this.currentBalance = currentBalance;
 	}
 
     /*

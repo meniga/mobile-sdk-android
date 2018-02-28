@@ -3,6 +3,7 @@ package com.meniga.sdk.helpers;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.categories.MenigaCategoryScore;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.webservices.serializers.BudgetDateSerializer;

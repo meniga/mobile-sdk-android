@@ -2,16 +2,20 @@ package com.meniga.sdk.providers;
 
 import com.meniga.sdk.adapters.TaskAdapter;
 
+import kotlin.jvm.functions.Function1;
 import retrofit2.Call;
 
 import com.meniga.sdk.ErrorHandler;
 import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.MTask;
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.helpers.ResultMapper;
 import com.meniga.sdk.providers.tasks.Continuation;
 import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.providers.tasks.TaskCompletionSource;
 import com.meniga.sdk.webservices.MenigaWebException;
+
+import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -114,12 +118,19 @@ public class BasicTaskAdapter implements TaskAdapter {
 			public void cancel() {
 				finalRequest.cancel();
 			}
+
+			@NotNull
+			@Override
+			public <R> Result<R> map(@NotNull Function1<? super T, ? extends R> mapper) {
+				return finalRequest.map(mapper);
+			}
 		};
 	}
 
 	@Override
 	public <T> Result<T> intercept(final Task<T> task, Interceptor<T> intercept) {
-		Result<T> result = new Result<T>() {
+		final Result<T> result = new Result<T>() {
+
 			@Override
 			public Task<T> getTask() {
 				return task;
@@ -128,6 +139,12 @@ public class BasicTaskAdapter implements TaskAdapter {
 			@Override
 			public void cancel() {
 				// Not supported when intercepting with tasks
+			}
+
+			@NotNull
+			@Override
+			public <R> Result<R> map(@NotNull Function1<? super T, ? extends R> mapper) {
+				return new ResultMapper<>(this, mapper);
 			}
 		};
 		return intercept(result, intercept);

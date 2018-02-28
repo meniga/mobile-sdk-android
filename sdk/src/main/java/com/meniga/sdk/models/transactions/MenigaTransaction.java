@@ -265,10 +265,9 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public void setCategoryId(long categoryId) {
 		if (hasChanged(this.categoryId, categoryId)) {
-			return;
+			changed();
+			this.categoryId = categoryId;
 		}
-		changed();
-		this.categoryId = categoryId;
 	}
 
 	/**
@@ -293,10 +292,9 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public void setDate(DateTime date) {
 		if (hasChanged(this.date, date)) {
-			return;
+			changed();
+			this.date = date;
 		}
-		changed();
-		this.date = date;
 	}
 
 	/**
@@ -311,10 +309,9 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public void setIsRead(boolean isRead) {
 		if (hasChanged(this.isRead, isRead)) {
-			return;
+			changed();
+			this.isRead = isRead;
 		}
-		changed();
-		this.isRead = isRead;
 	}
 
 	public void setIsReadAndUpdate() {
@@ -334,10 +331,9 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public void setIsFlagged(boolean isFlagged) {
 		if (hasChanged(this.isFlagged, isFlagged)) {
-			return;
+			changed();
+			this.isFlagged = isFlagged;
 		}
-		changed();
-		this.isFlagged = isFlagged;
 	}
 
 	/**
@@ -352,10 +348,9 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public void setHasUncertainCategorization(boolean uncertain) {
 		if (hasChanged(this.hasUncertainCategorization, uncertain)) {
-			return;
+			changed();
+			this.hasUncertainCategorization = uncertain;
 		}
-		changed();
-		this.hasUncertainCategorization = uncertain;
 	}
 
 	/**

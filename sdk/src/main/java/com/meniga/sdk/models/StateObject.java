@@ -1,10 +1,7 @@
 package com.meniga.sdk.models;
 
 import com.meniga.sdk.ErrorHandler;
-import com.meniga.sdk.helpers.MenigaDecimal;
-import com.meniga.sdk.models.categories.enums.CategoryType;
-
-import org.joda.time.DateTime;
+import com.meniga.sdk.helpers.Objects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,46 +55,7 @@ public abstract class StateObject implements Cloneable {
 		return newList;
 	}
 
-	protected boolean hasChanged(Boolean par1, Boolean par2) {
-		return par1 == null && par2 == null || (par1 != null && par2 != null && !par1 != par2);
-	}
-
-	protected boolean hasChanged(String par1, String par2) {
-		return par1 == null && par2 == null || (par1 != null && par2 != null && par1.equals(par2));
-	}
-
-	protected boolean hasChanged(List<String> par1, List<String> par2) {
-		if (par1 == null || par2 == null) {
-			return true;
-		}
-		if (par1.size() != par2.size()) {
-			return false;
-		}
-		for (int i = 0; i < par1.size(); i++) {
-			if (!par1.get(i).equals(par2.get(i))) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	protected boolean hasChanged(DateTime par1, DateTime par2) {
-		return par1 == null && par2 == null || (par1 != null && par2 != null && par1.equals(par2));
-	}
-
-	protected boolean hasChanged(Long par1, Long par2) {
-		return par1 == null && par2 == null || (par1 != null && par2 != null && par1.equals(par2));
-	}
-
-	protected boolean hasChanged(MenigaDecimal par1, MenigaDecimal par2) {
-		return par1 == null && par2 == null || (par1 != null && par2 != null && par1.doubleValue() == par2.doubleValue());
-	}
-
-	protected boolean hasChanged(CategoryType par1, CategoryType par2) {
-		return !(par1 == null && par2 == null) && (par1 == null || par2 == null || par1 != par2);
-	}
-
-	protected boolean hasChanged(int par1, int par2) {
-		return par1 == par2;
+	protected <T> boolean hasChanged(T par1, T par2) {
+		return !Objects.equals(par1, par2);
 	}
 }

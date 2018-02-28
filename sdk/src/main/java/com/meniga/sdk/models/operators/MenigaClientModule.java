@@ -2,7 +2,7 @@ package com.meniga.sdk.models.operators;
 
 import com.meniga.sdk.ErrorHandler;
 import com.meniga.sdk.models.accounts.operators.MenigaAccountOperations;
-import com.meniga.sdk.models.accounts.operators.MenigaAccountOperationsImp;
+import com.meniga.sdk.models.accounts.MenigaAccountOperationsImp;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperationsImp;
 import com.meniga.sdk.models.categories.operators.MenigaCategoryOperations;

@@ -19,13 +19,6 @@ class APIConst {
 	// Tags
 	static final String URL_TAGS = "tags";
 
-	// Accounts
-	static final String URL_ACCOUNTS = "accounts";
-	static final String ACCOUNT_TYPES = "accounttypes";
-	static final String ACCOUNT_AUTHORIZATION_TYPES = "authorizationtypes";
-	static final String ACCOUNT_METADATA = "metadata";
-	static final String ACCOUNT_BALANCE_HISTORY = "history";
-
 	// Sync
 	static final String URL_SYNC = "sync";
 	static final String REALM = "/realm";

@@ -34,6 +34,13 @@ public class MenigaAccountType implements Parcelable, Serializable {
 		this.parentName = in.readString();
 	}
 
+	MenigaAccountType(long id, String name, long parentId, String parentName) {
+		this.id = id;
+		this.name = name;
+		this.parentId = parentId;
+		this.parentName = parentName;
+	}
+
 	/**
 	 * @return The ID of the account type.
 	 */

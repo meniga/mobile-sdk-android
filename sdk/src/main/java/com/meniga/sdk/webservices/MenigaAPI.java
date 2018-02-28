@@ -1,10 +1,6 @@
 package com.meniga.sdk.webservices;
 
 import com.meniga.sdk.helpers.KeyVal;
-import com.meniga.sdk.models.accounts.MenigaAccount;
-import com.meniga.sdk.models.accounts.MenigaAccountBalanceHistory;
-import com.meniga.sdk.models.accounts.MenigaAccountType;
-import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -63,8 +59,6 @@ import com.meniga.sdk.webservices.requests.SetSubscription;
 import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
 import com.meniga.sdk.webservices.requests.SplitTransaction;
 import com.meniga.sdk.webservices.requests.StartSync;
-import com.meniga.sdk.webservices.requests.UpdateAccount;
-import com.meniga.sdk.webservices.requests.UpdateAccountMetadata;
 import com.meniga.sdk.webservices.requests.UpdateChallenge;
 import com.meniga.sdk.webservices.requests.UpdateComment;
 import com.meniga.sdk.webservices.requests.UpdateHistoryBalance;
@@ -174,39 +168,6 @@ public interface MenigaAPI {
 
 	@PUT(APIConst.URL_TRANSACTIONS + "/" + APIConst.RULES + "/{id}")
 	Call<Void> updateTransactionRule(@Path("id") long id, @QueryMap Map<String, String> queryMap, @Body UpdateTransactionRule req);
-
-	// --
-	// Accounts
-	// --
-	@GET(APIConst.URL_ACCOUNTS)
-	Call<List<MenigaAccount>> getAccounts(@QueryMap Map<String, String> queryMap);
-
-	@GET(APIConst.URL_ACCOUNTS + "/{id}")
-	Call<MenigaAccount> getAccount(@Path("id") long accountId);
-
-	@PUT(APIConst.URL_ACCOUNTS + "/{id}")
-	Call<Void> updateAccount(@Path("id") long accountId, @Body UpdateAccount req);
-
-	@DELETE(APIConst.URL_ACCOUNTS + "/{id}")
-	Call<Void> deleteAccount(@Path("id") long accountId);
-
-	@GET(APIConst.URL_ACCOUNTS + "/" + APIConst.ACCOUNT_TYPES)
-	Call<List<MenigaAccountType>> getAccountTypes();
-
-	@GET(APIConst.URL_ACCOUNTS + "/" + APIConst.ACCOUNT_AUTHORIZATION_TYPES)
-	Call<List<MenigaAuthorizationType>> getAccountAuthorizationTypes();
-
-	@GET(APIConst.URL_ACCOUNTS + "/{id}/" + APIConst.ACCOUNT_METADATA)
-	Call<List<KeyVal<String, String>>> getAccountMetadata(@Path("id") long accountId);
-
-	@PUT(APIConst.URL_ACCOUNTS + "/{id}/" + APIConst.ACCOUNT_METADATA)
-	Call<KeyVal<String, String>> updateAccountMetadata(@Path("id") long accountId, @Body UpdateAccountMetadata req);
-
-	@GET(APIConst.URL_ACCOUNTS + "/{id}/" + APIConst.ACCOUNT_METADATA + "/{name}")
-	Call<KeyVal<String, String>> getAccountMetadataKeyVal(@Path("id") long accountId, @Path("name") String name);
-
-	@GET(APIConst.URL_ACCOUNTS + "/{id}/" + APIConst.ACCOUNT_BALANCE_HISTORY)
-	Call<List<MenigaAccountBalanceHistory>> getAccountBalanceHistory(@Path("id") long accountId, @QueryMap Map<String, String> query);
 
 	// --
 	// Tags

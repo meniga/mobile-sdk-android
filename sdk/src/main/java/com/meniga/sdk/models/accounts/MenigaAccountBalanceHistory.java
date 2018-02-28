@@ -41,6 +41,14 @@ public class MenigaAccountBalanceHistory implements Parcelable, Serializable {
 		this.isDefault = in.readByte() != 0;
 	}
 
+	MenigaAccountBalanceHistory(long id, long accountId, MenigaDecimal balance, DateTime balanceDate, boolean isDefault) {
+		this.id = id;
+		this.accountId = accountId;
+		this.balance = balance;
+		this.balanceDate = balanceDate;
+		this.isDefault = isDefault;
+	}
+
 	/**
 	 * @return The ID of the account balance history.
 	 */

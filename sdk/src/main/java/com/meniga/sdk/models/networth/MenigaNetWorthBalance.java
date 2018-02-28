@@ -93,11 +93,10 @@ public class MenigaNetWorthBalance extends StateObject implements Parcelable, Se
 	 * @param balance The new balance at the point in time represented by this history entry
 	 */
 	public void setBalance(MenigaDecimal balance) {
-		if (this.hasChanged(this.balance, balance)) {
-			return;
+		if (hasChanged(this.balance, balance)) {
+			changed();
+			this.balance = balance;
 		}
-		this.changed();
-		this.balance = balance;
 	}
 
 	/**
@@ -120,11 +119,10 @@ public class MenigaNetWorthBalance extends StateObject implements Parcelable, Se
 	 * @param date The new date of the balance for the net worth account associated with this history balance item
 	 */
 	public void setBalanceDate(DateTime date) {
-		if (this.hasChanged(this.balanceDate, date)) {
-			return;
+		if (hasChanged(this.balanceDate, date)) {
+			changed();
+			this.balanceDate = date;
 		}
-		this.changed();
-		this.balanceDate = date;
 	}
 
 	/**
