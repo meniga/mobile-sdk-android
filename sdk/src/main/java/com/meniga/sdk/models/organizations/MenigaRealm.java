@@ -8,6 +8,7 @@ import com.meniga.sdk.models.organizations.enums.AuthorizationType;
 import com.meniga.sdk.models.organizations.operators.MenigaRealmOperations;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -160,5 +161,17 @@ public class MenigaRealm implements Parcelable, Serializable {
 
 	public Result<MenigaRealmAuthResponse> performBankAuthenticationStep(List<MenigaRealmAuthParameter> authPars, String userId, String sessionToken) {
 		return apiOperations.performBankAuthenticationStep(id, authPars, userId, sessionToken);
+	}
+
+	/**
+	 * Transfers the accounts of a realm user (indicated by sessionToken) to another realm user (indicated by realmUserId).
+	 * This action can only be taken after authenticating to a realm and receiving a RealmUserExists error.
+	 * @param realmUserId The realm user to which the accounts will be transferred.
+	 * @param sessionToken The id of the session. This is the link between the two realm users.
+	 * @return A response indicating if the action was successful or not.
+	 */
+	public Result<MenigaRealmAuthResponse> transferUserAccounts(String realmUserId, String sessionToken) {
+		List<MenigaRealmAuthParameter> emptyParametersList = new ArrayList<>();
+		return performBankAuthenticationStep(emptyParametersList, realmUserId, sessionToken);
 	}
 }
