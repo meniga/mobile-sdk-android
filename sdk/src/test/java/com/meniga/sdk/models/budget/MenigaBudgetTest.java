@@ -9,6 +9,7 @@ import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.utils.FileImporter;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +48,8 @@ public class MenigaBudgetTest {
         HttpUrl baseUrl = server.url("/v1");
         MenigaSettings settings = new MenigaSettings.Builder().endpoint(baseUrl).build();
         MenigaSDK.init(settings);
+
+        DateTimeUtils.setCurrentMillisFixed(DateTime.parse("2018-02-01").getMillis());
     }
 
     @After

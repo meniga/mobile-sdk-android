@@ -1,6 +1,7 @@
 package com.meniga.sdk.helpers;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public final class Objects {
 
@@ -11,6 +12,11 @@ public final class Objects {
             throw new NullPointerException();
         }
         return object;
+    }
+
+    @Nonnull
+    public static <T> T firstNonNull(@Nullable T first, @Nonnull T second) {
+        return first != null ? first : requireNonNull(second);
     }
 
     private Objects() {

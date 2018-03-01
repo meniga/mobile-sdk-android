@@ -13,6 +13,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -58,7 +60,7 @@ public class TransactionFilterTest{
 		Assert.assertEquals(false, jsonFilter.get("onlyUnread").getAsBoolean());
 		Assert.assertEquals(false, jsonFilter.get("onlyUncertain").getAsBoolean());
 		Assert.assertEquals(false, jsonFilter.get("onlyFlagged").getAsBoolean());
-		Assert.assertEquals(new DateTime("2012-08-16T07:00:00Z"), DateTime.parse(jsonFilter.get("periodFrom").getAsString()));
-		Assert.assertEquals(new DateTime("2012-08-16T23:00:00Z"), DateTime.parse(jsonFilter.get("periodTo").getAsString()));
+		assertThat(DateTime.parse(jsonFilter.get("periodFrom").getAsString())).isEqualTo(new DateTime("2012-08-16T07:00:00Z"));
+		assertThat(DateTime.parse(jsonFilter.get("periodTo").getAsString())).isEqualTo(new DateTime("2012-08-16T23:00:00Z"));
 	}
 }

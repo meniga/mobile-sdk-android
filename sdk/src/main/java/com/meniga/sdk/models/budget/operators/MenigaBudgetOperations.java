@@ -5,6 +5,7 @@ import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
+import com.meniga.sdk.webservices.budget.CreateBudget;
 import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
 import com.meniga.sdk.webservices.budget.GetBudget;
 import com.meniga.sdk.webservices.budget.GetBudgetEntries;
@@ -37,7 +38,7 @@ public interface MenigaBudgetOperations {
 
     Result<MenigaBudgetEntry> updateBudgetEntry(long budgetId, long entryId, UpdateBudgetEntry updateBudgetEntry);
 
-    Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset);
+    Result<MenigaBudget> createBudget(CreateBudget createBudget);
 
     Result<Void> deleteBudget(long budgetId);
 

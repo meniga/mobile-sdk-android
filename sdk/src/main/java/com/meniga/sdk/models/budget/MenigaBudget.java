@@ -11,11 +11,20 @@ import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 
+import org.jetbrains.annotations.NonNls;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static com.meniga.sdk.helpers.Objects.firstNonNull;
+import static com.meniga.sdk.helpers.Objects.requireNonNull;
+import static java.util.Collections.emptyList;
 
 public class MenigaBudget implements Parcelable, Serializable {
 	protected static MenigaBudgetOperations apiOperator;
@@ -187,12 +196,41 @@ public class MenigaBudget implements Parcelable, Serializable {
 		return apiOperator.getBudget(FetchBudgetFilterExtensions.toGetBudget(filter));
 	}
 
-	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period) {
-		return apiOperator.createBudget(type, name, description, accountIds, period, null);
+	/**
+	 * Use {@link #create(NewBudget)} instead.
+	 */
+	@Deprecated
+	public static Result<MenigaBudget> create(
+			@Nonnull BudgetType type,
+			@Nonnull String name,
+			@Nullable String description,
+			@Nullable List<Long> accountIds,
+			@Nullable BudgetPeriod period) {
+		return create(type, name, description, accountIds, period, null);
 	}
 
-	public static Result<MenigaBudget> create(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset) {
-		return apiOperator.createBudget(type, name, description, accountIds, period, periodOffset);
+	/**
+	 * Use {@link #create(NewBudget)} instead.
+	 */
+	@Deprecated
+	public static Result<MenigaBudget> create(
+			@Nonnull BudgetType type,
+			@Nonnull String name,
+			@Nullable String description,
+			@Nullable List<Long> accountIds,
+			@Nullable BudgetPeriod period,
+			@Nullable Integer periodOffset) {
+		NewBudget newBudget = new NewBudget(type, name);
+		newBudget.setDescription(description);
+		newBudget.setAccountIds(firstNonNull(accountIds, Collections.<Long>emptyList()));
+		newBudget.setPeriod(period);
+		newBudget.setPeriodOffset(periodOffset);
+		return create(newBudget);
+	}
+
+	public static Result<MenigaBudget> create(@Nonnull NewBudget newBudget) {
+		requireNonNull(newBudget);
+		return apiOperator.createBudget(NewBudgetExtensions.toCreateBudget(newBudget));
 	}
 
 	public Result<Void> delete() {
