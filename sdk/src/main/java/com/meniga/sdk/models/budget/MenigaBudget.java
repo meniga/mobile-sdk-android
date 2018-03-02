@@ -197,7 +197,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 	}
 
 	/**
-	 * Use {@link #create(NewBudget)} instead.
+	 * Use {@link #create(NewBudget)} or {@link #create(NewPlanningBudget)} instead.
 	 */
 	@Deprecated
 	public static Result<MenigaBudget> create(
@@ -210,7 +210,7 @@ public class MenigaBudget implements Parcelable, Serializable {
 	}
 
 	/**
-	 * Use {@link #create(NewBudget)} instead.
+	 * Use {@link #create(NewBudget)} or {@link #create(NewPlanningBudget)}instead.
 	 */
 	@Deprecated
 	public static Result<MenigaBudget> create(
@@ -220,17 +220,29 @@ public class MenigaBudget implements Parcelable, Serializable {
 			@Nullable List<Long> accountIds,
 			@Nullable BudgetPeriod period,
 			@Nullable Integer periodOffset) {
-		NewBudget newBudget = new NewBudget(type, name);
-		newBudget.setDescription(description);
-		newBudget.setAccountIds(firstNonNull(accountIds, Collections.<Long>emptyList()));
-		newBudget.setPeriod(period);
-		newBudget.setPeriodOffset(periodOffset);
-		return create(newBudget);
+		if (type == BudgetType.BUDGET) {
+			NewBudget budget = new NewBudget(name);
+			budget.setDescription(description);
+			budget.setAccountIds(firstNonNull(accountIds, Collections.<Long>emptyList()));
+			return create(budget);
+		} else {
+			NewPlanningBudget budget = new NewPlanningBudget(name);
+			budget.setDescription(description);
+			budget.setAccountIds(firstNonNull(accountIds, Collections.<Long>emptyList()));
+			budget.setPeriod(period);
+			budget.setPeriodOffset(periodOffset);
+			return create(budget);
+		}
 	}
 
-	public static Result<MenigaBudget> create(@Nonnull NewBudget newBudget) {
-		requireNonNull(newBudget);
-		return apiOperator.createBudget(NewBudgetExtensions.toCreateBudget(newBudget));
+	public static Result<MenigaBudget> create(@Nonnull NewBudget budget) {
+		requireNonNull(budget);
+		return apiOperator.createBudget(NewBudgetExtensions.toCreateBudget(budget));
+	}
+
+	public static Result<MenigaBudget> create(@Nonnull NewPlanningBudget budget) {
+		requireNonNull(budget);
+		return apiOperator.createBudget(NewPlanningBudgetExtensions.toCreateBudget(budget));
 	}
 
 	public Result<Void> delete() {
