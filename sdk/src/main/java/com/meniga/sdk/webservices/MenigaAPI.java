@@ -114,7 +114,7 @@ public interface MenigaAPI {
 	@DELETE(APIConst.URL_TRANSACTIONS)
 	Call<Void> deleteTransactions(@QueryMap Map<String, String> queryMap);
 
-	@GET(APIConst.URL_TRANSACTIONS)
+	@GET(APIConst.URL_TRANSACTIONS + "?include=Account,Merchant")
 	Call<MenigaTransactionPage> getTransactions(@QueryMap Map<String, String> queryMap);
 
 	@POST(APIConst.URL_TRANSACTIONS)
@@ -123,7 +123,7 @@ public interface MenigaAPI {
 	@PUT(APIConst.URL_TRANSACTIONS)
 	Call<MenigaTransactionUpdate> updateTransactions(@QueryMap Map<String, String> transactionIds, @Body UpdateTransactions req);
 
-	@GET(APIConst.URL_TRANSACTIONS + "/{id}")
+	@GET(APIConst.URL_TRANSACTIONS + "/{id}?include=Account,Merchant")
 	Call<MenigaTransaction> getTransaction(@Path("id") long transId);
 
 	@PUT(APIConst.URL_TRANSACTIONS + "/{id}")
