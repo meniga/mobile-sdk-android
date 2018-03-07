@@ -19,7 +19,6 @@ public enum BudgetPeriod {
 	@Override
 	public String toString() {
 		switch (this) {
-
 			case WEEK:
 				return "Week";
 
@@ -29,8 +28,11 @@ public enum BudgetPeriod {
 			case QUARTER:
 				return "Quarter";
 
+			case YEAR:
+				return "Year";
+
 			default:
-				return "Budget";
+				throw new IllegalStateException("Unhandled period value: " + name());
 		}
 	}
 }

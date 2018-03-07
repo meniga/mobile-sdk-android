@@ -9,6 +9,7 @@ import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.utils.FileImporter;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +48,8 @@ public class MenigaBudgetTest {
         HttpUrl baseUrl = server.url("/v1");
         MenigaSettings settings = new MenigaSettings.Builder().endpoint(baseUrl).build();
         MenigaSDK.init(settings);
+
+        DateTimeUtils.setCurrentMillisFixed(DateTime.parse("2018-02-01").getMillis());
     }
 
     @After
@@ -72,10 +75,10 @@ public class MenigaBudgetTest {
     }
 
     @Test
-    public void testCreateBudget() throws Exception {
+    public void testCreatePlanningBudget() throws Exception {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
 
-        MenigaBudget budget = createMenigaBudgetTask().getResult();
+        MenigaBudget budget = createMenigaBudgetTask(BudgetType.PLANNING).getResult();
 
         RecordedRequest request = server.takeRequest();
         assertThat(request.getPath()).isEqualTo("/v1/budgets");
@@ -84,9 +87,23 @@ public class MenigaBudgetTest {
         assertThat(budget).isNotNull();
     }
 
+
+    @Test
+    public void testCreateBudget() throws Exception {
+        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
+
+        MenigaBudget budget = createMenigaBudgetTask(BudgetType.BUDGET).getResult();
+
+        RecordedRequest request = server.takeRequest();
+        assertThat(request.getPath()).isEqualTo("/v1/budgets");
+        assertThat(request.getMethod()).isEqualTo("POST");
+        JSONAssert.assertEquals("{\"type\":\"Budget\",\"name\":\"Test Budget\",\"description\":\"Test Budget\",\"accountIds\":[1]}", request.getBody().readUtf8(), false);
+        assertThat(budget).isNotNull();
+    }
+
     @Test
     public void testDeleteBudget() throws Exception {
-        MenigaBudget menigaBudget = prepareMenigaBudget();
+        MenigaBudget menigaBudget = prepareMenigaPlanningBudget();
 
         Task<Void> createBudgetTask = menigaBudget.delete().getTask();
         createBudgetTask.waitForCompletion();
@@ -118,7 +135,7 @@ public class MenigaBudgetTest {
 
     @Test
     public void testUpdateSingleBudget() throws Exception {
-        MenigaBudget budget = prepareMenigaBudget();
+        MenigaBudget budget = prepareMenigaPlanningBudget();
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
         BudgetUpdate parameters = new BudgetUpdate();
         parameters.setName("New name");
@@ -137,7 +154,7 @@ public class MenigaBudgetTest {
 
     @Test
     public void testResetBudget() throws Exception {
-        MenigaBudget menigaBudget = prepareMenigaBudget();
+        MenigaBudget menigaBudget = prepareMenigaPlanningBudget();
 
         Task<Void> resetBudgetTask = menigaBudget.reset().getTask();
         resetBudgetTask.waitForCompletion();
@@ -221,15 +238,15 @@ public class MenigaBudgetTest {
         assertThat(task.getResult()).isNotNull();
     }
 
-    private Task<MenigaBudget> createMenigaBudgetTask() throws InterruptedException {
+    private Task<MenigaBudget> createMenigaBudgetTask(BudgetType budgetType) throws InterruptedException {
         server.enqueue(new MockResponse().setBody("{\"id\": 1}"));
-        Task<MenigaBudget> task = MenigaBudget.create(BudgetType.PLANNING, "Test Budget", "Test Budget", singletonList(1L), BudgetPeriod.WEEK, 0).getTask();
+        Task<MenigaBudget> task = MenigaBudget.create(budgetType, "Test Budget", "Test Budget", singletonList(1L), BudgetPeriod.WEEK, 0).getTask();
         task.waitForCompletion();
         return task;
     }
 
-    private MenigaBudget prepareMenigaBudget() throws InterruptedException {
-        MenigaBudget menigaBudget = createMenigaBudgetTask().getResult();
+    private MenigaBudget prepareMenigaPlanningBudget() throws InterruptedException {
+        MenigaBudget menigaBudget = createMenigaBudgetTask(BudgetType.PLANNING).getResult();
         server.enqueue(new MockResponse().setBody("{}"));
         server.takeRequest();
         return menigaBudget;

@@ -4,8 +4,6 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
-import com.meniga.sdk.models.budget.enums.BudgetPeriod;
-import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.webservices.budget.CreateBudget;
 import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
 import com.meniga.sdk.webservices.budget.GetBudget;
@@ -64,16 +62,8 @@ public class MenigaBudgetOperationsImp implements MenigaBudgetOperations {
     }
 
     @Override
-    public Result<MenigaBudget> createBudget(BudgetType type, String name, String description, List<Long> accountIds, BudgetPeriod period, Integer periodOffset) {
-        CreateBudget req = new CreateBudget();
-        req.setType(type);
-        req.setName(name);
-        req.setDescription(description);
-        req.setAccountIds(accountIds);
-        req.setPeriod(period.toString());
-        req.setOffset(periodOffset);
-
-        return MenigaSDK.executor().createBudget(req);
+    public Result<MenigaBudget> createBudget(CreateBudget createBudget) {
+        return MenigaSDK.executor().createBudget(createBudget);
     }
 
     @Override
