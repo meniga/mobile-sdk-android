@@ -411,10 +411,6 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 		return account;
 	}
 
-	public void setAccount(MenigaAccount account) {
-		this.account = account;
-	}
-
 	/**
 	 * @return The merchant category code mapping used when detecting categories.
 	 */
@@ -462,10 +458,6 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public MenigaMerchant getMerchant() {
 		return merchant;
-	}
-
-	public void setMerchant(MenigaMerchant merchant) {
-		this.merchant = merchant;
 	}
 
 	/**

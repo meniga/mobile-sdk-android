@@ -3,13 +3,16 @@
  */
 package com.meniga.sdk.models.transactions;
 
+import com.jayway.jsonassert.JsonAssert;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
+import com.meniga.sdk.helpers.DateTimeUtils;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.utils.FileImporter;
 
 import org.assertj.core.util.Lists;
+import org.hamcrest.Matchers;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.junit.After;
@@ -26,6 +29,8 @@ import okhttp3.mockwebserver.RecordedRequest;
 
 import static com.meniga.sdk.models.transactions.MenigaTransactionPageAssertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 public class MenigaTransactionApiSpec {
 
@@ -49,12 +54,18 @@ public class MenigaTransactionApiSpec {
     public void shouldCreateTransaction() throws IOException, JSONException, InterruptedException {
         server.enqueue(mockResponse("transaction.json"));
 
-        Task<MenigaTransaction> task = MenigaTransaction.create(DateTime.now(), "Hagkaup", new MenigaDecimal(5000), 45).getTask();
+        Task<MenigaTransaction> task = MenigaTransaction.create(DateTime.parse("2018-03-08"), "Hagkaup", new MenigaDecimal(5000), 45).getTask();
         task.waitForCompletion();
 
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/transactions");
         assertThat(recordedRequest.getMethod()).isEqualTo("POST");
+        JsonAssert.with(recordedRequest.getBody().readUtf8())
+                .assertThat("$.date", equalTo("2018-03-08T00:00:00.000Z"))
+                .assertThat("$.text", equalTo("Hagkaup"))
+                .assertThat("$.amount", equalTo(5000.0))
+                .assertThat("$.categoryId", equalTo(45))
+                .assertThat("$.setAsRead", is(true));
         assertThat(task.getResult()).isNotNull();
     }
 

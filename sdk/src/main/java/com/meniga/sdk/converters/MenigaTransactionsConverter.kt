@@ -13,6 +13,8 @@ import com.meniga.sdk.models.accounts.MenigaAccount
 import com.meniga.sdk.models.merchants.MenigaMerchant
 import com.meniga.sdk.models.transactions.MenigaTransaction
 import com.meniga.sdk.models.transactions.MenigaTransactionPage
+import com.meniga.sdk.models.transactions.setAccount
+import com.meniga.sdk.models.transactions.setMerchant
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -27,8 +29,8 @@ class MenigaTransactionsConverter : MenigaConverter() {
                 val (transactions, accounts, merchants) = gson.getAccountsMerchantsAndTransactions(data, included)
                 transactions
                         .onEach {
-                            it.account = accounts.find { account -> account.id == it.accountId }
-                            it.merchant = merchants.find { merchant -> merchant.id == it.merchantId }
+                            it.setAccount(accounts.find { account -> account.id == it.accountId })
+                            it.setMerchant(merchants.find { merchant -> merchant.id == it.merchantId })
                             it.updateCommentsTransactionId()
                         }
             }
@@ -36,8 +38,8 @@ class MenigaTransactionsConverter : MenigaConverter() {
                 val (data, _, included) = MenigaConverter.getAsObjectApiResponse(responseBody.byteStream())
                 val transaction = gson.fromJson(data, MenigaTransaction::class.java)
                 included?.let {
-                    transaction.account = gson.get(it, "account")
-                    transaction.merchant = gson.get(it, "merchant")
+                    transaction.setAccount(gson.get(it, "account"))
+                    transaction.setMerchant(gson.get(it, "merchant"))
                 }
                 transaction.apply {
                     updateCommentsTransactionId()
@@ -49,8 +51,8 @@ class MenigaTransactionsConverter : MenigaConverter() {
                 val transactionPage = MenigaTransactionPage()
                 val (transactions, accounts, merchants) = gson.getAccountsMerchantsAndTransactions(data, included)
                 transactions.forEach { transaction ->
-                    transaction.account = accounts.find { it.id == transaction.accountId }
-                    transaction.merchant = merchants.find { it.id == transaction.merchantId }
+                    transaction.setAccount(accounts.find { it.id == transaction.accountId })
+                    transaction.setMerchant(merchants.find { it.id == transaction.merchantId })
                     transaction.updateCommentsTransactionId()
                 }
                 transactionPage.apply {
