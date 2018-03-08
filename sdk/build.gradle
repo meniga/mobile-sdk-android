@@ -69,10 +69,10 @@ dependencies {
 
     testImplementation "org.robolectric:robolectric:3.3.2"
     testImplementation "net.jodah:concurrentunit:0.4.2"
+    testImplementation "com.jayway.jsonpath:json-path-assert:2.4.0"
     testImplementation "com.squareup.okhttp3:mockwebserver:3.9.1"
     testImplementation "com.squareup.retrofit2:retrofit-mock:2.1.0"
     testImplementation "org.assertj:assertj-core:2.6.0"
-    testImplementation "org.skyscreamer:jsonassert:1.5.0"
     //noinspection GradleDependency (https://github.com/dlew/joda-time-android/issues/148)
     testImplementation "joda-time:joda-time:2.9.4"
     testImplementation "junit:junit:4.12"

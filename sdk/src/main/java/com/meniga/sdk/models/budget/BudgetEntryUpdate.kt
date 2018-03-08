@@ -13,13 +13,13 @@ data class BudgetEntryUpdate @JvmOverloads constructor(
         var targetAmount: MenigaDecimal? = null,
         var startDate: DateTime,
         var endDate: DateTime? = null,
-        var categoryId: Long)
+        var categoryIds: List<Long>)
 
 internal fun BudgetEntryUpdate.toUpdateBudgetEntry(): UpdateBudgetEntry {
     return UpdateBudgetEntry().also {
         it.targetAmount = targetAmount
         it.startDate = startDate
         it.endDate = endDate
-        it.categoryIds = listOf(categoryId)
+        it.categoryIds = categoryIds
     }
 }
