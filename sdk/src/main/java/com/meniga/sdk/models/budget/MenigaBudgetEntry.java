@@ -247,7 +247,7 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 	}
 
 	public static Result<List<MenigaBudgetEntry>> create(long budgetId, NewBudgetEntry parameters) {
-		return apiOperator.createBudgetEntry(budgetId, CreateBudgetEntryExtensions.toCreateBudgetEntry(parameters));
+		return apiOperator.createBudgetEntries(budgetId, CreateBudgetEntryExtensions.toCreateBudgetEntries(parameters));
 	}
 
 	public Result<MenigaBudgetEntry> update(BudgetEntryUpdate parameters) {

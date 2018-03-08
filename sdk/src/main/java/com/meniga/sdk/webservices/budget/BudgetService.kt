@@ -30,9 +30,9 @@ internal interface BudgetService {
             @QueryMap query: Map<String, String>): Call<List<MenigaBudgetEntry>>
 
     @POST("budgets/{id}/entries")
-    fun createBudgetEntry(
+    fun createBudgetEntries(
             @Path("id") id: String,
-            @Body parameters: CreateBudgetEntry): Call<List<MenigaBudgetEntry>>
+            @Body parameters: CreateBudgetEntries): Call<List<MenigaBudgetEntry>>
 
     @DELETE("budgets/{id}/entries/{entryId}")
     fun deleteBudgetEntry(@Path("id") id: String, @Path("entryId") entryId: String): Call<Void>

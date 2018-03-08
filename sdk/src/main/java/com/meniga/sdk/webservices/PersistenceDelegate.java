@@ -50,7 +50,7 @@ import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.budget.BudgetService;
 import com.meniga.sdk.webservices.budget.CreateBudget;
-import com.meniga.sdk.webservices.budget.CreateBudgetEntry;
+import com.meniga.sdk.webservices.budget.CreateBudgetEntries;
 import com.meniga.sdk.webservices.budget.GetBudget;
 import com.meniga.sdk.webservices.budget.GetBudgetEntries;
 import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
@@ -719,8 +719,8 @@ public class PersistenceDelegate {
 		return persist(req, getService(BudgetService.class).getBudgetEntries(Long.toString(req.getId()), req.toQueryMap()));
 	}
 
-	public Result<List<MenigaBudgetEntry>> createBudgetEntry(long budgetId, CreateBudgetEntry parameters) {
-		return persist(parameters, getService(BudgetService.class).createBudgetEntry(Long.toString(budgetId), parameters));
+	public Result<List<MenigaBudgetEntry>> createBudgetEntries(long budgetId, CreateBudgetEntries parameters) {
+		return persist(parameters, getService(BudgetService.class).createBudgetEntries(Long.toString(budgetId), parameters));
 	}
 
 	public Result<Void> deleteBudgetEntry(long budgetId, long entryId) {

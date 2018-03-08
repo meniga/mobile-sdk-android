@@ -1,5 +1,6 @@
 package com.meniga.sdk.models.budget;
 
+import com.jayway.jsonassert.JsonAssert;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.helpers.MenigaDecimal;
@@ -13,10 +14,8 @@ import org.joda.time.DateTimeUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.HttpUrl;
@@ -24,8 +23,11 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -62,8 +64,8 @@ public class MenigaBudgetTest {
     public void testFetchBudgets() throws Exception {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgets.json")));
         FetchBudgetsFilter parameters = new FetchBudgetsFilter();
-        parameters.setIds(Arrays.asList(1L, 2L));
-        parameters.setAccountIds(Arrays.asList(10L, 20L));
+        parameters.setIds(asList(1L, 2L));
+        parameters.setAccountIds(asList(10L, 20L));
         parameters.setType(BudgetType.PLANNING);
 
         Task<List<MenigaBudget>> budgetTask = MenigaBudget.fetch(parameters).getTask();
@@ -83,10 +85,15 @@ public class MenigaBudgetTest {
         RecordedRequest request = server.takeRequest();
         assertThat(request.getPath()).isEqualTo("/v1/budgets");
         assertThat(request.getMethod()).isEqualTo("POST");
-        JSONAssert.assertEquals("{\"type\":\"Planning\",\"period\":\"Week\",\"name\":\"Test Budget\",\"description\":\"Test Budget\",\"accountIds\":[1],\"offset\":0}", request.getBody().readUtf8(), false);
+        JsonAssert.with(request.getBody().readUtf8())
+                .assertThat("$.type", equalTo("Planning"))
+                .assertThat("$.period", equalTo("Week"))
+                .assertThat("$.name", equalTo("Test Budget"))
+                .assertThat("$.description", equalTo("Test Budget"))
+                .assertThat("$.accountIds", equalTo(singletonList(1)))
+                .assertThat("$.offset", equalTo(0));
         assertThat(budget).isNotNull();
     }
-
 
     @Test
     public void testCreateBudget() throws Exception {
@@ -97,7 +104,11 @@ public class MenigaBudgetTest {
         RecordedRequest request = server.takeRequest();
         assertThat(request.getPath()).isEqualTo("/v1/budgets");
         assertThat(request.getMethod()).isEqualTo("POST");
-        JSONAssert.assertEquals("{\"type\":\"Budget\",\"name\":\"Test Budget\",\"description\":\"Test Budget\",\"accountIds\":[1]}", request.getBody().readUtf8(), false);
+        JsonAssert.with(request.getBody().readUtf8())
+                .assertThat("$.type", equalTo("Budget"))
+                .assertThat("$.name", equalTo("Test Budget"))
+                .assertThat("$.description", equalTo("Test Budget"))
+                .assertThat("$.accountIds", equalTo(singletonList(1)));
         assertThat(budget).isNotNull();
     }
 
@@ -118,7 +129,7 @@ public class MenigaBudgetTest {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
         FetchBudgetFilter filter = new FetchBudgetFilter(1L);
         filter.setId(1L);
-        filter.setCategoryIds(Arrays.asList(1L, 2L));
+        filter.setCategoryIds(asList(1L, 2L));
         filter.setStartDate(DateTime.parse("2018-01-01"));
         filter.setEndDate(DateTime.parse("2018-01-01"));
         filter.setAllowOverlappingEntries(true);
@@ -140,7 +151,7 @@ public class MenigaBudgetTest {
         BudgetUpdate parameters = new BudgetUpdate();
         parameters.setName("New name");
         parameters.setDescription("New description");
-        parameters.setAccountIds(Arrays.asList(1L, 2L));
+        parameters.setAccountIds(asList(1L, 2L));
 
         Task<MenigaBudget> updateBudgetTask = budget.update(parameters).getTask();
         updateBudgetTask.waitForCompletion();
@@ -181,10 +192,10 @@ public class MenigaBudgetTest {
     public void testCreateBudgetEntry() throws Exception {
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentries.json")));
         NewBudgetEntry parameters = new NewBudgetEntry();
-        parameters.setCategoryIds(Arrays.asList(1L, 2L));
+        parameters.setCategoryIds(asList(1L, 2L));
         parameters.setStartDate(DateTime.parse("2018-01-01"));
-        parameters.setEndDate(DateTime.parse("2018-01-01"));
-        parameters.setTargetAmount(MenigaDecimal.ZERO);
+        parameters.setEndDate(DateTime.parse("2018-01-02"));
+        parameters.setTargetAmount(new MenigaDecimal(42));
 
         Task<List<MenigaBudgetEntry>> task = MenigaBudgetEntry.create(1, parameters).getTask();
         task.waitForCompletion();
@@ -192,6 +203,12 @@ public class MenigaBudgetTest {
         RecordedRequest request = server.takeRequest();
         assertThat(request.getPath()).isEqualTo("/v1/budgets/1/entries");
         assertThat(request.getMethod()).isEqualTo("POST");
+        JsonAssert.with(request.getBody().readUtf8())
+                .assertThat("$.entries",  hasSize(1))
+                .assertThat("$.entries[0].targetAmount", equalTo(42.0))
+                .assertThat("$.entries[0].startDate", equalTo("2018-01-01T00:00:00.000Z"))
+                .assertThat("$.entries[0].endDate", equalTo("2018-01-02T00:00:00.000Z"))
+                .assertThat("$.entries[0].categoryIds", equalTo(asList(1, 2)));
         assertThat(task.getResult()).isNotNull();
     }
 
@@ -224,8 +241,8 @@ public class MenigaBudgetTest {
     @Test
     public void testUpdateSingleBudgetEntry() throws Exception {
         MenigaBudgetEntry menigaBudgetEntry = prepareMenigaBudgetEntry();
-        BudgetEntryUpdate parameters = new BudgetEntryUpdate(DateTime.parse("2016-01-08"), 1L);
-        parameters.setTargetAmount(MenigaDecimal.ZERO);
+        BudgetEntryUpdate parameters = new BudgetEntryUpdate(DateTime.parse("2016-01-08"), asList(1L, 2L));
+        parameters.setTargetAmount(new MenigaDecimal(42));
         parameters.setEndDate(DateTime.parse("2019-11-01"));
         server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentry.json")));
 
@@ -235,6 +252,11 @@ public class MenigaBudgetTest {
         RecordedRequest request = server.takeRequest();
         assertThat(request.getPath()).isEqualTo("/v1/budgets/1/entries/2");
         assertThat(request.getMethod()).isEqualTo("PUT");
+        JsonAssert.with(request.getBody().readUtf8())
+                .assertThat("$.targetAmount", equalTo(42.0))
+                .assertThat("$.startDate", equalTo(DateTime.parse("2016-01-08").toString()))
+                .assertThat("$.endDate", equalTo(DateTime.parse("2019-11-01").toString()))
+                .assertThat("$.categoryIds", equalTo(asList(1, 2)));
         assertThat(task.getResult()).isNotNull();
     }
 
@@ -258,7 +280,7 @@ public class MenigaBudgetTest {
         parameters.setTargetAmount(MenigaDecimal.ZERO);
         parameters.setStartDate(DateTime.parse("2016-01-08"));
         parameters.setEndDate(DateTime.parse("2019-11-01"));
-        parameters.setCategoryIds(Arrays.asList(1L, 2L));
+        parameters.setCategoryIds(asList(1L, 2L));
         Task<List<MenigaBudgetEntry>> task = MenigaBudgetEntry.create(1L, parameters).getTask();
         task.waitForCompletion();
         server.takeRequest();
