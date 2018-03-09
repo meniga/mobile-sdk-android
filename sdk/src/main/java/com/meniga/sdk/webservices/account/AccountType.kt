@@ -3,5 +3,10 @@ package com.meniga.sdk.webservices.account
 internal data class AccountType(
         val id: Long? = null,
         val name: String? = null,
-        val parentId: Long = 0,
-        val parentName: String? = null)
+        val description: String? = null,
+        val accountCategory: AccountCategory? = null,
+        val accountClass: String? = null,
+        val organizationId: Long? = 0,
+        val realmId: Long? = 0,
+        val accountCategoryDetails: String? = null,
+        val enableCashback: Boolean? = null)

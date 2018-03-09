@@ -46,11 +46,12 @@ import com.meniga.sdk.models.user.MenigaUserMetaData;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.account.Account;
+import com.meniga.sdk.webservices.account.AccountAuthorizationType;
 import com.meniga.sdk.webservices.account.AccountBalanceHistory;
-import com.meniga.sdk.webservices.account.AccountTypeCategory;
+import com.meniga.sdk.webservices.account.AccountMetaData;
 import com.meniga.sdk.webservices.account.AccountService;
 import com.meniga.sdk.webservices.account.AccountType;
-import com.meniga.sdk.webservices.account.AuthorizationType;
+import com.meniga.sdk.webservices.account.AccountTypeCategory;
 import com.meniga.sdk.webservices.account.UpdateAccount;
 import com.meniga.sdk.webservices.account.UpdateAccountMetadata;
 import com.meniga.sdk.webservices.budget.BudgetService;
@@ -165,7 +166,7 @@ public class PersistenceDelegate {
 		return persist(req, getService(AccountService.class).getAccountTypes());
 	}
 
-	public Result<List<AuthorizationType>> getAccountAuthorizationTypes(GetAuthorizationTypes req) {
+	public Result<List<AccountAuthorizationType>> getAccountAuthorizationTypes(GetAuthorizationTypes req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
@@ -176,18 +177,18 @@ public class PersistenceDelegate {
 		return call(getService(AccountService.class).getAccountCategories());
 	}
 
-	public Result<List<KeyVal<String, String>>> getAccountMetadata(GetAccountMetadata req) {
+	public Result<List<AccountMetaData>> getAccountMetadata(GetAccountMetadata req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
 		return persist(req, getService(AccountService.class).getAccountMetadata(req.id));
 	}
 
-	public Result<KeyVal<String, String>> updateAccountMetadata(UpdateAccountMetadata req) {
-		return persist(req, getService(AccountService.class).updateAccountMetadata(req.id, req));
+	public Result<AccountMetaData> updateAccountMetadata(long accountId, UpdateAccountMetadata req) {
+		return persist(req, getService(AccountService.class).updateAccountMetadata(accountId, req));
 	}
 
-	public Result<KeyVal<String, String>> getAccountMetadataKeyVal(GetAccountMetadataKeyVal req) {
+	public Result<AccountMetaData> getAccountMetadataKeyVal(GetAccountMetadataKeyVal req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
@@ -202,7 +203,7 @@ public class PersistenceDelegate {
 	}
 
 	public Result<Void> updateAccount(UpdateAccount req) {
-		return persist(req, getService(AccountService.class).updateAccount(req.id, req));
+		return persist(req, getService(AccountService.class).updateAccount(req.getId(), req));
 	}
 
 	public Result<Void> deleteAccount(DeleteAccount req) {

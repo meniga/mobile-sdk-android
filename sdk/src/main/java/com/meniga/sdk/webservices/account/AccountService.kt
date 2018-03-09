@@ -3,7 +3,6 @@
  */
 package com.meniga.sdk.webservices.account
 
-import com.meniga.sdk.helpers.KeyVal
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -32,20 +31,20 @@ internal interface AccountService {
     fun getAccountCategories(): Call<List<AccountTypeCategory>>
 
     @GET("accounts/authorizationtypes")
-    fun getAccountAuthorizationTypes(): Call<List<AuthorizationType>>
+    fun getAccountAuthorizationTypes(): Call<List<AccountAuthorizationType>>
 
     @GET("accounts/{id}/metadata")
-    fun getAccountMetadata(@Path("id") accountId: Long): Call<List<KeyVal<String, String>>>
+    fun getAccountMetadata(@Path("id") accountId: Long): Call<List<AccountMetaData>>
 
     @PUT("accounts/{id}/metadata")
     fun updateAccountMetadata(
             @Path("id") accountId: Long,
-            @Body req: UpdateAccountMetadata): Call<KeyVal<String, String>>
+            @Body req: UpdateAccountMetadata): Call<AccountMetaData>
 
     @GET("accounts/{id}/metadata/{name}")
     fun getAccountMetadataKeyVal(
             @Path("id") accountId: Long,
-            @Path("name") name: String): Call<KeyVal<String, String>>
+            @Path("name") name: String): Call<AccountMetaData>
 
     @GET("accounts/{id}/history")
     fun getAccountBalanceHistory(

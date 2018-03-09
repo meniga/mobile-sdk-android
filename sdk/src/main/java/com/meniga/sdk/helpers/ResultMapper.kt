@@ -6,7 +6,7 @@ internal class ResultMapper<T, R>(
         private val result: Result<T>,
         private val mapper: (T) -> R) : Result<R> {
     override val task: Task<R>
-        get() = result.task.continueWith { continuationTask -> mapper.invoke(continuationTask.result) }
+        get() = result.task.onSuccess { continuationTask -> mapper.invoke(continuationTask.result) }
 
     override fun cancel() {
         result.cancel()

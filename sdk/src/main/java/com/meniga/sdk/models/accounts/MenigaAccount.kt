@@ -1,11 +1,10 @@
 /*
- * Copyright 2017 Meniga Iceland Inc.
+ * Copyright 2017-2018 Meniga Iceland Inc.
  */
 package com.meniga.sdk.models.accounts
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.helpers.Interceptor
 import com.meniga.sdk.helpers.KeyVal
@@ -17,7 +16,6 @@ import com.meniga.sdk.models.accounts.enums.AccountAuthorizationType
 import com.meniga.sdk.models.accounts.enums.AccountBalanceHistorySort
 import com.meniga.sdk.models.accounts.enums.AccountCategory
 import com.meniga.sdk.models.accounts.operators.MenigaAccountOperations
-import com.meniga.sdk.models.transactions.MetaData
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
 import java.io.Serializable
@@ -57,15 +55,15 @@ import java.io.Serializable
  */
 @SuppressLint("ParcelCreator")
 @Parcelize
-class MenigaAccount internal constructor(
+data class MenigaAccount internal constructor(
         val id: Long = 0,
         val accountIdentifier: String? = null,
         val realmIdentifier: String? = null,
         val realmAccountTypeId: Int = 0,
         val accountTypeId: Int = 0,
-        @SerializedName("name") var _name: String? = null,
+        private var _name: String? = null,
         val accountCategory: AccountCategory? = null,
-        @SerializedName("emergencyFundBalanceLimit") var _emergencyFundBalanceLimit: MenigaDecimal? = null,
+        private var _emergencyFundBalanceLimit: MenigaDecimal? = null,
         val balance: MenigaDecimal? = null,
         val originalBalance: MenigaDecimal? = null,
         val committedAmount: MenigaDecimal? = null,
@@ -74,18 +72,22 @@ class MenigaAccount internal constructor(
         val organizationIdentifier: String? = null,
         val realmCredentialsId: Long? = null,
         val accountAuthorizatonType: AccountAuthorizationType? = null,
-        @SerializedName("orderId") var _orderId: Int = 0,
+        private var _orderId: Int = 0,
         val isImportAccount: Boolean = false,
         val lastUpdate: DateTime? = null,
         val personId: Long? = null,
         val userEmail: String? = null,
         val createDate: DateTime? = null,
-        val isInactive: Boolean = false,
+        val inactive: Boolean = false,
         val attachedToUserDate: DateTime? = null,
-        @SerializedName("isHidden") var _isHidden: Boolean = false,
-        @SerializedName("isDisabled") var _isDisabled: Boolean = false,
-        val metadata: List<MetaData>? = null
+        private var _isHidden: Boolean = false,
+        private var _isDisabled: Boolean = false,
+        val metadata: List<MenigaAccountMetaData> = emptyList()
 ) : StateObject(), Parcelable, Serializable, Cloneable {
+
+    @Deprecated("Use inactive instead.", replaceWith = ReplaceWith("inactive"))
+    val isInactive: Boolean
+        get() = inactive
 
     var name: String?
         get() = _name
@@ -144,13 +146,13 @@ class MenigaAccount internal constructor(
         isHidden = hidden
     }
 
-    override fun clone(): MenigaAccount = super<StateObject>.clone() as MenigaAccount
+    override fun clone(): MenigaAccount = copy()
 
     /**
      * @return List of key-vals for various metadata as a map.
      */
-    val metaDataAsMap: Map<String, String>
-        get() = metadata?.associate { it.name to it.value } ?: emptyMap()
+    val metaDataAsMap: Map<String, String?>
+        get() = metadata.associate { it.name to it.value }
 
     override fun revertToRevision(lastRevision: StateObject) {
         if (lastRevision is MenigaAccount) {
@@ -244,78 +246,6 @@ class MenigaAccount internal constructor(
                 Merge.merge(this@MenigaAccount, result)
             }
         })
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as MenigaAccount
-
-        if (id != other.id) return false
-        if (accountIdentifier != other.accountIdentifier) return false
-        if (realmIdentifier != other.realmIdentifier) return false
-        if (realmAccountTypeId != other.realmAccountTypeId) return false
-        if (accountTypeId != other.accountTypeId) return false
-        if (_name != other._name) return false
-        if (accountCategory != other.accountCategory) return false
-        if (_emergencyFundBalanceLimit != other._emergencyFundBalanceLimit) return false
-        if (balance != other.balance) return false
-        if (originalBalance != other.originalBalance) return false
-        if (committedAmount != other.committedAmount) return false
-        if (limit != other.limit) return false
-        if (accountClass != other.accountClass) return false
-        if (organizationIdentifier != other.organizationIdentifier) return false
-        if (realmCredentialsId != other.realmCredentialsId) return false
-        if (accountAuthorizatonType != other.accountAuthorizatonType) return false
-        if (_orderId != other._orderId) return false
-        if (isImportAccount != other.isImportAccount) return false
-        if (lastUpdate != other.lastUpdate) return false
-        if (personId != other.personId) return false
-        if (userEmail != other.userEmail) return false
-        if (createDate != other.createDate) return false
-        if (isInactive != other.isInactive) return false
-        if (attachedToUserDate != other.attachedToUserDate) return false
-        if (_isHidden != other._isHidden) return false
-        if (_isDisabled != other._isDisabled) return false
-        if (metadata != other.metadata) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + (accountIdentifier?.hashCode() ?: 0)
-        result = 31 * result + (realmIdentifier?.hashCode() ?: 0)
-        result = 31 * result + realmAccountTypeId
-        result = 31 * result + accountTypeId
-        result = 31 * result + (_name?.hashCode() ?: 0)
-        result = 31 * result + (accountCategory?.hashCode() ?: 0)
-        result = 31 * result + (_emergencyFundBalanceLimit?.hashCode() ?: 0)
-        result = 31 * result + (balance?.hashCode() ?: 0)
-        result = 31 * result + (originalBalance?.hashCode() ?: 0)
-        result = 31 * result + (committedAmount?.hashCode() ?: 0)
-        result = 31 * result + (limit?.hashCode() ?: 0)
-        result = 31 * result + (accountClass?.hashCode() ?: 0)
-        result = 31 * result + (organizationIdentifier?.hashCode() ?: 0)
-        result = 31 * result + (realmCredentialsId?.hashCode() ?: 0)
-        result = 31 * result + (accountAuthorizatonType?.hashCode() ?: 0)
-        result = 31 * result + _orderId
-        result = 31 * result + isImportAccount.hashCode()
-        result = 31 * result + (lastUpdate?.hashCode() ?: 0)
-        result = 31 * result + (personId?.hashCode() ?: 0)
-        result = 31 * result + (userEmail?.hashCode() ?: 0)
-        result = 31 * result + (createDate?.hashCode() ?: 0)
-        result = 31 * result + isInactive.hashCode()
-        result = 31 * result + (attachedToUserDate?.hashCode() ?: 0)
-        result = 31 * result + _isHidden.hashCode()
-        result = 31 * result + _isDisabled.hashCode()
-        result = 31 * result + (metadata?.hashCode() ?: 0)
-        return result
-    }
-
-    override fun toString(): String {
-        return "MenigaAccount(id=$id, accountIdentifier=$accountIdentifier, realmIdentifier=$realmIdentifier, realmAccountTypeId=$realmAccountTypeId, accountTypeId=$accountTypeId, _name=$_name, accountCategory=$accountCategory, _emergencyFundBalanceLimit=$_emergencyFundBalanceLimit, balance=$balance, originalBalance=$originalBalance, committedAmount=$committedAmount, limit=$limit, accountClass=$accountClass, organizationIdentifier=$organizationIdentifier, realmCredentialsId=$realmCredentialsId, accountAuthorizatonType=$accountAuthorizatonType, _orderId=$_orderId, isImportAccount=$isImportAccount, lastUpdate=$lastUpdate, personId=$personId, userEmail=$userEmail, createDate=$createDate, isInactive=$isInactive, attachedToUserDate=$attachedToUserDate, _isHidden=$_isHidden, _isDisabled=$_isDisabled, metadata=$metadata)"
     }
 
     companion object {

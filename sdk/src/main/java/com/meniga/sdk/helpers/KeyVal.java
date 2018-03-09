@@ -81,4 +81,8 @@ public class KeyVal<A, B> implements Comparable<KeyVal<A, B>>, Parcelable {
 		parcel.writeSerializable((Serializable) key);
 		parcel.writeSerializable((Serializable) value);
 	}
+
+	public static KeyVal<String, String> of(String key, String value) {
+		return new KeyVal<>(key, value);
+	}
 }

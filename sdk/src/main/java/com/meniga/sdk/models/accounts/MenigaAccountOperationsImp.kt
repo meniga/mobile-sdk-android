@@ -6,13 +6,15 @@ package com.meniga.sdk.models.accounts
 import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.helpers.KeyVal
 import com.meniga.sdk.helpers.Result
+import com.meniga.sdk.models.accounts.enums.AccountAuthorizationType
 import com.meniga.sdk.models.accounts.enums.AccountBalanceHistorySort
 import com.meniga.sdk.models.accounts.enums.AccountCategory
 import com.meniga.sdk.models.accounts.operators.MenigaAccountOperations
 import com.meniga.sdk.webservices.account.Account
+import com.meniga.sdk.webservices.account.AccountAuthorizationTypeName
 import com.meniga.sdk.webservices.account.AccountBalanceHistory
-import com.meniga.sdk.webservices.account.AccountType
-import com.meniga.sdk.webservices.account.AuthorizationType
+import com.meniga.sdk.webservices.account.AccountMetaData
+import com.meniga.sdk.webservices.account.AccountTypeCategory
 import com.meniga.sdk.webservices.account.UpdateAccount
 import com.meniga.sdk.webservices.account.UpdateAccountMetadata
 import com.meniga.sdk.webservices.requests.DeleteAccount
@@ -64,7 +66,7 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
     override fun getAccountTypes(): Result<List<MenigaAccountType>> {
         val req = GetAccountTypes()
         return MenigaSDK.executor().getAccountTypes(req)
-                .map { it.map { it.toMenigaAccountType() } }
+                .map { emptyList<MenigaAccountType>() }
     }
 
     override fun getAccountAuthorizationTypes(): Result<List<MenigaAuthorizationType>> {
@@ -78,27 +80,29 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
                 .map { it.map { it.toMenigaAccountCategory() } }
     }
 
-    override fun getMetadata(accountId: Long): Result<List<KeyVal<String, String>>> {
+    override fun getMetadata(accountId: Long): Result<List<KeyVal<String, String?>>> {
         val req = GetAccountMetadata()
         req.id = accountId
         return MenigaSDK.executor().getAccountMetadata(req)
+                .map { it.map { KeyVal(it.name, it.value) } }
     }
 
-    override fun updateMetadata(accountId: Long, keyVal: KeyVal<String, String>): Result<KeyVal<String, String>> {
+    override fun updateMetadata(accountId: Long, keyVal: KeyVal<String, String>): Result<KeyVal<String, String?>> {
         val request = UpdateAccountMetadata().also {
-            it.id = accountId
-            it.key = keyVal.key
+            it.name = keyVal.key
             it.value = keyVal.value
         }
-        return MenigaSDK.executor().updateAccountMetadata(request)
+        return MenigaSDK.executor().updateAccountMetadata(accountId, request)
+                .map { KeyVal(it.name, it.value) }
     }
 
-    override fun getMetadataKeyVal(accId: Long, key: String): Result<KeyVal<String, String>> {
+    override fun getMetadataKeyVal(accId: Long, key: String): Result<KeyVal<String?, String?>> {
         val request = GetAccountMetadataKeyVal().also {
             it.id = accId
             it.name = key
         }
         return MenigaSDK.executor().getAccountMetadataKeyVal(request)
+                .map { KeyVal(it.value, it.name) }
     }
 
     override fun getBalanceHistory(accId: Long, from: DateTime, to: DateTime, sort: AccountBalanceHistorySort): Result<List<MenigaAccountBalanceHistory>> {
@@ -126,29 +130,41 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
                     accountClass = accountClass,
                     organizationIdentifier = organizationIdentifier,
                     realmCredentialsId = realmCredentialsId,
-                    accountAuthorizatonType = accountAuthorizatonType,
+                    accountAuthorizatonType = accountAuthorizationType?.toAccountAuthorizationType(),
                     isImportAccount = isImportAccount,
                     lastUpdate = lastUpdate,
                     personId = personId,
                     userEmail = userEmail,
                     createDate = createDate,
                     accountCategory = (accountCategory ?: accountType)?.toMenigaAccountCategory() ,
-                    isInactive = isInactive,
+                    inactive = inactive,
                     attachedToUserDate = attachedToUserDate,
-                    metadata = metadata)
+                    metadata = metadata?.map { it.toMenigaAccountMetaData() }.orEmpty() )
 
     private fun AccountBalanceHistory.toMenigaAccountBalanceHistory() =
             MenigaAccountBalanceHistory(id ?: 0, accountId ?: 0, balance, balanceDate, isDefault)
 
-    private fun AuthorizationType.toMenigaAuthorizationType() =
-            MenigaAuthorizationType(id ?: 0, name)
+    private fun AccountAuthorizationTypeName.toAccountAuthorizationType() =
+            when(this) {
+                AccountAuthorizationTypeName.NONE -> AccountAuthorizationType.NONE
+                AccountAuthorizationTypeName.EXTERNAL -> AccountAuthorizationType.EXTERNAL
+                AccountAuthorizationTypeName.INTERNAL -> AccountAuthorizationType.INTERNAL
+                AccountAuthorizationTypeName.EXTERNAL_MULTIFACTOR -> AccountAuthorizationType.EXTERNAL_MULTIFACTOR
+            }
 
-    private fun AccountType.toMenigaAccountType() =
-            MenigaAccountType(id ?: 0, name, parentId, parentName)
+    private fun AccountTypeCategory.toMenigaAccountType() =
+            MenigaAccountType(id ?: 0, name, parentId ?: 0, parentName)
 
-    private fun com.meniga.sdk.webservices.account.AccountTypeCategory.toMenigaAccountCategory() =
+    private fun AccountTypeCategory.toMenigaAccountCategory() =
             name?.let { AccountCategory.valueOf(it.toUpperCase()) } ?: AccountCategory.UNKNOWN
 
     private fun com.meniga.sdk.webservices.account.AccountCategory.toMenigaAccountCategory() =
             AccountCategory.valueOf(name)
+
+    private fun AccountMetaData.toMenigaAccountMetaData() =
+            MenigaAccountMetaData(name, value)
+
+    private fun com.meniga.sdk.webservices.account.AccountAuthorizationType.toMenigaAuthorizationType() =
+            MenigaAuthorizationType(id, name)
 }
+
