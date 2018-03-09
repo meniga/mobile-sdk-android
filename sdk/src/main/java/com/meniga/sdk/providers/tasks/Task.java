@@ -87,14 +87,12 @@ public class Task<TResult> {
 	private boolean complete;
 	private boolean cancelled;
 	private TResult result;
-	private String request = "";
 	private Exception error;
 	private boolean errorHasBeenObserved;
 	private UnobservedErrorNotifier unobservedErrorNotifier;
 	private List<Continuation<TResult, Void>> continuations = new ArrayList<>();
 
-	/* package */ Task(String request) {
-		this.request = request;
+	/* package */ Task() {
 	}
 
 	private Task(TResult result) {
@@ -150,12 +148,6 @@ public class Task<TResult> {
 	public TResult getResult() {
 		synchronized (lock) {
 			return result;
-		}
-	}
-
-	public String getRequest() {
-		synchronized (lock) {
-			return request;
 		}
 	}
 

@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class MenigaSyncStatus implements Parcelable, Serializable {
 	protected boolean hasCompletedSyncSession;
 	protected boolean isSynchronizationNeeded;
-	protected String synchronizationStatus;
+	protected MenigaSyncSubStatus synchronizationStatus;
 
 	public static final Creator<MenigaSyncStatus> CREATOR = new Creator<MenigaSyncStatus>() {
 		@Override
@@ -36,6 +36,14 @@ public class MenigaSyncStatus implements Parcelable, Serializable {
 	 */
 	public boolean getHasCompletedSyncSession() {
 		return hasCompletedSyncSession;
+	}
+
+	public boolean isSynchronizationNeeded() {
+		return isSynchronizationNeeded;
+	}
+
+	public MenigaSyncSubStatus getSynchronizationStatus() {
+		return synchronizationStatus;
 	}
 
 	@Override

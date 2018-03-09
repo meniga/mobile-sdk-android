@@ -11,7 +11,6 @@ import com.meniga.sdk.webservices.requests.StartSync;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public final class MenigaSyncOperationsImp implements MenigaSyncOperations {
-
 	@Override
 	public Result<MenigaSync> startSync(long timeout) {
 		StartSync req = new StartSync();
