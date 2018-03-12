@@ -27,7 +27,7 @@ import java.io.Serializable
  * @property accountIdentifier The identifier for the account set by the originating bank. This identifier is used when getting account statements.
  * @property realmIdentifier The realm identifier for this account. Realm here can mean e.g. a bank institute.
  * @property realmAccountTypeId The realm account type for this account. Realm here can mean e.g. a bank institute.
- * @property accountTypeId
+ * @property accountTypeId The id of the account type.
  * @property name The name of the account set by the user or the originating bank.
  * @property balance The current balance of the account.
  * @property originalBalance The balance for the account when it was created.
@@ -44,7 +44,6 @@ import java.io.Serializable
  * @property userEmail Email for the person that owns this account.
  * @property createDate Creation date for this account.
  * @property accountCategory Indicates if this is a Current account, Credit account or Saving account = ['0', '1', '2', '3', '4', '5', '21', '22'].
- * @property accountType
  * @property emergencyFundBalanceLimit If this account is used to track Life goals, this amount indicates the amount that is not used for goal allocation.
  * @property isInactive True if the account is inactive.
  * @property attachedToUserDate DateTime when the user added thia account.
@@ -250,7 +249,7 @@ data class MenigaAccount internal constructor(
 
     companion object {
 
-        lateinit var apiOperator: MenigaAccountOperations
+        private lateinit var apiOperator: MenigaAccountOperations
 
         /**
          * Sets the api operator for doing api calls

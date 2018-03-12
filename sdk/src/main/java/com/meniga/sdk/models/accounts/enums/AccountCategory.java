@@ -30,7 +30,9 @@ public enum AccountCategory implements Serializable {
 	}
 
 	/**
-	 * This method is not reliable. Use {@link MenigaAccount#fetchCategories()} instead.
+	 * This method may not be reliable. Use {@link MenigaAccount#fetchAccountTypes()} and then call {@link com.meniga.sdk.models.accounts.MenigaAccountType#accountCategory}.
+	 *
+	 * @deprecated Will be removed in 1.2
 	 */
 	@Deprecated
 	public static AccountCategory fromId(long id) {

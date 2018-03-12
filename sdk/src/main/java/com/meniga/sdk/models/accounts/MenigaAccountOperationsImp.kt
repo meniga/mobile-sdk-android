@@ -14,6 +14,7 @@ import com.meniga.sdk.webservices.account.Account
 import com.meniga.sdk.webservices.account.AccountAuthorizationTypeName
 import com.meniga.sdk.webservices.account.AccountBalanceHistory
 import com.meniga.sdk.webservices.account.AccountMetaData
+import com.meniga.sdk.webservices.account.AccountType
 import com.meniga.sdk.webservices.account.AccountTypeCategory
 import com.meniga.sdk.webservices.account.UpdateAccount
 import com.meniga.sdk.webservices.account.UpdateAccountMetadata
@@ -66,7 +67,7 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
     override fun getAccountTypes(): Result<List<MenigaAccountType>> {
         val req = GetAccountTypes()
         return MenigaSDK.executor().getAccountTypes(req)
-                .map { emptyList<MenigaAccountType>() }
+                .map { it.map { it.toMenigaAccountType() } }
     }
 
     override fun getAccountAuthorizationTypes(): Result<List<MenigaAuthorizationType>> {
@@ -136,24 +137,27 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
                     personId = personId,
                     userEmail = userEmail,
                     createDate = createDate,
-                    accountCategory = (accountCategory ?: accountType)?.toMenigaAccountCategory() ,
+                    accountCategory = (accountCategory ?: accountType)?.toMenigaAccountCategory(),
                     inactive = inactive,
                     attachedToUserDate = attachedToUserDate,
-                    metadata = metadata?.map { it.toMenigaAccountMetaData() }.orEmpty() )
+                    metadata = metadata?.map { it.toMenigaAccountMetaData() }.orEmpty())
 
     private fun AccountBalanceHistory.toMenigaAccountBalanceHistory() =
-            MenigaAccountBalanceHistory(id ?: 0, accountId ?: 0, balance, balanceDate, isDefault)
+            MenigaAccountBalanceHistory(
+                    id ?: 0,
+                    accountId ?: 0,
+                    balance,
+                    balanceInUserCurrency,
+                    balanceDate,
+                    isDefault)
 
     private fun AccountAuthorizationTypeName.toAccountAuthorizationType() =
-            when(this) {
+            when (this) {
                 AccountAuthorizationTypeName.NONE -> AccountAuthorizationType.NONE
                 AccountAuthorizationTypeName.EXTERNAL -> AccountAuthorizationType.EXTERNAL
                 AccountAuthorizationTypeName.INTERNAL -> AccountAuthorizationType.INTERNAL
                 AccountAuthorizationTypeName.EXTERNAL_MULTIFACTOR -> AccountAuthorizationType.EXTERNAL_MULTIFACTOR
             }
-
-    private fun AccountTypeCategory.toMenigaAccountType() =
-            MenigaAccountType(id ?: 0, name, parentId ?: 0, parentName)
 
     private fun AccountTypeCategory.toMenigaAccountCategory() =
             name?.let { AccountCategory.valueOf(it.toUpperCase()) } ?: AccountCategory.UNKNOWN
@@ -166,5 +170,16 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
 
     private fun com.meniga.sdk.webservices.account.AccountAuthorizationType.toMenigaAuthorizationType() =
             MenigaAuthorizationType(id, name)
+
+    private fun AccountType.toMenigaAccountType(): MenigaAccountType =
+            MenigaAccountType(
+                    id ?: 0,
+                    name,
+                    description,
+                    accountCategory?.toMenigaAccountCategory(),
+                    organizationId,
+                    realmId,
+                    accountCategoryDetails,
+                    enableCashback ?: false)
 }
 

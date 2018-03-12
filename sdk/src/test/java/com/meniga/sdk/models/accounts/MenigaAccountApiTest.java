@@ -7,12 +7,15 @@ import com.jayway.jsonassert.JsonAssert;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.helpers.KeyVal;
+import com.meniga.sdk.helpers.MenigaDecimal;
+import com.meniga.sdk.models.accounts.enums.AccountBalanceHistorySort;
 import com.meniga.sdk.models.accounts.enums.AccountCategory;
 import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
 
+import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -106,8 +109,17 @@ public class MenigaAccountApiTest {
         Task<List<MenigaAccountType>> accountsTask = MenigaAccount.fetchAccountTypes().getTask();
         accountsTask.waitForCompletion();
 
-        List<MenigaAccountType> accounts = accountsTask.getResult();
-        Assert.assertNotNull(accounts);
+        List<MenigaAccountType> accountTypes = accountsTask.getResult();
+        assertThat(accountTypes).isNotEmpty();
+        MenigaAccountType type = accountTypes.get(0);
+        assertThat(type.getId()).isEqualTo(1);
+        assertThat(type.getName()).isEqualTo("Wallet");
+        assertThat(type.getDescription()).isEqualTo("Wallet");
+        assertThat(type.getAccountCategory()).isEqualTo(AccountCategory.WALLET);
+        assertThat(type.getOrganizationId()).isEqualTo(1);
+        assertThat(type.getRealmId()).isEqualTo(0);
+        assertThat(type.getAccountCategoryDetails()).isNull();
+        assertThat(type.isCashbackEnabled()).isEqualTo(false);
     }
 
     @Test
@@ -175,17 +187,51 @@ public class MenigaAccountApiTest {
 
     @Test
     public void shouldFetchMetadataByName() throws Exception {
+        server.enqueue(new MockResponse());
+        MenigaAccount account = MenigaAccountFactory.createAccount();
 
+        Task<KeyVal<String, String>> task = account.fetchMetadataKeyVal("Valid to").getTask();
+        task.waitForCompletion();
+
+        RecordedRequest request = server.takeRequest();
+        assertThat(request.getPath()).isEqualTo("/v1/accounts/0/metadata/Valid%20to");
+        assertThat(request.getMethod()).isEqualTo("GET");
     }
 
     @Test
     public void shouldFetchBalanceHistory() throws Exception {
+        server.enqueue(mockResponse("accountbalancehistory.json"));
+        MenigaAccount account = MenigaAccountFactory.createAccount();
 
+        Task<List<MenigaAccountBalanceHistory>> task = account.fetchBalanceHistory(DateTime.parse("2018-01-01"), DateTime.parse("2018-02-01"), AccountBalanceHistorySort.DATE_ASCENDING).getTask();
+        task.waitForCompletion();
+
+        RecordedRequest request = server.takeRequest();
+        assertThat(request.getPath()).isEqualTo("/v1/accounts/0/history?dateTo=2018-02-01T00:00:00.000Z&sort=BalanceDate&dateFrom=2018-01-01T00:00:00.000Z");
+        assertThat(request.getMethod()).isEqualTo("GET");
+        List<MenigaAccountBalanceHistory> result = task.getResult();
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0).getId()).isEqualTo(4114);
+        assertThat(result.get(0).getAccountId()).isEqualTo(1795);
+        assertThat(result.get(0).getBalance()).isEqualTo(MenigaDecimal.ZERO);
+        assertThat(result.get(0).getBalanceInUserCurrency()).isEqualTo(MenigaDecimal.ZERO);
+        assertThat(result.get(0).getBalanceDate()).isEqualTo(DateTime.parse("2018-02-01T13:55:14"));
+        assertThat(result.get(0).isDefault()).isEqualTo(false);
     }
 
     @Test
     public void shouldRefresh() throws Exception {
+        server.enqueue(mockResponse("account.json"));
+        MenigaAccount account = MenigaAccountFactory.createAccount();
 
+        Task<MenigaAccount> task = account.refresh().getTask();
+        task.waitForCompletion();
+
+        RecordedRequest request = server.takeRequest();
+        assertThat(request.getPath()).isEqualTo("/v1/accounts/0");
+        assertThat(request.getMethod()).isEqualTo("GET");
+        MenigaAccount result = task.getResult();
+        assertThat(account).isNotEqualTo(result);
     }
 
     private MockResponse mockResponse(String path) throws IOException {
