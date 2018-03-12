@@ -13,7 +13,6 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.sync.operators.MenigaSyncOperations;
-import com.meniga.sdk.providers.BasicTaskAdapter;
 import com.meniga.sdk.providers.tasks.Continuation;
 import com.meniga.sdk.providers.tasks.Task;
 

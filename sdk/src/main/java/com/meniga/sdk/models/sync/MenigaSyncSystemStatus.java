@@ -9,19 +9,21 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Contains info on the sync status of all realms and for each realm, its accounts
+ *
  * Copyright 2017 Meniga Iceland Inc.
  * Created by agustk on 9.3.2018.
  */
-public class MenigaSyncSubStatus implements Parcelable, Serializable {
+public class MenigaSyncSystemStatus implements Parcelable, Serializable {
     private long syncHistoryId;
     private boolean isSyncDone;
     private DateTime syncSessionStartTime;
     private List<RealmSyncResponse> realmSyncResponses;
 
-    protected MenigaSyncSubStatus() {
+    protected MenigaSyncSystemStatus() {
     }
 
-    protected MenigaSyncSubStatus(Parcel in) {
+    protected MenigaSyncSystemStatus(Parcel in) {
         this.syncHistoryId = in.readLong();
         this.isSyncDone = in.readByte() != 0;
         this.syncSessionStartTime = (DateTime) in.readSerializable();
@@ -49,7 +51,7 @@ public class MenigaSyncSubStatus implements Parcelable, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MenigaSyncSubStatus that = (MenigaSyncSubStatus) o;
+        MenigaSyncSystemStatus that = (MenigaSyncSystemStatus) o;
 
         if (syncHistoryId != that.syncHistoryId) {
             return false;
@@ -85,15 +87,15 @@ public class MenigaSyncSubStatus implements Parcelable, Serializable {
         dest.writeTypedList(this.realmSyncResponses);
     }
 
-    public static final Creator<MenigaSyncSubStatus> CREATOR = new Creator<MenigaSyncSubStatus>() {
+    public static final Creator<MenigaSyncSystemStatus> CREATOR = new Creator<MenigaSyncSystemStatus>() {
         @Override
-        public MenigaSyncSubStatus createFromParcel(Parcel source) {
-            return new MenigaSyncSubStatus(source);
+        public MenigaSyncSystemStatus createFromParcel(Parcel source) {
+            return new MenigaSyncSystemStatus(source);
         }
 
         @Override
-        public MenigaSyncSubStatus[] newArray(int size) {
-            return new MenigaSyncSubStatus[size];
+        public MenigaSyncSystemStatus[] newArray(int size) {
+            return new MenigaSyncSystemStatus[size];
         }
     };
 }
