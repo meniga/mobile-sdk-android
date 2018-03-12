@@ -1,3 +1,4 @@
 include ':sdk'
 
 rootProject.name = 'com.meniga'
+project(":sdk").name = "sdk"
