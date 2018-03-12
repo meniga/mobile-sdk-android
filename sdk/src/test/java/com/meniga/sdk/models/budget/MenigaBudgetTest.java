@@ -184,7 +184,7 @@ public class MenigaBudgetTest {
 
         List<MenigaBudgetEntry> entries = entriesTask.getResult();
         assertThat(server.takeRequest().getPath())
-                .isEqualTo("/v1/budgets/1/entries?id=1&startDate=2018-02-01T00:00:00.000Z&endDate=2018-02-28T00:00:00.000Z&allowOverlappingEntries=true&includeOptionalHistoricalData=false");
+                 .isEqualTo("/v1/budgets/1/entries?id=1&startDate=2018-02-01T00:00:00.000Z&endDate=2018-02-28T00:00:00.000Z&allowOverlappingEntries=true&includeOptionalHistoricalData=false");
         assertThat(entries).isNotNull();
     }
 

@@ -46,10 +46,7 @@ public abstract class MenigaConverter extends Converter.Factory {
 	}
 
 	public static JsonArray getAsArray(InputStream stream) throws IOException {
-		JsonObject jsonObject;
-		InputStreamReader isr = new InputStreamReader(stream);
-		JsonElement jsonElement = new JsonParser().parse(isr);
-		jsonObject = jsonElement.getAsJsonObject();
+		JsonObject jsonObject = readJsonObject(stream);
 		return jsonObject.getAsJsonArray("data");
 	}
 
@@ -68,6 +65,28 @@ public abstract class MenigaConverter extends Converter.Factory {
 		}
 		JsonObject jobject = jelement.getAsJsonObject();
 		return jobject.getAsJsonObject("data");
+	}
+
+	public static MenigaApiResponse.Object getAsObjectApiResponse(InputStream stream) throws IOException {
+		JsonObject jsonObject = readJsonObject(stream);
+		return new MenigaApiResponse.Object(
+				jsonObject.getAsJsonObject("data"),
+				jsonObject.getAsJsonObject("meta"),
+				jsonObject.getAsJsonObject("included"));
+	}
+
+	public static MenigaApiResponse.Array getAsArrayApiResponse(InputStream stream) throws IOException {
+		JsonObject jsonObject = readJsonObject(stream);
+		return new MenigaApiResponse.Array(
+				jsonObject.getAsJsonArray("data"),
+				jsonObject.getAsJsonObject("meta"),
+				jsonObject.getAsJsonObject("included"));
+	}
+
+	private static JsonObject readJsonObject(InputStream stream) {
+		InputStreamReader reader = new InputStreamReader(stream);
+		JsonElement jsonElement = new JsonParser().parse(reader);
+		return jsonElement.getAsJsonObject();
 	}
 
 	@SuppressWarnings("unchecked")

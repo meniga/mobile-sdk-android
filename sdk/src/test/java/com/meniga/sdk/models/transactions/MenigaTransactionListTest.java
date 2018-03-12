@@ -26,7 +26,7 @@ public class MenigaTransactionListTest{
 		assertThat(items.size()).isGreaterThan(0);
 
 		assertThat(items.size()).isGreaterThan(0);
-		assertThat(items.get(0).getText()).isEqualTo("McDonalds");
+		assertThat(items.get(0).getText()).isEqualTo("London Car Parking");
 	}
 
 	@Test
