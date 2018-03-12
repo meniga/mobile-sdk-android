@@ -10,6 +10,7 @@ import com.meniga.sdk.webservices.MenigaWebException;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -205,5 +206,22 @@ public class MenigaUser implements Serializable, Parcelable, Cloneable {
 
 	public static Result<Void> forgotPassword(String email) {
 		return apiOperator.forgotPassword(email);
+	}
+
+	/**
+	 * Returns an array of the currently logged in user's meta data
+	 * @return A list of all user metadata
+	 */
+	public static Result<List<MenigaUserMetaData>> fetchMetaData() {
+		return apiOperator.getUserMetaData(new ArrayList<String>());
+	}
+
+	/**
+	 * Returns an array of the currently logged in user's meta data that match the keys provided
+	 * @param filter Keys of meta data to filter by
+	 * @return A list of filtered user metadata
+	 */
+	public static Result<List<MenigaUserMetaData>> fetchMetaData(List<String> filter) {
+		return apiOperator.getUserMetaData(filter);
 	}
 }
