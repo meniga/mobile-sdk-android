@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-27-alpha
+    steps:
+      - checkout
+      - restore_cache:
+          key: m2-{{ checksum "build.gradle" }}-{{ checksum "sdk/build.gradle" }}
+      - run:
+          command: ./gradlew androidDependencies
+      - run:
+          name: Build
+          command: ./gradlew build
+      - store_test_results:
+          path: sdk/build/test-results

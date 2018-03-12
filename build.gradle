@@ -25,6 +25,7 @@ scmVersion {
         prefix = 'v'
         versionSeparator = ''
     }
+    versionCreator 'versionWithBranch'
 }
 
 allprojects {
