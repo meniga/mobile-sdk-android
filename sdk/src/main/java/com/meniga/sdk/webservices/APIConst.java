@@ -46,6 +46,7 @@ class APIConst {
 	static final String REGISTER = "/register";
 	static final String PASSWORD = "/password";
 	static final String FORGOT = "/forgot";
+	static final String META_DATA = "/metadata";
 
 	// Categories
 	static final String URL_CATEGORIES = "categories";

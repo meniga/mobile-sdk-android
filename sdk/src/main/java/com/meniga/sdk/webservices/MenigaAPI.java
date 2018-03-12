@@ -40,6 +40,7 @@ import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.user.MenigaUser;
+import com.meniga.sdk.models.user.MenigaUserMetaData;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.requests.AcceptChallenge;
@@ -281,6 +282,9 @@ public interface MenigaAPI {
 
 	@POST(APIConst.URL_ME + APIConst.PASSWORD + APIConst.FORGOT)
 	Call<Void> forgotPassword(@Body ForgotPassword req);
+
+	@GET(APIConst.URL_ME + APIConst.META_DATA)
+	Call<List<MenigaUserMetaData>> getUserMetaData(@QueryMap Map<String, String> queryMap);
 
 	// --
 	// Categories

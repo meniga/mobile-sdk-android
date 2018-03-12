@@ -3,7 +3,9 @@ package com.meniga.sdk.models.user.operators;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.user.MenigaUser;
+import com.meniga.sdk.models.user.MenigaUserMetaData;
 import com.meniga.sdk.webservices.requests.ForgotPassword;
+import com.meniga.sdk.webservices.requests.GetUserMetaData;
 import com.meniga.sdk.webservices.requests.GetUsers;
 import com.meniga.sdk.webservices.requests.RegisterUser;
 import com.meniga.sdk.webservices.requests.SetCulture;
@@ -40,5 +42,12 @@ public class MenigaUserOperationsImp implements MenigaUserOperations {
 		ForgotPassword req = new ForgotPassword();
 		req.email = email;
 		return MenigaSDK.executor().forgotPassword(req);
+	}
+
+	@Override
+	public Result<List<MenigaUserMetaData>> getUserMetaData(List<String> filter) {
+		GetUserMetaData req = new GetUserMetaData();
+		req.names = filter;
+		return MenigaSDK.executor().getUserMetaData(req);
 	}
 }
