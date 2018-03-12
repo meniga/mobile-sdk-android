@@ -1,7 +1,6 @@
 apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
-apply plugin: "com.jfrog.artifactory"
 apply plugin: 'digital.wup.android-maven-publish'
+apply plugin: "kotlin-android"
 
 android {
     compileSdkVersion 27
@@ -43,8 +42,8 @@ android {
 dependencies {
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    implementation "com.squareup.okhttp3:okhttp:3.9.1"
-    implementation "com.squareup.okhttp3:okhttp-urlconnection:3.9.1"
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$okHttpVersion"
     api "net.danlew:android.joda:2.9.9"
     implementation "com.squareup.retrofit2:retrofit:2.3.0"
     implementation "com.squareup.retrofit2:converter-gson:2.3.0"
@@ -55,7 +54,7 @@ dependencies {
     testImplementation "org.robolectric:robolectric:3.3.2"
     testImplementation "net.jodah:concurrentunit:0.4.2"
     testImplementation "com.jayway.jsonpath:json-path-assert:2.4.0"
-    testImplementation "com.squareup.okhttp3:mockwebserver:3.9.1"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
     testImplementation "com.squareup.retrofit2:retrofit-mock:2.1.0"
     testImplementation "org.assertj:assertj-core:2.6.0"
     //noinspection GradleDependency (https://github.com/dlew/joda-time-android/issues/148)
@@ -68,7 +67,7 @@ task deploy() {}
 deploy.dependsOn publishToMavenLocal
 
 task androidSourcesJar(type: Jar) {
-    classifier = 'sources'
+    classifier = "sources"
     from android.sourceSets.main.java.srcDirs
 }
 
@@ -87,10 +86,4 @@ publishing {
     }
 }
 
-if (project.hasProperty("artifactory_username") && (file("../artifactory.gradle").exists())) {
-    apply from: "../artifactory.gradle"
-}
-
-if (project.hasProperty("bintray_user") && (file("../bintray.gradle").exists())) {
-    apply from: "../bintray.gradle"
-}
+apply from: "$rootDir/gradle/bintray.gradle"

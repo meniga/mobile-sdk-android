@@ -1,10 +1,11 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.30'
+        kotlinVersion = "1.2.30"
+        okHttpVersion = "3.9.1"
     }
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:3.0.1"
@@ -17,15 +18,15 @@ buildscript {
 }
 
 plugins {
-    id 'pl.allegro.tech.build.axion-release' version '1.9.0'
+    id "pl.allegro.tech.build.axion-release" version "1.9.0"
 }
 
 scmVersion {
     tag {
-        prefix = 'v'
-        versionSeparator = ''
+        prefix = "v"
+        versionSeparator = ""
     }
-    versionCreator 'versionWithBranch'
+    versionCreator "versionWithBranch"
 }
 
 allprojects {

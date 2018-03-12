@@ -14,3 +14,14 @@ jobs:
           command: ./gradlew build
       - store_test_results:
           path: sdk/build/test-results
+  deploy:
+    requires:
+      - build
+    docker:
+      - image: circleci/android:api-27-alpha
+    filters:
+      tags:
+        only: /^v.*/
+    steps:
+      - run:
+          command: ./gradlew bintrayUpload
