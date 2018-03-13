@@ -46,6 +46,7 @@ import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.user.MenigaUser;
+import com.meniga.sdk.models.user.MenigaUserMetaData;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.budget.BudgetService;
@@ -468,6 +469,10 @@ public class PersistenceDelegate {
 
 	public Result<Void> forgotPassword(ForgotPassword req) {
 		return persist(req, getClient(Service.USERS).forgotPassword(req));
+	}
+
+	public Result<List<MenigaUserMetaData>> getUserMetaData(GetUserMetaData req) {
+		return persist(req, getClient(Service.USERS).getUserMetaData(req.toQueryMap()));
 	}
 
 	// --

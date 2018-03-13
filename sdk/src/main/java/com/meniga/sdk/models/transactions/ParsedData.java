@@ -24,56 +24,27 @@ public class ParsedData implements Serializable, Parcelable {
 	};
 
 	protected String key;
-	protected String val;
+	protected String value;
 
 	protected ParsedData() {
 	}
 
 	protected ParsedData(Parcel in) {
 		this.key = in.readString();
-		this.val = in.readString();
+		this.value = in.readString();
 	}
 
-	public ParsedData(String key, String val) {
+	public ParsedData(String key, String value) {
 		this.key = key;
-		this.val = val;
+		this.value = value;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		ParsedData that = (ParsedData) o;
-
-		if (!(this.key == null && that.key == null)) {
-			if (this.key == null && that.key != null || this.key != null && that.key == null) {
-				return false;
-			}
-			if (!this.key.equals(that.key)) {
-				return false;
-			}
-		}
-		if (!(this.val == null && that.val == null)) {
-			if (this.val == null && that.val != null || this.val != null && that.val == null) {
-				return false;
-			}
-			if (!this.val.equals(that.val)) {
-				return false;
-			}
-		}
-
-		return true;
+	public String getKey() {
+		return key;
 	}
 
-	@Override
-	public int hashCode() {
-		int result = key != null ? key.hashCode() : 0;
-		result = 31 * result + (val != null ? val.hashCode() : 0);
-		return result;
+	public String getValue() {
+		return value;
 	}
 
 	@Override
@@ -84,6 +55,30 @@ public class ParsedData implements Serializable, Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(this.key);
-		dest.writeString(this.val);
+		dest.writeString(this.value);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		ParsedData that = (ParsedData) o;
+
+		if (key != null ? !key.equals(that.key) : that.key != null) {
+			return false;
+		}
+		return value != null ? value.equals(that.value) : that.value == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = key != null ? key.hashCode() : 0;
+		result = 31 * result + (value != null ? value.hashCode() : 0);
+		return result;
 	}
 }

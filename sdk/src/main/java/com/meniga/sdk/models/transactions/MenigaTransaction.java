@@ -10,6 +10,7 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.Merge;
 import com.meniga.sdk.models.StateObject;
+import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.categories.MenigaCategoryScore;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
 import com.meniga.sdk.models.merchants.MenigaMerchant;
@@ -51,12 +52,14 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	protected Boolean isFlagged;
 	protected boolean hasUncertainCategorization;
 	protected Long accountId;
+	protected MenigaAccount account;
 	protected Integer mcc;
 	protected List<MenigaCategoryScore> detectedCategories;
 	protected String currency;
 	protected MenigaDecimal amountInCurrency;
 	protected Integer dataFormat;
 	protected Long merchantId;
+	protected MenigaMerchant merchant;
 	protected List<MenigaMerchant> merchants;
 	protected String bankId;
 	protected DateTime insertTime;
@@ -88,52 +91,54 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	}
 
 	protected MenigaTransaction(Parcel in) {
-		parentIdentifier = in.readString();
-		id = in.readLong();
-		amount = (MenigaDecimal) in.readSerializable();
-		tags = in.createStringArrayList();
-		comments = in.createTypedArrayList(MenigaComment.CREATOR);
-		categoryId = (Long) in.readValue(Long.class.getClassLoader());
-		date = (DateTime) in.readSerializable();
-		text = in.readString();
-		originalDate = (DateTime) in.readSerializable();
-		originalText = in.readString();
-		originalAmount = (MenigaDecimal) in.readSerializable();
-		isRead = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		isFlagged = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		hasUncertainCategorization = in.readByte() != 0;
-		accountId = (Long) in.readValue(Long.class.getClassLoader());
-		mcc = (Integer) in.readValue(Integer.class.getClassLoader());
-		detectedCategories = in.createTypedArrayList(MenigaCategoryScore.CREATOR);
-		currency = in.readString();
-		amountInCurrency = (MenigaDecimal) in.readSerializable();
-		dataFormat = (Integer) in.readValue(Integer.class.getClassLoader());
-		merchantId = (Long) in.readValue(Long.class.getClassLoader());
-		merchants = in.createTypedArrayList(MenigaMerchant.CREATOR);
-		bankId = in.readString();
-		insertTime = (DateTime) in.readSerializable();
-		hasUserClearedCategoryUncertainty = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		isUncleared = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		balance = (MenigaDecimal) in.readSerializable();
-		categoryChangedTime = (DateTime) in.readSerializable();
-		changedByRule = (Long) in.readValue(Long.class.getClassLoader());
-		changedByRuleTime = (DateTime) in.readSerializable();
-		counterpartyAccountIdentifier = in.readString();
-		dueDate = (DateTime) in.readSerializable();
-		lastModifiedTime = (DateTime) in.readSerializable();
-		timestamp = (DateTime) in.readSerializable();
-		parsedData = in.createTypedArrayList(ParsedData.CREATOR);
-		data = in.readString();
-		redeemed = (MenigaDecimal) in.readSerializable();
-		toRedeem = (MenigaDecimal) in.readSerializable();
-		remainingToSpend = (MenigaDecimal) in.readSerializable();
-		belongsToExpiredOffer = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		reason = in.readString();
-		isSplitChild = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		timeStamp = in.readLong();
-		userData = in.readString();
-		eventTypeIdentifier = in.readString();
-		topicName = in.readString();
+		this.parentIdentifier = in.readString();
+		this.id = in.readLong();
+		this.amount = (MenigaDecimal) in.readSerializable();
+		this.tags = in.createStringArrayList();
+		this.comments = in.createTypedArrayList(MenigaComment.CREATOR);
+		this.categoryId = (Long) in.readValue(Long.class.getClassLoader());
+		this.date = (DateTime) in.readSerializable();
+		this.text = in.readString();
+		this.originalDate = (DateTime) in.readSerializable();
+		this.originalText = in.readString();
+		this.originalAmount = (MenigaDecimal) in.readSerializable();
+		this.isRead = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.isFlagged = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.hasUncertainCategorization = in.readByte() != 0;
+		this.accountId = (Long) in.readValue(Long.class.getClassLoader());
+		this.account = in.readParcelable(MenigaAccount.class.getClassLoader());
+		this.mcc = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.detectedCategories = in.createTypedArrayList(MenigaCategoryScore.CREATOR);
+		this.currency = in.readString();
+		this.amountInCurrency = (MenigaDecimal) in.readSerializable();
+		this.dataFormat = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.merchantId = (Long) in.readValue(Long.class.getClassLoader());
+		this.merchant = in.readParcelable(MenigaMerchant.class.getClassLoader());
+		this.merchants = in.createTypedArrayList(MenigaMerchant.CREATOR);
+		this.bankId = in.readString();
+		this.insertTime = (DateTime) in.readSerializable();
+		this.hasUserClearedCategoryUncertainty = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.isUncleared = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.balance = (MenigaDecimal) in.readSerializable();
+		this.categoryChangedTime = (DateTime) in.readSerializable();
+		this.changedByRule = (Long) in.readValue(Long.class.getClassLoader());
+		this.changedByRuleTime = (DateTime) in.readSerializable();
+		this.counterpartyAccountIdentifier = in.readString();
+		this.dueDate = (DateTime) in.readSerializable();
+		this.lastModifiedTime = (DateTime) in.readSerializable();
+		this.timestamp = (DateTime) in.readSerializable();
+		this.parsedData = in.createTypedArrayList(ParsedData.CREATOR);
+		this.data = in.readString();
+		this.redeemed = (MenigaDecimal) in.readSerializable();
+		this.toRedeem = (MenigaDecimal) in.readSerializable();
+		this.remainingToSpend = (MenigaDecimal) in.readSerializable();
+		this.belongsToExpiredOffer = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.reason = in.readString();
+		this.isSplitChild = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.timeStamp = in.readLong();
+		this.userData = in.readString();
+		this.eventTypeIdentifier = in.readString();
+		this.topicName = in.readString();
 	}
 
 	@Override
@@ -143,52 +148,54 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(parentIdentifier);
-		dest.writeLong(id);
-		dest.writeSerializable(amount);
-		dest.writeStringList(tags);
-		dest.writeTypedList(comments);
-		dest.writeValue(categoryId);
-		dest.writeSerializable(date);
-		dest.writeString(text);
-		dest.writeSerializable(originalDate);
-		dest.writeString(originalText);
-		dest.writeSerializable(originalAmount);
-		dest.writeValue(isRead);
-		dest.writeValue(isFlagged);
-		dest.writeByte(hasUncertainCategorization ? (byte) 1 : (byte) 0);
-		dest.writeValue(accountId);
-		dest.writeValue(mcc);
-		dest.writeTypedList(detectedCategories);
-		dest.writeString(currency);
-		dest.writeSerializable(amountInCurrency);
-		dest.writeValue(dataFormat);
-		dest.writeValue(merchantId);
-		dest.writeTypedList(merchants);
-		dest.writeString(bankId);
-		dest.writeSerializable(insertTime);
-		dest.writeValue(hasUserClearedCategoryUncertainty);
-		dest.writeValue(isUncleared);
-		dest.writeSerializable(balance);
-		dest.writeSerializable(categoryChangedTime);
-		dest.writeValue(changedByRule);
-		dest.writeSerializable(changedByRuleTime);
-		dest.writeString(counterpartyAccountIdentifier);
-		dest.writeSerializable(dueDate);
-		dest.writeSerializable(lastModifiedTime);
-		dest.writeSerializable(timestamp);
-		dest.writeTypedList(parsedData);
-		dest.writeString(data);
-		dest.writeSerializable(redeemed);
-		dest.writeSerializable(toRedeem);
-		dest.writeSerializable(remainingToSpend);
-		dest.writeValue(belongsToExpiredOffer);
-		dest.writeString(reason);
-		dest.writeValue(isSplitChild);
-		dest.writeLong(timeStamp);
-		dest.writeString(userData);
-		dest.writeString(eventTypeIdentifier);
-		dest.writeString(topicName);
+		dest.writeString(this.parentIdentifier);
+		dest.writeLong(this.id);
+		dest.writeSerializable(this.amount);
+		dest.writeStringList(this.tags);
+		dest.writeTypedList(this.comments);
+		dest.writeValue(this.categoryId);
+		dest.writeSerializable(this.date);
+		dest.writeString(this.text);
+		dest.writeSerializable(this.originalDate);
+		dest.writeString(this.originalText);
+		dest.writeSerializable(this.originalAmount);
+		dest.writeValue(this.isRead);
+		dest.writeValue(this.isFlagged);
+		dest.writeByte(this.hasUncertainCategorization ? (byte) 1 : (byte) 0);
+		dest.writeValue(this.accountId);
+		dest.writeParcelable(this.account, flags);
+		dest.writeValue(this.mcc);
+		dest.writeTypedList(this.detectedCategories);
+		dest.writeString(this.currency);
+		dest.writeSerializable(this.amountInCurrency);
+		dest.writeValue(this.dataFormat);
+		dest.writeValue(this.merchantId);
+		dest.writeParcelable(this.merchant, flags);
+		dest.writeTypedList(this.merchants);
+		dest.writeString(this.bankId);
+		dest.writeSerializable(this.insertTime);
+		dest.writeValue(this.hasUserClearedCategoryUncertainty);
+		dest.writeValue(this.isUncleared);
+		dest.writeSerializable(this.balance);
+		dest.writeSerializable(this.categoryChangedTime);
+		dest.writeValue(this.changedByRule);
+		dest.writeSerializable(this.changedByRuleTime);
+		dest.writeString(this.counterpartyAccountIdentifier);
+		dest.writeSerializable(this.dueDate);
+		dest.writeSerializable(this.lastModifiedTime);
+		dest.writeSerializable(this.timestamp);
+		dest.writeTypedList(this.parsedData);
+		dest.writeString(this.data);
+		dest.writeSerializable(this.redeemed);
+		dest.writeSerializable(this.toRedeem);
+		dest.writeSerializable(this.remainingToSpend);
+		dest.writeValue(this.belongsToExpiredOffer);
+		dest.writeString(this.reason);
+		dest.writeValue(this.isSplitChild);
+		dest.writeLong(this.timeStamp);
+		dest.writeString(this.userData);
+		dest.writeString(this.eventTypeIdentifier);
+		dest.writeString(this.topicName);
 	}
 
 	public static final Creator<MenigaTransaction> CREATOR = new Creator<MenigaTransaction>() {
@@ -398,6 +405,13 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	}
 
 	/**
+	 * @return The account this transaction belongs to.
+	 */
+	public MenigaAccount getAccount() {
+		return account;
+	}
+
+	/**
 	 * @return The merchant category code mapping used when detecting categories.
 	 */
 	public Integer getMcc() {
@@ -437,6 +451,13 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 */
 	public Long getMerchantId() {
 		return merchantId;
+	}
+
+	/**
+	 * @return Merchant if this transaction was linked to a merchant.
+	 */
+	public MenigaMerchant getMerchant() {
+		return merchant;
 	}
 
 	/**

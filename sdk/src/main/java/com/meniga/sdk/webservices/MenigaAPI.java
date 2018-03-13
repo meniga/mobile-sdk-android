@@ -40,6 +40,7 @@ import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.user.MenigaUser;
+import com.meniga.sdk.models.user.MenigaUserMetaData;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.requests.AcceptChallenge;
@@ -114,7 +115,7 @@ public interface MenigaAPI {
 	@DELETE(APIConst.URL_TRANSACTIONS)
 	Call<Void> deleteTransactions(@QueryMap Map<String, String> queryMap);
 
-	@GET(APIConst.URL_TRANSACTIONS)
+	@GET(APIConst.URL_TRANSACTIONS + "?include=Account,Merchant")
 	Call<MenigaTransactionPage> getTransactions(@QueryMap Map<String, String> queryMap);
 
 	@POST(APIConst.URL_TRANSACTIONS)
@@ -123,7 +124,7 @@ public interface MenigaAPI {
 	@PUT(APIConst.URL_TRANSACTIONS)
 	Call<MenigaTransactionUpdate> updateTransactions(@QueryMap Map<String, String> transactionIds, @Body UpdateTransactions req);
 
-	@GET(APIConst.URL_TRANSACTIONS + "/{id}")
+	@GET(APIConst.URL_TRANSACTIONS + "/{id}?include=Account,Merchant")
 	Call<MenigaTransaction> getTransaction(@Path("id") long transId);
 
 	@PUT(APIConst.URL_TRANSACTIONS + "/{id}")
@@ -281,6 +282,9 @@ public interface MenigaAPI {
 
 	@POST(APIConst.URL_ME + APIConst.PASSWORD + APIConst.FORGOT)
 	Call<Void> forgotPassword(@Body ForgotPassword req);
+
+	@GET(APIConst.URL_ME + APIConst.META_DATA)
+	Call<List<MenigaUserMetaData>> getUserMetaData(@QueryMap Map<String, String> queryMap);
 
 	// --
 	// Categories

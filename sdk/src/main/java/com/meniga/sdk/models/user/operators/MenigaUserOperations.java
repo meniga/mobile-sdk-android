@@ -2,6 +2,7 @@ package com.meniga.sdk.models.user.operators;
 
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.user.MenigaUser;
+import com.meniga.sdk.models.user.MenigaUserMetaData;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface MenigaUserOperations {
 	Result<MenigaUser> registerUser(String email, String password, String culture);
 
     Result<Void> forgotPassword(String email);
+
+    Result<List<MenigaUserMetaData>> getUserMetaData(List<String> filter);
 }

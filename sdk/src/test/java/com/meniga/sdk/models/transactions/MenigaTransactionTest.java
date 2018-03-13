@@ -1,3 +1,6 @@
+/*
+ * Copyright 2017 Meniga Iceland Inc.
+ */
 package com.meniga.sdk.models.transactions;
 
 import android.os.Parcel;
@@ -6,33 +9,24 @@ import com.google.gson.Gson;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MenigaDecimal;
-import com.meniga.sdk.models.mocks.MenigaTransactionOperationsMock;
-import com.meniga.sdk.providers.tasks.Continuation;
-import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
 
 import org.joda.time.DateTime;
-import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-/**
- * Copyright 2017 Meniga Iceland Inc.
- */
-
 @RunWith(RobolectricTestRunner.class)
-public class MenigaTransactionTest{
+public class MenigaTransactionTest {
 
 	@Test
 	public void testState() {
@@ -121,34 +115,6 @@ public class MenigaTransactionTest{
 		Assert.assertTrue(transactionToTest.equals(createdFromParcel));
 
 		parcel.recycle();
-	}
-
-	@Test
-	public void testFetch() {
-		MenigaTransaction.setOperator(new MenigaTransactionOperationsMock());
-
-		MenigaTransaction.fetch(245566).getTask()
-				.onSuccess(new Continuation<MenigaTransaction, Void>() {
-					@Override
-					public Void then(Task<MenigaTransaction> task) throws Exception {
-						Assert.assertEquals(245566, task.getResult().getId());
-						return null;
-					}
-				});
-	}
-
-	@Test
-	public void testCreateTransaction() throws UnsupportedEncodingException, JSONException {
-		MenigaTransaction.setOperator(new MenigaTransactionOperationsMock());
-
-		MenigaTransaction.create(DateTime.now(), "Hagkaup", new MenigaDecimal(5000), 45).getTask()
-				.onSuccess(new Continuation<MenigaTransaction, Void>() {
-					@Override
-					public Void then(Task<MenigaTransaction> task) throws Exception {
-						Assert.assertNotNull(task.getResult());
-						return null;
-					}
-				});
 	}
 
 	private List<MenigaTransaction> gson() {
