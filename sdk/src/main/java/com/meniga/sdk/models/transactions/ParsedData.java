@@ -39,6 +39,14 @@ public class ParsedData implements Serializable, Parcelable {
 		this.value = value;
 	}
 
+	public String getKey() {
+		return key;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
 	@Override
 	public int describeContents() {
 		return 0;
