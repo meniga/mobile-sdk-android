@@ -6,14 +6,15 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 /**
- * Contains info on whether or not the sync process has finished.
- * <p>
+ * Contains info on whether or not the sync process has finished as well
+ * as information on the sync for each realm and account
+ *
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSyncStatus implements Parcelable, Serializable {
 	protected boolean hasCompletedSyncSession;
 	protected boolean isSynchronizationNeeded;
-	protected String synchronizationStatus;
+	protected MenigaSyncSystemStatus synchronizationStatus;
 
 	public static final Creator<MenigaSyncStatus> CREATOR = new Creator<MenigaSyncStatus>() {
 		@Override
@@ -36,6 +37,14 @@ public class MenigaSyncStatus implements Parcelable, Serializable {
 	 */
 	public boolean getHasCompletedSyncSession() {
 		return hasCompletedSyncSession;
+	}
+
+	public boolean isSynchronizationNeeded() {
+		return isSynchronizationNeeded;
+	}
+
+	public MenigaSyncSystemStatus getSynchronizationStatus() {
+		return synchronizationStatus;
 	}
 
 	@Override

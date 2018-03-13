@@ -116,4 +116,20 @@ public class BasicTaskAdapter implements TaskAdapter {
 			}
 		};
 	}
+
+	@Override
+	public <T> Result<T> intercept(final Task<T> task, Interceptor<T> intercept) {
+		Result<T> result = new Result<T>() {
+			@Override
+			public Task<T> getTask() {
+				return task;
+			}
+
+			@Override
+			public void cancel() {
+				// Not supported when intercepting with tasks
+			}
+		};
+		return intercept(result, intercept);
+	}
 }

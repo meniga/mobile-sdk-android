@@ -13,6 +13,8 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.sync.operators.MenigaSyncOperations;
+import com.meniga.sdk.providers.tasks.Continuation;
+import com.meniga.sdk.providers.tasks.Task;
 
 /**
  * Represents the status of a sync procedure.
@@ -268,7 +270,16 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * @return A new sync object.
 	 */
 	public static Result<MenigaSync> start(final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
-		Result<MenigaSync> task = MenigaSync.apiOperator.startSync(timeout);
+		Task<MenigaSync> task = getSyncStatus().getTask().continueWithTask(new Continuation<MenigaSyncStatus, Task<MenigaSync>>() {
+			@Override
+			public Task<MenigaSync> then(Task<MenigaSyncStatus> task) throws Exception {
+				if (task.isFaulted() || task.getResult().hasCompletedSyncSession) {
+					return apiOperator.startSync(timeout).getTask();
+				} else {
+					return fetch(task.getResult().getSynchronizationStatus().getSyncHistoryId()).getTask();
+				}
+			}
+		});
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaSync>() {
 			@Override
 			public void onFinished(final MenigaSync result, boolean failed) {
@@ -308,8 +319,26 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * Checks to see if the synchronization operation has finished
 	 *
 	 * @return A Task containing a boolean indicating if the synchronization is done or not
+	 * @deprecated  Reason this method is deprecated </br>
+	 *              {Will be removed in next version} </br>
+	 *              use static {@link #getSyncStatus()} instead like this:
+	 *
+	 * <blockquote>
+	 * <pre>
+	 * MenigaSync.getSyncStatus()
+	 * </pre></blockquote>
+	 *
 	 */
 	public Result<MenigaSyncStatus> isSyncDone() {
-		return MenigaSync.apiOperator.getSyncStatus();
+		return apiOperator.getSyncStatus();
+	}
+
+	/**
+	 * Checks to see the status of all synchronization operations on the back end
+	 *
+	 * @return A Task indicating if the synchronization is done or not
+	 */
+	public static Result<MenigaSyncStatus> getSyncStatus() {
+		return apiOperator.getSyncStatus();
 	}
 }
