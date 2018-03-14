@@ -18,7 +18,7 @@ public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializa
 	@SerializedName("topicId")
 	protected long accountId;
 	protected String actionText;
-	protected transient MenigaAccountEventData messageData;
+	protected MenigaAccountEventData messageData;
 	protected DateTime date;
 	protected String title;
 	protected String body;
@@ -111,7 +111,7 @@ public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializa
 	@Override
 	public int hashCode() {
 		int result = (int) (id ^ (id >>> 32));
-		result = 31 * result + (int) (accountId ^ (id >>> 32));
+		result = 31 * result + (int) (accountId ^ (accountId >>> 32));
 		result = 31 * result + (actionText != null ? actionText.hashCode() : 0);
 		result = 31 * result + (messageData != null ? messageData.hashCode() : 0);
 		result = 31 * result + (date != null ? date.hashCode() : 0);
