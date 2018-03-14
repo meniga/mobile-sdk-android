@@ -26,8 +26,8 @@ public class MenigaSyncTest {
 		MockWebServer server = new MockWebServer();
 
 		// Schedule some responses.
-		server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("syncresponse.json")));
 		server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("syncstatus.json")));
+		server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("syncresponse.json")));
 
 		// Start the server.
 		server.start();

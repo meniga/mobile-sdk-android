@@ -1,6 +1,60 @@
 {
   "data": {
-    "synchronizationStatus": null,
+    "synchronizationStatus": {
+      "syncHistoryId": 0,
+      "isSyncDone": true,
+      "syncSessionStartTime": "2018-03-13T15:17:51.280Z",
+      "realmSyncResponses": [
+        {
+          "realmCredentialsId": 0,
+          "realmCredentialsDisplayName": "string",
+          "organizationId": 0,
+          "organizationName": "string",
+          "organizationBankCode": "string",
+          "accountSyncStatuses": [
+            {
+              "accountId": 0,
+              "balance": 0,
+              "limit": 0,
+              "transactionsProcessed": 0,
+              "totalTransactions": 0,
+              "startDate": "2018-03-13T15:17:51.280Z",
+              "endDate": "2018-03-13T15:17:51.280Z",
+              "accountStatus": "string"
+            }
+          ],
+          "authenticationChallenge": {
+            "requiredParameters": [
+              {
+                "name": "string",
+                "displayName": "string",
+                "regularExpression": "string",
+                "minLength": 0,
+                "maxLength": 0,
+                "isPassword": true,
+                "isHidden": true,
+                "isDropDown": true,
+                "dropDownValues": "string",
+                "parentId": 0,
+                "canSave": true,
+                "isEncrypted": true,
+                "isIdentity": true
+              }
+            ],
+            "contentType": "NONE",
+            "textChallenge": "string",
+            "binaryChallenge": "string",
+            "errorMessage": "string",
+            "errorMessageCode": "string",
+            "userIdentifier": "string",
+            "canSave": true,
+            "loginHelp": "string",
+            "realmUserPersonEmail": "string"
+          },
+          "isSyncDone": true
+        }
+      ]
+    },
     "hasCompletedSyncSession": true,
     "isSynchronizationNeeded": false
   }
