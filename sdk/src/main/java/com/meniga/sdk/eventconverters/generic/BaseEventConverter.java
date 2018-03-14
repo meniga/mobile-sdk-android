@@ -18,27 +18,7 @@ public class BaseEventConverter implements EventBaseConverter<MenigaFeedItem> {
     @Override
     public MenigaFeedItem eventConverter(JsonElement el) {
         final JsonObject element = el.getAsJsonObject();
-        return new MenigaFeedItem() {
-            @Override
-            public MenigaFeedItem clone() throws CloneNotSupportedException {
-                return this;
-            }
-
-            @Override
-            public DateTime getDate() {
-                return DateTime.now();
-            }
-
-            @Override
-            public String getEventTypeIdentifier() {
-                return element.get("eventTypeIdentifier").getAsString();
-            }
-
-            @Override
-            public String getTopicName() {
-                return element.get("topicName").getAsString();
-            }
-        };
+        return new BaseMenigaFeedItem(element);
     }
 
     @Override
