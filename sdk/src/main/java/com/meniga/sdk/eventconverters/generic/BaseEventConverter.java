@@ -17,8 +17,7 @@ import java.util.List;
 public class BaseEventConverter implements EventBaseConverter<MenigaFeedItem> {
     @Override
     public MenigaFeedItem eventConverter(JsonElement el) {
-        final JsonObject element = el.getAsJsonObject();
-        return new BaseMenigaFeedItem(element);
+        return new BaseMenigaFeedItem(el.toString());
     }
 
     @Override
