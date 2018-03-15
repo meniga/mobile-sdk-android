@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -175,7 +176,16 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 		return result;
 	}
 
-    /*
+	@Override
+	public MenigaFeed subList(int fromIndex, int toIndex) {
+		List<MenigaFeedItem> items = super.subList(fromIndex, toIndex);
+		MenigaFeed clone = clone();
+		clone.clear();
+		clone.addAll(items);
+		return clone;
+	}
+
+	/*
      * API calls
      */
 
