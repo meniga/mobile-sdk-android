@@ -6,13 +6,11 @@ package com.meniga.sdk.models.transactions;
 import com.jayway.jsonassert.JsonAssert;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
-import com.meniga.sdk.helpers.DateTimeUtils;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.utils.FileImporter;
 
-import org.assertj.core.util.Lists;
-import org.hamcrest.Matchers;
+import org.assertj.core.api.Condition;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.junit.After;
@@ -29,6 +27,7 @@ import okhttp3.mockwebserver.RecordedRequest;
 
 import static com.meniga.sdk.models.transactions.MenigaTransactionPageAssertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
@@ -107,7 +106,7 @@ public class MenigaTransactionApiSpec {
     public void shouldFetchMultipleTransactionsWithFiltersList() throws Exception {
         server.enqueue(mockResponse("transactionsPage.json"));
         server.enqueue(mockResponse("transactionsPage.json"));
-        List<TransactionsFilter> filters = Lists.newArrayList(
+        List<TransactionsFilter> filters = newArrayList(
                 new TransactionsFilter.Builder()
                         .comment("comment")
                         .build(),
@@ -118,15 +117,23 @@ public class MenigaTransactionApiSpec {
         Task<MenigaTransactionPage> task = MenigaTransaction.fetch(filters).getTask();
         task.waitForCompletion();
 
-        RecordedRequest recordedRequest = server.takeRequest();
-        assertThat(recordedRequest.getPath()).isEqualTo("/v1/transactions?include=Account,Merchant&take=50&comment=comment&skip=0");
-        recordedRequest = server.takeRequest();
-        assertThat(recordedRequest.getPath()).isEqualTo("/v1/transactions?include=Account,Merchant&take=20&skip=0");
+        List<RecordedRequest> recordedRequests = newArrayList(server.takeRequest(), server.takeRequest());
+        assertThat(recordedRequests).haveExactly(1, withPath("/v1/transactions?include=Account,Merchant&take=50&comment=comment&skip=0"));
+        assertThat(recordedRequests).haveExactly(1, withPath("/v1/transactions?include=Account,Merchant&take=20&skip=0"));
         MenigaTransactionPage page = task.getResult();
         assertThat(page)
                 .hasPageIndex(0)
                 .hasAccountsIncluded()
                 .hasMerchantsIncluded();
+    }
+
+    private Condition<RecordedRequest> withPath(final String expectedPath) {
+        return new Condition<RecordedRequest>(expectedPath) {
+            @Override
+            public boolean matches(RecordedRequest value) {
+                return expectedPath.equals(value.getPath());
+            }
+        };
     }
 
     private MockResponse mockResponse(String path) throws IOException {

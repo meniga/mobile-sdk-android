@@ -1,29 +1,26 @@
 apply plugin: "com.jfrog.bintray"
 
-logger.info("BINTRAY " + project.version)
-
 bintray {
-    Collection<String> credentials = (project.hasProperty("bintray.credentials") ?
-            project.property("bintray.credentials") :
-            System.getenv("BINTRAY_CREDENTIALS") ?: "")
-            .split(":")
-    user = credentials.first()
-    key = credentials.last()
+    user = bintrayCredentials.first()
+    key = bintrayCredentials.last()
     pkg {
         repo = "android"
         name = "com.meniga.sdk"
+        userOrg = "meniga"
         desc = "Meniga SDK library"
         websiteUrl = "https://github.com/meniga/mobile-sdk-android"
+        issueTrackerUrl = "https://github.com/meniga/mobile-sdk-android/issues"
         vcsUrl = "https://github.com/meniga/mobile-sdk-android.git"
         licenses = ["MIT"]
+        publicDownloadNumbers = true
+        githubRepo = "meniga/mobile-sdk-android"
+        githubReleaseNotesFile = "README.md"
         publish = true
-        userOrg = "meniga"
         version {
             gpg {
                 sign = true
             }
         }
-        publicDownloadNumbers = true
     }
     publications = ["aar"]
 }

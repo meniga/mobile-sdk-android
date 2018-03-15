@@ -1,5 +1,5 @@
 apply plugin: "com.android.library"
-apply plugin: 'digital.wup.android-maven-publish'
+apply plugin: "digital.wup.android-maven-publish"
 apply plugin: "kotlin-android"
 
 android {
@@ -8,7 +8,6 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 27
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "proguard-rules.pro"
     }
     buildTypes {
@@ -22,10 +21,12 @@ android {
     }
     testOptions {
         unitTests {
-            returnDefaultValues = true
             all {
                 systemProperty "file.encoding", "UTF-8"
                 systemProperty "user.timezone", "UTC"
+                testLogging {
+                    exceptionFormat "full"
+                }
             }
         }
     }
@@ -62,10 +63,6 @@ dependencies {
     testImplementation "junit:junit:4.12"
 }
 
-// Convenience task
-task deploy() {}
-deploy.dependsOn publishToMavenLocal
-
 task androidSourcesJar(type: Jar) {
     classifier = "sources"
     from android.sourceSets.main.java.srcDirs
@@ -86,4 +83,4 @@ publishing {
     }
 }
 
-apply from: "$rootDir/gradle/bintray.gradle"
+apply from: "$rootDir/gradle/deploy.gradle"

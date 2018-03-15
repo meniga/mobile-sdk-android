@@ -1,0 +1,29 @@
+language: android
+jdk: oraclejdk8
+sudo: false
+android:
+  components:
+  - tools
+  - build-tools-27.0.3
+  - android-27
+
+cache:
+  directories:
+  - "$HOME/.gradle/caches"
+  - "$HOME/.gradle/wrapper/dists"
+
+stages:
+  - name: build
+  - name: deploy
+
+jobs:
+  include:
+    - stage: build
+      script: ./gradlew build
+
+    - stage: deploy
+      script: ./gradlew deploy -Dbuild.number=$TRAVIS_BUILD_NUMBER
+
+env:
+  global:
+    secure: AqXXZNi0tr/2SlJgJ8VSmtgw7NUVMhQyMwpNFvdaaV9p8FZ2JtwdC5NdXVydFQhM1Wk38vqxw9TNpUjrCpdg+uJkTYSlVK8P+VtGIYBF/zoWDy7wC1wedbThi6AGXUzUIcmjj4BBSZeOBJskoQzXHlYLykTrLGfYa2JGh6k9EPaArsmutm9Pyhc8gHJ+eJqO+40LFdDGMDajRDZEXa0vpmqmW4KGbVgm6MfeNkkGqbJmQ8DrPjBA1bPvJU89BZe9HeRR/k582/t4XzbWSX6KI+XKq/vw4xoRJELPkO3S/Bk1D6vNNxoV30pnNdQb2IZEmHXl8OSbEk6l5MOddAaNgVzO0H0V6lGvPRmDzLxb3t2NRke1GZFcHgoTV+3MwYcm4dqdFW/Ibck4+Vi+5H8axoI84TD2voL1uJFKLVcs6C+LdGyj9HjZLZN18MbSwo9TFfU5hKxYkzhuUmWbZ8JxZWAe5b2yuHA/XmMWeOb6XA9c8KKDnORe2SDPZ7ODJtf8/i1QdhgLwH7agJrQm0zLvM4mH9QrljCUHKIAo1wTNBnW4IazL4Ljv88N6Ou7onmRRB1XA78KCPoiC2r7+BM6zM9sXiki9MR/2gZ2oCSA1GH5hufGnPLtyqPti/cxk0upKqvW5o+ksPcgKXyv/w2XGBtb/EL1Xm2BqFCDzqTEYdU=

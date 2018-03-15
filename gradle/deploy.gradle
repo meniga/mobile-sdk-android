@@ -1,0 +1,17 @@
+ext {
+    bintrayCredentials = (project.hasProperty("bintray.credentials") ?
+            project.property("bintray.credentials") :
+            System.getenv("BINTRAY_CREDENTIALS") ?: "")
+            .split(":")
+}
+
+apply from: "$rootDir/gradle/artifactory.gradle"
+apply from: "$rootDir/gradle/bintray.gradle"
+
+task deploy() {
+    dependsOn isSnapshot() ? artifactoryPublish : bintrayUpload
+}
+
+private boolean isSnapshot() {
+    return project.version.toString().endsWith("-SNAPSHOT")
+}
