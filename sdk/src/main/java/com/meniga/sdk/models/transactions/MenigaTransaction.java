@@ -15,7 +15,6 @@ import com.meniga.sdk.models.categories.MenigaCategoryScore;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
 import com.meniga.sdk.models.merchants.MenigaMerchant;
 import com.meniga.sdk.models.transactions.operators.MenigaTransactionOperations;
-import com.meniga.sdk.providers.tasks.Capture;
 import com.meniga.sdk.providers.tasks.Continuation;
 import com.meniga.sdk.providers.tasks.Task;
 import com.meniga.sdk.providers.tasks.TaskCompletionSource;
@@ -1128,49 +1127,50 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 		final TaskCompletionSource<MenigaTransactionPage> src = new TaskCompletionSource<>();
 		final Task<MenigaTransactionPage> task = src.getTask();
 
-		final MenigaTransactionPage page = new MenigaTransactionPage();
-		final Capture<Integer> step = new Capture<>();
-		step.set(0);
-		final int total = filters.size();
+		List<Task<MenigaTransactionPage>> transactionTasks = new ArrayList<>();
+
 		for (TransactionsFilter filter : filters) {
-	    	fetch(filter).getTask().continueWith(new Continuation<MenigaTransactionPage, Object>() {
-				@Override
-				public Object then(Task<MenigaTransactionPage> task) throws Exception {
-					step.set(step.get() + 1);
-					if (!task.isFaulted()) {
-						for (MenigaTransaction sub : task.getResult()) {
-							boolean exists = false;
-							for (MenigaTransaction item : page) {
-								if (item.getId() == sub.getId()) {
-									exists = true;
-									break;
-								}
-							}
-							if (!exists) {
-								page.add(sub);
-							}
-						}
-					}
-					if (step.get() >= total) {
-						Collections.sort(page, new Comparator<MenigaTransaction>() {
-							@Override
-							public int compare(MenigaTransaction left, MenigaTransaction right) {
-								if (left == null || left.getDate() == null) {
-									return 1;
-								} else if (right == null || right.getDate() == null) {
-									return -1;
-								}
-								return right.getDate().compareTo(left.getDate());
-							}
-						});
-						src.setResult(page);
-					}
-					return null;
-				}
-			});
+			transactionTasks.add(fetch(filter).getTask());
 		}
+
+		Task.whenAllResult(transactionTasks)
+				.continueWith(new Continuation<List<MenigaTransactionPage>, Void>() {
+					@Override
+					public Void then(Task<List<MenigaTransactionPage>> task) throws Exception {
+						final MenigaTransactionPage page = new MenigaTransactionPage();
+						if (!task.isFaulted()) {
+							for (MenigaTransactionPage subPage : task.getResult()) {
+								for (MenigaTransaction sub : subPage) {
+									boolean exists = false;
+									for (MenigaTransaction item : page) {
+										if (item.getId() == sub.getId()) {
+											exists = true;
+											break;
+										}
+									}
+									if (!exists) {
+										page.add(sub);
+									}
+								}
+							}
+							Collections.sort(page, new Comparator<MenigaTransaction>() {
+								@Override
+								public int compare(MenigaTransaction left, MenigaTransaction right) {
+									if (left == null || left.getDate() == null) {
+										return 1;
+									} else if (right == null || right.getDate() == null) {
+										return -1;
+									}
+									return right.getDate().compareTo(left.getDate());
+								}
+							});
+						}
+						src.setResult(page);
+						return null;
+					}
+				});
 		return new MTask<>(task, src);
-    }
+	}
 
 	/**
 	 * Returns all transactions that meet the filter criteria in transFilter
