@@ -44,6 +44,12 @@ android {
         exclude "META-INF/LICENSE.txt"
         exclude "META-INF/NOTICE.txt"
     }
+    sourceSets {
+        test {
+            java.srcDirs += "src/integrationTest/java"
+            resources.srcDirs += "src/integrationTest/resources"
+        }
+    }
 }
 
 androidExtensions {
@@ -62,6 +68,7 @@ dependencies {
     implementation "javax.inject:javax.inject:1"
     implementation "javax.annotation:javax.annotation-api:1.3.1"
 
+    testImplementation "com.atlassian.oai:swagger-request-validator-core:1.4.2"
     testImplementation "com.jayway.jsonpath:json-path-assert:2.4.0"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
     testImplementation "com.squareup.retrofit2:retrofit-mock:2.1.0"

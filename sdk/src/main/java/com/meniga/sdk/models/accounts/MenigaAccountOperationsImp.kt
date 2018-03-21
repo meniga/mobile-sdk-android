@@ -49,6 +49,7 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
     override fun updateAccount(account: MenigaAccount): Result<Void> {
         val request = UpdateAccount().also {
             it.id = account.id
+            it.orderId = account.orderId
             it.name = account.name
             it.isHidden = account.isHidden
             it.isDisabled = account.isDisabled
