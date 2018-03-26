@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.meniga.sdk.helpers.MenigaDecimal;
-import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.feed.MenigaTransactionEvent;
 
 import org.joda.time.DateTime;
@@ -14,7 +13,7 @@ import java.io.Serializable;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaRepaymentRecord extends StateObject implements Parcelable, Serializable, Cloneable {
+public class MenigaRepaymentRecord implements Parcelable, Serializable, Cloneable {
 	public static final Parcelable.Creator<MenigaRepaymentRecord> CREATOR = new Parcelable.Creator<MenigaRepaymentRecord>() {
 		public MenigaRepaymentRecord createFromParcel(Parcel source) {
 			return new MenigaRepaymentRecord(source);
@@ -105,16 +104,5 @@ public class MenigaRepaymentRecord extends StateObject implements Parcelable, Se
 	@Override
 	protected MenigaRepaymentRecord clone() throws CloneNotSupportedException {
 		return (MenigaRepaymentRecord) super.clone();
-	}
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		if (!(lastRevision instanceof MenigaRepaymentRecord))
-			return;
-
-		MenigaRepaymentRecord other = (MenigaRepaymentRecord) lastRevision;
-		this.account = other.account;
-		this.amount = other.amount;
-		this.date = other.date;
 	}
 }

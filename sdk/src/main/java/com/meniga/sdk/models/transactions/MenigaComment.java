@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.transactions.operators.MenigaCommentOperations;
 
 import org.joda.time.DateTime;
@@ -18,7 +17,7 @@ import java.io.Serializable;
  * <p>
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaComment extends StateObject implements Parcelable, Serializable, Cloneable {
+public class MenigaComment implements Parcelable, Serializable, Cloneable {
 	public static final Parcelable.Creator<MenigaComment> CREATOR = new Parcelable.Creator<MenigaComment>() {
 		public MenigaComment createFromParcel(Parcel source) {
 			return new MenigaComment(source);
@@ -76,10 +75,7 @@ public class MenigaComment extends StateObject implements Parcelable, Serializab
 	 * @param comment The new comment.
 	 */
 	public void setComment(String comment) {
-		if (hasChanged(this.comment, comment)) {
-			changed();
-			this.comment = comment;
-		}
+		this.comment = comment;
 	}
 
 	/**
@@ -161,16 +157,6 @@ public class MenigaComment extends StateObject implements Parcelable, Serializab
 		result = 31 * result + (comment != null ? comment.hashCode() : 0);
 		result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
 		return result;
-	}
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		if (!(lastRevision instanceof MenigaComment)) {
-			return;
-		}
-
-		MenigaComment other = (MenigaComment) lastRevision;
-		this.comment = other.comment;
 	}
 
 	/*

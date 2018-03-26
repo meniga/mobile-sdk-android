@@ -4,9 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.meniga.sdk.MenigaSDK;
-import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.categories.enums.CategoryRequest;
 import com.meniga.sdk.models.categories.enums.CategoryType;
 import com.meniga.sdk.models.categories.operators.MenigaCategoryOperations;
@@ -26,7 +24,7 @@ import java.util.Map;
  * <p>
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaCategory extends StateObject implements Parcelable, Serializable, Cloneable {
+public class MenigaCategory implements Parcelable, Serializable, Cloneable {
 	public static final Creator<MenigaCategory> CREATOR = new Creator<MenigaCategory>() {
 		public MenigaCategory createFromParcel(Parcel source) {
 			return new MenigaCategory(source);
@@ -335,11 +333,6 @@ public class MenigaCategory extends StateObject implements Parcelable, Serializa
 		dest.writeValue(this.orderId);
 		dest.writeString(this.displayData);
 		dest.writeString(this.fixedIcon);
-	}
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		// Implemented in MenigaUserCategory
 	}
 
     /*

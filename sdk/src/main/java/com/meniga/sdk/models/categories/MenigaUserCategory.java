@@ -6,7 +6,6 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.Merge;
-import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.categories.enums.CategoryType;
 
 import java.io.Serializable;
@@ -57,10 +56,7 @@ public class MenigaUserCategory extends MenigaCategory implements Serializable {
 	 * @param name The new name of this user category
 	 */
 	public void setName(String name) {
-		if (hasChanged(super.name, name)) {
-			changed();
-			super.name = name;
-		}
+		super.name = name;
 	}
 
 	/**
@@ -69,10 +65,7 @@ public class MenigaUserCategory extends MenigaCategory implements Serializable {
 	 * @param isFixedExpenses Wheather this user category is fixed expenses or not
 	 */
 	public void setIsFixedExpenses(boolean isFixedExpenses) {
-		if (hasChanged(super.isFixedExpenses, isFixedExpenses)) {
-			changed();
-			super.isFixedExpenses = isFixedExpenses;
-		}
+		super.isFixedExpenses = isFixedExpenses;
 	}
 
 	/**
@@ -81,10 +74,7 @@ public class MenigaUserCategory extends MenigaCategory implements Serializable {
 	 * @param categoryType The new type of this user category
 	 */
 	public void setCategoryType(CategoryType categoryType) {
-		if (hasChanged(super.categoryType, categoryType)) {
-			changed();
-			super.categoryType = categoryType;
-		}
+		super.categoryType = categoryType;
 	}
 
     /*
@@ -97,24 +87,7 @@ public class MenigaUserCategory extends MenigaCategory implements Serializable {
 	 * @param parentCategoryId The new parent category id of this child user category
 	 */
 	public void setParentCategoryId(long parentCategoryId) {
-		if (hasChanged(super.parentCategoryId, parentCategoryId)) {
-			changed();
-			super.parentCategoryId = parentCategoryId;
-		}
-	}
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		if (!(lastRevision instanceof MenigaCategory)) {
-			return;
-		}
-
-		// Revert all settable fields to last revision
-		MenigaCategory prevRevision = (MenigaCategory) lastRevision;
-		super.name = prevRevision.name;
-		super.isFixedExpenses = prevRevision.isFixedExpenses;
-		super.categoryType = prevRevision.categoryType;
-		super.parentCategoryId = prevRevision.parentCategoryId;
+		super.parentCategoryId = parentCategoryId;
 	}
 
 	/*

@@ -7,7 +7,6 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.upcoming.enums.PaymentStatus;
 import com.meniga.sdk.models.upcoming.operators.MenigaUpcomingOperations;
 
@@ -19,7 +18,7 @@ import java.util.List;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaUpcoming extends StateObject implements Serializable, Parcelable, Cloneable {
+public class MenigaUpcoming implements Serializable, Parcelable, Cloneable {
 	protected long id;
 	protected String bankReference;
 	protected String text;
@@ -207,57 +206,46 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 	}
 
 	public void setText(String text) {
-		changed();
 		this.text = text;
 	}
 
 	public void setAmountInCurrency(MenigaDecimal amountInCurrency) {
-		changed();
 		this.amountInCurrency = amountInCurrency;
 	}
 
 	public void setCurrencyCode(String currencyCode) {
-		changed();
 		this.currencyCode = currencyCode;
 	}
 
 	public void setDate(DateTime date) {
-		changed();
 		this.date = date;
 	}
 
 	public void setPaymentStatus(PaymentStatus paymentStatus) {
-		changed();
 		this.paymentStatus = paymentStatus;
 	}
 
 	public void setAccountId(long accountId) {
-		changed();
 		this.accountId = accountId;
 	}
 
 	public void setCategoryId(long categoryId) {
-		changed();
 		this.categoryId = categoryId;
 	}
 
 	public void setTransactionId(long transactionId) {
-		changed();
 		this.transactionId = transactionId;
 	}
 
 	public void setFlagged(boolean isFlagged) {
-		changed();
 		this.isFlagged = isFlagged;
 	}
 
 	public void setIsWatched(boolean isWatched) {
-		changed();
 		this.isWatched = isWatched;
 	}
 
 	public void setRecurringPattern(MenigaUpcomingRecurringPattern recurringPattern) {
-		changed();
 		this.recurringPattern = recurringPattern;
 	}
 
@@ -268,26 +256,6 @@ public class MenigaUpcoming extends StateObject implements Serializable, Parcela
 	 */
 	public static void setOperator(MenigaUpcomingOperations operator) {
 		MenigaUpcoming.apiOperator = operator;
-	}
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		if (!(lastRevision instanceof MenigaUpcoming)) {
-			return;
-		}
-
-		MenigaUpcoming last = (MenigaUpcoming) lastRevision;
-		text = last.text;
-		amountInCurrency = last.amountInCurrency;
-		currencyCode = last.currencyCode;
-		date = last.date;
-		paymentStatus = last.paymentStatus;
-		accountId = last.accountId;
-		categoryId = last.categoryId;
-		transactionId = last.transactionId;
-		isFlagged = last.isFlagged;
-		isWatched = last.isWatched;
-		recurringPattern = last.recurringPattern;
 	}
 
 	@Override

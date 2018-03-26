@@ -9,7 +9,6 @@ import com.meniga.sdk.helpers.MTask;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.Merge;
-import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.categories.MenigaCategoryScore;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
@@ -33,7 +32,7 @@ import java.util.List;
  * <p>
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaTransaction extends StateObject implements Serializable, MenigaFeedItem, Cloneable, Parcelable {
+public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneable, Parcelable {
 	protected static MenigaTransactionOperations apiOperator;
 
 	protected String parentIdentifier;
@@ -264,10 +263,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @param categoryId Sets a new category for the transaction.
 	 */
 	public void setCategoryId(long categoryId) {
-		if (hasChanged(this.categoryId, categoryId)) {
-			changed();
-			this.categoryId = categoryId;
-		}
+		this.categoryId = categoryId;
 	}
 
 	/**
@@ -291,10 +287,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @param date The new date for the transaction.
 	 */
 	public void setDate(DateTime date) {
-		if (hasChanged(this.date, date)) {
-			changed();
-			this.date = date;
-		}
+		this.date = date;
 	}
 
 	/**
@@ -308,10 +301,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @param isRead Sets the transaction to be read or not.
 	 */
 	public void setIsRead(boolean isRead) {
-		if (hasChanged(this.isRead, isRead)) {
-			changed();
-			this.isRead = isRead;
-		}
+		this.isRead = isRead;
 	}
 
 	public void setIsReadAndUpdate() {
@@ -330,10 +320,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @param isFlagged If you want the transaction to be flagged or not.
 	 */
 	public void setIsFlagged(boolean isFlagged) {
-		if (hasChanged(this.isFlagged, isFlagged)) {
-			changed();
-			this.isFlagged = isFlagged;
-		}
+		this.isFlagged = isFlagged;
 	}
 
 	/**
@@ -347,10 +334,7 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
 	 * @param uncertain Sets the transaction to have uncertain categorization or not.
 	 */
 	public void setHasUncertainCategorization(boolean uncertain) {
-		if (hasChanged(this.hasUncertainCategorization, uncertain)) {
-			changed();
-			this.hasUncertainCategorization = uncertain;
-		}
+		this.hasUncertainCategorization = uncertain;
 	}
 
 	/**
@@ -639,26 +623,6 @@ public class MenigaTransaction extends StateObject implements Serializable, Meni
     /*
 	--- API calls below ---
 	 */
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		if (!(lastRevision instanceof MenigaTransaction)) {
-			return;
-		}
-
-		// Revert all settable fields to last revision
-		MenigaTransaction prevRevision = (MenigaTransaction) lastRevision;
-		isRead = prevRevision.isRead;
-		amount = prevRevision.amount;
-		comments = prevRevision.comments;
-		date = prevRevision.date;
-		isFlagged = prevRevision.isFlagged;
-		text = prevRevision.text;
-		categoryId = prevRevision.categoryId;
-		tags = prevRevision.tags;
-		hasUncertainCategorization = prevRevision.hasUncertainCategorization;
-		userData = prevRevision.userData;
-	}
 
 	@Override
 	public boolean equals(Object o) {
