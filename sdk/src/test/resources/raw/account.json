@@ -24,7 +24,20 @@
     "attachedToUserDate": null,
     "isHidden": false,
     "isDisabled": false,
-    "metadata": [],
+    "metadata": [
+      {
+        "name": "Card holder",
+        "value": "John Bob"
+      },
+      {
+        "name": "Card number",
+        "value": "1234 XXXX XXXX 5432"
+      },
+      {
+        "name": "Valid to",
+        "value": "12/2026"
+      }
+    ],
     "currencyCode": "GBP",
     "accountRoleExternal": null,
     "accountStatusExternal": null,

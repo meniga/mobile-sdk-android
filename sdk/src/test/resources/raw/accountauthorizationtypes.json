@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "name": "None",
+      "id": 0
+    },
+    {
+      "name": "External",
+      "id": 1
+    },
+    {
+      "name": "Internal",
+      "id": 2
+    },
+    {
+      "name": "ExternalMultifactor",
+      "id": 3
+    }
+  ]
+}

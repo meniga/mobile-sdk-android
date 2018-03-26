@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "id": 4114,
+      "accountId": 1795,
+      "balance": 0,
+      "balanceInUserCurrency": 0,
+      "balanceDate": "2018-02-01T13:55:14.9604373",
+      "isDefault": false
+    },
+    {
+      "id": 4117,
+      "accountId": 1795,
+      "balance": -960,
+      "balanceInUserCurrency": -960,
+      "balanceDate": "2018-02-01T13:57:34.9189651",
+      "isDefault": false
+    }
+  ]
+}

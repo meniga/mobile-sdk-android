@@ -5,10 +5,6 @@ import com.meniga.sdk.adapters.TaskAdapter;
 import com.meniga.sdk.helpers.KeyVal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.interfaces.PersistenceProvider;
-import com.meniga.sdk.models.accounts.MenigaAccount;
-import com.meniga.sdk.models.accounts.MenigaAccountBalanceHistory;
-import com.meniga.sdk.models.accounts.MenigaAccountType;
-import com.meniga.sdk.models.accounts.MenigaAuthorizationType;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
 import com.meniga.sdk.models.categories.MenigaCategory;
@@ -49,6 +45,15 @@ import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserMetaData;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
+import com.meniga.sdk.webservices.account.Account;
+import com.meniga.sdk.webservices.account.AccountAuthorizationType;
+import com.meniga.sdk.webservices.account.AccountBalanceHistory;
+import com.meniga.sdk.webservices.account.AccountMetaData;
+import com.meniga.sdk.webservices.account.AccountService;
+import com.meniga.sdk.webservices.account.AccountType;
+import com.meniga.sdk.webservices.account.AccountTypeCategory;
+import com.meniga.sdk.webservices.account.UpdateAccount;
+import com.meniga.sdk.webservices.account.UpdateAccountMetadata;
 import com.meniga.sdk.webservices.budget.BudgetService;
 import com.meniga.sdk.webservices.budget.CreateBudget;
 import com.meniga.sdk.webservices.budget.CreateBudgetEntries;
@@ -140,65 +145,69 @@ public class PersistenceDelegate {
 	// --
 	// Sync
 	// --
-	public Result<List<MenigaAccount>> getAccounts(GetAccounts req) {
+	public Result<List<Account>> getAccounts(GetAccounts req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.ACCOUNTS).getAccounts(req.toQueryMap()));
+		return persist(req, getService(AccountService.class).getAccounts(req.toQueryMap()));
 	}
 
-	public Result<MenigaAccount> getAccount(GetAccount req) {
+	public Result<Account> getAccount(GetAccount req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.ACCOUNTS).getAccount(req.accountId));
+		return persist(req, getService(AccountService.class).getAccount(req.accountId));
 	}
 
-	public Result<List<MenigaAccountType>> getAccountTypes(GetAccountTypes req) {
+	public Result<List<AccountType>> getAccountTypes(GetAccountTypes req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.ACCOUNTS).getAccountTypes());
+		return persist(req, getService(AccountService.class).getAccountTypes());
 	}
 
-	public Result<List<MenigaAuthorizationType>> getAccountAuthorizationTypes(GetAuthorizationTypes req) {
+	public Result<List<AccountAuthorizationType>> getAccountAuthorizationTypes(GetAuthorizationTypes req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.ACCOUNTS).getAccountAuthorizationTypes());
+		return persist(req, getService(AccountService.class).getAccountAuthorizationTypes());
 	}
 
-	public Result<List<KeyVal<String, String>>> getAccountMetadata(GetAccountMetadata req) {
+	public Result<List<AccountTypeCategory>> getAccountCategories() {
+		return call(getService(AccountService.class).getAccountCategories());
+	}
+
+	public Result<List<AccountMetaData>> getAccountMetadata(GetAccountMetadata req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.ACCOUNTS).getAccountMetadata(req.id));
+		return persist(req, getService(AccountService.class).getAccountMetadata(req.id));
 	}
 
-	public Result<KeyVal<String, String>> updateAccountMetadata(UpdateAccountMetadata req) {
-		return persist(req, getClient(Service.ACCOUNTS).updateAccountMetadata(req.id, req));
+	public Result<AccountMetaData> updateAccountMetadata(long accountId, UpdateAccountMetadata req) {
+		return persist(req, getService(AccountService.class).updateAccountMetadata(accountId, req));
 	}
 
-	public Result<KeyVal<String, String>> getAccountMetadataKeyVal(GetAccountMetadataKeyVal req) {
+	public Result<AccountMetaData> getAccountMetadataKeyVal(GetAccountMetadataKeyVal req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.ACCOUNTS).getAccountMetadataKeyVal(req.id, req.name));
+		return persist(req, getService(AccountService.class).getAccountMetadataKeyVal(req.id, req.name));
 	}
 
-	public Result<List<MenigaAccountBalanceHistory>> getAccountBalanceHistory(GetAccountBalanceHistory req) {
+	public Result<List<AccountBalanceHistory>> getAccountBalanceHistory(GetAccountBalanceHistory req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.ACCOUNTS).getAccountBalanceHistory(req.id, req.toQueryMap()));
+		return persist(req, getService(AccountService.class).getAccountBalanceHistory(req.id, req.toQueryMap()));
 	}
 
 	public Result<Void> updateAccount(UpdateAccount req) {
-		return persist(req, getClient(Service.ACCOUNTS).updateAccount(req.id, req));
+		return persist(req, getService(AccountService.class).updateAccount(req.getId(), req));
 	}
 
 	public Result<Void> deleteAccount(DeleteAccount req) {
-		return persist(req, getClient(Service.ACCOUNTS).deleteAccount(req.accountId));
+		return persist(req, getService(AccountService.class).deleteAccount(req.accountId));
 	}
 
 	// --

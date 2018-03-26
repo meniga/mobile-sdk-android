@@ -325,11 +325,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param name set a new name for the rule.
 	 */
 	public void setName(String name) {
-		if (this.hasChanged(this.name, name)) {
-			return;
+		if (hasChanged(this.name, name)) {
+			changed();
+			this.name = name;
 		}
-		this.changed();
-		this.name = name;
 	}
 
 	/**
@@ -343,11 +342,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param textCriteria set a text criteria to be matched by this rule, or null if no text criteria is wanted.
 	 */
 	public void setTextCriteria(String textCriteria) {
-		if (this.hasChanged(this.textCriteria, textCriteria)) {
-			return;
+		if (hasChanged(this.textCriteria, textCriteria)) {
+			changed();
+			this.textCriteria = textCriteria;
 		}
-		this.changed();
-		this.textCriteria = textCriteria;
 	}
 
 	/**
@@ -397,11 +395,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param daysLimitCriteria update the day limit for the rule.
 	 */
 	public void setDaysLimitCriteria(int daysLimitCriteria) {
-		if (this.hasChanged(this.daysLimitCriteria, daysLimitCriteria)) {
-			return;
+		if (hasChanged(this.daysLimitCriteria, daysLimitCriteria)) {
+			changed();
+			this.daysLimitCriteria = daysLimitCriteria;
 		}
-		this.changed();
-		this.daysLimitCriteria = daysLimitCriteria;
 	}
 
 	/**
@@ -451,11 +448,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param amountCriteria set a new amount criteria.
 	 */
 	public void setAmountCriteria(MenigaDecimal amountCriteria) {
-		if (this.hasChanged(this.amountCriteria, amountCriteria)) {
-			return;
+		if (hasChanged(this.amountCriteria, amountCriteria)) {
+			changed();
+			this.amountCriteria = amountCriteria;
 		}
-		this.changed();
-		this.amountCriteria = amountCriteria;
 	}
 
 	/**
@@ -471,11 +467,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param accountCategoryCriteria set a new account category criteria.
 	 */
 	public void setAccountCategoryCriteria(String accountCategoryCriteria) {
-		if (this.hasChanged(this.accountCategoryCriteria, accountCategoryCriteria)) {
-			return;
+		if (hasChanged(this.accountCategoryCriteria, accountCategoryCriteria)) {
+			changed();
+			this.accountCategoryCriteria = accountCategoryCriteria;
 		}
-		this.changed();
-		this.accountCategoryCriteria = accountCategoryCriteria;
 	}
 
 	/**
@@ -489,11 +484,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param acceptAction set accepted action.
 	 */
 	public void setAcceptAction(boolean acceptAction) {
-		if (this.hasChanged(this.acceptAction, acceptAction)) {
-			return;
+		if (hasChanged(this.acceptAction, acceptAction)) {
+			changed();
+			this.acceptAction = acceptAction;
 		}
-		this.changed();
-		this.acceptAction = acceptAction;
 	}
 
 	/**
@@ -507,11 +501,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param monthShiftAction set number of months to shift transactions matched by this rule.
 	 */
 	public void setMonthShiftAction(int monthShiftAction) {
-		if (this.hasChanged(this.monthShiftAction, monthShiftAction)) {
-			return;
+		if (hasChanged(this.monthShiftAction, monthShiftAction)) {
+			changed();
+			this.monthShiftAction = monthShiftAction;
 		}
-		this.changed();
-		this.monthShiftAction = monthShiftAction;
 	}
 
 	/**
@@ -525,11 +518,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param removeAction set remove actions.
 	 */
 	public void setRemoveAction(boolean removeAction) {
-		if (this.hasChanged(this.removeAction, removeAction)) {
-			return;
+		if (hasChanged(this.removeAction, removeAction)) {
+			changed();
+			this.removeAction = removeAction;
 		}
-		this.changed();
-		this.removeAction = removeAction;
 	}
 
 	/**
@@ -543,11 +535,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param textAction set text action.
 	 */
 	public void setTextAction(String textAction) {
-		if (this.hasChanged(this.textAction, textAction)) {
-			return;
+		if (hasChanged(this.textAction, textAction)) {
+			changed();
+			this.textAction = textAction;
 		}
-		this.changed();
-		this.textAction = textAction;
 	}
 
 	/**
@@ -561,11 +552,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param commentAction set comment action.
 	 */
 	public void setCommentAction(String commentAction) {
-		if (this.hasChanged(this.commentAction, commentAction)) {
-			return;
+		if (hasChanged(this.commentAction, commentAction)) {
+			changed();
+			this.commentAction = commentAction;
 		}
-		this.changed();
-		this.commentAction = commentAction;
 	}
 
 	/**
@@ -579,11 +569,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param categoryIdAction set category ID action.
 	 */
 	public void setCategoryIdAction(long categoryIdAction) {
-		if (this.hasChanged(this.categoryIdAction, categoryIdAction)) {
-			return;
+		if (hasChanged(this.categoryIdAction, categoryIdAction)) {
+			changed();
+			this.categoryIdAction = categoryIdAction;
 		}
-		this.changed();
-		this.categoryIdAction = categoryIdAction;
 	}
 
 	/**
@@ -632,11 +621,10 @@ public class MenigaTransactionRule extends StateObject implements Parcelable, Se
 	 * @param flagAction set flag action.
 	 */
 	public void setFlagAction(Boolean flagAction) {
-		if (this.hasChanged(this.flagAction, flagAction)) {
-			return;
+		if (hasChanged(this.flagAction, flagAction)) {
+			changed();
+			this.flagAction = flagAction;
 		}
-		this.changed();
-		this.flagAction = flagAction;
 	}
 
 	/**

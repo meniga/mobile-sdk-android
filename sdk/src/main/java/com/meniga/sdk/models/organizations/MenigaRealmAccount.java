@@ -3,6 +3,7 @@ package com.meniga.sdk.models.organizations;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.accounts.enums.AccountCategory;
 import com.meniga.sdk.webservices.requests.QueryRequestObject;
 
@@ -35,8 +36,18 @@ public class MenigaRealmAccount extends QueryRequestObject implements Parcelable
 		return accountIdentifier;
 	}
 
-	public AccountCategory getAccountTypeId() {
+	/**
+	 * This method may not be reliable. Use {@link MenigaAccount#fetchAccountTypes()} and call {@link com.meniga.sdk.models.accounts.MenigaAccountType#accountCategory} instead.
+	 *
+	 * @deprecated Will be removed in 1.2
+	 */
+	@Deprecated
+	public AccountCategory getAccountCategory() {
 		return AccountCategory.fromId(accountTypeId);
+	}
+
+	public long getAccountTypeId() {
+		return accountTypeId;
 	}
 
 	public boolean isAccountAlreadyConnected() {

@@ -1,0 +1,40 @@
+package com.meniga.sdk.webservices.account
+
+import com.meniga.sdk.helpers.MenigaDecimal
+import org.joda.time.DateTime
+
+internal data class Account(
+        val id: Long = 0,
+        val accountIdentifier: String? = null,
+        val realmIdentifier: String? = null,
+        val realmAccountTypeId: Int = 0,
+        val accountTypeId: Int = 0,
+        val name: String? = null,
+        val balance: MenigaDecimal? = null,
+        val limit: MenigaDecimal? = null,
+        val accountClass: String? = null,
+        val originalBalance: MenigaDecimal? = null,
+        val committedAmount: MenigaDecimal? = null,
+        val organizationName: String? = null,
+        val organizationIdentifier: String? = null,
+        val realmCredentialsId: Long? = null,
+        val accountAuthorizationType: AccountAuthorizationTypeName? = null,
+        val orderId: Long? = 0,
+        val isImportAccount: Boolean = false,
+        val lastUpdate: DateTime? = null,
+        val personId: Long? = null,
+        val userEmail: String? = null,
+        val createDate: DateTime? = null,
+        val accountCategory: AccountCategory? = null,
+        val accountType: AccountCategory? = null,
+        val emergencyFundBalanceLimit: MenigaDecimal? = null,
+        val inactive: Boolean = false,
+        val attachedToUserDate: DateTime? = null,
+        val isHidden: Boolean = false,
+        val isDisabled: Boolean = false,
+        val metadata: List<AccountMetaData>? = null,
+        val currencyCode: String? = null,
+        val accountRoleExternal: String? = null,
+        val accountStatusExternal: String? = null,
+        val balanceInUserCurrency: MenigaDecimal? = null,
+        val limitInUserCurrency: MenigaDecimal? = null)

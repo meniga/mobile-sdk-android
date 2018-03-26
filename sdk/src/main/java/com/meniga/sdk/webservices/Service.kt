@@ -3,13 +3,14 @@
  */
 package com.meniga.sdk.webservices
 
+import com.meniga.sdk.webservices.account.AccountService
 import com.meniga.sdk.webservices.budget.BudgetService
 
 enum class Service(
         private val key: String,
         val serviceClass: Class<*>? = null) {
     ALL("all"),
-    ACCOUNTS("accounts"),
+    ACCOUNTS("accounts", AccountService::class.java),
     AUTHENTICATION("authentication"),
     CATEGORIES("categories"),
     EVENT_TRACKING("eventtracking"),

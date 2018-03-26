@@ -14,6 +14,10 @@ public final class Objects {
         return object;
     }
 
+    public static <T> boolean equals(@Nullable T a, @Nullable T b) {
+        return (a == b) || (a != null && a.equals(b));
+    }
+
     @Nonnull
     public static <T> T firstNonNull(@Nullable T first, @Nonnull T second) {
         return first != null ? first : requireNonNull(second);

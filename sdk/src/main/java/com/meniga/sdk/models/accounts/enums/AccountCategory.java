@@ -1,6 +1,6 @@
 package com.meniga.sdk.models.accounts.enums;
 
-import com.google.gson.annotations.SerializedName;
+import com.meniga.sdk.models.accounts.MenigaAccount;
 
 import java.io.Serializable;
 import java.util.Locale;
@@ -9,21 +9,13 @@ import java.util.Locale;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public enum AccountCategory implements Serializable {
-	@SerializedName("Wallet")
 	WALLET("WALLET"),
-	@SerializedName("Credit")
 	CREDIT("CREDIT"),
-	@SerializedName("Current")
 	CURRENT("CURRENT"),
-	@SerializedName("Savings")
 	SAVINGS("SAVINGS"),
-	@SerializedName("Manual")
 	MANUAL("MANUAL"),
-	@SerializedName("Loan")
 	LOAN("LOAN"),
-	@SerializedName("Asset")
 	ASSET("ASSET"),
-	@SerializedName("Unknown")
 	UNKNOWN("UNKNOWN");
 
 	private String accountCategory;
@@ -37,6 +29,12 @@ public enum AccountCategory implements Serializable {
 		return this.accountCategory;
 	}
 
+	/**
+	 * This method may not be reliable. Use {@link MenigaAccount#fetchAccountTypes()} and then call {@link com.meniga.sdk.models.accounts.MenigaAccountType#accountCategory}.
+	 *
+	 * @deprecated Will be removed in 1.2
+	 */
+	@Deprecated
 	public static AccountCategory fromId(long id) {
 		switch ((int) id) {
 			case 1:
