@@ -59,9 +59,9 @@ data class MenigaAccount internal constructor(
         val realmIdentifier: String? = null,
         val realmAccountTypeId: Int = 0,
         val accountTypeId: Int = 0,
-        private var _name: String? = null,
+        var name: String? = null,
         val accountCategory: AccountCategory? = null,
-        private var _emergencyFundBalanceLimit: MenigaDecimal? = null,
+        var emergencyFundBalanceLimit: MenigaDecimal? = null,
         val balance: MenigaDecimal? = null,
         val originalBalance: MenigaDecimal? = null,
         val committedAmount: MenigaDecimal? = null,
@@ -70,7 +70,7 @@ data class MenigaAccount internal constructor(
         val organizationIdentifier: String? = null,
         val realmCredentialsId: Long? = null,
         val accountAuthorizatonType: AccountAuthorizationType? = null,
-        private var _orderId: Int = 0,
+        var orderId: Int = 0,
         val isImportAccount: Boolean = false,
         val lastUpdate: DateTime? = null,
         val personId: Long? = null,
@@ -78,44 +78,14 @@ data class MenigaAccount internal constructor(
         val createDate: DateTime? = null,
         val inactive: Boolean = false,
         val attachedToUserDate: DateTime? = null,
-        private var _isHidden: Boolean = false,
-        private var _isDisabled: Boolean = false,
+        var isHidden: Boolean = false,
+        var isDisabled: Boolean = false,
         val metadata: List<MenigaAccountMetaData> = emptyList()
 ) : Parcelable, Serializable, Cloneable {
 
     @Deprecated("Use inactive instead.", replaceWith = ReplaceWith("inactive"))
     val isInactive: Boolean
         get() = inactive
-
-    var name: String?
-        get() = _name
-        set(value) {
-            _name = value
-        }
-
-    var orderId: Int
-        get() = _orderId
-        set(value) {
-            _orderId = value
-        }
-
-    var isHidden: Boolean
-        get() = _isHidden
-        set(value) {
-            _isHidden = value
-        }
-
-    var isDisabled: Boolean
-        get() = _isDisabled
-        set(value) {
-            _isDisabled = value
-        }
-
-    var emergencyFundBalanceLimit: MenigaDecimal?
-        get() = _emergencyFundBalanceLimit
-        set(value) {
-            _emergencyFundBalanceLimit = value
-        }
 
     @Deprecated("Use isDisabled() instead", replaceWith = ReplaceWith("isDisabled()"))
     fun getIsDisabled(): Boolean = isDisabled

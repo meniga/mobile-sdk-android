@@ -120,6 +120,10 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
     private fun Account.toMenigaAccount() =
             MenigaAccount(
                     id = id,
+                    name = name,
+                    emergencyFundBalanceLimit = emergencyFundBalanceLimit,
+                    isHidden = isHidden,
+                    isDisabled = isDisabled,
                     accountIdentifier = accountIdentifier,
                     realmIdentifier = realmIdentifier,
                     realmAccountTypeId = realmAccountTypeId,

@@ -29,47 +29,6 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class MenigaTransactionTest {
 
 	@Test
-	public void testState() {
-		MenigaTransaction trans = gson().get(0);
-
-		Random rnd = new Random(System.currentTimeMillis());
-		Boolean orgFlagged = trans.getIsFlagged();
-		MenigaDecimal orgAmt = trans.getAmount();
-		List<MenigaComment> orgComments = trans.getComments();
-		MenigaComment comment = null;
-		String orgCommentTxt = "";
-		if (orgComments.size() > 0) {
-			comment = orgComments.get(0);
-			orgCommentTxt = comment.getComment();
-		}
-		DateTime orgDate = trans.getDate();
-		Boolean orgIsRead = trans.getIsRead();
-
-		trans.setIsFlagged(orgFlagged == null || !orgFlagged);
-		trans.setAmount(new MenigaDecimal(667));
-
-		if (comment != null) {
-			comment.setComment("Comment comment comment " + System.currentTimeMillis());
-		}
-		trans.setDate(DateTime.now().minusDays(rnd.nextInt(30)));
-		trans.setIsRead(orgIsRead == null || !orgIsRead);
-
-		Assert.assertFalse(trans.getIsFlagged() == orgFlagged);
-		assertThat(trans.getAmount().toPlainString()).isNotEqualTo(orgAmt.toPlainString());
-		if (comment != null) {
-			Assert.assertFalse(orgCommentTxt.equals(comment.getComment()));
-		}
-		Assert.assertFalse(trans.getDate().getMillis() == orgDate.getMillis());
-
-		trans.revert();
-
-		Assert.assertTrue(trans.getIsFlagged() == orgFlagged);
-		Assert.assertTrue(trans.getAmount().toPlainString().equals(orgAmt.toPlainString()));
-		Assert.assertTrue(trans.getComments().size() == 0 ? comment == null : trans.getComments().get(0).getComment().equals(comment.getComment()));
-		Assert.assertTrue(trans.getDate().getMillis() == orgDate.getMillis());
-	}
-
-	@Test
 	public void testCompare() {
 		List<MenigaTransaction> items1 = this.gson();
 		List<MenigaTransaction> items2 = this.gson();

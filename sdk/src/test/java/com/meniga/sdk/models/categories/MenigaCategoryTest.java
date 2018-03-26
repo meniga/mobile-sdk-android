@@ -72,30 +72,6 @@ public class MenigaCategoryTest {
 	}
 
 	@Test
-	public void testRevert() throws IOException {
-		List<MenigaCategory> categories = this.gson();
-		assertThat(categories).isNotNull();
-		assertThat(categories.size()).isGreaterThan(0);
-		MenigaUserCategory test = new MenigaUserCategory(categories.get(0));
-
-		String oldName = test.getName();
-		test.setName(oldName + "Test");
-		CategoryType oldCategoryType = test.getCategoryType();
-		test.setCategoryType(CategoryType.EXCLUDED);
-		boolean oldFixed = test.getIsFixedExpenses();
-		test.setIsFixedExpenses(!oldFixed);
-		long oldParentId = test.getParentCategoryId();
-		test.setParentCategoryId(oldParentId + 1);
-
-		test.revert();
-
-		assertThat(oldName).isEqualTo(test.getName());
-		assertThat(oldCategoryType).isEqualTo(test.getCategoryType());
-		assertThat(oldFixed).isEqualTo(test.getIsFixedExpenses());
-		assertThat(oldParentId).isEqualTo(test.getParentCategoryId());
-	}
-
-	@Test
 	public void testParcel() {
 		MenigaCategory category = this.gson().get(0);
 
