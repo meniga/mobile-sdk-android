@@ -8,7 +8,6 @@ import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.Merge;
-import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.networth.operators.MenigaNetWorthBalanceOperations;
 
 import org.joda.time.DateTime;
@@ -21,7 +20,7 @@ import java.util.List;
  * <p>
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaNetWorthBalance extends StateObject implements Parcelable, Serializable, Cloneable, Comparable<MenigaNetWorthBalance> {
+public class MenigaNetWorthBalance implements Parcelable, Serializable, Cloneable, Comparable<MenigaNetWorthBalance> {
 	public static final Parcelable.Creator<MenigaNetWorthBalance> CREATOR = new Parcelable.Creator<MenigaNetWorthBalance>() {
 		public MenigaNetWorthBalance createFromParcel(Parcel in) {
 			return new MenigaNetWorthBalance(in);
@@ -93,10 +92,7 @@ public class MenigaNetWorthBalance extends StateObject implements Parcelable, Se
 	 * @param balance The new balance at the point in time represented by this history entry
 	 */
 	public void setBalance(MenigaDecimal balance) {
-		if (hasChanged(this.balance, balance)) {
-			changed();
-			this.balance = balance;
-		}
+		this.balance = balance;
 	}
 
 	/**
@@ -119,10 +115,7 @@ public class MenigaNetWorthBalance extends StateObject implements Parcelable, Se
 	 * @param date The new date of the balance for the net worth account associated with this history balance item
 	 */
 	public void setBalanceDate(DateTime date) {
-		if (hasChanged(this.balanceDate, date)) {
-			changed();
-			this.balanceDate = date;
-		}
+		this.balanceDate = date;
 	}
 
 	/**
@@ -137,17 +130,6 @@ public class MenigaNetWorthBalance extends StateObject implements Parcelable, Se
 	 */
 	public long getAccountId() {
 		return this.accountId;
-	}
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		if (!(lastRevision instanceof MenigaNetWorthBalance)) {
-			return;
-		}
-		MenigaNetWorthBalance other = (MenigaNetWorthBalance) lastRevision;
-
-		this.balanceDate = other.balanceDate;
-		this.balance = other.balance;
 	}
 
 	@Override

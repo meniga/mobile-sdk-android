@@ -74,29 +74,6 @@ public class MenigaNetWorthTest {
 	}
 
 	@Test
-	public void testMenigaNetWorthRevert() throws IOException {
-		List<MenigaNetWorth> categories = this.gson();
-		assertThat(categories).isNotNull();
-		assertThat(categories.size()).isGreaterThan(0);
-
-		MenigaNetWorth test = categories.get(0);
-
-		String oldName = test.getName();
-		test.setName(test.getName() + "Test");
-		MenigaDecimal oldBala = test.getCurrentBalance();
-		test.setCurrentBalance(test.getCurrentBalance().add(new MenigaDecimal(100)));
-		boolean excl = test.getIsExcluded();
-		test.setIsExcluded(!test.getIsExcluded());
-
-		test.revert();
-
-		assertThat(oldName).isEqualTo(test.getName());
-		assertThat(oldBala).isEqualTo(test.getCurrentBalance());
-		assertThat(excl).isEqualTo(test.getIsExcluded());
-		assertThat(excl).isEqualTo(test.getIsExcluded());
-	}
-
-	@Test
 	public void testParcel() {
 		MenigaNetWorth item = gson().get(0);
 

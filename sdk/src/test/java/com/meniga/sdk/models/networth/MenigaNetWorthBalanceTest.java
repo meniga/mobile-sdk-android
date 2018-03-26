@@ -75,24 +75,6 @@ public class MenigaNetWorthBalanceTest {
 	}
 
 	@Test
-	public void testRevert() throws IOException {
-		List<MenigaNetWorthBalance> list = this.gson();
-		assertThat(list).isNotNull();
-		assertThat(list.size()).isGreaterThan(0);
-		MenigaNetWorthBalance test = list.get(0);
-
-		DateTime orgDate = test.getBalanceDate();
-		test.setBalanceDate(test.getBalanceDate().plusMonths(3));
-		MenigaDecimal orgBala = test.getBalance();
-		test.setBalance(test.getBalance().add(new MenigaDecimal(100)));
-
-		test.revert();
-
-		assertThat(test.getBalanceDate()).isEqualTo(orgDate);
-		assertThat(test.getBalance()).isEqualTo(orgBala);
-	}
-
-	@Test
 	public void testParcel() {
 		MenigaNetWorthBalance item = gson().get(0);
 

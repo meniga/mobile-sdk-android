@@ -9,7 +9,6 @@ import com.meniga.sdk.helpers.KeyVal;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.Merge;
-import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.networth.enums.NetWorthType;
 import com.meniga.sdk.models.networth.operators.MenigaNetWorthOperations;
 
@@ -25,7 +24,7 @@ import java.util.List;
  * <p>
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaNetWorth extends StateObject implements Serializable, Parcelable, Cloneable {
+public class MenigaNetWorth implements Serializable, Parcelable, Cloneable {
 	public static final Parcelable.Creator<MenigaNetWorth> CREATOR = new Parcelable.Creator<MenigaNetWorth>() {
 		@Override
 		public MenigaNetWorth createFromParcel(Parcel source) {
@@ -147,10 +146,7 @@ public class MenigaNetWorth extends StateObject implements Serializable, Parcela
 	 * @param name Set the name for the NetWorth account.
 	 */
 	public void setName(String name) {
-		if (hasChanged(this.accountName, name)) {
-			changed();
-			this.accountName = name;
-		}
+		this.accountName = name;
 	}
 
 	/**
@@ -191,10 +187,7 @@ public class MenigaNetWorth extends StateObject implements Serializable, Parcela
 	 * @param isExcluded Set if the NetWorth should be excluded or not.
 	 */
 	public void setIsExcluded(Boolean isExcluded) {
-		if (hasChanged(this.isExcluded, isExcluded)) {
-			changed();
-			this.isExcluded = isExcluded;
-		}
+		this.isExcluded = isExcluded;
 	}
 
 	/**
@@ -216,10 +209,7 @@ public class MenigaNetWorth extends StateObject implements Serializable, Parcela
 	 *                       this way, only updating the most recent net worth balance will do that.
 	 */
 	public void setCurrentBalance(MenigaDecimal currentBalance) {
-		if (hasChanged(this.currentBalance, currentBalance)) {
-			changed();
-			this.currentBalance = currentBalance;
-		}
+		this.currentBalance = currentBalance;
 	}
 
     /*
@@ -238,19 +228,6 @@ public class MenigaNetWorth extends StateObject implements Serializable, Parcela
 	 */
 	public List<MenigaNetWorthBalance> getHistory() {
 		return history;
-	}
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		if (!(lastRevision instanceof MenigaNetWorth)) {
-			return;
-		}
-
-		// Revert all settable fields to last revision
-		MenigaNetWorth prevRevision = (MenigaNetWorth) lastRevision;
-		this.accountName = prevRevision.accountName;
-		this.isExcluded = prevRevision.isExcluded;
-		this.currentBalance = prevRevision.currentBalance;
 	}
 
 	@Override
@@ -334,15 +311,7 @@ public class MenigaNetWorth extends StateObject implements Serializable, Parcela
 	 * @return A task of type Void. The task will indicate if the deleteUpcoming was successful or not
 	 */
 	public Result<Void> update() {
-		Result<Void> task = MenigaNetWorth.apiOperator.updateNetWorthAccount(this.accountId, this.isExcluded, this.accountName);
-		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<Void>() {
-			@Override
-			public void onFinished(Void result, boolean failed) {
-				if (!failed) {
-					MenigaNetWorth.this.resetState();
-				}
-			}
-		});
+		return MenigaNetWorth.apiOperator.updateNetWorthAccount(this.accountId, this.isExcluded, this.accountName);
 	}
 
 	/**

@@ -4,14 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.meniga.sdk.helpers.MenigaDecimal;
-import com.meniga.sdk.models.StateObject;
-
 import java.io.Serializable;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaOfferCashbackPrediction extends StateObject implements Parcelable, Serializable, Cloneable {
+public class MenigaOfferCashbackPrediction implements Parcelable, Serializable, Cloneable {
 	public static final Parcelable.Creator<MenigaOfferCashbackPrediction> CREATOR = new Parcelable.Creator<MenigaOfferCashbackPrediction>() {
 		public MenigaOfferCashbackPrediction createFromParcel(Parcel source) {
 			return new MenigaOfferCashbackPrediction(source);
@@ -104,21 +102,5 @@ public class MenigaOfferCashbackPrediction extends StateObject implements Parcel
 	@Override
 	protected MenigaOfferCashbackPrediction clone() throws CloneNotSupportedException {
 		return (MenigaOfferCashbackPrediction) super.clone();
-	}
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		if (!(lastRevision instanceof MenigaOfferCashbackPrediction)) {
-			return;
-		}
-
-		MenigaOfferCashbackPrediction other = (MenigaOfferCashbackPrediction) lastRevision;
-		this.monthlyAmount = other.monthlyAmount;
-		this.historyMonths = other.historyMonths;
-		this.monthlyCount = other.monthlyCount;
-		this.expectedSavingsRatio = other.expectedSavingsRatio;
-		this.progress = other.progress;
-		this.predictedAmount = other.predictedAmount;
-		this.averageAmount = other.averageAmount;
 	}
 }

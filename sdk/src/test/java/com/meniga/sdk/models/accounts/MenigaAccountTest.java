@@ -53,27 +53,6 @@ public class MenigaAccountTest {
 	}
 
 	@Test
-	public void testRevert() throws IOException {
-		MenigaAccount test = createAccount();
-
-		String oldName = test.getName();
-		int oldOrderId = test.getOrderId();
-		MenigaDecimal oldLimit = test.getEmergencyFundBalanceLimit();
-		boolean oldHidden = test.isHidden();
-		test.setName("NewName");
-		test.setOrderId(oldOrderId + 1);
-		test.setEmergencyFundBalanceLimit(oldLimit.add(new MenigaDecimal(10.0)));
-		test.setHidden(!oldHidden);
-
-		test.revert();
-
-		assertThat(test.getName()).isEqualTo(oldName);
-		assertThat(test.getOrderId()).isEqualTo(oldOrderId);
-		assertThat(test.getEmergencyFundBalanceLimit()).isEqualTo(oldLimit);
-		assertThat(test.isHidden()).isEqualTo(oldHidden);
-	}
-
-	@Test
 	public void testParcel() {
 		MenigaAccount account = createAccount();
 

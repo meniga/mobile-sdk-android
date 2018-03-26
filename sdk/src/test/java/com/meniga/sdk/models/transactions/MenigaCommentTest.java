@@ -55,21 +55,6 @@ public class MenigaCommentTest {
 	}
 
 	@Test
-	public void testRevert() throws IOException {
-		List<MenigaComment> comments = this.gson();
-		assertThat(comments).isNotNull();
-		assertThat(comments.size()).isGreaterThan(0);
-		MenigaComment test = comments.get(0);
-
-		String oldCOmment = test.getComment();
-		test.setComment(test.getComment() + "Test");
-
-		test.revert();
-
-		assertThat(oldCOmment).isEqualTo(test.getComment());
-	}
-
-	@Test
 	public void testClone() {
 		List<MenigaComment> items = this.gson();
 		assertThat(items).isNotNull();

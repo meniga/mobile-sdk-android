@@ -8,7 +8,6 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
-import com.meniga.sdk.models.StateObject;
 import com.meniga.sdk.models.Merge;
 import com.meniga.sdk.models.challenges.enums.ChallengeInterval;
 import com.meniga.sdk.models.challenges.enums.ChallengeType;
@@ -26,7 +25,7 @@ import java.util.UUID;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaChallenge extends StateObject implements Serializable, Cloneable, Parcelable {
+public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	private static MenigaChallengesOperations apiOperations;
 
 	protected UUID id;
@@ -335,37 +334,30 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 	}
 
 	public void setTitle(String titleIn) {
-		changed();
 		title = titleIn;
 	}
 
 	public void setDescription(String desc) {
-		changed();
 		description = desc;
 	}
 
 	public void setStartDate(DateTime starts) {
-		changed();
 		startDate = starts;
 	}
 
 	public void setEndDate(DateTime ends) {
-		changed();
 		endDate = ends;
 	}
 
 	public void setIconUrl(String url) {
-		changed();
 		iconUrl = url;
 	}
 
 	public void setCustomChallengeColor(CustomChallengeColor color) {
-		changed();
 		customChallengeColor = color;
 	}
 
 	public void setCategoryIds(List<Long> ids) {
-		changed();
 		categoryIds = ids;
 		categoryIdsDirty = true;
 	}
@@ -384,31 +376,11 @@ public class MenigaChallenge extends StateObject implements Serializable, Clonea
 	 */
 
 	public void setType(ChallengeType type) {
-		changed();
 		this.type = type;
 	}
 
 	public void setTargetAmount(MenigaDecimal amt) {
-		changed();
 		targetAmount = amt.abs();
-	}
-
-	@Override
-	protected void revertToRevision(StateObject lastRevision) {
-		if (!(lastRevision instanceof MenigaChallenge)) {
-			return;
-		}
-
-		MenigaChallenge last = (MenigaChallenge) lastRevision;
-		type = last.type;
-		targetAmount = last.targetAmount;
-		title = last.title;
-		description = last.description;
-		startDate = last.startDate;
-		endDate = last.endDate;
-		iconUrl = last.iconUrl;
-		categoryIds = last.categoryIds;
-		customChallengeColor = last.customChallengeColor;
 	}
 
 	@Override
