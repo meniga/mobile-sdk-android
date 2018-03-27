@@ -14,15 +14,32 @@ cache:
 
 stages:
   - name: build
-  - name: deploy
+  - name: deploy branch snapshot
+    if: branch IS present AND type = push
+  - name: deploy tagged release
+    if: tag =~ ^v
 
 jobs:
   include:
     - stage: build
-      script: ./gradlew build
+      script:
+        - ./gradlew build
 
-    - stage: deploy
-      script: ./gradlew deploy -Dbuild.number=$TRAVIS_BUILD_NUMBER
+    - stage: deploy branch snapshot
+      install:
+        - git fetch --unshallow --tags
+        - git checkout $TRAVIS_BRANCH
+      script:
+        - ./gradlew currentVersion deploy -Dbuild.number=$TRAVIS_BUILD_NUMBER
+
+    - stage: deploy tagged release
+      install:
+        - git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+        - git fetch --unshallow --tags
+        - git checkout master
+        - git reset --hard $TRAVIS_BRANCH
+      script:
+        - ./gradlew currentVersion deploy -Dbuild.number=$TRAVIS_BUILD_NUMBER
 
 env:
   global:
