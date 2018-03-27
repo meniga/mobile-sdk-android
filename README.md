@@ -38,6 +38,38 @@ dependencies {
 
 For more information please refer to [list of snapshots](https://oss.jfrog.org/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/com/meniga/sdk/sdk-android).
 
+## Local development
+
+In order to use an SDK that contains local changes you may start by checking the version as shown below.
+
+```
+$ ./gradlew currentVersion
+
+> Task :currentVersion 
+
+Project version: x.y.z-SNAPSHOT
+```
+
+The next step is to publish the artifact to the local Maven repository.
+
+```
+$ ./gradlew publishToMavenLocal
+```
+
+In the Android Application project add the missing local Maven repository and adjust the version of the artifact.
+
+```
+repositories {
+  mavenLocal()
+  
+  ...
+}
+
+dependencies {
+  compile 'com.meniga.sdk:sdk-android:x.y.z-SNAPSHOT'
+}
+```
+
 ## Changelog
 The changelog can be found in the [release section](https://github.com/meniga/mobile-sdk-android/releases)
 
