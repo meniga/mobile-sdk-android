@@ -2,7 +2,7 @@
 
 mobile-sdk-android
 ====
-[![Download](https://api.bintray.com/packages/meniga/android/com.meniga.sdk/images/download.svg) ](https://bintray.com/meniga/android/com.meniga.sdk/_latestVersion)
+[![Download](https://api.bintray.com/packages/meniga/android/com.meniga.sdk:sdk-android/images/download.svg) ](https://bintray.com/meniga/android/com.meniga.sdk:sdk-android/_latestVersion)
 [![Build Status](https://travis-ci.org/meniga/mobile-sdk-android.svg?branch=master)](https://travis-ci.org/meniga/mobile-sdk-android)
 
 Meniga helps banks use data to accelerate innovation and meaningful engagement by providing RESTful APIs on top of Meniga software products to improve and personalize the online banking experience for both individuals and corporate customers.
@@ -14,7 +14,7 @@ Developers for institutions implementing the Meniga REST API can use this sdk to
 
 ```
 repositories {
-  jcenter()
+  maven { url "https://dl.bintray.com/meniga/android" }
 }
 
 dependencies {
