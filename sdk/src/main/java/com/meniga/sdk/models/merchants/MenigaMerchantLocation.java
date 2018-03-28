@@ -11,18 +11,6 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaMerchantLocation implements Serializable, Parcelable {
-	public static final Creator<MenigaMerchantLocation> CREATOR = new Creator<MenigaMerchantLocation>() {
-		@Override
-		public MenigaMerchantLocation createFromParcel(Parcel source) {
-			return new MenigaMerchantLocation(source);
-		}
-
-		@Override
-		public MenigaMerchantLocation[] newArray(int size) {
-			return new MenigaMerchantLocation[size];
-		}
-	};
-
 	protected String city;
 	protected String country;
 	protected String countryCode;
@@ -33,17 +21,6 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 	protected String streetLine2;
 
 	protected MenigaMerchantLocation() {
-	}
-
-	protected MenigaMerchantLocation(Parcel in) {
-		this.city = in.readString();
-		this.country = in.readString();
-		this.countryCode = in.readString();
-		this.latitude = in.readDouble();
-		this.longitude = in.readDouble();
-		this.postalCode = in.readString();
-		this.streetLine1 = in.readString();
-		this.streetLine2 = in.readString();
 	}
 
 	/**
@@ -160,10 +137,33 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 		dest.writeString(this.city);
 		dest.writeString(this.country);
 		dest.writeString(this.countryCode);
-		dest.writeDouble(this.latitude);
-		dest.writeDouble(this.longitude);
+		dest.writeValue(this.latitude);
+		dest.writeValue(this.longitude);
 		dest.writeString(this.postalCode);
 		dest.writeString(this.streetLine1);
 		dest.writeString(this.streetLine2);
 	}
+
+	protected MenigaMerchantLocation(Parcel in) {
+		this.city = in.readString();
+		this.country = in.readString();
+		this.countryCode = in.readString();
+		this.latitude = (Double) in.readValue(Double.class.getClassLoader());
+		this.longitude = (Double) in.readValue(Double.class.getClassLoader());
+		this.postalCode = in.readString();
+		this.streetLine1 = in.readString();
+		this.streetLine2 = in.readString();
+	}
+
+	public static final Creator<MenigaMerchantLocation> CREATOR = new Creator<MenigaMerchantLocation>() {
+		@Override
+		public MenigaMerchantLocation createFromParcel(Parcel source) {
+			return new MenigaMerchantLocation(source);
+		}
+
+		@Override
+		public MenigaMerchantLocation[] newArray(int size) {
+			return new MenigaMerchantLocation[size];
+		}
+	};
 }
