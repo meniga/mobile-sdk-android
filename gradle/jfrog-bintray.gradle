@@ -1,0 +1,22 @@
+apply plugin: "com.jfrog.bintray"
+apply from: "$rootDir/gradle/project-information.gradle"
+
+bintray {
+    user = bintrayCredentials.first()
+    key = bintrayCredentials.last()
+    pkg {
+        repo = "android"
+        name = "com.meniga.sdk:sdk-android"
+        userOrg = "meniga"
+        desc = information.description
+        websiteUrl = information.url
+        issueTrackerUrl = information.issueTrackerUrl
+        vcsUrl = information.
+        licenses = [information.licenseName]
+        publicDownloadNumbers = true
+        githubRepo = "meniga/mobile-sdk-android"
+        githubReleaseNotesFile = "README.md"
+        publish = true
+    }
+    publications = ["aar"]
+}
