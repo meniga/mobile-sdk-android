@@ -3,8 +3,18 @@
     "parentIdentifier": "a76f45c6-2376-42e3-8495-51759f466a4d",
     "id": 138327,
     "amount": -5,
-    "tags": [],
-    "comments": [],
+    "tags": [
+      "unabellamangiata"
+    ],
+    "comments": [
+      {
+        "id": 129,
+        "personId": 10001008,
+        "comment": "#unabellamangiata",
+        "createdDate": "2018-02-07T12:19:20.3231548",
+        "modifiedDate": "2018-02-08T15:18:16.6543267"
+      }
+    ],
     "categoryId": 35,
     "date": "2018-02-07T00:00:00",
     "text": "London Car Parking",

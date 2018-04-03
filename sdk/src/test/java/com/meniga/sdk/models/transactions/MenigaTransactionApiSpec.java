@@ -12,7 +12,6 @@ import com.meniga.sdk.utils.FileImporter;
 
 import org.assertj.core.api.Condition;
 import org.joda.time.DateTime;
-import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +49,7 @@ public class MenigaTransactionApiSpec {
     }
 
     @Test
-    public void shouldCreateTransaction() throws IOException, JSONException, InterruptedException {
+    public void shouldCreateTransaction() throws IOException, InterruptedException {
         server.enqueue(mockResponse("transaction.json"));
 
         Task<MenigaTransaction> task = MenigaTransaction.create(DateTime.parse("2018-03-08"), "Hagkaup", new MenigaDecimal(5000), 45).getTask();
@@ -72,7 +71,7 @@ public class MenigaTransactionApiSpec {
     public void shouldFetchSingleTransaction() throws InterruptedException, IOException {
         server.enqueue(mockResponse("transaction.json"));
 
-        Task<MenigaTransaction> task = MenigaTransaction.fetch(138327).getTask();
+        Task<MenigaTransaction> task = fetchTransaction();
         task.waitForCompletion();
 
         RecordedRequest recordedRequest = server.takeRequest();
@@ -127,6 +126,37 @@ public class MenigaTransactionApiSpec {
                 .hasMerchantsIncluded();
     }
 
+    @Test
+    public void shouldUpdateTransaction() throws Exception {
+        server.enqueue(mockResponse("transaction.json"));
+        Task<MenigaTransaction> task = fetchTransaction();
+        server.takeRequest();
+        MenigaTransaction transaction = task.getResult();
+        server.enqueue(mockResponse("transaction.json"));
+
+        transaction.setCategoryId(99);
+        Task<MenigaTransactionUpdate> updateTask = transaction.update().getTask();
+        updateTask.waitForCompletion();
+
+        RecordedRequest recordedRequest = server.takeRequest();
+        assertThat(recordedRequest.getPath()).isEqualTo("/v1/transactions/138327");
+        assertThat(recordedRequest.getMethod()).isEqualTo("PUT");
+        JsonAssert.with(recordedRequest.getBody().readUtf8())
+                .assertThat("$.amount", equalTo(-5.0))
+                .assertThat("$.categoryId", equalTo(99))
+                .assertThat("$.hasUncertainCategorization", is(false))
+                .assertThat("$.useSubTextInRecat", is(true))
+                .assertThat("$.text", equalTo("London Car Parking"))
+                .assertThat("$.date", equalTo("2018-02-07T00:00:00.000Z"))
+                .assertThat("$.isRead", is(false));
+        assertThat(updateTask.getResult().getUpdatedTransactions()).hasSize(1);
+        MenigaTransaction updatedTransaction = updateTask.getResult().getUpdatedTransactions().get(0);
+        assertThat(updatedTransaction).isEqualToIgnoringGivenFields(transaction, "categoryId", "account");
+        assertThat(updatedTransaction.getCategoryId()).isEqualTo(35);
+        assertThat(updatedTransaction.getAccount()).isNull();
+        assertThat(updateTask.getResult().getSuggestedTransactions()).hasSize(0);
+    }
+
     private Condition<RecordedRequest> withPath(final String expectedPath) {
         return new Condition<RecordedRequest>(expectedPath) {
             @Override
@@ -138,5 +168,11 @@ public class MenigaTransactionApiSpec {
 
     private MockResponse mockResponse(String path) throws IOException {
         return new MockResponse().setBody(FileImporter.getJsonFileFromRaw(path));
+    }
+
+    private Task<MenigaTransaction> fetchTransaction() throws InterruptedException {
+        Task<MenigaTransaction> task = MenigaTransaction.fetch(138327).getTask();
+        task.waitForCompletion();
+        return task;
     }
 }
