@@ -101,6 +101,7 @@ publishing {
             artifactId = project.name
             version = project.version
             customizePom(pom)
+            pom.packaging = "aar"
         }
     }
 }
