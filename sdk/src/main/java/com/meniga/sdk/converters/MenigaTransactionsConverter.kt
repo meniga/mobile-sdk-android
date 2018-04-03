@@ -67,8 +67,12 @@ class MenigaTransactionsConverter : MenigaConverter() {
     private fun Gson.getAccountsMerchantsAndTransactions(data: JsonArray, included: JsonObject?)
             : Triple<List<MenigaTransaction>, List<MenigaAccount>, List<MenigaMerchant>> =
             Triple(get<List<MenigaTransaction>>(data).orEmpty(),
-                    included?.let { get<List<MenigaAccount>>(it, "accounts") }.orEmpty(),
-                    included?.let { get<List<MenigaMerchant>>(it, "merchants") }.orEmpty())
+                    included?.let { get<List<MenigaAccount?>>(it, "accounts") }
+                            .orEmpty()
+                            .filterNotNull(),
+                    included?.let { get<List<MenigaMerchant?>>(it, "merchants") }
+                            .orEmpty()
+                            .filterNotNull())
 
     private fun MenigaTransaction.updateCommentsTransactionId() {
         comments?.forEach { it.transactionId = id }
