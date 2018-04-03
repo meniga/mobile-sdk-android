@@ -1,0 +1,24 @@
+ext {
+    sonatypeCredentials = (project.hasProperty("sonatype.credentials") ?
+            project.property("sonatype.credentials") :
+            System.getenv("SONATYPE_CREDENTIALS") ?: "")
+            .split(":")
+}
+
+publishing {
+    repositories {
+        maven {
+            url isSnapshot ?
+                    'https://oss.sonatype.org/content/repositories/snapshots' :
+                    'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+            credentials {
+                username sonatypeCredentials.first()
+                password sonatypeCredentials.last()
+            }
+        }
+    }
+}
+
+task publishToSonatype() {
+    dependsOn "publishAarPublicationToMavenRepository"
+}

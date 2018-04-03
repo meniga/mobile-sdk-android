@@ -1,0 +1,24 @@
+apply from: "$rootDir/gradle/project-information.gradle"
+
+ext {
+    customizePom = { pom ->
+        pom.withXml {
+            asNode().children().last() + {
+                resolveStrategy = DELEGATE_FIRST
+                description information.description
+                url information.url
+                licenses {
+                    license {
+                        name information.licenseName
+                        url information.licenseUrl
+                    }
+                }
+                scm {
+                    url information.scmUrl
+                    connection information.scmConnection
+                    developerConnection information.scmDeveloperConnection
+                }
+            }
+        }
+    }
+}
