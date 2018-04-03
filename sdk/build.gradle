@@ -106,6 +106,9 @@ publishing {
 }
 
 signing {
-    required { !isSnapshot }
+    required { !isSnapshot &&
+            project.hasProperty("signing.keyId") &&
+            project.hasProperty("signing.password") &&
+            project.hasProperty("signing.secretKeyRingFile")}
     sign configurations.archives
 }
