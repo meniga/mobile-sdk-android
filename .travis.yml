@@ -15,7 +15,7 @@ cache:
 stages:
   - name: build
   - name: deploy branch snapshot
-    if: branch IS present AND type = push AND repo = meniga/mobile-sdk-android
+    if: (NOT tag IS present) AND branch IS present AND type = push AND repo = meniga/mobile-sdk-android
   - name: deploy tagged release
     if: tag =~ ^v AND repo = meniga/mobile-sdk-android
 
