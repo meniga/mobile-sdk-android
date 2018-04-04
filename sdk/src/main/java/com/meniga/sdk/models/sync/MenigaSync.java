@@ -258,7 +258,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * @return A new sync object created by starting the sync procedure
 	 */
 	public static Result<MenigaSync> start(long timeout) {
-		return MenigaSync.start(timeout, 1000, null);
+		return MenigaSync.start(null, timeout, 1000, null);
 	}
 
 	/**
@@ -270,11 +270,24 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * @return A new sync object.
 	 */
 	public static Result<MenigaSync> start(final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
+		return start(null, timeout, interval, onDone);
+	}
+
+	/**
+	 * Starts the accounts synchronization process and also returns a MenigaSync object
+	 * that contains further details.
+	 *
+	 * @param realmUserId  The amount of time the background process should try to check the syn result before terminating.
+	 * @param timeout  The amount of time the background process should try to check the syn result before terminating.
+	 * @param interval The amount of time between checks for sync completion in the background
+	 * @return A new sync object.
+	 */
+	public static Result<MenigaSync> start(final Long realmUserId, final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
 		Task<MenigaSync> task = getSyncStatus().getTask().continueWithTask(new Continuation<MenigaSyncStatus, Task<MenigaSync>>() {
 			@Override
 			public Task<MenigaSync> then(Task<MenigaSyncStatus> task) throws Exception {
 				if (task.isFaulted() || task.getResult().hasCompletedSyncSession) {
-					return apiOperator.startSync(timeout).getTask();
+					return apiOperator.startSync(realmUserId, timeout).getTask();
 				} else {
 					return fetch(task.getResult().getSynchronizationStatus().getSyncHistoryId()).getTask();
 				}

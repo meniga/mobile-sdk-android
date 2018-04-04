@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class MenigaSyncOperationsMock implements MenigaSyncOperations {
 	@Override
-	public Result<MenigaSync> startSync(long timeout) {
+	public Result<MenigaSync> startSync(Long realmUserId, long timeout) {
 		TaskCompletionSource<MenigaSync> task = new TaskCompletionSource<>();
 		task.setResult(this.gson());
 		return new MTask<>(task.getTask(), task);
