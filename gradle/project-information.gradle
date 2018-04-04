@@ -4,6 +4,7 @@ ext {
             issueTrackerUrl: "https://github.com/meniga/mobile-sdk-android/issues",
             licenseName: "MIT",
             licenseUrl: "http://www.opensource.org/licenses/mit-license.php",
+            name: "Meniga SDK library",
             scmConnection: "scm:git:git://github.com/meniga/mobile-sdk-android.git",
             scmDeveloperConnection: "scm:git:ssh://github.com:meniga/mobile-sdk-android.git",
             scmUrl: "https://github.com/meniga/mobile-sdk-android/tree/master",
