@@ -2,9 +2,11 @@ apply from: "$rootDir/gradle/project-information.gradle"
 
 ext {
     customizePom = { pom ->
+        pom.packaging = "aar"
         pom.withXml {
             asNode().children().last() + {
                 resolveStrategy = DELEGATE_FIRST
+                name information.name
                 description information.description
                 url information.url
                 licenses {
@@ -17,6 +19,18 @@ ext {
                     url information.scmUrl
                     connection information.scmConnection
                     developerConnection information.scmDeveloperConnection
+                }
+                developers {
+                    developer {
+                        id "agustk"
+                        name "Ágúst Karlsson"
+                        email "agustk@meniga.com"
+                    }
+                    developer {
+                        id "artur"
+                        name "Artur Stępniewski"
+                        email "artur@meniga.com"
+                    }
                 }
             }
         }

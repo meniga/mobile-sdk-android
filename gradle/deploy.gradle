@@ -14,3 +14,7 @@ apply from: "$rootDir/gradle/sonatype.gradle"
 task publishToJFrog() {
     dependsOn isSnapshot ? artifactoryPublish : bintrayUpload
 }
+
+task publishToSonatype() {
+    if (isSnapshot) dependsOn "publishAarPublicationToMavenRepository"
+}

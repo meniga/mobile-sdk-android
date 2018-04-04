@@ -8,17 +8,11 @@ ext {
 publishing {
     repositories {
         maven {
-            url isSnapshot ?
-                    'https://oss.sonatype.org/content/repositories/snapshots' :
-                    'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+            url "https://oss.sonatype.org/content/repositories/snapshots"
             credentials {
                 username sonatypeCredentials.first()
                 password sonatypeCredentials.last()
             }
         }
     }
-}
-
-task publishToSonatype() {
-    dependsOn "publishAarPublicationToMavenRepository"
 }

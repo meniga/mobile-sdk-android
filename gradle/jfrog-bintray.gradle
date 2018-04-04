@@ -17,6 +17,12 @@ bintray {
         githubRepo = "meniga/mobile-sdk-android"
         githubReleaseNotesFile = "README.md"
         publish = true
+        version {
+            gpg {
+                sign = true
+                passphrase = System.getenv("SIGNING_PASSWORD")
+            }
+        }
     }
     publications = ["aar"]
 }
