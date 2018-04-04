@@ -185,8 +185,8 @@ public interface MenigaAPI {
 	@POST(APIConst.URL_SYNC)
 	Call<MenigaSync> startSync(@Body StartSync req);
 
-	@POST(APIConst.URL_SYNC_REALM)
-	Call<MenigaSync> startRealmSync(@Body StartRealmSync req, @QueryMap Map<String, String> query);
+	@POST(APIConst.URL_SYNC_REALM + "/{id}")
+	Call<MenigaSync> startRealmSync(@Body StartRealmSync req, @Path("id") long realmUserId);
 
 	@GET(APIConst.URL_SYNC)
 	Call<MenigaSyncStatus> getSyncStatus();

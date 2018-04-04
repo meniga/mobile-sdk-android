@@ -269,7 +269,7 @@ public class PersistenceDelegate {
 
 	public Result<MenigaSync> startRealmSync(StartRealmSync req) {
 		TaskAdapter taskAdapter = MenigaSDK.getMenigaSettings().getTaskAdapter();
-		return taskAdapter.adapt(getClient(Service.SYNC).startRealmSync(req, req.toQueryMap()), null);
+		return taskAdapter.adapt(getClient(Service.SYNC).startRealmSync(req, req.realmUserId), null);
 	}
 
 	public Result<MenigaSyncStatus> getSyncStatus() {

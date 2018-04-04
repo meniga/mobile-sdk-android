@@ -18,11 +18,4 @@ public class StartRealmSync extends QueryRequestObject {
         hash += (int) (realmUserId ^ (realmUserId >>> 32));
         return hash;
     }
-
-    @Override
-    public Map<String, String> toQueryMap() {
-        Map<String, String> query = new HashMap<>();
-        query.put("realmUserId", Long.toString(realmUserId));
-        return query;
-    }
 }
