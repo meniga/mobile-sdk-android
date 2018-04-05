@@ -265,7 +265,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 */
 	@Deprecated
 	public static Result<MenigaSync> start(final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
-		return launchSync(null, timeout, null);
+		return launchSync(null, timeout, onDone);
 	}
 
 	/**
