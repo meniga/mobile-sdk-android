@@ -5,6 +5,7 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.sync.MenigaSync;
 import com.meniga.sdk.models.sync.MenigaSyncStatus;
 import com.meniga.sdk.webservices.requests.GetSync;
+import com.meniga.sdk.webservices.requests.StartRealmSync;
 import com.meniga.sdk.webservices.requests.StartSync;
 
 /**
@@ -12,11 +13,17 @@ import com.meniga.sdk.webservices.requests.StartSync;
  */
 public final class MenigaSyncOperationsImp implements MenigaSyncOperations {
 	@Override
-	public Result<MenigaSync> startSync(long timeout) {
-		StartSync req = new StartSync();
-		req.waitForCompleteMilliseconds = timeout;
-
-		return MenigaSDK.executor().startSync(req);
+	public Result<MenigaSync> startSync(Long realmUserId, long timeout) {
+		if (realmUserId == null) {
+			StartSync req = new StartSync();
+			req.waitForCompleteMilliseconds = timeout;
+			return MenigaSDK.executor().startSync(req);
+		} else {
+			StartRealmSync req = new StartRealmSync();
+			req.realmUserId = realmUserId;
+			req.waitForCompleteMilliseconds = timeout;
+			return MenigaSDK.executor().startRealmSync(req);
+		}
 	}
 
 	@Override

@@ -58,6 +58,7 @@ import com.meniga.sdk.webservices.requests.RegisterUser;
 import com.meniga.sdk.webservices.requests.SetSubscription;
 import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
 import com.meniga.sdk.webservices.requests.SplitTransaction;
+import com.meniga.sdk.webservices.requests.StartRealmSync;
 import com.meniga.sdk.webservices.requests.StartSync;
 import com.meniga.sdk.webservices.requests.UpdateChallenge;
 import com.meniga.sdk.webservices.requests.UpdateComment;
@@ -183,6 +184,9 @@ public interface MenigaAPI {
 	// --
 	@POST(APIConst.URL_SYNC)
 	Call<MenigaSync> startSync(@Body StartSync req);
+
+	@POST(APIConst.URL_SYNC_REALM + "/{id}")
+	Call<MenigaSync> startRealmSync(@Body StartRealmSync req, @Path("id") long realmUserId);
 
 	@GET(APIConst.URL_SYNC)
 	Call<MenigaSyncStatus> getSyncStatus();

@@ -21,6 +21,7 @@ class APIConst {
 
 	// Sync
 	static final String URL_SYNC = "sync";
+	static final String URL_SYNC_REALM = "sync/realm";
 	static final String REALM = "/realm";
 	static final String AUTH = "/auth";
 	static final String ACCOUNTS = "/accounts";

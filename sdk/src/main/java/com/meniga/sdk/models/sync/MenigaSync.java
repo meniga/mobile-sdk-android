@@ -22,6 +22,8 @@ import com.meniga.sdk.providers.tasks.Task;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSync implements Serializable, Parcelable, Cloneable {
+	private static final long SYNC_CHECK_INTERVAL_MILLISECONDS = 1000;
+
 	protected static MenigaSyncOperations apiOperator;
 
 	protected long syncHistoryId;
@@ -251,30 +253,62 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	}
 
 	/**
-	 * Starts the accounts synchronization process and also returns a MenigaSync object
-	 * that contains further details.
-	 *
-	 * @param timeout Timeout for the sync procedure, the actuall response callback might take longer
-	 * @return A new sync object created by starting the sync procedure
+	 * Use {@link #syncRealms(long)} instead.
 	 */
+	@Deprecated
 	public static Result<MenigaSync> start(long timeout) {
-		return MenigaSync.start(timeout, 1000, null);
+		return launchSync(null, timeout, null);
+	}
+
+	/**
+	 * Use {@link #syncRealms(long, Interceptor)} instead.
+	 */
+	@Deprecated
+	public static Result<MenigaSync> start(final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
+		return launchSync(null, timeout, null);
 	}
 
 	/**
 	 * Starts the accounts synchronization process and also returns a MenigaSync object
 	 * that contains further details.
 	 *
-	 * @param timeout  The amount of time the background process should try to check the syn result before terminating.
-	 * @param interval The amount of time between checks for sync completion in the background
+	 * @param timeout Timeout for the sync procedure.
+	 * @return A new sync object created by starting the sync procedure
+	 */
+	public static Result<MenigaSync> syncRealms(long timeout) {
+		return launchSync(null, timeout, null);
+	}
+
+	/**
+	 * Starts the accounts synchronization process and also returns a MenigaSync object
+	 * that contains further details.
+	 *
+     * @param timeout  The amount of time the background process should try to check if the sync has completed before terminating.
 	 * @return A new sync object.
 	 */
-	public static Result<MenigaSync> start(final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
-		Task<MenigaSync> task = getSyncStatus().getTask().continueWithTask(new Continuation<MenigaSyncStatus, Task<MenigaSync>>() {
+	public static Result<MenigaSync> syncRealms(long timeout, Interceptor<MenigaSync> onDone) {
+		return launchSync(null, timeout, onDone);
+	}
+
+	/**
+	 * Starts the accounts synchronization process for a specific realm and also returns a MenigaSync object
+	 * that contains further details.
+	 *
+	 * @param realmUserId  The id of the realm account user - a realm is a "department" in e.g. a bank. Most organizations (most often banks) have only one but some
+     *                     large organizations can have many realms (e.g. insurance, banking, credit cards and so on). This id identifies the user's realm user account.
+	 * @param timeout  The amount of time the background process should try to check if the sync has completed before terminating.
+	 * @return A new sync object.
+	 */
+    public static Result<MenigaSync> syncRealm(long realmUserId, long timeout, Interceptor<MenigaSync> onDone) {
+        return launchSync(realmUserId, timeout, onDone);
+    }
+
+	private static Result<MenigaSync> launchSync(final Long realmUserId, final long timeout, final Interceptor<MenigaSync> onDone) {
+    	Task<MenigaSync> task = getSyncStatus().getTask().continueWithTask(new Continuation<MenigaSyncStatus, Task<MenigaSync>>() {
 			@Override
 			public Task<MenigaSync> then(Task<MenigaSyncStatus> task) throws Exception {
 				if (task.isFaulted() || task.getResult().hasCompletedSyncSession) {
-					return apiOperator.startSync(timeout).getTask();
+					return apiOperator.startSync(realmUserId, timeout).getTask();
 				} else {
 					return fetch(task.getResult().getSynchronizationStatus().getSyncHistoryId()).getTask();
 				}
@@ -310,7 +344,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 							onDone.onFinished(null, true);
 						}
 					}
-				}, timeout, interval);
+				}, timeout, SYNC_CHECK_INTERVAL_MILLISECONDS);
 			}
 		});
 	}
