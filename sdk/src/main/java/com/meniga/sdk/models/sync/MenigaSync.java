@@ -254,7 +254,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * Starts the accounts synchronization process and also returns a MenigaSync object
 	 * that contains further details.
 	 *
-	 * @param timeout Timeout for the sync procedure, the actuall response callback might take longer
+	 * @param timeout Timeout for the sync procedure.
 	 * @return A new sync object created by starting the sync procedure
 	 */
 	public static Result<MenigaSync> start(long timeout) {
@@ -265,7 +265,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * Starts the accounts synchronization process and also returns a MenigaSync object
 	 * that contains further details.
 	 *
-	 * @param timeout  The amount of time the background process should try to check the syn result before terminating.
+     * @param timeout  The amount of time the background process should try to check if the sync has completed before terminating.
 	 * @param interval The amount of time between checks for sync completion in the background
 	 * @return A new sync object.
 	 */
@@ -274,15 +274,20 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	}
 
 	/**
-	 * Starts the accounts synchronization process and also returns a MenigaSync object
+	 * Starts the accounts synchronization process for a specific realm and also returns a MenigaSync object
 	 * that contains further details.
 	 *
-	 * @param realmUserId  The amount of time the background process should try to check the syn result before terminating.
-	 * @param timeout  The amount of time the background process should try to check the syn result before terminating.
-	 * @param interval The amount of time between checks for sync completion in the background
+	 * @param realmUserId  The id of the realm account user - a realm is a "department" in e.g. a bank. Most organizations (most often banks) have only one but some
+     *                     large organizations can have many realms (e.g. insurance, banking, credit cards and so on). This id identifies the user's realm user account.
+	 * @param timeout  The amount of time the background process should try to check if the sync has completed before terminating.
+	 * @param interval The amount of time between checks for sync completion in the background.
 	 * @return A new sync object.
 	 */
-	public static Result<MenigaSync> start(final Long realmUserId, final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
+    public static Result<MenigaSync> startForRealm(final long realmUserId, final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
+        return start(realmUserId, timeout, interval, onDone);
+    }
+
+	private static Result<MenigaSync> start(final Long realmUserId, final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
 		Task<MenigaSync> task = getSyncStatus().getTask().continueWithTask(new Continuation<MenigaSyncStatus, Task<MenigaSync>>() {
 			@Override
 			public Task<MenigaSync> then(Task<MenigaSyncStatus> task) throws Exception {
