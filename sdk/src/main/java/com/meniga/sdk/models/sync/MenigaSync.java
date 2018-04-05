@@ -22,6 +22,8 @@ import com.meniga.sdk.providers.tasks.Task;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSync implements Serializable, Parcelable, Cloneable {
+	private static final long SYNC_CHECK_INTERVAL_MILLISECONDS = 1000;
+
 	protected static MenigaSyncOperations apiOperator;
 
 	protected long syncHistoryId;
@@ -251,14 +253,30 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	}
 
 	/**
+	 * Use {@link #syncRealms(long)} instead.
+	 */
+	@Deprecated
+	public static Result<MenigaSync> start(long timeout) {
+		return launchSync(null, timeout, null);
+	}
+
+	/**
+	 * Use {@link #syncRealms(long, Interceptor)} instead.
+	 */
+	@Deprecated
+	public static Result<MenigaSync> start(final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
+		return launchSync(null, timeout, null);
+	}
+
+	/**
 	 * Starts the accounts synchronization process and also returns a MenigaSync object
 	 * that contains further details.
 	 *
 	 * @param timeout Timeout for the sync procedure.
 	 * @return A new sync object created by starting the sync procedure
 	 */
-	public static Result<MenigaSync> start(long timeout) {
-		return MenigaSync.start(null, timeout, 1000, null);
+	public static Result<MenigaSync> syncRealms(long timeout) {
+		return launchSync(null, timeout, null);
 	}
 
 	/**
@@ -266,11 +284,10 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * that contains further details.
 	 *
      * @param timeout  The amount of time the background process should try to check if the sync has completed before terminating.
-	 * @param interval The amount of time between checks for sync completion in the background
 	 * @return A new sync object.
 	 */
-	public static Result<MenigaSync> start(final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
-		return start(null, timeout, interval, onDone);
+	public static Result<MenigaSync> syncRealms(long timeout, Interceptor<MenigaSync> onDone) {
+		return launchSync(null, timeout, onDone);
 	}
 
 	/**
@@ -280,15 +297,14 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 	 * @param realmUserId  The id of the realm account user - a realm is a "department" in e.g. a bank. Most organizations (most often banks) have only one but some
      *                     large organizations can have many realms (e.g. insurance, banking, credit cards and so on). This id identifies the user's realm user account.
 	 * @param timeout  The amount of time the background process should try to check if the sync has completed before terminating.
-	 * @param interval The amount of time between checks for sync completion in the background.
 	 * @return A new sync object.
 	 */
-    public static Result<MenigaSync> startForRealm(final long realmUserId, final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
-        return start(realmUserId, timeout, interval, onDone);
+    public static Result<MenigaSync> syncRealm(long realmUserId, long timeout, Interceptor<MenigaSync> onDone) {
+        return launchSync(realmUserId, timeout, onDone);
     }
 
-	private static Result<MenigaSync> start(final Long realmUserId, final long timeout, final long interval, final Interceptor<MenigaSync> onDone) {
-		Task<MenigaSync> task = getSyncStatus().getTask().continueWithTask(new Continuation<MenigaSyncStatus, Task<MenigaSync>>() {
+	private static Result<MenigaSync> launchSync(final Long realmUserId, final long timeout, final Interceptor<MenigaSync> onDone) {
+    	Task<MenigaSync> task = getSyncStatus().getTask().continueWithTask(new Continuation<MenigaSyncStatus, Task<MenigaSync>>() {
 			@Override
 			public Task<MenigaSync> then(Task<MenigaSyncStatus> task) throws Exception {
 				if (task.isFaulted() || task.getResult().hasCompletedSyncSession) {
@@ -328,7 +344,7 @@ public class MenigaSync implements Serializable, Parcelable, Cloneable {
 							onDone.onFinished(null, true);
 						}
 					}
-				}, timeout, interval);
+				}, timeout, SYNC_CHECK_INTERVAL_MILLISECONDS);
 			}
 		});
 	}
