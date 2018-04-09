@@ -2,7 +2,6 @@ package com.meniga.sdk;
 
 import com.meniga.sdk.models.feed.MenigaFeed;
 import com.meniga.sdk.providers.tasks.Task;
-import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
 
@@ -10,8 +9,9 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 
 import okhttp3.HttpUrl;
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+
+import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -27,7 +27,7 @@ public class MenigaFeedTest {
 		MockWebServer server = new MockWebServer();
 
 		// Schedule some responses.
-		server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("feed.json")));
+		server.enqueue(mockResponse("feed.json"));
 
 		// Start the server.
 		server.start();

@@ -3,15 +3,15 @@ package com.meniga.sdk;
 import com.meniga.sdk.models.sync.MenigaSync;
 import com.meniga.sdk.models.user.ChallengeContentType;
 import com.meniga.sdk.providers.tasks.Task;
-import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 
 import okhttp3.HttpUrl;
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+
+import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -26,8 +26,8 @@ public class MenigaSyncTest {
 		MockWebServer server = new MockWebServer();
 
 		// Schedule some responses.
-		server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("syncstatus.json")));
-		server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("syncresponse.json")));
+		server.enqueue(mockResponse("syncstatus.json"));
+		server.enqueue(mockResponse("syncresponse.json"));
 
 		// Start the server.
 		server.start();

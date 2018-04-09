@@ -30,7 +30,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class MenigaChallengesTest {
 
 	@Test
-	public void testSerialization() throws IOException {
+	public void testSerialization() {
 		MenigaChallenge test = gson().get(0);
 		assertThat(test).isNotNull();
 

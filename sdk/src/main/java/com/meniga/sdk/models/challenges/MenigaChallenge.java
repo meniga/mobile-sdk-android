@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -425,12 +427,13 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	}
 
 	/**
-	 * Gets all challenges, expired, suggested and accepted alike but not expired ones
+	 * Gets all challenges - expired, suggested, accepted and disabled.
 	 *
 	 * @return A task that includes all the challenge objects that match the default parameters
 	 */
 	public static Result<List<MenigaChallenge>> fetch() {
-		return MenigaChallenge.fetch(true, false, false);
+		FetchChallengeFilter filter = new FetchChallengeFilter(true, false, false, true);
+		return fetch(filter);
 	}
 
 	/**
@@ -468,9 +471,23 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	 * Gets all challenges, both new ones and accepted ones, also excluded ones if includeExpired is set to true
 	 *
 	 * @return A task that includes all the challenge objects that match the query parameters
+	 *
+	 * @deprecated use {@link #fetch(FetchChallengeFilter)} instead
 	 */
+	@Deprecated
 	public static Result<List<MenigaChallenge>> fetch(boolean includeExpired, boolean excludeSuggested, boolean excludeAccepted) {
-		return MenigaChallenge.apiOperations.getChallenges(includeExpired, excludeSuggested, excludeAccepted);
+		FetchChallengeFilter filter = new FetchChallengeFilter(includeExpired, excludeSuggested, excludeAccepted, true);
+		return fetch(filter);
+	}
+
+	/**
+	 * Gets all challenges matching the filter provided.
+	 *
+	 * @param filter query filter
+	 * @return A task that includes all the challenge objects that match the query parameters
+	 */
+	public static Result<List<MenigaChallenge>> fetch(FetchChallengeFilter filter) {
+		return MenigaChallenge.apiOperations.getChallenges(filter);
 	}
 
 	/**
@@ -525,6 +542,14 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 		});
 	}
 
+	public Result<Void> disable() {
+		return MenigaChallenge.apiOperations.disableChallenge(id);
+	}
+
+	public Result<Void> enable() {
+		return MenigaChallenge.apiOperations.enableChallenge(id);
+	}
+
 	/**
 	 * Creates a new custom challenge object with a default value for iconId
 	 *
@@ -536,7 +561,10 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	 * @param targetAmount The budget target amount for the challenge
 	 * @param color        Color of the challenge being created
 	 * @return A task containing the newly created custom challenge
+	 *
+	 * @deprecated use {@link #create(NewChallenge)} instead
 	 */
+	@Deprecated
 	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
 	                                             DateTime endDate, List<Long> categoryIds,
 	                                             MenigaDecimal targetAmount, CustomChallengeColor color) {
@@ -554,7 +582,10 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	 * @param targetAmount The budget target amount for the challenge
 	 * @param color        Color of the challenge being created
 	 * @return A task containing the newly created custom challenge
+	 *
+	 * @deprecated use {@link #create(NewChallenge)} instead
 	 */
+	@Deprecated
 	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
 												 DateTime endDate, List<Long> categoryIds,
 												 MenigaDecimal targetAmount, CustomChallengeColor color, ChallengeInterval interval) {
@@ -573,7 +604,10 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	 * @param iconId       Id of the icon associated with the challenge
 	 * @param color        Color of the challenge being created
 	 * @return A task containing the newly created custom challenge
+	 *
+	 * @deprecated use {@link #create(NewChallenge)} instead
 	 */
+	@Deprecated
 	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
 	                                             DateTime endDate, List<Long> categoryIds,
 	                                             MenigaDecimal targetAmount, Long iconId, CustomChallengeColor color) {
@@ -593,22 +627,35 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	 * @param color        Color of the challenge being created
 	 * @param interval     The interval between repeats, e.g. monthly, annually etc.
 	 * @return A task containing the newly created custom challenge
+	 *
+	 * @deprecated use {@link #create(NewChallenge)} instead
 	 */
+	@Deprecated
 	public static Result<MenigaChallenge> create(String title, String description, DateTime startDate,
 												 DateTime endDate, List<Long> categoryIds,
 												 MenigaDecimal targetAmount, Long iconId, CustomChallengeColor color,
 												 ChallengeInterval interval) {
-		return apiOperations.createChallenge(
+		NewChallenge challenge = new NewChallenge(
 				title,
 				description,
 				startDate,
 				endDate,
-				categoryIds,
-				targetAmount,
-				iconId,
+				null,
+				new CategoryDefinition.CategoryList(categoryIds),
 				color,
-				interval
-		);
+				targetAmount,
+				interval);
+		return apiOperations.createChallenge(challenge);
+	}
+
+	/**
+	 * Creates a new custom challenge object with a recurring interval
+	 *
+	 * @param challenge new challenge data
+	 * @return A task containing the newly created custom challenge
+	 */
+	public static Result<MenigaChallenge> create(@Nonnull NewChallenge challenge) {
+		return apiOperations.createChallenge(challenge);
 	}
 
 	/**

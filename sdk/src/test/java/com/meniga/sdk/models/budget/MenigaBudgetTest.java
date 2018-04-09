@@ -7,7 +7,6 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.providers.tasks.Task;
-import com.meniga.sdk.utils.FileImporter;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
@@ -23,6 +22,7 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
+import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -62,7 +62,7 @@ public class MenigaBudgetTest {
 
     @Test
     public void testFetchBudgets() throws Exception {
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgets.json")));
+        server.enqueue(mockResponse("budgets.json"));
         FetchBudgetsFilter parameters = new FetchBudgetsFilter();
         parameters.setIds(asList(1L, 2L));
         parameters.setAccountIds(asList(10L, 20L));
@@ -78,7 +78,7 @@ public class MenigaBudgetTest {
 
     @Test
     public void testCreatePlanningBudget() throws Exception {
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
+        server.enqueue(mockResponse("budget.json"));
 
         MenigaBudget budget = createMenigaBudgetTask(BudgetType.PLANNING).getResult();
 
@@ -97,7 +97,7 @@ public class MenigaBudgetTest {
 
     @Test
     public void testCreateBudget() throws Exception {
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
+        server.enqueue(mockResponse("budget.json"));
 
         MenigaBudget budget = createMenigaBudgetTask(BudgetType.BUDGET).getResult();
 
@@ -126,7 +126,7 @@ public class MenigaBudgetTest {
 
     @Test
     public void testFetchSingleBudget() throws Exception {
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
+        server.enqueue(mockResponse("budget.json"));
         FetchBudgetFilter filter = new FetchBudgetFilter(1L);
         filter.setId(1L);
         filter.setCategoryIds(asList(1L, 2L));
@@ -147,7 +147,7 @@ public class MenigaBudgetTest {
     @Test
     public void testUpdateSingleBudget() throws Exception {
         MenigaBudget budget = prepareMenigaPlanningBudget();
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budget.json")));
+        server.enqueue(mockResponse("budget.json"));
         BudgetUpdate parameters = new BudgetUpdate();
         parameters.setName("New name");
         parameters.setDescription("New description");
@@ -177,7 +177,7 @@ public class MenigaBudgetTest {
 
     @Test
     public void testFetchEntries() throws Exception {
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentries.json")));
+        server.enqueue(mockResponse("budgetentries.json"));
 
         Task<List<MenigaBudgetEntry>> entriesTask = MenigaBudgetEntry.fetch(1).getTask();
         entriesTask.waitForCompletion();
@@ -190,7 +190,7 @@ public class MenigaBudgetTest {
 
     @Test
     public void testCreateBudgetEntry() throws Exception {
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentries.json")));
+        server.enqueue(mockResponse("budgetentries.json"));
         NewBudgetEntry parameters = new NewBudgetEntry();
         parameters.setCategoryIds(asList(1L, 2L));
         parameters.setStartDate(DateTime.parse("2018-01-01"));
@@ -227,7 +227,7 @@ public class MenigaBudgetTest {
 
     @Test
     public void testGetSingleBudgetEntry() throws Exception {
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentry.json")));
+        server.enqueue(mockResponse("budgetentry.json"));
 
         Task<MenigaBudgetEntry> task = MenigaBudgetEntry.fetch(1L, 2L).getTask();
         task.waitForCompletion();
@@ -244,7 +244,7 @@ public class MenigaBudgetTest {
         BudgetEntryUpdate parameters = new BudgetEntryUpdate(DateTime.parse("2016-01-08"), asList(1L, 2L));
         parameters.setTargetAmount(new MenigaDecimal(42));
         parameters.setEndDate(DateTime.parse("2019-11-01"));
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentry.json")));
+        server.enqueue(mockResponse("budgetentry.json"));
 
         Task<MenigaBudgetEntry> task = menigaBudgetEntry.update(parameters).getTask();
         task.waitForCompletion();
@@ -275,7 +275,7 @@ public class MenigaBudgetTest {
     }
 
     private Task<List<MenigaBudgetEntry>> createMenigaBudgetEntryTask() throws InterruptedException, IOException {
-        server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("budgetentries.json")));
+        server.enqueue(mockResponse("budgetentries.json"));
         NewBudgetEntry parameters = new NewBudgetEntry();
         parameters.setTargetAmount(MenigaDecimal.ZERO);
         parameters.setStartDate(DateTime.parse("2016-01-08"));
