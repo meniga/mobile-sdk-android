@@ -15,10 +15,8 @@ Developers for institutions implementing the Meniga REST API can use this sdk to
 ```
 repositories {
   jcenter()
-  
-  // Other
-  mavenCentral()
-  maven { url "https://dl.bintray.com/meniga/android" }
+  // or: mavenCentral()
+  // or: maven { url "https://dl.bintray.com/meniga/android" }
 }
 
 dependencies {
@@ -33,9 +31,7 @@ For the latest release version code, check out https://github.com/meniga/mobile-
 ```
 repositories {
   maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
-  
-  // Other
-  maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+  // or: maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 dependencies {

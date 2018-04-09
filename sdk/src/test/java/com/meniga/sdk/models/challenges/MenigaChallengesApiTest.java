@@ -18,6 +18,8 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -92,7 +94,7 @@ public class MenigaChallengesApiTest {
 
     @Test
     public void shouldDeleteChallenge() throws InterruptedException {
-        MenigaChallenge challenge = fetchChallenges().get(0);
+        MenigaChallenge challenge = fetchChallenge("e9b6101a-49eb-4d25-98e4-7b48dab90d50");
         server.enqueue(new MockResponse().setResponseCode(204));
 
         Task<Void> task = challenge.delete().getTask();
@@ -122,7 +124,7 @@ public class MenigaChallengesApiTest {
 
     @Test
     public void shouldUpdateChallenge() throws InterruptedException {
-        MenigaChallenge challenge = fetchChallenges().get(0);
+        MenigaChallenge challenge = fetchChallenge("e9b6101a-49eb-4d25-98e4-7b48dab90d50");
         server.enqueue(mockResponse("challenge.json"));
 
         challenge.title = "New title";
@@ -144,7 +146,7 @@ public class MenigaChallengesApiTest {
 
     @Test
     public void shouldAcceptChallenge() throws InterruptedException {
-        MenigaChallenge challenge = fetchChallenges().get(0);
+        MenigaChallenge challenge = fetchChallenge("e9b6101a-49eb-4d25-98e4-7b48dab90d50");
         server.enqueue(mockResponse("challenge.json"));
 
         Task<MenigaChallenge> task = challenge.accept(new MenigaDecimal(1)).getTask();
@@ -160,7 +162,7 @@ public class MenigaChallengesApiTest {
 
     @Test
     public void shouldDisableChallenge() throws InterruptedException {
-        MenigaChallenge challenge = fetchChallenges().get(0);
+        MenigaChallenge challenge = fetchChallenge("e9b6101a-49eb-4d25-98e4-7b48dab90d50");
         server.enqueue(new MockResponse().setResponseCode(204));
 
         Task<Void> task = challenge.disable().getTask();
@@ -174,7 +176,7 @@ public class MenigaChallengesApiTest {
 
     @Test
     public void shouldEnableChallenge() throws InterruptedException {
-        MenigaChallenge challenge = fetchChallenges().get(0);
+        MenigaChallenge challenge = fetchChallenge("e9b6101a-49eb-4d25-98e4-7b48dab90d50");
         server.enqueue(new MockResponse().setResponseCode(204));
 
         Task<Void> task = challenge.enable().getTask();
@@ -188,7 +190,7 @@ public class MenigaChallengesApiTest {
 
     @Test
     public void shouldFetchChallengeHistory() throws InterruptedException {
-        MenigaChallenge challenge = fetchChallenges().get(0);
+        MenigaChallenge challenge = fetchChallenge("e9b6101a-49eb-4d25-98e4-7b48dab90d50");
         server.enqueue(mockResponse("challenges.json"));
 
         Task<List<MenigaChallenge>> task = challenge.history(1, 8).getTask();
@@ -200,11 +202,40 @@ public class MenigaChallengesApiTest {
         assertThat(task.getResult()).hasSize(8);
     }
 
+    @Test
+    public void shouldRefreshChallenge() throws InterruptedException {
+        MenigaChallenge challenge = fetchChallenge("e9b6101a-49eb-4d25-98e4-7b48dab90d50");
+        server.enqueue(mockResponse("challenge.json"));
+
+        challenge.title = "Some new title";
+        Task<MenigaChallenge> task = challenge.refresh().getTask();
+        task.waitForCompletion();
+
+        RecordedRequest recordedRequest = server.takeRequest();
+        assertThat(recordedRequest.getMethod()).isEqualTo("GET");
+        assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges/e9b6101a-49eb-4d25-98e4-7b48dab90d50");
+        MenigaChallenge result = task.getResult();
+        assertThat(result.title).isEqualTo("Eat like a Boss");
+    }
+
     private List<MenigaChallenge> fetchChallenges() throws InterruptedException {
         server.enqueue(mockResponse("challenges.json"));
         Task<List<MenigaChallenge>> task = MenigaChallenge.fetch().getTask();
         task.waitForCompletion();
         server.takeRequest();
         return task.getResult();
+    }
+
+    private MenigaChallenge fetchChallenge(final String id) throws InterruptedException {
+        return fetchChallenges()
+                .stream()
+                .filter(new Predicate<MenigaChallenge>() {
+                    @Override
+                    public boolean test(MenigaChallenge menigaChallenge) {
+                        return menigaChallenge.id.equals(UUID.fromString(id));
+                    }
+                })
+                .findFirst()
+                .get();
     }
 }

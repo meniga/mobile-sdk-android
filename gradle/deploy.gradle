@@ -4,6 +4,11 @@ ext {
             System.getenv("BINTRAY_CREDENTIALS") ?: "")
             .split(":")
 
+    sonatypeCredentials = (project.hasProperty("sonatype.credentials") ?
+            project.property("sonatype.credentials") :
+            System.getenv("SONATYPE_CREDENTIALS") ?: "")
+            .split(":")
+
     isSnapshot = project.version.toString().endsWith("-SNAPSHOT")
 }
 

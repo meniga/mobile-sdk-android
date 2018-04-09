@@ -11,7 +11,7 @@ bintray {
         desc = information.description
         websiteUrl = information.url
         issueTrackerUrl = information.issueTrackerUrl
-        vcsUrl = information.
+        vcsUrl = information.scmUrl
         licenses = [information.licenseName]
         publicDownloadNumbers = true
         githubRepo = "meniga/mobile-sdk-android"
@@ -21,6 +21,12 @@ bintray {
             gpg {
                 sign = true
                 passphrase = System.getenv("SIGNING_PASSWORD")
+            }
+            mavenCentralSync {
+                sync = true
+                user = sonatypeCredentials.first()
+                password = sonatypeCredentials.last()
+                close = '1'
             }
         }
     }

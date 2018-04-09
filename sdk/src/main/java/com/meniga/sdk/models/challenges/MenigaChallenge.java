@@ -468,7 +468,11 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	}
 
 	/**
-	 * Gets all challenges, both new ones and accepted ones, also excluded ones if includeExpired is set to true
+	 * Gets challenges based on provided parameters.
+	 *
+	 * @param includeExpired if true includes expired challenges
+	 * @param excludeSuggested if true excludes suggested challenges
+	 * @param excludeAccepted if true excludes accepted challenges
 	 *
 	 * @return A task that includes all the challenge objects that match the query parameters
 	 *
@@ -476,7 +480,7 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	 */
 	@Deprecated
 	public static Result<List<MenigaChallenge>> fetch(boolean includeExpired, boolean excludeSuggested, boolean excludeAccepted) {
-		FetchChallengeFilter filter = new FetchChallengeFilter(includeExpired, excludeSuggested, excludeAccepted, true);
+		FetchChallengeFilter filter = new FetchChallengeFilter(includeExpired, excludeSuggested, excludeAccepted, false);
 		return fetch(filter);
 	}
 
@@ -507,8 +511,7 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	 * @return A task indicating if the operation was successful or not
 	 */
 	public static Result<Void> delete(UUID id) {
-		Result<Void> task = MenigaChallenge.apiOperations.deleteChallenge(id);
-		return task;
+        return MenigaChallenge.apiOperations.deleteChallenge(id);
 	}
 
 	/**
@@ -517,8 +520,7 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 	 * @return A task indicating if the operation was successful or not
 	 */
 	public Result<Void> delete() {
-		Result<Void> task = MenigaChallenge.apiOperations.deleteChallenge(this.getId());
-		return task;
+        return MenigaChallenge.apiOperations.deleteChallenge(this.getId());
 	}
 
 	/**
@@ -542,10 +544,20 @@ public class MenigaChallenge implements Serializable, Cloneable, Parcelable {
 		});
 	}
 
+    /**
+     * Pauses previously accepted challenge.
+     *
+     * @return A Task of type void, the task will have an error and be marked as failed if it is not successful
+     */
 	public Result<Void> disable() {
 		return MenigaChallenge.apiOperations.disableChallenge(id);
 	}
 
+    /**
+     * Resumes previously disabled challenge.
+     *
+     * @return A Task of type void, the task will have an error and be marked as failed if it is not successful
+     */
 	public Result<Void> enable() {
 		return MenigaChallenge.apiOperations.enableChallenge(id);
 	}
