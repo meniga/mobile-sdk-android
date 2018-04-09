@@ -3,7 +3,6 @@ package com.meniga.sdk.webservices;
 import com.meniga.sdk.helpers.KeyVal;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
-import com.meniga.sdk.models.challenges.MenigaChallenge;
 import com.meniga.sdk.models.feed.MenigaFeed;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
 import com.meniga.sdk.models.feed.MenigaScheduledEvent;
@@ -39,8 +38,6 @@ import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserMetaData;
 import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
-import com.meniga.sdk.webservices.requests.AcceptChallenge;
-import com.meniga.sdk.webservices.requests.CreateChallenge;
 import com.meniga.sdk.webservices.requests.CreateComment;
 import com.meniga.sdk.webservices.requests.CreateNetWorthAccount;
 import com.meniga.sdk.webservices.requests.CreateNetWorthBalanceHistory;
@@ -60,7 +57,6 @@ import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
 import com.meniga.sdk.webservices.requests.SplitTransaction;
 import com.meniga.sdk.webservices.requests.StartRealmSync;
 import com.meniga.sdk.webservices.requests.StartSync;
-import com.meniga.sdk.webservices.requests.UpdateChallenge;
 import com.meniga.sdk.webservices.requests.UpdateComment;
 import com.meniga.sdk.webservices.requests.UpdateHistoryBalance;
 import com.meniga.sdk.webservices.requests.UpdateSplits;
@@ -412,30 +408,6 @@ public interface MenigaAPI {
 
 	@DELETE(APIConst.URL_UPCOMING + APIConst.UPCOMING_RECURRINC + "/{id}")
 	Call<Void> deleteUpcomingSeries(@Path("id") long id);
-
-	// --
-	// Challenges
-	// --
-	@GET(APIConst.URL_CHALLENGES)
-	Call<List<MenigaChallenge>> getChallenges(@QueryMap Map<String, String> query);
-
-	@GET(APIConst.URL_CHALLENGES + "/{id}")
-	Call<MenigaChallenge> getChallenge(@Path("id") String id);
-
-	@POST(APIConst.URL_CHALLENGES + "/{id}" + APIConst.CHALLENGES_ACCEPT)
-	Call<MenigaChallenge> acceptChallenge(@Body AcceptChallenge req, @Path("id") String id);
-
-	@DELETE(APIConst.URL_CHALLENGES + "/{id}")
-	Call<Void> deleteChallenge(@Path("id") String id);
-
-	@POST(APIConst.URL_CHALLENGES)
-	Call<MenigaChallenge> createChallenge(@Body CreateChallenge req);
-
-	@PUT(APIConst.URL_CHALLENGES + "/{id}")
-	Call<Void> updateChallenge(@Path("id") String id, @Body UpdateChallenge req);
-
-	@GET(APIConst.URL_CHALLENGES + "/{id}" + APIConst.CHALLENGES_HISTORY)
-	Call<List<MenigaChallenge>> getChallengeHistory(@Path("id") String id, @QueryMap Map<String, String> query);
 
 	// --
 	// Organizations

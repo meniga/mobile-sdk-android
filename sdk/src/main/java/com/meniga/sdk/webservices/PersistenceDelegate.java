@@ -64,11 +64,20 @@ import com.meniga.sdk.webservices.budget.GetBudgets;
 import com.meniga.sdk.webservices.budget.UpdateBudget;
 import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
 import com.meniga.sdk.webservices.budget.UpdateBudgetRules;
+import com.meniga.sdk.webservices.challenge.AcceptChallenge;
+import com.meniga.sdk.webservices.challenge.ChallengeService;
+import com.meniga.sdk.webservices.challenge.CreateChallenge;
+import com.meniga.sdk.webservices.challenge.DeleteChallenge;
+import com.meniga.sdk.webservices.challenge.GetChallenge;
+import com.meniga.sdk.webservices.challenge.GetChallengeHistory;
+import com.meniga.sdk.webservices.challenge.GetChallenges;
+import com.meniga.sdk.webservices.challenge.UpdateChallenge;
 import com.meniga.sdk.webservices.requests.*;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -681,37 +690,45 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.CHALLENGES).getChallenges(req.toQueryMap()));
+		return persist(req, getService(ChallengeService.class).getChallenges(req.toQueryMap()));
 	}
 
 	public Result<MenigaChallenge> getChallenge(GetChallenge req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.CHALLENGES).getChallenge(req.id.toString()));
+		return persist(req, getService(ChallengeService.class).getChallenge(req.id.toString()));
 	}
 
 	public Result<MenigaChallenge> acceptChallenge(AcceptChallenge req) {
-		return persist(req, getClient(Service.CHALLENGES).acceptChallenge(req, req.id.toString()));
+		return persist(req, getService(ChallengeService.class).acceptChallenge(req, req.id.toString()));
+	}
+
+	public Result<Void> disableChallenge(UUID id) {
+		return call(getService(ChallengeService.class).disableChallenge(id.toString()));
+	}
+
+	public Result<Void> enableChallenge(UUID id) {
+		return call(getService(ChallengeService.class).enableChallenge(id.toString()));
 	}
 
 	public Result<Void> deleteChallenge(DeleteChallenge req) {
-		return persist(req, getClient(Service.CHALLENGES).deleteChallenge(req.id.toString()));
+		return persist(req, getService(ChallengeService.class).deleteChallenge(req.id.toString()));
 	}
 
 	public Result<MenigaChallenge> createChallenge(CreateChallenge req) {
-		return persist(req, getClient(Service.CHALLENGES).createChallenge(req));
+		return persist(req, getService(ChallengeService.class).createChallenge(req));
 	}
 
 	public Result<Void> updateChallenge(UpdateChallenge req) {
-		return persist(req, getClient(Service.CHALLENGES).updateChallenge(req.id.toString(), req));
+		return persist(req, getService(ChallengeService.class).updateChallenge(req.id.toString(), req));
 	}
 
 	public Result<List<MenigaChallenge>> getChallengeHistory(GetChallengeHistory req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.CHALLENGES).getChallengeHistory(req.id.toString(), req.toQueryMap()));
+		return persist(req, getService(ChallengeService.class).getChallengeHistory(req.id.toString(), req.toQueryMap()));
 	}
 
 	// --

@@ -8,7 +8,6 @@ import com.meniga.sdk.models.transactions.SeriesSelector;
 import com.meniga.sdk.models.transactions.TransactionsFilter;
 import com.meniga.sdk.models.transactions.enums.TimeResolution;
 import com.meniga.sdk.providers.tasks.Task;
-import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
 
@@ -21,6 +20,8 @@ import java.util.List;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+
+import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -35,7 +36,7 @@ public class MenigaTransactionsTest {
 		MockWebServer server = new MockWebServer();
 
 		// Schedule some responses.
-		server.enqueue(new MockResponse().setBody(FileImporter.getJsonFileFromRaw("transactionsPage.json")));
+		server.enqueue(mockResponse("transactionsPage.json"));
 
 		// Start the server.
 		server.start();
@@ -61,7 +62,7 @@ public class MenigaTransactionsTest {
 		MockWebServer server = new MockWebServer();
 
 		// Schedule some responses.
-		MockResponse mockResponse = new MockResponse().setBody(FileImporter.getJsonFileFromRaw("transactionseries.json"))
+		MockResponse mockResponse = mockResponse("transactionseries.json")
 				.addHeader("Content-Type", "application/json; charset=utf-8")
 				.addHeader("Cache-Control", "no-cache");
 		server.enqueue(mockResponse);

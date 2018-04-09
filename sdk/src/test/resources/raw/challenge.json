@@ -1,0 +1,19 @@
+{
+  "data": {
+    "id": "e9b6101a-49eb-4d25-98e4-7b48dab90d50",
+    "title": "Eat like a Boss",
+    "description": "You can't handle the truth",
+    "type": "SuggestedSpending",
+    "startDate": "2018-03-01T00:00:00.000Z",
+    "endDate": "2018-04-01T00:00:00.000Z",
+    "accepted": true,
+    "acceptedDate": "2018-04-09T09:20:44.094Z",
+    "typeData": {},
+    "iconUrl": "string",
+    "topicId": 0,
+    "parentTopicId": 0,
+    "parentStartDate": "2018-04-09T09:20:44.094Z",
+    "parentEndDate": "2018-04-09T09:20:44.094Z",
+    "enabled": true
+  }
+}

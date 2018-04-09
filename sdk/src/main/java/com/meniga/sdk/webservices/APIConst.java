@@ -78,11 +78,6 @@ class APIConst {
 	static final String URL_UPCOMING = "upcoming";
 	static final String UPCOMING_RECURRINC = "/recurring";
 
-	// Challenges
-	static final String URL_CHALLENGES = "challenges";
-	static final String CHALLENGES_ACCEPT = "/accept";
-	static final String CHALLENGES_HISTORY = "/history";
-
 	// Terms
 	static final String URL_TERMS = "terms";
 	static final String TYPES = "/types";

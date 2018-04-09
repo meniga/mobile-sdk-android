@@ -26,6 +26,7 @@ import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
 import static com.meniga.sdk.models.transactions.MenigaTransactionPageAssertions.assertThat;
+import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.hamcrest.Matchers.equalTo;
@@ -134,9 +135,5 @@ public class MenigaTransactionApiSpec {
                 return expectedPath.equals(value.getPath());
             }
         };
-    }
-
-    private MockResponse mockResponse(String path) throws IOException {
-        return new MockResponse().setBody(FileImporter.getJsonFileFromRaw(path));
     }
 }

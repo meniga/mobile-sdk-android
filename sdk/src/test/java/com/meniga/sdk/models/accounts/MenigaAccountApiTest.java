@@ -11,7 +11,6 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.models.accounts.enums.AccountBalanceHistorySort;
 import com.meniga.sdk.models.accounts.enums.AccountCategory;
 import com.meniga.sdk.providers.tasks.Task;
-import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
 
@@ -20,7 +19,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 import okhttp3.HttpUrl;
@@ -28,6 +26,7 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
+import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -232,9 +231,5 @@ public class MenigaAccountApiTest {
         assertThat(request.getMethod()).isEqualTo("GET");
         MenigaAccount result = task.getResult();
         assertThat(account).isNotEqualTo(result);
-    }
-
-    private MockResponse mockResponse(String path) throws IOException {
-        return new MockResponse().setBody(FileImporter.getJsonFileFromRaw(path));
     }
 }
