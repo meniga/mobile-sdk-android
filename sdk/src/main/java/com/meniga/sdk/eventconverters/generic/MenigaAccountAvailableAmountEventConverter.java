@@ -30,7 +30,7 @@ public class MenigaAccountAvailableAmountEventConverter implements EventBaseConv
 		MenigaAccountEventData data = gson.fromJson(element.getAsJsonObject().get(MESSAGE_DATA), MenigaAccountEventData.class);
 
 		MenigaAccountEvent event = gson.fromJson(element, MenigaAccountEvent.class);
-		event.setMessageData(data);
+		event.messageData = data;
 		return event;
 	}
 
