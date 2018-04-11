@@ -22,7 +22,6 @@ public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializa
 	protected DateTime date;
 	protected String title;
 	protected String body;
-
 	protected UserEventType eventTypeIdentifier;
 	protected String topicName;
 
@@ -134,6 +133,8 @@ public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializa
 		dest.writeSerializable(this.date);
 		dest.writeString(this.title);
 		dest.writeString(this.body);
+		dest.writeInt(this.eventTypeIdentifier == null ? -1 : this.eventTypeIdentifier.ordinal());
+		dest.writeString(this.topicName);
 	}
 
 	protected MenigaAccountEvent(Parcel in) {
@@ -144,6 +145,9 @@ public class MenigaAccountEvent implements MenigaFeedItem, Parcelable, Serializa
 		this.date = (DateTime) in.readSerializable();
 		this.title = in.readString();
 		this.body = in.readString();
+		int tmpEventTypeIdentifier = in.readInt();
+		this.eventTypeIdentifier = tmpEventTypeIdentifier == -1 ? null : UserEventType.values()[tmpEventTypeIdentifier];
+		this.topicName = in.readString();
 	}
 
 	public static final Creator<MenigaAccountEvent> CREATOR = new Creator<MenigaAccountEvent>() {
