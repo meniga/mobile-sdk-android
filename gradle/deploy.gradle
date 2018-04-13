@@ -16,10 +16,10 @@ apply from: "$rootDir/gradle/jfrog-artifactory.gradle"
 apply from: "$rootDir/gradle/jfrog-bintray.gradle"
 apply from: "$rootDir/gradle/sonatype.gradle"
 
-task publishToJFrog() {
-    dependsOn isSnapshot ? artifactoryPublish : bintrayUpload
+task publishSnapshot() {
+    if (isSnapshot) { dependsOn "artifactoryPublish", "publishAarPublicationToMavenRepository"  }
 }
 
-task publishToSonatype() {
-    if (isSnapshot) dependsOn "publishAarPublicationToMavenRepository"
+task publishRelease() {
+    if (!isSnapshot) { dependsOn "bintrayUpload" }
 }

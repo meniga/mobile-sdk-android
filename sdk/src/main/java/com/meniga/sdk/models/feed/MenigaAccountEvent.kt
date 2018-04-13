@@ -1,5 +1,6 @@
 package com.meniga.sdk.models.feed
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.meniga.sdk.models.userevents.enums.UserEventType
@@ -12,6 +13,7 @@ import java.io.Serializable
  * Created by agustk on 11.4.2018.
  */
 @Parcelize
+@SuppressLint("ParcelCreator")
 data class MenigaAccountEvent(
         @JvmField val id: Long,
         @SerializedName("topicId") @JvmField val accountId: Long,
