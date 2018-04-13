@@ -408,7 +408,8 @@
     }
   ],
   "meta": {
-    "actualEndDate": null,
-    "hasMoreData": true
+    "actualEndDate": "2018-02-01T00:00:00.000",
+    "hasMoreData": true,
+    "totalCount": 12
   }
 }

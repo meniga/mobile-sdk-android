@@ -3,6 +3,7 @@
  */
 package com.meniga.sdk.models.accounts
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
@@ -14,6 +15,7 @@ import java.io.Serializable
  * @param name The name of the authorization type.
  */
 @Parcelize
+@SuppressLint("ParcelCreator")
 data class MenigaAuthorizationType(
         val id: Long = 0,
         val name: String? = null

@@ -14,7 +14,7 @@ public interface MenigaFeedOperations {
 
 	Result<MenigaFeed> getFeed(DateTime from, DateTime to);
 
-	Result<MenigaFeed> getFeed(DateTime from, DateTime to, int skip, int take);
+	Result<MenigaFeed> getFeed(DateTime from, DateTime to, int page, int itemsPerPage);
 
     Result<MenigaScheduledEvent> getScheduledEvent(long id);
 }

@@ -3,6 +3,7 @@
  */
 package com.meniga.sdk.models.accounts
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.meniga.sdk.models.accounts.enums.AccountCategory
 import kotlinx.android.parcel.Parcelize
@@ -21,6 +22,7 @@ import java.io.Serializable
  * @param isCashbackEnabled True if cashback can be calculated for the account.
  */
 @Parcelize
+@SuppressLint("ParcelCreator")
 data class MenigaAccountType(
         val id: Long,
         val name: String?,
