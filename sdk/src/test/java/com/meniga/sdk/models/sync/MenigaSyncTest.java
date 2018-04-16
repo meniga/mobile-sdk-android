@@ -1,11 +1,10 @@
-package com.meniga.sdk.models.user;
+package com.meniga.sdk.models.sync;
 
 import android.os.Parcel;
 
 import com.google.gson.Gson;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
-import com.meniga.sdk.models.sync.MenigaSync;
 import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
@@ -13,7 +12,6 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-
 
 import java.io.IOException;
 
@@ -27,7 +25,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class MenigaSyncTest {
 
 	@Test
-	public void testSerialization() throws IOException {
+	public void testSerialization() {
 		MenigaSync items = this.gson();
 
 		assertThat(items).isNotNull();
@@ -49,7 +47,7 @@ public class MenigaSyncTest {
 	}
 
 	@Test
-	public void testParcel() throws IOException {
+	public void testParcel() {
 		MenigaSync syncResponse = this.gson();
 
 		// Obtain a Parcel object and write the parcelable object to it:
@@ -60,7 +58,7 @@ public class MenigaSyncTest {
 		parcel.setDataPosition(0);
 
 		// Reconstruct object from parcel and asserts:
-		MenigaSync createdFromParcel = MenigaSync.CREATOR.createFromParcel(parcel);
+		MenigaSync createdFromParcel = (MenigaSync) MenigaSync.CREATOR.createFromParcel(parcel);
 		Assert.assertTrue(syncResponse.equals(createdFromParcel));
 
 		parcel.recycle();
