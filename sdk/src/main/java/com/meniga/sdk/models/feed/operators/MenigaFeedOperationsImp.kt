@@ -7,13 +7,9 @@ import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.helpers.Result
 import com.meniga.sdk.helpers.toSkipAndTake
 import com.meniga.sdk.models.feed.MenigaFeed
-import com.meniga.sdk.models.feed.MenigaFeedItem
 import com.meniga.sdk.models.feed.MenigaScheduledEvent
-import com.meniga.sdk.models.sync.MenigaSync
-import com.meniga.sdk.webservices.requests.GetEvent
 import com.meniga.sdk.webservices.requests.GetFeed
 import com.meniga.sdk.webservices.requests.GetScheduledEvent
-
 import org.joda.time.DateTime
 
 internal class MenigaFeedOperationsImp : MenigaFeedOperations {
@@ -36,7 +32,7 @@ internal class MenigaFeedOperationsImp : MenigaFeedOperations {
         val req = GetFeed()
         req.dateFrom = from
         req.dateTo = to
-        toSkipAndTake(page, itemsPerPage).also {
+        toSkipAndTake(page, itemsPerPage).let {
             req.skip = it.first
             req.take = it.second
         }

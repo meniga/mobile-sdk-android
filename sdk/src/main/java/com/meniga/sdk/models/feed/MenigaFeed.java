@@ -236,7 +236,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 * Fetches and merges items from the feed into this feed object by going numDays into the past
 	 *
 	 * @param numDays Number of days into the past, beyond the current from date, to fetch new feed data
-	 * @return A boolean indicating that the request was successful
+	 * @return A feed object containing transactions, user events etc.
 	 */
 	public Result<MenigaFeed> appendDays(final int numDays) {
 		DateTime to = from.minusMillis(1);
@@ -266,7 +266,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	/**
 	 * Appends all the transactions from the next page. Use hasMorePages to find out if you are on the last page
 	 *
-	 * @return A boolean indicating that the request was successful
+	 * @return A feed object containing a next page
 	 */
 	public Result<MenigaFeed> appendNextPage() {
 		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page + 1, itemsPerPage);
@@ -286,7 +286,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	/**
 	 * Replaces all the items with the items from the next page. Use hasMorePages to find out if you are on the last page
 	 *
-	 * @return A boolean indicating that the request was successful
+	 * @return A feed object containing a next page
 	 */
 	public Result<MenigaFeed> nextPage() {
 		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page + 1, itemsPerPage);
@@ -307,7 +307,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	/**
 	 * Replaces all the items with the items from the previous page. Use getPage to find out if you are on the first page
 	 *
-	 * @return A boolean indicating that the request was successful
+	 * @return A feed object containing a previous page
 	 */
 	public Result<MenigaFeed> prevPage() {
 		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page - 1, itemsPerPage);
@@ -316,9 +316,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 			public void onFinished(MenigaFeed result, boolean failed) {
 				if (!failed && result != null) {
 					clear();
-					for (MenigaFeedItem item : result) {
-						add(item);
-					}
+					addAll(result);
 					totalCount = result.totalCount;
 					setActualEndDate(result.actualEndDate);
 					page--;

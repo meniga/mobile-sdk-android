@@ -39,6 +39,14 @@ object MenigaFeedApiTest : Spek({
         server.shutdown()
     }
 
+    fun fetchFeed(): MenigaFeed {
+        server.enqueue(mockResponse("feed.json"))
+        val task = MenigaFeed.fetch(dateFrom, dateTo, 1, 10).task
+        task.waitForCompletion()
+        server.takeRequest()
+        return task.result
+    }
+
     on("fetching feed in date range") {
         server.enqueue(mockResponse("feed.json"))
 
@@ -59,7 +67,7 @@ object MenigaFeedApiTest : Spek({
         it("should retrieve proper data") {
             val feed = task.result
             assertThat(feed).isNotNull
-            assertThat(feed.size).isEqualTo(12)
+            assertThat(feed.size).isEqualTo(10)
         }
     }
 
@@ -96,13 +104,10 @@ object MenigaFeedApiTest : Spek({
     }
 
     on("appending days") {
-        server.enqueue(mockResponse("feed.json"))
-        val task = MenigaFeed.fetch(dateFrom, dateTo, 1, 10).task
-        task.waitForCompletion()
-        server.takeRequest()
+        val feed = fetchFeed()
         server.enqueue(mockResponse("feed.json"))
 
-        val appendTask = task.result.appendDays(1).task
+        val appendTask = feed.appendDays(1).task
         appendTask.waitForCompletion()
 
         it("should make a proper request") {
@@ -117,8 +122,85 @@ object MenigaFeedApiTest : Spek({
         }
 
         it("should retrieve proper data") {
-            val result = task.result
-            assertThat(result.hasMoreData()).isTrue()
+            assertThat(appendTask.result.hasMoreData()).isTrue()
+        }
+    }
+
+    on("appending next page") {
+        val feed = fetchFeed()
+        server.enqueue(mockResponse("feed.json"))
+
+        val task = feed.appendNextPage().task
+        task.waitForCompletion()
+
+        it("should make a proper request") {
+            val recordedRequest = server.takeRequest()
+            assertThat(recordedRequest.method).isEqualTo("GET")
+            assertThat(URI(recordedRequest.path))
+                    .hasPath("/v1/feed")
+                    .hasParameter("skip", "20")
+                    .hasParameter("take", "10")
+                    .hasParameter("dateFrom", "2018-01-01T00:00:00.000")
+                    .hasParameter("dateTo", "2018-02-01T00:00:00.000")
+        }
+        it("should append to current feed") {
+            assertThat(feed.size).isGreaterThan(task.result.size)
+            assertThat(feed.page).isEqualTo(2)
+        }
+        it("should return next page") {
+            assertThat(task.result.size).isEqualTo(10)
+        }
+    }
+
+    on("fetching next page") {
+        val feed = fetchFeed()
+        server.enqueue(mockResponse("feed.json"))
+
+        val task = feed.nextPage().task
+        task.waitForCompletion()
+
+        it("should make a proper request") {
+            val recordedRequest = server.takeRequest()
+            assertThat(recordedRequest.method).isEqualTo("GET")
+            assertThat(URI(recordedRequest.path))
+                    .hasPath("/v1/feed")
+                    .hasParameter("skip", "20")
+                    .hasParameter("take", "10")
+                    .hasParameter("dateFrom", "2018-01-01T00:00:00.000")
+                    .hasParameter("dateTo", "2018-02-01T00:00:00.000")
+        }
+        it("should not append to current feed") {
+            assertThat(feed.size).isEqualTo(10)
+            assertThat(feed.page).isEqualTo(2)
+        }
+        it("should return next page") {
+            assertThat(task.result.size).isEqualTo(10)
+        }
+    }
+
+    on("fetching previous page") {
+        val feed = fetchFeed()
+        server.enqueue(mockResponse("feed.json"))
+
+        val task = feed.prevPage().task
+        task.waitForCompletion()
+
+        it("should make a proper request") {
+            val recordedRequest = server.takeRequest()
+            assertThat(recordedRequest.method).isEqualTo("GET")
+            assertThat(URI(recordedRequest.path))
+                    .hasPath("/v1/feed")
+                    .hasParameter("skip", "0")
+                    .hasParameter("take", "10")
+                    .hasParameter("dateFrom", "2018-01-01T00:00:00.000")
+                    .hasParameter("dateTo", "2018-02-01T00:00:00.000")
+        }
+        it("should not append to current feed") {
+            assertThat(feed.size).isEqualTo(10)
+            assertThat(feed.page).isEqualTo(0)
+        }
+        it("should return next page") {
+            assertThat(task.result.size).isEqualTo(10)
         }
     }
 })

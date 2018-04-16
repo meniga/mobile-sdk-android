@@ -369,42 +369,6 @@
       "title": "ATMs & Cash Withdrawals",
       "body": null,
       "typeName": "TransactionFeedItemModel"
-    },
-    {
-      "id": 4,
-      "eventTypeIdentifier": "transactions_threshold_deposit",
-      "actionText": "Check Transaction",
-      "messageData": {
-        "transactionId": 150,
-        "Amount": "5000",
-        "Description": "Pizza",
-        "CurrencyCode": "ISK"
-      },
-      "date": "2017-06-30T00:00:00",
-      "topicId": 275106102,
-      "topicName": "Transaction",
-      "title": "Money!",
-      "body": "Somone got some income.",
-      "typeName": "UserEventFeedItemModel"
-    },
-    {
-      "id": 6,
-      "eventTypeIdentifier": "transactions_merchant_count",
-      "actionText": "You have been here 10 times",
-      "messageData": {
-        "transactionId": 150,
-        "merchantId": 5400,
-        "merchantName": "Pizza",
-        "totalCount": 10,
-        "periodCount": 2,
-        "categoryName": "Food"
-      },
-      "date": "2017-06-30T00:00:00",
-      "topicId": 275126102,
-      "topicName": "Transaction Merchant Count",
-      "title": "You have shopped here many times",
-      "body": "You have shopped here many times",
-      "typeName": "UserEventFeedItemModel"
     }
   ],
   "meta": {

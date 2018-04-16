@@ -16,7 +16,8 @@ object PaginationUtilsTest : Spek({
             data(0, 0, 0, 0),
             data(1, 0, 0, 0),
             data(0, 10, 0, 10),
-            data(1, 10, 10, 10))
+            data(1, 10, 10, 10),
+            data(2, 10, 20, 10))
 
     on("converting page=%s and itemsPerPage=%s to skip and take", with = *skipAndTakeData) { page, itemsPerPage, expectedSkip, expectedTake ->
         it("should return skip=$expectedSkip and take=$expectedTake") {
