@@ -40,7 +40,7 @@ data class MenigaSync(
     }
 
     /**
-     * A class used as a callback. It will be called when the sync precedure is done or if it fails or times out.
+     * A class used as a callback. It will be called when the sync procedure is done or if it fails or times out.
      */
     abstract class PostSyncCallback {
         var hasNewData: Boolean = false
@@ -111,14 +111,7 @@ data class MenigaSync(
      *
      * @return A Task containing a boolean indicating if the synchronization is done or not
      */
-    @Deprecated("Reason this method is deprecated </br>\n" +
-            "\t               {Will be removed in next version} </br>\n" +
-            "\t               use static {@link #getSyncStatus()} instead like this:\n" +
-            "\t \n" +
-            "\t  <blockquote>\n" +
-            "\t  <pre>\n" +
-            "\t  MenigaSync.getSyncStatus()\n" +
-            "\t  </pre></blockquote>")
+    @Deprecated("Use static getSyncStatus instead", replaceWith = ReplaceWith("getSyncStatus"))
     fun isSyncDone(): Result<MenigaSyncStatus> = apiOperator.syncStatus
 
     companion object {
@@ -137,27 +130,30 @@ data class MenigaSync(
         }
 
         /**
-         * Gets a sync object that was created by MenigaSync.start
+         * Gets a sync object that was created by [start]
          *
          * @param syncHistoryId The id of the sync object
          * @return The sync object
          */
+        @JvmStatic
         fun fetch(syncHistoryId: Long): Result<MenigaSync> {
             return MenigaSync.apiOperator.getSync(syncHistoryId)
         }
 
         /**
-         * Use [.syncRealms] instead.
+         * Use [syncRealms] instead.
          */
         @Deprecated("Use syncRealms instead")
+        @JvmStatic
         fun start(timeout: Long): Result<MenigaSync> {
             return launchSync(null, timeout, null)
         }
 
         /**
-         * Use [.syncRealms] instead.
+         * Use [syncRealms] instead.
          */
         @Deprecated("Use syncRealms instead")
+        @JvmStatic
         fun start(timeout: Long, interval: Long, onDone: Interceptor<MenigaSync>): Result<MenigaSync> {
             return launchSync(null, timeout, onDone)
         }
@@ -169,6 +165,7 @@ data class MenigaSync(
          * @param timeout Timeout for the sync procedure.
          * @return A new sync object created by starting the sync procedure
          */
+        @JvmStatic
         fun syncRealms(timeout: Long): Result<MenigaSync> {
             return launchSync(null, timeout, null)
         }
@@ -180,6 +177,7 @@ data class MenigaSync(
          * @param timeout  The amount of time the background process should try to check if the sync has completed before terminating.
          * @return A new sync object.
          */
+        @JvmStatic
         fun syncRealms(timeout: Long, onDone: Interceptor<MenigaSync>? = null): Result<MenigaSync> {
             return launchSync(null, timeout, onDone)
         }
@@ -193,6 +191,7 @@ data class MenigaSync(
          * @param timeout  The amount of time the background process should try to check if the sync has completed before terminating.
          * @return A new sync object.
          */
+        @JvmStatic
         fun syncRealm(realmUserId: Long, timeout: Long, onDone: Interceptor<MenigaSync>? = null): Result<MenigaSync> {
             return launchSync(realmUserId, timeout, onDone)
         }
@@ -233,6 +232,7 @@ data class MenigaSync(
          *
          * @return A Task indicating if the synchronization is done or not
          */
+        @JvmStatic
         fun getSyncStatus(): Result<MenigaSyncStatus> = apiOperator.syncStatus
     }
 }
