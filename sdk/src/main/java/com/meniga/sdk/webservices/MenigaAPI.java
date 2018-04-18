@@ -106,7 +106,7 @@ public interface MenigaAPI {
 	@DELETE(APIConst.URL_TRANSACTIONS)
 	Call<Void> deleteTransactions(@QueryMap Map<String, String> queryMap);
 
-	@GET(APIConst.URL_TRANSACTIONS + "?include=Account,Merchant")
+	@GET(APIConst.URL_TRANSACTIONS)
 	Call<MenigaTransactionPage> getTransactions(@QueryMap Map<String, String> queryMap);
 
 	@POST(APIConst.URL_TRANSACTIONS)
