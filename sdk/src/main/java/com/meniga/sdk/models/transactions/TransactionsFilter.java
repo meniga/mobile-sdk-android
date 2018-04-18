@@ -89,6 +89,10 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	protected final String parsedData;
 	protected final List<String> parsedDataExactKeys;
 	protected final String parsedDataNameToOrderBy;
+
+	protected boolean includeAccounts = true;
+	protected boolean includeMerchants = true;
+
 	protected transient final boolean isFiltering;
 
 	protected TransactionsFilter(Parcel in) {
@@ -145,6 +149,9 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		parsedData = in.readString();
 		parsedDataExactKeys = in.createStringArrayList();
 		parsedDataNameToOrderBy = in.readString();
+		includeAccounts = (in.readInt() == 1);
+		includeMerchants = (in.readInt() == 1);
+
 		isFiltering = in.readInt() == 1;
 	}
 
@@ -195,6 +202,9 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		parsedData = builder.parsedData;
 		parsedDataExactKeys = builder.parsedDataExactKeys;
 		parsedDataNameToOrderBy = builder.parsedDataNameToOrderBy;
+		includeAccounts = builder.includeAccounts;
+		includeMerchants = builder.includeMerchants;
+
 		isFiltering = builder.isFiltering;
 	}
 
@@ -231,7 +241,11 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		Field skipField = null;
 		Field takeField = null;
 		for (Field member : mappableFields) {
-			if (member.getName().equals("isFiltering")) {
+			if (member.getName().equals("isFiltering") || member.getName().equals("includeMerchants")) {
+				continue;
+			}
+			if (member.getName().equals("includeAccounts")) {
+				map.put("include", constructInclude());
 				continue;
 			}
 			if (member.getName().equals("skip")) {
@@ -250,6 +264,20 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 			addToMap(takeField, map);
 		}
 		return map;
+	}
+
+	private String constructInclude() {
+		String include = "";
+		if (includeAccounts) {
+			include += "Account";
+		}
+		if (includeMerchants) {
+			if (include.length() > 0) {
+				include += ",";
+			}
+			include += "Merchant";
+		}
+		return include;
 	}
 
 	private void addToMap(Field member, Map<String, String> map ) {
@@ -350,6 +378,9 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		dest.writeString(parsedData);
 		dest.writeStringList(parsedDataExactKeys);
 		dest.writeString(parsedDataNameToOrderBy);
+		dest.writeInt(includeAccounts ? 1 : 0);
+		dest.writeInt(includeMerchants ? 1 : 0);
+
 		dest.writeInt(isFiltering ? 1 : 0);
 	}
 
@@ -537,6 +568,14 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		return parsedDataNameToOrderBy;
 	}
 
+	public boolean getIncludeAccounts() {
+		return includeAccounts;
+	}
+
+	public boolean getIncludeMerchants() {
+		return includeMerchants;
+	}
+
 	public boolean getIsFiltering() {
 		return isFiltering;
 	}
@@ -636,6 +675,10 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 			return false;
 		if (parsedDataNameToOrderBy != null ? !parsedDataNameToOrderBy.equals(that.parsedDataNameToOrderBy) : that.parsedDataNameToOrderBy != null)
 			return false;
+		if (includeAccounts != that.includeAccounts)
+			return false;
+		if (includeMerchants != that.includeMerchants)
+			return false;
 		return true;
 	}
 
@@ -693,6 +736,9 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		result = 31 * result + (parsedData != null ? parsedData.hashCode() : 0);
 		result = 31 * result + (parsedDataExactKeys != null ? parsedDataExactKeys.hashCode() : 0);
 		result = 31 * result + (parsedDataNameToOrderBy != null ? parsedDataNameToOrderBy.hashCode() : 0);
+		result = 31 * result + (includeAccounts ? 1 : 0);
+		result = 31 * result + (includeMerchants ? 1 : 0);
+
 		result = 31 * result + (isFiltering ? 1 : 0);
 		return result;
 	}
@@ -749,6 +795,9 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		private String parsedData;
 		private List<String> parsedDataExactKeys;
 		private String parsedDataNameToOrderBy;
+		private boolean includeAccounts = true;
+		private boolean includeMerchants = true;
+
 		private boolean isFiltering;
 
 		public Builder() {
@@ -816,6 +865,9 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 				parsedData = preserveNonNull(filter.parsedData, parsedData);
 				parsedDataExactKeys = preserveNonNull(filter.parsedDataExactKeys, parsedDataExactKeys);
 				parsedDataNameToOrderBy = preserveNonNull(filter.parsedDataNameToOrderBy, parsedDataNameToOrderBy);
+				includeAccounts = preserveNonNull(filter.includeAccounts, includeAccounts);
+				includeMerchants = preserveNonNull(filter.includeMerchants, includeMerchants);
+
 				isFiltering = preserveNonNull(filter.isFiltering, isFiltering);
 			}
 		}
@@ -1364,6 +1416,26 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		public Builder parsedDataNameToOrderBy(String parsedDataNameToOrderBy) {
 			this.parsedDataNameToOrderBy = parsedDataNameToOrderBy;
 			isFiltering = true;
+			return this;
+		}
+
+		/**
+		 * Flag for the option of getting the transaction accounts as a separate meta field
+		 *
+		 * @return builder object
+		 */
+		public Builder includeAccounts(boolean includeAccounts) {
+			this.includeAccounts = includeAccounts;
+			return this;
+		}
+
+		/**
+		 * Flag for the option of getting the transaction merchants as a separate meta field
+		 *
+		 * @return builder object
+		 */
+		public Builder includeMerchants(boolean includeMerchants) {
+			this.includeMerchants = includeMerchants;
 			return this;
 		}
 
