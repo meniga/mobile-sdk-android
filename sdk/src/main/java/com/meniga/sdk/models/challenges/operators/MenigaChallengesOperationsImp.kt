@@ -6,6 +6,7 @@ package com.meniga.sdk.models.challenges.operators
 import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.helpers.MenigaDecimal
 import com.meniga.sdk.helpers.Result
+import com.meniga.sdk.helpers.toSkipAndTake
 import com.meniga.sdk.models.challenges.CategoryDefinition
 import com.meniga.sdk.models.challenges.FetchChallengeFilter
 import com.meniga.sdk.models.challenges.MenigaChallenge
@@ -19,17 +20,7 @@ import com.meniga.sdk.webservices.challenge.GetChallenges
 import com.meniga.sdk.webservices.challenge.UpdateChallenge
 import java.util.UUID
 
-class MenigaChallengesOperationsImp : MenigaChallengesOperations {
-
-    override fun getChallenges(includeExpired: Boolean,
-                               excludeSuggested: Boolean,
-                               excludeAccepted: Boolean): Result<List<MenigaChallenge>> {
-        val req = GetChallenges()
-        req.includeExpired = includeExpired
-        req.excludeSuggested = excludeSuggested
-        req.excludeAccepted = excludeSuggested
-        return MenigaSDK.executor().getChallenges(req)
-    }
+internal class MenigaChallengesOperationsImp : MenigaChallengesOperations {
 
     override fun getChallenges(filter: FetchChallengeFilter): Result<List<MenigaChallenge>> {
         val request = GetChallenges(
@@ -113,9 +104,9 @@ class MenigaChallengesOperationsImp : MenigaChallengesOperations {
         return MenigaSDK.executor().deleteChallenge(req)
     }
 
-    override fun getChallengeHistory(id: UUID, page: Int, numPerPage: Int): Result<List<MenigaChallenge>> {
-        val skip = if (page == 0) 0 else numPerPage / page
-        val req = GetChallengeHistory(id, skip, numPerPage)
-        return MenigaSDK.executor().getChallengeHistory(req)
+    override fun getChallengeHistory(id: UUID, page: Int, itemsPerPage: Int): Result<List<MenigaChallenge>> {
+        val (skip, take) = toSkipAndTake(page, itemsPerPage)
+        val request = GetChallengeHistory(id, skip, take)
+        return MenigaSDK.executor().getChallengeHistory(request)
     }
 }

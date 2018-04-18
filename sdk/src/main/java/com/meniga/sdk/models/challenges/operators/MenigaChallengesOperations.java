@@ -17,10 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MenigaChallengesOperations {
-	Result<List<MenigaChallenge>> getChallenges(boolean includeExpired,
-												boolean excludeSuggested,
-												boolean excludeAccepted);
-
 	Result<List<MenigaChallenge>> getChallenges(FetchChallengeFilter filter);
 
 	Result<MenigaChallenge> acceptChallenge(UUID id, MenigaDecimal targetAmount);

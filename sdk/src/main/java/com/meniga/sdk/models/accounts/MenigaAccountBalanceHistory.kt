@@ -3,6 +3,7 @@
  */
 package com.meniga.sdk.models.accounts
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.meniga.sdk.helpers.MenigaDecimal
 import kotlinx.android.parcel.Parcelize
@@ -20,6 +21,7 @@ import java.io.Serializable
  * @property isDefault Indicates if the entry has been generated with default values. This happens when there is missing months (in the database) between the start and end date ranges sent in by the client.
  */
 @Parcelize
+@SuppressLint("ParcelCreator")
 data class MenigaAccountBalanceHistory(
         val id: Long = 0,
         val accountId: Long = 0,

@@ -19,7 +19,6 @@ import org.junit.Test;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;

@@ -33,8 +33,7 @@ jobs:
         - |
           ./gradlew \
           currentVersion \
-          publishToJFrog \
-          publishToSonatype \
+          publishSnapshot \
           -Dbuild.number=$TRAVIS_BUILD_NUMBER
 
     - stage: deploy tagged release
@@ -47,7 +46,7 @@ jobs:
         - |
           ./gradlew \
           currentVersion \
-          publishToJFrog \
+          publishRelease \
           -Dbuild.number=$TRAVIS_BUILD_NUMBER
 
 env:

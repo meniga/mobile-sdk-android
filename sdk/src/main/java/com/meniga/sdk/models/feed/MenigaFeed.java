@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.Interceptor;
+import com.meniga.sdk.helpers.PaginationUtils;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.feed.operators.MenigaFeedOperations;
 
@@ -13,6 +14,8 @@ import org.joda.time.DateTime;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nonnull;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -31,6 +34,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	protected static MenigaFeedOperations apiOperator;
 
 	protected boolean hasMoreData = true;
+	protected Integer totalCount;
 	protected DateTime actualEndDate;
 	protected DateTime from;
 	protected DateTime to;
@@ -45,6 +49,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	protected MenigaFeed(Parcel in) {
 		super();
 		hasMoreData = in.readByte() != 0;
+		totalCount = (Integer) in.readValue(Integer.class.getClassLoader());
 		long actual = in.readLong();
 		actualEndDate = actual == 0 ? null : new DateTime(actual);
 		long fromLong = in.readLong();
@@ -59,6 +64,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeByte(hasMoreData ? (byte) 1 : (byte) 0);
+		dest.writeValue(totalCount);
 		dest.writeLong(actualEndDate != null ? actualEndDate.getMillis() : 0L);
 		dest.writeLong(from != null ? from.getMillis() : 0L);
 		dest.writeLong(to != null ? to.getMillis() : 0L);
@@ -74,13 +80,6 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 */
 	public static void setOperator(MenigaFeedOperations operator) {
 		MenigaFeed.apiOperator = operator;
-	}
-
-	/**
-	 * @param hasMoreData Does there exist more data in some range for the user
-	 */
-	public void setHasMoreData(boolean hasMoreData) {
-		this.hasMoreData = hasMoreData;
 	}
 
 	private void setActualEndDate(DateTime actualEndDate) {
@@ -130,7 +129,6 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 		return 0;
 	}
 
-
 	/**
 	 * @return Whether or not there are more items for the user. Not the same as atLastPage, hasMoreData
 	 * is for all time whereas atLastPage only applies to pagination within a time period
@@ -143,40 +141,41 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 * @return Whether or not the feed is at the last page within the time period requested.
 	 */
 	public boolean hasMorePages() {
-		return actualEndDate != null;
+		return totalCount != null && PaginationUtils.hasMoreData(totalCount, page, itemsPerPage);
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-		MenigaFeed that = (MenigaFeed) o;
+        MenigaFeed that = (MenigaFeed) o;
 
-		if (hasMoreData != that.hasMoreData) return false;
-		if (page != that.page) return false;
-		if (itemsPerPage != that.itemsPerPage) return false;
-		if (actualEndDate != null ? !actualEndDate.equals(that.actualEndDate) : that.actualEndDate != null)
-			return false;
-		if (from != null ? !from.equals(that.from) : that.from != null) return false;
-		return to != null ? to.equals(that.to) : that.to == null;
+        if (page != that.page) return false;
+        if (itemsPerPage != that.itemsPerPage) return false;
+        if (totalCount != null ? !totalCount.equals(that.totalCount) : that.totalCount != null)
+            return false;
+        if (actualEndDate != null ? !actualEndDate.equals(that.actualEndDate) : that.actualEndDate != null)
+            return false;
+        if (from != null ? !from.equals(that.from) : that.from != null) return false;
+        return to != null ? to.equals(that.to) : that.to == null;
+    }
 
-	}
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (totalCount != null ? totalCount.hashCode() : 0);
+        result = 31 * result + (actualEndDate != null ? actualEndDate.hashCode() : 0);
+        result = 31 * result + (from != null ? from.hashCode() : 0);
+        result = 31 * result + (to != null ? to.hashCode() : 0);
+        result = 31 * result + page;
+        result = 31 * result + itemsPerPage;
+        return result;
+    }
 
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + (hasMoreData ? 1 : 0);
-		result = 31 * result + (actualEndDate != null ? actualEndDate.hashCode() : 0);
-		result = 31 * result + (from != null ? from.hashCode() : 0);
-		result = 31 * result + (to != null ? to.hashCode() : 0);
-		result = 31 * result + page;
-		result = 31 * result + itemsPerPage;
-		return result;
-	}
-
-	@Override
+    @Override
+    @Nonnull
 	public MenigaFeed subList(int fromIndex, int toIndex) {
 		List<MenigaFeedItem> items = super.subList(fromIndex, toIndex);
 		MenigaFeed clone = clone();
@@ -237,7 +236,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 * Fetches and merges items from the feed into this feed object by going numDays into the past
 	 *
 	 * @param numDays Number of days into the past, beyond the current from date, to fetch new feed data
-	 * @return A boolean indicating that the request was successful
+	 * @return A feed object containing transactions, user events etc.
 	 */
 	public Result<MenigaFeed> appendDays(final int numDays) {
 		DateTime to = from.minusMillis(1);
@@ -254,10 +253,8 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 			@Override
 			public void onFinished(MenigaFeed result, boolean failed) {
 				if (!failed && result != null) {
-					for (MenigaFeedItem item : result) {
-						add(item);
-					}
-					hasMoreData = result.hasMoreData;
+					addAll(result);
+					totalCount = result.totalCount;
 					actualEndDate = result.actualEndDate;
 
 					MenigaFeed.this.from = MenigaFeed.this.from.minusDays(numDays);
@@ -269,7 +266,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	/**
 	 * Appends all the transactions from the next page. Use hasMorePages to find out if you are on the last page
 	 *
-	 * @return A boolean indicating that the request was successful
+	 * @return A feed object containing a next page
 	 */
 	public Result<MenigaFeed> appendNextPage() {
 		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page + 1, itemsPerPage);
@@ -277,10 +274,8 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 			@Override
 			public void onFinished(MenigaFeed result, boolean failed) {
 				if (!failed && result != null) {
-					for (MenigaFeedItem item : result) {
-						add(item);
-					}
-					hasMoreData = result.hasMoreData;
+					addAll(result);
+					totalCount = result.totalCount;
 					actualEndDate = result.actualEndDate;
 					page++;
 				}
@@ -291,7 +286,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	/**
 	 * Replaces all the items with the items from the next page. Use hasMorePages to find out if you are on the last page
 	 *
-	 * @return A boolean indicating that the request was successful
+	 * @return A feed object containing a next page
 	 */
 	public Result<MenigaFeed> nextPage() {
 		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page + 1, itemsPerPage);
@@ -300,10 +295,8 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 			public void onFinished(MenigaFeed result, boolean failed) {
 				if (!failed && result != null) {
 					clear();
-					for (MenigaFeedItem item : result) {
-						add(item);
-					}
-					hasMoreData = result.hasMoreData;
+					addAll(result);
+					totalCount = result.totalCount;
 					actualEndDate = result.actualEndDate;
 					page++;
 				}
@@ -314,7 +307,7 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	/**
 	 * Replaces all the items with the items from the previous page. Use getPage to find out if you are on the first page
 	 *
-	 * @return A boolean indicating that the request was successful
+	 * @return A feed object containing a previous page
 	 */
 	public Result<MenigaFeed> prevPage() {
 		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page - 1, itemsPerPage);
@@ -323,10 +316,8 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 			public void onFinished(MenigaFeed result, boolean failed) {
 				if (!failed && result != null) {
 					clear();
-					for (MenigaFeedItem item : result) {
-						add(item);
-					}
-					setHasMoreData(result.hasMoreData);
+					addAll(result);
+					totalCount = result.totalCount;
 					setActualEndDate(result.actualEndDate);
 					page--;
 				}
