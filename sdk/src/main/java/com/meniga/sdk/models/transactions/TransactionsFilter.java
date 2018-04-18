@@ -244,7 +244,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 			if (member.getName().equals("isFiltering") || member.getName().equals("includeMerchants")) {
 				continue;
 			}
-			if (member.getName().equals("includeAccounts")) {
+			if (member.getName().equals("includeAccounts") && (includeMerchants || includeAccounts)) {
 				map.put("include", constructInclude());
 				continue;
 			}
