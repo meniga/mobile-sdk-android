@@ -3,6 +3,7 @@
  */
 package com.meniga.sdk.converters
 
+import com.google.gson.JsonNull
 import com.google.gson.JsonObject
 import com.meniga.sdk.helpers.FeedItemFactory
 import com.meniga.sdk.helpers.type
@@ -29,7 +30,10 @@ internal class MenigaFeedConverter(private val feedItemFactory: FeedItemFactory)
                     }
 
                     meta?.let {
-                        setActualEndDate(DateTime.parse(it.get("actualEndDate").asString))
+                        val actualEndDate = it.get("actualEndDate");
+                        if (!actualEndDate.isJsonNull) {
+                            setActualEndDate(DateTime.parse(actualEndDate.asString))
+                        }
                         setHasMoreData(it.get("hasMoreData").asBoolean)
                         setTotalCount(it.get("totalCount").asInt)
                     }
