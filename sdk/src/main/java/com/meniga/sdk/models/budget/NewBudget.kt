@@ -11,7 +11,7 @@ import com.meniga.sdk.webservices.budget.CreateBudget
 data class NewBudget @JvmOverloads constructor(
         var name: String,
         var description: String? = null,
-        var accountIds: List<Long> = emptyList())
+        var accountIds: List<Long>? = null)
 
 internal fun NewBudget.toCreateBudget(): CreateBudget =
         CreateBudget(
