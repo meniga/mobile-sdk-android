@@ -1,0 +1,12 @@
+{
+  "data": {
+    "synchronizationStatus": {
+      "syncHistoryId": 0,
+      "isSyncDone": false,
+      "syncSessionStartTime": "2018-03-13T15:17:51.280Z",
+      "realmSyncResponses": null
+    },
+    "hasCompletedSyncSession": false,
+    "isSynchronizationNeeded": false
+  }
+}
