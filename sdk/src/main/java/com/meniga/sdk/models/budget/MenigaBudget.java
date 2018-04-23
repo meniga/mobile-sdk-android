@@ -11,20 +11,16 @@ import com.meniga.sdk.models.budget.enums.BudgetPeriod;
 import com.meniga.sdk.models.budget.enums.BudgetType;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 
-import org.jetbrains.annotations.NonNls;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static com.meniga.sdk.helpers.Objects.firstNonNull;
 import static com.meniga.sdk.helpers.Objects.requireNonNull;
-import static java.util.Collections.emptyList;
 
 public class MenigaBudget implements Parcelable, Serializable {
 	protected static MenigaBudgetOperations apiOperator;
@@ -223,12 +219,12 @@ public class MenigaBudget implements Parcelable, Serializable {
 		if (type == BudgetType.BUDGET) {
 			NewBudget budget = new NewBudget(name);
 			budget.setDescription(description);
-			budget.setAccountIds(firstNonNull(accountIds, Collections.<Long>emptyList()));
+			budget.setAccountIds(accountIds);
 			return create(budget);
 		} else {
 			NewPlanningBudget budget = new NewPlanningBudget(name);
 			budget.setDescription(description);
-			budget.setAccountIds(firstNonNull(accountIds, Collections.<Long>emptyList()));
+			budget.setAccountIds(accountIds);
 			budget.setPeriod(period);
 			budget.setPeriodOffset(periodOffset);
 			return create(budget);

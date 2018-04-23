@@ -12,7 +12,7 @@ import com.meniga.sdk.webservices.budget.CreateBudget
 data class NewPlanningBudget @JvmOverloads constructor(
         var name: String,
         var description: String? = null,
-        var accountIds: List<Long> = emptyList(),
+        var accountIds: List<Long>? = null,
         var period: BudgetPeriod? = null,
         var periodOffset: Int? = null)
 
