@@ -8,6 +8,7 @@ import com.meniga.sdk.webservices.requests.ForgotPassword;
 import com.meniga.sdk.webservices.requests.GetUserMetaData;
 import com.meniga.sdk.webservices.requests.GetUsers;
 import com.meniga.sdk.webservices.requests.RegisterUser;
+import com.meniga.sdk.webservices.requests.SaveMetaData;
 import com.meniga.sdk.webservices.requests.SetCulture;
 
 import java.util.List;
@@ -49,5 +50,11 @@ public class MenigaUserOperationsImp implements MenigaUserOperations {
 		GetUserMetaData req = new GetUserMetaData();
 		req.names = filter;
 		return MenigaSDK.executor().getUserMetaData(req);
+	}
+
+	@Override
+	public Result<MenigaUserMetaData> saveMetaData(String key, String value) {
+		SaveMetaData req = new SaveMetaData(key, value);
+		return MenigaSDK.executor().saveUserMetaData(req);
 	}
 }

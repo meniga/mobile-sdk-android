@@ -20,4 +20,6 @@ public interface MenigaUserOperations {
     Result<Void> forgotPassword(String email);
 
     Result<List<MenigaUserMetaData>> getUserMetaData(List<String> filter);
+
+    Result<MenigaUserMetaData> saveMetaData(String key, String value);
 }

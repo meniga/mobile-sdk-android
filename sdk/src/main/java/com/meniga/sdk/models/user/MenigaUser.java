@@ -224,4 +224,8 @@ public class MenigaUser implements Serializable, Parcelable, Cloneable {
 	public static Result<List<MenigaUserMetaData>> fetchMetaData(List<String> filter) {
 		return apiOperator.getUserMetaData(filter);
 	}
+
+	public static Result<MenigaUserMetaData> saveMetaData(String key, String value) {
+		return apiOperator.saveMetaData(key, value);
+	}
 }
