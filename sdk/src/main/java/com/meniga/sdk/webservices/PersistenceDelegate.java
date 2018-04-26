@@ -498,6 +498,10 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.USERS).getUserMetaData(req.toQueryMap()));
 	}
 
+	public Result<MenigaUserMetaData> saveUserMetaData(SaveMetaData req) {
+		return persist(req, getClient(Service.USERS).saveUserMetaData(req));
+	}
+
 	// --
 	// Offers
 	// --

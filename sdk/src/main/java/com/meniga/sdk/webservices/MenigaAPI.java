@@ -52,6 +52,7 @@ import com.meniga.sdk.webservices.requests.GetTopMerchants;
 import com.meniga.sdk.webservices.requests.GetTransactionSeries;
 import com.meniga.sdk.webservices.requests.RecategorizeTransactions;
 import com.meniga.sdk.webservices.requests.RegisterUser;
+import com.meniga.sdk.webservices.requests.SaveMetaData;
 import com.meniga.sdk.webservices.requests.SetSubscription;
 import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
 import com.meniga.sdk.webservices.requests.SplitTransaction;
@@ -246,6 +247,9 @@ public interface MenigaAPI {
 
 	@GET(APIConst.URL_ME + APIConst.META_DATA)
 	Call<List<MenigaUserMetaData>> getUserMetaData(@QueryMap Map<String, String> queryMap);
+
+	@PUT(APIConst.URL_ME + APIConst.META_DATA)
+	Call<MenigaUserMetaData> saveUserMetaData(@Body SaveMetaData metaData);
 
 	// --
 	// Categories
