@@ -29,7 +29,6 @@ class MenigaTransactionsConverter : MenigaConverter() {
                 val (transactions, accounts, merchants) = gson.getAccountsMerchantsAndTransactions(data, included)
                 transactions
                         .onEach {
-                            it.hasUncertainCategorization = true
                             it.setAccount(accounts.find { account -> account.id == it.accountId })
                             it.setMerchant(merchants.find { merchant -> merchant.id == it.merchantId })
                             it.updateCommentsTransactionId()
@@ -38,7 +37,6 @@ class MenigaTransactionsConverter : MenigaConverter() {
             type<MenigaTransaction>() -> return Converter<ResponseBody, Any> { responseBody ->
                 val (data, _, included) = MenigaConverter.getAsObjectApiResponse(responseBody.byteStream())
                 val transaction = gson.fromJson(data, MenigaTransaction::class.java)
-                transaction.hasUncertainCategorization = true
                 included?.let {
                     transaction.setAccount(gson.get(it, "account"))
                     transaction.setMerchant(gson.get(it, "merchant"))
@@ -53,7 +51,6 @@ class MenigaTransactionsConverter : MenigaConverter() {
                 val transactionPage = MenigaTransactionPage()
                 val (transactions, accounts, merchants) = gson.getAccountsMerchantsAndTransactions(data, included)
                 transactions.forEach { transaction ->
-                    transaction.hasUncertainCategorization = true
                     transaction.setAccount(accounts.find { it.id == transaction.accountId })
                     transaction.setMerchant(merchants.find { it.id == transaction.merchantId })
                     transaction.updateCommentsTransactionId()
