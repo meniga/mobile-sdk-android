@@ -52,6 +52,10 @@ public enum UserEventType {
 	CASHBACK_REPAYMENT("cashback_repayment"),
 	@SerializedName("dialog_message")
 	DIALOG_MESSAGE("dialog_message"),
+	@SerializedName("life_goal_reached")
+	LIFE_GOAL_REACHED("life_goal_reached"),
+	@SerializedName("life_goal_progress")
+	LIFE_GOAL_PROGRESS("life_goal_progress"),
 	UNKNOWN("unknown");
 
 	private String tag;
@@ -63,5 +67,16 @@ public enum UserEventType {
 	@Override
 	public String toString() {
 		return tag;
+	}
+
+	public static UserEventType parse(String userEventTypeIdentifier) {
+		for (UserEventType type : UserEventType.values()) {
+			if (type.tag.toLowerCase().equals(userEventTypeIdentifier.toLowerCase())) {
+				return type;
+			}
+		}
+		UserEventType unknownType = UNKNOWN;
+		unknownType.tag = userEventTypeIdentifier;
+		return unknownType;
 	}
 }
