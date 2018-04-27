@@ -19,7 +19,7 @@ import java.util.Map;
 public class MenigaUserEvent implements Serializable, Parcelable, Cloneable {
 	protected static MenigaUserEventsOperations apiOperations;
 
-	protected UserEventType userEventTypeIdentifier;
+	protected String userEventTypeIdentifier;
 	protected List<UserEventSubscription> subscriptions;
 	protected List<UserEventSetting> settings;
 	protected List<MenigaUserEvent> children;
@@ -33,11 +33,11 @@ public class MenigaUserEvent implements Serializable, Parcelable, Cloneable {
 		MenigaUserEvent.apiOperations = operator;
 	}
 
-	public MenigaUserEvent() {
+	protected MenigaUserEvent() {
 	}
 
 	public UserEventType getUserEventTypeIdentifier() {
-		return userEventTypeIdentifier;
+		return userEventTypeIdentifier == null ? UserEventType.UNKNOWN : UserEventType.parse(userEventTypeIdentifier);
 	}
 
 	public List<UserEventSubscription> getSubscriptions() {
@@ -54,17 +54,24 @@ public class MenigaUserEvent implements Serializable, Parcelable, Cloneable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		MenigaUserEvent that = (MenigaUserEvent) o;
 
-		if (userEventTypeIdentifier != null ? !userEventTypeIdentifier.equals(that.userEventTypeIdentifier) : that.userEventTypeIdentifier != null)
+		if (userEventTypeIdentifier != null ? !userEventTypeIdentifier.equals(that.userEventTypeIdentifier) : that.userEventTypeIdentifier != null) {
 			return false;
-		if (subscriptions != null ? !subscriptions.equals(that.subscriptions) : that.subscriptions != null)
+		}
+		if (subscriptions != null ? !subscriptions.equals(that.subscriptions) : that.subscriptions != null) {
 			return false;
-		if (settings != null ? !settings.equals(that.settings) : that.settings != null)
+		}
+		if (settings != null ? !settings.equals(that.settings) : that.settings != null) {
 			return false;
+		}
 		return children != null ? children.equals(that.children) : that.children == null;
 
 	}
@@ -85,7 +92,7 @@ public class MenigaUserEvent implements Serializable, Parcelable, Cloneable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(this.userEventTypeIdentifier.ordinal());
+		dest.writeString(this.userEventTypeIdentifier);
 		dest.writeTypedList(this.subscriptions);
 		dest.writeTypedList(this.settings);
 		dest.writeTypedList(this.children);
@@ -93,7 +100,7 @@ public class MenigaUserEvent implements Serializable, Parcelable, Cloneable {
 
 
 	protected MenigaUserEvent(Parcel in) {
-		this.userEventTypeIdentifier = UserEventType.values()[in.readInt()];
+		this.userEventTypeIdentifier = in.readString();
 		this.subscriptions = in.createTypedArrayList(UserEventSubscription.CREATOR);
 		this.settings = in.createTypedArrayList(UserEventSetting.CREATOR);
 		this.children = in.createTypedArrayList(MenigaUserEvent.CREATOR);
