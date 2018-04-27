@@ -198,7 +198,7 @@ data class MenigaSync(
 
         private fun launchSync(realmUserId: Long?, timeout: Long, onDone: Interceptor<MenigaSync>?): Result<MenigaSync> {
             val task = getSyncStatus().task.continueWithTask { task ->
-                if (task.isFaulted || task.result.hasCompletedSyncSession) {
+                if (task.isFaulted || task.result.hasCompletedSyncSession || task.result.synchronizationStatus == null) {
                     apiOperator.startSync(realmUserId, timeout).task
                 } else {
                     fetch(task.result.getSynchronizationStatus().syncHistoryId).task
