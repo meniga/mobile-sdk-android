@@ -37,6 +37,7 @@ public class MenigaMerchant implements Serializable, Parcelable, Cloneable {
 	protected String offersLink;
 	protected String telephone;
 	protected String webpage;
+	protected MerchantAttribute customAttributes;
 
 	protected MenigaMerchant() {
 	}
@@ -179,6 +180,13 @@ public class MenigaMerchant implements Serializable, Parcelable, Cloneable {
 	 */
 	public String getWebpage() {
 		return webpage;
+	}
+
+	/**
+	 * @return Custom attributes, such as social media links and mcc ids.
+	 */
+	public MerchantAttribute getCustomAttributes() {
+		return customAttributes;
 	}
 
 	/**
