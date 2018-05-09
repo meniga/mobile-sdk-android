@@ -387,12 +387,6 @@ public class MenigaCategory implements Parcelable, Serializable, Cloneable {
 								child.parent = root;
 							}
 						}
-						Collections.sort(root.getChildren(), new Comparator<MenigaCategory>() {
-							@Override
-							public int compare(MenigaCategory lhs, MenigaCategory rhs) {
-								return lhs.getName().compareTo(rhs.getName());
-							}
-						});
 					}
 
 					task.getResult().clear();
