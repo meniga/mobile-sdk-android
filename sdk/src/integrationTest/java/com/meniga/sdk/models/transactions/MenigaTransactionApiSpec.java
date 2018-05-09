@@ -8,11 +8,9 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.providers.tasks.Task;
-import com.meniga.sdk.utils.FileImporter;
 
 import org.assertj.core.api.Condition;
 import org.joda.time.DateTime;
-import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,11 +19,11 @@ import java.io.IOException;
 import java.util.List;
 
 import okhttp3.HttpUrl;
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
 import static com.meniga.sdk.models.transactions.MenigaTransactionPageAssertions.assertThat;
+import static com.meniga.sdk.providers.tasks.TaskAssertions.assertThat;
 import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -51,12 +49,12 @@ public class MenigaTransactionApiSpec {
     }
 
     @Test
-    public void shouldCreateTransaction() throws IOException, JSONException, InterruptedException {
+    public void shouldCreateTransaction() throws InterruptedException {
         server.enqueue(mockResponse("transaction.json"));
 
         Task<MenigaTransaction> task = MenigaTransaction.create(DateTime.parse("2018-03-08"), "Hagkaup", new MenigaDecimal(5000), 45).getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/transactions");
         assertThat(recordedRequest.getMethod()).isEqualTo("POST");
@@ -70,12 +68,12 @@ public class MenigaTransactionApiSpec {
     }
 
     @Test
-    public void shouldFetchSingleTransaction() throws InterruptedException, IOException {
+    public void shouldFetchSingleTransaction() throws InterruptedException {
         server.enqueue(mockResponse("transaction.json"));
 
         Task<MenigaTransaction> task = MenigaTransaction.fetch(138327).getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/transactions/138327?include=Account,Merchant");
         MenigaTransaction transaction = task.getResult();
@@ -92,8 +90,8 @@ public class MenigaTransactionApiSpec {
                 .build();
 
         Task<MenigaTransactionPage> task = MenigaTransaction.fetch(filter).getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/transactions?include=Account,Merchant&take=20&skip=0");
         MenigaTransactionPage page = task.getResult();
@@ -116,8 +114,8 @@ public class MenigaTransactionApiSpec {
                         .build());
 
         Task<MenigaTransactionPage> task = MenigaTransaction.fetch(filters).getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         List<RecordedRequest> recordedRequests = newArrayList(server.takeRequest(), server.takeRequest());
         assertThat(recordedRequests).haveExactly(1, withPath("/v1/transactions?include=Account,Merchant&take=50&comment=comment&skip=0"));
         assertThat(recordedRequests).haveExactly(1, withPath("/v1/transactions?include=Account,Merchant&take=20&skip=0"));

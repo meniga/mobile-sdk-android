@@ -9,6 +9,7 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.helpers.KeyVal;
 import com.meniga.sdk.helpers.MenigaDecimal;
+import com.meniga.sdk.models.SwaggerJsonExtensions;
 import com.meniga.sdk.models.accounts.enums.AccountBalanceHistorySort;
 import com.meniga.sdk.models.accounts.enums.AccountCategory;
 import com.meniga.sdk.providers.tasks.Task;
@@ -31,7 +32,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class MenigaAccountApiTest {
 
     @Rule
-    public ValidatingMockWebServer server = ValidatingMockWebServer.create("/api/swagger.json", "/v1");
+    public ValidatingMockWebServer server = SwaggerJsonExtensions.createValidatingMockWebServer();
 
     @Before
     public void setUp() {

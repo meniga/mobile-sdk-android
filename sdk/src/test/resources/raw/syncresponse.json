@@ -2,7 +2,7 @@
   "data": {
     "syncHistoryId": 150,
     "isSyncDone": true,
-    "syncSessionStartTime": "2017-07-27T12:23:34.896Z",
+    "syncSessionStartTime": "2017-07-27T12:23:34.896",
     "realmSyncResponses": [
       {
         "realmCredentialsId": 1550004040444,
@@ -51,7 +51,5 @@
         }
       }
     ]
-  },
-  "hasCompletedSyncSession": true,
-  "isSynchronizationNeeded": true
+  }
 }

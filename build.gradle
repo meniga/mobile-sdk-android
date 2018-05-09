@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = "1.2.31"
+        kotlinVersion = "1.2.41"
         okHttpVersion = "3.9.1"
         spekVersion = "1.1.5"
     }
@@ -21,6 +21,7 @@ buildscript {
 }
 
 plugins {
+    id 'de.undercouch.download' version '3.4.2'
     id "pl.allegro.tech.build.axion-release" version "1.9.0"
 }
 

@@ -1,7 +1,7 @@
 {
   "data": {
     "id": 1,
-    "type": "budget",
+    "type": "Budget",
     "name": "Basic Budget 1",
     "description": "A basic budget of budget type",
     "accountIds": [
