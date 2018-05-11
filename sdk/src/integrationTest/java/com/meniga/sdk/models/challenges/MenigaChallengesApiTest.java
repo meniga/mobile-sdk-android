@@ -1,9 +1,11 @@
 package com.meniga.sdk.models.challenges;
 
+import com.atlassian.oai.validator.mockwebserver.ValidatingMockWebServer;
 import com.jayway.jsonassert.JsonAssert;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.helpers.MenigaDecimal;
+import com.meniga.sdk.models.SwaggerJsonExtensions;
 import com.meniga.sdk.models.challenges.enums.ChallengeInterval;
 import com.meniga.sdk.models.challenges.enums.ChallengeType;
 import com.meniga.sdk.models.challenges.enums.CustomChallengeColor;
@@ -12,48 +14,40 @@ import com.meniga.sdk.providers.tasks.Task;
 import org.assertj.core.util.Lists;
 import org.hamcrest.Matchers;
 import org.joda.time.DateTime;
-import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
+import static com.meniga.sdk.providers.tasks.TaskAssertions.assertThat;
 import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class MenigaChallengesApiTest {
 
-    private MockWebServer server;
+    @Rule
+    public ValidatingMockWebServer server = SwaggerJsonExtensions.createValidatingMockWebServer();
 
     @Before
-    public void setUp() throws Exception {
-        server = new MockWebServer();
-        server.start();
-        HttpUrl baseUrl = server.url("/v1");
-        MenigaSettings settings = new MenigaSettings.Builder().endpoint(baseUrl).build();
+    public void setUp() {
+        MenigaSettings settings = new MenigaSettings.Builder().endpoint(server.baseUrl()).build();
         MenigaSDK.init(settings);
     }
 
-    @After
-    public void tearDown() throws Exception {
-        server.shutdown();
-    }
-
     @Test
-    public void shouldFetchChallenges() throws Exception {
+    public void shouldFetchChallenges() {
         server.enqueue(mockResponse("challenges.json"));
 
         Task<List<MenigaChallenge>> task = MenigaChallenge.fetch().getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("GET");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges?includeExpired=true&excludeSuggested=false&excludeAccepted=false&includeDisabled=true");
@@ -62,8 +56,8 @@ public class MenigaChallengesApiTest {
     }
 
     @Test
-    public void shouldCreateChallenge() throws InterruptedException {
-        server.enqueue(mockResponse("challenges.json"));
+    public void shouldCreateChallenge() {
+        server.enqueue(mockResponse("challenge.json").setResponseCode(201));
 
         Task<MenigaChallenge> task = MenigaChallenge.create(
                 "title",
@@ -76,8 +70,8 @@ public class MenigaChallengesApiTest {
                 CustomChallengeColor.YELLOW,
                 ChallengeInterval.WEEKLY)
                 .getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("POST");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges");
@@ -97,8 +91,8 @@ public class MenigaChallengesApiTest {
         server.enqueue(new MockResponse().setResponseCode(204));
 
         Task<Void> task = challenge.delete().getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("DELETE");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges/e9b6101a-49eb-4d25-98e4-7b48dab90d50");
@@ -106,12 +100,12 @@ public class MenigaChallengesApiTest {
     }
 
     @Test
-    public void shouldFetchSingleChallenge() throws InterruptedException {
+    public void shouldFetchSingleChallenge() {
         server.enqueue(mockResponse("challenge.json"));
 
         Task<MenigaChallenge> task = MenigaChallenge.fetch(UUID.fromString("e9b6101a-49eb-4d25-98e4-7b48dab90d50")).getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("GET");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges/e9b6101a-49eb-4d25-98e4-7b48dab90d50");
@@ -128,8 +122,8 @@ public class MenigaChallengesApiTest {
 
         challenge.title = "New title";
         Task<Void> update = challenge.update().getTask();
-        update.waitForCompletion();
 
+        assertThat(update).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("PUT");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges/e9b6101a-49eb-4d25-98e4-7b48dab90d50");
@@ -149,8 +143,8 @@ public class MenigaChallengesApiTest {
         server.enqueue(mockResponse("challenge.json"));
 
         Task<MenigaChallenge> task = challenge.accept(new MenigaDecimal(1)).getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("POST");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges/e9b6101a-49eb-4d25-98e4-7b48dab90d50/accept");
@@ -165,8 +159,8 @@ public class MenigaChallengesApiTest {
         server.enqueue(new MockResponse().setResponseCode(204));
 
         Task<Void> task = challenge.disable().getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("POST");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges/e9b6101a-49eb-4d25-98e4-7b48dab90d50/disable");
@@ -179,8 +173,8 @@ public class MenigaChallengesApiTest {
         server.enqueue(new MockResponse().setResponseCode(204));
 
         Task<Void> task = challenge.enable().getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("POST");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges/e9b6101a-49eb-4d25-98e4-7b48dab90d50/enable");
@@ -193,8 +187,8 @@ public class MenigaChallengesApiTest {
         server.enqueue(mockResponse("challenges.json"));
 
         Task<List<MenigaChallenge>> task = challenge.history(1, 8).getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("GET");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges/e9b6101a-49eb-4d25-98e4-7b48dab90d50/history?skip=8&take=8");
@@ -208,8 +202,8 @@ public class MenigaChallengesApiTest {
 
         challenge.title = "Some new title";
         Task<MenigaChallenge> task = challenge.refresh().getTask();
-        task.waitForCompletion();
 
+        assertThat(task).isSuccessful();
         RecordedRequest recordedRequest = server.takeRequest();
         assertThat(recordedRequest.getMethod()).isEqualTo("GET");
         assertThat(recordedRequest.getPath()).isEqualTo("/v1/challenges/e9b6101a-49eb-4d25-98e4-7b48dab90d50");

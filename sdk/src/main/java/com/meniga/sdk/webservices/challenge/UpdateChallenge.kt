@@ -10,7 +10,7 @@ import org.joda.time.DateTime
 import java.util.UUID
 
 internal data class UpdateChallenge(
-        @JvmField var id: UUID? = null,
+        @Transient @JvmField var id: UUID? = null,
         @JvmField var title: String? = null,
         @JvmField var description: String? = null,
         @JvmField var startDate: DateTime? = null,

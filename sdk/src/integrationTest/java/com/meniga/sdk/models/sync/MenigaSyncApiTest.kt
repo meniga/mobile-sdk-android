@@ -3,12 +3,13 @@
  */
 package com.meniga.sdk.models.sync
 
+import com.atlassian.oai.validator.mockwebserver.ValidatingMockWebServer
 import com.jayway.jsonassert.JsonAssert
 import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.MenigaSettings
+import com.meniga.sdk.models.createValidatingMockWebServer
 import com.meniga.sdk.models.user.ChallengeContentType
 import com.meniga.sdk.utils.mockResponse
-import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.jetbrains.spek.api.Spek
@@ -21,18 +22,17 @@ import java.net.URI
 @RunWith(JUnitPlatform::class)
 object MenigaSyncApiTest : Spek({
 
-    lateinit var server: MockWebServer
+    lateinit var server: ValidatingMockWebServer
 
     beforeEachTest {
-        server = MockWebServer()
+        server = createValidatingMockWebServer()
         server.start()
-        val baseUrl = server.url("/v1")
-        val settings = MenigaSettings.Builder().endpoint(baseUrl).build()
+        val settings = MenigaSettings.Builder().endpoint(server.baseUrl()).build()
         MenigaSDK.init(settings)
     }
 
     afterEachTest {
-        server.shutdown()
+        server.stop()
     }
 
     fun assertThatSyncStatusWasChecked() {
@@ -76,6 +76,10 @@ object MenigaSyncApiTest : Spek({
             assertThat(realmSyncResponse.organizationName).isEqualTo("ExampleBank")
             assertThat(realmSyncResponse.realmCredentialsDisplayName).isEqualTo("string")
         }
+
+        it("should validate against the spec") {
+            server.assertNoValidations()
+        }
     }
 
     on("syncing all realms while still in progress") {
@@ -95,6 +99,10 @@ object MenigaSyncApiTest : Spek({
             assertThat(URI(recordedRequest.path))
                     .hasPath("/v1/sync/0")
                     .hasNoParameters()
+        }
+
+        it("should validate against the spec") {
+            server.assertNoValidations()
         }
     }
 
@@ -121,6 +129,10 @@ object MenigaSyncApiTest : Spek({
         it("should return proper data") {
             assertThat(task.result).isNotNull()
         }
+
+        it("should validate against the spec") {
+            server.assertNoValidations()
+        }
     }
 
     on("checking sync status") {
@@ -135,6 +147,10 @@ object MenigaSyncApiTest : Spek({
 
         it("should return proper sync status") {
             task.result.hasCompletedSyncSession
+        }
+
+        it("should validate against the spec") {
+            server.assertNoValidations()
         }
     }
 })

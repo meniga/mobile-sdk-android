@@ -1,0 +1,29 @@
+ext {
+    swaggerJsonUrl = "http://api.umw.meniga.net/docs/user-v1"
+    timeoutMillis = 1000
+}
+
+task updateSwaggerJson(type: Download) {
+    group "build"
+    onlyIf { isReachable(swaggerJsonUrl, timeoutMillis) }
+    src swaggerJsonUrl
+    dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", "swagger.json")
+    overwrite true
+    acceptAnyCertificate true
+    compress true
+    timeout timeoutMillis
+}
+
+afterEvaluate { tasks.getByName("compileDebugUnitTestSources").dependsOn(updateSwaggerJson) }
+
+private boolean isReachable(String urlString, int timeOutMillis) {
+    try {
+        URL url = new URL(urlString)
+        Socket socket = new Socket()
+        socket.connect(new InetSocketAddress(url.host, url.defaultPort), timeOutMillis)
+        return true
+    } catch (Exception exception) {
+        project.logger.warn("Skipping Swagger JSON download", exception)
+        return false
+    }
+}

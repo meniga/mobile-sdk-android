@@ -6,6 +6,7 @@ apply plugin: "org.jetbrains.dokka-android"
 apply from: "$rootDir/gradle/deploy.gradle"
 apply from: "$rootDir/gradle/fixKotlinTestCoverage.gradle"
 apply from: "$rootDir/gradle/pom-customizer.gradle"
+apply from: "$rootDir/gradle/swagger-json-updater.gradle"
 
 android {
     compileSdkVersion 27
@@ -77,6 +78,7 @@ dependencies {
     testImplementation "junit:junit:4.12"
     testImplementation "net.jodah:concurrentunit:0.4.2"
     testImplementation "org.assertj:assertj-core:2.6.0"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
     testImplementation "org.jetbrains.spek:spek-api:$spekVersion"
     testImplementation "org.jetbrains.spek:spek-data-driven-extension:$spekVersion"
     testImplementation "org.jetbrains.spek:spek-junit-platform-engine:$spekVersion"

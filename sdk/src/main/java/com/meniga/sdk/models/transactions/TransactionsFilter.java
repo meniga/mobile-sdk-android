@@ -45,8 +45,8 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 
 	protected final String type;
 	protected final String orderBy;
-	protected final Integer skip;
-	protected final Integer take;
+	protected final transient Integer skip;
+	protected final transient Integer take;
 	protected final MenigaDecimal amountTo;
 	protected final MenigaDecimal amountFrom;
 	protected final List<Long> categoryIds;
@@ -90,10 +90,10 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	protected final List<String> parsedDataExactKeys;
 	protected final String parsedDataNameToOrderBy;
 
-	protected boolean includeAccounts = true;
-	protected boolean includeMerchants = true;
+	protected transient boolean includeAccounts = true;
+	protected transient boolean includeMerchants = true;
 
-	protected transient final boolean isFiltering;
+	protected final transient boolean isFiltering;
 
 	protected TransactionsFilter(Parcel in) {
 		type = in.readString();

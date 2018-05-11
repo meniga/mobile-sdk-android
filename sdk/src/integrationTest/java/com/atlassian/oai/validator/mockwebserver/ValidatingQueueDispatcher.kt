@@ -3,7 +3,6 @@ package com.atlassian.oai.validator.mockwebserver
 import com.atlassian.oai.validator.SwaggerRequestResponseValidator
 import com.atlassian.oai.validator.report.ValidationReport
 import com.atlassian.oai.validator.whitelist.ValidationErrorsWhitelist
-import com.atlassian.oai.validator.whitelist.rule.WhitelistRules
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.QueueDispatcher
 import okhttp3.mockwebserver.RecordedRequest
@@ -11,6 +10,7 @@ import okhttp3.mockwebserver.RecordedRequest
 internal class ValidatingQueueDispatcher(
         swaggerJsonUrl: String,
         overriddenBasePath: String,
+        whitelist: ValidationErrorsWhitelist,
         validatorsCache: ValidatorsCache = StaticValidatorsCache) : QueueDispatcher() {
 
     private val validator: SwaggerRequestResponseValidator by lazy {
@@ -20,8 +20,7 @@ internal class ValidatingQueueDispatcher(
                 {
                     SwaggerRequestResponseValidator.createFor(swaggerJsonUrl)
                             .withBasePathOverride(overriddenBasePath)
-                            .withWhitelist(ValidationErrorsWhitelist.create()
-                                    .withRule("Ignore date-format violations", WhitelistRules.messageContains("is invalid against requested date format")))
+                            .withWhitelist(whitelist)
                             .build()
                 })
     }
