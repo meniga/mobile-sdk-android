@@ -13,5 +13,5 @@ public enum RecurringPatternStatus {
 	@SerializedName("Accepted")
 	ACCEPTED,
 	@SerializedName("Rejected")
-	RECJECTED
+	REJECTED
 }
