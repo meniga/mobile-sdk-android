@@ -3,6 +3,7 @@ package com.meniga.sdk.webservices.requests;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.models.upcoming.MenigaUpcomingRecurringPattern;
 import com.meniga.sdk.models.upcoming.enums.PaymentStatus;
+import com.meniga.sdk.models.upcoming.enums.RecurringPatternStatus;
 
 import org.joda.time.DateTime;
 
@@ -13,7 +14,6 @@ import java.util.Map;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class UpdateUpcoming extends QueryRequestObject {
-
 	public transient long id;
 	public String text;
 	public MenigaDecimal amountInCurrency;
@@ -26,6 +26,8 @@ public class UpdateUpcoming extends QueryRequestObject {
 	public Boolean isFlagged;
 	public Boolean isWatched;
 	public MenigaUpcomingRecurringPattern recurringPattern;
+	public DateTime repeatUntil;
+	public RecurringPatternStatus status;
 
 	@Override
 	public Map<String, String> toQueryMap() {

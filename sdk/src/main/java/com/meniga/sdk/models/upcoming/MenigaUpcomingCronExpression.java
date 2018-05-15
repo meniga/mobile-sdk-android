@@ -20,7 +20,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 	protected Integer monthInterval;
 	protected CronDayOfWeek dayOfWeek;
 	protected Integer dayOfWeekInterval;
-	protected DateTime weekOfYear;
+	protected Integer weekOfYear;
 	protected Integer weekInterval;
 
 	public MenigaUpcomingCronExpression() {
@@ -82,7 +82,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 	/**
 	 * @return The week-of-year field of the cron expression. If null, the wildcard character * is assumed
 	 */
-	public DateTime getWeekOfYear() {
+	public Integer getWeekOfYear() {
 		return weekOfYear;
 	}
 
@@ -124,7 +124,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 		return this;
 	}
 
-	public MenigaUpcomingCronExpression setWeekOfYear(DateTime weekOfYear) {
+	public MenigaUpcomingCronExpression setWeekOfYear(Integer weekOfYear) {
 		this.weekOfYear = weekOfYear;
 		return this;
 	}
@@ -195,7 +195,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 		dest.writeValue(monthInterval);
 		dest.writeInt(dayOfWeek == null ? -1 : dayOfWeek.ordinal());
 		dest.writeValue(dayOfWeekInterval);
-		dest.writeValue(weekOfYear == null ? null : weekOfYear.getMillis());
+		dest.writeValue(weekOfYear);
 		dest.writeValue(weekInterval);
 	}
 
@@ -208,10 +208,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 		int tmpDayOfWeek = in.readInt();
 		dayOfWeek = tmpDayOfWeek == -1 ? null : CronDayOfWeek.values()[tmpDayOfWeek];
 		dayOfWeekInterval = (Integer) in.readValue(Integer.class.getClassLoader());
-		Long weekOfYearMs = (Long) in.readValue(Long.class.getClassLoader());
-		if (weekOfYearMs != null) {
-			weekOfYear = new DateTime(weekOfYearMs);
-		}
+		weekOfYear = (Integer) in.readValue(Integer.class.getClassLoader());
 		weekInterval = (Integer) in.readValue(Integer.class.getClassLoader());
 	}
 

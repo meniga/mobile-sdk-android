@@ -74,6 +74,8 @@ public class MenigaUpcomingOperationsImp implements MenigaUpcomingOperations {
 		if (updateWholeSeries) {
 			req.recurringPattern = update.getRecurringPattern();
 		}
+		req.repeatUntil = update.getRecurringPattern().getRepeatUntil();
+		req.status = update.getRecurringPattern().getStatus();
 
 		return MenigaSDK.executor().updateUpcoming(req);
 	}
