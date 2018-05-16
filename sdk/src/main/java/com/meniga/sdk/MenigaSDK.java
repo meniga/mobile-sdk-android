@@ -71,7 +71,6 @@ import javax.inject.Inject;
  */
 @SuppressWarnings("WeakerAccess")
 public class MenigaSDK {
-
 	private static PersistenceDelegate persistenceDelegate;
 
 	private static MenigaSettings settings;

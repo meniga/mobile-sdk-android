@@ -21,19 +21,20 @@ import java.lang.reflect.Type;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class DateTimeSerializer implements JsonDeserializer<DateTime>, JsonSerializer<DateTime> {
-
 	@Override
 	public DateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		String str = json.getAsString().substring(0, 19);
+		String dateAdString = json.getAsString();
+		if (dateAdString.length() > 19) {
+			dateAdString = dateAdString.substring(0, 19);
+		}
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss");
 
-		return format.parseDateTime(str);
+		return format.parseDateTime(dateAdString);
 	}
 
 	@Override
 	public JsonElement serialize(DateTime src, Type typeOfSrc, JsonSerializationContext context) {
-		DateTime dateTime = new LocalDateTime(src.getMillis()).toDateTime(DateTimeZone.UTC);
-		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
-		return new JsonPrimitive(fmt.print(dateTime));
+		DateTimeFormatter formatter = ISODateTimeFormat.dateTime();
+		return new JsonPrimitive(formatter.print(src));
 	}
 }
