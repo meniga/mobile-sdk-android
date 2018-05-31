@@ -28,7 +28,7 @@ public class MenigaRealm implements Parcelable, Serializable {
 	protected MenigaRealm() {
 	}
 
-	public static void setOperations(MenigaRealmOperations operations) {
+	public static void setOperator(MenigaRealmOperations operations) {
 		apiOperations = operations;
 	}
 

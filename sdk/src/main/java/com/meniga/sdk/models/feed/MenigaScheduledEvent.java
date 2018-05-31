@@ -95,7 +95,7 @@ public class MenigaScheduledEvent implements MenigaFeedItem, Serializable, Clone
 		this.typeName = in.readString();
 	}
 
-	public static void setApiOperator(MenigaFeedOperations apiOperatorIn) {
+	public static void setOperator(MenigaFeedOperations apiOperatorIn) {
 		apiOperator = apiOperatorIn;
 	}
 
