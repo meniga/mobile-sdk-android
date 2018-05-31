@@ -180,7 +180,7 @@ public class MenigaSDK {
 	}
 
 	/**
-	 * This is the entry point to the SDK. Pass in a MenigaServerSettings and after initalization the SDK can be used.
+	 * This is the entry point to the SDK. Pass in a MenigaServerSettings and after initialization the SDK can be used.
 	 *
 	 * @param settings MenigaServerSettings object that has all the required settings set.
 	 */
