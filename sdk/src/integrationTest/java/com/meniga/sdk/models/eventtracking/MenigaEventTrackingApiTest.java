@@ -1,6 +1,7 @@
 package com.meniga.sdk.models.eventtracking;
 
 import com.atlassian.oai.validator.mockwebserver.ValidatingMockWebServer;
+import com.jayway.jsonassert.JsonAssert;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.models.SwaggerJsonExtensions;
@@ -13,7 +14,9 @@ import org.junit.Test;
 
 import okhttp3.mockwebserver.RecordedRequest;
 
+import static org.hamcrest.Matchers.equalTo;
 import static com.meniga.sdk.providers.tasks.TaskAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 
 /**
@@ -34,11 +37,17 @@ public class MenigaEventTrackingApiTest {
 	@Test
 	public void testTracking() {
 		server.enqueue(mockResponse("eventtracking.json").setResponseCode(204));
-		Task<Void> task = MenigaEventTracking.build("dialog", "seen", 25, "mobile_androud").track().getTask();
+		Task<Void> task = MenigaEventTracking.build("dialog", "seen", 25, "mobile_android").track().getTask();
 
 		assertThat(task).isSuccessful();
 		RecordedRequest request = server.takeRequest();
-		Assertions.assertThat(request.getPath()).isEqualTo("/v1/eventtracking");
-		Assertions.assertThat(request.getMethod()).isEqualTo("POST");
+		JsonAssert.with(request.getBody().readUtf8())
+				.assertThat("$.trackingType", equalTo("dialog"))
+				.assertThat("$.trackingState", equalTo("seen"))
+				.assertThat("$.trackerId", equalTo(25))
+				.assertThat("$.media", equalTo("mobile_android"));
+
+		assertThat(request.getPath()).isEqualTo("/v1/eventtracking");
+		assertThat(request.getMethod()).isEqualTo("POST");
 	}
 }
