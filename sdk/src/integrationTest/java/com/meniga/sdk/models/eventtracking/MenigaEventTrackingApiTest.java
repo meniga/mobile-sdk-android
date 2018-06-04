@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.RecordedRequest;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -36,7 +37,7 @@ public class MenigaEventTrackingApiTest {
 
 	@Test
 	public void testTracking() {
-		server.enqueue(mockResponse("eventtracking.json").setResponseCode(204));
+		server.enqueue(new MockResponse().setResponseCode(204));
 		Task<Void> task = MenigaEventTracking.build("dialog", "seen", 25, "mobile_android").track().getTask();
 
 		assertThat(task).isSuccessful();
