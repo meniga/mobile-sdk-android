@@ -9,6 +9,8 @@ import com.meniga.sdk.models.categories.operators.MenigaCategoryOperations;
 import com.meniga.sdk.models.categories.operators.MenigaCategoryOperationsImp;
 import com.meniga.sdk.models.challenges.operators.MenigaChallengesOperations;
 import com.meniga.sdk.models.challenges.operators.MenigaChallengesOperationsImp;
+import com.meniga.sdk.models.eventtracking.operators.MenigaEventTrackingOperations;
+import com.meniga.sdk.models.eventtracking.operators.MenigaEventTrackingOperationsImp;
 import com.meniga.sdk.models.feed.operators.MenigaFeedOperations;
 import com.meniga.sdk.models.feed.operators.MenigaFeedOperationsImp;
 import com.meniga.sdk.models.merchants.operators.MenigaMerchantOperations;
@@ -160,6 +162,11 @@ public class MenigaClientModule {
 	@Provides
 	private MenigaCategoryOperations provideMenigaCategoryOperations() {
 		return new MenigaCategoryOperationsImp();
+	}
+
+	@Provides
+	private MenigaEventTrackingOperations provideMenigaEventTrackingOperations() {
+		return new MenigaEventTrackingOperationsImp();
 	}
 
 	@Provides

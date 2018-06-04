@@ -11,6 +11,8 @@ import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.categories.operators.MenigaCategoryOperations;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
 import com.meniga.sdk.models.challenges.operators.MenigaChallengesOperations;
+import com.meniga.sdk.models.eventtracking.MenigaEventTracking;
+import com.meniga.sdk.models.eventtracking.operators.MenigaEventTrackingOperations;
 import com.meniga.sdk.models.feed.MenigaFeed;
 import com.meniga.sdk.models.feed.MenigaScheduledEvent;
 import com.meniga.sdk.models.feed.operators.MenigaFeedOperations;
@@ -129,6 +131,8 @@ public class MenigaSDK {
 	MenigaOrganizationOperations organizationsOperations;
 	@Inject
 	MenigaRealmOperations realmOperations;
+	@Inject
+	MenigaEventTrackingOperations eventTrackingOperations;
 
 	/**
 	 * Returns the current MenigaAPI client.
@@ -170,12 +174,13 @@ public class MenigaSDK {
 		MenigaBudgetEntry.setOperator(budgetOperations);
 		MenigaChallenge.setOperator(challengesOperations);
 		MenigaOrganization.setOperator(organizationsOperations);
-		MenigaRealm.setOperations(realmOperations);
-		MenigaScheduledEvent.setApiOperator(feedOperator);
+		MenigaRealm.setOperator(realmOperations);
+		MenigaScheduledEvent.setOperator(feedOperator);
+		MenigaEventTracking.setOperator(eventTrackingOperations);
 	}
 
 	/**
-	 * This is the entry point to the SDK. Pass in a MenigaServerSettings and after initalization the SDK can be used.
+	 * This is the entry point to the SDK. Pass in a MenigaServerSettings and after initialization the SDK can be used.
 	 *
 	 * @param settings MenigaServerSettings object that has all the required settings set.
 	 */

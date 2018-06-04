@@ -17,7 +17,6 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaCategoryOperationsImp implements MenigaCategoryOperations {
-
 	@Override
 	public Result<List<MenigaCategory>> getCategories(Boolean publicOnly, String culture) {
 		GetCategories req = new GetCategories();

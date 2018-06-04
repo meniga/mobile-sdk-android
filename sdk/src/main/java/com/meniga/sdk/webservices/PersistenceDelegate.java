@@ -72,6 +72,8 @@ import com.meniga.sdk.webservices.challenge.GetChallenge;
 import com.meniga.sdk.webservices.challenge.GetChallengeHistory;
 import com.meniga.sdk.webservices.challenge.GetChallenges;
 import com.meniga.sdk.webservices.challenge.UpdateChallenge;
+import com.meniga.sdk.webservices.eventtracking.EventTrackingService;
+import com.meniga.sdk.webservices.eventtracking.TrackEvent;
 import com.meniga.sdk.webservices.requests.*;
 
 import java.util.Collections;
@@ -835,6 +837,13 @@ public class PersistenceDelegate {
 
 	public Result<Void> declineTerms(DeclineTerms req) {
 		return persist(req, getClient(Service.TERMS).declineTerms(req.typeId));
+	}
+
+	// --
+	// EventTracking
+	// --
+	public Result<Void> trackEvent(TrackEvent req) {
+		return persist(req, getService(EventTrackingService.class).trackEvent(req));
 	}
 
 	// --
