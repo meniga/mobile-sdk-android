@@ -1,15 +1,15 @@
 /*
  * Copyright 2017-2018 Meniga Iceland Inc.
  */
-package com.meniga.sdk.models.accounts
+package com.meniga.sdk.models.accounts.operators
 
 import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.helpers.KeyVal
 import com.meniga.sdk.helpers.Result
+import com.meniga.sdk.models.accounts.*
 import com.meniga.sdk.models.accounts.enums.AccountAuthorizationType
 import com.meniga.sdk.models.accounts.enums.AccountBalanceHistorySort
 import com.meniga.sdk.models.accounts.enums.AccountCategory
-import com.meniga.sdk.models.accounts.operators.MenigaAccountOperations
 import com.meniga.sdk.webservices.account.Account
 import com.meniga.sdk.webservices.account.AccountAuthorizationTypeName
 import com.meniga.sdk.webservices.account.AccountBalanceHistory
