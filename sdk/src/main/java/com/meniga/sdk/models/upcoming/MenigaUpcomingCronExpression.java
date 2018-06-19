@@ -189,7 +189,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeValue(dayOfMonth);
+		dest.writeString(dayOfMonth);
 		dest.writeValue(dayOfMonthInterval);
 		dest.writeInt(month == null ? -1 : month.ordinal());
 		dest.writeValue(monthInterval);
