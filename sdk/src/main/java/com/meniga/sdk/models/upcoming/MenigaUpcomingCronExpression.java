@@ -14,7 +14,7 @@ import java.io.Serializable;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaUpcomingCronExpression implements Serializable, Parcelable, Cloneable {
-	protected Integer dayOfMonth;
+	protected String dayOfMonth;
 	protected Integer dayOfMonthInterval;
 	protected CronMonth month;
 	protected Integer monthInterval;
@@ -34,7 +34,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 	/**
 	 * @return The day-of-month field of the cron expression. If null, the wildcard character * is assumed
 	 */
-	public Integer getDayOfMonth() {
+	public String getDayOfMonth() {
 		return dayOfMonth;
 	}
 
@@ -94,7 +94,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 		return weekInterval;
 	}
 
-	public MenigaUpcomingCronExpression setDayOfMonth(Integer dayOfMonth) {
+	public MenigaUpcomingCronExpression setDayOfMonth(String dayOfMonth) {
 		this.dayOfMonth = dayOfMonth;
 		return this;
 	}
@@ -189,7 +189,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeValue(dayOfMonth);
+		dest.writeString(dayOfMonth);
 		dest.writeValue(dayOfMonthInterval);
 		dest.writeInt(month == null ? -1 : month.ordinal());
 		dest.writeValue(monthInterval);
@@ -200,7 +200,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 	}
 
 	protected MenigaUpcomingCronExpression(Parcel in) {
-		dayOfMonth = (Integer) in.readValue(Integer.class.getClassLoader());
+		dayOfMonth = in.readString();
 		dayOfMonthInterval = (Integer) in.readValue(Integer.class.getClassLoader());
 		int tmpMonth = in.readInt();
 		month = tmpMonth == -1 ? null : CronMonth.values()[tmpMonth];
