@@ -205,7 +205,6 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 		int tmpMonth = in.readInt();
 		month = tmpMonth == -1 ? null : CronMonth.values()[tmpMonth];
 		monthInterval = (Integer) in.readValue(Integer.class.getClassLoader());
-		int tmpDayOfWeek = in.readInt();
 		dayOfWeek = in.readString();
 		dayOfWeekInterval = (Integer) in.readValue(Integer.class.getClassLoader());
 		weekOfYear = (Integer) in.readValue(Integer.class.getClassLoader());
