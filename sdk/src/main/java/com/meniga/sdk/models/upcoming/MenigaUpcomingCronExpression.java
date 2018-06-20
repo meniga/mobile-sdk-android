@@ -18,7 +18,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 	protected Integer dayOfMonthInterval;
 	protected CronMonth month;
 	protected Integer monthInterval;
-	protected CronDayOfWeek dayOfWeek;
+	protected String dayOfWeek;
 	protected Integer dayOfWeekInterval;
 	protected Integer weekOfYear;
 	protected Integer weekInterval;
@@ -67,7 +67,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 	 * @return The day-of-week field of the cron expression. If null, the wildcard character * is
 	 * assumed. = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 	 */
-	public CronDayOfWeek getDayOfWeek() {
+	public String getDayOfWeek() {
 		return dayOfWeek;
 	}
 
@@ -114,7 +114,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 		return this;
 	}
 
-	public MenigaUpcomingCronExpression setDayOfWeek(CronDayOfWeek dayOfWeek) {
+	public MenigaUpcomingCronExpression setDayOfWeek(String dayOfWeek) {
 		this.dayOfWeek = dayOfWeek;
 		return this;
 	}
@@ -193,7 +193,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 		dest.writeValue(dayOfMonthInterval);
 		dest.writeInt(month == null ? -1 : month.ordinal());
 		dest.writeValue(monthInterval);
-		dest.writeInt(dayOfWeek == null ? -1 : dayOfWeek.ordinal());
+		dest.writeString(dayOfWeek);
 		dest.writeValue(dayOfWeekInterval);
 		dest.writeValue(weekOfYear);
 		dest.writeValue(weekInterval);
@@ -206,7 +206,7 @@ public class MenigaUpcomingCronExpression implements Serializable, Parcelable, C
 		month = tmpMonth == -1 ? null : CronMonth.values()[tmpMonth];
 		monthInterval = (Integer) in.readValue(Integer.class.getClassLoader());
 		int tmpDayOfWeek = in.readInt();
-		dayOfWeek = tmpDayOfWeek == -1 ? null : CronDayOfWeek.values()[tmpDayOfWeek];
+		dayOfWeek = in.readString();
 		dayOfWeekInterval = (Integer) in.readValue(Integer.class.getClassLoader());
 		weekOfYear = (Integer) in.readValue(Integer.class.getClassLoader());
 		weekInterval = (Integer) in.readValue(Integer.class.getClassLoader());
