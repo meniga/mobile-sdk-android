@@ -116,7 +116,7 @@ public class MenigaUpcomingTest {
 		MenigaUpcomingCronExpression cron = new MenigaUpcomingCronExpression();
 		cron.setDayOfMonth("1");
 		cron.setDayOfMonthInterval(2);
-		cron.setDayOfWeek(CronDayOfWeek.SATURDAY);
+		cron.setDayOfWeek("Saturday");
 		cron.setDayOfWeekInterval(3);
 		cron.setMonth(CronMonth.APRIL);
 		pattern.setPattern(cron);
