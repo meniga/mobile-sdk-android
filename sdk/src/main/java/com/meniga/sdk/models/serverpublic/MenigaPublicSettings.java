@@ -355,7 +355,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 		return result;
 	}
 
-	private static class MenigaCurrency implements Parcelable, Serializable {
+	public static class MenigaCurrency implements Parcelable, Serializable {
 		public static final Creator<MenigaCurrency> CREATOR = new Creator<MenigaCurrency>() {
 			@Override
 			public MenigaCurrency createFromParcel(Parcel source) {
@@ -368,15 +368,15 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 			}
 		};
 
-		protected int id;
-		protected String code;
-		protected Boolean isDefault;
-		protected String name;
-		protected String format;
-		protected String currencyFormat;
-		protected String currencyFormatUsingCode;
-		protected String provider;
-		protected Integer roundOff;
+		private int id;
+		private String code;
+		private Boolean isDefault;
+		private String name;
+		private String format;
+		private String currencyFormat;
+		private String currencyFormatUsingCode;
+		private String provider;
+		private Integer roundOff;
 
 		protected MenigaCurrency() {
 		}
