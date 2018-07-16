@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": 13103,
+      "targetAmount": 0,
+      "startDate": "2018-07-01T00:00:00",
+      "endDate": "2018-07-31T00:00:00",
+      "updatedAt": "2018-07-16T11:38:11.0670068",
+      "budgetId": 97,
+      "generationType": 12,
+      "categoryIds": [
+        72
+      ]
+    },
+    {
+      "id": 13098,
+      "targetAmount": 0,
+      "startDate": "2018-08-01T00:00:00",
+      "endDate": "2018-08-31T00:00:00",
+      "updatedAt": "2018-07-16T11:36:16.2459065",
+      "budgetId": 97,
+      "generationType": 12,
+      "categoryIds": [
+        72
+      ]
+    },
+    {
+      "id": 13102,
+      "targetAmount": 0,
+      "startDate": "2018-09-01T00:00:00",
+      "endDate": "2018-09-30T00:00:00",
+      "updatedAt": "2018-07-16T11:36:16.2529048",
+      "budgetId": 97,
+      "generationType": 3,
+      "categoryIds": [
+        72
+      ]
+    }
+  ]
+}

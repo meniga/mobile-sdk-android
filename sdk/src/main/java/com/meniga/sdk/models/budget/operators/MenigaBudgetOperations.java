@@ -3,15 +3,17 @@ package com.meniga.sdk.models.budget.operators;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
+import com.meniga.sdk.models.budget.MenigaBudgetRule;
 import com.meniga.sdk.webservices.budget.CreateBudget;
 import com.meniga.sdk.webservices.budget.CreateBudgetEntries;
 import com.meniga.sdk.webservices.budget.GetBudget;
 import com.meniga.sdk.webservices.budget.GetBudgetEntries;
 import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.GetBudgetRules;
 import com.meniga.sdk.webservices.budget.GetBudgets;
 import com.meniga.sdk.webservices.budget.UpdateBudget;
 import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
-import com.meniga.sdk.webservices.budget.UpdateBudgetRules;
+import com.meniga.sdk.webservices.budget.CreateBudgetRules;
 
 import java.util.List;
 
@@ -42,5 +44,9 @@ public interface MenigaBudgetOperations {
 
     Result<Void> resetBudget(long budgetId);
 
-    Result<Void> updateBudgetRules(long budgetId, UpdateBudgetRules parameters);
+    Result<List<MenigaBudgetRule>> getBudgetRules(GetBudgetRules filter);
+
+    Result<List<MenigaBudgetRule>> createBudgetRules(long budgetId, CreateBudgetRules parameters);
+
+	Result<Void> deleteBudgetRule(long budgetId, long ruleId);
 }

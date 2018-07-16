@@ -18,4 +18,3 @@ internal data class CreateBudgetEntry(
         var endDate: DateTime? = null,
         var categoryIds: List<Long>? = null
 )
-

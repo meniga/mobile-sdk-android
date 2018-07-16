@@ -8,11 +8,11 @@ import com.meniga.sdk.webservices.requests.QueryRequestObject
 
 import org.joda.time.DateTime
 
-internal data class UpdateBudgetRules(var rules: List<UpdateBudgetData>? = null) : QueryRequestObject() {
+internal data class CreateBudgetRules(var rules: List<CreateBudgetRuleData>? = null) : QueryRequestObject() {
 
     override fun getValueHash(): Long = hashCode().toLong()
 
-    data class UpdateBudgetData(
+    data class CreateBudgetRuleData(
             var targetAmount: MenigaDecimal? = null,
             var startDate: DateTime? = null,
             var endDate: DateTime? = null,

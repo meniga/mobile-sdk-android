@@ -17,6 +17,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import kotlin.jvm.functions.Function1;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -220,6 +222,8 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 
 	/**
 	 * Use {@link #update(long, BudgetRulesUpdate)} instead.
+	 *
+	 * @deprecated To be removed in 1.2
 	 */
 	@Deprecated
 	public static Result<Void> update(
@@ -242,8 +246,20 @@ public class MenigaBudgetEntry implements Parcelable, Serializable {
 		return update(budgetId, parameters);
 	}
 
+	/**
+	 * Use {@link MenigaBudgetRule#create(NewBudgetRule)} instead.
+	 *
+	 * @deprecated To be removed in 1.2
+	 */
+	@Deprecated
 	public static Result<Void> update(long budgetId, BudgetRulesUpdate parameters) {
-		return apiOperator.updateBudgetRules(budgetId, BudgetRulesUpdateExtensions.toUpdateBudgetRules(parameters));
+		return apiOperator.createBudgetRules(budgetId, BudgetRulesUpdateExtensions.toUpdateBudgetRules(parameters))
+				.map(new Function1<List<MenigaBudgetRule>, Void>() {
+					@Override
+					public Void invoke(List<MenigaBudgetRule> menigaBudgetRules) {
+						return null;
+					}
+				});
 	}
 
 	public static Result<List<MenigaBudgetEntry>> create(long budgetId, NewBudgetEntry parameters) {

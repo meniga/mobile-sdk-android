@@ -5,6 +5,7 @@ package com.meniga.sdk.webservices.budget
 
 import com.meniga.sdk.models.budget.MenigaBudget
 import com.meniga.sdk.models.budget.MenigaBudgetEntry
+import com.meniga.sdk.models.budget.MenigaBudgetRule
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -61,5 +62,13 @@ internal interface BudgetService {
     fun resetBudget(@Path("id") budgetId: String): Call<Void>
 
     @POST("budgets/{id}/rules")
-    fun createBudgetRules(@Path("id") id: String, @Body req: UpdateBudgetRules): Call<Void>
+    fun createBudgetRules(@Path("id") id: String, @Body req: CreateBudgetRules): Call<List<MenigaBudgetRule>>
+
+    @GET("budgets/{id}/rules")
+    fun getBudgetRules(
+            @Path("id") id: String,
+            @QueryMap query: Map<String, String>): Call<List<MenigaBudgetRule>>
+
+    @DELETE("budgets/{id}/rules/{ruleId}")
+    fun deleteBudgetRule(@Path("id") id: String, @Path("ruleId") entryId: String): Call<Void>
 }
