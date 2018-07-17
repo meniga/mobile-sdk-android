@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": 13101,
+      "budgetId": 97,
+      "targetAmount": 0,
+      "startDate": "2018-07-01T00:00:00",
+      "endDate": "2018-07-31T00:00:00",
+      "updatedAt": "2018-07-16T11:36:16.2529048+00:00",
+      "categoryIds": [
+        72
+      ],
+      "generationType": 3
+    },
+    {
+      "id": 13102,
+      "budgetId": 97,
+      "targetAmount": 0,
+      "startDate": "2018-09-01T00:00:00",
+      "endDate": "2018-09-30T00:00:00",
+      "updatedAt": "2018-07-16T11:36:16.2529048+00:00",
+      "categoryIds": [
+        72
+      ],
+      "generationType": 3
+    }
+  ]
+}

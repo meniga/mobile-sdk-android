@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
+@Deprecated
 public class GenerationTypeValue implements Parcelable, Serializable {
     private int value;
     private GenerationType type;

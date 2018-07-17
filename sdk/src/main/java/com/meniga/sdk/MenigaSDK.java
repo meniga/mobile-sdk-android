@@ -5,6 +5,7 @@ import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.accounts.operators.MenigaAccountOperations;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
+import com.meniga.sdk.models.budget.MenigaBudgetRule;
 import com.meniga.sdk.models.budget.operators.MenigaBudgetOperations;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
@@ -172,6 +173,7 @@ public class MenigaSDK {
 		MenigaRedemptions.setOperator(redemptionsOperations);
 		MenigaBudget.setOperator(budgetOperations);
 		MenigaBudgetEntry.setOperator(budgetOperations);
+		MenigaBudgetRule.setOperator(budgetOperations);
 		MenigaChallenge.setOperator(challengesOperations);
 		MenigaOrganization.setOperator(organizationsOperations);
 		MenigaRealm.setOperator(realmOperations);

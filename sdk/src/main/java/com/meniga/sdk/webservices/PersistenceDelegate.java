@@ -7,6 +7,7 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.interfaces.PersistenceProvider;
 import com.meniga.sdk.models.budget.MenigaBudget;
 import com.meniga.sdk.models.budget.MenigaBudgetEntry;
+import com.meniga.sdk.models.budget.MenigaBudgetRule;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 import com.meniga.sdk.models.challenges.MenigaChallenge;
@@ -57,13 +58,14 @@ import com.meniga.sdk.webservices.account.UpdateAccountMetadata;
 import com.meniga.sdk.webservices.budget.BudgetService;
 import com.meniga.sdk.webservices.budget.CreateBudget;
 import com.meniga.sdk.webservices.budget.CreateBudgetEntries;
+import com.meniga.sdk.webservices.budget.CreateBudgetRules;
 import com.meniga.sdk.webservices.budget.GetBudget;
 import com.meniga.sdk.webservices.budget.GetBudgetEntries;
 import com.meniga.sdk.webservices.budget.GetBudgetEntryById;
+import com.meniga.sdk.webservices.budget.GetBudgetRules;
 import com.meniga.sdk.webservices.budget.GetBudgets;
 import com.meniga.sdk.webservices.budget.UpdateBudget;
 import com.meniga.sdk.webservices.budget.UpdateBudgetEntry;
-import com.meniga.sdk.webservices.budget.UpdateBudgetRules;
 import com.meniga.sdk.webservices.challenge.AcceptChallenge;
 import com.meniga.sdk.webservices.challenge.ChallengeService;
 import com.meniga.sdk.webservices.challenge.CreateChallenge;
@@ -788,8 +790,16 @@ public class PersistenceDelegate {
 		return persist(parameters, getService(BudgetService.class).updateBudget(Long.toString(budgetId), parameters));
 	}
 
-	public Result<Void> updateBudgetRules(long budgetId, UpdateBudgetRules req) {
+	public Result<List<MenigaBudgetRule>> getBudgetRules(GetBudgetRules filter) {
+		return persist(filter, getService(BudgetService.class).getBudgetRules(Long.toString(filter.getId()), filter.toQueryMap()));
+	}
+
+	public Result<List<MenigaBudgetRule>> createBudgetRules(long budgetId, CreateBudgetRules req) {
 		return call(getService(BudgetService.class).createBudgetRules(Long.toString(budgetId), req));
+	}
+
+	public Result<Void> deleteBudgetRule(long budgetId, long ruleId) {
+		return call(getService(BudgetService.class).deleteBudgetRule(Long.toString(budgetId), Long.toString(ruleId)));
 	}
 
 	public Result<Void> deleteBudget(long budgetId) {
