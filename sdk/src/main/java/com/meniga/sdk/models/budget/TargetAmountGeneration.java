@@ -27,6 +27,10 @@ public final class TargetAmountGeneration {
 		return new TargetAmountGeneration(value);
 	}
 
+	public static TargetAmountGeneration manual() {
+		return create(GenerationType.MANUAL, 0);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
