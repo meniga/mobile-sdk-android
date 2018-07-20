@@ -62,7 +62,7 @@ public class MenigaBudgetRuleTest {
 	}
 
 	@Test
-	public void shouldAddRule() {
+	public void shouldAddRecurringRule() {
 		server.enqueue(mockResponse("postbudgetrule.json"));
 		NewBudgetRule budgetRule = NewBudgetRule.manualRecurring(
 				everyMonths(2)
@@ -88,6 +88,32 @@ public class MenigaBudgetRuleTest {
 				.assertThat("$.rules[0].generationType", equalTo(0))
 				.assertThat("$.rules[0].recurringPattern.monthInterval", equalTo(2))
 				.assertThat("$.rules[0].repeatUntil", equalTo("2019-01-01T00:00:00.000Z"));
+	}
+
+	@Test
+	public void shouldAddNotRecurringRule() {
+		server.enqueue(mockResponse("postbudgetrule.json"));
+		NewBudgetRule budgetRule = NewBudgetRule.averageForLastMonths(3)
+				.budgetId(97)
+				.categoryIds(singletonList(72L))
+				.startDate(new DateTime("2018-01-01"))
+				.build();
+
+		Task<List<MenigaBudgetRule>> task = MenigaBudgetRule.create(budgetRule).getTask();
+
+		assertThat(task).isSuccessful();
+		RecordedRequest request = server.takeRequest();
+		assertThat(request.getPath()).isEqualTo("/v1/budgets/97/rules");
+		assertThat(request.getMethod()).isEqualTo("POST");
+		JsonAssert.with(request.getBody().readUtf8())
+				.assertThat("$.rules", hasSize(1))
+				.assertNotDefined("$.rules[0].targetAmount")
+				.assertThat("$.rules[0].startDate", equalTo("2018-01-01T00:00:00.000Z"))
+				.assertNotDefined("$.rules[0].endDate")
+				.assertThat("$.rules[0].categoryIds", equalTo(singletonList(72)))
+				.assertThat("$.rules[0].generationType", equalTo(3))
+				.assertNotDefined("$.rules[0].recurringPattern.monthInterval")
+				.assertNotDefined("$.rules[0].repeatUntil");
 	}
 
 	@Test

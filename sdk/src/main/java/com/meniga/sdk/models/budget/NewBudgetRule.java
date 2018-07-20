@@ -83,12 +83,12 @@ public class NewBudgetRule {
 		return generation.getValue();
 	}
 
-	private CreateBudgetRules.RecurringPattern toRecurringPattern(RecurringPattern recurringPattern) {
-		return new CreateBudgetRules.RecurringPattern(recurringPattern.getMonths());
+	private CreateBudgetRules.RecurringPattern toRecurringPattern(@Nullable RecurringPattern recurringPattern) {
+		return recurringPattern == null ? null : new CreateBudgetRules.RecurringPattern(recurringPattern.getMonths());
 	}
 
-	private DateTime toRepeatUntil(RecurringPattern recurringPattern) {
-		return recurringPattern.getUntil();
+	private DateTime toRepeatUntil(@Nullable RecurringPattern recurringPattern) {
+		return recurringPattern == null ? null : recurringPattern.getUntil();
 	}
 
 	public long getBudgetId() {
