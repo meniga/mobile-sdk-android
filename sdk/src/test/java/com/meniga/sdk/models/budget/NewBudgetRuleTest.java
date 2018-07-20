@@ -1,58 +1,71 @@
 package com.meniga.sdk.models.budget;
 
 import com.meniga.sdk.helpers.MenigaDecimal;
-import com.meniga.sdk.models.budget.enums.GenerationType;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
 
+import static com.meniga.sdk.models.budget.RecurringPattern.everyMonths;
 import static java.util.Collections.singletonList;
 
 public class NewBudgetRuleTest {
 
-	@Test(expected = IllegalStateException.class)
-	public void shouldFailWhenTargetAmountProvidedAndSameAsMonth() {
-		builder().generation(TargetAmountGeneration.create(GenerationType.SAME_AS_MONTH, 3))
-				.targetAmount(new MenigaDecimal(42))
-				.build();
-	}
-
-	@Test(expected = IllegalStateException.class)
-	public void shouldFailWhenTargetAmountProvidedAndAverage() {
-		builder().generation(TargetAmountGeneration.create(GenerationType.AVERAGE_MONTHS, 3))
-				.targetAmount(new MenigaDecimal(42))
-				.build();
-	}
-
-	@Test(expected = IllegalStateException.class)
-	public void shouldFailWithoutTargetAmountProvidedAndManual() {
-		builder().generation(TargetAmountGeneration.create(GenerationType.MANUAL, 3))
-				.build();
-	}
-
 	@Test
-	public void shouldPassForSameAsMonth() {
-		builder().generation(TargetAmountGeneration.create(GenerationType.SAME_AS_MONTH, 3))
-				.build();
-	}
-
-	@Test
-	public void shouldPassForAverage() {
-		builder().generation(TargetAmountGeneration.create(GenerationType.AVERAGE_MONTHS, 3))
-				.build();
-	}
-
-	@Test
-	public void shouldPassForFixed() {
-		builder().generation(TargetAmountGeneration.create(GenerationType.MANUAL, 3))
+	public void shouldCreateManualNewBudgetRule() {
+		NewBudgetRule.manual()
 				.targetAmount(new MenigaDecimal(44))
+				.startDate(new DateTime("2018-01-01"))
+				.endDate(new DateTime("2018-01-01"))
+				.categoryIds(singletonList(44L))
 				.build();
 	}
 
-	private NewBudgetRule.Builder builder() {
-		return NewBudgetRule.builder()
-				.startDate(DateTime.now())
+	@Test
+	public void shouldCreateSameAsMonthNewBudgetRule() {
+		NewBudgetRule.sameAsMonthAgo(5)
+				.startDate(new DateTime("2018-01-01"))
+				.endDate(new DateTime("2019-01-01"))
 				.categoryIds(singletonList(44L))
-				.applying(Applying.always());
+				.build();
+	}
+
+	@Test
+	public void shouldCreateAverageNewBudgetRule() {
+		NewBudgetRule.averageForLastMonths(3)
+				.startDate(new DateTime("2018-01-01"))
+				.endDate(new DateTime("2019-01-01"))
+				.categoryIds(singletonList(44L))
+				.build();
+	}
+
+	@Test
+	public void shouldCreateRecurringManualNewBudgetRule() {
+		NewBudgetRule.manualRecurring(
+				everyMonths(3)
+						.starting(new DateTime("2018-01-01"))
+						.until(new DateTime("2019-01-01")))
+				.targetAmount(new MenigaDecimal(44))
+				.categoryIds(singletonList(44L))
+				.build();
+	}
+
+	@Test
+	public void shouldCreateRecurringSameAsMonthNewBudgetRule() {
+		NewBudgetRule.sameAsMonthAgoRecurring(3,
+				everyMonths(6)
+						.starting(new DateTime("2018-01-01"))
+						.until(new DateTime("2019-01-01")))
+				.categoryIds(singletonList(44L))
+				.build();
+	}
+
+	@Test
+	public void shouldCreateRecurringAverageNewBudgetRule() {
+		NewBudgetRule.averageForLastMonthsRecurring(3,
+				everyMonths(6)
+						.starting(new DateTime("2018-01-01"))
+						.until(new DateTime("2019-01-01")))
+				.categoryIds(singletonList(44L))
+				.build();
 	}
 }

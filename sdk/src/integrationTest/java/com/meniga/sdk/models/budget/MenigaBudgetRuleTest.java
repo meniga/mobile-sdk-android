@@ -6,7 +6,6 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.models.SwaggerJsonExtensions;
-import com.meniga.sdk.models.budget.enums.GenerationType;
 import com.meniga.sdk.providers.tasks.Task;
 
 import org.joda.time.DateTime;
@@ -20,6 +19,7 @@ import java.util.List;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.RecordedRequest;
 
+import static com.meniga.sdk.models.budget.RecurringPattern.everyMonths;
 import static com.meniga.sdk.providers.tasks.TaskAssertions.assertThat;
 import static com.meniga.sdk.utils.MockResponseFactory.mockResponse;
 import static java.util.Collections.singletonList;
@@ -64,13 +64,13 @@ public class MenigaBudgetRuleTest {
 	@Test
 	public void shouldAddRule() {
 		server.enqueue(mockResponse("postbudgetrule.json"));
-		NewBudgetRule budgetRule = NewBudgetRule.builder()
+		NewBudgetRule budgetRule = NewBudgetRule.manualRecurring(
+				everyMonths(2)
+						.starting(new DateTime("2018-01-01"))
+						.until(new DateTime("2019-01-01")))
 				.budgetId(97)
+				.targetAmount(new MenigaDecimal(42))
 				.categoryIds(singletonList(72L))
-				.startDate(new DateTime("2018-01-01"))
-				.endDate(new DateTime("2018-02-01"))
-				.generation(TargetAmountGeneration.create(GenerationType.SAME_AS_MONTH, 3))
-				.applying(Applying.every(2).until(new DateTime("2018-01-01")))
 				.build();
 
 		Task<List<MenigaBudgetRule>> task = MenigaBudgetRule.create(budgetRule).getTask();
@@ -81,13 +81,13 @@ public class MenigaBudgetRuleTest {
 		assertThat(request.getMethod()).isEqualTo("POST");
 		JsonAssert.with(request.getBody().readUtf8())
 				.assertThat("$.rules", hasSize(1))
-				.assertNotDefined("$.rules[0].targetAmount")
+				.assertThat("$.rules[0].targetAmount", equalTo(42.0))
 				.assertThat("$.rules[0].startDate", equalTo("2018-01-01T00:00:00.000Z"))
-				.assertThat("$.rules[0].endDate", equalTo("2018-02-01T00:00:00.000Z"))
+				.assertThat("$.rules[0].endDate", equalTo("2018-01-31T23:59:59.999Z"))
 				.assertThat("$.rules[0].categoryIds", equalTo(singletonList(72)))
-				.assertThat("$.rules[0].generationType", equalTo(-3))
+				.assertThat("$.rules[0].generationType", equalTo(0))
 				.assertThat("$.rules[0].recurringPattern.monthInterval", equalTo(2))
-				.assertThat("$.rules[0].repeatUntil", equalTo("2018-01-01T00:00:00.000Z"));
+				.assertThat("$.rules[0].repeatUntil", equalTo("2019-01-01T00:00:00.000Z"));
 	}
 
 	@Test
