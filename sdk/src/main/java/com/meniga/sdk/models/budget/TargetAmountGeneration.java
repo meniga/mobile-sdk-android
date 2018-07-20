@@ -54,6 +54,10 @@ public final class TargetAmountGeneration {
 		return value;
 	}
 
+	public int getMonths() {
+		return Math.abs(value);
+	}
+
 	public GenerationType getType() {
 		if (value == 0) {
 			return GenerationType.MANUAL;
