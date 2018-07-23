@@ -1,6 +1,8 @@
 package com.meniga.sdk.models.budget;
 
 import com.meniga.sdk.helpers.MenigaDecimal;
+import com.meniga.sdk.helpers.Preconditions;
+import com.meniga.sdk.models.budget.enums.GenerationType;
 import com.meniga.sdk.webservices.budget.CreateBudgetRules;
 
 import org.joda.time.DateTime;
@@ -20,7 +22,7 @@ public class NewBudgetRule {
 	private final DateTime endDate;
 	private final List<Long> categoryIds;
 	private final TargetAmountGeneration generation;
-	private final Applying applying;
+	private final RecurringPattern recurringPattern;
 
 	private NewBudgetRule(
 			long budgetId,
@@ -29,15 +31,31 @@ public class NewBudgetRule {
 			@Nullable DateTime endDate,
 			@Nonnull List<Long> categoryIds,
 			@Nonnull TargetAmountGeneration generation,
-			@Nonnull Applying applying) {
+			@Nullable RecurringPattern recurringPattern) {
 		this.budgetId = budgetId;
 		this.targetAmount = targetAmount;
-		this.startDate = requireNonNull(startDate);
-		this.endDate = endDate;
+		this.startDate = requireNonNull(toStartDate(startDate, recurringPattern));
+		this.endDate = toEndDate(endDate, recurringPattern);
 		this.categoryIds = requireNonNull(categoryIds);
 		this.generation = requireNonNull(generation);
-		this.applying = requireNonNull(applying);
+		this.recurringPattern = recurringPattern;
 		checkState();
+	}
+
+	private DateTime toStartDate(DateTime startDate, RecurringPattern recurringPattern) {
+		if (recurringPattern != null) {
+			return recurringPattern.getStarting();
+		} else {
+			return startDate;
+		}
+	}
+
+	private DateTime toEndDate(DateTime endDate, RecurringPattern recurringPattern) {
+		if (recurringPattern != null) {
+			return recurringPattern.getEndDate();
+		} else {
+			return endDate;
+		}
 	}
 
 	private void checkState() {
@@ -48,10 +66,6 @@ public class NewBudgetRule {
 		}
 	}
 
-	public static Builder builder() {
-		return new Builder();
-	}
-
 	public CreateBudgetRules toCreateBudgetRules() {
 		CreateBudgetRules.CreateBudgetRuleData data = new CreateBudgetRules.CreateBudgetRuleData(
 				targetAmount,
@@ -59,8 +73,8 @@ public class NewBudgetRule {
 				endDate,
 				categoryIds,
 				toGenerationType(generation),
-				toRecurringPattern(applying),
-				toRepeatUntil(applying)
+				toRecurringPattern(recurringPattern),
+				toRepeatUntil(recurringPattern)
 		);
 		return new CreateBudgetRules(singletonList(data));
 	}
@@ -69,87 +83,129 @@ public class NewBudgetRule {
 		return generation.getValue();
 	}
 
-	private CreateBudgetRules.RecurringPattern toRecurringPattern(Applying applying) {
-		return new CreateBudgetRules.RecurringPattern(applying.getEvery());
+	private CreateBudgetRules.RecurringPattern toRecurringPattern(@Nullable RecurringPattern recurringPattern) {
+		return recurringPattern == null ? null : new CreateBudgetRules.RecurringPattern(recurringPattern.getMonths());
 	}
 
-	private DateTime toRepeatUntil(Applying applying) {
-		return applying.getUntil();
+	private DateTime toRepeatUntil(@Nullable RecurringPattern recurringPattern) {
+		return recurringPattern == null ? null : recurringPattern.getUntil();
 	}
 
 	public long getBudgetId() {
 		return budgetId;
 	}
 
-	public static final class Builder {
-		private long budgetId;
-		private MenigaDecimal targetAmount;
-		private DateTime startDate;
-		private DateTime endDate;
-		private List<Long> categoryIds;
-		private TargetAmountGeneration generation;
-		private Applying applying;
 
-		private Builder() {
-		}
+	public static ManualBuilder manual() {
+		return new ManualBuilder();
+	}
 
-		public Builder budgetId(long budgetId) {
-			this.budgetId = budgetId;
+	public static AutomaticBuilder sameAsMonthAgo(int months) {
+		return new AutomaticBuilder(months, GenerationType.SAME_AS_MONTH);
+	}
+
+	public static AutomaticBuilder averageForLastMonths(int months) {
+		return new AutomaticBuilder(months, GenerationType.AVERAGE_MONTHS);
+	}
+
+	public static ManualRecurringBuilder manualRecurring(@Nonnull RecurringPattern recurringPattern) {
+		return new ManualRecurringBuilder(recurringPattern);
+	}
+
+	public static AutomaticRecurringBuilder sameAsMonthAgoRecurring(int monthAgo, @Nonnull RecurringPattern recurringPattern) {
+		return new AutomaticRecurringBuilder(monthAgo, GenerationType.SAME_AS_MONTH, recurringPattern);
+	}
+
+	public static AutomaticRecurringBuilder averageForLastMonthsRecurring(int lastMonths, @Nonnull RecurringPattern recurringPattern) {
+		return new AutomaticRecurringBuilder(lastMonths, GenerationType.AVERAGE_MONTHS, recurringPattern);
+	}
+
+	public static class ManualBuilder extends BaseManualBuilder<ManualBuilder> {
+
+		public ManualBuilder startDate(@Nonnull DateTime startDate) {
+			this.startDate = requireNonNull(startDate);
 			return this;
 		}
 
-		public Builder targetAmount(MenigaDecimal targetAmount) {
-			this.targetAmount = targetAmount;
-			return this;
-		}
-
-		public Builder startDate(DateTime startDate) {
-			this.startDate = startDate;
-			return this;
-		}
-
-		public Builder endDate(DateTime endDate) {
+		public ManualBuilder endDate(@Nullable DateTime endDate) {
 			this.endDate = endDate;
 			return this;
 		}
 
-		public Builder categoryIds(List<Long> categoryIds) {
-			this.categoryIds = categoryIds;
+		private ManualBuilder() {
+			this.targetAmountGeneration = TargetAmountGeneration.manual();
+		}
+	}
+
+	public static class AutomaticBuilder extends Builder<AutomaticBuilder> {
+
+		public AutomaticBuilder startDate(@Nonnull DateTime startDate) {
+			this.startDate = requireNonNull(startDate);
 			return this;
 		}
 
-		public Builder generation(TargetAmountGeneration generation) {
-			this.generation = generation;
+		public AutomaticBuilder endDate(@Nullable DateTime endDate) {
+			this.endDate = endDate;
 			return this;
 		}
 
-		public Builder applying(Applying applying) {
-			this.applying = applying;
-			return this;
+		private AutomaticBuilder(int months, GenerationType generationType) {
+			this.targetAmountGeneration = TargetAmountGeneration.create(generationType, months);
+		}
+	}
+
+	@SuppressWarnings("WeakerAccess")
+	public static class ManualRecurringBuilder extends BaseManualBuilder<ManualRecurringBuilder> {
+		private ManualRecurringBuilder(RecurringPattern recurringPattern) {
+			this.targetAmountGeneration = TargetAmountGeneration.manual();
+			this.recurringPattern = recurringPattern;
+		}
+	}
+
+	@SuppressWarnings("WeakerAccess")
+	public static class AutomaticRecurringBuilder extends Builder<AutomaticRecurringBuilder> {
+		private AutomaticRecurringBuilder(int months, GenerationType generationType, RecurringPattern recurringPattern) {
+			this.targetAmountGeneration = TargetAmountGeneration.create(generationType, months);
+			this.recurringPattern = recurringPattern;
+		}
+	}
+
+	protected static abstract class BaseManualBuilder<TBuilder extends BaseManualBuilder<TBuilder>> extends Builder<TBuilder> {
+
+		@SuppressWarnings("unchecked")
+		public TBuilder targetAmount(@Nonnull MenigaDecimal targetAmount) {
+			this.targetAmount = requireNonNull(targetAmount);
+			return (TBuilder) this;
+		}
+	}
+
+	protected static abstract class Builder<TBuilder extends Builder<TBuilder>> {
+		private long budgetId;
+		MenigaDecimal targetAmount;
+		DateTime startDate;
+		DateTime endDate;
+		private List<Long> categoryIds;
+		TargetAmountGeneration targetAmountGeneration;
+		RecurringPattern recurringPattern;
+
+		private Builder() {
+		}
+
+		@SuppressWarnings("unchecked")
+		public TBuilder budgetId(long budgetId) {
+			this.budgetId = budgetId;
+			return (TBuilder) this;
+		}
+
+		@SuppressWarnings("unchecked")
+		public TBuilder categoryIds(@Nonnull List<Long> categoryIds) {
+			this.categoryIds = requireNonNull(categoryIds);
+			Preconditions.checkState(categoryIds.size() > 0, "At least one category id is expected");
+			return (TBuilder) this;
 		}
 
 		public NewBudgetRule build() {
-			return new NewBudgetRule(budgetId, targetAmount, startDate, endDate, categoryIds, generation, applying);
+			return new NewBudgetRule(budgetId, targetAmount, startDate, endDate, categoryIds, targetAmountGeneration, recurringPattern);
 		}
 	}
 }
-
-/*
-{
-  "rules": [
-    {
-      "targetAmount": 0,
-      "startDate": "2018-07-01",
-      "endDate": "2018-07-31",
-      "categoryIds": [
-        72
-      ],
-      "generationType": 3,
-      "recurringPattern": {
-        "monthInterval": 2
-      },
-      "repeatUntil": "2018-10-01"
-    }
-  ]
-}
- */
