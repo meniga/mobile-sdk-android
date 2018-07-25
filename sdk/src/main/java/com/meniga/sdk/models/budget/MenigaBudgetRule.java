@@ -43,7 +43,7 @@ public class MenigaBudgetRule implements Parcelable, Serializable {
 		return startDate;
 	}
 
-	@Nonnull
+	@Nullable
 	public DateTime getEndDate() {
 		return endDate;
 	}
