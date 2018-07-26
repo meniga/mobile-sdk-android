@@ -33,7 +33,7 @@ public class MenigaBudgetRule implements Parcelable, Serializable {
 		return id;
 	}
 
-	@Nullable
+	@Nonnull
 	public MenigaDecimal getTargetAmount() {
 		return targetAmount;
 	}
