@@ -68,12 +68,11 @@ public class MenigaBudgetRuleTest {
 				everyMonths(2)
 						.starting(new DateTime("2018-01-01"))
 						.until(new DateTime("2019-01-01")))
-				.budgetId(97)
 				.targetAmount(new MenigaDecimal(42))
 				.categoryIds(singletonList(72L))
 				.build();
 
-		Task<List<MenigaBudgetRule>> task = MenigaBudgetRule.create(budgetRule).getTask();
+		Task<List<MenigaBudgetRule>> task = MenigaBudgetRule.create(NewBudgetRules.withBudgetId(97).addRule(budgetRule).build()).getTask();
 
 		assertThat(task).isSuccessful();
 		RecordedRequest request = server.takeRequest();
@@ -94,12 +93,11 @@ public class MenigaBudgetRuleTest {
 	public void shouldAddNotRecurringRule() {
 		server.enqueue(mockResponse("postbudgetrule.json"));
 		NewBudgetRule budgetRule = NewBudgetRule.averageForLastMonths(3)
-				.budgetId(97)
 				.categoryIds(singletonList(72L))
 				.startDate(new DateTime("2018-01-01"))
 				.build();
 
-		Task<List<MenigaBudgetRule>> task = MenigaBudgetRule.create(budgetRule).getTask();
+		Task<List<MenigaBudgetRule>> task = MenigaBudgetRule.create(NewBudgetRules.withBudgetId(97).addRule(budgetRule).build()).getTask();
 
 		assertThat(task).isSuccessful();
 		RecordedRequest request = server.takeRequest();
@@ -114,6 +112,49 @@ public class MenigaBudgetRuleTest {
 				.assertThat("$.rules[0].generationType", equalTo(3))
 				.assertNotDefined("$.rules[0].recurringPattern.monthInterval")
 				.assertNotDefined("$.rules[0].repeatUntil");
+	}
+
+	@Test
+	public void shouldAddMultipleRulesAtOnce() {
+		server.enqueue(mockResponse("postbudgetrule.json"));
+		NewBudgetRule firstRule = NewBudgetRule.manual()
+				.categoryIds(singletonList(74L))
+				.startDate(new DateTime("2018-01-01"))
+				.targetAmount(new MenigaDecimal(42))
+				.build();
+		NewBudgetRule secondRule = NewBudgetRule.manualRecurring(everyMonths(2)
+				.starting(new DateTime("2018-02-01"))
+				.withoutEndDate())
+				.categoryIds(singletonList(75L))
+				.targetAmount(new MenigaDecimal(44))
+				.build();
+		NewBudgetRules budgetRules = NewBudgetRules.withBudgetId(97)
+				.addRule(firstRule)
+				.addRule(secondRule)
+				.build();
+
+		Task<List<MenigaBudgetRule>> task = MenigaBudgetRule.create(budgetRules).getTask();
+
+		assertThat(task).isSuccessful();
+		RecordedRequest request = server.takeRequest();
+		assertThat(request.getPath()).isEqualTo("/v1/budgets/97/rules");
+		assertThat(request.getMethod()).isEqualTo("POST");
+		JsonAssert.with(request.getBody().readUtf8())
+				.assertThat("$.rules", hasSize(2))
+				.assertThat("$.rules[0].targetAmount", equalTo(42.0))
+				.assertThat("$.rules[0].startDate", equalTo("2018-01-01T00:00:00.000Z"))
+				.assertNotDefined("$.rules[0].endDate")
+				.assertThat("$.rules[0].categoryIds", equalTo(singletonList(74)))
+				.assertThat("$.rules[0].generationType", equalTo(0))
+				.assertNotDefined("$.rules[0].recurringPattern.monthInterval")
+				.assertNotDefined("$.rules[0].repeatUntil")
+				.assertThat("$.rules[1].targetAmount", equalTo(44.0))
+				.assertThat("$.rules[1].startDate", equalTo("2018-02-01T00:00:00.000Z"))
+				.assertThat("$.rules[1].endDate", equalTo("2018-02-28T23:59:59.999Z"))
+				.assertThat("$.rules[1].categoryIds", equalTo(singletonList(75)))
+				.assertThat("$.rules[1].generationType", equalTo(0))
+				.assertThat("$.rules[1].recurringPattern.monthInterval", equalTo(2))
+				.assertThat("$.rules[1].repeatUntil", equalTo("2034-01-01T00:00:00.000Z"));
 	}
 
 	@Test

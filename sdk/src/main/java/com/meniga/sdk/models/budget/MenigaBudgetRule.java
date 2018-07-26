@@ -78,8 +78,8 @@ public class MenigaBudgetRule implements Parcelable, Serializable {
 		return apiOperator.getBudgetRules(filter.toGetBudgetRules());
 	}
 
-	public static Result<List<MenigaBudgetRule>> create(NewBudgetRule budgetRule) {
-		return apiOperator.createBudgetRules(budgetRule.getBudgetId(), budgetRule.toCreateBudgetRules());
+	public static Result<List<MenigaBudgetRule>> create(NewBudgetRules budgetRules) {
+		return apiOperator.createBudgetRules(budgetRules.getBudgetId(), budgetRules.toCreateBudgetRules());
 	}
 
 	private MenigaBudgetRule() {

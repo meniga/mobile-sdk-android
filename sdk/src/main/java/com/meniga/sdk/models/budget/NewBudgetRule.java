@@ -13,10 +13,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static com.meniga.sdk.helpers.Objects.requireNonNull;
-import static java.util.Collections.singletonList;
 
 public class NewBudgetRule {
-	private final long budgetId;
 	private final MenigaDecimal targetAmount;
 	private final DateTime startDate;
 	private final DateTime endDate;
@@ -25,14 +23,12 @@ public class NewBudgetRule {
 	private final RecurringPattern recurringPattern;
 
 	private NewBudgetRule(
-			long budgetId,
 			@Nullable MenigaDecimal targetAmount,
 			@Nonnull DateTime startDate,
 			@Nullable DateTime endDate,
 			@Nonnull List<Long> categoryIds,
 			@Nonnull TargetAmountGeneration generation,
 			@Nullable RecurringPattern recurringPattern) {
-		this.budgetId = budgetId;
 		this.targetAmount = targetAmount;
 		this.startDate = requireNonNull(toStartDate(startDate, recurringPattern));
 		this.endDate = toEndDate(endDate, recurringPattern);
@@ -66,8 +62,8 @@ public class NewBudgetRule {
 		}
 	}
 
-	public CreateBudgetRules toCreateBudgetRules() {
-		CreateBudgetRules.CreateBudgetRuleData data = new CreateBudgetRules.CreateBudgetRuleData(
+	CreateBudgetRules.CreateBudgetRuleData toCreateBudgetRulesData() {
+		return new CreateBudgetRules.CreateBudgetRuleData(
 				targetAmount,
 				startDate,
 				endDate,
@@ -76,7 +72,6 @@ public class NewBudgetRule {
 				toRecurringPattern(recurringPattern),
 				toRepeatUntil(recurringPattern)
 		);
-		return new CreateBudgetRules(singletonList(data));
 	}
 
 	private int toGenerationType(TargetAmountGeneration generation) {
@@ -90,11 +85,6 @@ public class NewBudgetRule {
 	private DateTime toRepeatUntil(@Nullable RecurringPattern recurringPattern) {
 		return recurringPattern == null ? null : recurringPattern.getUntil();
 	}
-
-	public long getBudgetId() {
-		return budgetId;
-	}
-
 
 	public static ManualBuilder manual() {
 		return new ManualBuilder();
@@ -180,7 +170,6 @@ public class NewBudgetRule {
 	}
 
 	protected static abstract class Builder<TBuilder extends Builder<TBuilder>> {
-		private long budgetId;
 		MenigaDecimal targetAmount;
 		DateTime startDate;
 		DateTime endDate;
@@ -192,12 +181,6 @@ public class NewBudgetRule {
 		}
 
 		@SuppressWarnings("unchecked")
-		public TBuilder budgetId(long budgetId) {
-			this.budgetId = budgetId;
-			return (TBuilder) this;
-		}
-
-		@SuppressWarnings("unchecked")
 		public TBuilder categoryIds(@Nonnull List<Long> categoryIds) {
 			this.categoryIds = requireNonNull(categoryIds);
 			Preconditions.checkState(categoryIds.size() > 0, "At least one category id is expected");
@@ -205,7 +188,7 @@ public class NewBudgetRule {
 		}
 
 		public NewBudgetRule build() {
-			return new NewBudgetRule(budgetId, targetAmount, startDate, endDate, categoryIds, targetAmountGeneration, recurringPattern);
+			return new NewBudgetRule(targetAmount, startDate, endDate, categoryIds, targetAmountGeneration, recurringPattern);
 		}
 	}
 }
