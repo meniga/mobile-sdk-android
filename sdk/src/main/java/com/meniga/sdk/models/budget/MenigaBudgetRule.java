@@ -33,7 +33,7 @@ public class MenigaBudgetRule implements Parcelable, Serializable {
 		return id;
 	}
 
-	@Nullable
+	@Nonnull
 	public MenigaDecimal getTargetAmount() {
 		return targetAmount;
 	}
@@ -43,7 +43,7 @@ public class MenigaBudgetRule implements Parcelable, Serializable {
 		return startDate;
 	}
 
-	@Nonnull
+	@Nullable
 	public DateTime getEndDate() {
 		return endDate;
 	}
