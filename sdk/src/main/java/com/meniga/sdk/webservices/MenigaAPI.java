@@ -51,7 +51,6 @@ import com.meniga.sdk.webservices.requests.GetRealmAuthMethod;
 import com.meniga.sdk.webservices.requests.GetTopMerchants;
 import com.meniga.sdk.webservices.requests.GetTransactionSeries;
 import com.meniga.sdk.webservices.requests.RecategorizeTransactions;
-import com.meniga.sdk.webservices.requests.RegisterUser;
 import com.meniga.sdk.webservices.requests.SaveMetaData;
 import com.meniga.sdk.webservices.requests.SetSubscription;
 import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
@@ -226,30 +225,6 @@ public interface MenigaAPI {
 	// --
 	@GET(APIConst.URL_USER_EVENTS + "/{id}")
 	Call<MenigaFeedItem> getEvent(@Path("id") long id);
-
-	// --
-	// Me
-	// --
-	@GET(APIConst.URL_ME + APIConst.PROFILE)
-	Call<MenigaUserProfile> getUserProfile();
-
-	@GET(APIConst.URL_ME + "?includeAll=true")
-	Call<List<MenigaUser>> getUsers();
-
-	@PUT(APIConst.URL_ME + APIConst.CULTURE)
-	Call<Void> setCulture(@QueryMap Map<String, String> queryMap);
-
-	@POST(APIConst.URL_ME + APIConst.REGISTER)
-	Call<MenigaUser> registerUser(@Body RegisterUser newUser);
-
-	@POST(APIConst.URL_ME + APIConst.PASSWORD + APIConst.FORGOT)
-	Call<Void> forgotPassword(@Body ForgotPassword req);
-
-	@GET(APIConst.URL_ME + APIConst.META_DATA)
-	Call<List<MenigaUserMetaData>> getUserMetaData(@QueryMap Map<String, String> queryMap);
-
-	@PUT(APIConst.URL_ME + APIConst.META_DATA)
-	Call<MenigaUserMetaData> saveUserMetaData(@Body SaveMetaData metaData);
 
 	// --
 	// Categories

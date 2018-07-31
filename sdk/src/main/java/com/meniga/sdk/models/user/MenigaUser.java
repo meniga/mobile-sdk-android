@@ -13,6 +13,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -202,6 +204,14 @@ public class MenigaUser implements Serializable, Parcelable, Cloneable {
 
 	public static Result<MenigaUser> create(String email, String password, String culture) {
 		return apiOperator.registerUser(email, password, culture);
+	}
+
+	public static Result<Void> beginRegistration(@Nonnull String email) {
+		return apiOperator.beginRegistration(email);
+	}
+
+	public static Result<MenigaUser> register(@Nonnull Registration registration) {
+		return apiOperator.register(registration);
 	}
 
 	public static Result<Void> forgotPassword(String email) {

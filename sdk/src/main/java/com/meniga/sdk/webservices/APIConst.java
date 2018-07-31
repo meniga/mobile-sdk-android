@@ -30,18 +30,6 @@ class APIConst {
 	// Feed
 	static final String URL_FEED = "feed";
 
-	// Events
-	static final String URL_EVENTS = "userevents";
-
-	// User/MenigaUser
-	static final String URL_ME = "me";
-	static final String PROFILE = "/profile";
-	static final String CULTURE = "/culture";
-	static final String REGISTER = "/register";
-	static final String PASSWORD = "/password";
-	static final String FORGOT = "/forgot";
-	static final String META_DATA = "/metadata";
-
 	// Categories
 	static final String URL_CATEGORIES = "categories";
 
