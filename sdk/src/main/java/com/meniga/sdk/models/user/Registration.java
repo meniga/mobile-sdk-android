@@ -12,10 +12,10 @@ public class Registration {
 	private final String culture;
 	private final String signupToken;
 
-	private Registration(@Nonnull String email, @Nonnull String password, @Nonnull String culture, @Nullable String signupToken) {
+	private Registration(@Nonnull String email, @Nonnull String password, @Nullable String culture, @Nullable String signupToken) {
 		this.email = requireNonNull(email);
 		this.password = requireNonNull(password);
-		this.culture = requireNonNull(culture);
+		this.culture = culture;
 		this.signupToken = signupToken;
 	}
 
@@ -33,7 +33,7 @@ public class Registration {
 		return password;
 	}
 
-	@Nonnull
+	@Nullable
 	public String getCulture() {
 		return culture;
 	}
