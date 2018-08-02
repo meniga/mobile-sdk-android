@@ -1,5 +1,5 @@
 ext {
-    swaggerJsonUrl = "http://api.umw.meniga.net/docs/user-v1"
+    swaggerJsonUrl = "http://api.dev.meniga.net/docs/user-v1"
     timeoutMillis = 1000
 }
 

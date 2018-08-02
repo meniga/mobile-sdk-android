@@ -77,6 +77,9 @@ import com.meniga.sdk.webservices.challenge.UpdateChallenge;
 import com.meniga.sdk.webservices.eventtracking.EventTrackingService;
 import com.meniga.sdk.webservices.eventtracking.TrackEvent;
 import com.meniga.sdk.webservices.requests.*;
+import com.meniga.sdk.webservices.user.BeginRegistration;
+import com.meniga.sdk.webservices.user.RegisterUser;
+import com.meniga.sdk.webservices.user.UserService;
 
 import java.util.Collections;
 import java.util.List;
@@ -476,34 +479,42 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.USERS).getUserProfile());
+		return persist(req, getService(UserService.class).getUserProfile());
 	}
 
 	public Result<List<MenigaUser>> getUsers(GetUsers req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.USERS).getUsers());
+		return persist(req, getService(UserService.class).getUsers());
 	}
 
 	public Result<Void> setCulture(SetCulture req) {
-		return persist(req, getClient(Service.USERS).setCulture(req.toQueryMap()));
+		return persist(req, getService(UserService.class).setCulture(req.toQueryMap()));
 	}
 
 	public Result<MenigaUser> registerUser(RegisterUser req) {
-		return persist(req, getClient(Service.USERS).registerUser(req));
+		return persist(req, getService(UserService.class).registerUser(req));
+	}
+
+	public Result<Void> beginRegistration(BeginRegistration req) {
+		return persist(req, getService(UserService.class).beginRegistration(req));
+	}
+
+	public Result<MenigaUser> register(RegisterUser registerUser) {
+		return persist(registerUser, getService(UserService.class).registerUser(registerUser));
 	}
 
 	public Result<Void> forgotPassword(ForgotPassword req) {
-		return persist(req, getClient(Service.USERS).forgotPassword(req));
+		return persist(req, getService(UserService.class).forgotPassword(req));
 	}
 
 	public Result<List<MenigaUserMetaData>> getUserMetaData(GetUserMetaData req) {
-		return persist(req, getClient(Service.USERS).getUserMetaData(req.toQueryMap()));
+		return persist(req, getService(UserService.class).getUserMetaData(req.toQueryMap()));
 	}
 
 	public Result<MenigaUserMetaData> saveUserMetaData(SaveMetaData req) {
-		return persist(req, getClient(Service.USERS).saveUserMetaData(req));
+		return persist(req, getService(UserService.class).saveUserMetaData(req));
 	}
 
 	// --

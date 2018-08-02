@@ -7,6 +7,7 @@ import com.meniga.sdk.webservices.account.AccountService
 import com.meniga.sdk.webservices.budget.BudgetService
 import com.meniga.sdk.webservices.challenge.ChallengeService
 import com.meniga.sdk.webservices.eventtracking.EventTrackingService
+import com.meniga.sdk.webservices.user.UserService
 
 enum class Service(
         private val key: String,
@@ -26,7 +27,7 @@ enum class Service(
     TRANSACTIONS("transactions"),
     UPCOMING("upcoming"),
     USER_EVENTS("userevents"),
-    USERS("users"),
+    USERS("users", UserService::class.java),
     OFFERS("offers"),
     CHALLENGES("challenges", ChallengeService::class.java),
     BUDGET("budget", BudgetService::class.java),

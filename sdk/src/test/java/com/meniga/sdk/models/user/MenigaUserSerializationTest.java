@@ -15,7 +15,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class MenigaUserTest{
+public class MenigaUserSerializationTest {
 
 	@Test
 	public void testMenigaUserSerialization() throws IOException {

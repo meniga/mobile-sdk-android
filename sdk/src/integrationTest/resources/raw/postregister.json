@@ -1,0 +1,37 @@
+{
+  "data": {
+    "userId": 0,
+    "personId": 0,
+    "firstName": "string",
+    "lastName": "string",
+    "lastLoginDate": "2018-07-30T12:36:51.700Z",
+    "isInitialSetupDone": true,
+    "email": "string",
+    "culture": "string",
+    "lastLoginRemoteHost": "string",
+    "createDate": "2018-07-30T12:36:51.700Z",
+    "termsAndConditionsId": 0,
+    "termsAndConditionsAcceptDate": "2018-07-30T12:36:51.700Z",
+    "optOutDate": "2018-07-30T12:36:51.700Z",
+    "profile": {
+      "personId": 0,
+      "gender": 0,
+      "birthYear": "2018-07-30T12:36:51.700Z",
+      "postalCode": "string",
+      "numberInFamily": 0,
+      "numberOfKids": 0,
+      "numberOfCars": 0,
+      "incomeId": 0,
+      "apartmentType": 0,
+      "apartmentSize": 0,
+      "apartmentRooms": 0,
+      "apartmentSizeKey": 0,
+      "hasSavedProfile": true,
+      "created": "2018-07-30T12:36:51.700Z",
+      "currencyCode": "string"
+    },
+    "phoneNumber": "string",
+    "passwordExpiryDate": "2018-07-30T12:36:51.700Z",
+    "hide": true
+  }
+}
