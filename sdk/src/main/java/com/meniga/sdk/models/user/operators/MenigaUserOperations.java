@@ -22,4 +22,6 @@ public interface MenigaUserOperations {
     Result<List<MenigaUserMetaData>> getUserMetaData(List<String> filter);
 
     Result<MenigaUserMetaData> saveMetaData(String key, String value);
+
+	Result<Void> resetPassword(String resetPasswordToken, String email, String newPassword);
 }
