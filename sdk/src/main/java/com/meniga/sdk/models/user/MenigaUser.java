@@ -228,4 +228,8 @@ public class MenigaUser implements Serializable, Parcelable, Cloneable {
 	public static Result<MenigaUserMetaData> saveMetaData(String key, String value) {
 		return apiOperator.saveMetaData(key, value);
 	}
+
+	public static Result<Void> resetPassword(String resetPasswordToken, String email, String newPassword) {
+		return apiOperator.resetPassword(resetPasswordToken, email, newPassword);
+	}
 }

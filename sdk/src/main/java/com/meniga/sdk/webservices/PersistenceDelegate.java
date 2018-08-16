@@ -506,6 +506,10 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.USERS).saveUserMetaData(req));
 	}
 
+	public Result<Void> resetPassword(ResetPasswordWithToken req) {
+		return persist(req, getClient(Service.USERS).resetPassword(req));
+	}
+
 	// --
 	// Offers
 	// --

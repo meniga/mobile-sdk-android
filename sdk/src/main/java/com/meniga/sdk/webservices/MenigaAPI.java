@@ -52,6 +52,7 @@ import com.meniga.sdk.webservices.requests.GetTopMerchants;
 import com.meniga.sdk.webservices.requests.GetTransactionSeries;
 import com.meniga.sdk.webservices.requests.RecategorizeTransactions;
 import com.meniga.sdk.webservices.requests.RegisterUser;
+import com.meniga.sdk.webservices.requests.ResetPasswordWithToken;
 import com.meniga.sdk.webservices.requests.SaveMetaData;
 import com.meniga.sdk.webservices.requests.SetSubscription;
 import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
@@ -250,6 +251,9 @@ public interface MenigaAPI {
 
 	@PUT(APIConst.URL_ME + APIConst.META_DATA)
 	Call<MenigaUserMetaData> saveUserMetaData(@Body SaveMetaData metaData);
+
+	@POST(APIConst.URL_ME + APIConst.PASSWORD + APIConst.RESET)
+	Call<Void> resetPassword(@Body ResetPasswordWithToken resetPasswordWithToken);
 
 	// --
 	// Categories

@@ -39,6 +39,7 @@ class APIConst {
 	static final String CULTURE = "/culture";
 	static final String REGISTER = "/register";
 	static final String PASSWORD = "/password";
+	static final String RESET = "/reset";
 	static final String FORGOT = "/forgot";
 	static final String META_DATA = "/metadata";
 
