@@ -36,7 +36,6 @@ public class MenigaUpcomingTest {
 
 	private MockInterceptor interceptor = new MockInterceptor("upcoming_single.json");
 
-
 	@Test
 	public void testSerialization() throws IOException {
 		List<MenigaUpcoming> list = gson();

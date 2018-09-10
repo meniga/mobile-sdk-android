@@ -193,7 +193,7 @@ public class MenigaUpcoming implements Serializable, Parcelable, Cloneable {
 	}
 
 	/**
-	 * @return A list of possible reconcileUpcoming matches
+	 * @return A list of possible reconcile matches
 	 */
 	public List<MenigaUpcomingReconcileScore> getReconcileScores() {
 		return reconcileScores;
