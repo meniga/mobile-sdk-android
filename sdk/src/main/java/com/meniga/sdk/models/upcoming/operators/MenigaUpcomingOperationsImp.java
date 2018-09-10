@@ -5,11 +5,13 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.upcoming.MenigaUpcomingRecurringPattern;
+import com.meniga.sdk.models.upcoming.enums.ReconcileEntityType;
 import com.meniga.sdk.webservices.requests.CreateUpcoming;
 import com.meniga.sdk.webservices.requests.DeleteUpcoming;
 import com.meniga.sdk.webservices.requests.DeleteUpcomingSeries;
 import com.meniga.sdk.webservices.requests.GetUpcoming;
 import com.meniga.sdk.webservices.requests.GetUpcomingById;
+import com.meniga.sdk.webservices.requests.ReconcileUpcoming;
 import com.meniga.sdk.webservices.requests.UpdateUpcoming;
 
 import org.joda.time.DateTime;
@@ -93,5 +95,15 @@ public class MenigaUpcomingOperationsImp implements MenigaUpcomingOperations {
 			req.id = item.getId();
 			return MenigaSDK.executor().deleteUpcoming(req);
 		}
+	}
+
+	@Override
+	public Result<Void> reconcileUpcoming(long upcomingId, ReconcileEntityType entityType, long entityId) {
+		ReconcileUpcoming req = new ReconcileUpcoming();
+		req.id = upcomingId;
+		req.entityType = entityType.toString();
+		req.entityId = entityId;
+
+		return MenigaSDK.executor().reconcileUpcoming(req);
 	}
 }

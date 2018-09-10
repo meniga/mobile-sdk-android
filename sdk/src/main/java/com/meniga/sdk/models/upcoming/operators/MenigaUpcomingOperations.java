@@ -4,6 +4,7 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.upcoming.MenigaUpcomingRecurringPattern;
+import com.meniga.sdk.models.upcoming.enums.ReconcileEntityType;
 
 import org.joda.time.DateTime;
 
@@ -25,4 +26,6 @@ public interface MenigaUpcomingOperations {
 	Result<Void> updateUpcoming(MenigaUpcoming update, boolean updateWholeSeries);
 
 	Result<Void> deleteUpcoming(MenigaUpcoming item, boolean deleteSeries);
+
+	Result<Void> reconcileUpcoming(long upcomingId, ReconcileEntityType entityType, long entityId);
 }

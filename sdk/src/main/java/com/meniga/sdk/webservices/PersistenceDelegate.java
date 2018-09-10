@@ -695,6 +695,10 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.UPCOMING).deleteUpcomingSeries(req.id));
 	}
 
+	public Result<Void> reconcileUpcoming(ReconcileUpcoming req) {
+		return persist(req, getClient(Service.UPCOMING).reconcileUpcoming(req.id, req.entityType, req.entityId));
+	}
+
 	// --
 	// Challenges
 	// --
