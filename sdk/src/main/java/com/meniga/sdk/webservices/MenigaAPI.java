@@ -417,6 +417,9 @@ public interface MenigaAPI {
 	@DELETE(APIConst.URL_UPCOMING + APIConst.UPCOMING_RECURRINC + "/{id}")
 	Call<Void> deleteUpcomingSeries(@Path("id") long id);
 
+	@POST(APIConst.URL_UPCOMING + "/{id}/reconcile/{entityType}/{entityId}")
+	Call<Void> reconcileUpcoming(@Path("id") long id, @Path("entityType") String entityType, @Path("entityId") long entityId);
+
 	// --
 	// Organizations
 	// --

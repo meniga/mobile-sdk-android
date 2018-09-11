@@ -8,6 +8,7 @@ import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.upcoming.enums.PaymentStatus;
+import com.meniga.sdk.models.upcoming.enums.ReconcileEntityType;
 import com.meniga.sdk.models.upcoming.operators.MenigaUpcomingOperations;
 
 import org.joda.time.DateTime;
@@ -487,5 +488,13 @@ public class MenigaUpcoming implements Serializable, Parcelable, Cloneable {
 	 */
 	public Result<Void> delete(boolean deleteSeries) {
 		return MenigaUpcoming.apiOperator.deleteUpcoming(this, deleteSeries);
+	}
+
+	public Result<Void> reconcile(ReconcileEntityType entityType, long entityId) {
+		return MenigaUpcoming.reconcile(id, entityType, entityId);
+	}
+
+	public static Result<Void> reconcile(long upcomingId, ReconcileEntityType entityType, long entityId) {
+		return MenigaUpcoming.apiOperator.reconcileUpcoming(upcomingId, entityType, entityId);
 	}
 }
