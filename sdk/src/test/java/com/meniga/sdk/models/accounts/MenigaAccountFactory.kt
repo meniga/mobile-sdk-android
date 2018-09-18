@@ -23,6 +23,7 @@ fun createAccount(seed: Int = 0) =
                 MenigaDecimal(4),
                 "accountClass",
                 "organizationIdentifier",
+                "organizationName",
                 0L,
                 AccountAuthorizationType.EXTERNAL,
                 0,
@@ -35,5 +36,10 @@ fun createAccount(seed: Int = 0) =
                 DateTime.parse("2018-03-08"),
                 false,
                 false,
-                emptyList()
+                emptyList(),
+                MenigaDecimal(10),
+                MenigaDecimal(20),
+                "accountStatusExternal",
+                "accountRoleExternal",
+                "currencyCode"
         )

@@ -34,8 +34,9 @@ import java.io.Serializable
  * @property limit The limit or overdraft for the account.
  * @property accountClass The account class that is for example used for displaying an image for this account in CSS.
  * @property organizationIdentifier A code that identifies the organization associated with this account globally, such as a Swift code.
+ * @property organizationName The name of the organization associated with this account.
  * @property realmCredentialsId Identifier for an online bank user that owns this account.
- * @property accountAuthorizatonType Indicates the type of account authorization during account aggregation = ['0', '1', '2', '3'].
+ * @property accountAuthorizationType Indicates the type of account authorization during account aggregation = ['0', '1', '2', '3'].
  * @property orderId Accounts are ordered in ascending order by this order key.
  * @property isImportAccount Indicates if this account causes transactions to be imported manually or not.
  * @property lastUpdate  Last update time of this account.
@@ -49,6 +50,12 @@ import java.io.Serializable
  * @property isHidden True if the account should be marked as hidden. It is up to each component/widget what to do with this information.
  * @property isDisabled True if the this account should be excluded from calculations.
  * @property metadata List of key-vals for various metadata.
+ * @property limitInUserCurrency The limit or overdraft in the currency of the user.
+ * @property balanceInUserCurrency Current balance of the account in the currency of the user.
+ * @property accountStatusExternal The account status external.
+ * @property accountRoleExternal The account role external.
+ * @property currencyCode The currency code of the account.
+
  *
  */
 @SuppressLint("ParcelCreator")
@@ -68,8 +75,9 @@ data class MenigaAccount internal constructor(
         val limit: MenigaDecimal? = null,
         val accountClass: String? = null,
         val organizationIdentifier: String? = null,
+        val organizationName: String? = null,
         val realmCredentialsId: Long? = null,
-        val accountAuthorizatonType: AccountAuthorizationType? = null,
+        val accountAuthorizationType: AccountAuthorizationType? = null,
         var orderId: Int = 0,
         val isImportAccount: Boolean = false,
         val lastUpdate: DateTime? = null,
@@ -80,7 +88,12 @@ data class MenigaAccount internal constructor(
         val attachedToUserDate: DateTime? = null,
         var isHidden: Boolean = false,
         var isDisabled: Boolean = false,
-        val metadata: List<MenigaAccountMetaData> = emptyList()
+        val metadata: List<MenigaAccountMetaData> = emptyList(),
+        var limitInUserCurrency: MenigaDecimal? = null,
+        var balanceInUserCurrency: MenigaDecimal? = null,
+        var accountStatusExternal: String? = null,
+        var accountRoleExternal: String? = null,
+        var currencyCode: String? = null
 ) : Parcelable, Serializable, Cloneable {
 
     @Deprecated("Use inactive instead.", replaceWith = ReplaceWith("inactive"))
