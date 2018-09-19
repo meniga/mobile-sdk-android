@@ -135,8 +135,9 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
                     limit = limit,
                     accountClass = accountClass,
                     organizationIdentifier = organizationIdentifier,
+                    organizationName = organizationName,
                     realmCredentialsId = realmCredentialsId,
-                    accountAuthorizatonType = accountAuthorizationType?.toAccountAuthorizationType(),
+                    accountAuthorizationType = accountAuthorizationType?.toAccountAuthorizationType(),
                     isImportAccount = isImportAccount,
                     lastUpdate = lastUpdate,
                     personId = personId,
@@ -145,7 +146,12 @@ internal class MenigaAccountOperationsImp : MenigaAccountOperations {
                     accountCategory = (accountCategory ?: accountType)?.toMenigaAccountCategory(),
                     inactive = inactive,
                     attachedToUserDate = attachedToUserDate,
-                    metadata = metadata?.map { it.toMenigaAccountMetaData() }.orEmpty())
+                    metadata = metadata?.map { it.toMenigaAccountMetaData() }.orEmpty(),
+                    limitInUserCurrency = limitInUserCurrency,
+                    balanceInUserCurrency = balanceInUserCurrency,
+                    accountStatusExternal = accountStatusExternal,
+                    accountRoleExternal = accountRoleExternal,
+                    currencyCode = currencyCode)
 
     private fun AccountBalanceHistory.toMenigaAccountBalanceHistory() =
             MenigaAccountBalanceHistory(
