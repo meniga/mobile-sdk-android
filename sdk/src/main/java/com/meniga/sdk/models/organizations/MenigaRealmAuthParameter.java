@@ -75,6 +75,10 @@ public class MenigaRealmAuthParameter implements Parcelable, Serializable {
 			return AuthParameterType.PASSWORD;
 		} else if (name.equals("otp")) {
 			return AuthParameterType.AUTHENTICATION_METHOD_OTP;
+		} else if (name.equals("authUrl") && displayName.toLowerCase().startsWith("http")) {
+			return AuthParameterType.AUTHENTICATION_URL;
+		} else if (name.equals("code") && displayName == null) {
+			return AuthParameterType.AUTHENTICATION_URL_CODE;
 		}
 		String[] parts = displayName.split("\\|");
 		switch (parts[0]) {
