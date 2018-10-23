@@ -11,8 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-import java.io.IOException;
-
 import static com.meniga.sdk.models.accounts.MenigaAccountFactory.createAccount;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -20,7 +18,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class MenigaAccountTest {
 
 	@Test
-	public void testSerialization() throws IOException {
+	public void testSerialization() {
 		MenigaAccount test = createAccount(2528);
 
 		assertThat(test.getBalance().getBigDecimal()).isEqualTo(new MenigaDecimal("233").getBigDecimal());
@@ -44,7 +42,7 @@ public class MenigaAccountTest {
 	}
 
 	@Test
-	public void testClone() throws CloneNotSupportedException {
+	public void testClone() {
 		MenigaAccount test = createAccount();
 
 		MenigaAccount test2 = test.clone();

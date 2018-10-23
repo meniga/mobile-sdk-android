@@ -12,8 +12,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
-import org.jetbrains.spek.data_driven.data
-import org.jetbrains.spek.data_driven.on
 import org.joda.time.DateTime
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
@@ -75,39 +73,39 @@ object MenigaFeedApiTest : Spek({
         }
     }
 
-    val pageData = arrayOf(
-            data(0, true),
-            data(1, false)
-    )
+    arrayOf(
+            Pair(0, true),
+            Pair(1, false)
+    ).forEach { (page, expectedHasMorePages) ->
+        on("fetching a feed in date range and page %s") {
+            server.enqueue(mockResponse("feed.json"))
 
-    on("fetching a feed in date range and page %s", with = *pageData) { page, expectedHasMorePages ->
-        server.enqueue(mockResponse("feed.json"))
+            val task = MenigaFeed.fetch(dateFrom, dateTo, page, 10).task
+            task.waitForCompletion()
 
-        val task = MenigaFeed.fetch(dateFrom, dateTo, page, 10).task
-        task.waitForCompletion()
+            val result = task.result
 
-        val result = task.result
+            it("should make a proper request") {
+                val recordedRequest = server.takeRequest()
+                assertThat(recordedRequest.method).isEqualTo("GET")
+                assertThat(URI(recordedRequest.path))
+                        .hasPath("/v1/feed")
+                        .hasParameter("skip", (page * 10).toString())
+                        .hasParameter("take", "10")
+                        .hasParameter("dateFrom", "2018-01-01T00:00:00.000Z")
+                        .hasParameter("dateTo", "2018-02-01T00:00:00.000Z")
+            }
 
-        it("should make a proper request") {
-            val recordedRequest = server.takeRequest()
-            assertThat(recordedRequest.method).isEqualTo("GET")
-            assertThat(URI(recordedRequest.path))
-                    .hasPath("/v1/feed")
-                    .hasParameter("skip", (page * 10).toString())
-                    .hasParameter("take", "10")
-                    .hasParameter("dateFrom", "2018-01-01T00:00:00.000Z")
-                    .hasParameter("dateTo", "2018-02-01T00:00:00.000Z")
-        }
+            it("should retrieve data with hasMorePages=$expectedHasMorePages") {
+                assertThat(result.hasMorePages()).isEqualTo(expectedHasMorePages)
+            }
+            it("should have more data") {
+                assertThat(result.hasMoreData()).isTrue()
+            }
 
-        it("should retrieve data with hasMorePages=$expectedHasMorePages") {
-            assertThat(result.hasMorePages()).isEqualTo(expectedHasMorePages)
-        }
-        it("should have more data") {
-            assertThat(result.hasMoreData()).isTrue()
-        }
-
-        it("should validate against the spec") {
-            server.assertNoValidations()
+            it("should validate against the spec") {
+                server.assertNoValidations()
+            }
         }
     }
 

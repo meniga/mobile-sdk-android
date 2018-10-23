@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 
-fun <R : Parcelable> R.testParcel(): R {
+fun <R : Parcelable> R.testParcel(): R? {
     val bytes = marshallParcelable(this)
     return unmarshallParcelable(bytes)
 }
@@ -22,9 +22,9 @@ private fun marshall(bundle: Bundle): ByteArray =
             it.marshall()
         }
 
-private fun <R : Parcelable> unmarshallParcelable(bytes: ByteArray): R = unmarshall(bytes)
+private fun <R : Parcelable> unmarshallParcelable(bytes: ByteArray): R? = unmarshall(bytes)
         .readBundle()
-        .run {
+        ?.run {
             classLoader = classLoader
             getParcelable("key")
         }

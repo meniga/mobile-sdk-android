@@ -1,9 +1,0 @@
-task copyClasses(type: Copy) {
-    from "build/tmp/kotlin-classes/debug"
-    into "build/intermediates/classes/debug"
-}
-task copyTestClasses(type: Copy) {
-    from "build/tmp/kotlin-classes/debugUnitTest"
-    into "build/intermediates/classes/test/debug"
-}
-afterEvaluate { tasks.getByName("compileDebugUnitTestSources").finalizedBy(copyClasses, copyTestClasses) }

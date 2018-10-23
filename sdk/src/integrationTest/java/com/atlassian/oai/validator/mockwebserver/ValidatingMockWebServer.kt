@@ -50,8 +50,8 @@ class ValidatingMockWebServer(
                 ?.reduce { accumulator, validationReport -> accumulator.merge(validationReport) }
                 ?.also {
                     it.messages
-                            .filter { it.level != ValidationReport.Level.ERROR }
-                            .forEach { System.err.println("[${it.level}] ${it.message}") }
+                            .filter { message -> message.level != ValidationReport.Level.ERROR }
+                            .forEach { message -> System.err.println("[${message.level}] ${message.message}") }
                     assertFalse(format(it), it.hasErrors())
                 }
     }
