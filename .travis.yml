@@ -4,8 +4,8 @@ sudo: false
 android:
   components:
   - tools
-  - build-tools-27.0.3
-  - android-27
+  - build-tools-28.0.3
+  - android-28
 
 cache:
   directories:
@@ -23,7 +23,9 @@ jobs:
   include:
     - stage: build
       script:
-        - ./gradlew build
+        - ./gradlew build jacocoTestReport
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
 
     - stage: deploy branch snapshot
       install:

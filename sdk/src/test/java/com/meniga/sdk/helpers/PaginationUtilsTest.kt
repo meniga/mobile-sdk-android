@@ -3,8 +3,7 @@ package com.meniga.sdk.helpers
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.data_driven.data
-import org.jetbrains.spek.data_driven.on
+import org.jetbrains.spek.api.dsl.on
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 import kotlin.test.assertFailsWith
@@ -12,52 +11,62 @@ import kotlin.test.assertFailsWith
 @RunWith(JUnitPlatform::class)
 object PaginationUtilsTest : Spek({
 
-    val skipAndTakeData = arrayOf(
-            data(0, 0, 0, 0),
-            data(1, 0, 0, 0),
-            data(0, 10, 0, 10),
-            data(1, 10, 10, 10),
-            data(2, 10, 20, 10))
-
-    on("converting page=%s and itemsPerPage=%s to skip and take", with = *skipAndTakeData) { page, itemsPerPage, expectedSkip, expectedTake ->
-        it("should return skip=$expectedSkip and take=$expectedTake") {
-            assertThat(toSkipAndTake(page, itemsPerPage)).isEqualTo(Pair(expectedSkip, expectedTake))
-        }
-    }
-
-    val failingSkipAndTakeData = arrayOf(
-            data(-1, 0, IllegalArgumentException::class),
-            data(0, -1, IllegalArgumentException::class))
-
-    on("converting page=%s and itemsPerPage=%s to skip and take", with = *failingSkipAndTakeData) { page, itemsPerPage, exceptionClass ->
-        it("should throw $exceptionClass") {
-            assertFailsWith(exceptionClass) {
-                toSkipAndTake(page, itemsPerPage)
+    arrayOf(
+            listOf(0, 0, 0, 0),
+            listOf(1, 0, 0, 0),
+            listOf(0, 10, 0, 10),
+            listOf(1, 10, 10, 10),
+            listOf(2, 10, 20, 10)
+    ).forEach { (page, itemsPerPage, expectedSkip, expectedTake) ->
+        on("converting page=$page and itemsPerPage=$itemsPerPage to skip and take") {
+            it("should return skip=$expectedSkip and take=$expectedTake") {
+                assertThat(toSkipAndTake(page, itemsPerPage)).isEqualTo(Pair(expectedSkip, expectedTake))
             }
         }
     }
 
-    val hasMoreData = arrayOf(
-            data(0, 0, 0, false),
-            data(10, 0, 10, false),
-            data(11, 0, 10, true),
-            data(11, 1, 10, false))
-
-    on("checking if there is more data for totalCount=%s, page=%s and itemsPerPage=%s", with = *hasMoreData) { totalCount, page, itemsPerPage, expected ->
-        it("should return $expected") {
-            assertThat(hasMoreData(totalCount, page, itemsPerPage)).isEqualTo(expected)
+    arrayOf(
+            Triple(-1, 0, IllegalArgumentException::class),
+            Triple(0, -1, IllegalArgumentException::class)
+    ).forEach { (page, itemsPerPage, exceptionClass) ->
+        on("converting page=$page and itemsPerPage=$itemsPerPage to skip and take") {
+            it("should throw $exceptionClass") {
+                assertFailsWith(exceptionClass) {
+                    toSkipAndTake(page, itemsPerPage)
+                }
+            }
         }
     }
 
-    val failingHasMoreData = arrayOf(
-            data(-1, 0, 0, IllegalArgumentException::class),
-            data(0, -1, 0, IllegalArgumentException::class),
-            data(0, 0, -1, IllegalArgumentException::class))
+    data class TestData(
+            val totalCount: Int,
+            val page: Int,
+            val itemsPerPage: Int
+    )
 
-    on("checking if there is more data for totalCount=%s, page=%s and itemsPerPage=%s", with = *failingHasMoreData) { totalCount, page, itemsPerPage, exceptionClass ->
-        it("should throw $exceptionClass") {
-            assertFailsWith(exceptionClass) {
-                hasMoreData(totalCount, page, itemsPerPage)
+    arrayOf(
+            Pair(TestData(0, 0, 0), false),
+            Pair(TestData(10, 0, 10), false),
+            Pair(TestData(11, 0, 10), true),
+            Pair(TestData(11, 1, 10), false)
+    ).forEach { (data, expected) ->
+        on("checking if there is more data for $data") {
+            it("should return $expected") {
+                assertThat(hasMoreData(data.totalCount, data.page, data.itemsPerPage)).isEqualTo(expected)
+            }
+        }
+    }
+
+    arrayOf(
+            Pair(TestData(-1, 0, 0), IllegalArgumentException::class),
+            Pair(TestData(0, -1, 0), IllegalArgumentException::class),
+            Pair(TestData(0, 0, -1), IllegalArgumentException::class)
+    ).forEach { (data, exceptionClass) ->
+        on("checking if there is more data for $data") {
+            it("should throw $exceptionClass") {
+                assertFailsWith(exceptionClass) {
+                    hasMoreData(data.totalCount, data.page, data.itemsPerPage)
+                }
             }
         }
     }

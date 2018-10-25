@@ -1,22 +1,22 @@
 buildscript {
     ext {
-        kotlinVersion = "1.2.41"
+        kotlinVersion = "1.2.71"
+        // MOBILE-3449 Parameters encoding changed in later versions https://github.com/square/okhttp/issues/3235
         okHttpVersion = "3.9.1"
-        spekVersion = "1.1.5"
+        spekVersion = "1.2.1"
     }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.1.1"
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0"
-        classpath "digital.wup:android-maven-publish:3.3.0"
-        classpath "org.apache.httpcomponents:httpclient:4.5.3"
-        classpath "org.codehaus.groovy:groovy-all:2.4.12"
-        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.16"
+        classpath "com.android.tools.build:gradle:3.2.1"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
+        classpath "digital.wup:android-maven-publish:3.6.2"
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.17"
+        classpath "org.codehaus.groovy:groovy-all:2.4.15"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.5.4"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.8.1"
     }
 }
 
