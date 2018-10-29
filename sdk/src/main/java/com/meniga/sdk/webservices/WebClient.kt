@@ -55,6 +55,7 @@ object WebClient {
         settings.sslSocketFactory?.let { builder.sslSocketFactory(it, settings.x509TrustManager) }
         settings.httpInterceptors?.forEach { builder.addInterceptor(it) }
         settings.networkInterceptors?.forEach { builder.addNetworkInterceptor(it) }
+        settings.certificatePinner?.let { builder.certificatePinner(it) }
         builder.addInterceptor(AcceptLanguageInterceptor())
 
         val client = builder.build()
@@ -83,6 +84,6 @@ object WebClient {
     }
 
     private fun fixEndpoint(endpoint: String): String {
-        return if (!endpoint.endsWith("/")) endpoint + "/" else endpoint
+        return if (!endpoint.endsWith("/")) "$endpoint/" else endpoint
     }
 }

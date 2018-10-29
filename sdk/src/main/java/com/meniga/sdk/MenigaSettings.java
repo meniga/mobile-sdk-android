@@ -1,15 +1,15 @@
 package com.meniga.sdk;
 
 import com.meniga.sdk.adapters.TaskAdapter;
+import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaAccountAvailableAmountEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaChallengeEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaCustomEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaDialogEventConverter;
-import com.meniga.sdk.eventconverters.generic.MenigaTransactionEventConverter;
 import com.meniga.sdk.eventconverters.generic.MenigaTransactionCountEventConverter;
+import com.meniga.sdk.eventconverters.generic.MenigaTransactionEventConverter;
 import com.meniga.sdk.interfaces.PersistenceMode;
 import com.meniga.sdk.interfaces.PersistenceProvider;
-import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
 import com.meniga.sdk.providers.BasicTaskAdapter;
 import com.meniga.sdk.webservices.Service;
@@ -19,10 +19,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Authenticator;
+import okhttp3.CertificatePinner;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 
@@ -39,10 +41,11 @@ public class MenigaSettings {
 	private final Map<Service, String> specialServiceEndpoints;
 	private final List<Interceptor> interceptors;
 	private final List<Interceptor> networkInterceptors;
+	private final CertificatePinner certificatePinner;
 	private final List<EventBaseConverter> userEventFeedConverters;
 	private final CustomErrorHandler errorHandler;
 	private final TaskAdapter taskAdapter;
-	private String culture = "en-GB";
+	private String culture;
 	private SSLSocketFactory sslSocketFactory;
 	private X509TrustManager x509TrustManager;
 
@@ -57,6 +60,7 @@ public class MenigaSettings {
 		taskAdapter = builder.taskAdapter;
 		errorHandler = builder.errorHandler;
 		networkInterceptors = builder.networkInterceptors;
+		certificatePinner = builder.certificatePinner;
 		culture = builder.culture;
 		sslSocketFactory = builder.sslSocketFactory;
 		x509TrustManager = builder.x509TrustManager;
@@ -163,6 +167,11 @@ public class MenigaSettings {
 		return networkInterceptors;
 	}
 
+	@Nullable
+	public CertificatePinner getCertificatePinner() {
+		return certificatePinner;
+	}
+
 	/**
 	 * Returns all user event feed converters in use.
 	 *
@@ -186,6 +195,7 @@ public class MenigaSettings {
 		private Map<Service, String> specialServiceEndpoints = new HashMap<>();
 		private List<Interceptor> interceptors = new ArrayList<>();
 		private List<Interceptor> networkInterceptors = new ArrayList<>();
+		private CertificatePinner certificatePinner;
 		private final List<EventBaseConverter> userEventFeedConverters = new ArrayList<>();
 		private CustomErrorHandler errorHandler;
 		private TaskAdapter taskAdapter;
@@ -249,11 +259,24 @@ public class MenigaSettings {
 		/**
 		 * Sets the concrete persistence implementation to be used in the Meniga SDK
 		 *
-		 * @param persistanceProvider The persistance provider, implementing the PersistenceProvider interface
+		 * @param persistenceProvider The persistance provider, implementing the PersistenceProvider interface
+		 * @return Builder object
+		 *
+		 * @deprecated Use {@link #persistenceMode(PersistenceMode)} instead.
+		 */
+		@Deprecated
+		public Builder persistanceProvider(PersistenceProvider persistenceProvider) {
+			return persistenceProvider(persistenceProvider);
+		}
+
+		/**
+		 * Sets the concrete persistence implementation to be used in the Meniga SDK
+		 *
+		 * @param persistenceProvider The persistence provider, implementing the PersistenceProvider interface
 		 * @return Builder object
 		 */
-		public Builder persistanceProvider(PersistenceProvider persistanceProvider) {
-			this.persistenceProvider = persistanceProvider;
+		public Builder persistenceProvider(@Nullable PersistenceProvider persistenceProvider) {
+			this.persistenceProvider = persistenceProvider;
 			return this;
 		}
 
@@ -320,6 +343,11 @@ public class MenigaSettings {
 		 */
 		public Builder addNetworkInterceptor(Interceptor interceptor) {
 			networkInterceptors.add(interceptor);
+			return this;
+		}
+
+		public Builder certificatePinner(@Nullable CertificatePinner certificatePinner) {
+			this.certificatePinner = certificatePinner;
 			return this;
 		}
 

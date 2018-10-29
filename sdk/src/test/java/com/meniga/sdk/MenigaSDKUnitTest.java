@@ -16,7 +16,7 @@ public class MenigaSDKUnitTest {
 		MenigaSettings settings = new MenigaSettings.Builder()
 				.endpoint(HttpUrl.parse("http://example.com"))
 				.authenticator(new BasicAuthenticator())
-				.persistanceProvider(new BasicPersistanceProviderNone())
+				.persistenceProvider(new BasicPersistanceProviderNone())
 				.build();
 
 		MenigaSDK.init(settings);
