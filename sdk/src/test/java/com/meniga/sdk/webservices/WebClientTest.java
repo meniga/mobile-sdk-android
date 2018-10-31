@@ -4,9 +4,6 @@ import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.providers.BasicAuthenticator;
 
-import junit.framework.Assert;
-
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import okhttp3.HttpUrl;
