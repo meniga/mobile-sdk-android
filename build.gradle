@@ -2,7 +2,7 @@ buildscript {
     ext {
         kotlinVersion = "1.2.71"
         // MOBILE-3449 Parameters encoding changed in later versions https://github.com/square/okhttp/issues/3235
-        okHttpVersion = "3.11.0"
+        okHttpVersion = "3.9.1"
         spekVersion = "1.2.1"
     }
     repositories {
