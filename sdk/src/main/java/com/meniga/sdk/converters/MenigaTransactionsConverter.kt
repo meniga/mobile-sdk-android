@@ -22,7 +22,7 @@ import java.lang.reflect.Type
 
 class MenigaTransactionsConverter : MenigaConverter() {
     override fun responseBodyConverter(type: Type, annotations: Array<Annotation>, retrofit: Retrofit): Converter<ResponseBody, *>? {
-        val gson = GsonProvider.getGsonBuilder()
+        val gson = GsonProvider.gson
         when (type) {
             type<List<MenigaTransaction>>() -> return Converter<ResponseBody, Any> { responseBody ->
                 val (data, _, included) = MenigaConverter.getAsArrayApiResponse(responseBody.byteStream())

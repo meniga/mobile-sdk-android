@@ -8,7 +8,6 @@ import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.models.MockClient;
 import com.meniga.sdk.models.MockInterceptor;
-import com.meniga.sdk.models.upcoming.enums.CronDayOfWeek;
 import com.meniga.sdk.models.upcoming.enums.CronMonth;
 import com.meniga.sdk.utils.FileImporter;
 
@@ -142,7 +141,7 @@ public class MenigaUpcomingTest {
 
 
 	private List<MenigaUpcoming> gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		MenigaUpcoming[] items = null;
 		try {
 			items = gson.fromJson(

@@ -27,7 +27,7 @@ public class MenigaBaseConverter<T> extends MenigaConverter {
 		return new Converter<ResponseBody, T>() {
 			@Override
 			public T convert(ResponseBody resBody) throws IOException {
-				Gson gson = GsonProvider.getGsonBuilder();
+				Gson gson = GsonProvider.getGson();
 				InputStreamReader isr = new InputStreamReader(resBody.byteStream());
 				JsonParser parser = new JsonParser();
 				JsonObject jsonObject = parser.parse(isr).getAsJsonObject();

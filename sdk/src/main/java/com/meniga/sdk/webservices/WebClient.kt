@@ -65,6 +65,8 @@ object WebClient {
         else
             fixEndpoint(settings.endpoint.toString())
 
+        val gson = GsonProvider.gson
+
         return Retrofit.Builder()
                 .baseUrl(endpoint)
                 .addConverterFactory(MenigaTransactionsConverter())
@@ -72,13 +74,14 @@ object WebClient {
                 .addConverterFactory(MenigaFeedConverter(FeedItemFactory()))
                 .addConverterFactory(MenigaCategoryConverter())
                 .addConverterFactory(MenigaOfferConverter())
-                .addConverterFactory(MenigaRedemptionConverter())
+                .addConverterFactory(MenigaSimilarBrandSpendingConverter(gson))
+                .addConverterFactory(MenigaRedemptionConverter(gson))
                 .addConverterFactory(MenigaReimbursementAccountConverter())
                 .addConverterFactory(MenigaIdNameKeyValConverter())
                 .addConverterFactory(MenigaChallengesConverter(ChallengeItemFactory()))
                 .addConverterFactory(MenigaFeedItemConverter(FeedItemFactory()))
                 .addConverterFactory(MenigaBaseConverter<Any>())
-                .addConverterFactory(GsonConverterFactory.create(GsonProvider.getGsonBuilder()))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build()
     }

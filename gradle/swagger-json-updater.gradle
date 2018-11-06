@@ -1,20 +1,27 @@
 ext {
-    swaggerJsonUrl = "http://api.umw.meniga.net/docs/user-v1"
-    timeoutMillis = 1000
+    timeoutMillis = 5000
 }
 
-task updateSwaggerJson(type: Download) {
-    group "build"
-    onlyIf { isReachable(swaggerJsonUrl, timeoutMillis) }
-    src swaggerJsonUrl
-    dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", "swagger.json")
-    overwrite true
-    acceptAnyCertificate true
-    compress true
-    timeout timeoutMillis
+createDownloadTask("updateApiJson", "http://api.umw.meniga.net/docs/user-v1", "api.json")
+createDownloadTask("updateOffersJson", "http://cashbackapi.umw.meniga.net/docs/user-v1", "offers.json")
+
+afterEvaluate {
+    tasks.getByName("compileDebugUnitTestSources")
+            .dependsOn updateApiJson, updateOffersJson
 }
 
-afterEvaluate { tasks.getByName("compileDebugUnitTestSources").dependsOn(updateSwaggerJson) }
+private void createDownloadTask(String taskName, String url, String destination) {
+    task "$taskName"(type: Download) {
+        group "build"
+        overwrite true
+        acceptAnyCertificate true
+        compress true
+        timeout timeoutMillis
+        onlyIf { isReachable(url, timeoutMillis) }
+        src url
+        dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", destination)
+    }
+}
 
 private boolean isReachable(String urlString, int timeOutMillis) {
     try {

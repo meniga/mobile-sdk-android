@@ -15,7 +15,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -90,7 +89,7 @@ public class MenigaTransactionRuleTest{
 	}
 
 	private List<MenigaTransactionRule> gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		List<MenigaTransactionRule> categories = null;
 		try {
 			categories = Arrays.asList(gson.fromJson(MenigaConverter.getAsArray(FileImporter.getInputStreamFromRaw("transactionrules.json")), MenigaTransactionRule[].class));

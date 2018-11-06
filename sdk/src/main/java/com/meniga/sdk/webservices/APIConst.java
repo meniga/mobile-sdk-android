@@ -57,7 +57,7 @@ class APIConst {
 	static final String OF_ACTIVATE = "/activate";
 	static final String OF_ENABLE = "/enable";
 	static final String OF_SEEN = "/seen";
-	static final String OF_SIMILAR_BRAND_SPENING_DETAILS = "/similarBrandSpendingDetails";
+	static final String OF_SIMILAR_BRAND_SPENING_DETAILS = "/similarBrandSpending";
 	static final String OF_ACCEPT_TERMS_AND_CONDITIONS = "/acceptTermsAndConditions";
 	static final String OF_MERCHANT_LOCATIONS = "/merchantLocations";
 

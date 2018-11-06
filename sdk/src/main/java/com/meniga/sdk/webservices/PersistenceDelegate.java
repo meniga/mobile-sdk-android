@@ -591,7 +591,7 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.OFFERS).getMerchantLocationByOfferId(req.offerId));
+		return persist(req, getClient(Service.OFFERS).getMerchantLocationByOfferId(req.offerId, req.toQueryMap()));
 	}
 
 	public Result<MenigaReimbursementAccount> addReimbursementAccount(CreateReimbursementAccount req) {

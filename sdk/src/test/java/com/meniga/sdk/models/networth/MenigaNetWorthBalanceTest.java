@@ -10,7 +10,6 @@ import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
 
-import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -93,7 +92,7 @@ public class MenigaNetWorthBalanceTest {
 	}
 
 	private List<MenigaNetWorthBalance> gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		try {
 			return Arrays.asList(gson.fromJson(MenigaConverter.getAsArray(
 					FileImporter.getInputStreamFromRaw("networthbalance.json")),

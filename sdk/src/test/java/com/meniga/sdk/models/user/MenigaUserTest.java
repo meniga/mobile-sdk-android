@@ -19,7 +19,7 @@ public class MenigaUserTest{
 
 	@Test
 	public void testMenigaUserSerialization() throws IOException {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		MenigaUserProfile menigaUser = gson.fromJson(FileImporter.getJsonFileFromRaw("user.json"), MenigaUserProfile.class);
 		assertThat(menigaUser).isNotNull();
 	}

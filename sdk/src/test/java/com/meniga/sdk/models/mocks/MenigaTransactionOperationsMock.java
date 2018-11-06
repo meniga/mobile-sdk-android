@@ -123,7 +123,7 @@ public class MenigaTransactionOperationsMock implements MenigaTransactionOperati
 	}
 
 	private MenigaTransactionPage gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		MenigaTransactionPage transactionPage = null;
 		try {
 			InputStream inputStream = FileImporter.getInputStreamFromRaw("transactions.json");

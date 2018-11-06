@@ -11,7 +11,6 @@ import com.meniga.sdk.models.offers.MenigaOffer;
 import com.meniga.sdk.models.offers.MenigaOfferPage;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -35,7 +34,7 @@ public class MenigaOfferConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaOfferPage>() {
 				@Override
 				public MenigaOfferPage convert(ResponseBody resBody) throws IOException {
-					Gson gson = GsonProvider.getGsonBuilder();
+					Gson gson = GsonProvider.getGson();
 					MenigaOfferPage page = gson.fromJson(new JsonArray(), MenigaOfferPage.class);
 					InputStreamReader isr = new InputStreamReader(resBody.byteStream());
 					JsonElement element;
@@ -60,7 +59,7 @@ public class MenigaOfferConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public Object convert(ResponseBody resBody) throws IOException {
-					Gson gson = GsonProvider.getGsonBuilder();
+					Gson gson = GsonProvider.getGson();
 					return gson.fromJson(getAsObject(resBody.byteStream()), MenigaOffer.class);
 				}
 			};

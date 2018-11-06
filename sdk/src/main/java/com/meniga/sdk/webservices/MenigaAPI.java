@@ -312,11 +312,13 @@ public interface MenigaAPI {
 	@GET(APIConst.URL_OFFERS + "/{id}" + APIConst.OF_SIMILAR_BRAND_SPENING_DETAILS)
 	Call<MenigaSimilarBrandSpendingDetails> getSimilarBrandSpeningDetails(@Path("id") long id);
 
-	@GET(APIConst.URL_OFFERS + "/{id}" + APIConst.URL_REDEMPTIONS)
+	@GET(APIConst.URL_OFFERS + "/{id}/redemptions")
 	Call<MenigaRedemptions> getRedemptionsByOfferId(@Path("id") long id);
 
 	@GET(APIConst.URL_OFFERS + "/{id}" + APIConst.OF_MERCHANT_LOCATIONS)
-	Call<MenigaOfferMerchantLocationPage> getMerchantLocationByOfferId(@Path("id") long id);
+	Call<MenigaOfferMerchantLocationPage> getMerchantLocationByOfferId(
+			@Path("id") long id,
+			@QueryMap Map<String, String> queryMap);
 
 	// --
 	// Redemptions

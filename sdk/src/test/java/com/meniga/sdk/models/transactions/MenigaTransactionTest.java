@@ -13,7 +13,6 @@ import com.meniga.sdk.utils.FileImporter;
 
 import junit.framework.Assert;
 
-import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -21,7 +20,6 @@ import org.robolectric.RobolectricTestRunner;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -77,7 +75,7 @@ public class MenigaTransactionTest {
 	}
 
 	private List<MenigaTransaction> gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		List<MenigaTransaction> transactions = null;
 		try {
 			transactions = Arrays.asList(

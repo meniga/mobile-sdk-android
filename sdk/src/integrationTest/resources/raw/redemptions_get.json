@@ -1,0 +1,13 @@
+{
+  "data": [],
+  "meta": {
+    "activatedOffers": 2,
+    "spentAmount": 0,
+    "redeemedAmount": 0,
+    "notReimbursedAmount": 0,
+    "reimbursedAmount": 0,
+    "nextReimbursementAmount": 0,
+    "scheduledReimbursements": [],
+    "totalCount": 0
+  }
+}

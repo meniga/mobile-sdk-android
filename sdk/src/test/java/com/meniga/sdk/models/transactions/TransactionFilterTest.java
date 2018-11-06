@@ -45,7 +45,7 @@ public class TransactionFilterTest{
 		Assert.assertEquals(merged.merchantTexts, Collections.singletonList("Hagkaup"));
 		Assert.assertTrue(merged.getSearchText().equals("Example"));
 
-		JsonElement obj = GsonProvider.getGsonBuilder().toJsonTree(merged);
+		JsonElement obj = GsonProvider.getGson().toJsonTree(merged);
 		JsonObject jsonFilter = obj.getAsJsonObject();
 		Assert.assertNotNull(jsonFilter);
 		Assert.assertEquals("Example", jsonFilter.get("searchText").getAsString());
