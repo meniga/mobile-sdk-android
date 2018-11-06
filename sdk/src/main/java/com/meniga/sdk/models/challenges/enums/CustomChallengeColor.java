@@ -21,7 +21,7 @@ public enum CustomChallengeColor implements Serializable {
 	RED;
 
 	/**
-	 * Use Colors should be defined in app instead.
+	 * @deprecated Colors should be defined in the app instead.
 	 */
 	@Deprecated
 	public int toColorInt() {
