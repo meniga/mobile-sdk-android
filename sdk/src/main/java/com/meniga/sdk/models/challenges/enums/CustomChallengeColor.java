@@ -20,6 +20,10 @@ public enum CustomChallengeColor implements Serializable {
 	@SerializedName("danger")
 	RED;
 
+	/**
+	 * @deprecated Colors should be defined in the app instead.
+	 */
+	@Deprecated
 	public int toColorInt() {
 		switch (this) {
 			default:
