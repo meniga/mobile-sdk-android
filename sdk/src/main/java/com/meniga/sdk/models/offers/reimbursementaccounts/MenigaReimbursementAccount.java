@@ -16,9 +16,9 @@ public class MenigaReimbursementAccount implements Serializable, Parcelable {
 
 	protected static MenigaReimbursementAccountOperations apiOperator;
 
-	protected transient long id;
-	protected transient boolean isActive;
-	protected transient boolean isVerified;
+	protected long id;
+	protected boolean isActive;
+	protected boolean isVerified;
 
 	protected String name;
 	protected String accountType;
