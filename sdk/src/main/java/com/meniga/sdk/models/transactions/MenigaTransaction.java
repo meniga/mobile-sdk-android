@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Represents a transaction in the Meniga system. Transactions belong to accounts.
@@ -622,6 +621,204 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 	};
 
 	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		MenigaTransaction that = (MenigaTransaction) o;
+
+		if (id != that.id) {
+			return false;
+		}
+		if (hasUncertainCategorization != that.hasUncertainCategorization) {
+			return false;
+		}
+		if (timeStamp != that.timeStamp) {
+			return false;
+		}
+		if (parentIdentifier != null ? !parentIdentifier.equals(that.parentIdentifier) : that.parentIdentifier != null) {
+			return false;
+		}
+		if (amount != null ? !amount.equals(that.amount) : that.amount != null) {
+			return false;
+		}
+		if (tags != null ? !tags.equals(that.tags) : that.tags != null) {
+			return false;
+		}
+		if (comments != null ? !comments.equals(that.comments) : that.comments != null) {
+			return false;
+		}
+		if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) {
+			return false;
+		}
+		if (date != null ? !date.equals(that.date) : that.date != null) {
+			return false;
+		}
+		if (text != null ? !text.equals(that.text) : that.text != null) {
+			return false;
+		}
+		if (originalDate != null ? !originalDate.equals(that.originalDate) : that.originalDate != null) {
+			return false;
+		}
+		if (originalText != null ? !originalText.equals(that.originalText) : that.originalText != null) {
+			return false;
+		}
+		if (originalAmount != null ? !originalAmount.equals(that.originalAmount) : that.originalAmount != null) {
+			return false;
+		}
+		if (isRead != null ? !isRead.equals(that.isRead) : that.isRead != null) {
+			return false;
+		}
+		if (isFlagged != null ? !isFlagged.equals(that.isFlagged) : that.isFlagged != null) {
+			return false;
+		}
+		if (accountId != null ? !accountId.equals(that.accountId) : that.accountId != null) {
+			return false;
+		}
+		if (mcc != null ? !mcc.equals(that.mcc) : that.mcc != null) {
+			return false;
+		}
+		if (detectedCategories != null ? !detectedCategories.equals(that.detectedCategories) : that.detectedCategories != null) {
+			return false;
+		}
+		if (currency != null ? !currency.equals(that.currency) : that.currency != null) {
+			return false;
+		}
+		if (amountInCurrency != null ? !amountInCurrency.equals(that.amountInCurrency) : that.amountInCurrency != null) {
+			return false;
+		}
+		if (dataFormat != null ? !dataFormat.equals(that.dataFormat) : that.dataFormat != null) {
+			return false;
+		}
+		if (merchantId != null ? !merchantId.equals(that.merchantId) : that.merchantId != null) {
+			return false;
+		}
+		if (merchants != null ? !merchants.equals(that.merchants) : that.merchants != null) {
+			return false;
+		}
+		if (bankId != null ? !bankId.equals(that.bankId) : that.bankId != null) {
+			return false;
+		}
+		if (insertTime != null ? !insertTime.equals(that.insertTime) : that.insertTime != null) {
+			return false;
+		}
+		if (hasUserClearedCategoryUncertainty != null ? !hasUserClearedCategoryUncertainty.equals(that.hasUserClearedCategoryUncertainty) : that.hasUserClearedCategoryUncertainty != null) {
+			return false;
+		}
+		if (isUncleared != null ? !isUncleared.equals(that.isUncleared) : that.isUncleared != null) {
+			return false;
+		}
+		if (balance != null ? !balance.equals(that.balance) : that.balance != null) {
+			return false;
+		}
+		if (categoryChangedTime != null ? !categoryChangedTime.equals(that.categoryChangedTime) : that.categoryChangedTime != null) {
+			return false;
+		}
+		if (changedByRule != null ? !changedByRule.equals(that.changedByRule) : that.changedByRule != null) {
+			return false;
+		}
+		if (changedByRuleTime != null ? !changedByRuleTime.equals(that.changedByRuleTime) : that.changedByRuleTime != null) {
+			return false;
+		}
+		if (counterpartyAccountIdentifier != null ? !counterpartyAccountIdentifier.equals(that.counterpartyAccountIdentifier) : that.counterpartyAccountIdentifier != null) {
+			return false;
+		}
+		if (dueDate != null ? !dueDate.equals(that.dueDate) : that.dueDate != null) {
+			return false;
+		}
+		if (lastModifiedTime != null ? !lastModifiedTime.equals(that.lastModifiedTime) : that.lastModifiedTime != null) {
+			return false;
+		}
+		if (timestamp != null ? !timestamp.equals(that.timestamp) : that.timestamp != null) {
+			return false;
+		}
+		if (parsedData != null ? !parsedData.equals(that.parsedData) : that.parsedData != null) {
+			return false;
+		}
+		if (data != null ? !data.equals(that.data) : that.data != null) {
+			return false;
+		}
+		if (redeemed != null ? !redeemed.equals(that.redeemed) : that.redeemed != null) {
+			return false;
+		}
+		if (toRedeem != null ? !toRedeem.equals(that.toRedeem) : that.toRedeem != null) {
+			return false;
+		}
+		if (remainingToSpend != null ? !remainingToSpend.equals(that.remainingToSpend) : that.remainingToSpend != null) {
+			return false;
+		}
+		if (belongsToExpiredOffer != null ? !belongsToExpiredOffer.equals(that.belongsToExpiredOffer) : that.belongsToExpiredOffer != null) {
+			return false;
+		}
+		if (reason != null ? !reason.equals(that.reason) : that.reason != null) {
+			return false;
+		}
+		if (isSplitChild != null ? !isSplitChild.equals(that.isSplitChild) : that.isSplitChild != null) {
+			return false;
+		}
+		if (userData != null ? !userData.equals(that.userData) : that.userData != null) {
+			return false;
+		}
+		if (eventTypeIdentifier != null ? !eventTypeIdentifier.equals(that.eventTypeIdentifier) : that.eventTypeIdentifier != null) {
+			return false;
+		}
+		return topicName != null ? topicName.equals(that.topicName) : that.topicName == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = parentIdentifier != null ? parentIdentifier.hashCode() : 0;
+		result = 31 * result + (int) (id ^ (id >>> 32));
+		result = 31 * result + (amount != null ? amount.hashCode() : 0);
+		result = 31 * result + (tags != null ? tags.hashCode() : 0);
+		result = 31 * result + (comments != null ? comments.hashCode() : 0);
+		result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
+		result = 31 * result + (date != null ? date.hashCode() : 0);
+		result = 31 * result + (text != null ? text.hashCode() : 0);
+		result = 31 * result + (originalDate != null ? originalDate.hashCode() : 0);
+		result = 31 * result + (originalText != null ? originalText.hashCode() : 0);
+		result = 31 * result + (originalAmount != null ? originalAmount.hashCode() : 0);
+		result = 31 * result + (isRead != null ? isRead.hashCode() : 0);
+		result = 31 * result + (isFlagged != null ? isFlagged.hashCode() : 0);
+		result = 31 * result + (hasUncertainCategorization ? 1 : 0);
+		result = 31 * result + (accountId != null ? accountId.hashCode() : 0);
+		result = 31 * result + (mcc != null ? mcc.hashCode() : 0);
+		result = 31 * result + (detectedCategories != null ? detectedCategories.hashCode() : 0);
+		result = 31 * result + (currency != null ? currency.hashCode() : 0);
+		result = 31 * result + (amountInCurrency != null ? amountInCurrency.hashCode() : 0);
+		result = 31 * result + (dataFormat != null ? dataFormat.hashCode() : 0);
+		result = 31 * result + (merchantId != null ? merchantId.hashCode() : 0);
+		result = 31 * result + (bankId != null ? bankId.hashCode() : 0);
+		result = 31 * result + (insertTime != null ? insertTime.hashCode() : 0);
+		result = 31 * result + (hasUserClearedCategoryUncertainty != null ? hasUserClearedCategoryUncertainty.hashCode() : 0);
+		result = 31 * result + (isUncleared != null ? isUncleared.hashCode() : 0);
+		result = 31 * result + (balance != null ? balance.hashCode() : 0);
+		result = 31 * result + (categoryChangedTime != null ? categoryChangedTime.hashCode() : 0);
+		result = 31 * result + (changedByRule != null ? changedByRule.hashCode() : 0);
+		result = 31 * result + (changedByRuleTime != null ? changedByRuleTime.hashCode() : 0);
+		result = 31 * result + (counterpartyAccountIdentifier != null ? counterpartyAccountIdentifier.hashCode() : 0);
+		result = 31 * result + (dueDate != null ? dueDate.hashCode() : 0);
+		result = 31 * result + (lastModifiedTime != null ? lastModifiedTime.hashCode() : 0);
+		result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
+		result = 31 * result + (parsedData != null ? parsedData.hashCode() : 0);
+		result = 31 * result + (data != null ? data.hashCode() : 0);
+		result = 31 * result + (userData != null ? userData.hashCode() : 0);
+		result = 31 * result + (redeemed != null ? redeemed.hashCode() : 0);
+		result = 31 * result + (toRedeem != null ? toRedeem.hashCode() : 0);
+		result = 31 * result + (remainingToSpend != null ? remainingToSpend.hashCode() : 0);
+		result = 31 * result + (belongsToExpiredOffer != null ? belongsToExpiredOffer.hashCode() : 0);
+		result = 31 * result + (reason != null ? reason.hashCode() : 0);
+		result = 31 * result + (isSplitChild == null ? 2 : isSplitChild ? 1 : 0);
+		result = 31 * result + (int) (timeStamp ^ (timeStamp >>> 32));
+		result = 31 * result + (int) (timeStamp ^ (timeStamp >>> 32));
+		return result;
+	}
+
+	@Override
 	public MenigaTransaction clone() throws CloneNotSupportedException {
 		return (MenigaTransaction) super.clone();
 	}
@@ -637,72 +834,6 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 	@Override
 	public String toString() {
 		return Long.toString(id) + ": " + amount.doubleValue() + ": " + text + " (" + date.toString() + ")";
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		MenigaTransaction that = (MenigaTransaction) o;
-		return id == that.id &&
-				hasUncertainCategorization == that.hasUncertainCategorization &&
-				timeStamp == that.timeStamp &&
-				Objects.equals(parentIdentifier, that.parentIdentifier) &&
-				Objects.equals(amount, that.amount) &&
-				Objects.equals(tags, that.tags) &&
-				Objects.equals(comments, that.comments) &&
-				Objects.equals(categoryId, that.categoryId) &&
-				Objects.equals(date, that.date) &&
-				Objects.equals(text, that.text) &&
-				Objects.equals(originalDate, that.originalDate) &&
-				Objects.equals(originalText, that.originalText) &&
-				Objects.equals(originalAmount, that.originalAmount) &&
-				Objects.equals(isRead, that.isRead) &&
-				Objects.equals(isFlagged, that.isFlagged) &&
-				Objects.equals(accountId, that.accountId) &&
-				Objects.equals(account, that.account) &&
-				Objects.equals(mcc, that.mcc) &&
-				Objects.equals(detectedCategories, that.detectedCategories) &&
-				Objects.equals(currency, that.currency) &&
-				Objects.equals(amountInCurrency, that.amountInCurrency) &&
-				Objects.equals(dataFormat, that.dataFormat) &&
-				Objects.equals(merchantId, that.merchantId) &&
-				Objects.equals(merchant, that.merchant) &&
-				Objects.equals(merchants, that.merchants) &&
-				Objects.equals(bankId, that.bankId) &&
-				Objects.equals(insertTime, that.insertTime) &&
-				Objects.equals(hasUserClearedCategoryUncertainty, that.hasUserClearedCategoryUncertainty) &&
-				Objects.equals(isUncleared, that.isUncleared) &&
-				Objects.equals(balance, that.balance) &&
-				Objects.equals(categoryChangedTime, that.categoryChangedTime) &&
-				Objects.equals(changedByRule, that.changedByRule) &&
-				Objects.equals(changedByRuleTime, that.changedByRuleTime) &&
-				Objects.equals(counterpartyAccountIdentifier, that.counterpartyAccountIdentifier) &&
-				Objects.equals(dueDate, that.dueDate) &&
-				Objects.equals(lastModifiedTime, that.lastModifiedTime) &&
-				Objects.equals(timestamp, that.timestamp) &&
-				Objects.equals(parsedData, that.parsedData) &&
-				Objects.equals(data, that.data) &&
-				Objects.equals(redeemed, that.redeemed) &&
-				Objects.equals(toRedeem, that.toRedeem) &&
-				Objects.equals(remainingToSpend, that.remainingToSpend) &&
-				Objects.equals(belongsToExpiredOffer, that.belongsToExpiredOffer) &&
-				Objects.equals(reason, that.reason) &&
-				Objects.equals(isSplitChild, that.isSplitChild) &&
-				Objects.equals(userData, that.userData) &&
-				Objects.equals(eventTypeIdentifier, that.eventTypeIdentifier) &&
-				Objects.equals(topicName, that.topicName);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(parentIdentifier, id, amount, tags, comments, categoryId, date, text, originalDate,
-				originalText, originalAmount, isRead, isFlagged, hasUncertainCategorization, accountId, account,
-				mcc, detectedCategories, currency, amountInCurrency, dataFormat, merchantId, merchant, merchants,
-				bankId, insertTime, hasUserClearedCategoryUncertainty, isUncleared, balance, categoryChangedTime,
-				changedByRule, changedByRuleTime, counterpartyAccountIdentifier, dueDate, lastModifiedTime,
-				timestamp, parsedData, data, redeemed, toRedeem, remainingToSpend, belongsToExpiredOffer, reason,
-				isSplitChild, timeStamp, userData, eventTypeIdentifier, topicName);
 	}
 
 	/*
