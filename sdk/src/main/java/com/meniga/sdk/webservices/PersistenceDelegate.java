@@ -76,6 +76,7 @@ import com.meniga.sdk.webservices.challenge.GetChallenges;
 import com.meniga.sdk.webservices.challenge.UpdateChallenge;
 import com.meniga.sdk.webservices.eventtracking.EventTrackingService;
 import com.meniga.sdk.webservices.eventtracking.TrackEvent;
+import com.meniga.sdk.webservices.offers.OffersService;
 import com.meniga.sdk.webservices.requests.*;
 
 import java.util.Collections;
@@ -370,13 +371,6 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.TRANSACTIONS).updateComment(req.transactionId, req.commentId, req));
 	}
 
-	public Result<List<MenigaTransaction>> getOfferTransactions(GetOfferTransactions req) {
-		if (provider.hasKey(req)) {
-			return createTask(provider.fetch(req));
-		}
-		return persist(req, getClient(Service.TRANSACTIONS).getOfferTransaction(req.id));
-	}
-
 	public Result<Void> deleteComment(DeleteComment req) {
 		return persist(req, getClient(Service.TRANSACTIONS).deleteComment(req.transactionId, req.commentId));
 	}
@@ -518,7 +512,7 @@ public class PersistenceDelegate {
 			return createTask(provider.fetch(req));
 		}
 
-		return persist(req, getClient(Service.OFFERS).getOffers(req.toQueryMap()));
+		return persist(req, getService(OffersService.class).getOffers(req.toQueryMap()));
 	}
 
 	public Result<MenigaOffer> getOfferByToken(GetOfferByToken req) {
@@ -526,7 +520,7 @@ public class PersistenceDelegate {
 			return createTask(provider.fetch(req));
 		}
 
-		return persist(req, getClient(Service.OFFERS).getOffer(req.token));
+		return persist(req, getService(OffersService.class).getOffer(req.token));
 	}
 
 	public Result<MenigaOffer> getOfferById(GetOfferById req) {
@@ -534,7 +528,7 @@ public class PersistenceDelegate {
 			return createTask(provider.fetch(req));
 		}
 
-		return persist(req, getClient(Service.OFFERS).getOffer(req.id));
+		return persist(req, getService(OffersService.class).getOffer(req.id));
 	}
 
 	public Result<MenigaRedemptions> getRedemptions(GetRedemptions req) {
@@ -542,72 +536,72 @@ public class PersistenceDelegate {
 			return createTask(provider.fetch(req));
 		}
 
-		return persist(req, getClient(Service.OFFERS).getRedemptions(req.toQueryMap()));
+		return persist(req, getService(OffersService.class).getRedemptions(req.toQueryMap()));
 	}
 
 	public Result<Void> activateOfferById(ActivateOfferById req) {
-		return persist(req, getClient(Service.OFFERS).activateOfferById(req.id));
+		return persist(req, getService(OffersService.class).activateOfferById(req.id));
 	}
 
 	public Result<Void> activateOfferByToken(ActivateOfferByToken req) {
-		return persist(req, getClient(Service.OFFERS).activateOfferByToken(req.validationToken));
+		return persist(req, getService(OffersService.class).activateOfferByToken(req.validationToken));
 	}
 
 	public Result<Void> declineOffer(DeclineOffer req) {
-		return persist(req, getClient(Service.OFFERS).declineOffer(req.id));
+		return persist(req, getService(OffersService.class).declineOffer(req.id));
 	}
 
 	public Result<Void> acceptTermsAndConditions(AcceptOffersTermsAndConditions req) {
-		return persist(req, getClient(Service.OFFERS).acceptTermsAndConditions());
+		return persist(req, getService(OffersService.class).acceptTermsAndConditions());
 	}
 
 	public Result<Void> enableOffers(EnableOffers req) {
-		return persist(req, getClient(Service.OFFERS).enableOffers());
+		return persist(req, getService(OffersService.class).enableOffers());
 	}
 
 	public Result<Void> disableOffers(DisableOffers req) {
-		return persist(req, getClient(Service.OFFERS).disableOffers());
+		return persist(req, getService(OffersService.class).disableOffers());
 	}
 
 	public Result<Void> markOfferAsSeen(MarkOfferAsSeen req) {
-		return persist(req, getClient(Service.OFFERS).markOfferAsSeen(req.id));
+		return persist(req, getService(OffersService.class).markOfferAsSeen(req.id));
 	}
 
 	public Result<MenigaSimilarBrandSpendingDetails> getSimilarBrandSpendingDetails(GetSimilarBrandSpendingDetails req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.OFFERS).getSimilarBrandSpeningDetails(req.id));
+		return persist(req, getService(OffersService.class).getSimilarBrandSpeningDetails(req.id));
 	}
 
 	public Result<MenigaRedemptions> getRedemptionsByOfferId(GetRedemptionsByOfferId req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.OFFERS).getRedemptionsByOfferId(req.offerId));
+		return persist(req, getService(OffersService.class).getRedemptionsByOfferId(req.offerId));
 	}
 
 	public Result<MenigaOfferMerchantLocationPage> getMerchantLocationsByOfferId(GetMerchantLocationsByOfferId req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.OFFERS).getMerchantLocationByOfferId(req.offerId, req.toQueryMap()));
+		return persist(req, getService(OffersService.class).getMerchantLocationByOfferId(req.offerId, req.toQueryMap()));
 	}
 
 	public Result<MenigaReimbursementAccount> addReimbursementAccount(CreateReimbursementAccount req) {
-		return persist(req, getClient(Service.OFFERS).addReimbursementAccount(req));
+		return persist(req, getService(OffersService.class).addReimbursementAccount(req));
 	}
 
 	public Result<MenigaReimbursementAccountPage> getReimbursementAccounts(GetReimbursementAccounts req) {
-		return persist(req, getClient(Service.OFFERS).getReimbursementAccounts(req.toQueryMap()));
+		return persist(req, getService(OffersService.class).getReimbursementAccounts(req.toQueryMap()));
 	}
 
 	public Result<MenigaReimbursementAccountTypePage> getReimbursementAccountTypes(GetReimbursementAccountTypes req) {
-		return persist(req, getClient(Service.OFFERS).getReimbursementAccountTypes(req.toQueryMap()));
+		return persist(req, getService(OffersService.class).getReimbursementAccountTypes(req.toQueryMap()));
 	}
 
 	public Result<MenigaReimbursementAccount> getReimbursementAccountById(GetReimbursementAccountById req) {
-		return persist(req, getClient(Service.OFFERS).getReimbursementAccountById(req.id));
+		return persist(req, getService(OffersService.class).getReimbursementAccountById(req.id));
 	}
 
 	// --

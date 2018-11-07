@@ -51,23 +51,6 @@ class APIConst {
 	static final String URL_USER_EVENT_SUBSCRIPTIONS = "userevents/subscription";
 	static final String UE_DETAILS = "/details";
 
-	// Offers
-	static final String URL_OFFERS = "offers";
-	static final String OF_TRANSACTIONS = "/transactions";
-	static final String OF_ACTIVATE = "/activate";
-	static final String OF_ENABLE = "/enable";
-	static final String OF_SEEN = "/seen";
-	static final String OF_SIMILAR_BRAND_SPENING_DETAILS = "/similarBrandSpending";
-	static final String OF_ACCEPT_TERMS_AND_CONDITIONS = "/acceptTermsAndConditions";
-	static final String OF_MERCHANT_LOCATIONS = "/merchantLocations";
-
-	// Reimbursement Accounts
-	static final String URL_REIMBURSEMENT_ACCOUNTS = "reimbursementAccounts";
-	static final String RA_TYPES = "/types";
-
-	// Redemptions
-	static final String URL_REDEMPTIONS = "redemptions";
-
 	// NetWorth
 	static final String URL_NETWORTH = "networth";
 	static final String NW_ACCOUNTS = "/accounts";
