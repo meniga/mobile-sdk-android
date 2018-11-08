@@ -1,29 +1,30 @@
 ext {
-    timeoutMillis = 1000
+    timeoutMillis = 5000
 }
 
 createDownloadTask("updateApiJson", "http://api.umw.meniga.net/docs/user-v1", "api.json")
 createDownloadTask("updateOffersJson", "http://cashbackapi.umw.meniga.net/docs/user-v1", "offers.json")
 
 afterEvaluate {
-    tasks.getByName("compileDebugUnitTestSources")
-            .dependsOn updateApiJson, updateOffersJson
+    tasks.findAll { it.name ==~ "process.*Res" }
+            .forEach { it.dependsOn updateApiJson, updateOffersJson }
 }
 
 private void createDownloadTask(String taskName, String url, String destination) {
-    task "$taskName"(type: Download) {
+    task "$taskName" << {
         group "build"
-        overwrite true
-        acceptAnyCertificate true
-        compress true
-        timeout timeoutMillis
-        src url
-        dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", destination)
-    }
 
-    gradle.taskGraph.afterTask { Task task, TaskState state ->
-        if (task.name == taskName && state.failure) {
-            task.state.failure = null
+        try {
+            download {
+                overwrite true
+                acceptAnyCertificate true
+                compress true
+                timeout timeoutMillis
+                src url
+                dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", destination)
+            }
+        } catch (Exception exception) {
+            logger.warn("Skipping $url download due to failure", exception)
         }
     }
 }
