@@ -21,7 +21,6 @@ public class MenigaRedemptions extends ArrayList<MenigaRedemptionTransaction> im
 
 	protected static MenigaRedemptionsOperations apiOperator;
 
-	private int page;
 	@MetaProperty
 	protected MenigaDecimal redeemedAmount;
 	@MetaProperty
@@ -92,6 +91,7 @@ public class MenigaRedemptions extends ArrayList<MenigaRedemptionTransaction> im
 		dest.writeSerializable(this.spentAmount);
 		dest.writeTypedList(this.scheduledReimbursements);
 		dest.writeInt(this.totalCount);
+		dest.writeList(this);
 	}
 
 	protected MenigaRedemptions(Parcel in) {
@@ -101,6 +101,7 @@ public class MenigaRedemptions extends ArrayList<MenigaRedemptionTransaction> im
 		this.spentAmount = (MenigaDecimal) in.readSerializable();
 		this.scheduledReimbursements = in.createTypedArrayList(MenigaScheduledReimbursement.CREATOR);
 		this.totalCount = in.readInt();
+		in.readList(this, getClass().getClassLoader());
 	}
 
 	public static final Creator<MenigaRedemptions> CREATOR = new Creator<MenigaRedemptions>() {

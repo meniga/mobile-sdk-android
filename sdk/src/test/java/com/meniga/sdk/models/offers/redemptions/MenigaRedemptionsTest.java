@@ -24,7 +24,7 @@ public class MenigaRedemptionsTest {
 	@Test
 	public void testSerialization() throws IOException {
 		MenigaRedemptions redemptions = GsonProvider.getGson().fromJson(MenigaConverter.getAsArray(
-				FileImporter.getInputStreamFromRaw("redemptions.json")),
+				FileImporter.getInputStreamFromRaw("redemptions_get.json")),
 				MenigaRedemptions.class
 		);
 		Parcel parcel = Parcel.obtain();

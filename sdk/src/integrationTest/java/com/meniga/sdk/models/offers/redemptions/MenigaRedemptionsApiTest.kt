@@ -55,7 +55,7 @@ object MenigaRedemptionsApiTest : Spek({
         }
 
         it("should retrieve proper data") {
-            assertThat(task.isFaulted).isFalse()
+            assertThat(task.result).isNotNull
         }
 
         it("should validate against the spec") {

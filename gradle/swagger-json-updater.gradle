@@ -1,5 +1,5 @@
 ext {
-    timeoutMillis = 5000
+    timeoutMillis = 1000
 }
 
 createDownloadTask("updateApiJson", "http://api.umw.meniga.net/docs/user-v1", "api.json")
@@ -17,20 +17,13 @@ private void createDownloadTask(String taskName, String url, String destination)
         acceptAnyCertificate true
         compress true
         timeout timeoutMillis
-        onlyIf { isReachable(url, timeoutMillis) }
         src url
         dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", destination)
     }
-}
 
-private boolean isReachable(String urlString, int timeOutMillis) {
-    try {
-        URL url = new URL(urlString)
-        Socket socket = new Socket()
-        socket.connect(new InetSocketAddress(url.host, url.defaultPort), timeOutMillis)
-        return true
-    } catch (Exception exception) {
-        project.logger.warn("Skipping Swagger JSON download", exception)
-        return false
+    gradle.taskGraph.afterTask { Task task, TaskState state ->
+        if (task.name == taskName && state.failure) {
+            task.state.failure = null
+        }
     }
 }

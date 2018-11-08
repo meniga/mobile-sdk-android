@@ -150,7 +150,7 @@ object MenigaOffersApiTest : Spek({
 
         it("should retrieve proper data") {
             val redemptions = task.result
-            assertThat(redemptions).isNotNull
+            assertThat(redemptions).hasSize(1)
         }
 
         it("should validate against the spec") {

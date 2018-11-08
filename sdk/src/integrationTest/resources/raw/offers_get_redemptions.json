@@ -1,3 +1,18 @@
 {
-  "data": []
+  "data": [
+    {
+      "id":111111110,
+      "redemptionId":111110,
+      "offerId":110,
+      "text":"Hamborgarafabrikkan",
+      "date":"2018-05-29T00:00:00",
+      "amount":-8430.0000,
+      "redemptionAmount":1686.0000,
+      "redemptionType":"FullPercentage",
+      "reimbursementStatus":"Processed",
+      "reimbursementDate":"2018-07-19T00:00:00",
+      "scheduledReimbursementDate":null,
+      "reimbursementAccountInfo":"{\"bankAccountNumber\":\"111111\",\"ledger\":\"11\",\"socialSecurityNumber\":\"1111111111\",\"bankNumber\":\"1111\"}"
+    }
+  ]
 }
