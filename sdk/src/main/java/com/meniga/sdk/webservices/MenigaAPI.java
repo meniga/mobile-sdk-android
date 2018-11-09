@@ -60,6 +60,8 @@ import com.meniga.sdk.webservices.requests.UpdateUpcoming;
 import com.meniga.sdk.webservices.requests.UpdateUserCategory;
 import com.meniga.sdk.webservices.requests.UpdatedNetWorthAccount;
 
+import org.json.JSONObject;
+
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +71,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
 import retrofit2.http.Header;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.OPTIONS;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -353,20 +356,20 @@ public interface MenigaAPI {
 
 	// Generic
 	@GET
-	Call<Object> genericGet(@Url String path, @QueryMap Map<String, String> query);
+	Call<Object> genericGet(@Url String path, @HeaderMap Map<String, String> headers, @QueryMap Map<String, String> query);
 
 	@HEAD
-	Call<Object> genericHead(@Url String path, @QueryMap Map<String, String> query);
+	Call<Object> genericHead(@Url String path, @HeaderMap Map<String, String> headers, @QueryMap Map<String, String> query);
 
 	@OPTIONS
-	Call<Object> genericOptions(@Url String path, @QueryMap Map<String, String> query);
+	Call<Object> genericOptions(@Url String path, @HeaderMap Map<String, String> headers, @QueryMap Map<String, String> query);
 
 	@POST
-	Call<Object> genericPost(@Url String path, @Body String body, @QueryMap Map<String, String> query);
+	Call<Object> genericPost(@Url String path, @HeaderMap Map<String, String> headers, @Body Object body, @QueryMap Map<String, String> query);
 
 	@PUT
-	Call<Object> genericPut(@Url String path, @Body String body, @QueryMap Map<String, String> query);
+	Call<Object> genericPut(@Url String path, @HeaderMap Map<String, String> headers, @Body Object body, @QueryMap Map<String, String> query);
 
 	@DELETE
-	Call<Object> genericDelete(@Url String path, @QueryMap Map<String, String> query);
+	Call<Object> genericDelete(@Url String path, @HeaderMap Map<String, String> headers, @QueryMap Map<String, String> query);
 }
