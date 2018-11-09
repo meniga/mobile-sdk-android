@@ -7,7 +7,6 @@ import com.meniga.sdk.models.offers.MenigaOfferPage;
 import com.meniga.sdk.models.offers.MenigaSimilarBrandSpendingDetails;
 import com.meniga.sdk.models.offers.enums.OfferFilterState;
 import com.meniga.sdk.models.offers.redemptions.MenigaRedemptions;
-import com.meniga.sdk.models.transactions.MenigaTransaction;
 
 import java.util.List;
 
@@ -21,8 +20,6 @@ public interface MenigaOfferOperations {
 	Result<MenigaOffer> getOfferById(long id);
 
 	Result<MenigaOffer> getOfferByToken(String token);
-
-	Result<List<MenigaTransaction>> getTransactions(long id);
 
 	Result<Void> activateById(long id);
 

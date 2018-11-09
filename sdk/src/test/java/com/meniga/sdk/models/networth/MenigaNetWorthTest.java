@@ -92,7 +92,7 @@ public class MenigaNetWorthTest {
 	}
 
 	private List<MenigaNetWorth> gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		try {
 			return Arrays.asList(gson.fromJson(MenigaConverter.getAsArray(
 					FileImporter.getInputStreamFromRaw("networth.json")),

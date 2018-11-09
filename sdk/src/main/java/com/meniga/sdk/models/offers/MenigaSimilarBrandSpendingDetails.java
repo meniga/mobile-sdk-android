@@ -31,6 +31,15 @@ public class MenigaSimilarBrandSpendingDetails implements Parcelable, Serializab
 	protected MenigaSimilarBrandSpendingDetails() {
 	}
 
+	MenigaSimilarBrandSpendingDetails(
+			DateTime startDate,
+			DateTime endDate,
+			List<MenigaBrandSpending> brandSpendings) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.brandSpendings = brandSpendings;
+	}
+
 	protected MenigaSimilarBrandSpendingDetails(Parcel in) {
 		this.startDate = (DateTime) in.readSerializable();
 		this.endDate = (DateTime) in.readSerializable();

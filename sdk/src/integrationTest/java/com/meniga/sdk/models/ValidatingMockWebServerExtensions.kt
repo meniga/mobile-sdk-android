@@ -10,9 +10,12 @@ import com.atlassian.oai.validator.whitelist.rule.WhitelistRules.anyOf
 import com.atlassian.oai.validator.whitelist.rule.WhitelistRules.messageContains
 import com.atlassian.oai.validator.whitelist.rule.WhitelistRules.pathContains
 
-fun createValidatingMockWebServer(): ValidatingMockWebServer =
+fun createValidatingMockWebServer() = createValidatingMockWebServer("/api/api.json")
+fun createOffersValidatingMockWebServer() = createValidatingMockWebServer("/api/offers.json")
+
+private fun createValidatingMockWebServer(apiUrl: String): ValidatingMockWebServer =
         create(
-                "/api/swagger.json",
+                apiUrl,
                 "/v1",
                 ValidationErrorsWhitelist.create()
                         .withRule("BACKEND-2972 Ignore date-format violations", messageContains("is invalid against requested date format"))
@@ -45,6 +48,19 @@ fun createValidatingMockWebServer(): ValidatingMockWebServer =
                                         pathContains("/transactions"),
                                         messageContains("does not match any allowed primitive type"),
                                         messageContains("parsedData")
+                                )
+                        )
+                        .withRule("TODO merchantName is returned null but not marked as optional",
+                            allOf(
+                                    pathContains("/offers"),
+                                    messageContains("Object has missing required properties"),
+                                    messageContains("merchantName")
+                            )
+                        )
+                        .withRule("this is probably a false positive from the validator - we can try to bump the dependency",
+                                allOf(
+                                        pathContains("/offers"),
+                                        messageContains("Value 'token' for parameter 'id' does not match type 'integer' with format 'int32'.")
                                 )
                         )
         )

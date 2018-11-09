@@ -6,9 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.meniga.sdk.helpers.GsonProvider;
-import com.meniga.sdk.models.transactions.MenigaComment;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
-import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 
 import java.io.IOException;
@@ -36,7 +34,7 @@ public class MenigaTransactionUpdateConverter extends MenigaConverter {
             return new Converter<ResponseBody, Object>() {
                 @Override
                 public Object convert(ResponseBody resBody) throws IOException {
-                    Gson gson = GsonProvider.getGsonBuilder();
+                    Gson gson = GsonProvider.getGson();
 
                     InputStreamReader isr = null;
                     try {

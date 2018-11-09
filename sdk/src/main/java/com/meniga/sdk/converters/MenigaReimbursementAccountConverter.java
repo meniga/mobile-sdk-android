@@ -37,7 +37,7 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaReimbursementAccount>() {
 				@Override
 				public MenigaReimbursementAccount convert(ResponseBody resBody) throws IOException {
-					Gson gson = GsonProvider.getGsonBuilder();
+					Gson gson = GsonProvider.getGson();
 					return gson.fromJson(getAsObject(resBody.byteStream()), MenigaReimbursementAccount.class);
 				}
 			};
@@ -45,7 +45,7 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaReimbursementAccountPage>() {
 				@Override
 				public MenigaReimbursementAccountPage convert(ResponseBody resBody) throws IOException {
-					Gson gson = GsonProvider.getGsonBuilder();
+					Gson gson = GsonProvider.getGson();
 					MenigaReimbursementAccountPage page = new MenigaReimbursementAccountPage();
 					InputStreamReader isr = new InputStreamReader(resBody.byteStream());
 					JsonElement jelement;
@@ -69,7 +69,7 @@ public class MenigaReimbursementAccountConverter extends MenigaConverter {
 			return new Converter<ResponseBody, MenigaReimbursementAccountTypePage>() {
 				@Override
 				public MenigaReimbursementAccountTypePage convert(ResponseBody resBody) throws IOException {
-					Gson gson = GsonProvider.getGsonBuilder();
+					Gson gson = GsonProvider.getGson();
 					MenigaReimbursementAccountTypePage page = new MenigaReimbursementAccountTypePage();
 
 					InputStreamReader isr = new InputStreamReader(resBody.byteStream());

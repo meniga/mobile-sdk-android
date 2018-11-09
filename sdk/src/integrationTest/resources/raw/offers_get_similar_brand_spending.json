@@ -1,0 +1,13 @@
+{
+  "data": [
+    {
+      "brandName": "Fake data",
+      "brandId": 42,
+      "spentAmount": 42.0
+    }
+  ],
+  "meta": {
+    "startDate": "2018-04-03T00:00:00",
+    "endDate": "2018-07-02T00:00:00"
+  }
+}

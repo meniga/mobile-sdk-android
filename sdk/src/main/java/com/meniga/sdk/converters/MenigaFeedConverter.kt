@@ -3,7 +3,6 @@
  */
 package com.meniga.sdk.converters
 
-import com.google.gson.JsonNull
 import com.google.gson.JsonObject
 import com.meniga.sdk.helpers.FeedItemFactory
 import com.meniga.sdk.helpers.type
@@ -17,7 +16,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
-internal class MenigaFeedConverter(private val feedItemFactory: FeedItemFactory) : MenigaConverter() {
+class MenigaFeedConverter(private val feedItemFactory: FeedItemFactory) : MenigaConverter() {
 
     override fun responseBodyConverter(type: Type?, annotations: Array<Annotation>?, retrofit: Retrofit?): Converter<ResponseBody, *>? {
         return when (type) {

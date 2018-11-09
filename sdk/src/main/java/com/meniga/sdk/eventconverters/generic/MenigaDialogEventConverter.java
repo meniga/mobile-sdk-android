@@ -6,7 +6,6 @@ import com.google.gson.JsonParser;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.models.feed.MenigaAccountEvent;
-import com.meniga.sdk.models.feed.MenigaAccountEventData;
 import com.meniga.sdk.models.feed.MenigaDialogEvent;
 import com.meniga.sdk.models.feed.MenigaDialogEventData;
 
@@ -21,7 +20,7 @@ public class MenigaDialogEventConverter implements EventBaseConverter<MenigaAcco
 
 	@Override
 	public MenigaDialogEvent eventConverter(JsonElement element) {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		JsonElement je = element.getAsJsonObject().get(MESSAGE_DATA);
 
 		if (!je.isJsonObject()) {

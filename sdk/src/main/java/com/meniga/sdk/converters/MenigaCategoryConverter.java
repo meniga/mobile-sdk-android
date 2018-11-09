@@ -7,7 +7,6 @@ import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.MenigaUserCategory;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class MenigaCategoryConverter extends MenigaConverter {
 			return new Converter<ResponseBody, Object>() {
 				@Override
 				public List<MenigaCategory> convert(ResponseBody resBody) throws IOException {
-					Gson gson = GsonProvider.getGsonBuilder();
+					Gson gson = GsonProvider.getGson();
 					MenigaCategory[] catsRaw = gson.fromJson(getAsArray(resBody.byteStream()), MenigaCategory[].class);
 
 					List<MenigaCategory> cats = new ArrayList<>();
@@ -60,7 +59,7 @@ public class MenigaCategoryConverter extends MenigaConverter {
 				@Override
 				public MenigaCategory convert(ResponseBody resBody) throws IOException {
 
-					Gson gson = GsonProvider.getGsonBuilder();
+					Gson gson = GsonProvider.getGson();
 
 					MenigaCategory catRaw = gson.fromJson(getAsObject(resBody.byteStream()), MenigaCategory.class);
 					if (catRaw.getIsPublic()) {

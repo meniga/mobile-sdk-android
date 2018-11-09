@@ -11,6 +11,7 @@ import com.meniga.sdk.converters.MenigaRedemptionConverter;
 import com.meniga.sdk.converters.MenigaReimbursementAccountConverter;
 import com.meniga.sdk.converters.MenigaTransactionsConverter;
 import com.meniga.sdk.helpers.ChallengeItemFactory;
+import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MockFeedItemFactory;
 import com.meniga.sdk.webservices.MenigaAPI;
 
@@ -33,7 +34,7 @@ public class MockClient {
 				.addConverterFactory(new MenigaFeedConverter(new MockFeedItemFactory()))
 				.addConverterFactory(new MenigaCategoryConverter())
 				.addConverterFactory(new MenigaOfferConverter())
-				.addConverterFactory(new MenigaRedemptionConverter())
+				.addConverterFactory(new MenigaRedemptionConverter(GsonProvider.getGson()))
 				.addConverterFactory(new MenigaReimbursementAccountConverter())
 				.addConverterFactory(new MenigaIdNameKeyValConverter())
 				.addConverterFactory(new MenigaChallengesConverter(new ChallengeItemFactory()))

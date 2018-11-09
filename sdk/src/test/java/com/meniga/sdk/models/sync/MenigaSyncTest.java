@@ -65,7 +65,7 @@ public class MenigaSyncTest {
 	}
 
 	private MenigaSync gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		try {
 			return gson.fromJson(
 					MenigaConverter.getAsObject(FileImporter.getInputStreamFromRaw("syncresponse.json")),

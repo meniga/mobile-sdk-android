@@ -57,7 +57,7 @@ public class UserEventsTest {
 	}
 
 	private List<MenigaUserEvent> gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		try {
 			return Arrays.asList(gson.fromJson(
 					MenigaConverter.getAsArray(FileImporter.getInputStreamFromRaw("userevents.json")),

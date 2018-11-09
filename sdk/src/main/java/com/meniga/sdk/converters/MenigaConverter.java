@@ -9,11 +9,15 @@ import com.google.gson.JsonSyntaxException;
 import com.meniga.sdk.ErrorHandler;
 import com.meniga.sdk.annotations.MetaProperty;
 
+import org.jetbrains.annotations.NonNls;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+
+import javax.annotation.Nonnull;
 
 import retrofit2.Converter;
 
@@ -90,7 +94,7 @@ public abstract class MenigaConverter extends Converter.Factory {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T mergeMeta(Gson gson, T dest, JsonObject meta) throws JsonSyntaxException {
+	public static <T> T mergeMeta(@Nonnull Gson gson, @Nonnull T dest, @Nonnull JsonObject meta) throws JsonSyntaxException {
 		Class<?> cl = dest.getClass();
 		Field[] fields = cl.getDeclaredFields();
 		for (Field field : fields) {

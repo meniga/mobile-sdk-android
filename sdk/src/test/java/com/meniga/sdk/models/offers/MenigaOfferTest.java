@@ -41,7 +41,7 @@ public class MenigaOfferTest{
 	}
 
 	private MenigaOfferPage gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		try {
 			return gson.fromJson(MenigaConverter.getAsArray(
 					FileImporter.getInputStreamFromRaw("offers.json")),

@@ -8,7 +8,6 @@ import com.meniga.sdk.models.offers.MenigaOfferPage;
 import com.meniga.sdk.models.offers.MenigaSimilarBrandSpendingDetails;
 import com.meniga.sdk.models.offers.enums.OfferFilterState;
 import com.meniga.sdk.models.offers.redemptions.MenigaRedemptions;
-import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.webservices.requests.AcceptOffersTermsAndConditions;
 import com.meniga.sdk.webservices.requests.ActivateOfferById;
 import com.meniga.sdk.webservices.requests.ActivateOfferByToken;
@@ -18,7 +17,6 @@ import com.meniga.sdk.webservices.requests.EnableOffers;
 import com.meniga.sdk.webservices.requests.GetMerchantLocationsByOfferId;
 import com.meniga.sdk.webservices.requests.GetOfferById;
 import com.meniga.sdk.webservices.requests.GetOfferByToken;
-import com.meniga.sdk.webservices.requests.GetOfferTransactions;
 import com.meniga.sdk.webservices.requests.GetOffers;
 import com.meniga.sdk.webservices.requests.GetRedemptionsByOfferId;
 import com.meniga.sdk.webservices.requests.GetSimilarBrandSpendingDetails;
@@ -60,13 +58,6 @@ public class MenigaOfferOperationsImp implements MenigaOfferOperations {
 		GetOfferById req = new GetOfferById(id);
 
 		return MenigaSDK.executor().getOfferById(req);
-	}
-
-	@Override
-	public Result<List<MenigaTransaction>> getTransactions(long id) {
-		GetOfferTransactions req = new GetOfferTransactions(id);
-
-		return MenigaSDK.executor().getOfferTransactions(req);
 	}
 
 	@Override

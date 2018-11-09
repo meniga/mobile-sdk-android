@@ -10,14 +10,6 @@ import com.meniga.sdk.models.merchants.MenigaMerchant;
 import com.meniga.sdk.models.merchants.MenigaTopMerchant;
 import com.meniga.sdk.models.networth.MenigaNetWorth;
 import com.meniga.sdk.models.networth.MenigaNetWorthBalance;
-import com.meniga.sdk.models.offers.MenigaOffer;
-import com.meniga.sdk.models.offers.MenigaOfferMerchantLocationPage;
-import com.meniga.sdk.models.offers.MenigaOfferPage;
-import com.meniga.sdk.models.offers.MenigaSimilarBrandSpendingDetails;
-import com.meniga.sdk.models.offers.redemptions.MenigaRedemptions;
-import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAccount;
-import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAccountPage;
-import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAccountTypePage;
 import com.meniga.sdk.models.organizations.MenigaOrganization;
 import com.meniga.sdk.models.organizations.MenigaRealmAccount;
 import com.meniga.sdk.models.organizations.MenigaRealmAuthResponse;
@@ -41,7 +33,6 @@ import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.requests.CreateComment;
 import com.meniga.sdk.webservices.requests.CreateNetWorthAccount;
 import com.meniga.sdk.webservices.requests.CreateNetWorthBalanceHistory;
-import com.meniga.sdk.webservices.requests.CreateReimbursementAccount;
 import com.meniga.sdk.webservices.requests.CreateTransaction;
 import com.meniga.sdk.webservices.requests.CreateTransactionRule;
 import com.meniga.sdk.webservices.requests.CreateUpcoming;
@@ -272,72 +263,6 @@ public interface MenigaAPI {
 
 	@PUT(APIConst.URL_CATEGORIES + "/{id}")
 	Call<Void> updateUserCategory(@Path("id") long id, @Body UpdateUserCategory req);
-
-	// --
-	// Offers
-	// --
-	@GET(APIConst.URL_OFFERS)
-	Call<MenigaOfferPage> getOffers(@QueryMap Map<String, String> queryMap);
-
-	@GET(APIConst.URL_OFFERS + "/{id}")
-	Call<MenigaOffer> getOffer(@Path("id") long id);
-
-	@GET(APIConst.URL_OFFERS + "/{token}")
-	Call<MenigaOffer> getOffer(@Path("token") String token);
-
-	@GET(APIConst.URL_OFFERS + "/{id}" + APIConst.OF_TRANSACTIONS)
-	Call<List<MenigaTransaction>> getOfferTransaction(@Path("id") long id);
-
-	@POST(APIConst.URL_OFFERS + "/{id}" + APIConst.OF_ACTIVATE)
-	Call<Void> activateOfferById(@Path("id") long id);
-
-	@POST(APIConst.URL_OFFERS + "/{token}" + APIConst.OF_ACTIVATE)
-	Call<Void> activateOfferByToken(@Path("token") String token);
-
-	@DELETE(APIConst.URL_OFFERS + "/{id}" + APIConst.OF_ACTIVATE)
-	Call<Void> declineOffer(@Path("id") long id);
-
-	@POST(APIConst.URL_OFFERS + "/{id}" + APIConst.OF_SEEN)
-	Call<Void> markOfferAsSeen(@Path("id") long id);
-
-	@POST(APIConst.URL_OFFERS + APIConst.OF_ACCEPT_TERMS_AND_CONDITIONS)
-	Call<Void> acceptTermsAndConditions();
-
-	@POST(APIConst.URL_OFFERS + APIConst.OF_ENABLE)
-	Call<Void> enableOffers();
-
-	@DELETE(APIConst.URL_OFFERS + APIConst.OF_ENABLE)
-	Call<Void> disableOffers();
-
-	@GET(APIConst.URL_OFFERS + "/{id}" + APIConst.OF_SIMILAR_BRAND_SPENING_DETAILS)
-	Call<MenigaSimilarBrandSpendingDetails> getSimilarBrandSpeningDetails(@Path("id") long id);
-
-	@GET(APIConst.URL_OFFERS + "/{id}" + APIConst.URL_REDEMPTIONS)
-	Call<MenigaRedemptions> getRedemptionsByOfferId(@Path("id") long id);
-
-	@GET(APIConst.URL_OFFERS + "/{id}" + APIConst.OF_MERCHANT_LOCATIONS)
-	Call<MenigaOfferMerchantLocationPage> getMerchantLocationByOfferId(@Path("id") long id);
-
-	// --
-	// Redemptions
-	// --
-	@GET(APIConst.URL_REDEMPTIONS)
-	Call<MenigaRedemptions> getRedemptions(@QueryMap Map<String, String> stringStringMap);
-
-	// --
-	// Reimbursement accounts
-	// --
-	@GET(APIConst.URL_REIMBURSEMENT_ACCOUNTS)
-	Call<MenigaReimbursementAccountPage> getReimbursementAccounts(@QueryMap Map<String, String> stringStringMap);
-
-	@POST(APIConst.URL_REIMBURSEMENT_ACCOUNTS)
-	Call<MenigaReimbursementAccount> addReimbursementAccount(@Body CreateReimbursementAccount req);
-
-	@GET(APIConst.URL_REIMBURSEMENT_ACCOUNTS + "/{id}")
-	Call<MenigaReimbursementAccount> getReimbursementAccountById(@Path("id") int id);
-
-	@GET(APIConst.URL_REIMBURSEMENT_ACCOUNTS + APIConst.RA_TYPES)
-	Call<MenigaReimbursementAccountTypePage> getReimbursementAccountTypes(@QueryMap Map<String, String> stringStringMap);
 
 	// --
 	// Net worth

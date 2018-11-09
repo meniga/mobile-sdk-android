@@ -40,7 +40,7 @@ public class MenigaTransactionListTest{
 	}
 
 	private MenigaTransactionPage gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		MenigaTransactionPage items = null;
 		try {
 			List<MenigaTransaction> list = Arrays.asList(

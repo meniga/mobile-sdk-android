@@ -1,29 +1,30 @@
 ext {
-    swaggerJsonUrl = "http://api.umw.meniga.net/docs/user-v1"
-    timeoutMillis = 1000
+    timeoutMillis = 5000
 }
 
-task updateSwaggerJson(type: Download) {
-    group "build"
-    onlyIf { isReachable(swaggerJsonUrl, timeoutMillis) }
-    src swaggerJsonUrl
-    dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", "swagger.json")
-    overwrite true
-    acceptAnyCertificate true
-    compress true
-    timeout timeoutMillis
+createDownloadTask("updateApiJson", "http://api.umw.meniga.net/docs/user-v1", "api.json")
+createDownloadTask("updateOffersJson", "http://cashbackapi.umw.meniga.net/docs/user-v1", "offers.json")
+
+afterEvaluate {
+    tasks.findAll { it.name ==~ "process.*Res" }
+            .forEach { it.dependsOn updateApiJson, updateOffersJson }
 }
 
-afterEvaluate { tasks.getByName("compileDebugUnitTestSources").dependsOn(updateSwaggerJson) }
+private void createDownloadTask(String taskName, String url, String destination) {
+    task "$taskName" << {
+        group "build"
 
-private boolean isReachable(String urlString, int timeOutMillis) {
-    try {
-        URL url = new URL(urlString)
-        Socket socket = new Socket()
-        socket.connect(new InetSocketAddress(url.host, url.defaultPort), timeOutMillis)
-        return true
-    } catch (Exception exception) {
-        project.logger.warn("Skipping Swagger JSON download", exception)
-        return false
+        try {
+            download {
+                overwrite true
+                acceptAnyCertificate true
+                compress true
+                timeout timeoutMillis
+                src url
+                dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", destination)
+            }
+        } catch (Exception exception) {
+            logger.warn("Skipping $url download due to failure", exception)
+        }
     }
 }

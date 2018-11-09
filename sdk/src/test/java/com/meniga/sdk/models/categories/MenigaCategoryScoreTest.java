@@ -63,7 +63,7 @@ public class MenigaCategoryScoreTest {
 	}
 
 	private MenigaCategoryScore gson() {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		MenigaCategoryScore categoryScore = null;
 		try {
 			categoryScore = gson.fromJson(FileImporter.getJsonFileFromRaw("categoryscore.json"), MenigaCategoryScore.class);

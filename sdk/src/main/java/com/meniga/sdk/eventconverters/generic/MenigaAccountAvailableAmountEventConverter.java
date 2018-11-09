@@ -19,7 +19,7 @@ public class MenigaAccountAvailableAmountEventConverter implements EventBaseConv
 
 	@Override
 	public MenigaAccountEvent eventConverter(JsonElement element) {
-		Gson gson = GsonProvider.getGsonBuilder();
+		Gson gson = GsonProvider.getGson();
 		JsonElement je = element.getAsJsonObject().get(MESSAGE_DATA);
 
 		if (!je.isJsonObject()) {

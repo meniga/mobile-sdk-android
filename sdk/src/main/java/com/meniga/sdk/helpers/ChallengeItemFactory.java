@@ -10,12 +10,9 @@ import com.meniga.sdk.models.challenges.MenigaChallenge;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class ChallengeItemFactory {
-	private Gson gson;
 
 	public MenigaChallenge getMenigaChallengeItem(JsonObject element) {
-		if (gson == null) {
-			gson = GsonProvider.getGsonBuilder();
-		}
+		Gson gson = GsonProvider.getGson();
 
 		MenigaChallenge topLevel = gson.fromJson(element, MenigaChallenge.class);
 		if (element.has("typeData")) {
