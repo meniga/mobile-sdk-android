@@ -79,10 +79,14 @@ import com.meniga.sdk.webservices.eventtracking.TrackEvent;
 import com.meniga.sdk.webservices.offers.OffersService;
 import com.meniga.sdk.webservices.requests.*;
 
+import org.json.JSONObject;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.annotation.Nonnull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -861,22 +865,22 @@ public class PersistenceDelegate {
 	// --
 	// Generic
 	// --
-	Result<Object> genericRequest(HttpMethod method, String path, String body, Map<String, String> query) {
+	Result<Object> genericRequest(@Nonnull HttpMethod method, @Nonnull String path, @Nonnull Map<String, String> headers, Object body, @Nonnull Map<String, String> query) {
 		TaskAdapter taskAdapter = MenigaSDK.getMenigaSettings().getTaskAdapter();
 		switch (method) {
 			case HEAD:
-				return taskAdapter.adapt(getClient(Service.BYPASS).genericHead(path, query), null);
+				return taskAdapter.adapt(getClient(Service.BYPASS).genericHead(path, headers, query), null);
 			case OPTIONS:
-				return taskAdapter.adapt(getClient(Service.BYPASS).genericOptions(path, query), null);
+				return taskAdapter.adapt(getClient(Service.BYPASS).genericOptions(path, headers, query), null);
 			case POST:
-				return taskAdapter.adapt(getClient(Service.BYPASS).genericPost(path, body, query), null);
+				return taskAdapter.adapt(getClient(Service.BYPASS).genericPost(path, headers, body, query), null);
 			case PUT:
-				return taskAdapter.adapt(getClient(Service.BYPASS).genericPut(path, body, query), null);
+				return taskAdapter.adapt(getClient(Service.BYPASS).genericPut(path, headers, body, query), null);
 			case DELETE:
-				return taskAdapter.adapt(getClient(Service.BYPASS).genericDelete(path, query), null);
+				return taskAdapter.adapt(getClient(Service.BYPASS).genericDelete(path, headers, query), null);
 			case GET:
 			default:
-				return taskAdapter.adapt(getClient(Service.BYPASS).genericGet(path, query), null);
+				return taskAdapter.adapt(getClient(Service.BYPASS).genericGet(path, headers, query), null);
 		}
 	}
 
