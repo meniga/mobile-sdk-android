@@ -1,10 +1,15 @@
 package com.meniga.sdk.models.budget;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.meniga.sdk.models.budget.enums.GenerationType;
+
+import java.io.Serializable;
 
 import static com.meniga.sdk.helpers.Objects.checkArgument;
 
-public final class TargetAmountGeneration {
+public final class TargetAmountGeneration implements Parcelable, Serializable {
 
 	private final int value;
 
@@ -68,4 +73,29 @@ public final class TargetAmountGeneration {
 		}
 	}
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(this.value);
+	}
+
+	TargetAmountGeneration(Parcel in) {
+		this.value = in.readInt();
+	}
+
+	public static final Creator<TargetAmountGeneration> CREATOR = new Creator<TargetAmountGeneration>() {
+		@Override
+		public TargetAmountGeneration createFromParcel(Parcel source) {
+			return new TargetAmountGeneration(source);
+		}
+
+		@Override
+		public TargetAmountGeneration[] newArray(int size) {
+			return new TargetAmountGeneration[size];
+		}
+	};
 }
