@@ -28,6 +28,8 @@ class MenigaFeedConverter(private val feedItemFactory: FeedItemFactory) : Meniga
                         add(feedItemFactory.getMenigaFeetItem(it as JsonObject))
                     }
 
+                    moveTransactionEventsToTransaction();
+
                     meta?.let {
                         val actualEndDate = it.get("actualEndDate");
                         if (!actualEndDate.isJsonNull) {
