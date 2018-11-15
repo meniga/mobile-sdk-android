@@ -8,7 +8,6 @@ import com.meniga.sdk.helpers.Interceptor;
 import com.meniga.sdk.helpers.PaginationUtils;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.feed.operators.MenigaFeedOperations;
-import com.meniga.sdk.models.transactions.MenigaTransaction;
 
 import org.joda.time.DateTime;
 
