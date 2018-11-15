@@ -72,7 +72,7 @@ public class MenigaFeedTest {
 		MenigaFeed feed = call.execute().body();
 
 		Assert.assertNotNull(feed);
-		Assert.assertEquals(MenigaTransactionCountEvent.class, feed.get(0).getClass());
+		Assert.assertEquals(MenigaTransactionCountEvent.class, feed.get(1).getClass());
 	}
 
 	@Test
