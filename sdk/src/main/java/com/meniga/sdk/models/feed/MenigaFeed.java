@@ -15,7 +15,6 @@ import org.joda.time.DateTime;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
@@ -73,29 +72,6 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 		dest.writeInt(page);
 		dest.writeInt(itemsPerPage);
 		dest.writeList(this);
-	}
-
-	public void moveTransactionEventsToTransaction() {
-		List<MenigaTransactionEvent> transactionEvents = new ArrayList<>();
-		for (int i = 0; i < size(); i++) {
-			MenigaFeedItem item = get(i);
-			if (item instanceof MenigaTransactionEvent) {
-				transactionEvents.add((MenigaTransactionEvent) item);
-				remove(item);
-				i--;
-			}
-		}
-		for (int i = 0; i < transactionEvents.size(); i++) {
-			MenigaTransactionEvent item = transactionEvents.get(i);
-			for (int x = 0; x < size(); x++) {
-				MenigaFeedItem feedItem = get(x);
-				if (feedItem instanceof MenigaTransaction && ((MenigaTransaction) feedItem).getId() == item.getTopicId()) {
-					item.setDate(feedItem.getDate());
-					set(x + 1, item);
-					x++;
-				}
-			}
-		}
 	}
 
 	/**
