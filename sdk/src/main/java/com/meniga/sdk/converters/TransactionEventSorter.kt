@@ -21,15 +21,7 @@ class TransactionEventSorter {
             val topicId = event.topicId;
             val subList = feed.filter { it is MenigaTransaction && it.id == topicId }
 
-            if (subList.isEmpty()) {
-                feed.find { it.date.millis > event.date.millis }.let {
-                    if (it == null) {
-                        feed.add(event)
-                    } else {
-                        feed.add(feed.indexOf(it), event)
-                    }
-                }
-            } else {
+            if (!subList.isEmpty()) {
                 feed.add(feed.indexOf(subList.last()) + 1, event)
                 event.setDate(subList.last().getDate())
             }

@@ -70,10 +70,12 @@ public class TransactionEventSorterTest {
 		sorter.moveTransactionEventsToTransaction(feed);
 
 		// Then
-		Assertions.assertThat(feed.get(expectedIndex)).isInstanceOf(MenigaTransactionEvent.class);
-		MenigaTransactionEvent event = (MenigaTransactionEvent) feed.get(expectedIndex);
 		if (verifyDate) {
+			Assertions.assertThat(feed.get(expectedIndex)).isInstanceOf(MenigaTransactionEvent.class);
+			MenigaTransactionEvent event = (MenigaTransactionEvent) feed.get(expectedIndex);
 			verify(event).setDate(eq(expectedDate));
+		} else {
+			Assertions.assertThat(feed.size()).isEqualTo(20);
 		}
 	}
 }
