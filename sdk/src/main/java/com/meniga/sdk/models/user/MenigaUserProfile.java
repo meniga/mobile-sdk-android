@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -45,6 +46,7 @@ public class MenigaUserProfile implements Serializable, Parcelable, Cloneable {
 	protected ApartmentType apartmentType;
 	protected String postalCode;
 	protected long personId;
+	protected String currencyCode;
 
 	protected MenigaUserProfile() {
 	}
@@ -66,6 +68,7 @@ public class MenigaUserProfile implements Serializable, Parcelable, Cloneable {
 		this.apartmentType = tmpApartmentType == -1 ? null : ApartmentType.values()[tmpApartmentType];
 		this.postalCode = in.readString();
 		this.personId = in.readLong();
+		this.currencyCode = in.readString();
 	}
 
 	/**
@@ -94,6 +97,10 @@ public class MenigaUserProfile implements Serializable, Parcelable, Cloneable {
 		return this.personId;
 	}
 
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+
 	@Override
 	public int describeContents() {
 		return 0;
@@ -115,6 +122,7 @@ public class MenigaUserProfile implements Serializable, Parcelable, Cloneable {
 		dest.writeInt(this.apartmentType == null ? -1 : this.apartmentType.ordinal());
 		dest.writeString(this.postalCode);
 		dest.writeLong(this.personId);
+		dest.writeString(this.currencyCode);
 	}
 
 	/*
@@ -128,5 +136,34 @@ public class MenigaUserProfile implements Serializable, Parcelable, Cloneable {
 	 */
 	public static Result<MenigaUserProfile> fetch() {
 		return MenigaUserProfile.apiOperator.getUserProfile();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		MenigaUserProfile that = (MenigaUserProfile) o;
+		return personId == that.personId &&
+				gender == that.gender &&
+				Objects.equals(birthYear, that.birthYear) &&
+				Objects.equals(created, that.created) &&
+				Objects.equals(hasSavedProfile, that.hasSavedProfile) &&
+				Objects.equals(incomeId, that.incomeId) &&
+				Objects.equals(numberInFamily, that.numberInFamily) &&
+				Objects.equals(numberOfCars, that.numberOfCars) &&
+				Objects.equals(numberOfKids, that.numberOfKids) &&
+				Objects.equals(apartmentRooms, that.apartmentRooms) &&
+				Objects.equals(apartmentSize, that.apartmentSize) &&
+				Objects.equals(apartmentSizeKey, that.apartmentSizeKey) &&
+				apartmentType == that.apartmentType &&
+				Objects.equals(postalCode, that.postalCode) &&
+				Objects.equals(currencyCode, that.currencyCode);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(gender, birthYear, created, hasSavedProfile, incomeId, numberInFamily,
+				numberOfCars, numberOfKids, apartmentRooms, apartmentSize, apartmentSizeKey,
+				apartmentType, postalCode, personId, currencyCode);
 	}
 }

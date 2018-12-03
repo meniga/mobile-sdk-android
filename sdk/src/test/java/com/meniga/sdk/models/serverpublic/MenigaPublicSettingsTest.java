@@ -23,13 +23,15 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class MenigaPublicSettingsTest{
 
 	@Test
-	public void testSerialization() throws IOException {
+	public void testSerialization() {
 		MenigaPublicSettings test = gson();
 		assertThat(test).isNotNull();
 
 		assertThat(test.getCurrencies()).isNotNull();
 		assertThat(test.getCurrencies().size()).isEqualTo(10);
 		assertThat(test.getCurrencyFormat()).isEqualTo("£ {0}");
+		assertThat(test.getJavaFormatForCurrency("ISK", true)).isEqualTo("ISK %1$s%2$s");
+		assertThat(test.getJavaFormatForCurrency("ISK", false)).isEqualTo("%1$s%2$s kr.");
 		assertThat(test.getClusterNodeName()).isEqualTo(null);
 	}
 
