@@ -46,7 +46,7 @@
     "timestamp": null,
     "metaData": [],
     "userData": null,
-    "bookedAmount": null,
+    "bookedAmount": -123,
     "splitRatio": 1
   },
   "included": {
