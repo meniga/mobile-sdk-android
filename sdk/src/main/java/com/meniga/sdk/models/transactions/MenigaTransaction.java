@@ -38,6 +38,7 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 	protected String parentIdentifier;
 	protected long id;
 	protected MenigaDecimal amount;
+	protected MenigaDecimal bookedAmount;
 	protected List<String> tags;
 	protected List<MenigaComment> comments = new ArrayList<>();
 	protected Long categoryId;
@@ -123,6 +124,13 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 	 */
 	public MenigaDecimal getAmount() {
 		return amount;
+	}
+
+	/**
+	 * @return The amount in the currency that the transaction's account is in
+	 */
+	public MenigaDecimal getBookedAmount() {
+		return bookedAmount;
 	}
 
 	/**
@@ -510,6 +518,7 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 		dest.writeString(this.parentIdentifier);
 		dest.writeLong(this.id);
 		dest.writeSerializable(this.amount);
+		dest.writeSerializable(this.bookedAmount);
 		dest.writeStringList(this.tags);
 		dest.writeTypedList(this.comments);
 		dest.writeValue(this.categoryId);
@@ -561,6 +570,7 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 		this.parentIdentifier = in.readString();
 		this.id = in.readLong();
 		this.amount = (MenigaDecimal) in.readSerializable();
+		this.bookedAmount = (MenigaDecimal) in.readSerializable();
 		this.tags = in.createStringArrayList();
 		this.comments = in.createTypedArrayList(MenigaComment.CREATOR);
 		this.categoryId = (Long) in.readValue(Long.class.getClassLoader());
@@ -644,6 +654,9 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 			return false;
 		}
 		if (amount != null ? !amount.equals(that.amount) : that.amount != null) {
+			return false;
+		}
+		if (bookedAmount != null ? !bookedAmount.equals(that.bookedAmount) : that.bookedAmount != null) {
 			return false;
 		}
 		if (tags != null ? !tags.equals(that.tags) : that.tags != null) {
@@ -774,6 +787,7 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 		int result = parentIdentifier != null ? parentIdentifier.hashCode() : 0;
 		result = 31 * result + (int) (id ^ (id >>> 32));
 		result = 31 * result + (amount != null ? amount.hashCode() : 0);
+		result = 31 * result + (bookedAmount != null ? bookedAmount.hashCode() : 0);
 		result = 31 * result + (tags != null ? tags.hashCode() : 0);
 		result = 31 * result + (comments != null ? comments.hashCode() : 0);
 		result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);

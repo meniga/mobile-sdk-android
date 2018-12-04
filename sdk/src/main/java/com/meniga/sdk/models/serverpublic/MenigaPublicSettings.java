@@ -458,11 +458,7 @@ public class MenigaPublicSettings implements Serializable, Parcelable, Cloneable
 		 */
 		public String getCurrencyFormatUsingCode() {
 			if (currencyFormatUsingCode == null) {
-				String symbol = currencyFormat.replace(" ", "");
-				for (int i = 0; i < 11; i++) {
-					symbol = symbol.replace("{" + i + "}", "");
-				}
-				currencyFormatUsingCode = currencyFormat.replace(symbol, code);
+				currencyFormatUsingCode = code + " {0}";
 			}
 			return currencyFormatUsingCode;
 		}
