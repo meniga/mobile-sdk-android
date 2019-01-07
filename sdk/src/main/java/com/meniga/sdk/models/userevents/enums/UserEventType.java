@@ -8,6 +8,7 @@ import java.util.Locale;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public enum UserEventType {
+
 	@SerializedName("accounts")
 	ACCOUNTS("accounts"),
 	@SerializedName("transactions")
@@ -20,6 +21,10 @@ public enum UserEventType {
 	DIALOG("dialog"),
 	@SerializedName("challenge")
 	CHALLENGE("challenge"),
+	@SerializedName("life_goal")
+	LIFE_GOAL("life_goal"),
+	@SerializedName("upcoming")
+	UPCOMING("upcoming"),
 	@SerializedName("accounts_available_amount")
 	ACCOUNTS_AVAILABLE_AMOUNT("accounts_available_amount"),
 	@SerializedName("scheduled_monthly_transaction_report")
@@ -56,6 +61,8 @@ public enum UserEventType {
 	LIFE_GOAL_REACHED("life_goal_reached"),
 	@SerializedName("life_goal_progress")
 	LIFE_GOAL_PROGRESS("life_goal_progress"),
+	@SerializedName("upcoming_available_projected_balance")
+	UPCOMING_AVAILABLE_PROJECTED_BALANCE("upcoming_available_projected_balance"),
 	UNKNOWN("unknown");
 
 	private String tag;
