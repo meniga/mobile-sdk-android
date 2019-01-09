@@ -48,25 +48,22 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 	 * @return The merchant's latitude.
 	 */
 	public Double getLatitude() {
-		if (latitude == null) {
-			return null;
-		}
-		try {
-			return Double.parseDouble(latitude.toString());
-		} catch (Exception ex) {
-			return null;
-		}
+		return getCoordinate(latitude);
 	}
 
 	/**
 	 * @return The merchant's longitude.
 	 */
 	public Double getLongitude() {
-		if (longitude == null) {
+		return getCoordinate(longitude);
+	}
+
+	private Double getCoordinate(String coordinate) {
+		if (coordinate == null) {
 			return null;
 		}
 		try {
-			return Double.parseDouble(longitude.toString());
+			return Double.parseDouble(coordinate);
 		} catch (Exception ex) {
 			return null;
 		}
