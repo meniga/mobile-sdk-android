@@ -140,30 +140,61 @@ public class MenigaUserProfile implements Serializable, Parcelable, Cloneable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
 		MenigaUserProfile that = (MenigaUserProfile) o;
-		return personId == that.personId &&
-				gender == that.gender &&
-				Objects.equals(birthYear, that.birthYear) &&
-				Objects.equals(created, that.created) &&
-				Objects.equals(hasSavedProfile, that.hasSavedProfile) &&
-				Objects.equals(incomeId, that.incomeId) &&
-				Objects.equals(numberInFamily, that.numberInFamily) &&
-				Objects.equals(numberOfCars, that.numberOfCars) &&
-				Objects.equals(numberOfKids, that.numberOfKids) &&
-				Objects.equals(apartmentRooms, that.apartmentRooms) &&
-				Objects.equals(apartmentSize, that.apartmentSize) &&
-				Objects.equals(apartmentSizeKey, that.apartmentSizeKey) &&
-				apartmentType == that.apartmentType &&
-				Objects.equals(postalCode, that.postalCode) &&
-				Objects.equals(currencyCode, that.currencyCode);
+
+		if (personId != that.personId)
+			return false;
+		if (gender != that.gender)
+			return false;
+		if (birthYear != null ? !birthYear.equals(that.birthYear) : that.birthYear != null)
+			return false;
+		if (created != null ? !created.equals(that.created) : that.created != null)
+			return false;
+		if (hasSavedProfile != null ? !hasSavedProfile.equals(that.hasSavedProfile) : that.hasSavedProfile != null)
+			return false;
+		if (incomeId != null ? !incomeId.equals(that.incomeId) : that.incomeId != null)
+			return false;
+		if (numberInFamily != null ? !numberInFamily.equals(that.numberInFamily) : that.numberInFamily != null)
+			return false;
+		if (numberOfCars != null ? !numberOfCars.equals(that.numberOfCars) : that.numberOfCars != null)
+			return false;
+		if (numberOfKids != null ? !numberOfKids.equals(that.numberOfKids) : that.numberOfKids != null)
+			return false;
+		if (apartmentRooms != null ? !apartmentRooms.equals(that.apartmentRooms) : that.apartmentRooms != null)
+			return false;
+		if (apartmentSize != null ? !apartmentSize.equals(that.apartmentSize) : that.apartmentSize != null)
+			return false;
+		if (apartmentSizeKey != null ? !apartmentSizeKey.equals(that.apartmentSizeKey) : that.apartmentSizeKey != null)
+			return false;
+		if (apartmentType != that.apartmentType)
+			return false;
+		if (postalCode != null ? !postalCode.equals(that.postalCode) : that.postalCode != null)
+			return false;
+		return currencyCode != null ? currencyCode.equals(that.currencyCode) : that.currencyCode == null;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(gender, birthYear, created, hasSavedProfile, incomeId, numberInFamily,
-				numberOfCars, numberOfKids, apartmentRooms, apartmentSize, apartmentSizeKey,
-				apartmentType, postalCode, personId, currencyCode);
+		int result = gender != null ? gender.hashCode() : 0;
+		result = 31 * result + (birthYear != null ? birthYear.hashCode() : 0);
+		result = 31 * result + (created != null ? created.hashCode() : 0);
+		result = 31 * result + (hasSavedProfile != null ? hasSavedProfile.hashCode() : 0);
+		result = 31 * result + (incomeId != null ? incomeId.hashCode() : 0);
+		result = 31 * result + (numberInFamily != null ? numberInFamily.hashCode() : 0);
+		result = 31 * result + (numberOfCars != null ? numberOfCars.hashCode() : 0);
+		result = 31 * result + (numberOfKids != null ? numberOfKids.hashCode() : 0);
+		result = 31 * result + (apartmentRooms != null ? apartmentRooms.hashCode() : 0);
+		result = 31 * result + (apartmentSize != null ? apartmentSize.hashCode() : 0);
+		result = 31 * result + (apartmentSizeKey != null ? apartmentSizeKey.hashCode() : 0);
+		result = 31 * result + (apartmentType != null ? apartmentType.hashCode() : 0);
+		result = 31 * result + (postalCode != null ? postalCode.hashCode() : 0);
+		result = 31 * result + (int) (personId ^ (personId >>> 32));
+		result = 31 * result + (currencyCode != null ? currencyCode.hashCode() : 0);
+		return result;
 	}
 }
