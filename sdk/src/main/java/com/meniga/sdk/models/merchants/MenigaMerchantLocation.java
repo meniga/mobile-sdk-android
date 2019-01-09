@@ -14,8 +14,8 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 	protected String city;
 	protected String country;
 	protected String countryCode;
-	protected Object latitude;
-	protected Object longitude;
+	protected String latitude;
+	protected String longitude;
 	protected String postalCode;
 	protected String streetLine1;
 	protected String streetLine2;
