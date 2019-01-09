@@ -14,8 +14,8 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 	protected String city;
 	protected String country;
 	protected String countryCode;
-	protected Double latitude;
-	protected Double longitude;
+	protected Object latitude;
+	protected Object longitude;
 	protected String postalCode;
 	protected String streetLine1;
 	protected String streetLine2;
@@ -48,14 +48,28 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 	 * @return The merchant's latitude.
 	 */
 	public Double getLatitude() {
-		return latitude;
+		if (latitude == null) {
+			return null;
+		}
+		try {
+			return Double.parseDouble(latitude.toString());
+		} catch (Exception ex) {
+			return null;
+		}
 	}
 
 	/**
 	 * @return The merchant's longitude.
 	 */
 	public Double getLongitude() {
-		return longitude;
+		if (longitude == null) {
+			return null;
+		}
+		try {
+			return Double.parseDouble(longitude.toString());
+		} catch (Exception ex) {
+			return null;
+		}
 	}
 
 	/**
