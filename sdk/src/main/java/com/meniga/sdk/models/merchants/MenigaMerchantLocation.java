@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
+import javax.annotation.Nullable;
+
 /**
  * Represents further details about the location and address of a merchant.
  * <p>
@@ -47,6 +49,7 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 	/**
 	 * @return The merchant's latitude.
 	 */
+	@Nullable
 	public Double getLatitude() {
 		return getCoordinate(latitude);
 	}
@@ -54,10 +57,12 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 	/**
 	 * @return The merchant's longitude.
 	 */
+	@Nullable
 	public Double getLongitude() {
 		return getCoordinate(longitude);
 	}
 
+	@Nullable
 	private Double getCoordinate(String coordinate) {
 		if (coordinate == null) {
 			return null;
@@ -148,8 +153,8 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 		dest.writeString(this.city);
 		dest.writeString(this.country);
 		dest.writeString(this.countryCode);
-		dest.writeString(this.latitude == null ? null : this.latitude.toString());
-		dest.writeString(this.longitude == null ? null : this.longitude.toString());
+		dest.writeString(this.latitude);
+		dest.writeString(this.longitude);
 		dest.writeString(this.postalCode);
 		dest.writeString(this.streetLine1);
 		dest.writeString(this.streetLine2);
