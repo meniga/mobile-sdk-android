@@ -151,25 +151,25 @@ public class MenigaMerchantLocation implements Serializable, Parcelable {
 		dest.writeString(this.city);
 		dest.writeString(this.country);
 		dest.writeString(this.countryCode);
-		dest.writeValue(this.latitude);
-		dest.writeValue(this.longitude);
+		dest.writeString(this.latitude == null ? null : this.latitude.toString());
+		dest.writeString(this.longitude == null ? null : this.longitude.toString());
 		dest.writeString(this.postalCode);
 		dest.writeString(this.streetLine1);
 		dest.writeString(this.streetLine2);
 	}
 
-	protected MenigaMerchantLocation(Parcel in) {
+	private MenigaMerchantLocation(Parcel in) {
 		this.city = in.readString();
 		this.country = in.readString();
 		this.countryCode = in.readString();
-		this.latitude = (Double) in.readValue(Double.class.getClassLoader());
-		this.longitude = (Double) in.readValue(Double.class.getClassLoader());
+		this.latitude = in.readString();
+		this.longitude = in.readString();
 		this.postalCode = in.readString();
 		this.streetLine1 = in.readString();
 		this.streetLine2 = in.readString();
 	}
 
-	public static final Creator<MenigaMerchantLocation> CREATOR = new Creator<MenigaMerchantLocation>() {
+	public static final Parcelable.Creator<MenigaMerchantLocation> CREATOR = new Parcelable.Creator<MenigaMerchantLocation>() {
 		@Override
 		public MenigaMerchantLocation createFromParcel(Parcel source) {
 			return new MenigaMerchantLocation(source);
