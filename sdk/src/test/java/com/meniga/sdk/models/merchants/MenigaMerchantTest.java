@@ -64,12 +64,30 @@ public class MenigaMerchantTest {
 		parcel.recycle();
 	}
 
+	@Test
+	public void testAddressWithNullsAndEmptyString() {
+		MenigaMerchant item = gson("merchant2.json");
+		Assert.assertNull(item.getAddress().getLatitude());
+		Assert.assertNull(item.getAddress().getLongitude());
+	}
+
+	@Test
+	public void testAddressWithTrueDoubleAndInt() {
+		MenigaMerchant item = gson("merchant3.json");
+		Assert.assertEquals(item.getAddress().getLatitude(), 50.0);
+		Assert.assertEquals(item.getAddress().getLongitude(), 40.0);
+	}
+
 	private MenigaMerchant gson() {
+		return gson("merchant.json");
+	}
+
+	private MenigaMerchant gson(String which) {
 		Gson gson = GsonProvider.getGson();
 		MenigaMerchant item = null;
 		try {
 			item = gson.fromJson(
-					MenigaConverter.getAsObject(FileImporter.getInputStreamFromRaw("merchant.json")),
+					MenigaConverter.getAsObject(FileImporter.getInputStreamFromRaw(which)),
 					MenigaMerchant.class
 			);
 		} catch (IOException e) {

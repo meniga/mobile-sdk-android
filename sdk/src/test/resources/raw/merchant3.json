@@ -1,0 +1,50 @@
+{
+  "data": {
+    "address": {
+      "city": null,
+      "country": "Iceland",
+      "countryCode": "IS",
+      "latitude": 50.0,
+      "longitude": 40,
+      "postalCode": null,
+      "streetLine1": "",
+      "streetLine2": ""
+    },
+    "categoryScores": null,
+    "childMerchants": null,
+    "detectedCategory": null,
+    "directoryLink": null,
+    "email": null,
+    "id": 40801,
+    "identifier": null,
+    "masterIdentifier": "97ff87c2-ed2d-4354-b11f-6828cd04b1ea",
+    "merchantCategoryIdentifier": "Y1553",
+    "name": "T-Mobile Uk",
+    "offersLink": null,
+    "parentId": 100000003,
+    "parentMerchant": {
+      "address": null,
+      "categoryScores": null,
+      "childMerchants": null,
+      "detectedCategory": null,
+      "directoryLink": null,
+      "email": null,
+      "id": 100000003,
+      "identifier": null,
+      "masterIdentifier": "6fabde65-73ff-4d40-9565-d793a6120b01",
+      "merchantCategoryIdentifier": null,
+      "name": "T-Mobile UK Brand",
+      "offersLink": null,
+      "parentId": -1,
+      "parentMerchant": null,
+      "parentName": null,
+      "publicIdentifier": null,
+      "telephone": null,
+      "webpage": null
+    },
+    "parentName": "T-Mobile UK Brand",
+    "publicIdentifier": null,
+    "telephone": "01224211331",
+    "webpage": "http://www.t-mobile.co.uk"
+  }
+}
