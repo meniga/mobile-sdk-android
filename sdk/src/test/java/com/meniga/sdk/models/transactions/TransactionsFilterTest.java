@@ -4,14 +4,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MenigaDecimal;
+import com.meniga.sdk.models.transactions.enums.TransactionSortField;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Copyright 2017 Meniga Iceland Inc.
  */
 
-public class TransactionFilterTest{
+public class TransactionsFilterTest {
 
 	@Test
 	public void testFilterCreation() {
@@ -43,7 +44,7 @@ public class TransactionFilterTest{
 
 		TransactionsFilter merged = new TransactionsFilter.Builder().mergeFilters(filter1, filter2).build();
 		Assert.assertEquals(merged.merchantTexts, Collections.singletonList("Hagkaup"));
-		Assert.assertTrue(merged.getSearchText().equals("Example"));
+		Assert.assertEquals("Example", merged.getSearchText());
 
 		JsonElement obj = GsonProvider.getGson().toJsonTree(merged);
 		JsonObject jsonFilter = obj.getAsJsonObject();
@@ -57,10 +58,34 @@ public class TransactionFilterTest{
 		Assert.assertEquals(new MenigaDecimal(5000.0), amountTo);
 		MenigaDecimal assetFrom = new MenigaDecimal(jsonFilter.get("amountFrom").getAsDouble());
 		Assert.assertEquals(MenigaDecimal.ZERO, assetFrom);
-		Assert.assertEquals(false, jsonFilter.get("onlyUnread").getAsBoolean());
-		Assert.assertEquals(false, jsonFilter.get("onlyUncertain").getAsBoolean());
-		Assert.assertEquals(false, jsonFilter.get("onlyFlagged").getAsBoolean());
+		Assert.assertFalse(jsonFilter.get("onlyUnread").getAsBoolean());
+		Assert.assertFalse(jsonFilter.get("onlyUncertain").getAsBoolean());
+		Assert.assertFalse(jsonFilter.get("onlyFlagged").getAsBoolean());
 		assertThat(DateTime.parse(jsonFilter.get("periodFrom").getAsString())).isEqualTo(new DateTime("2012-08-16T07:00:00Z"));
 		assertThat(DateTime.parse(jsonFilter.get("periodTo").getAsString())).isEqualTo(new DateTime("2012-08-16T23:00:00Z"));
+	}
+
+	@Test
+	public void testSortWithStrings() {
+		TransactionsFilter filter1 = new TransactionsFilter.Builder()
+				.addSortAscending("asc1")
+				.addSortAscending("asc2")
+				.addSortDescending("desc1")
+				.addSortDescending("desc2")
+				.build();
+		Map<String, String> query = filter1.toQueryMap();
+		Assert.assertEquals(4, query.size());
+		Assert.assertEquals("asc1,asc2,-desc1,-desc2", query.get("sort"));
+	}
+
+	@Test
+	public void testSortWithEnum() {
+		TransactionsFilter filter1 = new TransactionsFilter.Builder()
+				.sortAscending(Collections.singletonList(TransactionSortField.IS_UNCLEARED))
+				.sortDescending(Collections.singletonList(TransactionSortField.IS_UNCLEARED))
+				.build();
+		Map<String, String> query = filter1.toQueryMap();
+		Assert.assertEquals(4, query.size());
+		Assert.assertEquals("IsUncleared,-IsUncleared", query.get("sort"));
 	}
 }

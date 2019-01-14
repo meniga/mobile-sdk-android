@@ -11,7 +11,9 @@ import com.meniga.sdk.models.accounts.MenigaAccount;
 import com.meniga.sdk.models.categories.MenigaCategory;
 import com.meniga.sdk.models.categories.enums.CategoryType;
 import com.meniga.sdk.models.transactions.enums.SeriesOrderBy;
+import com.meniga.sdk.models.transactions.enums.TransactionSortField;
 
+import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
@@ -24,12 +26,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 /**
  * A filter that can be passed to a Meniga endpoint and returns given transactions based on that filter.
  * <p>
  * Copyright 2017 Meniga Iceland Inc.
  *
 */
+@SuppressWarnings({"WeakerAccess", "unused", "RedundantIfStatement", "unchecked"})
 public class TransactionsFilter implements Serializable, Parcelable, Cloneable, ValueHashable {
 	public static final Parcelable.Creator<TransactionsFilter> CREATOR = new Parcelable.Creator<TransactionsFilter>() {
 		@Override
@@ -89,9 +94,11 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	protected final String parsedData;
 	protected final List<String> parsedDataExactKeys;
 	protected final String parsedDataNameToOrderBy;
+	protected final List<String> sortAscending;
+	protected final List<String> sortDescending;
 
-	protected transient boolean includeAccounts = true;
-	protected transient boolean includeMerchants = true;
+	protected transient boolean includeAccounts;
+	protected transient boolean includeMerchants;
 
 	protected final transient boolean isFiltering;
 
@@ -151,6 +158,8 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		parsedDataNameToOrderBy = in.readString();
 		includeAccounts = (in.readInt() == 1);
 		includeMerchants = (in.readInt() == 1);
+		sortAscending = in.createStringArrayList();
+		sortDescending = in.createStringArrayList();
 
 		isFiltering = in.readInt() == 1;
 	}
@@ -204,6 +213,8 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		parsedDataNameToOrderBy = builder.parsedDataNameToOrderBy;
 		includeAccounts = builder.includeAccounts;
 		includeMerchants = builder.includeMerchants;
+		sortAscending = builder.sortAscending;
+		sortDescending = builder.sortDescending;
 
 		isFiltering = builder.isFiltering;
 	}
@@ -240,6 +251,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		Map<String, String> map = new HashMap<>();
 		Field skipField = null;
 		Field takeField = null;
+		List<String> sortBy = new ArrayList<>();
 		for (Field member : mappableFields) {
 			if (member.getName().equals("isFiltering") || member.getName().equals("includeMerchants")) {
 				continue;
@@ -248,6 +260,29 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 				map.put("include", constructInclude());
 				continue;
 			}
+
+			try {
+				if (member.getName().equals("sortAscending")) {
+					List<String> sortAscending = (List<String>) member.get(this);
+					if (sortAscending != null && sortAscending.size() > 0) {
+						sortBy.addAll(sortAscending);
+					}
+					continue;
+				}
+				if (member.getName().equals("sortDescending")) {
+					List<String> sortDescending = (List<String>) member.get(this);
+					if (sortDescending != null && sortDescending.size() > 0) {
+						for (String sort : sortDescending) {
+							sortBy.add("-" + sort);
+						}
+					}
+					continue;
+				}
+			} catch (IllegalAccessException ex) {
+				ErrorHandler.reportAndHandle(ex);
+				continue;
+			}
+
 			if (member.getName().equals("skip")) {
 				skipField = member;
 				continue;
@@ -262,6 +297,16 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		}
 		if (takeField != null) {
 			addToMap(takeField, map);
+		}
+		if (sortBy.size() > 0) {
+			StringBuilder bld = new StringBuilder();
+			for (String sort : sortBy) {
+				if (bld.length() > 0) {
+					bld.append(",");
+				}
+				bld.append(sort);
+			}
+			map.put("sort", bld.toString());
 		}
 		return map;
 	}
@@ -380,6 +425,8 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		dest.writeString(parsedDataNameToOrderBy);
 		dest.writeInt(includeAccounts ? 1 : 0);
 		dest.writeInt(includeMerchants ? 1 : 0);
+		dest.writeStringList(sortAscending);
+		dest.writeStringList(sortDescending);
 
 		dest.writeInt(isFiltering ? 1 : 0);
 	}
@@ -580,6 +627,14 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		return isFiltering;
 	}
 
+	public List<String> getSortAscending() {
+		return sortAscending;
+	}
+
+	public List<String> getSortDescending() {
+		return sortDescending;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -679,6 +734,10 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 			return false;
 		if (includeMerchants != that.includeMerchants)
 			return false;
+		if (sortAscending != null ? !sortAscending.equals(that.sortAscending) : that.sortAscending != null)
+			return false;
+		if (sortDescending != null ? !sortDescending.equals(that.sortDescending) : that.sortDescending != null)
+			return false;
 		return true;
 	}
 
@@ -738,8 +797,10 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		result = 31 * result + (parsedDataNameToOrderBy != null ? parsedDataNameToOrderBy.hashCode() : 0);
 		result = 31 * result + (includeAccounts ? 1 : 0);
 		result = 31 * result + (includeMerchants ? 1 : 0);
-
 		result = 31 * result + (isFiltering ? 1 : 0);
+		result = 31 * result + (sortAscending != null ? sortAscending.hashCode() : 0);
+		result = 31 * result + (sortDescending != null ? sortDescending.hashCode() : 0);
+
 		return result;
 	}
 
@@ -748,6 +809,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	 * <p>
 	 * Copyright 2017 Meniga Iceland Inc.
 	 */
+	@SuppressWarnings("unused")
 	public static class Builder {
 		private String type;
 		private String orderBy;
@@ -797,6 +859,8 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		private String parsedDataNameToOrderBy;
 		private boolean includeAccounts = true;
 		private boolean includeMerchants = true;
+		private List<String> sortAscending;
+		private List<String> sortDescending;
 
 		private boolean isFiltering;
 
@@ -867,8 +931,9 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 				parsedDataNameToOrderBy = preserveNonNull(filter.parsedDataNameToOrderBy, parsedDataNameToOrderBy);
 				includeAccounts = preserveNonNull(filter.includeAccounts, includeAccounts);
 				includeMerchants = preserveNonNull(filter.includeMerchants, includeMerchants);
-
 				isFiltering = preserveNonNull(filter.isFiltering, isFiltering);
+				sortAscending = preserveNonNull(filter.sortAscending, sortAscending);
+				sortDescending = preserveNonNull(filter.sortDescending, sortDescending);
 			}
 		}
 
@@ -1480,6 +1545,62 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		public Builder onlyUncertain(boolean onlyUncertain) {
 			this.onlyUncertain = onlyUncertain;
 			isFiltering = true;
+			return this;
+		}
+
+		public Builder addSortAscending(@Nonnull TransactionSortField sort) {
+			if (sortAscending == null) {
+				sortAscending = new ArrayList<>();
+			}
+			sortAscending.add(sort.toString());
+			return this;
+		}
+
+		public Builder addSortAscending(@Nonnull String sort) {
+			if (sortAscending == null) {
+				sortAscending = new ArrayList<>();
+			}
+			sortAscending.add(sort);
+			return this;
+		}
+
+		public Builder sortAscending(@Nullable List<TransactionSortField> sort) {
+			if (sort == null) {
+				sortAscending = null;
+			} else {
+				sortAscending = new ArrayList<>();
+				for (TransactionSortField field : sort) {
+					sortAscending.add(field.toString());
+				}
+			}
+			return this;
+		}
+
+		public Builder addSortDescending(@Nonnull TransactionSortField sort) {
+			if (sortDescending == null) {
+				sortDescending = new ArrayList<>();
+			}
+			sortDescending.add(sort.toString());
+			return this;
+		}
+
+		public Builder addSortDescending(@Nonnull String sort) {
+			if (sortDescending == null) {
+				sortDescending = new ArrayList<>();
+			}
+			sortDescending.add(sort);
+			return this;
+		}
+
+		public Builder sortDescending(@Nullable List<TransactionSortField> sort) {
+			if (sort == null) {
+				sortDescending = null;
+			} else {
+				sortDescending = new ArrayList<>();
+				for (TransactionSortField field : sort) {
+					sortDescending.add(field.toString());
+				}
+			}
 			return this;
 		}
 
