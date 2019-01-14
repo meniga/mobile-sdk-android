@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,8 +95,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	protected final String parsedData;
 	protected final List<String> parsedDataExactKeys;
 	protected final String parsedDataNameToOrderBy;
-	protected final List<String> sortAscending;
-	protected final List<String> sortDescending;
+	protected final String sort;
 
 	protected transient boolean includeAccounts;
 	protected transient boolean includeMerchants;
@@ -158,8 +158,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		parsedDataNameToOrderBy = in.readString();
 		includeAccounts = (in.readInt() == 1);
 		includeMerchants = (in.readInt() == 1);
-		sortAscending = in.createStringArrayList();
-		sortDescending = in.createStringArrayList();
+		sort = in.readString();
 
 		isFiltering = in.readInt() == 1;
 	}
@@ -213,8 +212,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		parsedDataNameToOrderBy = builder.parsedDataNameToOrderBy;
 		includeAccounts = builder.includeAccounts;
 		includeMerchants = builder.includeMerchants;
-		sortAscending = builder.sortAscending;
-		sortDescending = builder.sortDescending;
+		sort = builder.sort;
 
 		isFiltering = builder.isFiltering;
 	}
@@ -260,29 +258,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 				map.put("include", constructInclude());
 				continue;
 			}
-
-			try {
-				if (member.getName().equals("sortAscending")) {
-					List<String> sortAscending = (List<String>) member.get(this);
-					if (sortAscending != null && sortAscending.size() > 0) {
-						sortBy.addAll(sortAscending);
-					}
-					continue;
-				}
-				if (member.getName().equals("sortDescending")) {
-					List<String> sortDescending = (List<String>) member.get(this);
-					if (sortDescending != null && sortDescending.size() > 0) {
-						for (String sort : sortDescending) {
-							sortBy.add("-" + sort);
-						}
-					}
-					continue;
-				}
-			} catch (IllegalAccessException ex) {
-				ErrorHandler.reportAndHandle(ex);
-				continue;
-			}
-
 			if (member.getName().equals("skip")) {
 				skipField = member;
 				continue;
@@ -425,8 +400,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		dest.writeString(parsedDataNameToOrderBy);
 		dest.writeInt(includeAccounts ? 1 : 0);
 		dest.writeInt(includeMerchants ? 1 : 0);
-		dest.writeStringList(sortAscending);
-		dest.writeStringList(sortDescending);
+		dest.writeString(sort);
 
 		dest.writeInt(isFiltering ? 1 : 0);
 	}
@@ -627,12 +601,8 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		return isFiltering;
 	}
 
-	public List<String> getSortAscending() {
-		return sortAscending;
-	}
-
-	public List<String> getSortDescending() {
-		return sortDescending;
+	public List<String> getSort() {
+		return Arrays.asList(sort.split(","));
 	}
 
 	@Override
@@ -734,9 +704,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 			return false;
 		if (includeMerchants != that.includeMerchants)
 			return false;
-		if (sortAscending != null ? !sortAscending.equals(that.sortAscending) : that.sortAscending != null)
-			return false;
-		if (sortDescending != null ? !sortDescending.equals(that.sortDescending) : that.sortDescending != null)
+		if (sort != null ? !sort.equals(that.sort) : that.sort != null)
 			return false;
 		return true;
 	}
@@ -798,8 +766,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		result = 31 * result + (includeAccounts ? 1 : 0);
 		result = 31 * result + (includeMerchants ? 1 : 0);
 		result = 31 * result + (isFiltering ? 1 : 0);
-		result = 31 * result + (sortAscending != null ? sortAscending.hashCode() : 0);
-		result = 31 * result + (sortDescending != null ? sortDescending.hashCode() : 0);
+		result = 31 * result + (sort != null ? sort.hashCode() : 0);
 
 		return result;
 	}
@@ -859,8 +826,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		private String parsedDataNameToOrderBy;
 		private boolean includeAccounts = true;
 		private boolean includeMerchants = true;
-		private List<String> sortAscending;
-		private List<String> sortDescending;
+		private String sort;
 
 		private boolean isFiltering;
 
@@ -932,8 +898,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 				includeAccounts = preserveNonNull(filter.includeAccounts, includeAccounts);
 				includeMerchants = preserveNonNull(filter.includeMerchants, includeMerchants);
 				isFiltering = preserveNonNull(filter.isFiltering, isFiltering);
-				sortAscending = preserveNonNull(filter.sortAscending, sortAscending);
-				sortDescending = preserveNonNull(filter.sortDescending, sortDescending);
+				sort = preserveNonNull(filter.sort, sort);
 			}
 		}
 
@@ -1548,60 +1513,58 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 			return this;
 		}
 
-		public Builder addSortAscending(@Nonnull TransactionSortField sort) {
-			if (sortAscending == null) {
-				sortAscending = new ArrayList<>();
-			}
-			sortAscending.add(sort.toString());
+		public Builder addSortAscending(@Nonnull TransactionSortField field) {
+			addSort(field.toString());
 			return this;
 		}
 
-		public Builder addSortAscending(@Nonnull String sort) {
-			if (sortAscending == null) {
-				sortAscending = new ArrayList<>();
-			}
-			sortAscending.add(sort);
+		public Builder addSortAscending(@Nonnull String field) {
+			addSort(field);
 			return this;
 		}
 
-		public Builder sortAscending(@Nullable List<TransactionSortField> sort) {
-			if (sort == null) {
-				sortAscending = null;
+		public Builder sortAscending(@Nullable List<TransactionSortField> fields) {
+			if (fields == null) {
+				sort = null;
 			} else {
-				sortAscending = new ArrayList<>();
-				for (TransactionSortField field : sort) {
-					sortAscending.add(field.toString());
+				sort = "";
+				for (TransactionSortField field : fields) {
+					addSort(field.toString());
 				}
 			}
 			return this;
 		}
 
-		public Builder addSortDescending(@Nonnull TransactionSortField sort) {
-			if (sortDescending == null) {
-				sortDescending = new ArrayList<>();
-			}
-			sortDescending.add(sort.toString());
+		public Builder addSortDescending(@Nonnull TransactionSortField field) {
+			addSort("-" + field.toString());
 			return this;
 		}
 
-		public Builder addSortDescending(@Nonnull String sort) {
-			if (sortDescending == null) {
-				sortDescending = new ArrayList<>();
-			}
-			sortDescending.add(sort);
+		public Builder addSortDescending(@Nonnull String field) {
+			addSort("-" + field);
 			return this;
 		}
 
-		public Builder sortDescending(@Nullable List<TransactionSortField> sort) {
-			if (sort == null) {
-				sortDescending = null;
+		public Builder sortDescending(@Nullable List<TransactionSortField> fields) {
+			if (fields == null) {
+				sort = null;
 			} else {
-				sortDescending = new ArrayList<>();
-				for (TransactionSortField field : sort) {
-					sortDescending.add(field.toString());
+				sort = "";
+				for (TransactionSortField field : fields) {
+					addSort("-" + field.toString());
 				}
 			}
 			return this;
+		}
+
+		private void addSort(String field) {
+			if (sort == null) {
+				sort = "";
+			}
+			if (sort.length() > 0) {
+				sort += ",";
+			}
+			sort += field;
 		}
 
 		/**
