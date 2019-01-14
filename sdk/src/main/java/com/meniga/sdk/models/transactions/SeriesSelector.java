@@ -10,6 +10,7 @@ import java.io.Serializable;
  * <p>
  * Copyright 2017 Meniga Iceland Inc.
  */
+@SuppressWarnings("WeakerAccess")
 public class SeriesSelector implements Serializable, Parcelable {
 	public static final Creator<SeriesSelector> CREATOR = new Creator<SeriesSelector>() {
 		@Override

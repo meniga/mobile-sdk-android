@@ -16,11 +16,11 @@ import java.util.List;
 public class MenigaTransactionSeriesOperationsImp implements MenigaTransactionSeriesOperations {
 
 	@Override
-	public Result<List<MenigaTransactionSeries>> getTransactionSeries(TransactionsFilter tf, Options options, List<SeriesSelector> ss) {
+	public Result<List<MenigaTransactionSeries>> getTransactionSeries(TransactionsFilter filter, Options options, List<SeriesSelector> seriesSelector) {
 		GetTransactionSeries request = new GetTransactionSeries();
-		request.seriesSelectors = ss;
+		request.seriesSelectors = seriesSelector;
 		request.options = options;
-		request.transactionFilter = tf;
+		request.transactionFilter = filter;
 
 		return MenigaSDK.executor().getTransactionSeries(request);
 	}
