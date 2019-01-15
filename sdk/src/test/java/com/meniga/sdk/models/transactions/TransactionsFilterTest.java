@@ -82,10 +82,10 @@ public class TransactionsFilterTest {
 	public void testSortWithEnum() {
 		TransactionsFilter filter1 = new TransactionsFilter.Builder()
 				.sortAscending(Collections.singletonList(TransactionSortField.IS_UNCLEARED))
-				.sortDescending(Collections.singletonList(TransactionSortField.IS_UNCLEARED))
+				.addSortDescending(TransactionSortField.ACCOUNT_ID)
 				.build();
 		Map<String, String> query = filter1.toQueryMap();
 		Assert.assertEquals(4, query.size());
-		Assert.assertEquals("IsUncleared,-IsUncleared", query.get("sort"));
+		Assert.assertEquals("IsUncleared,-AccountId", query.get("sort"));
 	}
 }
