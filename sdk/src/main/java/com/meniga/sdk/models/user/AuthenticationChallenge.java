@@ -16,6 +16,7 @@ public class AuthenticationChallenge implements Parcelable, Serializable {
 	protected ChallengeContentType contentType;
 	protected String textChallenge;
 	protected String errorMessage;
+	protected String errorMessageCode;
 	protected String userIdentifier;
 	protected boolean canSave;
 	protected String loginHelp;
@@ -47,6 +48,13 @@ public class AuthenticationChallenge implements Parcelable, Serializable {
 	 */
 	public String getErrorMessage() {
 		return errorMessage;
+	}
+
+	/**
+	 * @return The nature of the error
+	 */
+	public String getErrorMessageCode() {
+		return errorMessageCode;
 	}
 
 	/**
@@ -83,6 +91,8 @@ public class AuthenticationChallenge implements Parcelable, Serializable {
 			return false;
 		if (errorMessage != null ? !errorMessage.equals(that.errorMessage) : that.errorMessage != null)
 			return false;
+		if (errorMessageCode != null ? !errorMessageCode.equals(that.errorMessageCode) : that.errorMessageCode != null)
+			return false;
 		if (userIdentifier != null ? !userIdentifier.equals(that.userIdentifier) : that.userIdentifier != null)
 			return false;
 		if (loginHelp != null ? !loginHelp.equals(that.loginHelp) : that.loginHelp != null)
@@ -96,6 +106,7 @@ public class AuthenticationChallenge implements Parcelable, Serializable {
 		int result = contentType != null ? contentType.hashCode() : 0;
 		result = 31 * result + (textChallenge != null ? textChallenge.hashCode() : 0);
 		result = 31 * result + (errorMessage != null ? errorMessage.hashCode() : 0);
+		result = 31 * result + (errorMessageCode != null ? errorMessageCode.hashCode() : 0);
 		result = 31 * result + (userIdentifier != null ? userIdentifier.hashCode() : 0);
 		result = 31 * result + (canSave ? 1 : 0);
 		result = 31 * result + (loginHelp != null ? loginHelp.hashCode() : 0);
@@ -113,6 +124,7 @@ public class AuthenticationChallenge implements Parcelable, Serializable {
 		dest.writeInt(this.contentType == null ? -1 : this.contentType.ordinal());
 		dest.writeString(this.textChallenge);
 		dest.writeString(this.errorMessage);
+		dest.writeString(this.errorMessageCode);
 		dest.writeString(this.userIdentifier);
 		dest.writeByte(this.canSave ? (byte) 1 : (byte) 0);
 		dest.writeString(this.loginHelp);
@@ -127,6 +139,7 @@ public class AuthenticationChallenge implements Parcelable, Serializable {
 		this.contentType = tmpContentType == -1 ? null : ChallengeContentType.values()[tmpContentType];
 		this.textChallenge = in.readString();
 		this.errorMessage = in.readString();
+		this.errorMessageCode = in.readString();
 		this.userIdentifier = in.readString();
 		this.canSave = in.readByte() != 0;
 		this.loginHelp = in.readString();
