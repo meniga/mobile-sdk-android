@@ -51,9 +51,9 @@ public class TransactionsFilterTest {
 		Assert.assertFalse(jsonFilter.get("onlyUnread").getAsBoolean());
 		Assert.assertFalse(jsonFilter.get("onlyUncertain").getAsBoolean());
 		Assert.assertFalse(jsonFilter.get("onlyFlagged").getAsBoolean());
-		assertThat(DateTime.parse(jsonFilter.get("periodFrom").getAsString())).isEqualTo(new DateTime("2012-08-16T07:00:00Z"));
-		assertThat(DateTime.parse(jsonFilter.get("periodTo").getAsString())).isEqualTo(new DateTime("2012-08-16T23:00:00Z"));
-		Assert.assertTrue(jsonFilter.get("getOnlyUncleared").getAsBoolean());
+		Assert.assertEquals(DateTime.parse(jsonFilter.get("periodFrom").getAsString()).getMillis(), new DateTime("2012-08-16T07:00:00Z").getMillis());
+		Assert.assertEquals(DateTime.parse(jsonFilter.get("periodTo").getAsString()).getMillis(), new DateTime("2012-08-16T23:00:00Z").getMillis());
+		Assert.assertTrue(jsonFilter.get("onlyUncleared").getAsBoolean());
 	}
 
 	private TransactionsFilter getExampleFilter() {
