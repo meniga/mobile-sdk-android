@@ -4,11 +4,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MenigaDecimal;
+import com.meniga.sdk.helpers.ParcelExtensions;
 import com.meniga.sdk.models.transactions.enums.TransactionSortField;
 
 import org.junit.Assert;
 import org.joda.time.DateTime;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,25 +22,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-
+@RunWith(RobolectricTestRunner.class)
 public class TransactionsFilterTest {
 
 	@Test
 	public void testFilterCreation() {
-		TransactionsFilter filter1 = new TransactionsFilter
-				.Builder()
-				.searchText("Example")
-				.accountIds(Arrays.asList(100L, 200L))
-				.amounts(new MenigaDecimal(0), new MenigaDecimal(5000))
-				.categories(Arrays.asList(1L, 2L))
-				.onlyFlagged(false)
-				.onlyUnread(false)
-				.onlyUncertain(false)
-				.transactions(Arrays.asList(1L, 2L))
-				.merchantIds(Arrays.asList(1L, 2L))
-				.tags(Collections.singletonList("test"))
-				.period(new DateTime("2012-08-16T07:00:00Z"), new DateTime("2012-08-16T23:00:00Z"))
-				.build();
+		TransactionsFilter filter1 = getExampleFilter();
 		TransactionsFilter filter2 = new TransactionsFilter.Builder()
 				.merchantTexts(Collections.singletonList("Hagkaup"))
 				.build();
@@ -61,8 +51,50 @@ public class TransactionsFilterTest {
 		Assert.assertFalse(jsonFilter.get("onlyUnread").getAsBoolean());
 		Assert.assertFalse(jsonFilter.get("onlyUncertain").getAsBoolean());
 		Assert.assertFalse(jsonFilter.get("onlyFlagged").getAsBoolean());
-		assertThat(DateTime.parse(jsonFilter.get("periodFrom").getAsString())).isEqualTo(new DateTime("2012-08-16T07:00:00Z"));
-		assertThat(DateTime.parse(jsonFilter.get("periodTo").getAsString())).isEqualTo(new DateTime("2012-08-16T23:00:00Z"));
+		Assert.assertEquals(DateTime.parse(jsonFilter.get("periodFrom").getAsString()).getMillis(), new DateTime("2012-08-16T07:00:00Z").getMillis());
+		Assert.assertEquals(DateTime.parse(jsonFilter.get("periodTo").getAsString()).getMillis(), new DateTime("2012-08-16T23:00:00Z").getMillis());
+		Assert.assertTrue(jsonFilter.get("onlyUncleared").getAsBoolean());
+	}
+
+	private TransactionsFilter getExampleFilter() {
+		return new TransactionsFilter
+				.Builder()
+				.searchText("Example")
+				.accountIds(Arrays.asList(100L, 200L))
+				.amounts(MenigaDecimal.ZERO, new MenigaDecimal(5000))
+				.categories(Arrays.asList(1L, 2L))
+				.onlyFlagged(false)
+				.onlyUnread(false)
+				.onlyUncertain(false)
+				.transactions(Arrays.asList(1L, 2L))
+				.merchantIds(Arrays.asList(1L, 2L))
+				.tags(Collections.singletonList("test"))
+				.period(new DateTime("2012-08-16T07:00:00Z"), new DateTime("2012-08-16T23:00:00Z"))
+				.onlyUncleared(true)
+				.build();
+	}
+
+	@Test
+	public void testParcelable() {
+		TransactionsFilter filter = getExampleFilter();
+		TransactionsFilter filterFromParcel = ParcelExtensions.testParcel(filter);
+
+		Assert.assertNotNull(filterFromParcel);
+
+		Assert.assertEquals("Example", filterFromParcel.getSearchText());
+		Assert.assertEquals(Arrays.asList(100L, 200L), filterFromParcel.getAccountIds());
+		Assert.assertEquals(MenigaDecimal.ZERO, filterFromParcel.getAmountFrom());
+		Assert.assertEquals(new MenigaDecimal(5000), filterFromParcel.getAmountTo());
+		Assert.assertEquals(Arrays.asList(1L, 2L), filterFromParcel.getCategoryIds());
+		Assert.assertEquals(false, filterFromParcel.getOnlyFlagged());
+		Assert.assertEquals(false, filterFromParcel.getOnlyUnread());
+		Assert.assertEquals(false, filterFromParcel.getOnlyUncertain());
+		Assert.assertEquals(Arrays.asList(1L, 2L), filterFromParcel.getIds());
+		Assert.assertEquals(Arrays.asList(1L, 2L), filterFromParcel.getMerchantIds());
+		Assert.assertEquals(Collections.singletonList("test"), filterFromParcel.getTags());
+		Assert.assertEquals(new DateTime("2012-08-16T07:00:00Z"), filterFromParcel.getPeriodFrom());
+		Assert.assertEquals(new DateTime("2012-08-16T23:00:00Z"), filterFromParcel.getPeriodTo());
+		Assert.assertEquals(true, filterFromParcel.getOnlyUncleared());
 	}
 
 	@Test
