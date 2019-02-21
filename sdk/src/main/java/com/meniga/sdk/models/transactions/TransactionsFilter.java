@@ -37,17 +37,6 @@ import javax.annotation.Nonnull;
 */
 @SuppressWarnings({"WeakerAccess", "unused", "RedundantIfStatement", "unchecked"})
 public class TransactionsFilter implements Serializable, Parcelable, Cloneable, ValueHashable {
-	public static final Parcelable.Creator<TransactionsFilter> CREATOR = new Parcelable.Creator<TransactionsFilter>() {
-		@Override
-		public TransactionsFilter createFromParcel(Parcel source) {
-			return new TransactionsFilter(source);
-		}
-
-		@Override
-		public TransactionsFilter[] newArray(int size) {
-			return new TransactionsFilter[size];
-		}
-	};
 
 	protected final String type;
 	protected final String orderBy;
@@ -96,72 +85,12 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 	protected final List<String> parsedDataExactKeys;
 	protected final String parsedDataNameToOrderBy;
 	protected final String sort;
+	protected final Boolean onlyUncleared;
 
 	protected transient boolean includeAccounts;
 	protected transient boolean includeMerchants;
 
 	protected final transient boolean isFiltering;
-
-	protected TransactionsFilter(Parcel in) {
-		type = in.readString();
-		orderBy = in.readString();
-		take = (Integer) in.readValue(Integer.class.getClassLoader());
-		skip = (Integer) in.readValue(Integer.class.getClassLoader());
-		amountTo = (MenigaDecimal) in.readSerializable();
-		amountFrom = (MenigaDecimal) in.readSerializable();
-		categoryIds = new ArrayList<>();
-		in.readList(categoryIds, Long.class.getClassLoader());
-		accountIds = new ArrayList<>();
-		in.readList(accountIds, Long.class.getClassLoader());
-		accountTypeIds = new ArrayList<>();
-		in.readList(accountTypeIds, Long.class.getClassLoader());
-		accountIdentifiers = in.createStringArrayList();
-		merchantIds = new ArrayList<>();
-		in.readList(merchantIds, Long.class.getClassLoader());
-		merchantTexts = in.createStringArrayList();
-		searchText = in.readString();
-		tags = in.createStringArrayList();
-		periodTo = (DateTime) in.readSerializable();
-		periodFrom = (DateTime) in.readSerializable();
-		ids = new ArrayList<>();
-		in.readList(ids, Long.class.getClassLoader());
-		onlyUnread = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		onlyUncertain = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		onlyFlagged = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		useExactMerchantTexts = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		uncertainOrFlagged = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		useAbsoluteAmountSearch = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		useAccentInsensitiveSearch = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		useAmountInCurrencySearch = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		useAndSearchForTags = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		useEqualsSearchForBankId = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		useExactDescription = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		useParentMerchantIds = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		onlyUncategorized = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		ascendingOrder = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		hideExcluded = (Boolean) in.readValue(Boolean.class.getClassLoader());
-		bankIds = in.createStringArrayList();
-		categoryTypes = new ArrayList<>();
-		in.readList(categoryTypes, CategoryType.class.getClassLoader());
-		comment = in.readString();
-		counterpartyAccountIdentifiers = in.createStringArrayList();
-		description = in.readString();
-		excludeMerchantIds = new ArrayList<>();
-		in.readList(excludeMerchantIds, Integer.class.getClassLoader());
-		excludeMerchantTexts = in.createStringArrayList();
-		fields = in.createStringArrayList();
-		insertedBefore = (DateTime) in.readSerializable();
-		originalPeriodFrom = (DateTime) in.readSerializable();
-		originalPeriodTo = (DateTime) in.readSerializable();
-		parsedData = in.readString();
-		parsedDataExactKeys = in.createStringArrayList();
-		parsedDataNameToOrderBy = in.readString();
-		includeAccounts = (in.readInt() == 1);
-		includeMerchants = (in.readInt() == 1);
-		sort = in.readString();
-
-		isFiltering = in.readInt() == 1;
-	}
 
 	private TransactionsFilter(TransactionsFilter.Builder builder) {
 		type = builder.type;
@@ -213,8 +142,141 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		includeAccounts = builder.includeAccounts;
 		includeMerchants = builder.includeMerchants;
 		sort = builder.sort;
+		onlyUncleared = builder.onlyUncleared;
 
 		isFiltering = builder.isFiltering;
+	}
+
+	protected TransactionsFilter(Parcel in) {
+		this.type = in.readString();
+		this.orderBy = in.readString();
+		this.take = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.skip = (Integer) in.readValue(Integer.class.getClassLoader());
+		this.amountTo = (MenigaDecimal) in.readSerializable();
+		this.amountFrom = (MenigaDecimal) in.readSerializable();
+		this.categoryIds = new ArrayList<>();
+		in.readList(this.categoryIds, Long.class.getClassLoader());
+		this.accountIds = new ArrayList<>();
+		in.readList(this.accountIds, Long.class.getClassLoader());
+		boolean isNull = in.readInt() == 0;
+		this.accountTypeIds = new ArrayList<>();
+		in.readList(this.accountTypeIds, Long.class.getClassLoader());
+		this.accountIdentifiers = in.createStringArrayList();
+		this.merchantIds = new ArrayList<>();
+		in.readList(this.merchantIds, Long.class.getClassLoader());
+		this.merchantTexts = in.createStringArrayList();
+		this.searchText = in.readString();
+		this.tags = in.createStringArrayList();
+		this.periodTo = (DateTime) in.readSerializable();
+		this.periodFrom = (DateTime) in.readSerializable();
+		this.ids = new ArrayList<>();
+		in.readList(this.ids, Long.class.getClassLoader());
+		this.onlyUnread = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.onlyUncertain = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.onlyFlagged = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.useExactMerchantTexts = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.uncertainOrFlagged = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.useAbsoluteAmountSearch = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.useAccentInsensitiveSearch = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.useAmountInCurrencySearch = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.useAndSearchForTags = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.useEqualsSearchForBankId = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.useExactDescription = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.useParentMerchantIds = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.onlyUncategorized = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.ascendingOrder = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.hideExcluded = (Boolean) in.readValue(Boolean.class.getClassLoader());
+		this.bankIds = in.createStringArrayList();
+		this.categoryTypes = new ArrayList<>();
+		in.readList(this.categoryTypes, CategoryType.class.getClassLoader());
+		this.comment = in.readString();
+		this.counterpartyAccountIdentifiers = in.createStringArrayList();
+		this.description = in.readString();
+		this.excludeMerchantIds = new ArrayList<>();
+		in.readList(this.excludeMerchantIds, Integer.class.getClassLoader());
+		this.excludeMerchantTexts = in.createStringArrayList();
+		this.fields = in.createStringArrayList();
+		this.insertedBefore = (DateTime) in.readSerializable();
+		this.originalPeriodFrom = (DateTime) in.readSerializable();
+		this.originalPeriodTo = (DateTime) in.readSerializable();
+		this.parsedData = in.readString();
+		this.parsedDataExactKeys = in.createStringArrayList();
+		this.parsedDataNameToOrderBy = in.readString();
+		this.sort = in.readString();
+		this.onlyUncleared = (Boolean) in.readValue(Boolean.class.getClassLoader());
+
+		isFiltering = in.readInt() == 1;
+	}
+
+	public static final Creator<TransactionsFilter> CREATOR = new Creator<TransactionsFilter>() {
+		@Override
+		public TransactionsFilter createFromParcel(Parcel source) {
+			return new TransactionsFilter(source);
+		}
+
+		@Override
+		public TransactionsFilter[] newArray(int size) {
+			return new TransactionsFilter[size];
+		}
+	};
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.type);
+		dest.writeString(this.orderBy);
+		dest.writeValue(take);
+		dest.writeValue(skip);
+		dest.writeSerializable(this.amountTo);
+		dest.writeSerializable(this.amountFrom);
+		dest.writeList(this.categoryIds);
+		dest.writeList(this.accountIds);
+		dest.writeInt(this.accountTypeIds == null ? 0 : 1);
+		dest.writeList(this.accountTypeIds);
+		dest.writeStringList(this.accountIdentifiers);
+		dest.writeList(this.merchantIds);
+		dest.writeStringList(this.merchantTexts);
+		dest.writeString(this.searchText);
+		dest.writeStringList(this.tags);
+		dest.writeSerializable(this.periodTo);
+		dest.writeSerializable(this.periodFrom);
+		dest.writeList(this.ids);
+		dest.writeValue(this.onlyUnread);
+		dest.writeValue(this.onlyUncertain);
+		dest.writeValue(this.onlyFlagged);
+		dest.writeValue(this.useExactMerchantTexts);
+		dest.writeValue(this.uncertainOrFlagged);
+		dest.writeValue(this.useAbsoluteAmountSearch);
+		dest.writeValue(this.useAccentInsensitiveSearch);
+		dest.writeValue(this.useAmountInCurrencySearch);
+		dest.writeValue(this.useAndSearchForTags);
+		dest.writeValue(this.useEqualsSearchForBankId);
+		dest.writeValue(this.useExactDescription);
+		dest.writeValue(this.useParentMerchantIds);
+		dest.writeValue(this.onlyUncategorized);
+		dest.writeValue(this.ascendingOrder);
+		dest.writeValue(this.hideExcluded);
+		dest.writeStringList(this.bankIds);
+		dest.writeList(this.categoryTypes);
+		dest.writeString(this.comment);
+		dest.writeStringList(this.counterpartyAccountIdentifiers);
+		dest.writeString(this.description);
+		dest.writeList(this.excludeMerchantIds);
+		dest.writeStringList(this.excludeMerchantTexts);
+		dest.writeStringList(this.fields);
+		dest.writeSerializable(this.insertedBefore);
+		dest.writeSerializable(this.originalPeriodFrom);
+		dest.writeSerializable(this.originalPeriodTo);
+		dest.writeString(this.parsedData);
+		dest.writeStringList(this.parsedDataExactKeys);
+		dest.writeString(this.parsedDataNameToOrderBy);
+		dest.writeString(this.sort);
+		dest.writeValue(this.onlyUncleared);
+		dest.writeInt(this.isFiltering ? 1 : 0);
 	}
 
 	/**
@@ -273,16 +335,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		if (takeField != null) {
 			addToMap(takeField, map);
 		}
-		if (sortBy.size() > 0) {
-			StringBuilder bld = new StringBuilder();
-			for (String sort : sortBy) {
-				if (bld.length() > 0) {
-					bld.append(",");
-				}
-				bld.append(sort);
-			}
-			map.put("sort", bld.toString());
-		}
+		sortBy.size();
 		return map;
 	}
 
@@ -343,66 +396,6 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		String json = gson.toJson(this);
 
 		return json.hashCode();
-	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(type);
-		dest.writeString(orderBy);
-		dest.writeValue(take);
-		dest.writeValue(skip);
-		dest.writeSerializable(amountTo);
-		dest.writeSerializable(amountFrom);
-		dest.writeList(categoryIds);
-		dest.writeList(accountIds);
-		dest.writeList(accountTypeIds);
-		dest.writeStringList(accountIdentifiers);
-		dest.writeList(merchantIds);
-		dest.writeStringList(merchantTexts);
-		dest.writeString(searchText);
-		dest.writeStringList(tags);
-		dest.writeSerializable(periodTo);
-		dest.writeSerializable(periodFrom);
-		dest.writeList(ids);
-		dest.writeValue(onlyUnread);
-		dest.writeValue(onlyUncertain);
-		dest.writeValue(onlyFlagged);
-		dest.writeValue(useExactMerchantTexts);
-		dest.writeValue(uncertainOrFlagged);
-		dest.writeValue(useAbsoluteAmountSearch);
-		dest.writeValue(useAccentInsensitiveSearch);
-		dest.writeValue(useAmountInCurrencySearch);
-		dest.writeValue(useAndSearchForTags);
-		dest.writeValue(useEqualsSearchForBankId);
-		dest.writeValue(useExactDescription);
-		dest.writeValue(useParentMerchantIds);
-		dest.writeValue(onlyUncategorized);
-		dest.writeValue(ascendingOrder);
-		dest.writeValue(hideExcluded);
-		dest.writeStringList(bankIds);
-		dest.writeList(categoryTypes);
-		dest.writeString(comment);
-		dest.writeStringList(counterpartyAccountIdentifiers);
-		dest.writeString(description);
-		dest.writeList(excludeMerchantIds);
-		dest.writeStringList(excludeMerchantTexts);
-		dest.writeStringList(fields);
-		dest.writeSerializable(insertedBefore);
-		dest.writeSerializable(originalPeriodFrom);
-		dest.writeSerializable(originalPeriodTo);
-		dest.writeString(parsedData);
-		dest.writeStringList(parsedDataExactKeys);
-		dest.writeString(parsedDataNameToOrderBy);
-		dest.writeInt(includeAccounts ? 1 : 0);
-		dest.writeInt(includeMerchants ? 1 : 0);
-		dest.writeString(sort);
-
-		dest.writeInt(isFiltering ? 1 : 0);
 	}
 
 	public String getType() {
@@ -605,6 +598,12 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		return Arrays.asList(sort.split(","));
 	}
 
+	@Nullable
+	public Boolean getOnlyUncleared() {
+		return onlyUncleared;
+	}
+
+	@SuppressWarnings("ConstantConditions")
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -706,14 +705,14 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 			return false;
 		if (sort != null ? !sort.equals(that.sort) : that.sort != null)
 			return false;
+		if (onlyUncleared != that.onlyUncleared)
+			return false;
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result;
-		long temp;
-		result = type != null ? type.hashCode() : 0;
+		int result = type != null ? type.hashCode() : 0;
 		result = 31 * result + (orderBy != null ? orderBy.hashCode() : 0);
 		result = 31 * result + (skip != null ? skip.hashCode() : 0);
 		result = 31 * result + (take != null ? take.hashCode() : 0);
@@ -727,10 +726,8 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		result = 31 * result + (merchantTexts != null ? merchantTexts.hashCode() : 0);
 		result = 31 * result + (searchText != null ? searchText.hashCode() : 0);
 		result = 31 * result + (tags != null ? tags.hashCode() : 0);
-		DateTime tmpPeriodTo = periodTo != null ? new DateTime(periodTo.getYear(), periodTo.getMonthOfYear(), periodTo.getDayOfMonth(), 0, 0) : null;
-		result = 31 * result + (tmpPeriodTo != null ? tmpPeriodTo.hashCode() : 0);
-		DateTime tmpPeriodFrom = periodFrom != null ? new DateTime(periodFrom.getYear(), periodFrom.getMonthOfYear(), periodFrom.getDayOfMonth(), 0, 0) : null;
-		result = 31 * result + (tmpPeriodFrom != null ? tmpPeriodFrom.hashCode() : 0);
+		result = 31 * result + (periodTo != null ? periodTo.hashCode() : 0);
+		result = 31 * result + (periodFrom != null ? periodFrom.hashCode() : 0);
 		result = 31 * result + (ids != null ? ids.hashCode() : 0);
 		result = 31 * result + (onlyUnread != null ? onlyUnread.hashCode() : 0);
 		result = 31 * result + (onlyUncertain != null ? onlyUncertain.hashCode() : 0);
@@ -756,18 +753,16 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		result = 31 * result + (excludeMerchantTexts != null ? excludeMerchantTexts.hashCode() : 0);
 		result = 31 * result + (fields != null ? fields.hashCode() : 0);
 		result = 31 * result + (insertedBefore != null ? insertedBefore.hashCode() : 0);
-		DateTime tmpOriginalPeriodFrom = originalPeriodFrom != null ? new DateTime(originalPeriodFrom.getYear(), originalPeriodFrom.getMonthOfYear(), originalPeriodFrom.getDayOfMonth(), 0, 0) : null;
-		result = 31 * result + (tmpOriginalPeriodFrom != null ? tmpOriginalPeriodFrom.hashCode() : 0);
-		DateTime tmpOriginalPeriodTo = originalPeriodTo != null ? new DateTime(originalPeriodTo.getYear(), originalPeriodTo.getMonthOfYear(), originalPeriodTo.getDayOfMonth(), 0, 0) : null;
-		result = 31 * result + (tmpOriginalPeriodTo != null ? tmpOriginalPeriodTo.hashCode() : 0);
+		result = 31 * result + (originalPeriodFrom != null ? originalPeriodFrom.hashCode() : 0);
+		result = 31 * result + (originalPeriodTo != null ? originalPeriodTo.hashCode() : 0);
 		result = 31 * result + (parsedData != null ? parsedData.hashCode() : 0);
 		result = 31 * result + (parsedDataExactKeys != null ? parsedDataExactKeys.hashCode() : 0);
 		result = 31 * result + (parsedDataNameToOrderBy != null ? parsedDataNameToOrderBy.hashCode() : 0);
+		result = 31 * result + (sort != null ? sort.hashCode() : 0);
+		result = 31 * result + (onlyUncleared != null ? onlyUncleared.hashCode() : 0);
 		result = 31 * result + (includeAccounts ? 1 : 0);
 		result = 31 * result + (includeMerchants ? 1 : 0);
 		result = 31 * result + (isFiltering ? 1 : 0);
-		result = 31 * result + (sort != null ? sort.hashCode() : 0);
-
 		return result;
 	}
 
@@ -827,6 +822,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 		private boolean includeAccounts = true;
 		private boolean includeMerchants = true;
 		private String sort;
+		private Boolean onlyUncleared;
 
 		private boolean isFiltering;
 
@@ -899,6 +895,7 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 				includeMerchants = preserveNonNull(filter.includeMerchants, includeMerchants);
 				isFiltering = preserveNonNull(filter.isFiltering, isFiltering);
 				sort = preserveNonNull(filter.sort, sort);
+				onlyUncleared = preserveNonNull(filter.onlyUncleared, onlyUncleared);
 			}
 		}
 
@@ -1565,6 +1562,11 @@ public class TransactionsFilter implements Serializable, Parcelable, Cloneable, 
 				sort += ",";
 			}
 			sort += field;
+		}
+
+		public Builder onlyUncleared(boolean onlyUncleared) {
+			this.onlyUncleared = onlyUncleared;
+			return this;
 		}
 
 		/**
