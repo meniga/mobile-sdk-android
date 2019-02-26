@@ -11,6 +11,10 @@ import com.meniga.sdk.webservices.requests.RegisterUser;
 import com.meniga.sdk.webservices.requests.ResetPasswordWithToken;
 import com.meniga.sdk.webservices.requests.SaveMetaData;
 import com.meniga.sdk.webservices.requests.SetCulture;
+import com.meniga.sdk.webservices.user.ChangePassword;
+import com.meniga.sdk.webservices.user.UpdateEmail;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -63,5 +67,22 @@ public class MenigaUserOperationsImp implements MenigaUserOperations {
 	public Result<Void> resetPassword(String resetPasswordToken, String email, String newPassword) {
 		ResetPasswordWithToken req = new ResetPasswordWithToken(resetPasswordToken, email, newPassword);
 		return MenigaSDK.executor().resetPassword(req);
+	}
+
+	@Override
+	public Result<Void> updateEmail(@NotNull String newEmail, @NotNull String password) {
+		UpdateEmail updateEmail = new UpdateEmail(newEmail, password);
+		return MenigaSDK.executor().updateEmail(updateEmail);
+	}
+
+	@Override
+	public Result<Void> changePassword(@NotNull String currentPassword, @NotNull String newPassword) {
+		ChangePassword changePassword = new ChangePassword(currentPassword, newPassword);
+		return MenigaSDK.executor().changePassword(changePassword);
+	}
+
+	@Override
+	public Result<Void> delete() {
+		return MenigaSDK.executor().deleteUser();
 	}
 }

@@ -7,6 +7,7 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.user.operators.MenigaUserOperations;
 import com.meniga.sdk.webservices.MenigaWebException;
 
+import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
@@ -231,5 +232,36 @@ public class MenigaUser implements Serializable, Parcelable, Cloneable {
 
 	public static Result<Void> resetPassword(String resetPasswordToken, String email, String newPassword) {
 		return apiOperator.resetPassword(resetPasswordToken, email, newPassword);
+	}
+
+	/**
+	 * Updates the email address of the user.
+	 *
+	 * @param newEmail user's new email
+	 * @param password user's password
+	 */
+	@NotNull
+	public static Result<Void> updateEmail(@NotNull String newEmail, @NotNull String password) {
+		return apiOperator.updateEmail(newEmail, password);
+	}
+
+	/**
+	 * Changes the password of the user.
+	 *
+	 * @param currentPassword user's old password
+	 * @param newPassword the new password
+	 */
+	@NotNull
+	public static Result<Void> changePassword(@NotNull String currentPassword, @NotNull String newPassword) {
+		return apiOperator.changePassword(currentPassword, newPassword);
+	}
+
+	/**
+	 * Delete the given person and remove transactions and accounts
+	 * (belonging to the person, not the household), realm user information, alerts etc.
+	 */
+	@NotNull
+	public static Result<Void> delete() {
+		return apiOperator.delete();
 	}
 }

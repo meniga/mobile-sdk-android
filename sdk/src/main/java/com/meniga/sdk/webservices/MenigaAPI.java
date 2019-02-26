@@ -26,9 +26,6 @@ import com.meniga.sdk.models.transactions.MenigaTransactionRule;
 import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
-import com.meniga.sdk.models.user.MenigaUser;
-import com.meniga.sdk.models.user.MenigaUserMetaData;
-import com.meniga.sdk.models.user.MenigaUserProfile;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
 import com.meniga.sdk.webservices.requests.CreateComment;
 import com.meniga.sdk.webservices.requests.CreateNetWorthAccount;
@@ -37,14 +34,10 @@ import com.meniga.sdk.webservices.requests.CreateTransaction;
 import com.meniga.sdk.webservices.requests.CreateTransactionRule;
 import com.meniga.sdk.webservices.requests.CreateUpcoming;
 import com.meniga.sdk.webservices.requests.CreateUserCategory;
-import com.meniga.sdk.webservices.requests.ForgotPassword;
 import com.meniga.sdk.webservices.requests.GetRealmAuthMethod;
 import com.meniga.sdk.webservices.requests.GetTopMerchants;
 import com.meniga.sdk.webservices.requests.GetTransactionSeries;
 import com.meniga.sdk.webservices.requests.RecategorizeTransactions;
-import com.meniga.sdk.webservices.requests.RegisterUser;
-import com.meniga.sdk.webservices.requests.ResetPasswordWithToken;
-import com.meniga.sdk.webservices.requests.SaveMetaData;
 import com.meniga.sdk.webservices.requests.SetSubscription;
 import com.meniga.sdk.webservices.requests.SetSubscriptionSettings;
 import com.meniga.sdk.webservices.requests.SplitTransaction;
@@ -59,8 +52,6 @@ import com.meniga.sdk.webservices.requests.UpdateTransactions;
 import com.meniga.sdk.webservices.requests.UpdateUpcoming;
 import com.meniga.sdk.webservices.requests.UpdateUserCategory;
 import com.meniga.sdk.webservices.requests.UpdatedNetWorthAccount;
-
-import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Map;
@@ -221,33 +212,6 @@ public interface MenigaAPI {
 	// --
 	@GET(APIConst.URL_USER_EVENTS + "/{id}")
 	Call<MenigaFeedItem> getEvent(@Path("id") long id);
-
-	// --
-	// Me
-	// --
-	@GET(APIConst.URL_ME + APIConst.PROFILE)
-	Call<MenigaUserProfile> getUserProfile();
-
-	@GET(APIConst.URL_ME + "?includeAll=true")
-	Call<List<MenigaUser>> getUsers();
-
-	@PUT(APIConst.URL_ME + APIConst.CULTURE)
-	Call<Void> setCulture(@QueryMap Map<String, String> queryMap);
-
-	@POST(APIConst.URL_ME + APIConst.REGISTER)
-	Call<MenigaUser> registerUser(@Body RegisterUser newUser);
-
-	@POST(APIConst.URL_ME + APIConst.PASSWORD + APIConst.FORGOT)
-	Call<Void> forgotPassword(@Body ForgotPassword req);
-
-	@GET(APIConst.URL_ME + APIConst.META_DATA)
-	Call<List<MenigaUserMetaData>> getUserMetaData(@QueryMap Map<String, String> queryMap);
-
-	@PUT(APIConst.URL_ME + APIConst.META_DATA)
-	Call<MenigaUserMetaData> saveUserMetaData(@Body SaveMetaData metaData);
-
-	@POST(APIConst.URL_ME + APIConst.PASSWORD + APIConst.RESET)
-	Call<Void> resetPassword(@Body ResetPasswordWithToken resetPasswordWithToken);
 
 	// --
 	// Categories

@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = "1.2.71"
+        kotlinVersion = "1.3.11"
         // MOBILE-3449 Parameters encoding changed in later versions https://github.com/square/okhttp/issues/3235
         okHttpVersion = "3.9.1"
         spekVersion = "1.2.1"
@@ -10,7 +10,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.2.1"
+        classpath "com.android.tools.build:gradle:3.3.1"
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
         classpath "digital.wup:android-maven-publish:3.6.2"
         classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.17"
