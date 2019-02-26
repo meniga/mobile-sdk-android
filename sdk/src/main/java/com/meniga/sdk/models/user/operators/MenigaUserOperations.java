@@ -4,6 +4,8 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.user.MenigaUser;
 import com.meniga.sdk.models.user.MenigaUserMetaData;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -24,4 +26,10 @@ public interface MenigaUserOperations {
     Result<MenigaUserMetaData> saveMetaData(String key, String value);
 
 	Result<Void> resetPassword(String resetPasswordToken, String email, String newPassword);
+
+	Result<Void> updateEmail(@NotNull String newEmail, @NotNull String password);
+
+	Result<Void> changePassword(@NotNull String currentPassword, @NotNull String newPassword);
+
+	Result<Void> delete();
 }

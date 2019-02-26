@@ -78,8 +78,9 @@ import com.meniga.sdk.webservices.eventtracking.EventTrackingService;
 import com.meniga.sdk.webservices.eventtracking.TrackEvent;
 import com.meniga.sdk.webservices.offers.OffersService;
 import com.meniga.sdk.webservices.requests.*;
-
-import org.json.JSONObject;
+import com.meniga.sdk.webservices.user.ChangePassword;
+import com.meniga.sdk.webservices.user.UpdateEmail;
+import com.meniga.sdk.webservices.user.UsersService;
 
 import java.util.Collections;
 import java.util.List;
@@ -474,38 +475,50 @@ public class PersistenceDelegate {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.USERS).getUserProfile());
+		return persist(req, getService(UsersService.class).getUserProfile());
 	}
 
 	public Result<List<MenigaUser>> getUsers(GetUsers req) {
 		if (provider.hasKey(req)) {
 			return createTask(provider.fetch(req));
 		}
-		return persist(req, getClient(Service.USERS).getUsers());
+		return persist(req, getService(UsersService.class).getUsers());
 	}
 
 	public Result<Void> setCulture(SetCulture req) {
-		return persist(req, getClient(Service.USERS).setCulture(req.toQueryMap()));
+		return persist(req, getService(UsersService.class).setCulture(req.toQueryMap()));
 	}
 
 	public Result<MenigaUser> registerUser(RegisterUser req) {
-		return persist(req, getClient(Service.USERS).registerUser(req));
+		return persist(req, getService(UsersService.class).registerUser(req));
 	}
 
 	public Result<Void> forgotPassword(ForgotPassword req) {
-		return persist(req, getClient(Service.USERS).forgotPassword(req));
+		return persist(req, getService(UsersService.class).forgotPassword(req));
 	}
 
 	public Result<List<MenigaUserMetaData>> getUserMetaData(GetUserMetaData req) {
-		return persist(req, getClient(Service.USERS).getUserMetaData(req.toQueryMap()));
+		return persist(req, getService(UsersService.class).getUserMetaData(req.toQueryMap()));
 	}
 
 	public Result<MenigaUserMetaData> saveUserMetaData(SaveMetaData req) {
-		return persist(req, getClient(Service.USERS).saveUserMetaData(req));
+		return persist(req, getService(UsersService.class).saveUserMetaData(req));
 	}
 
 	public Result<Void> resetPassword(ResetPasswordWithToken req) {
-		return persist(req, getClient(Service.USERS).resetPassword(req));
+		return persist(req, getService(UsersService.class).resetPassword(req));
+	}
+
+	public Result<Void> updateEmail(UpdateEmail req) {
+		return call(getService(UsersService.class).updateEmail(req));
+	}
+
+	public Result<Void> changePassword(ChangePassword changePassword) {
+		return call(getService(UsersService.class).changePassword(changePassword));
+	}
+
+	public Result<Void> deleteUser() {
+		return call(getService(UsersService.class).delete());
 	}
 
 	// --
