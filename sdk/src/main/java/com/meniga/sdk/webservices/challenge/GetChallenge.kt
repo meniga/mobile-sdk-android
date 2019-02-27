@@ -7,7 +7,7 @@ import com.meniga.sdk.webservices.requests.QueryRequestObject
 
 import java.util.UUID
 
-internal data class GetChallenge(
+data class GetChallenge(
         @JvmField var id: UUID
 ) : QueryRequestObject() {
 

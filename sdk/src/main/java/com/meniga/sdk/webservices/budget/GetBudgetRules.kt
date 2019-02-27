@@ -7,7 +7,7 @@ import com.meniga.sdk.helpers.DateTimeUtils
 import com.meniga.sdk.webservices.requests.QueryRequestObject
 import org.joda.time.DateTime
 
-internal data class GetBudgetRules(
+data class GetBudgetRules(
         @Transient
         val id: Long = 0,
         val categoryIds: List<Long>? = null,

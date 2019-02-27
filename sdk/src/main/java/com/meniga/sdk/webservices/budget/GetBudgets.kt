@@ -6,7 +6,7 @@ package com.meniga.sdk.webservices.budget
 import com.meniga.sdk.models.budget.enums.BudgetType
 import com.meniga.sdk.webservices.requests.QueryRequestObject
 
-internal data class GetBudgets(
+data class GetBudgets(
         var ids: List<Long>? = null,
         var accountIds: List<Long>? = null,
         var type: BudgetType? = null

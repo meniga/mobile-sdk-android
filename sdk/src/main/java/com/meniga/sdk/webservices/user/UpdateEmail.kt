@@ -5,7 +5,7 @@ package com.meniga.sdk.webservices.user
 
 import com.meniga.sdk.webservices.requests.QueryRequestObject
 
-internal data class UpdateEmail(
+data class UpdateEmail(
         @JvmField var newEmail: String,
         @JvmField var password: String
 ) : QueryRequestObject() {

@@ -5,7 +5,7 @@ package com.meniga.sdk.webservices.user
 
 import com.meniga.sdk.webservices.requests.QueryRequestObject
 
-internal data class ChangePassword(
+data class ChangePassword(
         @JvmField var currentPassword: String,
         @JvmField var newPassword: String
 ) : QueryRequestObject() {

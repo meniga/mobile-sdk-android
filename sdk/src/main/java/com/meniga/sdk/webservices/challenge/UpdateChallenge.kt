@@ -9,7 +9,7 @@ import com.meniga.sdk.webservices.requests.QueryRequestObject
 import org.joda.time.DateTime
 import java.util.UUID
 
-internal data class UpdateChallenge(
+data class UpdateChallenge(
         @Transient @JvmField var id: UUID? = null,
         @JvmField var title: String? = null,
         @JvmField var description: String? = null,

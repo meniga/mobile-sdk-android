@@ -510,11 +510,11 @@ public class PersistenceDelegate {
 	}
 
 	public Result<Void> updateEmail(UpdateEmail req) {
-		return call(getService(UsersService.class).updateEmail(req));
+		return persist(req, getService(UsersService.class).updateEmail(req));
 	}
 
-	public Result<Void> changePassword(ChangePassword changePassword) {
-		return call(getService(UsersService.class).changePassword(changePassword));
+	public Result<Void> changePassword(ChangePassword req) {
+		return persist(req, getService(UsersService.class).changePassword(req));
 	}
 
 	public Result<Void> deleteUser() {

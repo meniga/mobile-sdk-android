@@ -5,7 +5,7 @@ package com.meniga.sdk.webservices.budget
 
 import com.meniga.sdk.webservices.requests.QueryRequestObject
 
-internal data class UpdateBudget(
+data class UpdateBudget(
         var name: String? = null,
         var description: String? = null,
         var accountIds: List<Long>? = null

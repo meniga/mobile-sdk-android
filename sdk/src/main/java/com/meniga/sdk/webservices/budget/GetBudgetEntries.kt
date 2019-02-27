@@ -7,7 +7,7 @@ import com.meniga.sdk.helpers.DateTimeUtils
 import com.meniga.sdk.webservices.requests.QueryRequestObject
 import org.joda.time.DateTime
 
-internal data class GetBudgetEntries(
+data class GetBudgetEntries(
         @Transient
         var id: Long = 0,
         var categoryIds: List<Long>? = null,

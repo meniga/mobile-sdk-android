@@ -8,7 +8,7 @@ import com.meniga.sdk.webservices.requests.QueryRequestObject
 
 import org.joda.time.DateTime
 
-internal data class UpdateBudgetEntry(
+data class UpdateBudgetEntry(
         var targetAmount: MenigaDecimal? = null,
         var startDate: DateTime? = null,
         var endDate: DateTime? = null,

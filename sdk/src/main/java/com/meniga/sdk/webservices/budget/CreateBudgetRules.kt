@@ -8,7 +8,7 @@ import com.meniga.sdk.webservices.requests.QueryRequestObject
 
 import org.joda.time.DateTime
 
-internal data class CreateBudgetRules(var rules: List<CreateBudgetRuleData>? = null) : QueryRequestObject() {
+data class CreateBudgetRules(var rules: List<CreateBudgetRuleData>? = null) : QueryRequestObject() {
 
     override fun getValueHash(): Long = hashCode().toLong()
 
