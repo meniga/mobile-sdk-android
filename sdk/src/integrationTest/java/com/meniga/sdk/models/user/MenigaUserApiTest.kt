@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2019 Meniga Iceland Inc.
+ * Copyright 2019 Meniga Iceland Inc.
  */
 package com.meniga.sdk.models.user
 
