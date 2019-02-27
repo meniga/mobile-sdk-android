@@ -20,8 +20,6 @@ import retrofit2.http.QueryMap
 
 internal interface UsersService {
 
-    // TODO Download data as zip file, url then?
-
     @DELETE("me")
     fun delete(): Call<Void>
 

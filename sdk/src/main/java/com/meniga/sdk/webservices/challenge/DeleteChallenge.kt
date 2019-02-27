@@ -7,7 +7,7 @@ import com.meniga.sdk.webservices.requests.QueryRequestObject
 
 import java.util.UUID
 
-internal data class DeleteChallenge(
+data class DeleteChallenge(
         @JvmField var id: UUID
 ) : QueryRequestObject() {
 

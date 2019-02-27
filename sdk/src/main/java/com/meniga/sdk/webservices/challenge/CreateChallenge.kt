@@ -10,7 +10,7 @@ import com.meniga.sdk.webservices.requests.QueryRequestObject
 
 import org.joda.time.DateTime
 
-internal data class CreateChallenge(
+data class CreateChallenge(
         @JvmField var title: String,
         @JvmField var description: String,
         @JvmField var startDate: DateTime,
@@ -21,7 +21,7 @@ internal data class CreateChallenge(
 
     override fun getValueHash(): Long = hashCode().toLong()
 
-    internal data class CreateChallengeTypeData(
+    data class CreateChallengeTypeData(
             var categoryIds: List<Long>? = null,
             var categoryType: CategoryType? = null,
             var targetAmount: MenigaDecimal? = null,

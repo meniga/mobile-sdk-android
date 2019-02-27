@@ -1,6 +1,6 @@
 package com.meniga.sdk.webservices.account
 
-internal data class AccountType(
+data class AccountType(
         val id: Long? = null,
         val name: String? = null,
         val description: String? = null,

@@ -6,7 +6,7 @@ package com.meniga.sdk.webservices.challenge
 import com.meniga.sdk.webservices.requests.QueryRequestObject
 import java.util.UUID
 
-internal data class GetChallengeHistory(
+data class GetChallengeHistory(
         @JvmField var id: UUID,
         @JvmField var skip: Int = 0,
         @JvmField var take: Int? = null

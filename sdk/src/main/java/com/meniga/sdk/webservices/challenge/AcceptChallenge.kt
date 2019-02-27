@@ -11,7 +11,7 @@ import java.util.UUID
  * @param id The id of the challenge to accept.
  * @param targetAmount The target amount for the challenge. If not specified, the target amount will be calculated according to the target percentage of the challenge.
  */
-internal data class AcceptChallenge(
+data class AcceptChallenge(
         @Transient @JvmField var id: UUID? = null,
         @JvmField var targetAmount: MenigaDecimal? = null
 ) : QueryRequestObject() {

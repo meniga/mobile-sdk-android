@@ -2,7 +2,7 @@ package com.meniga.sdk.webservices.account
 
 import com.google.gson.annotations.SerializedName
 
-internal enum class AccountCategory {
+enum class AccountCategory {
     @SerializedName("Wallet")
     WALLET,
     @SerializedName("Credit")

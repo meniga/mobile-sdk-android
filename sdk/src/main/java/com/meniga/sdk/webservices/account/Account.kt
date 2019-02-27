@@ -3,7 +3,7 @@ package com.meniga.sdk.webservices.account
 import com.meniga.sdk.helpers.MenigaDecimal
 import org.joda.time.DateTime
 
-internal data class Account(
+data class Account(
         val id: Long = 0,
         val accountIdentifier: String? = null,
         val realmIdentifier: String? = null,

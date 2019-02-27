@@ -5,7 +5,7 @@ package com.meniga.sdk.webservices.challenge
 
 import com.meniga.sdk.webservices.requests.QueryRequestObject
 
-internal data class GetChallenges(
+data class GetChallenges(
         @JvmField var includeExpired: Boolean = false,
         @JvmField var excludeSuggested: Boolean = false,
         @JvmField var excludeAccepted: Boolean = false,
