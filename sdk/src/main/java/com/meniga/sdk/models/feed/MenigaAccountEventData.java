@@ -8,6 +8,8 @@ import com.meniga.sdk.helpers.MenigaDecimal;
 
 import java.io.Serializable;
 
+import javax.annotation.Nullable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -32,6 +34,7 @@ public class MenigaAccountEventData implements Parcelable, Serializable {
 		return thresholdAmountTrigger;
 	}
 
+	@Nullable
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
