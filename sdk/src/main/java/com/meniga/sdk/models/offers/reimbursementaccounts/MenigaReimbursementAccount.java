@@ -8,6 +8,7 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.offers.reimbursementaccounts.operators.MenigaReimbursementAccountOperations;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -53,14 +54,13 @@ public class MenigaReimbursementAccount implements Serializable, Parcelable {
 		return isVerified;
 	}
 
-	public MenigaOfferAccountInfo getAccountInfo() {
+	public MenigaOfferAccountInfo getAccountInfo(Type type) {
 		Gson gson = new Gson();
-		return gson.fromJson(accountInfo, MenigaOfferAccountInfo.class);
+		return gson.fromJson(accountInfo, type);
 	}
 
 	public void setAccountInfo(MenigaOfferAccountInfo accountInfo) {
-		Gson gson = new Gson();
-		this.accountInfo = gson.toJson(accountInfo);
+		this.accountInfo = accountInfo.toJson();
 	}
 
 	public String getName() {
@@ -77,6 +77,10 @@ public class MenigaReimbursementAccount implements Serializable, Parcelable {
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+
+	public String getAccountInfo() {
+		return accountInfo;
 	}
 
 	@Override

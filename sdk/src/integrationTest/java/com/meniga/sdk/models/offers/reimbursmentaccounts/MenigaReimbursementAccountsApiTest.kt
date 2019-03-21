@@ -9,6 +9,7 @@ import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.MenigaSettings
 import com.meniga.sdk.models.createOffersValidatingMockWebServer
 import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaOfferAccountInfo
+import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaOfferAccountInfoIceland
 import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAccount
 import com.meniga.sdk.utils.mockResponse
 import org.assertj.core.api.Assertions.assertThat
@@ -62,7 +63,7 @@ object MenigaReimbursementAccountsApiTest : Spek({
     on("creating reimbursement") {
         server.enqueue(mockResponse("reimbursement_accounts_post.json").setResponseCode(201))
 
-        val menigaOfferAccountInfo = MenigaOfferAccountInfo.newInstance(
+        val menigaOfferAccountInfo = MenigaOfferAccountInfoIceland(
                 "1234",
                 "12",
                 "123",
@@ -116,7 +117,7 @@ object MenigaReimbursementAccountsApiTest : Spek({
                 assertThat(isVerified).isTrue()
                 assertThat(name).isEqualTo("Reimbursement account")
                 assertThat(accountType).isEqualTo("Bank account ISL")
-                assertThat(accountInfo).hasNoNullFieldsOrProperties()
+                assertThat(accountInfo).isEqualTo("")
             }
         }
 
