@@ -5,7 +5,6 @@ import android.os.Parcel;
 import com.google.gson.Gson;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
-import com.meniga.sdk.models.feed.MenigaOfferEvent;
 import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaOfferAccountInfoUK;
 import com.meniga.sdk.utils.FileImporter;
 
@@ -15,9 +14,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Copyright 2019 Meniga Iceland Inc.
@@ -40,6 +36,16 @@ public class MenigaOfferAccountInfoUKTest {
 		Assert.assertEquals(item, createdFromParcel);
 
 		parcel.recycle();
+	}
+
+	@Test
+	public void testToJson() {
+		MenigaOfferAccountInfoUK item = gson();
+
+		org.junit.Assert.assertNotNull(item);
+		String json = item.toJson();
+
+		Assert.assertEquals(json, "{\"bankName\":\"NatWest\",\"accountName\":\"Einarsson\",\"sortcode\":\"123456\",\"bankAccountNumber\":\"12345678\"}");
 	}
 
 	private MenigaOfferAccountInfoUK gson() {

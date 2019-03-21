@@ -38,6 +38,16 @@ public class MenigaOfferAccountInfoIcelandTest  {
 		parcel.recycle();
 	}
 
+	@Test
+	public void testToJson() {
+		MenigaOfferAccountInfoIceland item = gson();
+
+		org.junit.Assert.assertNotNull(item);
+		String json = item.toJson();
+
+		Assert.assertEquals(json, "{\"bankNumber\":\"0512\",\"ledger\":\"26\",\"bankAccountNumber\":\"123456\",\"socialSecurityNumber\":\"1111114449\"}");
+	}
+
 	private MenigaOfferAccountInfoIceland gson() {
 		Gson gson = GsonProvider.getGson();
 		try {
