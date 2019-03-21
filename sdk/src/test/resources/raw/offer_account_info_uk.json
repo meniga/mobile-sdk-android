@@ -1,6 +1,8 @@
 {
-  "bankName":"NatWest",
-  "accountName":"Einarsson",
-  "sortcode":"123456",
-  "bankAccountNumber":"12345678"
+  "data": {
+    "bankName": "NatWest",
+    "accountName": "Einarsson",
+    "sortcode": "123456",
+    "bankAccountNumber": "12345678"
+  }
 }

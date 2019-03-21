@@ -5,8 +5,7 @@ import android.os.Parcel;
 import com.google.gson.Gson;
 import com.meniga.sdk.converters.MenigaConverter;
 import com.meniga.sdk.helpers.GsonProvider;
-import com.meniga.sdk.models.feed.MenigaOfferEvent;
-import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaOfferAccountInfoUK;
+import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaOfferAccountInfoIceland;
 import com.meniga.sdk.utils.FileImporter;
 
 import org.junit.Assert;
@@ -15,9 +14,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Copyright 2019 Meniga Iceland Inc.
@@ -27,7 +23,7 @@ import java.util.List;
 public class MenigaOfferAccountInfoIcelandTest  {
 	@Test
 	public void testParcel() {
-		MenigaOfferAccountInfoUK item = gson();
+		MenigaOfferAccountInfoIceland item = gson();
 
 		Parcel parcel = Parcel.obtain();
 		org.junit.Assert.assertNotNull(item);
@@ -35,19 +31,19 @@ public class MenigaOfferAccountInfoIcelandTest  {
 
 		parcel.setDataPosition(0);
 
-		MenigaOfferAccountInfoUK createdFromParcel = MenigaOfferAccountInfoUK.CREATOR.createFromParcel(parcel);
+		MenigaOfferAccountInfoIceland createdFromParcel = MenigaOfferAccountInfoIceland.CREATOR.createFromParcel(parcel);
 		org.junit.Assert.assertNotNull(item);
 		Assert.assertEquals(item, createdFromParcel);
 
 		parcel.recycle();
 	}
 
-	private MenigaOfferAccountInfoUK gson() {
+	private MenigaOfferAccountInfoIceland gson() {
 		Gson gson = GsonProvider.getGson();
 		try {
 			return gson.fromJson(MenigaConverter.getAsObject(
 					FileImporter.getInputStreamFromRaw("offer_account_info_iceland.json")),
-					MenigaOfferAccountInfoUK.class
+					MenigaOfferAccountInfoIceland.class
 			);
 		} catch (IOException e) {
 			e.printStackTrace();

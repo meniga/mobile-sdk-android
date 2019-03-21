@@ -117,7 +117,12 @@ object MenigaReimbursementAccountsApiTest : Spek({
                 assertThat(isVerified).isTrue()
                 assertThat(name).isEqualTo("Reimbursement account")
                 assertThat(accountType).isEqualTo("Bank account ISL")
-                assertThat(accountInfo).isEqualTo("")
+                assertThat(accountInfo).isEqualTo("{\n" +
+                        "  \"bankNumber\": \"1234\",\n" +
+                        "  \"ledger\": \"12\",\n" +
+                        "  \"bankAccountNumber\": \"123\",\n" +
+                        " \"socialSecurityNumber\": \"0000000000\"\n" +
+                        "}")
             }
         }
 
