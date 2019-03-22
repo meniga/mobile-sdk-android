@@ -4,11 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.Gson;
+import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.offers.reimbursementaccounts.operators.MenigaReimbursementAccountOperations;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
+
+import javax.annotation.Nonnull;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -54,8 +57,8 @@ public class MenigaReimbursementAccount implements Serializable, Parcelable {
 		return isVerified;
 	}
 
-	public MenigaOfferAccountInfo getAccountInfo(Type type) {
-		Gson gson = new Gson();
+	public <T extends MenigaOfferAccountInfo> T getAccountInfo(Class<T> type) {
+		Gson gson = GsonProvider.getGson();
 		return gson.fromJson(accountInfo, type);
 	}
 
@@ -79,6 +82,7 @@ public class MenigaReimbursementAccount implements Serializable, Parcelable {
 		this.accountType = accountType;
 	}
 
+	@Nonnull
 	public String getAccountInfo() {
 		return accountInfo;
 	}

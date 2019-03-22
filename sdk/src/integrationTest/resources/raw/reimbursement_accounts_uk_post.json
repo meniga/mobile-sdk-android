@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": 69,
+    "isActive": true,
+    "isVerified": true,
+    "name": "Reimbursment account",
+    "accountType": "Bank account ISL",
+    "accountInfo": "{\n  \"bankName\": \"NatWest\",\n  \"accountName\": \"Karlsson\",\n  \"sortcode\": \"112233\",\n \"bankAccountNumber\": \"12345678\"\n}"
+  }
+}
