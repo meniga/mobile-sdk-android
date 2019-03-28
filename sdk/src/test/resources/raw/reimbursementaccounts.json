@@ -6,15 +6,15 @@
       "isVerified": true,
       "name": "Test account",
       "accountType": "Bank account ISL",
-      "accountInfo": "{}"
+      "accountInfo": "{\"bankNumber\":\"1234\",\"ledger\":\"12\",\"bankAccountNumber\":\"123456\",\"socialSecurityNumber\":\"1234567890\"}"
     },
     {
       "id": 1,
       "isActive": true,
       "isVerified": true,
       "name": "Test account 2",
-      "accountType": "Bank account ISL",
-      "accountInfo": "{}"
+      "accountType": "Bank account UK",
+      "accountInfo": "{\"bankName\":\"NatWest\",\"accountName\":\"Karlsson\",\"sortcode\":\"123456\",\"bankAccountNumber\":\"12345678\"}"
     }
   ],
   "meta": {
