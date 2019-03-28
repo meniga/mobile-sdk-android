@@ -79,9 +79,4 @@ public class MenigaReimbursementAccountsTest {
 		MenigaReimbursementAccountTypePage createdFromParcel = MenigaReimbursementAccountTypePage.CREATOR.createFromParcel(parcel);
 		assertThat(createdFromParcel).isEqualTo(types);
 	}
-
-	@Test
-	public void testAccountInfoRetrieval() {
-
-	}
 }
