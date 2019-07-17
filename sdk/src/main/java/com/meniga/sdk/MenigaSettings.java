@@ -51,7 +51,7 @@ public class MenigaSettings {
 
 	private MenigaSettings(Builder builder) {
 		endpoint = builder.endpoint;
-		timeout = builder.timeout;
+		timeout = builder.timeout <= 0 ? 60 : builder.timeout;
 		authenticator = builder.authenticator;
 		persistenceProvider = builder.persistenceProvider;
 		persistenceMode = builder.persistenceMode;

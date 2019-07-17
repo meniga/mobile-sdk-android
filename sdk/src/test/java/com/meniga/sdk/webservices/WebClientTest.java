@@ -54,6 +54,21 @@ public class WebClientTest {
 	}
 
 	@Test
+	public void testDefaultTimeoutIs60Seconds() throws IllegalAccessException {
+		MenigaSettings settings = new MenigaSettings.Builder()
+				.endpoint(HttpUrl.parse("http://example.com"))
+				.authenticator(new BasicAuthenticator())
+				.build();
+		MenigaSDK.init(settings);
+		Map<Service, ?> services = MenigaSDK.executor().getApis();
+		OkHttpClient client = getOktHttpClient(services, Service.ALL);
+		assertThat(client).isNotNull();
+		assertThat(client.writeTimeoutMillis()).isEqualTo(60000);
+		assertThat(client.readTimeoutMillis()).isEqualTo(60000);
+		assertThat(client.connectTimeoutMillis()).isEqualTo(60000);
+	}
+
+	@Test
 	public void testSpecialEndpointsAndTimeout() throws IllegalAccessException {
 		MenigaSettings settings = new MenigaSettings.Builder()
 				.endpoint(HttpUrl.parse("http://example.com"))
@@ -73,6 +88,8 @@ public class WebClientTest {
 		assertThat(retrofit.baseUrl().toString()).isEqualTo("http://example.transactions.com/");
 		assertThat(client).isNotNull();
 		assertThat(client.writeTimeoutMillis()).isEqualTo(20000);
+		assertThat(client.readTimeoutMillis()).isEqualTo(20000);
+		assertThat(client.connectTimeoutMillis()).isEqualTo(20000);
 
 		client = getOktHttpClient(services, Service.ACCOUNTS);
 		retrofit = getRetrofit(services, Service.ACCOUNTS);
@@ -80,6 +97,8 @@ public class WebClientTest {
 		assertThat(retrofit.baseUrl().toString()).isEqualTo("http://example.accounts.com/");
 		assertThat(client).isNotNull();
 		assertThat(client.writeTimeoutMillis()).isEqualTo(100000);
+		assertThat(client.readTimeoutMillis()).isEqualTo(100000);
+		assertThat(client.connectTimeoutMillis()).isEqualTo(100000);
 	}
 
 	private Retrofit getRetrofit(Map<Service, ?> services, Service service) throws IllegalAccessException {
