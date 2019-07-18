@@ -9,7 +9,7 @@ import com.meniga.sdk.models.sync.MenigaSyncStatus;
  */
 public interface MenigaSyncOperations {
 
-	Result<MenigaSync> startSync(Long realmUserId, long timeout);
+	Result<MenigaSync> startSync(Long realmUserId, String sessionToken, long timeout);
 
 	Result<MenigaSyncStatus> getSyncStatus();
 

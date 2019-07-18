@@ -13,7 +13,7 @@ import com.meniga.sdk.webservices.requests.StartSync;
  */
 public final class MenigaSyncOperationsImp implements MenigaSyncOperations {
 	@Override
-	public Result<MenigaSync> startSync(Long realmUserId, long timeout) {
+	public Result<MenigaSync> startSync(Long realmUserId, String sessionToken, long timeout) {
 		if (realmUserId == null) {
 			StartSync req = new StartSync();
 			req.waitForCompleteMilliseconds = timeout;
@@ -22,6 +22,7 @@ public final class MenigaSyncOperationsImp implements MenigaSyncOperations {
 			StartRealmSync req = new StartRealmSync();
 			req.realmUserId = realmUserId;
 			req.waitForCompleteMilliseconds = timeout;
+			req.sessionToken = sessionToken;
 			return MenigaSDK.executor().startRealmSync(req);
 		}
 	}
