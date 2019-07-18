@@ -49,7 +49,7 @@ object WebClient {
                 settings.specialServiceEndpoints[service]!!.timeoutInSeconds > 0)
             settings.specialServiceEndpoints[service]!!.timeoutInSeconds
         else
-            settings.timeout
+            settings.timeoutInSeconds
 
         val builder = OkHttpClient.Builder()
                 .cookieJar(WebClient.cookieJar)

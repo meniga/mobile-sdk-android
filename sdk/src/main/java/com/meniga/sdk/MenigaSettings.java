@@ -35,7 +35,7 @@ public class MenigaSettings {
 
 	private final HttpUrl endpoint;
 	private final Authenticator authenticator;
-	private final long timeout;
+	private final long timeoutInSeconds;
 	private final PersistenceMode persistenceMode;
 	private PersistenceProvider persistenceProvider;
 	private final Map<Service, SpecialServiceEndpointDefinition> specialServiceEndpoints;
@@ -51,7 +51,7 @@ public class MenigaSettings {
 
 	private MenigaSettings(Builder builder) {
 		endpoint = builder.endpoint;
-		timeout = builder.timeout;
+		timeoutInSeconds = builder.timeoutInSeconds <= 0 ? 60 : builder.timeoutInSeconds;
 		authenticator = builder.authenticator;
 		persistenceProvider = builder.persistenceProvider;
 		persistenceMode = builder.persistenceMode;
@@ -139,12 +139,12 @@ public class MenigaSettings {
 	}
 
 	/**
-	 * Gets the OkHttp read and write timeout limit in ms
+	 * Gets the OkHttp read and write timeoutInSeconds limit in ms
 	 *
 	 * @return The read and write timout in ms
 	 */
-	public long getTimeout() {
-		return timeout;
+	public long getTimeoutInSeconds() {
+		return timeoutInSeconds;
 	}
 
 	/**
@@ -191,7 +191,7 @@ public class MenigaSettings {
 		private HttpUrl endpoint;
 		private Authenticator authenticator;
 		private PersistenceMode persistenceMode;
-		private long timeout = 60;
+		private long timeoutInSeconds;
 		private PersistenceProvider persistenceProvider;
 		private Map<Service, SpecialServiceEndpointDefinition> specialServiceEndpoints = new HashMap<>();
 		private List<Interceptor> interceptors = new ArrayList<>();
@@ -296,13 +296,13 @@ public class MenigaSettings {
 		}
 
 		/**
-		 * Sets the OkHttp read and write timeout limit in ms
+		 * Sets the OkHttp read and write timeoutInSeconds limit in ms
 		 *
 		 * @param timeout The time out in ms
 		 * @return Builder object
 		 */
 		public Builder timeout(long timeout) {
-			this.timeout = timeout;
+			this.timeoutInSeconds = timeout;
 			return this;
 		}
 
@@ -315,17 +315,17 @@ public class MenigaSettings {
 		 * @return Returns settings builder
 		 */
 		public Builder addEndpointForService(Service service, String endpoint) {
-			return addEndpointForServiceWithTimeout(service, endpoint, 60);
+			return addEndpointForServiceWithTimeout(service, endpoint, 0);
 		}
 
 		/**
 		 * Adds a special endpoint url for a specific model class type (service). This way certain
 		 * model classes can use other endpoints than the default given one. Additionally
-		 * specifies the timeout the client should use for the service.
+		 * specifies the timeoutInSeconds the client should use for the service.
 		 *
 		 * @param service The service should have a different endpoint
 		 * @param endpoint The endpoint for the model class type
-		 * @param timeoutInSeconds The client timeout, in seconds
+		 * @param timeoutInSeconds The client timeoutInSeconds, in seconds
 		 * @return Returns settings builder
 		 */
 		public Builder addEndpointForServiceWithTimeout(Service service, String endpoint, int timeoutInSeconds) {
