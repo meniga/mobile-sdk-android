@@ -51,7 +51,7 @@ public class MenigaSettings {
 
 	private MenigaSettings(Builder builder) {
 		endpoint = builder.endpoint;
-		timeout = builder.timeout <= 0 ? 60 : builder.timeout;
+		timeout = builder.timeout;
 		authenticator = builder.authenticator;
 		persistenceProvider = builder.persistenceProvider;
 		persistenceMode = builder.persistenceMode;
@@ -191,7 +191,7 @@ public class MenigaSettings {
 		private HttpUrl endpoint;
 		private Authenticator authenticator;
 		private PersistenceMode persistenceMode;
-		private long timeout;
+		private long timeout = 60;
 		private PersistenceProvider persistenceProvider;
 		private Map<Service, SpecialServiceEndpointDefinition> specialServiceEndpoints = new HashMap<>();
 		private List<Interceptor> interceptors = new ArrayList<>();
@@ -315,7 +315,7 @@ public class MenigaSettings {
 		 * @return Returns settings builder
 		 */
 		public Builder addEndpointForService(Service service, String endpoint) {
-			return addEndpointForServiceWithTimeout(service, endpoint, -1);
+			return addEndpointForServiceWithTimeout(service, endpoint, 60);
 		}
 
 		/**
@@ -325,17 +325,17 @@ public class MenigaSettings {
 		 *
 		 * @param service The service should have a different endpoint
 		 * @param endpoint The endpoint for the model class type
-		 * @param timeout The client timeout, in seconds
+		 * @param timeoutInSeconds The client timeout, in seconds
 		 * @return Returns settings builder
 		 */
-		public Builder addEndpointForServiceWithTimeout(Service service, String endpoint, int timeout) {
+		public Builder addEndpointForServiceWithTimeout(Service service, String endpoint, int timeoutInSeconds) {
 			if (specialServiceEndpoints == null) {
 				specialServiceEndpoints = new HashMap<>();
 			}
 			if (!endpoint.endsWith("/")) {
 				endpoint = endpoint + "/";
 			}
-			specialServiceEndpoints.put(service, new SpecialServiceEndpointDefinition(endpoint, timeout));
+			specialServiceEndpoints.put(service, new SpecialServiceEndpointDefinition(endpoint, timeoutInSeconds));
 			return this;
 		}
 

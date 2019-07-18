@@ -45,17 +45,17 @@ object WebClient {
     }
 
     private fun buildRetrofit(service: Service, settings: MenigaSettings): Retrofit {
-        val timeout = if (settings.specialServiceEndpoints.containsKey(service) &&
-                settings.specialServiceEndpoints[service]!!.timeout > 0)
-            settings.specialServiceEndpoints[service]!!.timeout
+        val timeoutInSeconds = if (settings.specialServiceEndpoints.containsKey(service) &&
+                settings.specialServiceEndpoints[service]!!.timeoutInSeconds > 0)
+            settings.specialServiceEndpoints[service]!!.timeoutInSeconds
         else
             settings.timeout
 
         val builder = OkHttpClient.Builder()
                 .cookieJar(WebClient.cookieJar)
-                .readTimeout(timeout, TimeUnit.SECONDS)
-                .writeTimeout(timeout, TimeUnit.SECONDS)
-                .connectTimeout(timeout, TimeUnit.SECONDS)
+                .readTimeout(timeoutInSeconds, TimeUnit.SECONDS)
+                .writeTimeout(timeoutInSeconds, TimeUnit.SECONDS)
+                .connectTimeout(timeoutInSeconds, TimeUnit.SECONDS)
 
         settings.authenticator?.let { builder.authenticator(it) }
         settings.sslSocketFactory?.let { builder.sslSocketFactory(it, settings.x509TrustManager) }
