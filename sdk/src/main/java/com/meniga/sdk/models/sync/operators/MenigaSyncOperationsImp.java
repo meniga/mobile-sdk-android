@@ -8,12 +8,14 @@ import com.meniga.sdk.webservices.requests.GetSync;
 import com.meniga.sdk.webservices.requests.StartRealmSync;
 import com.meniga.sdk.webservices.requests.StartSync;
 
+import javax.annotation.Nullable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 public final class MenigaSyncOperationsImp implements MenigaSyncOperations {
 	@Override
-	public Result<MenigaSync> startSync(Long realmUserId, String sessionToken, long timeout) {
+	public Result<MenigaSync> startSync(Long realmUserId, @Nullable String sessionToken, long timeout) {
 		if (realmUserId == null) {
 			StartSync req = new StartSync();
 			req.waitForCompleteMilliseconds = timeout;

@@ -207,7 +207,7 @@ data class MenigaSync(
          * @return A new sync object.
          */
         @JvmStatic
-        fun syncRealm(realmUserId: Long, sessionToken: String?, timeout: Long, onDone: Interceptor<MenigaSync>? = null): Result<MenigaSync> {
+        fun syncRealm(realmUserId: Long, sessionToken: String, timeout: Long, onDone: Interceptor<MenigaSync>? = null): Result<MenigaSync> {
             return launchSync(realmUserId, sessionToken, timeout, onDone)
         }
 
