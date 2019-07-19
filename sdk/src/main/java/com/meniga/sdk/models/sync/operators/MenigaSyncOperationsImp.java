@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
  */
 public final class MenigaSyncOperationsImp implements MenigaSyncOperations {
 	@Override
-	public Result<MenigaSync> startSync(Long realmUserId, @Nullable String sessionToken, long timeout) {
+	public Result<MenigaSync> startSync(@Nullable Long realmUserId, @Nullable String sessionToken, long timeout) {
 		if (realmUserId == null) {
 			StartSync req = new StartSync();
 			req.waitForCompleteMilliseconds = timeout;

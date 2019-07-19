@@ -4,12 +4,14 @@ import com.meniga.sdk.helpers.Result;
 import com.meniga.sdk.models.sync.MenigaSync;
 import com.meniga.sdk.models.sync.MenigaSyncStatus;
 
+import javax.annotation.Nullable;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface MenigaSyncOperations {
 
-	Result<MenigaSync> startSync(Long realmUserId, String sessionToken, long timeout);
+	Result<MenigaSync> startSync(@Nullable Long realmUserId, @Nullable String sessionToken, long timeout);
 
 	Result<MenigaSyncStatus> getSyncStatus();
 
