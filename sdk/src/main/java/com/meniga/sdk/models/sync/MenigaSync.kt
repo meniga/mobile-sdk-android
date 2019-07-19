@@ -196,10 +196,29 @@ data class MenigaSync(
             return launchSync(realmUserId, timeout, onDone)
         }
 
+        /**
+         * Starts the accounts synchronization process for a specific realm with a session token already provided.
+         * Returns a MenigaSync object once the sync procedure has been launched.
+         *
+         * @param realmUserId  The id of the realm account user - a realm is a "department" in e.g. a bank. Most organizations (most often banks) have only one but some
+         * large organizations can have many realms (e.g. insurance, banking, credit cards and so on). This id identifies the user's realm user account.
+         * @param sessionToken A token from a previous (e.g. authentication) operation that should be carried over to the sync process
+         * @param timeout  The amount of time the background process should try to check if the sync has completed before terminating.
+         * @return A new sync object.
+         */
+        @JvmStatic
+        fun syncRealm(realmUserId: Long, sessionToken: String, timeout: Long, onDone: Interceptor<MenigaSync>? = null): Result<MenigaSync> {
+            return launchSync(realmUserId, sessionToken, timeout, onDone)
+        }
+
         private fun launchSync(realmUserId: Long?, timeout: Long, onDone: Interceptor<MenigaSync>?): Result<MenigaSync> {
+            return launchSync(realmUserId, null, timeout, onDone);
+        }
+
+        private fun launchSync(realmUserId: Long?, sessionToken: String?, timeout: Long, onDone: Interceptor<MenigaSync>?): Result<MenigaSync> {
             val task = getSyncStatus().task.continueWithTask { task ->
                 if (task.isFaulted || task.result.hasCompletedSyncSession || task.result.synchronizationStatus == null) {
-                    apiOperator.startSync(realmUserId, timeout).task
+                    apiOperator.startSync(realmUserId, sessionToken, timeout).task
                 } else {
                     fetch(task.result.getSynchronizationStatus().syncHistoryId).task
                 }

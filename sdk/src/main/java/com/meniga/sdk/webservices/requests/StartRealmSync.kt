@@ -6,7 +6,8 @@ package com.meniga.sdk.webservices.requests
  */
 data class StartRealmSync(
         @JvmField @Transient var realmUserId: Long = 0,
-        @JvmField var waitForCompleteMilliseconds: Long = 0
+        @JvmField var waitForCompleteMilliseconds: Long = 0,
+        @JvmField var sessionToken: String? = null
 ) : QueryRequestObject() {
     override fun getValueHash(): Long = hashCode().toLong()
 }

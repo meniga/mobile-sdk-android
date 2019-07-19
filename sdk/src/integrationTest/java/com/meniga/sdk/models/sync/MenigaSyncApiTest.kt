@@ -106,12 +106,12 @@ object MenigaSyncApiTest : Spek({
         }
     }
 
-    on("syncing realm by user id") {
-        val userId = 44L
+    on("syncing realm by realm user id") {
+        val realmUserId = 44L
         server.enqueue(mockResponse("syncstatus.json"))
         server.enqueue(mockResponse("syncresponse.json"))
 
-        val task = MenigaSync.syncRealm(userId, 1000, null).task
+        val task = MenigaSync.syncRealm(realmUserId, 1000, null).task
         task.waitForCompletion()
 
         it("should make request to get sync status") {
@@ -132,6 +132,25 @@ object MenigaSyncApiTest : Spek({
 
         it("should validate against the spec") {
             server.assertNoValidations()
+        }
+    }
+
+    on("syncing realm by realm user id and a session token") {
+        val sessionToken = "whatSessionTokenIsThis"
+        server.enqueue(mockResponse("syncstatus.json"))
+        server.enqueue(mockResponse("syncresponse.json"))
+
+        val task = MenigaSync.syncRealm(0, sessionToken, 1000, null).task
+        task.waitForCompletion()
+
+        it("should make request to get sync status") {
+            assertThatSyncStatusWasChecked()
+        }
+
+        it("Should include session token in request") {
+            val recordedRequest = server.takeRequest()
+            JsonAssert.with(recordedRequest.body.readUtf8())
+                    .assertThat("$.sessionToken", equalTo(sessionToken))
         }
     }
 
