@@ -32,6 +32,7 @@ import okhttp3.Interceptor;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSettings {
+	private static final long DEFAULT_TIMEOUT_IN_SECONDS = 60;
 
 	private final HttpUrl endpoint;
 	private final Authenticator authenticator;
@@ -51,7 +52,8 @@ public class MenigaSettings {
 
 	private MenigaSettings(Builder builder) {
 		endpoint = builder.endpoint;
-		timeoutInSeconds = builder.timeoutInSeconds <= 0 ? 60 : builder.timeoutInSeconds;
+		timeoutInSeconds = builder.timeoutInSeconds <= 0 ?
+				DEFAULT_TIMEOUT_IN_SECONDS : builder.timeoutInSeconds;
 		authenticator = builder.authenticator;
 		persistenceProvider = builder.persistenceProvider;
 		persistenceMode = builder.persistenceMode;
@@ -139,9 +141,9 @@ public class MenigaSettings {
 	}
 
 	/**
-	 * Gets the OkHttp read and write timeoutInSeconds limit in ms
+	 * Gets the OkHttp read and write timeout limit in ms
 	 *
-	 * @return The read and write timout in ms
+	 * @return The read and write timeout in seconds
 	 */
 	public long getTimeoutInSeconds() {
 		return timeoutInSeconds;
@@ -296,13 +298,13 @@ public class MenigaSettings {
 		}
 
 		/**
-		 * Sets the OkHttp read and write timeoutInSeconds limit in ms
+		 * Sets the OkHttp read and write timeout limit in seconds
 		 *
-		 * @param timeout The time out in ms
+		 * @param timeoutInSeconds The client time out in seconds
 		 * @return Builder object
 		 */
-		public Builder timeout(long timeout) {
-			this.timeoutInSeconds = timeout;
+		public Builder timeout(long timeoutInSeconds) {
+			this.timeoutInSeconds = timeoutInSeconds;
 			return this;
 		}
 
@@ -321,11 +323,11 @@ public class MenigaSettings {
 		/**
 		 * Adds a special endpoint url for a specific model class type (service). This way certain
 		 * model classes can use other endpoints than the default given one. Additionally
-		 * specifies the timeoutInSeconds the client should use for the service.
+		 * specifies the timeout the client should use for the service.
 		 *
 		 * @param service The service should have a different endpoint
 		 * @param endpoint The endpoint for the model class type
-		 * @param timeoutInSeconds The client timeoutInSeconds, in seconds
+		 * @param timeoutInSeconds The client timeout, in seconds
 		 * @return Returns settings builder
 		 */
 		public Builder addEndpointForServiceWithTimeout(Service service, String endpoint, int timeoutInSeconds) {
