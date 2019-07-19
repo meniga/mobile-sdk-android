@@ -32,13 +32,14 @@ import okhttp3.Interceptor;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaSettings {
+	private static final long DEFAULT_TIMEOUT_IN_SECONDS = 60;
 
 	private final HttpUrl endpoint;
 	private final Authenticator authenticator;
-	private final long timeout = 60;
+	private final long timeoutInSeconds;
 	private final PersistenceMode persistenceMode;
 	private PersistenceProvider persistenceProvider;
-	private final Map<Service, String> specialServiceEndpoints;
+	private final Map<Service, SpecialServiceEndpointDefinition> specialServiceEndpoints;
 	private final List<Interceptor> interceptors;
 	private final List<Interceptor> networkInterceptors;
 	private final CertificatePinner certificatePinner;
@@ -51,6 +52,8 @@ public class MenigaSettings {
 
 	private MenigaSettings(Builder builder) {
 		endpoint = builder.endpoint;
+		timeoutInSeconds = builder.timeoutInSeconds <= 0 ?
+				DEFAULT_TIMEOUT_IN_SECONDS : builder.timeoutInSeconds;
 		authenticator = builder.authenticator;
 		persistenceProvider = builder.persistenceProvider;
 		persistenceMode = builder.persistenceMode;
@@ -133,17 +136,17 @@ public class MenigaSettings {
 	 *
 	 * @return The map containing the mapping between model types and their endpoints
 	 */
-	public Map<Service, String> getSpecialServiceEndpoints() {
+	public Map<Service, SpecialServiceEndpointDefinition> getSpecialServiceEndpoints() {
 		return specialServiceEndpoints;
 	}
 
 	/**
 	 * Gets the OkHttp read and write timeout limit in ms
 	 *
-	 * @return The read and write timout in ms
+	 * @return The read and write timeout in seconds
 	 */
-	public long getTimeout() {
-		return timeout;
+	public long getTimeoutInSeconds() {
+		return timeoutInSeconds;
 	}
 
 	/**
@@ -190,9 +193,9 @@ public class MenigaSettings {
 		private HttpUrl endpoint;
 		private Authenticator authenticator;
 		private PersistenceMode persistenceMode;
-		private long timeout;
+		private long timeoutInSeconds;
 		private PersistenceProvider persistenceProvider;
-		private Map<Service, String> specialServiceEndpoints = new HashMap<>();
+		private Map<Service, SpecialServiceEndpointDefinition> specialServiceEndpoints = new HashMap<>();
 		private List<Interceptor> interceptors = new ArrayList<>();
 		private List<Interceptor> networkInterceptors = new ArrayList<>();
 		private CertificatePinner certificatePinner;
@@ -295,13 +298,13 @@ public class MenigaSettings {
 		}
 
 		/**
-		 * Sets the OkHttp read and write timeout limit in ms
+		 * Sets the OkHttp read and write timeout limit in seconds
 		 *
-		 * @param timeout The time out in ms
+		 * @param timeoutInSeconds The client time out in seconds
 		 * @return Builder object
 		 */
-		public Builder timeout(long timeout) {
-			this.timeout = timeout;
+		public Builder timeout(long timeoutInSeconds) {
+			this.timeoutInSeconds = timeoutInSeconds;
 			return this;
 		}
 
@@ -314,13 +317,27 @@ public class MenigaSettings {
 		 * @return Returns settings builder
 		 */
 		public Builder addEndpointForService(Service service, String endpoint) {
+			return addEndpointForServiceWithTimeout(service, endpoint, 0);
+		}
+
+		/**
+		 * Adds a special endpoint url for a specific model class type (service). This way certain
+		 * model classes can use other endpoints than the default given one. Additionally
+		 * specifies the timeout the client should use for the service.
+		 *
+		 * @param service The service should have a different endpoint
+		 * @param endpoint The endpoint for the model class type
+		 * @param timeoutInSeconds The client timeout, in seconds
+		 * @return Returns settings builder
+		 */
+		public Builder addEndpointForServiceWithTimeout(Service service, String endpoint, int timeoutInSeconds) {
 			if (specialServiceEndpoints == null) {
 				specialServiceEndpoints = new HashMap<>();
 			}
 			if (!endpoint.endsWith("/")) {
 				endpoint = endpoint + "/";
 			}
-			specialServiceEndpoints.put(service, endpoint);
+			specialServiceEndpoints.put(service, new SpecialServiceEndpointDefinition(endpoint, timeoutInSeconds));
 			return this;
 		}
 
