@@ -4,10 +4,6 @@ import javax.annotation.Nonnull;
 
 import static com.meniga.sdk.helpers.Objects.requireNonNull;
 
-/**
- * Copyright 2019 Meniga Iceland Inc.
- * Created by agustk on 17.7.2019.
- */
 public class SpecialServiceEndpointDefinition {
 	private final String endpoint;
 	private final long timeoutInSeconds;
