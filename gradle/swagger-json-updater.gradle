@@ -11,20 +11,23 @@ afterEvaluate {
 }
 
 private void createDownloadTask(String taskName, String url, String destination) {
-    task "$taskName" << {
+    tasks.register(taskName) {
         group "build"
 
-        try {
-            download {
-                overwrite true
-                acceptAnyCertificate true
-                compress true
-                timeout timeoutMillis
-                src url
-                dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", destination)
+        doLast {
+            try {
+                download {
+                    overwrite true
+                    acceptAnyCertificate true
+                    compress true
+                    connectTimeout timeoutMillis
+                    readTimeout timeoutMillis
+                    src url
+                    dest new File(projectDir.absolutePath + "/src/integrationTest/resources/api", destination)
+                }
+            } catch (Exception exception) {
+                logger.warn("Skipping $url download due to failure", exception)
             }
-        } catch (Exception exception) {
-            logger.warn("Skipping $url download due to failure", exception)
         }
     }
 }
