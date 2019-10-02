@@ -25,15 +25,17 @@ import com.meniga.sdk.webservices.requests.MarkOfferAsSeen;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Copyright 2017 Meniga Iceland Inc.
- */
 public class MenigaOfferOperationsImp implements MenigaOfferOperations {
 
 	@Override
-	public Result<MenigaOfferPage> getOffers(int skip, int take, List<OfferFilterState> states, List<Long> offerId, boolean expiredCashBackOnly) {
+	public Result<MenigaOfferPage> getOffers(
+			int skip,
+			int take,
+			List<OfferFilterState> states,
+			List<Long> offerId,
+			boolean expiredWithRedemptionsOnly) {
 		GetOffers req = new GetOffers();
-		if (states == null || states.size() == 0) {
+		if (states == null || states.isEmpty()) {
 			states = new ArrayList<>();
 			states.add(OfferFilterState.ALL);
 		}
@@ -41,7 +43,7 @@ public class MenigaOfferOperationsImp implements MenigaOfferOperations {
 		req.take = take;
 		req.filterStates = states;
 		req.filterOfferIds = offerId;
-		req.filterExpiredWithCashBackOnly = expiredCashBackOnly;
+		req.filterExpiredWithRedemptionsOnly = expiredWithRedemptionsOnly;
 
 		return MenigaSDK.executor().getOffers(req);
 	}
