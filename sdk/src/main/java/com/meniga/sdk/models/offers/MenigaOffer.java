@@ -437,7 +437,7 @@ public class MenigaOffer implements Parcelable, Serializable {
 	 * @return a page of offers
 	 */
 	public static Result<MenigaOfferPage> fetch(final int skip, final int take) {
-		Result<MenigaOfferPage> task = MenigaOffer.apiOperator.getOffers(skip, take, Collections.singletonList(OfferFilterState.ALL), Collections.singletonList(0L), false);
+		Result<MenigaOfferPage> task = MenigaOffer.apiOperator.getOffers(skip, take, Collections.singletonList(OfferFilterState.ALL), null, false);
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaOfferPage>() {
 			@Override
 			public void onFinished(MenigaOfferPage result, boolean failed) {
