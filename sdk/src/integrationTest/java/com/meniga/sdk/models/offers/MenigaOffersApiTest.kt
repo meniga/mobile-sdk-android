@@ -48,6 +48,7 @@ object MenigaOffersApiTest : Spek({
                     .hasParameter("skip", "0")
                     .hasParameter("take", "10")
                     .hasParameter("filter.states", "all")
+                    .hasNoParameter("filter.offerIds")
                     .hasParameter("filter.expiredWithRedemptionsOnly", "false")
         }
 
