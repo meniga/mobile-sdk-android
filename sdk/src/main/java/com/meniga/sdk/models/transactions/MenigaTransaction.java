@@ -1196,8 +1196,8 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 	/**
 	 * Deletes a list of user created transactions
 	 *
-	 * @param transactionIds The ids of the user transactions to deleteUpcoming
-	 * @return A task of type Void. The task will indicate if the deleteUpcoming was successful or not
+	 * @param transactionIds The ids of the user transactions to delete
+	 * @return A task of type Void. The task will indicate if the deleteTransactions was successful or not
 	 */
 	public static Result<Void> deleteTransactions(List<Long> transactionIds) {
 		return MenigaTransaction.apiOperator.deleteTransactions(transactionIds);
@@ -1210,9 +1210,21 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 	 * @param recategorizeUnreadOnly Recategorize only unread transactions if true, otherwise recategorize unread or read transactions
 	 * @param useSubTextInRecat      Whether to include the subText field when searching for transactions to recategorize
 	 * @param markAsRead             Mark recategorized transactions as read or not
-	 * @return A task of type Void. The task will indicate if the deleteUpcoming was successful or not
+	 * @return A task of type Void. The task will indicate if the recategorize was successful or not
 	 */
 	public static Result<Void> recategorize(List<String> transactionTexts, Boolean recategorizeUnreadOnly, Boolean useSubTextInRecat, Boolean markAsRead) {
 		return MenigaTransaction.apiOperator.recategorize(transactionTexts, recategorizeUnreadOnly, useSubTextInRecat, markAsRead);
+	}
+
+	/**
+	 * Create a comment for a list of transaction ids. If the comment contains any tags (words starting with '#') they are automatically
+	 * created and associated with these transaction if they do not already exist.
+	 *
+	 * @param transactionIds The ids of the user transactions to add the comment
+	 * @param comment		 The new comment to add to transactions
+	 * @return A task of type Void. The task will indicate if the addComment was successful or not
+	 */
+	public static Result<Void> addComment(List<Long> transactionIds, String comment) {
+		return MenigaTransaction.apiOperator.addComment(transactionIds, comment);
 	}
 }

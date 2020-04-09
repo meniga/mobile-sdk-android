@@ -49,4 +49,6 @@ public interface MenigaTransactionOperations {
 	);
 
 	Result<List<MenigaTransaction>> updateSplits(long id, List<UpdateSplits> updates);
+
+	Result<Void> addComment(List<Long> transactionIds, String comment);
 }
