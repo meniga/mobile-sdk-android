@@ -107,6 +107,13 @@ public class MenigaTransactionOperationsMock implements MenigaTransactionOperati
 	}
 
 	@Override
+	public Result<Void> addComment(List<Long> transactionIds, String comment) {
+		TaskCompletionSource<Void> task = new TaskCompletionSource<>();
+		task.setResult(null);
+		return new MTask<>(task.getTask(), task);
+	}
+
+	@Override
 	public Result<List<MenigaTransaction>> fetchSplitTransactions(MenigaTransaction menigaTransaction) {
 		TaskCompletionSource<List<MenigaTransaction>> task = new TaskCompletionSource<>();
 		List<MenigaTransaction> list = new ArrayList<>();
