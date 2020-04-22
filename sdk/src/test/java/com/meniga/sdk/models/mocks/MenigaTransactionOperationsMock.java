@@ -6,6 +6,7 @@ import com.meniga.sdk.helpers.GsonProvider;
 import com.meniga.sdk.helpers.MTask;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.models.transactions.MenigaComment;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
@@ -107,8 +108,8 @@ public class MenigaTransactionOperationsMock implements MenigaTransactionOperati
 	}
 
 	@Override
-	public Result<Void> addComment(List<Long> transactionIds, String comment) {
-		TaskCompletionSource<Void> task = new TaskCompletionSource<>();
+	public Result<List<MenigaComment>> addComments(List<Long> transactionIds, String comment) {
+		TaskCompletionSource<List<MenigaComment>> task = new TaskCompletionSource<>();
 		task.setResult(null);
 		return new MTask<>(task.getTask(), task);
 	}

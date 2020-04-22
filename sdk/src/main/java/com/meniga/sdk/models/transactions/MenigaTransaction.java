@@ -1222,9 +1222,9 @@ public class MenigaTransaction implements Serializable, MenigaFeedItem, Cloneabl
 	 *
 	 * @param transactionIds The ids of the user transactions to add the comment
 	 * @param comment		 The new comment to add to transactions
-	 * @return A task of type Void. The task will indicate if the addComment was successful or not
+	 * @return Result with newly added transaction comments
 	 */
-	public static Result<Void> addComment(List<Long> transactionIds, String comment) {
-		return MenigaTransaction.apiOperator.addComment(transactionIds, comment);
+	public static Result<List<MenigaComment>> addComments(List<Long> transactionIds, String comment) {
+		return MenigaTransaction.apiOperator.addComments(transactionIds, comment);
 	}
 }

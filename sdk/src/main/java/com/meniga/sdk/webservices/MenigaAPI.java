@@ -27,7 +27,7 @@ import com.meniga.sdk.models.transactions.MenigaTransactionSeries;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.upcoming.MenigaUpcoming;
 import com.meniga.sdk.models.userevents.MenigaUserEvent;
-import com.meniga.sdk.webservices.requests.AddComment;
+import com.meniga.sdk.webservices.requests.AddComments;
 import com.meniga.sdk.webservices.requests.CreateComment;
 import com.meniga.sdk.webservices.requests.CreateNetWorthAccount;
 import com.meniga.sdk.webservices.requests.CreateNetWorthBalanceHistory;
@@ -125,7 +125,7 @@ public interface MenigaAPI {
 	Call<Void> deleteComment(@Path("id") long transactionId, @Path("commentId") long commentId);
 
 	@POST(APIConst.URL_TRANSACTIONS + "/" + APIConst.COMMENTS)
-	Call<Void> addComment(@Body AddComment req);
+	Call<List<MenigaComment>> addComments(@Body AddComments req);
 
 	@GET(APIConst.URL_TRANSACTIONS + "/{id}/" + APIConst.SPLIT)
 	Call<List<MenigaTransaction>> fetchSplitTransactions(@Path("id") long parentId);

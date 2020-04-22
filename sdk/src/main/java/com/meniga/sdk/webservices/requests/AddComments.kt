@@ -3,7 +3,7 @@
  */
 package com.meniga.sdk.webservices.requests
 
-class AddComment(
+class AddComments(
         val transactionIds: List<Long>,
         val comment: String
 ) : QueryRequestObject() {

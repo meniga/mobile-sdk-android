@@ -3,11 +3,12 @@ package com.meniga.sdk.models.transactions.operators;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.models.transactions.MenigaComment;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
 import com.meniga.sdk.models.transactions.TransactionsFilter;
-import com.meniga.sdk.webservices.requests.AddComment;
+import com.meniga.sdk.webservices.requests.AddComments;
 import com.meniga.sdk.webservices.requests.CreateTransaction;
 import com.meniga.sdk.webservices.requests.DeleteTransaction;
 import com.meniga.sdk.webservices.requests.DeleteTransactions;
@@ -154,8 +155,8 @@ public final class MenigaTransactionOperationsImp implements MenigaTransactionOp
 	}
 
 	@Override
-	public Result<Void> addComment(List<Long> transactionIds, String comment) {
-		AddComment req = new AddComment(transactionIds, comment);
+	public Result<List<MenigaComment>> addComments(List<Long> transactionIds, String comment) {
+		AddComments req = new AddComments(transactionIds, comment);
 
 		return MenigaSDK.executor().addComments(req);
 	}

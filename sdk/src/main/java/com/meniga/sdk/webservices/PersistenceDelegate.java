@@ -380,8 +380,8 @@ public class PersistenceDelegate {
 		return persist(req, getClient(Service.TRANSACTIONS).deleteComment(req.transactionId, req.commentId));
 	}
 
-	public Result<Void> addComments(AddComment req) {
-		return persist(req, getClient(Service.TRANSACTIONS).addComment(req));
+	public Result<List<MenigaComment>> addComments(AddComments req) {
+		return persist(req, getClient(Service.TRANSACTIONS).addComments(req));
 	}
 
 	public Result<Void> recategorizeTransactions(RecategorizeTransactions req) {

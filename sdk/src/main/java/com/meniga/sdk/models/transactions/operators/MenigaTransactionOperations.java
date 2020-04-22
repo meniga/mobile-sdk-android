@@ -2,6 +2,7 @@ package com.meniga.sdk.models.transactions.operators;
 
 import com.meniga.sdk.helpers.MenigaDecimal;
 import com.meniga.sdk.helpers.Result;
+import com.meniga.sdk.models.transactions.MenigaComment;
 import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.models.transactions.MenigaTransactionPage;
 import com.meniga.sdk.models.transactions.MenigaTransactionUpdate;
@@ -50,5 +51,5 @@ public interface MenigaTransactionOperations {
 
 	Result<List<MenigaTransaction>> updateSplits(long id, List<UpdateSplits> updates);
 
-	Result<Void> addComment(List<Long> transactionIds, String comment);
+	Result<List<MenigaComment>> addComments(List<Long> transactionIds, String comment);
 }
