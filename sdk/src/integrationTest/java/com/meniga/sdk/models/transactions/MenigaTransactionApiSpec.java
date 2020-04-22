@@ -126,6 +126,28 @@ public class MenigaTransactionApiSpec {
                 .hasMerchantsIncluded();
     }
 
+    @Test
+    public void shouldAddCommentToTransactions() throws InterruptedException {
+        server.enqueue(mockResponse("addComments.json"));
+
+        List<Long> transactionIds = newArrayList(1L, 2L);
+        Task<List<MenigaComment>> task = MenigaTransaction.addComments(transactionIds, "newComment").getTask();
+
+        assertThat(task).isSuccessful();
+        RecordedRequest recordedRequest = server.takeRequest();
+        assertThat(recordedRequest.getPath()).isEqualTo("/v1/transactions/comments");
+        assertThat(recordedRequest.getMethod()).isEqualTo("POST");
+        List<MenigaComment> comments = task.getResult();
+        MenigaComment firstComment = comments.get(0);
+        assertThat(firstComment.id).isEqualTo(20409);
+        assertThat(firstComment.comment).isEqualTo("newComment");
+        assertThat(firstComment.personId).isEqualTo(1180);
+        MenigaComment secondComment = comments.get(1);
+        assertThat(secondComment.id).isEqualTo(20410);
+        assertThat(secondComment.comment).isEqualTo("newComment");
+        assertThat(secondComment.personId).isEqualTo(1180);
+    }
+
     private Condition<RecordedRequest> withPath(final String expectedPath) {
         return new Condition<RecordedRequest>(expectedPath) {
             @Override
