@@ -52,7 +52,11 @@
             "loginHelp": "string",
             "realmUserPersonEmail": "string"
           },
-          "isSyncDone": true
+          "isSyncDone": true,
+          "realmId": 4,
+          "realmSyncStartDate": "2020-03-12T15:17:51.280Z",
+          "realmSyncEndDate": "2020-03-13T15:17:51.280Z",
+          "status": "Success"
         }
       ]
     },
