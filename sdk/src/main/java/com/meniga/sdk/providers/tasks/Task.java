@@ -25,14 +25,14 @@ public class Task<TResult> {
 	/**
 	 * An {@link java.util.concurrent.Executor} that executes tasks in parallel.
 	 */
-	static final ExecutorService BACKGROUND_EXECUTOR = Executors.background();
+	static final ExecutorService BACKGROUND_EXECUTOR = MenigaExecutors.background();
 
 	/**
 	 * An {@link java.util.concurrent.Executor} that executes tasks in the current thread unless
 	 * the stack runs too deep, at which point it will delegate to {@link Task#BACKGROUND_EXECUTOR} in
 	 * order to trim the stack.
 	 */
-	private static final Executor IMMEDIATE_EXECUTOR = Executors.immediate();
+	private static final Executor IMMEDIATE_EXECUTOR = MenigaExecutors.immediate();
 
 	/**
 	 * An {@link java.util.concurrent.Executor} that executes tasks on the UI thread.

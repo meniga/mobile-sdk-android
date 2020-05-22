@@ -7,6 +7,7 @@ import com.atlassian.oai.validator.mockwebserver.ValidatingMockWebServer
 import com.jayway.jsonassert.JsonAssert
 import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.MenigaSettings
+import com.meniga.sdk.helpers.MenigaDecimal
 import com.meniga.sdk.models.createValidatingMockWebServer
 import com.meniga.sdk.models.user.ChallengeContentType
 import com.meniga.sdk.utils.mockResponse
@@ -15,6 +16,7 @@ import org.hamcrest.Matchers.equalTo
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
+import org.joda.time.DateTime
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 import java.net.URI
@@ -69,6 +71,17 @@ object MenigaSyncApiTest : Spek({
             assertThat(sync.numNewTransactions).isEqualTo(230)
             val realmSyncResponse = sync.realmSyncResponses!![0]
             assertThat(realmSyncResponse.accountSyncStatuses).hasSize(1)
+            realmSyncResponse.accountSyncStatuses[0].run {
+                assertThat(accountId).isEqualTo(15567)
+                assertThat(balance).isEqualTo(MenigaDecimal(50000))
+                assertThat(limit).isEqualTo(MenigaDecimal(2000))
+                assertThat(transactionsProcessed).isEqualTo(230)
+                assertThat(totalTransactions).isEqualTo(5180)
+                assertThat(startDate).isEqualTo(DateTime.parse("2017-07-27T12:23:34.000Z"))
+                assertThat(endDate).isEqualTo(DateTime.parse("2017-07-27T12:23:34.000Z"))
+                assertThat(accountStatus).isEqualTo("Success")
+                assertThat(status).isEqualTo(AccountSyncResult.SUCCESS)
+            }
             assertThat(realmSyncResponse.authenticationChallenge.contentType).isEqualTo(ChallengeContentType.TEXT)
             assertThat(realmSyncResponse.isSyncDone).isTrue()
             assertThat(realmSyncResponse.organizationBankCode).isEqualTo("EB")

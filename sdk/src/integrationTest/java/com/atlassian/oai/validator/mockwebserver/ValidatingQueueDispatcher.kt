@@ -16,13 +16,13 @@ internal class ValidatingQueueDispatcher(
     private val validator: SwaggerRequestResponseValidator by lazy {
         validatorsCache.getOrPut(
                 swaggerJsonUrl,
-                overriddenBasePath,
-                {
-                    SwaggerRequestResponseValidator.createFor(swaggerJsonUrl)
-                            .withBasePathOverride(overriddenBasePath)
-                            .withWhitelist(whitelist)
-                            .build()
-                })
+                overriddenBasePath
+        ) {
+            SwaggerRequestResponseValidator.createFor(swaggerJsonUrl)
+                    .withBasePathOverride(overriddenBasePath)
+                    .withWhitelist(whitelist)
+                    .build()
+        }
     }
 
     var validationReports: List<ValidationReport> = emptyList()
@@ -30,7 +30,7 @@ internal class ValidatingQueueDispatcher(
 
     override fun dispatch(request: RecordedRequest): MockResponse =
             super.dispatch(request).also { response ->
-                validationReports += validator.validate(MockWebServerRequest(request), MockWebServerResponse(response))
+                validationReports = validationReports + validator.validate(MockWebServerRequest(request), MockWebServerResponse(response))
             }
 
     fun cleanValidations() {

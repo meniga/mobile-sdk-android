@@ -20,7 +20,8 @@
               "totalTransactions": 0,
               "startDate": "2018-03-13T15:17:51.280Z",
               "endDate": "2018-03-13T15:17:51.280Z",
-              "accountStatus": "string"
+              "accountStatus": "Success",
+              "status": "Success"
             }
           ],
           "authenticationChallenge": {

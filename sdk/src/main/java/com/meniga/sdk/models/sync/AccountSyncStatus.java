@@ -23,6 +23,7 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 	protected DateTime startDate;
 	protected DateTime endDate;
 	protected String accountStatus;
+	protected AccountSyncResult status;
 
 	protected AccountSyncStatus() {
 	}
@@ -36,6 +37,8 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 		this.startDate = (DateTime) in.readSerializable();
 		this.endDate = (DateTime) in.readSerializable();
 		this.accountStatus = in.readString();
+		int tmpStatus = in.readInt();
+		this.status = tmpStatus == -1 ? null : AccountSyncResult.values()[tmpStatus];
 	}
 
 	/**
@@ -91,40 +94,29 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 		return accountId;
 	}
 
+	/**
+	 * @return The status of the account synchronization.
+	 */
+	public AccountSyncResult getStatus() {
+		return status;
+	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
 		AccountSyncStatus that = (AccountSyncStatus) o;
 
-		if (accountId != that.accountId) {
-			return false;
-		}
-		if (transactionsProcessed != null ? !transactionsProcessed.equals(that.transactionsProcessed) : that.transactionsProcessed != null) {
-			return false;
-		}
-		if (balance != null ? !balance.equals(that.balance) : that.balance != null) {
-			return false;
-		}
-		if (limit != null ? !limit.equals(that.limit) : that.limit != null) {
-			return false;
-		}
-		if (totalTransactions != null ? !totalTransactions.equals(that.totalTransactions) : that.totalTransactions != null) {
-			return false;
-		}
-		if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) {
-			return false;
-		}
-		if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) {
-			return false;
-		}
-		return accountStatus != null ? accountStatus.equals(that.accountStatus) : that.accountStatus == null;
+		if (accountId != that.accountId) return false;
+		if (transactionsProcessed != null ? !transactionsProcessed.equals(that.transactionsProcessed) : that.transactionsProcessed != null) return false;
+		if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
+		if (limit != null ? !limit.equals(that.limit) : that.limit != null) return false;
+		if (totalTransactions != null ? !totalTransactions.equals(that.totalTransactions) : that.totalTransactions != null) return false;
+		if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
+		if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
+		if (accountStatus != null ? !accountStatus.equals(that.accountStatus) : that.accountStatus != null) return false;
+		return status == that.status;
 	}
 
 	@Override
@@ -137,6 +129,7 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
 		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
 		result = 31 * result + (accountStatus != null ? accountStatus.hashCode() : 0);
+		result = 31 * result + (status != null ? status.hashCode() : 0);
 		return result;
 	}
 
@@ -155,6 +148,7 @@ public class AccountSyncStatus implements Serializable, Parcelable {
 		dest.writeSerializable(this.startDate);
 		dest.writeSerializable(this.endDate);
 		dest.writeString(this.accountStatus);
+		dest.writeInt(this.status == null ? -1 : this.status.ordinal());
 	}
 
 	public static final Creator<AccountSyncStatus> CREATOR = new Creator<AccountSyncStatus>() {
