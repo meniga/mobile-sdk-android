@@ -20,7 +20,8 @@
             "totalTransactions": 5180,
             "startDate": "2017-07-27T12:23:34.896Z",
             "endDate": "2017-07-27T12:23:34.896Z",
-            "accountStatus": "GOOD"
+            "accountStatus": "Success",
+            "status": "Success"
           }
         ],
         "authenticationChallenge": {

@@ -52,7 +52,7 @@ object WebClient {
             settings.timeoutInSeconds
 
         val builder = OkHttpClient.Builder()
-                .cookieJar(WebClient.cookieJar)
+                .cookieJar(cookieJar)
                 .readTimeout(timeoutInSeconds, TimeUnit.SECONDS)
                 .writeTimeout(timeoutInSeconds, TimeUnit.SECONDS)
                 .connectTimeout(timeoutInSeconds, TimeUnit.SECONDS)

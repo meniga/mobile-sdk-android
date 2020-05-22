@@ -1,12 +1,9 @@
 package com.meniga.sdk.models.upcoming;
 
 import com.atlassian.oai.validator.mockwebserver.ValidatingMockWebServer;
-import com.jayway.jsonassert.JsonAssert;
 import com.meniga.sdk.MenigaSDK;
 import com.meniga.sdk.MenigaSettings;
 import com.meniga.sdk.models.SwaggerJsonExtensions;
-import com.meniga.sdk.models.budget.MenigaBudgetRule;
-import com.meniga.sdk.models.budget.NewBudgetRules;
 import com.meniga.sdk.models.upcoming.enums.ReconcileEntityType;
 import com.meniga.sdk.providers.tasks.Task;
 
@@ -14,10 +11,9 @@ import org.assertj.core.api.Assertions;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.List;
 
 import okhttp3.mockwebserver.RecordedRequest;
 
@@ -42,6 +38,7 @@ public class MenigaUpcomingIntegrationTest {
 	}
 
 	@Test
+	@Ignore("Not in the API anymore")
 	public void shouldReconcileTransaction() {
 		server.enqueue(mockResponse("postreconciletransaction.json"));
 		Task<Void> task = MenigaUpcoming.reconcile(1, ReconcileEntityType.INVOICE, 2).getTask();

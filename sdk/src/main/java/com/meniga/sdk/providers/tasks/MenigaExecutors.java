@@ -34,7 +34,7 @@ final class MenigaExecutors {
 	/**
 	 * An {@link java.util.concurrent.Executor} that executes tasks in parallel.
 	 */
-	private static ExecutorService background() {
+	static ExecutorService background() {
 		return INSTANCE.background;
 	}
 
