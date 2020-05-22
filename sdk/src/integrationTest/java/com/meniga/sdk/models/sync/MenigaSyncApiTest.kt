@@ -69,25 +69,31 @@ object MenigaSyncApiTest : Spek({
         it("should return a proper object") {
             val sync = task.result
             assertThat(sync.numNewTransactions).isEqualTo(230)
-            val realmSyncResponse = sync.realmSyncResponses!![0]
-            assertThat(realmSyncResponse.accountSyncStatuses).hasSize(1)
-            realmSyncResponse.accountSyncStatuses[0].run {
-                assertThat(accountId).isEqualTo(15567)
-                assertThat(balance).isEqualTo(MenigaDecimal(50000))
-                assertThat(limit).isEqualTo(MenigaDecimal(2000))
-                assertThat(transactionsProcessed).isEqualTo(230)
-                assertThat(totalTransactions).isEqualTo(5180)
-                assertThat(startDate).isEqualTo(DateTime.parse("2017-07-27T12:23:34.000Z"))
-                assertThat(endDate).isEqualTo(DateTime.parse("2017-07-27T12:23:34.000Z"))
-                assertThat(accountStatus).isEqualTo("Success")
-                assertThat(status).isEqualTo(AccountSyncResult.SUCCESS)
+            sync.realmSyncResponses!![0].run {
+                assertThat(realmCredentialsId).isEqualTo(1550004040444)
+                assertThat(realmCredentialsDisplayName).isEqualTo("string")
+                assertThat(organizationId).isEqualTo(144)
+                assertThat(organizationName).isEqualTo("ExampleBank")
+                assertThat(organizationBankCode).isEqualTo("EB")
+                assertThat(accountSyncStatuses).hasSize(1)
+                accountSyncStatuses[0].run {
+                    assertThat(accountId).isEqualTo(15567)
+                    assertThat(balance).isEqualTo(MenigaDecimal(50000))
+                    assertThat(limit).isEqualTo(MenigaDecimal(2000))
+                    assertThat(transactionsProcessed).isEqualTo(230)
+                    assertThat(totalTransactions).isEqualTo(5180)
+                    assertThat(startDate).isEqualTo(DateTime.parse("2017-07-27T12:23:34.000Z"))
+                    assertThat(endDate).isEqualTo(DateTime.parse("2017-07-27T12:23:34.000Z"))
+                    assertThat(accountStatus).isEqualTo("Success")
+                    assertThat(status).isEqualTo(AccountSyncResult.SUCCESS)
+                }
+                assertThat(authenticationChallenge.contentType).isEqualTo(ChallengeContentType.TEXT)
+                assertThat(isSyncDone).isTrue()
+                assertThat(realmId).isEqualTo(4)
+                assertThat(realmSyncStartDate).isEqualTo(DateTime.parse("2020-03-12T15:17:51.000Z"))
+                assertThat(realmSyncEndDate).isEqualTo(DateTime.parse("2020-03-13T15:17:51.000Z"))
+                assertThat(status).isEqualTo(RealmSyncResult.SUCCESS)
             }
-            assertThat(realmSyncResponse.authenticationChallenge.contentType).isEqualTo(ChallengeContentType.TEXT)
-            assertThat(realmSyncResponse.isSyncDone).isTrue()
-            assertThat(realmSyncResponse.organizationBankCode).isEqualTo("EB")
-            assertThat(realmSyncResponse.organizationId).isEqualTo(144)
-            assertThat(realmSyncResponse.organizationName).isEqualTo("ExampleBank")
-            assertThat(realmSyncResponse.realmCredentialsDisplayName).isEqualTo("string")
         }
 
         it("should validate against the spec") {

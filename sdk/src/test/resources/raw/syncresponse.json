@@ -10,7 +10,6 @@
         "organizationId": 144,
         "organizationName": "ExampleBank",
         "organizationBankCode": "EB",
-        "isSyncDone": true,
         "accountSyncStatuses": [
           {
             "accountId": 15567,
@@ -49,7 +48,12 @@
           "userIdentifier": null,
           "canSave": false,
           "loginHelp": "Please enter input"
-        }
+        },
+        "isSyncDone": true,
+        "realmId": 4,
+        "realmSyncStartDate": "2020-03-12T15:17:51.280Z",
+        "realmSyncEndDate": "2020-03-13T15:17:51.280Z",
+        "status": "Success"
       }
     ]
   }
