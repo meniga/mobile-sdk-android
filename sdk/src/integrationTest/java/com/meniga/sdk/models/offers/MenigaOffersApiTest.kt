@@ -37,7 +37,7 @@ object MenigaOffersApiTest : Spek({
     on("fetching offers") {
         server.enqueue(mockResponse("offers_get.json"))
 
-        val task = MenigaOffer.fetch(0, 10).task
+        val task = MenigaOffer.fetch(10, 10).task
         task.waitForCompletion()
 
         it("should make a proper request") {
@@ -45,7 +45,7 @@ object MenigaOffersApiTest : Spek({
             assertThat(recordedRequest.method).isEqualTo("GET")
             assertThat(URI(recordedRequest.path))
                     .hasPath("/v1/offers")
-                    .hasParameter("skip", "0")
+                    .hasParameter("skip", "10")
                     .hasParameter("take", "10")
                     .hasParameter("filter.states", "all")
                     .hasNoParameter("filter.offerIds")
@@ -56,6 +56,7 @@ object MenigaOffersApiTest : Spek({
             val offers = task.result
             assertThat(offers).isNotNull
             assertThat(offers.size).isEqualTo(4)
+            assertThat(offers.hasMorePages).isFalse()
         }
 
         it("should validate against the spec") {

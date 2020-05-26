@@ -20,6 +20,8 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.Collections.singletonList;
+
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
@@ -348,12 +350,10 @@ public class MenigaOffer implements Parcelable, Serializable {
 				if (!failed && result != null) {
 					result.skip = skip;
 					result.take = take;
-					result.states = states;
-					result.offerIds = offerIds;
+					result.states = states != null ? states : Collections.<OfferFilterState>emptyList();
+					result.offerIds = offerIds != null ? offerIds : Collections.<Long>emptyList();
 					result.expiredWithRedemptionOnly = expiredWithRedemptionOnly;
-					if (result.size() >= result.getTotalCount()) {
-						result.hasMorePages = false;
-					}
+					result.hasMorePages = skip + take < result.getTotalCount();
 				}
 			}
 		});
@@ -382,51 +382,31 @@ public class MenigaOffer implements Parcelable, Serializable {
 	/**
 	 * Returns offers and relevant meta data.
 	 *
+	 * @deprecated Use {@link #fetch(int, int, List, List, boolean)}. Will be removed in 1.2.
+	 *
 	 * @param states state of offers that should be fetched.
 	 * @return a page of offers
 	 */
+	@Deprecated
 	public static Result<MenigaOfferPage> fetch(final List<OfferFilterState> states) {
 		final int take = 100;
 		final int skip = 0;
-		Result<MenigaOfferPage> task = MenigaOffer.apiOperator.getOffers(skip, take, states, Collections.singletonList(0L), false);
-		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaOfferPage>() {
-			@Override
-			public void onFinished(MenigaOfferPage result, boolean failed) {
-				if (!failed && result != null) {
-					result.skip = skip;
-					result.take = take;
-					result.states = states;
-					if (result.size() >= result.getTotalCount()) {
-						result.hasMorePages = false;
-					}
-				}
-			}
-		});
+		return fetch(skip, take, states, null, false);
 	}
 
 	/**
 	 * Returns offers and relevant meta data by specific ids
 	 *
+	 * @deprecated Use {@link #fetch(int, int, List, List, boolean)}. Will be removed in 1.2.
+	 *
 	 * @param offerIds specific offer ids to fetch.
 	 * @return a page of offers
 	 */
+	@Deprecated
 	public static Result<MenigaOfferPage> fetchId(final List<Long> offerIds) {
 		final int take = 100;
 		final int skip = 0;
-		Result<MenigaOfferPage> task = MenigaOffer.apiOperator.getOffers(skip, take, null, offerIds, false);
-		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaOfferPage>() {
-			@Override
-			public void onFinished(MenigaOfferPage result, boolean failed) {
-				if (!failed && result != null) {
-					result.skip = skip;
-					result.take = take;
-					result.offerIds = offerIds;
-					if (result.size() >= result.getTotalCount()) {
-						result.hasMorePages = false;
-					}
-				}
-			}
-		});
+		return fetch(skip, take, null, offerIds, false);
 	}
 
 	/**
@@ -437,19 +417,7 @@ public class MenigaOffer implements Parcelable, Serializable {
 	 * @return a page of offers
 	 */
 	public static Result<MenigaOfferPage> fetch(final int skip, final int take) {
-		Result<MenigaOfferPage> task = MenigaOffer.apiOperator.getOffers(skip, take, Collections.singletonList(OfferFilterState.ALL), null, false);
-		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaOfferPage>() {
-			@Override
-			public void onFinished(MenigaOfferPage result, boolean failed) {
-				if (!failed && result != null) {
-					result.skip = skip;
-					result.take = take;
-					if (result.size() >= result.getTotalCount()) {
-						result.hasMorePages = false;
-					}
-				}
-			}
-		});
+		return fetch(skip, take, singletonList(OfferFilterState.ALL), null, false);
 	}
 
 	/**
