@@ -417,7 +417,7 @@ public class MenigaOffer implements Parcelable, Serializable {
 	 * @return a page of offers
 	 */
 	public static Result<MenigaOfferPage> fetch(final int skip, final int take) {
-		return fetch(skip, take, singletonList(OfferFilterState.ALL), null, false);
+		return fetch(skip, take, null, null, false);
 	}
 
 	/**
