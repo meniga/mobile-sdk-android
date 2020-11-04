@@ -3,7 +3,7 @@
 mobile-sdk-android
 ====
 [![Download](https://api.bintray.com/packages/meniga/android/com.meniga.sdk:sdk-android/images/download.svg) ](https://bintray.com/meniga/android/com.meniga.sdk:sdk-android/_latestVersion)
-[![Build Status](https://travis-ci.org/meniga/mobile-sdk-android.svg?branch=master)](https://travis-ci.org/meniga/mobile-sdk-android)
+![Tests](https://github.com/meniga/mobile-sdk-android/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/meniga/mobile-sdk-android/branch/master/graph/badge.svg)](https://codecov.io/gh/meniga/mobile-sdk-android)
 
 Meniga helps banks use data to accelerate innovation and meaningful engagement by providing RESTful APIs on top of Meniga software products to improve and personalize the online banking experience for both individuals and corporate customers.
