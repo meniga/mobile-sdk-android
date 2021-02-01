@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.helpers.GsonProvider;
-import com.meniga.sdk.models.feed.MenigaAccountEvent;
 import com.meniga.sdk.models.feed.MenigaDialogEvent;
 import com.meniga.sdk.models.feed.MenigaDialogEventData;
 
@@ -15,8 +14,8 @@ import java.util.List;
 /**
  * Copyright 2017 Meniga Iceland Inc.
  */
-public class MenigaDialogEventConverter implements EventBaseConverter<MenigaAccountEvent> {
-	private final String MESSAGE_DATA = "messageData";
+public class MenigaDialogEventConverter implements EventBaseConverter<MenigaDialogEvent> {
+	private static final String MESSAGE_DATA = "messageData";
 
 	@Override
 	public MenigaDialogEvent eventConverter(JsonElement element) {

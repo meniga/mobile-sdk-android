@@ -3,20 +3,27 @@
  */
 package com.meniga.sdk.converters
 
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.meniga.sdk.helpers.FeedItemFactory
+import com.meniga.sdk.helpers.get
 import com.meniga.sdk.helpers.type
+import com.meniga.sdk.models.accounts.MenigaAccount
 import com.meniga.sdk.models.feed.MenigaFeed
 import com.meniga.sdk.models.feed.setActualEndDate
 import com.meniga.sdk.models.feed.setHasMoreData
 import com.meniga.sdk.models.feed.setTotalCount
+import com.meniga.sdk.models.merchants.MenigaMerchant
 import okhttp3.ResponseBody
 import org.joda.time.DateTime
 import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
-class MenigaFeedConverter(private val feedItemFactory: FeedItemFactory) : MenigaConverter() {
+class MenigaFeedConverter(
+        private val feedItemFactory: FeedItemFactory,
+        private val gson: Gson
+) : MenigaConverter() {
 
     private val transactionEventSorter = TransactionEventSorter()
 
@@ -24,16 +31,17 @@ class MenigaFeedConverter(private val feedItemFactory: FeedItemFactory) : Meniga
         return when (type) {
             type<MenigaFeed>() -> Converter<ResponseBody, MenigaFeed> { resBody ->
                 MenigaFeed().apply {
-                    val (data, meta) = MenigaConverter.getAsArrayApiResponse(resBody.byteStream())
+                    val (data, meta, included) = getAsArrayApiResponse(resBody.byteStream())
+                    val (accounts, merchants) = gson.getAccountsAndMerchants(included)
 
                     data.forEach {
-                        add(feedItemFactory.getMenigaFeetItem(it as JsonObject))
+                        add(feedItemFactory.getMenigaFeedItem(it as JsonObject, accounts, merchants))
                     }
 
-                    transactionEventSorter.moveTransactionEventsToTransaction(this);
+                    transactionEventSorter.moveTransactionEventsToTransaction(this)
 
                     meta?.let {
-                        val actualEndDate = it.get("actualEndDate");
+                        val actualEndDate = it.get("actualEndDate")
                         if (!actualEndDate.isJsonNull) {
                             setActualEndDate(DateTime.parse(actualEndDate.asString))
                         }
@@ -45,4 +53,14 @@ class MenigaFeedConverter(private val feedItemFactory: FeedItemFactory) : Meniga
             else -> null
         }
     }
+
+    private fun Gson.getAccountsAndMerchants(included: JsonObject?)
+            : Pair<List<MenigaAccount>, List<MenigaMerchant>> = Pair(
+            included?.let { get<List<MenigaAccount?>>(it, "accounts") }
+                    .orEmpty()
+                    .filterNotNull(),
+            included?.let { get<List<MenigaMerchant?>>(it, "merchants") }
+                    .orEmpty()
+                    .filterNotNull()
+    )
 }

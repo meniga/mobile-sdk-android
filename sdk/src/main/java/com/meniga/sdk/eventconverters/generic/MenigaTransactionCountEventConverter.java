@@ -15,7 +15,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public class MenigaTransactionCountEventConverter implements EventBaseConverter<MenigaTransactionCountEvent> {
-	private final String MESSAGE_DATA = "messageData";
+	private static final String MESSAGE_DATA = "messageData";
 
 	@Override
 	public MenigaTransactionCountEvent eventConverter(JsonElement element) {

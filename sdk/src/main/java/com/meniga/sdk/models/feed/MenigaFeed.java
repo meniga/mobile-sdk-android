@@ -196,16 +196,8 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 * @return A feed object containing transactions, user events etc.
 	 */
 	public static Result<MenigaFeed> fetch(final DateTime from, final DateTime to) {
-		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to);
-		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaFeed>() {
-			@Override
-			public void onFinished(MenigaFeed result, boolean failed) {
-				if (!failed && result != null) {
-					result.from = from;
-					result.to = to;
-				}
-			}
-		});
+		FeedFilter feedFilter = new FeedFilter.Builder().from(from).to(to).build();
+		return fetch(feedFilter);
 	}
 
 	/**
@@ -218,15 +210,35 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 * @return A feed object containing transactions, user events etc.
 	 */
 	public static Result<MenigaFeed> fetch(final DateTime from, final DateTime to, final int page, final int itemsPerPage) {
-		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page, itemsPerPage);
+		FeedFilter feedFilter = new FeedFilter.Builder()
+				.from(from)
+				.to(to)
+				.page(page)
+				.itemsPerPage(itemsPerPage)
+				.build();
+		return fetch(feedFilter);
+	}
+
+	/**
+	 * Fetches the feed according to the provided {@link FeedFilter}
+	 *
+	 * @param feedFilter The filter to use
+	 * @return A feed object containing transactions, user events etc.
+	 */
+	public static Result<MenigaFeed> fetch(@Nonnull final FeedFilter feedFilter) {
+		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(feedFilter);
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaFeed>() {
 			@Override
 			public void onFinished(MenigaFeed result, boolean failed) {
 				if (!failed && result != null) {
-					result.from = from;
-					result.to = to;
-					result.page = page;
-					result.itemsPerPage = itemsPerPage;
+					result.from = feedFilter.getFrom();
+					result.to = feedFilter.getTo();
+					if (feedFilter.getPage() != null) {
+						result.page = feedFilter.getPage();
+					}
+					if (feedFilter.getItemsPerPage() != null) {
+						result.itemsPerPage = feedFilter.getItemsPerPage();
+					}
 				}
 			}
 		});
@@ -239,16 +251,14 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 * @return A feed object containing transactions, user events etc.
 	 */
 	public Result<MenigaFeed> appendDays(final int numDays) {
-		DateTime to = from.minusMillis(1);
-		DateTime from = this.from.minusDays(numDays);
-
-		Result<MenigaFeed> task;
+		FeedFilter.Builder builder = new FeedFilter.Builder()
+				.from(from.minusDays(numDays))
+				.to(from.minusMillis(1));
 		if (itemsPerPage > 0) {
 			page = 0;
-			task = MenigaFeed.apiOperator.getFeed(from, to, page, itemsPerPage);
-		} else {
-			task = MenigaFeed.apiOperator.getFeed(from, to);
+			builder.page(page).itemsPerPage(itemsPerPage);
 		}
+		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(builder.build());
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaFeed>() {
 			@Override
 			public void onFinished(MenigaFeed result, boolean failed) {
@@ -269,7 +279,13 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 * @return A feed object containing a next page
 	 */
 	public Result<MenigaFeed> appendNextPage() {
-		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page + 1, itemsPerPage);
+		FeedFilter feedFilter = new FeedFilter.Builder()
+				.from(from)
+				.to(to)
+				.page(page + 1)
+				.itemsPerPage(itemsPerPage)
+				.build();
+		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(feedFilter);
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaFeed>() {
 			@Override
 			public void onFinished(MenigaFeed result, boolean failed) {
@@ -289,7 +305,13 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 * @return A feed object containing a next page
 	 */
 	public Result<MenigaFeed> nextPage() {
-		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page + 1, itemsPerPage);
+		FeedFilter feedFilter = new FeedFilter.Builder()
+				.from(from)
+				.to(to)
+				.page(page + 1)
+				.itemsPerPage(itemsPerPage)
+				.build();
+		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(feedFilter);
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaFeed>() {
 			@Override
 			public void onFinished(MenigaFeed result, boolean failed) {
@@ -310,7 +332,13 @@ public class MenigaFeed extends ArrayList<MenigaFeedItem> implements Parcelable,
 	 * @return A feed object containing a previous page
 	 */
 	public Result<MenigaFeed> prevPage() {
-		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(from, to, page - 1, itemsPerPage);
+		FeedFilter feedFilter = new FeedFilter.Builder()
+				.from(from)
+				.to(to)
+				.page(page - 1)
+				.itemsPerPage(itemsPerPage)
+				.build();
+		Result<MenigaFeed> task = MenigaFeed.apiOperator.getFeed(feedFilter);
 		return MenigaSDK.getMenigaSettings().getTaskAdapter().intercept(task, new Interceptor<MenigaFeed>() {
 			@Override
 			public void onFinished(MenigaFeed result, boolean failed) {

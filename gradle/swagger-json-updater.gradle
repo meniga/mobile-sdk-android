@@ -2,7 +2,7 @@ ext {
     timeoutMillis = 5000
 }
 
-createDownloadTask("updateApiJson", "http://api.umw.meniga.net/docs/user-v1", "api.json")
+createDownloadTask("updateApiJson", "http://api.3.11.test.meniga.net/docs/user-v1", "api.json")
 createDownloadTask("updateOffersJson", "http://cashbackapi.umw.meniga.net/docs/user-v1", "offers.json")
 
 afterEvaluate {

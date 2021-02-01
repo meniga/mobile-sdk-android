@@ -9,7 +9,7 @@ import java.util.List;
  * Copyright 2017 Meniga Iceland Inc.
  */
 public interface EventBaseConverter<T extends MenigaFeedItem> {
-	MenigaFeedItem eventConverter(JsonElement object);
+	T eventConverter(JsonElement object);
 
 	List<String> eventNames();
 }

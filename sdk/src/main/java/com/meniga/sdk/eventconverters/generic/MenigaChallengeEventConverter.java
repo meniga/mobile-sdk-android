@@ -16,7 +16,7 @@ import java.util.List;
  * Created by agustk on 6.12.2017.
  */
 public class MenigaChallengeEventConverter implements EventBaseConverter<MenigaChallengeEvent> {
-    private final String MESSAGE_DATA = "messageData";
+    private static final String MESSAGE_DATA = "messageData";
 
     @Override
     public MenigaChallengeEvent eventConverter(JsonElement element) {

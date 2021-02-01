@@ -77,7 +77,7 @@ object WebClient {
                 .baseUrl(endpoint)
                 .addConverterFactory(MenigaTransactionsConverter())
                 .addConverterFactory(MenigaTransactionUpdateConverter())
-                .addConverterFactory(MenigaFeedConverter(FeedItemFactory()))
+                .addConverterFactory(MenigaFeedConverter(FeedItemFactory(), gson))
                 .addConverterFactory(MenigaCategoryConverter())
                 .addConverterFactory(MenigaOfferConverter())
                 .addConverterFactory(MenigaSimilarBrandSpendingConverter(gson))

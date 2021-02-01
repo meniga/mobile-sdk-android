@@ -25,7 +25,7 @@ class MenigaTransactionsConverter : MenigaConverter() {
         val gson = GsonProvider.gson
         when (type) {
             type<List<MenigaTransaction>>() -> return Converter<ResponseBody, Any> { responseBody ->
-                val (data, _, included) = MenigaConverter.getAsArrayApiResponse(responseBody.byteStream())
+                val (data, _, included) = getAsArrayApiResponse(responseBody.byteStream())
                 val (transactions, accounts, merchants) = gson.getAccountsMerchantsAndTransactions(data, included)
                 transactions
                         .onEach {
@@ -35,7 +35,7 @@ class MenigaTransactionsConverter : MenigaConverter() {
                         }
             }
             type<MenigaTransaction>() -> return Converter<ResponseBody, Any> { responseBody ->
-                val (data, _, included) = MenigaConverter.getAsObjectApiResponse(responseBody.byteStream())
+                val (data, _, included) = getAsObjectApiResponse(responseBody.byteStream())
                 val transaction = gson.fromJson(data, MenigaTransaction::class.java)
                 included?.let {
                     transaction.setAccount(gson.get(it, "account"))
@@ -47,7 +47,7 @@ class MenigaTransactionsConverter : MenigaConverter() {
             }
 
             type<MenigaTransactionPage>() -> return Converter<ResponseBody, Any> { responseBody ->
-                val (data, meta, included) = MenigaConverter.getAsArrayApiResponse(responseBody.byteStream())
+                val (data, meta, included) = getAsArrayApiResponse(responseBody.byteStream())
                 val transactionPage = MenigaTransactionPage()
                 val (transactions, accounts, merchants) = gson.getAccountsMerchantsAndTransactions(data, included)
                 transactions.forEach { transaction ->
