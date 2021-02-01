@@ -205,7 +205,7 @@ public interface MenigaAPI {
 	// --
 	// Feed
 	// --
-	@GET(APIConst.URL_FEED)
+	@GET(APIConst.URL_FEED + "?include=Account,Merchant")
 	Call<MenigaFeed> getFeed(@QueryMap Map<String, String> query);
 
 	@GET(APIConst.URL_FEED + "/{type}/{id}")

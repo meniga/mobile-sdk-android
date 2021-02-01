@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 public class MenigaTransactionCountEvent extends MenigaTransactionEvent implements MenigaFeedItem, Parcelable, Serializable {
 	protected MenigaTransactionCountEventData countEventData;
+	protected MenigaTransactionCountEventData merchant;
 
 	public MenigaTransactionCountEvent() {
 	}

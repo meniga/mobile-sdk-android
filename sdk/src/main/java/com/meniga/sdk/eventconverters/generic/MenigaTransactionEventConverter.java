@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.helpers.GsonProvider;
-import com.meniga.sdk.models.feed.MenigaEvent;
 import com.meniga.sdk.models.feed.MenigaTransactionEvent;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class MenigaTransactionEventConverter implements EventBaseConverter<Menig
 	private static final String MESSAGE_DATA = "messageData";
 
 	@Override
-	public MenigaEvent eventConverter(JsonElement element) {
+	public MenigaTransactionEvent eventConverter(JsonElement element) {
 		Gson gson = GsonProvider.getGson();
 		JsonElement je = element.getAsJsonObject().get(MESSAGE_DATA);
 

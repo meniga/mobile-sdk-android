@@ -8,8 +8,6 @@ import com.meniga.sdk.models.transactions.MenigaTransaction;
 import com.meniga.sdk.webservices.requests.GetEvent;
 import com.meniga.sdk.webservices.requests.GetFeed;
 
-import junit.framework.Assert;
-
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +16,8 @@ import org.robolectric.RobolectricTestRunner;
 import java.io.IOException;
 
 import retrofit2.Call;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Copyright 2017 Meniga Iceland Inc.
@@ -28,25 +28,23 @@ public class MenigaFeedTest {
 
 	private MockInterceptor interceptor = new MockInterceptor("feed.json");
 	private MockInterceptor eventInterceptor = new MockInterceptor("event.json");
-
+	private FeedFilter feedFilter = new FeedFilter.Builder()
+			.from(DateTime.now())
+			.to(DateTime.now())
+			.itemsPerPage(20)
+			.build();
 
 	@Test
 	public void testSerialization() throws IOException {
-		GetFeed query = new GetFeed();
-		query.dateFrom = DateTime.now();
-		query.dateTo = DateTime.now();
-		query.take = 20;
+		GetFeed query = new GetFeed(feedFilter);
 		Call<MenigaFeed> call = MockClient.getApi(interceptor).getFeed(query.toQueryMap());
 		MenigaFeed feed = call.execute().body();
-		Assert.assertNotNull(feed);
+		assertThat(feed).isNotNull();
 	}
 
 	@Test
 	public void testParcelable() throws IOException {
-		GetFeed query = new GetFeed();
-		query.dateFrom = DateTime.now();
-		query.dateTo = DateTime.now();
-		query.take = 20;
+		GetFeed query = new GetFeed(feedFilter);
 		Call<MenigaFeed> call = MockClient.getApi(interceptor).getFeed(query.toQueryMap());
 		MenigaFeed feed = call.execute().body();
 		// Obtain a Parcel object and write the parcelable object to it:
@@ -58,33 +56,27 @@ public class MenigaFeedTest {
 
 		// Reconstruct object from parcel and asserts:
 		MenigaFeed createdFromParcel = com.meniga.sdk.models.feed.MenigaFeed.CREATOR.createFromParcel(parcel);
-		Assert.assertEquals(feed, createdFromParcel);
+		assertThat(feed).isEqualTo(createdFromParcel);
 	}
 
 	@Test
 	public void testTransactionCountEvent() throws IOException {
-		GetFeed query = new GetFeed();
-		query.dateFrom = DateTime.now();
-		query.dateTo = DateTime.now();
-		query.take = 20;
+		GetFeed query = new GetFeed(feedFilter);
 
 		Call<MenigaFeed> call = MockClient.getApi(interceptor).getFeed(query.toQueryMap());
 		MenigaFeed feed = call.execute().body();
 
-		Assert.assertNotNull(feed);
-		Assert.assertEquals(MenigaTransactionCountEvent.class, feed.get(1).getClass());
+		assertThat(feed).isNotNull();
+		assertThat(feed.get(1)).isInstanceOf(MenigaTransactionCountEvent.class);
 	}
 
 	@Test
 	public void testTransactionEvent() throws IOException {
-		GetFeed query = new GetFeed();
-		query.dateFrom = DateTime.now();
-		query.dateTo = DateTime.now();
-		query.take = 20;
+		GetFeed query = new GetFeed(feedFilter);
 		Call<MenigaFeed> call = MockClient.getApi(interceptor).getFeed(query.toQueryMap());
 		MenigaFeed feed = call.execute().body();
-		Assert.assertNotNull(feed);
-		Assert.assertEquals(MenigaTransaction.class, feed.get(6).getClass());
+		assertThat(feed).isNotNull();
+		assertThat(feed.get(6)).isInstanceOf(MenigaTransaction.class);
 	}
 
 	@Test
@@ -93,7 +85,6 @@ public class MenigaFeedTest {
 		query.id = 10;
 		Call<MenigaFeedItem> call = MockClient.getApi(eventInterceptor).getEvent(query.id);
 		MenigaFeedItem event = call.execute().body();
-		Assert.assertNotNull(event);
+		assertThat(event).isNotNull();
 	}
-	
 }

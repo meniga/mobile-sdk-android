@@ -31,7 +31,7 @@ public class MockClient {
 				.build();
 		final Retrofit retrofit = new Retrofit.Builder()
 				.addConverterFactory(new MenigaTransactionsConverter())
-				.addConverterFactory(new MenigaFeedConverter(new MockFeedItemFactory()))
+				.addConverterFactory(new MenigaFeedConverter(new MockFeedItemFactory(), GsonProvider.getGson()))
 				.addConverterFactory(new MenigaCategoryConverter())
 				.addConverterFactory(new MenigaOfferConverter())
 				.addConverterFactory(new MenigaRedemptionConverter(GsonProvider.getGson()))

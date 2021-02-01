@@ -1,11 +1,8 @@
 package com.meniga.sdk.eventconverters.generic;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.meniga.sdk.eventconverters.EventBaseConverter;
 import com.meniga.sdk.models.feed.MenigaFeedItem;
-
-import org.joda.time.DateTime;
 
 import java.util.Collections;
 import java.util.List;

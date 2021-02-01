@@ -7,6 +7,7 @@ import com.atlassian.oai.validator.mockwebserver.ValidatingMockWebServer
 import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.MenigaSettings
 import com.meniga.sdk.models.createValidatingMockWebServer
+import com.meniga.sdk.models.transactions.MenigaTransaction
 import com.meniga.sdk.utils.mockResponse
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
@@ -60,12 +61,19 @@ object MenigaFeedApiTest : Spek({
                     .hasNoParameter("skip")
                     .hasParameter("dateFrom", "2018-01-01T00:00:00.000Z")
                     .hasParameter("dateTo", "2018-02-01T00:00:00.000Z")
+                    .hasParameter("include", "Account,Merchant")
         }
 
         it("should retrieve proper data") {
             val feed = task.result
             assertThat(feed).isNotNull
             assertThat(feed.size).isEqualTo(10)
+        }
+
+        it ("should contain accounts and merchant models inlined") {
+            val transactions = task.result.filterIsInstance(MenigaTransaction::class.java)
+            assertThat(transactions.any { it.account != null } )
+            assertThat(transactions.any { it.merchant != null } )
         }
 
         it("should validate against the spec") {
@@ -94,6 +102,7 @@ object MenigaFeedApiTest : Spek({
                         .hasParameter("take", "10")
                         .hasParameter("dateFrom", "2018-01-01T00:00:00.000Z")
                         .hasParameter("dateTo", "2018-02-01T00:00:00.000Z")
+                        .hasParameter("include", "Account,Merchant")
             }
 
             it("should retrieve data with hasMorePages=$expectedHasMorePages") {
@@ -125,6 +134,7 @@ object MenigaFeedApiTest : Spek({
                     .hasParameter("take", "10")
                     .hasParameter("dateFrom", "2017-12-31T00:00:00.000Z")
                     .hasParameter("dateTo", "2017-12-31T23:59:59.999Z")
+                    .hasParameter("include", "Account,Merchant")
         }
 
         it("should retrieve proper data") {
@@ -152,6 +162,7 @@ object MenigaFeedApiTest : Spek({
                     .hasParameter("take", "10")
                     .hasParameter("dateFrom", "2018-01-01T00:00:00.000Z")
                     .hasParameter("dateTo", "2018-02-01T00:00:00.000Z")
+                    .hasParameter("include", "Account,Merchant")
         }
         it("should append to current feed") {
             assertThat(feed.size).isGreaterThan(task.result.size)
@@ -182,6 +193,7 @@ object MenigaFeedApiTest : Spek({
                     .hasParameter("take", "10")
                     .hasParameter("dateFrom", "2018-01-01T00:00:00.000Z")
                     .hasParameter("dateTo", "2018-02-01T00:00:00.000Z")
+                    .hasParameter("include", "Account,Merchant")
         }
         it("should not append to current feed") {
             assertThat(feed.size).isEqualTo(10)
@@ -212,6 +224,7 @@ object MenigaFeedApiTest : Spek({
                     .hasParameter("take", "10")
                     .hasParameter("dateFrom", "2018-01-01T00:00:00.000Z")
                     .hasParameter("dateTo", "2018-02-01T00:00:00.000Z")
+                    .hasParameter("include", "Account,Merchant")
         }
         it("should not append to current feed") {
             assertThat(feed.size).isEqualTo(10)
