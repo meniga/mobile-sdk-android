@@ -3,9 +3,9 @@ package com.meniga.sdk.models.eventtracking
 import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.meniga.sdk.models.eventtracking.operators.MenigaEventTrackingOperations
-import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 import com.meniga.sdk.helpers.Result
+import kotlinx.parcelize.Parcelize
 
 /**
  * Copyright 2018 Meniga Iceland Inc.
@@ -35,7 +35,7 @@ data class MenigaEventTracking internal constructor(
      * @return A Void result
      */
     fun track(): Result<Void> {
-        return MenigaEventTracking.apiOperator.track(this)
+        return apiOperator.track(this)
     }
 
     companion object {
@@ -43,7 +43,7 @@ data class MenigaEventTracking internal constructor(
 
         @JvmStatic
         fun setOperator(operator: MenigaEventTrackingOperations) {
-            MenigaEventTracking.apiOperator = operator
+            apiOperator = operator
         }
 
         @JvmStatic

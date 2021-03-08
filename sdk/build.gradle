@@ -1,19 +1,18 @@
 apply plugin: "com.android.library"
-apply plugin: "digital.wup.android-maven-publish"
 apply plugin: "kotlin-android"
-apply plugin: "kotlin-android-extensions"
-apply plugin: "org.jetbrains.dokka-android"
+apply plugin: "kotlin-parcelize"
+apply plugin: "org.jetbrains.dokka"
 apply from: "$rootDir/gradle/coverage.gradle"
 apply from: "$rootDir/gradle/deploy.gradle"
 apply from: "$rootDir/gradle/pom-customizer.gradle"
 apply from: "$rootDir/gradle/swagger-json-updater.gradle"
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 30
         consumerProguardFiles "proguard-rules.pro"
     }
     buildTypes {
@@ -53,10 +52,6 @@ android {
     }
 }
 
-androidExtensions {
-    experimental = true
-}
-
 dependencies {
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
@@ -65,7 +60,7 @@ dependencies {
     api "net.danlew:android.joda:2.10.3"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.google.code.gson:gson:2.8.5"
+    implementation "com.google.code.gson:gson:2.8.6"
     implementation "javax.inject:javax.inject:1"
     implementation "javax.annotation:javax.annotation-api:1.3.2"
 
@@ -73,7 +68,7 @@ dependencies {
     testImplementation "com.jayway.jsonpath:json-path-assert:2.4.0"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
     testImplementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
-    testImplementation "junit:junit:4.12"
+    testImplementation "junit:junit:4.13.1"
     testImplementation "net.jodah:concurrentunit:0.4.6"
     testImplementation "org.assertj:assertj-core:3.13.2"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
@@ -85,34 +80,16 @@ dependencies {
     testImplementation "org.mockito:mockito-core:2.28.2"
 }
 
-dokka {
-    outputFormat = "javadoc"
-    outputDirectory = "${buildDir}/javadoc"
+dokkaHtml {
+    outputDirectory.set(file("${buildDir}/javadoc"))
 }
 
-task androidJavadocJar(type: Jar, dependsOn: dokka) {
-    classifier = "javadoc"
-    from dokka
+task androidJavadocJar(type: Jar, dependsOn: dokkaHtml) {
+    archiveClassifier.set("javadoc")
+    from dokkaHtml
 }
 
 task androidSourcesJar(type: Jar) {
-    classifier = "sources"
+    archiveClassifier.set("sources")
     from android.sourceSets.main.java.srcDirs
-}
-
-artifacts {
-    archives androidJavadocJar
-    archives androidSourcesJar
-}
-
-publishing {
-    publications {
-        aar(MavenPublication) {
-            from components.android
-            groupId rootProject.name
-            artifactId = project.name
-            version = project.version
-            customizePom(pom)
-        }
-    }
 }

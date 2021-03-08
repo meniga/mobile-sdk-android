@@ -1,9 +1,7 @@
-ext {
-    bintrayCredentials = (project.hasProperty("bintray.credentials") ?
-            project.property("bintray.credentials") :
-            System.getenv("BINTRAY_CREDENTIALS") ?: "")
-            .split(":")
+apply plugin: "maven-publish"
+apply plugin: "signing"
 
+ext {
     sonatypeCredentials = (project.hasProperty("sonatype.credentials") ?
             project.property("sonatype.credentials") :
             System.getenv("SONATYPE_CREDENTIALS") ?: "")
@@ -12,14 +10,54 @@ ext {
     isSnapshot = project.version.toString().endsWith("-SNAPSHOT")
 }
 
-apply from: "$rootDir/gradle/jfrog-artifactory.gradle"
-apply from: "$rootDir/gradle/jfrog-bintray.gradle"
-apply from: "$rootDir/gradle/sonatype.gradle"
-
 task publishSnapshot() {
-    if (isSnapshot) { dependsOn "artifactoryPublish", "publishAarPublicationToMavenRepository"  }
+    if (isSnapshot) { dependsOn "publishAarPublicationToMavenRepository" }
 }
 
 task publishRelease() {
-    if (!isSnapshot) { dependsOn "bintrayUpload" }
+    if (!isSnapshot) {
+        Task closeTask = tasks.getByPath(":closeAndReleaseRepository")
+        closeTask.dependsOn ":sdk-android:publishAarPublicationToMavenRepository"
+        dependsOn closeTask
+    }
+}
+
+nexusStaging {
+    packageGroup = "com.meniga"
+    stagingProfileId = "38d85abe8cb003"
+    username = sonatypeCredentials.first()
+    password = sonatypeCredentials.last()
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            aar(MavenPublication) {
+                from components.release
+                groupId rootProject.name
+                artifactId project.name
+                version project.version
+                customizePom(pom)
+                artifact androidJavadocJar
+                artifact androidSourcesJar
+            }
+        }
+        repositories {
+            maven {
+                url = isSnapshot ?
+                        "https://oss.sonatype.org/content/repositories/snapshots/" :
+                        "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                credentials {
+                    username sonatypeCredentials.first()
+                    password sonatypeCredentials.last()
+                }
+            }
+        }
+    }
+    signing {
+        String signingKey = System.getenv("SIGNING_ARMORED_KEY")
+        String signingPassword = System.getenv("SIGNING_PASSWORD")
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications.aar
+    }
 }

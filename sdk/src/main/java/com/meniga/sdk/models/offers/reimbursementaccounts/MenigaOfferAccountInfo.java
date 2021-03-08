@@ -1,13 +1,8 @@
-package com.meniga.sdk.models.offers.reimbursementaccounts;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.io.Serializable;
-
-/**
+/*
  * Copyright 2017 Meniga Iceland Inc.
  */
+package com.meniga.sdk.models.offers.reimbursementaccounts;
+
 public interface MenigaOfferAccountInfo {
-	String toJson();
+    String toJson();
 }

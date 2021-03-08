@@ -9,7 +9,7 @@ import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.helpers.Interceptor
 import com.meniga.sdk.helpers.Result
 import com.meniga.sdk.models.sync.operators.MenigaSyncOperations
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.joda.time.DateTime
 import java.io.Serializable
 

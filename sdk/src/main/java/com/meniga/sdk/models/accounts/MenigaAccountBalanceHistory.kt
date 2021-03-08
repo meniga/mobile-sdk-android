@@ -6,7 +6,7 @@ package com.meniga.sdk.models.accounts
 import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.meniga.sdk.helpers.MenigaDecimal
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.joda.time.DateTime
 import java.io.Serializable
 

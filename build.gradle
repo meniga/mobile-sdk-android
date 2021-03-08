@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = "1.4.21"
+        kotlinVersion = "1.4.31"
         // MOBILE-3449 Parameters encoding changed in later versions https://github.com/square/okhttp/issues/3235
         okHttpVersion = "3.9.1"
         retrofitVersion = "2.3.0"
@@ -9,23 +9,20 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.5.3"
+        classpath "com.android.tools.build:gradle:3.6.4"
         classpath "com.dicedmelon.gradle:jacoco-android:0.1.4"
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
-        classpath "digital.wup:android-maven-publish:3.6.2"
-        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.18"
-        classpath "org.codehaus.groovy:groovy-all:2.4.15"
+        classpath "org.codehaus.groovy:groovy-all:2.4.21"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.9.10"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:1.4.20"
     }
 }
 
 plugins {
-    id 'de.undercouch.download' version '4.0.2'
-    id "pl.allegro.tech.build.axion-release" version "1.10.2"
+    id "de.undercouch.download" version "4.1.1"
+    id "io.codearte.nexus-staging" version "0.30.0"
+    id "pl.allegro.tech.build.axion-release" version "1.12.1"
 }
 
 scmVersion {

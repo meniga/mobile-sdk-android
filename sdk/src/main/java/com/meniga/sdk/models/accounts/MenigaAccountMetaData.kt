@@ -2,7 +2,7 @@ package com.meniga.sdk.models.accounts
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
 @Parcelize

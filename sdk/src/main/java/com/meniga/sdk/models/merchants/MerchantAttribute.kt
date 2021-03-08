@@ -1,14 +1,14 @@
+/*
+ * Copyright 2018 Meniga Iceland Inc.
+ * Created by agustk on 30.4.2018.
+ */
 package com.meniga.sdk.models.merchants
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
-/**
- * Copyright 2018 Meniga Iceland Inc.
- * Created by agustk on 30.4.2018.
- */
 @Parcelize
 @SuppressLint("ParcelCreator")
 data class MerchantAttribute(
