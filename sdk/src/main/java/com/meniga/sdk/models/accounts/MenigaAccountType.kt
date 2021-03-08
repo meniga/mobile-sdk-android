@@ -6,7 +6,7 @@ package com.meniga.sdk.models.accounts
 import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.meniga.sdk.models.accounts.enums.AccountCategory
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
 /**

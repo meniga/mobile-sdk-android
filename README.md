@@ -2,7 +2,7 @@
 
 mobile-sdk-android
 ====
-[![Download](https://api.bintray.com/packages/meniga/android/com.meniga.sdk:sdk-android/images/download.svg) ](https://bintray.com/meniga/android/com.meniga.sdk:sdk-android/_latestVersion)
+[![Download](https://maven-badges.herokuapp.com/maven-central/com.meniga.sdk/sdk-android/badge.svg)](https://mvnrepository.com/artifact/com.meniga.sdk/sdk-android/latest)
 ![Tests](https://github.com/meniga/mobile-sdk-android/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/meniga/mobile-sdk-android/branch/master/graph/badge.svg)](https://codecov.io/gh/meniga/mobile-sdk-android)
 
@@ -15,9 +15,7 @@ Developers for institutions implementing the Meniga REST API can use this sdk to
 
 ```
 repositories {
-  jcenter()
-  // or: mavenCentral()
-  // or: maven { url "https://dl.bintray.com/meniga/android" }
+  mavenCentral()
 }
 
 dependencies {
@@ -31,8 +29,7 @@ For the latest release version code, check out https://github.com/meniga/mobile-
 
 ```
 repositories {
-  maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
-  // or: maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+  maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 dependencies {
@@ -40,7 +37,7 @@ dependencies {
 }
 ```
 
-For more information please refer to [list of snapshots](https://oss.jfrog.org/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/com/meniga/sdk/sdk-android).
+For more information please refer to [list of snapshots](https://oss.sonatype.org/content/repositories/snapshots/com/meniga/sdk/sdk-android/).
 
 ## Local development
 

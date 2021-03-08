@@ -1,10 +1,12 @@
 package com.meniga.sdk.models.offers.reimbursementaccounts
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.meniga.sdk.helpers.GsonProvider
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
+@SuppressLint("ParcelCreator")
 @Parcelize
 data class MenigaOfferAccountInfoUK(
         val bankName: String?,

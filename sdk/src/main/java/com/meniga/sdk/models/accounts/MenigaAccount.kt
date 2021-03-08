@@ -15,7 +15,7 @@ import com.meniga.sdk.models.accounts.enums.AccountAuthorizationType
 import com.meniga.sdk.models.accounts.enums.AccountBalanceHistorySort
 import com.meniga.sdk.models.accounts.enums.AccountCategory
 import com.meniga.sdk.models.accounts.operators.MenigaAccountOperations
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.joda.time.DateTime
 import java.io.Serializable
 

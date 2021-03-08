@@ -1,17 +1,17 @@
+/*
+ * Copyright 2018 Meniga Iceland Inc.
+ * Created by agustk on 11.4.2018.
+ */
 package com.meniga.sdk.models.feed
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.meniga.sdk.models.userevents.enums.UserEventType
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.joda.time.DateTime
 import java.io.Serializable
 
-/**
- * Copyright 2018 Meniga Iceland Inc.
- * Created by agustk on 11.4.2018.
- */
 @Parcelize
 @SuppressLint("ParcelCreator")
 data class MenigaAccountEvent(

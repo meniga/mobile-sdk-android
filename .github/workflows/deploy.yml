@@ -5,8 +5,8 @@ on: push
 jobs:
   deploy:
     env:
-      BINTRAY_CREDENTIALS: ${{ secrets.BINTRAY_CREDENTIALS}}
       SONATYPE_CREDENTIALS: ${{ secrets.SONATYPE_CREDENTIALS}}
+      SIGNING_ARMORED_KEY: ${{ secrets.SIGNING_ARMORED_KEY}}
       SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD}}
     if: github.repository_owner == 'meniga'
     runs-on: ubuntu-latest
@@ -23,20 +23,15 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Set environment variables
-        run: |
-          echo "DEPLOY_BUILD_NUMBER=$((500 + ${{ github.run_number }}))" >> $GITHUB_ENV
       - name: Deploy branch snapshot
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
           ./gradlew \
           currentVersion \
-          publishSnapshot \
-          -Dbuild.number=$DEPLOY_BUILD_NUMBER
+          publishSnapshot
       - name: Deploy tagged release
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
           ./gradlew \
           currentVersion \
-          publishRelease \
-          -Dbuild.number=$DEPLOY_BUILD_NUMBER
+          publishRelease
