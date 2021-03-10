@@ -68,7 +68,7 @@ dependencies {
     testImplementation "com.jayway.jsonpath:json-path-assert:2.4.0"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
     testImplementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
-    testImplementation "junit:junit:4.13.1"
+    testImplementation "junit:junit:4.13.2"
     testImplementation "net.jodah:concurrentunit:0.4.6"
     testImplementation "org.assertj:assertj-core:3.13.2"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
