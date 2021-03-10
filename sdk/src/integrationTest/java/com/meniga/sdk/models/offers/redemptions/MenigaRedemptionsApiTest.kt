@@ -9,17 +9,15 @@ import com.meniga.sdk.MenigaSettings
 import com.meniga.sdk.models.createOffersValidatingMockWebServer
 import com.meniga.sdk.utils.mockResponse
 import org.assertj.core.api.Assertions.assertThat
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
 import org.joda.time.DateTime
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import java.net.URI
 
 @RunWith(JUnitPlatform::class)
 object MenigaRedemptionsApiTest : Spek({
-
     lateinit var server: ValidatingMockWebServer
     lateinit var dateFrom: DateTime
     lateinit var dateTo: DateTime
@@ -37,11 +35,15 @@ object MenigaRedemptionsApiTest : Spek({
         server.stop()
     }
 
-    on("fetching redemptions") {
-        server.enqueue(mockResponse("redemptions_get.json"))
+    describe("fetching redemptions") {
+        lateinit var result: MenigaRedemptions
 
-        val task = MenigaRedemptions.fetch(0, 5, dateFrom, dateTo).task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("redemptions_get.json"))
+            val task = MenigaRedemptions.fetch(0, 5, dateFrom, dateTo).task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make proper request") {
             val recordedRequest = server.takeRequest()
@@ -55,7 +57,7 @@ object MenigaRedemptionsApiTest : Spek({
         }
 
         it("should retrieve proper data") {
-            assertThat(task.result).isNotNull
+            assertThat(result).isNotNull
         }
 
         it("should validate against the spec") {

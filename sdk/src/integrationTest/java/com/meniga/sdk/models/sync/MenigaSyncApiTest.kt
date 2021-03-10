@@ -13,12 +13,11 @@ import com.meniga.sdk.models.user.ChallengeContentType
 import com.meniga.sdk.utils.mockResponse
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.Matchers.equalTo
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
 import org.joda.time.DateTime
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import java.net.URI
 
 @RunWith(JUnitPlatform::class)
@@ -45,18 +44,23 @@ object MenigaSyncApiTest : Spek({
                 .hasNoParameters()
     }
 
-    on("starting sync with timeout") {
-        server.enqueue(mockResponse("syncstatus.json"))
-        server.enqueue(mockResponse("syncresponse.json"))
+    describe("starting sync with timeout") {
+        lateinit var result: MenigaSync
 
-        val task = MenigaSync.start(1000).task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("syncstatus.json"))
+            server.enqueue(mockResponse("syncresponse.json"))
+            val task = MenigaSync.start(1000).task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should check status first") {
             assertThatSyncStatusWasChecked()
         }
 
         it("should start sync with timeout") {
+            server.takeRequest()
             val recordedRequest = server.takeRequest()
             assertThat(recordedRequest.method).isEqualTo("POST")
             assertThat(URI(recordedRequest.path))
@@ -67,9 +71,8 @@ object MenigaSyncApiTest : Spek({
         }
 
         it("should return a proper object") {
-            val sync = task.result
-            assertThat(sync.numNewTransactions).isEqualTo(230)
-            sync.realmSyncResponses!![0].run {
+            assertThat(result.numNewTransactions).isEqualTo(230)
+            result.realmSyncResponses!![0].run {
                 assertThat(realmCredentialsId).isEqualTo(1550004040444)
                 assertThat(realmCredentialsDisplayName).isEqualTo("string")
                 assertThat(organizationId).isEqualTo(144)
@@ -101,18 +104,20 @@ object MenigaSyncApiTest : Spek({
         }
     }
 
-    on("syncing all realms while still in progress") {
-        server.enqueue(mockResponse("syncstatusinprogress.json"))
-        server.enqueue(mockResponse("syncresponse.json"))
-
-        val task = MenigaSync.syncRealms(1000, null).task
-        task.waitForCompletion()
+    describe("syncing all realms while still in progress") {
+        beforeEachTest {
+            server.enqueue(mockResponse("syncstatusinprogress.json"))
+            server.enqueue(mockResponse("syncresponse.json"))
+            val task = MenigaSync.syncRealms(1000, null).task
+            task.waitForCompletion()
+        }
 
         it("should make request to get sync status") {
             assertThatSyncStatusWasChecked()
         }
 
         it("should make request to get an ongoing sync") {
+            server.takeRequest()
             val recordedRequest = server.takeRequest()
             assertThat(recordedRequest.method).isEqualTo("GET")
             assertThat(URI(recordedRequest.path))
@@ -125,19 +130,24 @@ object MenigaSyncApiTest : Spek({
         }
     }
 
-    on("syncing realm by realm user id") {
-        val realmUserId = 44L
-        server.enqueue(mockResponse("syncstatus.json"))
-        server.enqueue(mockResponse("syncresponse.json"))
+    describe("syncing realm by realm user id") {
+        lateinit var result: MenigaSync
 
-        val task = MenigaSync.syncRealm(realmUserId, 1000, null).task
-        task.waitForCompletion()
+        beforeEachTest {
+            val realmUserId = 44L
+            server.enqueue(mockResponse("syncstatus.json"))
+            server.enqueue(mockResponse("syncresponse.json"))
+            val task = MenigaSync.syncRealm(realmUserId, 1000, null).task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make request to get sync status") {
             assertThatSyncStatusWasChecked()
         }
 
         it("should make request to sync realm by user id") {
+            server.takeRequest()
             val recordedRequest = server.takeRequest()
             assertThat(recordedRequest.method).isEqualTo("POST")
             assertThat(URI(recordedRequest.path)).hasPath("/v1/sync/realm/44")
@@ -146,7 +156,7 @@ object MenigaSyncApiTest : Spek({
         }
 
         it("should return proper data") {
-            assertThat(task.result).isNotNull()
+            assertThat(result).isNotNull()
         }
 
         it("should validate against the spec") {
@@ -154,37 +164,44 @@ object MenigaSyncApiTest : Spek({
         }
     }
 
-    on("syncing realm by realm user id and a session token") {
+    describe("syncing realm by realm user id and a session token") {
         val sessionToken = "whatSessionTokenIsThis"
-        server.enqueue(mockResponse("syncstatus.json"))
-        server.enqueue(mockResponse("syncresponse.json"))
 
-        val task = MenigaSync.syncRealm(0, sessionToken, 1000, null).task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("syncstatus.json"))
+            server.enqueue(mockResponse("syncresponse.json"))
+            val task = MenigaSync.syncRealm(0, sessionToken, 1000, null).task
+            task.waitForCompletion()
+        }
 
         it("should make request to get sync status") {
             assertThatSyncStatusWasChecked()
         }
 
         it("Should include session token in request") {
+            server.takeRequest()
             val recordedRequest = server.takeRequest()
             JsonAssert.with(recordedRequest.body.readUtf8())
                     .assertThat("$.sessionToken", equalTo(sessionToken))
         }
     }
 
-    on("checking sync status") {
-        server.enqueue(mockResponse("syncstatus.json"))
+    describe("checking sync status") {
+        lateinit var result: MenigaSyncStatus
 
-        val task = MenigaSync.getSyncStatus().task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("syncstatus.json"))
+            val task = MenigaSync.getSyncStatus().task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make request to get sync status") {
             assertThatSyncStatusWasChecked()
         }
 
         it("should return proper sync status") {
-            task.result.hasCompletedSyncSession
+            result.hasCompletedSyncSession
         }
 
         it("should validate against the spec") {

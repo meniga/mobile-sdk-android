@@ -10,47 +10,54 @@ import com.meniga.sdk.models.createValidatingMockWebServer
 import com.meniga.sdk.models.transactions.MenigaTransaction
 import com.meniga.sdk.utils.mockResponse
 import org.assertj.core.api.Assertions.assertThat
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
 import org.joda.time.DateTime
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.dsl.Root
+import org.spekframework.spek2.style.specification.describe
 import java.net.URI
+
+fun Root.setupMockWebServer() {
+    val dateFrom by memoized { DateTime.parse("2018-01-01") }
+    val dateTo by memoized { DateTime.parse("2018-02-01") }
+    val server by memoized(
+            factory = {
+                createValidatingMockWebServer().apply {
+                    start()
+                    val settings = MenigaSettings.Builder().endpoint(baseUrl()).build()
+                    MenigaSDK.init(settings)
+                }
+            },
+            destructor = { it.stop() }
+    )
+
+    val feed by memoized(
+            factory = {
+                server.enqueue(mockResponse("feed.json"))
+                val task = MenigaFeed.fetch(dateFrom, dateTo, 1, 10).task
+                task.waitForCompletion()
+                server.takeRequest()
+                task.result
+            }
+    )
+}
 
 @RunWith(JUnitPlatform::class)
 object MenigaFeedApiTest : Spek({
+    setupMockWebServer()
 
-    lateinit var server: ValidatingMockWebServer
-    lateinit var dateFrom: DateTime
-    lateinit var dateTo: DateTime
+    val dateFrom: DateTime by memoized()
+    val dateTo: DateTime by memoized()
+    val server: ValidatingMockWebServer by memoized()
 
-    beforeEachTest {
-        server = createValidatingMockWebServer()
-        server.start()
-        val settings = MenigaSettings.Builder().endpoint(server.baseUrl()).build()
-        MenigaSDK.init(settings)
-        dateFrom = DateTime.parse("2018-01-01")
-        dateTo = DateTime.parse("2018-02-01")
-    }
+    describe("fetching feed in date range") {
+        val task by memoized { MenigaFeed.fetch(dateFrom, dateTo).task }
 
-    afterEachTest {
-        server.stop()
-    }
-
-    fun fetchFeed(): MenigaFeed {
-        server.enqueue(mockResponse("feed.json"))
-        val task = MenigaFeed.fetch(dateFrom, dateTo, 1, 10).task
-        task.waitForCompletion()
-        server.takeRequest()
-        return task.result
-    }
-
-    on("fetching feed in date range") {
-        server.enqueue(mockResponse("feed.json"))
-
-        val task = MenigaFeed.fetch(dateFrom, dateTo).task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("feed.json"))
+            task.waitForCompletion()
+        }
 
         it("should make a proper request") {
             val recordedRequest = server.takeRequest()
@@ -70,10 +77,10 @@ object MenigaFeedApiTest : Spek({
             assertThat(feed.size).isEqualTo(10)
         }
 
-        it ("should contain accounts and merchant models inlined") {
+        it("should contain accounts and merchant models inlined") {
             val transactions = task.result.filterIsInstance(MenigaTransaction::class.java)
-            assertThat(transactions.any { it.account != null } )
-            assertThat(transactions.any { it.merchant != null } )
+            assertThat(transactions.any { it.account != null })
+            assertThat(transactions.any { it.merchant != null })
         }
 
         it("should validate against the spec") {
@@ -85,13 +92,15 @@ object MenigaFeedApiTest : Spek({
             Pair(0, true),
             Pair(1, false)
     ).forEach { (page, expectedHasMorePages) ->
-        on("fetching a feed in date range and page %s") {
-            server.enqueue(mockResponse("feed.json"))
+        describe("fetching a feed in date range and page %s") {
+            lateinit var result: MenigaFeed
 
-            val task = MenigaFeed.fetch(dateFrom, dateTo, page, 10).task
-            task.waitForCompletion()
-
-            val result = task.result
+            beforeEachTest {
+                server.enqueue(mockResponse("feed.json"))
+                val task = MenigaFeed.fetch(dateFrom, dateTo, page, 10).task
+                task.waitForCompletion()
+                result = task.result
+            }
 
             it("should make a proper request") {
                 val recordedRequest = server.takeRequest()
@@ -118,12 +127,16 @@ object MenigaFeedApiTest : Spek({
         }
     }
 
-    on("appending days") {
-        val feed = fetchFeed()
-        server.enqueue(mockResponse("feed.json"))
+    describe("appending days") {
+        val feed: MenigaFeed by memoized()
+        lateinit var result: MenigaFeed
 
-        val appendTask = feed.appendDays(1).task
-        appendTask.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("feed.json"))
+            val appendTask = feed.appendDays(1).task
+            appendTask.waitForCompletion()
+            result = appendTask.result
+        }
 
         it("should make a proper request") {
             val recordedRequest = server.takeRequest()
@@ -138,7 +151,7 @@ object MenigaFeedApiTest : Spek({
         }
 
         it("should retrieve proper data") {
-            assertThat(appendTask.result.hasMoreData()).isTrue()
+            assertThat(result.hasMoreData()).isTrue()
         }
 
         it("should validate against the spec") {
@@ -146,12 +159,16 @@ object MenigaFeedApiTest : Spek({
         }
     }
 
-    on("appending next page") {
-        val feed = fetchFeed()
-        server.enqueue(mockResponse("feed.json"))
+    describe("appending next page") {
+        val feed: MenigaFeed by memoized()
+        lateinit var result: MenigaFeed
 
-        val task = feed.appendNextPage().task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("feed.json"))
+            val task = feed.appendNextPage().task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make a proper request") {
             val recordedRequest = server.takeRequest()
@@ -165,11 +182,11 @@ object MenigaFeedApiTest : Spek({
                     .hasParameter("include", "Account,Merchant")
         }
         it("should append to current feed") {
-            assertThat(feed.size).isGreaterThan(task.result.size)
+            assertThat(feed.size).isGreaterThan(result.size)
             assertThat(feed.page).isEqualTo(2)
         }
         it("should return next page") {
-            assertThat(task.result.size).isEqualTo(10)
+            assertThat(result.size).isEqualTo(10)
         }
 
         it("should validate against the spec") {
@@ -177,12 +194,16 @@ object MenigaFeedApiTest : Spek({
         }
     }
 
-    on("fetching next page") {
-        val feed = fetchFeed()
-        server.enqueue(mockResponse("feed.json"))
+    describe("fetching next page") {
+        val feed: MenigaFeed by memoized()
+        lateinit var result: MenigaFeed
 
-        val task = feed.nextPage().task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("feed.json"))
+            val task = feed.nextPage().task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make a proper request") {
             val recordedRequest = server.takeRequest()
@@ -200,7 +221,7 @@ object MenigaFeedApiTest : Spek({
             assertThat(feed.page).isEqualTo(2)
         }
         it("should return next page") {
-            assertThat(task.result.size).isEqualTo(10)
+            assertThat(result.size).isEqualTo(10)
         }
 
         it("should validate against the spec") {
@@ -208,12 +229,16 @@ object MenigaFeedApiTest : Spek({
         }
     }
 
-    on("fetching previous page") {
-        val feed = fetchFeed()
-        server.enqueue(mockResponse("feed.json"))
+    describe("fetching previous page") {
+        val feed: MenigaFeed by memoized()
+        lateinit var result: MenigaFeed
 
-        val task = feed.prevPage().task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("feed.json"))
+            val task = feed.prevPage().task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make a proper request") {
             val recordedRequest = server.takeRequest()
@@ -231,7 +256,7 @@ object MenigaFeedApiTest : Spek({
             assertThat(feed.page).isEqualTo(0)
         }
         it("should return next page") {
-            assertThat(task.result.size).isEqualTo(10)
+            assertThat(result.size).isEqualTo(10)
         }
 
         it("should validate against the spec") {
