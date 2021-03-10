@@ -80,13 +80,13 @@ dependencies {
     testImplementation "org.mockito:mockito-core:3.8.0"
 }
 
-dokkaHtml {
+dokkaJavadoc {
     outputDirectory.set(file("${buildDir}/javadoc"))
 }
 
-task androidJavadocJar(type: Jar, dependsOn: dokkaHtml) {
+task androidJavadocJar(type: Jar, dependsOn: dokkaJavadoc) {
     archiveClassifier.set("javadoc")
-    from dokkaHtml
+    from dokkaJavadoc
 }
 
 task androidSourcesJar(type: Jar) {
