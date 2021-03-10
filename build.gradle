@@ -4,7 +4,7 @@ buildscript {
         // MOBILE-3449 Parameters encoding changed in later versions https://github.com/square/okhttp/issues/3235
         okHttpVersion = "3.9.1"
         retrofitVersion = "2.3.0"
-        spekVersion = "1.2.1"
+        spekVersion = "2.0.15"
     }
     repositories {
         google()
@@ -21,6 +21,7 @@ buildscript {
 
 plugins {
     id "de.undercouch.download" version "4.1.1"
+    // Using legacy plugin until https://github.com/gradle-nexus/publish-plugin/issues/75 is resolved
     id "io.codearte.nexus-staging" version "0.30.0"
     id "pl.allegro.tech.build.axion-release" version "1.12.1"
 }
@@ -35,9 +36,9 @@ scmVersion {
 
 allprojects {
     repositories {
-        jcenter()
         mavenCentral()
         google()
+        jcenter()
     }
 
     version = scmVersion.version
