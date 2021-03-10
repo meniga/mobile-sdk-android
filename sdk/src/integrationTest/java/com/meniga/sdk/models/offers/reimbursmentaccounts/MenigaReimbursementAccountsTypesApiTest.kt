@@ -10,11 +10,10 @@ import com.meniga.sdk.models.createOffersValidatingMockWebServer
 import com.meniga.sdk.models.offers.reimbursementaccounts.MenigaReimbursementAccountType
 import com.meniga.sdk.utils.mockResponse
 import org.assertj.core.api.Assertions.assertThat
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import java.net.URI
 
 @RunWith(JUnitPlatform::class)
@@ -33,11 +32,15 @@ object MenigaReimbursementAccountsTypesApiTest : Spek({
         server.stop()
     }
 
-    on("fetching reimbursement accounts types") {
-        server.enqueue(mockResponse("reimbursement_accounts_types_get.json"))
+    describe("fetching reimbursement accounts types") {
+        lateinit var result: List<MenigaReimbursementAccountType>
 
-        val task = MenigaReimbursementAccountType.fetch(0, 5).task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("reimbursement_accounts_types_get.json"))
+            val task = MenigaReimbursementAccountType.fetch(0, 5).task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make proper request") {
             val recordedRequest = server.takeRequest()
@@ -49,8 +52,7 @@ object MenigaReimbursementAccountsTypesApiTest : Spek({
         }
 
         it("should retrieve proper data") {
-            val reimbursementAccountTypes = task.result
-            assertThat(reimbursementAccountTypes).hasSize(1)
+            assertThat(result).hasSize(1)
         }
 
         it("should validate against the spec") {

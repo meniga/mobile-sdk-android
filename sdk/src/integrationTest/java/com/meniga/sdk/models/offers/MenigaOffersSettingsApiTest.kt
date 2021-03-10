@@ -7,18 +7,17 @@ import com.atlassian.oai.validator.mockwebserver.ValidatingMockWebServer
 import com.meniga.sdk.MenigaSDK
 import com.meniga.sdk.MenigaSettings
 import com.meniga.sdk.models.createOffersValidatingMockWebServer
+import com.meniga.sdk.providers.tasks.Task
 import okhttp3.mockwebserver.MockResponse
 import org.assertj.core.api.Assertions.assertThat
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import java.net.URI
 
 @RunWith(JUnitPlatform::class)
 object MenigaOffersSettingsApiTest : Spek({
-
     lateinit var server: ValidatingMockWebServer
 
     beforeEachTest {
@@ -32,11 +31,14 @@ object MenigaOffersSettingsApiTest : Spek({
         server.stop()
     }
 
-    on("enabling offers") {
-        server.enqueue(MockResponse().setResponseCode(204))
+    describe("enabling offers") {
+        lateinit var task: Task<Void>
 
-        val task = MenigaOffersSettings.enable().task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(MockResponse().setResponseCode(204))
+            task = MenigaOffersSettings.enable().task
+            task.waitForCompletion()
+        }
 
         it("should make proper request") {
             val recordedRequest = server.takeRequest()
@@ -54,11 +56,14 @@ object MenigaOffersSettingsApiTest : Spek({
         }
     }
 
-    on("disabling offers") {
-        server.enqueue(MockResponse().setResponseCode(204))
+    describe("disabling offers") {
+        lateinit var task: Task<Void>
 
-        val task = MenigaOffersSettings.disable().task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(MockResponse().setResponseCode(204))
+            task = MenigaOffersSettings.disable().task
+            task.waitForCompletion()
+        }
 
         it("should make proper request") {
             val recordedRequest = server.takeRequest()
@@ -76,11 +81,14 @@ object MenigaOffersSettingsApiTest : Spek({
         }
     }
 
-    on("accepting terms and conditions") {
-        server.enqueue(MockResponse().setResponseCode(204))
+    describe("accepting terms and conditions") {
+        lateinit var task: Task<Void>
 
-        val task = MenigaOffersSettings.acceptTermsAndConditions().task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(MockResponse().setResponseCode(204))
+            task = MenigaOffersSettings.acceptTermsAndConditions().task
+            task.waitForCompletion()
+        }
 
         it("should make proper request") {
             val recordedRequest = server.takeRequest()

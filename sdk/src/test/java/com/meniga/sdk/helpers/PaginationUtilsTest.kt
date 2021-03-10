@@ -1,11 +1,10 @@
 package com.meniga.sdk.helpers
 
 import org.assertj.core.api.Assertions.assertThat
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import kotlin.test.assertFailsWith
 
 @RunWith(JUnitPlatform::class)
@@ -18,7 +17,7 @@ object PaginationUtilsTest : Spek({
             listOf(1, 10, 10, 10),
             listOf(2, 10, 20, 10)
     ).forEach { (page, itemsPerPage, expectedSkip, expectedTake) ->
-        on("converting page=$page and itemsPerPage=$itemsPerPage to skip and take") {
+        describe("converting page=$page and itemsPerPage=$itemsPerPage to skip and take") {
             it("should return skip=$expectedSkip and take=$expectedTake") {
                 assertThat(toSkipAndTake(page, itemsPerPage)).isEqualTo(Pair(expectedSkip, expectedTake))
             }
@@ -29,7 +28,7 @@ object PaginationUtilsTest : Spek({
             Triple(-1, 0, IllegalArgumentException::class),
             Triple(0, -1, IllegalArgumentException::class)
     ).forEach { (page, itemsPerPage, exceptionClass) ->
-        on("converting page=$page and itemsPerPage=$itemsPerPage to skip and take") {
+        describe("converting page=$page and itemsPerPage=$itemsPerPage to skip and take") {
             it("should throw $exceptionClass") {
                 assertFailsWith(exceptionClass) {
                     toSkipAndTake(page, itemsPerPage)
@@ -50,7 +49,7 @@ object PaginationUtilsTest : Spek({
             Pair(TestData(11, 0, 10), true),
             Pair(TestData(11, 1, 10), false)
     ).forEach { (data, expected) ->
-        on("checking if there is more data for $data") {
+        describe("checking if there is more data for $data") {
             it("should return $expected") {
                 assertThat(hasMoreData(data.totalCount, data.page, data.itemsPerPage)).isEqualTo(expected)
             }
@@ -62,7 +61,7 @@ object PaginationUtilsTest : Spek({
             Pair(TestData(0, -1, 0), IllegalArgumentException::class),
             Pair(TestData(0, 0, -1), IllegalArgumentException::class)
     ).forEach { (data, exceptionClass) ->
-        on("checking if there is more data for $data") {
+        describe("checking if there is more data for $data") {
             it("should throw $exceptionClass") {
                 assertFailsWith(exceptionClass) {
                     hasMoreData(data.totalCount, data.page, data.itemsPerPage)

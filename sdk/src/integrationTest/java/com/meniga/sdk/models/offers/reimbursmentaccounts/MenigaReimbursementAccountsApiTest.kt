@@ -12,11 +12,10 @@ import com.meniga.sdk.models.offers.reimbursementaccounts.*
 import com.meniga.sdk.utils.mockResponse
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.Matchers.equalTo
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import java.net.URI
 
 @RunWith(JUnitPlatform::class)
@@ -35,11 +34,15 @@ object MenigaReimbursementAccountsApiTest : Spek({
         server.stop()
     }
 
-    on("fetching reimbursement accounts") {
-        server.enqueue(mockResponse("reimbursement_accounts_get.json"))
+    describe("fetching reimbursement accounts") {
+        lateinit var result: MenigaReimbursementAccountPage
 
-        val task = MenigaReimbursementAccount.fetch().task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("reimbursement_accounts_get.json"))
+            val task = MenigaReimbursementAccount.fetch().task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make proper request") {
             val recordedRequest = server.takeRequest()
@@ -50,7 +53,7 @@ object MenigaReimbursementAccountsApiTest : Spek({
         }
 
         it("should retrieve proper data") {
-            assertThat(task.result).hasSize(1)
+            assertThat(result).hasSize(1)
         }
 
         it("should validate against the spec") {
@@ -58,8 +61,8 @@ object MenigaReimbursementAccountsApiTest : Spek({
         }
     }
 
-    on("creating reimbursement Iceland") {
-        server.enqueue(mockResponse("reimbursement_accounts_iceland_post.json").setResponseCode(201))
+    describe("creating reimbursement Iceland") {
+        lateinit var result: MenigaReimbursementAccount
 
         val menigaOfferAccountInfo = MenigaOfferAccountInfoIceland(
                 "1234",
@@ -73,11 +76,15 @@ object MenigaReimbursementAccountsApiTest : Spek({
                 .assertThat("$.bankAccountNumber", equalTo("123"))
                 .assertThat("$.socialSecurityNumber", equalTo("0000000000"))
 
-        val task = MenigaReimbursementAccount.create(
-                "Reimbursement account",
-                "Bank account ISL",
-                menigaOfferAccountInfo).task
-        task.waitForCompletion()
+        beforeEachTest {
+            server.enqueue(mockResponse("reimbursement_accounts_iceland_post.json").setResponseCode(201))
+            val task = MenigaReimbursementAccount.create(
+                    "Reimbursement account",
+                    "Bank account ISL",
+                    menigaOfferAccountInfo).task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make proper request") {
             val recordedRequest = server.takeRequest()
@@ -91,42 +98,8 @@ object MenigaReimbursementAccountsApiTest : Spek({
                     .assertThat("$.accountInfo", equalTo("""{"bankNumber":"1234","ledger":"12","bankAccountNumber":"123","socialSecurityNumber":"0000000000"}"""))
         }
 
-        on("creating reimbursement UK") {
-            server.enqueue(mockResponse("reimbursement_accounts_uk_post.json").setResponseCode(201))
-
-            val menigaOfferAccountInfo = MenigaOfferAccountInfoUK(
-                    "NatWest",
-                    "Karlsson",
-                    "112233",
-                    "12345678"
-            )
-            JsonAssert.with(menigaOfferAccountInfo.toJson())
-                    .assertThat("$.bankName", equalTo("NatWest"))
-                    .assertThat("$.accountName", equalTo("Karlsson"))
-                    .assertThat("$.sortcode", equalTo("112233"))
-                    .assertThat("$.bankAccountNumber", equalTo("12345678"))
-
-            val task = MenigaReimbursementAccount.create(
-                    "Reimbursement account",
-                    "Bank account UK",
-                    menigaOfferAccountInfo).task
-            task.waitForCompletion()
-
-            it("should make proper request") {
-                val recordedRequest = server.takeRequest()
-                assertThat(recordedRequest.method).isEqualTo("POST")
-                assertThat(URI(recordedRequest.path))
-                        .hasPath("/v1/reimbursementAccounts")
-                JsonAssert.with(recordedRequest.body.readUtf8())
-                        .assertThat("$.name", equalTo("Reimbursement account"))
-                        .assertThat("$.accountType", equalTo("Bank account UK"))
-                        .assertThat("$.accountInfo", equalTo("""{"bankName":"NatWest","accountName":"Karlsson","sortcode":"112233","bankAccountNumber":"12345678"}"""))
-            }
-        }
-
         it("should retrieve proper data") {
-            val reimbursementAccount = task.result
-            assertThat(reimbursementAccount).isNotNull
+            assertThat(result).isNotNull
         }
 
         it("should validate against the spec") {
@@ -134,11 +107,60 @@ object MenigaReimbursementAccountsApiTest : Spek({
         }
     }
 
-    on("fetching reimbursement account by id") {
-        server.enqueue(mockResponse("reimbursement_accounts_get_by_id.json"))
+    describe("creating reimbursement UK") {
+        lateinit var result: MenigaReimbursementAccount
 
-        val task = MenigaReimbursementAccount.fetch(69).task
-        task.waitForCompletion()
+        val menigaOfferAccountInfo = MenigaOfferAccountInfoUK(
+                "NatWest",
+                "Karlsson",
+                "112233",
+                "12345678"
+        )
+        JsonAssert.with(menigaOfferAccountInfo.toJson())
+                .assertThat("$.bankName", equalTo("NatWest"))
+                .assertThat("$.accountName", equalTo("Karlsson"))
+                .assertThat("$.sortcode", equalTo("112233"))
+                .assertThat("$.bankAccountNumber", equalTo("12345678"))
+
+        beforeEachTest {
+            server.enqueue(mockResponse("reimbursement_accounts_uk_post.json").setResponseCode(201))
+            val task = MenigaReimbursementAccount.create(
+                    "Reimbursement account",
+                    "Bank account UK",
+                    menigaOfferAccountInfo).task
+            task.waitForCompletion()
+            result = task.result
+        }
+
+        it("should make proper request") {
+            val recordedRequest = server.takeRequest()
+            assertThat(recordedRequest.method).isEqualTo("POST")
+            assertThat(URI(recordedRequest.path))
+                    .hasPath("/v1/reimbursementAccounts")
+            JsonAssert.with(recordedRequest.body.readUtf8())
+                    .assertThat("$.name", equalTo("Reimbursement account"))
+                    .assertThat("$.accountType", equalTo("Bank account UK"))
+                    .assertThat("$.accountInfo", equalTo("""{"bankName":"NatWest","accountName":"Karlsson","sortcode":"112233","bankAccountNumber":"12345678"}"""))
+        }
+
+        it("should retrieve proper data") {
+            assertThat(result).isNotNull
+        }
+
+        it("should validate against the spec") {
+            server.assertNoValidations()
+        }
+    }
+
+    describe("fetching reimbursement account by id") {
+        lateinit var result: MenigaReimbursementAccount
+
+        beforeEachTest {
+            server.enqueue(mockResponse("reimbursement_accounts_get_by_id.json"))
+            val task = MenigaReimbursementAccount.fetch(69).task
+            task.waitForCompletion()
+            result = task.result
+        }
 
         it("should make proper request") {
             val recordedRequest = server.takeRequest()
@@ -148,10 +170,10 @@ object MenigaReimbursementAccountsApiTest : Spek({
         }
 
         it("should retrieve proper data") {
-            task.result.run {
+            result.run {
                 assertThat(id).isEqualTo(69)
-                assertThat(isActive).isTrue()
-                assertThat(isVerified).isTrue()
+                assertThat(isActive).isTrue
+                assertThat(isVerified).isTrue
                 assertThat(name).isEqualTo("Reimbursement account")
                 assertThat(accountType).isEqualTo("Bank account ISL")
                 JsonAssert.with(accountInfo)
