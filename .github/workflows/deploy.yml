@@ -8,7 +8,7 @@ jobs:
       SONATYPE_CREDENTIALS: ${{ secrets.SONATYPE_CREDENTIALS}}
       SIGNING_ARMORED_KEY: ${{ secrets.SIGNING_ARMORED_KEY}}
       SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD}}
-    if: github.repository_owner == 'meniga'
+    if: github.repository_owner == 'meniga' && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
