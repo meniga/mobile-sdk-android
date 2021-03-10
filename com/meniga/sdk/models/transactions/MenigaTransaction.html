@@ -1,0 +1,2692 @@
+<!DOCTYPE HTML>
+<!-- NewPage -->
+<html lang="en"><head>
+    <title>MenigaTransaction 1.1.95-feature-MOBILE-4336-deploy-documentation-to-gh-pages-SNAPSHOT API </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="dc.created" content="2020-03-25">
+    <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
+    <link rel="stylesheet" type="text/css" href="../../../../../dokka-javadoc-stylesheet.css" title="Style">
+    <link rel="stylesheet" type="text/css" href="../../../../../jquery/jquery-ui.css" title="Style">
+    <script type="text/javascript" src="../../../../../jquery/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../../../../../jquery/jquery-migrate-3.0.1.js"></script>
+    <script type="text/javascript" src="../../../../../jquery/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="../../../../../search.js"></script>
+    <script async type="text/javascript" src="../../../../../module-search-index.js"></script>
+    <script async type="text/javascript" src="../../../../../package-search-index.js"></script>
+    <script async type="text/javascript" src="../../../../../type-search-index.js"></script>
+    <script async type="text/javascript" src="../../../../../member-search-index.js"></script>
+    <script async type="text/javascript" src="../../../../../tag-search-index.js"></script>
+</head><body>
+<script type="text/javascript">
+var pathtoroot = "../../../../../";
+</script>
+<noscript>
+    <div>JavaScript is disabled on your browser.</div>
+</noscript><header role="banner">
+    <nav role="navigation">
+        <div class="fixedNav">
+            <!-- ========= START OF TOP NAVBAR ======= -->
+            <div class="topNav"><a id="navbar.top">
+                <!--   -->
+            </a>
+                <div class="skipNav"><a href="#skip.navbar.top" title="Skip navigation links">Skip navigation links</a>
+                </div>
+                <a id="navbar.top.firstrow">
+                    <!--   -->
+                </a>
+                <ul class="navList" title="Navigation">
+    <li><a href="../../../../../index.html">Overview</a></li>
+    
+    <li><a href="package-summary.html">Package</a></li>
+    
+    <li class="navBarCell1Rev">Class</li>
+    
+    <li><a href="package-tree.html">Tree</a></li>
+    
+    <li><a href="../../../../../deprecated.html">Deprecated</a></li>
+    <li><a href="../../../../../index-files/index-1.html">Index</a></li>
+    <li>Help</li>
+</ul></div>
+            <div class="subNav">
+<ul class="navList" id="allclasses_navbar_top" style="display: block;">
+    <li><a href="../../../../../allclasses.html">All&nbsp;Classes</a></li>
+</ul>
+
+<ul class="navListSearch">
+<li><label for="search">SEARCH:</label>
+<input type="text" id="search" value="search" class="ui-autocomplete-input" autocomplete="off" placeholder="Search">
+<input type="reset" id="reset" value="reset">
+</li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+</div>
+<a id="skip.navbar.top">
+<!--   -->
+</a></div><!-- ========= END OF TOP NAVBAR ========= -->
+        </div>
+        <div class="navPadding">&nbsp;</div>
+        <script type="text/javascript"><!--
+        $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
+        //-->
+        </script>
+    </nav>
+</header>
+
+<main role="main">
+    <div class="header">
+        <div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html"></a></div>
+        <h2 title="Class MenigaTransaction" class="title">Class MenigaTransaction</h2>
+    </div>
+    <div class="contentContainer">
+        <!-- <ul class="inheritance">
+            <li>java.lang.Object</li>
+            <li>
+                <ul class="inheritance">
+                    <li>adaptation.Adaptation</li>
+                </ul>
+            </li>
+        </ul> TODO inheritance tree -->
+        <div class="description">
+            <ul class="blockList">
+                <li class="blockList">
+                    
+                    <dl>
+                        <dt>All Implemented Interfaces:</dt>
+                        <dd>
+                            
+                            <code>android.os.Parcelable</code>
+                            
+                            ,
+                            
+                            
+                            <code>com.meniga.sdk.models.feed.MenigaFeedItem</code>
+                            
+                            ,
+                            
+                            
+                            <code>java.io.Serializable</code>
+                            
+                            ,
+                            
+                            
+                            <code>java.lang.Cloneable</code>
+                            
+                            
+                        </dd>
+                    </dl>
+                    
+                    <hr>
+                    <pre class="wrap-overflow">
+
+public class <span class="typeNameLabel"><a href=MenigaTransaction.html>MenigaTransaction</a></span>
+ implements <a href=https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html>Serializable</a>, <a href=../com/meniga/sdk/models/feed/MenigaFeedItem.html>MenigaFeedItem</a>, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Cloneable.html>Cloneable</a>, <a href=https://developer.android.com/reference/kotlin/android/os/Parcelable.html>Parcelable</a>
+                    </pre>
+                    <div class="block"><p>Represents a transaction in the Meniga system. Transactions belong to accounts. </p><p>Copyright 2017 Meniga Iceland Inc.</p></div>
+                </li>
+            </ul>
+        </div>
+        <div class="summary">
+            <ul class="blockList">
+                <li class="blockList">
+                <!-- ======== NESTED CLASS SUMMARY ======== -->
+                    
+                    <!-- =========== FIELD SUMMARY =========== -->
+                    
+                    <section role="region">
+                        <ul class="blockList">
+                            <li class="blockList"><a id="field.summary">
+                                <!--   -->
+                            </a>
+                                <h3>Field Summary</h3>
+                                <div class="memberSummary">
+                                    <table>
+                                        <caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+                                        <tr>
+                                            <th class="colFirst" scope="col">Modifier and Type</th>
+                                            <th class="colSecond" scope="col">Field</th>
+                                            <th class="colLast" scope="col">Description</th>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#parentIdentifier>parentIdentifier</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  long</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#id>id</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#amount>amount</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#bookedAmount>bookedAmount</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>&gt;</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#tags>tags</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaComment.html>MenigaComment</a>&gt;</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#comments>comments</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#categoryId>categoryId</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  DateTime</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#date>date</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#text>text</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  DateTime</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#originalDate>originalDate</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#originalText>originalText</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#originalAmount>originalAmount</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#isRead>isRead</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#isFlagged>isFlagged</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  boolean</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#hasUncertainCategorization>hasUncertainCategorization</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#accountId>accountId</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/models/accounts/MenigaAccount.html>MenigaAccount</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#account>account</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html>Integer</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#mcc>mcc</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=../com/meniga/sdk/models/categories/MenigaCategoryScore.html>MenigaCategoryScore</a>&gt;</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#detectedCategories>detectedCategories</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#currency>currency</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#amountInCurrency>amountInCurrency</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html>Integer</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#dataFormat>dataFormat</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#merchantId>merchantId</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/models/merchants/MenigaMerchant.html>MenigaMerchant</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#merchant>merchant</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=../com/meniga/sdk/models/merchants/MenigaMerchant.html>MenigaMerchant</a>&gt;</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#merchants>merchants</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#bankId>bankId</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  DateTime</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#insertTime>insertTime</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#hasUserClearedCategoryUncertainty>hasUserClearedCategoryUncertainty</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#isUncleared>isUncleared</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#balance>balance</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  DateTime</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#categoryChangedTime>categoryChangedTime</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#changedByRule>changedByRule</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  DateTime</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#changedByRuleTime>changedByRuleTime</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#counterpartyAccountIdentifier>counterpartyAccountIdentifier</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  DateTime</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#dueDate>dueDate</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  DateTime</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#lastModifiedTime>lastModifiedTime</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=ParsedData.html>ParsedData</a>&gt;</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#parsedData>parsedData</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#data>data</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#redeemed>redeemed</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#toRedeem>toRedeem</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#remainingToSpend>remainingToSpend</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#belongsToExpiredOffer>belongsToExpiredOffer</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#reason>reason</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  long</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#timeStamp>timeStamp</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#userData>userData</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#eventTypeIdentifier>eventTypeIdentifier</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="altColor">
+                                            <td class="colFirst"><code>protected  <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#topicName>topicName</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
+                                            <td class="colFirst"><code>public final static <a href=https://developer.android.com/reference/kotlin/android/os/Parcelable.Creator.html>Parcelable.Creator</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;</code></td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#CREATOR>CREATOR</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                    </table>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <!-- ======== CONSTRUCTOR SUMMARY ======== -->
+                    
+                    <!-- =========== ENUM CONSTANT SUMMARY =========== -->
+                    
+                    <!-- ========== METHOD SUMMARY =========== -->
+                    
+                    <section role="region">
+                        <ul class="blockList">
+                            <li class="blockList"><a id="method.summary">
+                                <!--   -->
+                            </a>
+                                <h3>Method Summary</h3>
+                                <div class="memberSummary">
+                                    <div role="tablist" aria-orientation="horizontal">
+                                        <button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button>
+                                        <!-- TODO: Instance and Concrete Methods #1118 -->
+                                    </div>
+                                    <div id="memberSummary_tabpanel" role="tabpanel">
+                                    <table aria-labelledby="t0">
+                                        <tr>
+                                            <th class="colFirst" scope="col">Modifier and Type</th>
+                                            <th class="colSecond" scope="col">Method</th>
+                                            <th class="colLast" scope="col">Description</th>
+                                        </tr>
+                                        
+                                        <tr id="i0" class="altColor">
+                                            <td class="colFirst"><code>static void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setOperator(MenigaTransactionOperations)>setOperator</a>(<a href=../com/meniga/sdk/models/transactions/operators/MenigaTransactionOperations.html>MenigaTransactionOperations</a> operator) </code>
+                                            </th>
+                                            <td class="colLast">Sets the api operator for doing api calls</td>
+                                        </tr>
+                                        
+                                        <tr id="i1" class="rowColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setIsReadAndUpdate()>setIsReadAndUpdate</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i2" class="altColor">
+                                            <td class="colFirst"><code>boolean</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getIsSplitParent()>getIsSplitParent</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i3" class="rowColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setIsSplitParent(boolean)>setIsSplitParent</a>(boolean splitParent) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i4" class="altColor">
+                                            <td class="colFirst"><code>boolean</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getIsSplit()>getIsSplit</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i5" class="rowColor">
+                                            <td class="colFirst"><code>int</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#describeContents()>describeContents</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i6" class="altColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#writeToParcel(Parcel,int)>writeToParcel</a>(<a href=https://developer.android.com/reference/kotlin/android/os/Parcel.html>Parcel</a> dest, int flags) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i7" class="rowColor">
+                                            <td class="colFirst"><code>boolean</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#equals(Object)>equals</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html>Object</a> o) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i8" class="altColor">
+                                            <td class="colFirst"><code>int</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#hashCode()>hashCode</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i9" class="rowColor">
+                                            <td class="colFirst"><code><a href=MenigaTransaction.html>MenigaTransaction</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#clone()>clone</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i10" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#toString()>toString</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i11" class="rowColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransactionUpdate.html>MenigaTransactionUpdate</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#update()>update</a>() </code>
+                                            </th>
+                                            <td class="colLast">Updates the user created transaction</td>
+                                        </tr>
+                                        
+                                        <tr id="i12" class="altColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Void.html>Void</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#delete()>delete</a>() </code>
+                                            </th>
+                                            <td class="colLast">Deletes a user created transaction</td>
+                                        </tr>
+                                        
+                                        <tr id="i13" class="rowColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#fetchSplitChildren()>fetchSplitChildren</a>() </code>
+                                            </th>
+                                            <td class="colLast">Gets all the splitTransaction children of this transaction.</td>
+                                        </tr>
+                                        
+                                        <tr id="i14" class="altColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#fetchSplitParent()>fetchSplitParent</a>() </code>
+                                            </th>
+                                            <td class="colLast">Return the parent of this splitTransaction child transaction.</td>
+                                        </tr>
+                                        
+                                        <tr id="i15" class="rowColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#fetchSplitAndParent()>fetchSplitAndParent</a>() </code>
+                                            </th>
+                                            <td class="colLast">Returns all split children and parent regardless of who is calling (a split transaction or the parent transaction)</td>
+                                        </tr>
+                                        
+                                        <tr id="i16" class="altColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#split(MenigaDecimal,String,long,boolean)>split</a>(<a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> amount, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> text, long categoryId, boolean isFlagged) </code>
+                                            </th>
+                                            <td class="colLast">Splits a transaction, creating a new connected, splitTransaction transaction, deducting the amount from this (parent) transaction</td>
+                                        </tr>
+                                        
+                                        <tr id="i17" class="rowColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#updateSplits(List)>updateSplits</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=../com/meniga/sdk/webservices/requests/UpdateSplits.html>UpdateSplits</a>&gt; update) </code>
+                                            </th>
+                                            <td class="colLast">Updates split transactions for a particular parent transaction by deleting current split child transactions and creating new splits.</td>
+                                        </tr>
+                                        
+                                        <tr id="i18" class="altColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#refresh()>refresh</a>() </code>
+                                            </th>
+                                            <td class="colLast">Fetches the server version of this object and updates all fields in this object with the server values, essentially syncing it with the server</td>
+                                        </tr>
+                                        
+                                        <tr id="i19" class="rowColor">
+                                            <td class="colFirst"><code>static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransactionUpdate.html>MenigaTransactionUpdate</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#update(List,MenigaDecimal,Long,boolean,Boolean,String,DateTime,Boolean,Boolean,String)>update</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a>&gt; transToUpdate, <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> amount, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a> categoryId, boolean hasUncertainCategorization, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> useSubTextInRecat, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> text, DateTime date, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> isRead, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> isFlagged, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> userData) </code>
+                                            </th>
+                                            <td class="colLast">Updates a list of transactions.</td>
+                                        </tr>
+                                        
+                                        <tr id="i20" class="altColor">
+                                            <td class="colFirst"><code>static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransactionPage.html>MenigaTransactionPage</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#fetch(List)>fetch</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=TransactionsFilter.html>TransactionsFilter</a>&gt; filters) </code>
+                                            </th>
+                                            <td class="colLast">Combines multiple calls to the transactions endpoint with multiple filters</td>
+                                        </tr>
+                                        
+                                        <tr id="i21" class="rowColor">
+                                            <td class="colFirst"><code>static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransactionPage.html>MenigaTransactionPage</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#fetch(TransactionsFilter)>fetch</a>(<a href=TransactionsFilter.html>TransactionsFilter</a> transFilter) </code>
+                                            </th>
+                                            <td class="colLast">Returns all transactions that meet the filter criteria in transFilter</td>
+                                        </tr>
+                                        
+                                        <tr id="i22" class="altColor">
+                                            <td class="colFirst"><code>static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#fetch(long)>fetch</a>(long transactionId) </code>
+                                            </th>
+                                            <td class="colLast">Retrieves a specific transaction with a specific transaction id</td>
+                                        </tr>
+                                        
+                                        <tr id="i23" class="rowColor">
+                                            <td class="colFirst"><code>static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#create(DateTime,String,MenigaDecimal,long)>create</a>(DateTime date, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> text, <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> amount, long categoryId) </code>
+                                            </th>
+                                            <td class="colLast">Creates a transaction in the user wallet and returns the new transaction.</td>
+                                        </tr>
+                                        
+                                        <tr id="i24" class="altColor">
+                                            <td class="colFirst"><code>static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Void.html>Void</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#deleteTransactions(List)>deleteTransactions</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a>&gt; transactionIds) </code>
+                                            </th>
+                                            <td class="colLast">Deletes a list of user created transactions</td>
+                                        </tr>
+                                        
+                                        <tr id="i25" class="rowColor">
+                                            <td class="colFirst"><code>static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Void.html>Void</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#recategorize(List,Boolean,Boolean,Boolean)>recategorize</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>&gt; transactionTexts, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> recategorizeUnreadOnly, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> useSubTextInRecat, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> markAsRead) </code>
+                                            </th>
+                                            <td class="colLast">Recategorize transactions by text(s).</td>
+                                        </tr>
+                                        
+                                        <tr id="i26" class="altColor">
+                                            <td class="colFirst"><code>static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaComment.html>MenigaComment</a>&gt;&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#addComments(List,String)>addComments</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a>&gt; transactionIds, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> comment) </code>
+                                            </th>
+                                            <td class="colLast">Create a comment for a list of transaction ids.</td>
+                                        </tr>
+                                        
+                                        <tr id="i27" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getParentIdentifier()>getParentIdentifier</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i28" class="altColor">
+                                            <td class="colFirst"><code>long</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getId()>getId</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i29" class="rowColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getAmount()>getAmount</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i30" class="altColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getBookedAmount()>getBookedAmount</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i31" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getTags()>getTags</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i32" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaComment.html>MenigaComment</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getComments()>getComments</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i33" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getCategoryId()>getCategoryId</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i34" class="altColor">
+                                            <td class="colFirst"><code>DateTime</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getDate()>getDate</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i35" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getText()>getText</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i36" class="altColor">
+                                            <td class="colFirst"><code>DateTime</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getOriginalDate()>getOriginalDate</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i37" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getOriginalText()>getOriginalText</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i38" class="altColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getOriginalAmount()>getOriginalAmount</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i39" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getIsRead()>getIsRead</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i40" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getIsFlagged()>getIsFlagged</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i41" class="rowColor">
+                                            <td class="colFirst"><code>boolean</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getHasUncertainCategorization()>getHasUncertainCategorization</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i42" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getAccountId()>getAccountId</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i43" class="rowColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/models/accounts/MenigaAccount.html>MenigaAccount</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getAccount()>getAccount</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i44" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html>Integer</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getMcc()>getMcc</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i45" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=../com/meniga/sdk/models/categories/MenigaCategoryScore.html>MenigaCategoryScore</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getDetectedCategories()>getDetectedCategories</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i46" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getCurrency()>getCurrency</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i47" class="rowColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getAmountInCurrency()>getAmountInCurrency</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i48" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html>Integer</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getDataFormat()>getDataFormat</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i49" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getMerchantId()>getMerchantId</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i50" class="altColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/models/merchants/MenigaMerchant.html>MenigaMerchant</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getMerchant()>getMerchant</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i51" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=../com/meniga/sdk/models/merchants/MenigaMerchant.html>MenigaMerchant</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getMerchants()>getMerchants</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i52" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getBankId()>getBankId</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i53" class="rowColor">
+                                            <td class="colFirst"><code>DateTime</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getInsertTime()>getInsertTime</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i54" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getHasUserClearedCategoryUncertainty()>getHasUserClearedCategoryUncertainty</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i55" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getIsUncleared()>getIsUncleared</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i56" class="altColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getBalance()>getBalance</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i57" class="rowColor">
+                                            <td class="colFirst"><code>DateTime</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getCategoryChangedTime()>getCategoryChangedTime</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i58" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getChangedByRule()>getChangedByRule</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i59" class="rowColor">
+                                            <td class="colFirst"><code>DateTime</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getChangedByRuleTime()>getChangedByRuleTime</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i60" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getCounterpartyAccountIdentifier()>getCounterpartyAccountIdentifier</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i61" class="rowColor">
+                                            <td class="colFirst"><code>DateTime</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getDueDate()>getDueDate</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i62" class="altColor">
+                                            <td class="colFirst"><code>DateTime</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getLastModifiedTime()>getLastModifiedTime</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i63" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=ParsedData.html>ParsedData</a>&gt;</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getParsedData()>getParsedData</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i64" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getData()>getData</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i65" class="rowColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getRedeemed()>getRedeemed</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i66" class="altColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getToRedeem()>getToRedeem</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i67" class="rowColor">
+                                            <td class="colFirst"><code><a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getRemainingToSpend()>getRemainingToSpend</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i68" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getBelongsToExpiredOffer()>getBelongsToExpiredOffer</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i69" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getReason()>getReason</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i70" class="altColor">
+                                            <td class="colFirst"><code>long</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getTimeStamp()>getTimeStamp</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i71" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getUserData()>getUserData</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i72" class="altColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getEventTypeIdentifier()>getEventTypeIdentifier</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i73" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#getTopicName()>getTopicName</a>() </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i74" class="altColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setAmount(MenigaDecimal)>setAmount</a>(<a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> amount) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i75" class="rowColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setCategoryId(long)>setCategoryId</a>(long categoryId) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i76" class="altColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setDate(DateTime)>setDate</a>(DateTime date) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i77" class="rowColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setIsRead(boolean)>setIsRead</a>(boolean isRead) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i78" class="altColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setIsFlagged(boolean)>setIsFlagged</a>(boolean isFlagged) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i79" class="rowColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setHasUncertainCategorization(boolean)>setHasUncertainCategorization</a>(boolean uncertain) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr id="i80" class="altColor">
+                                            <td class="colFirst"><code>void</code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=MenigaTransaction.html#setUserData(String)>setUserData</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> data) </code>
+                                            </th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <ul class="blockList">
+                                
+                                    <li class="blockList"><a id="methods.inherited.from.class.com.meniga.sdk.models.feed.MenigaFeedItem">
+                                            <!--   -->
+                                        </a>
+                                            <h3>Methods inherited from class&nbsp;com.meniga.sdk.models.feed.MenigaFeedItem</h3>
+                                            <code>clone</code></li>
+                                 
+                                    <li class="blockList"><a id="methods.inherited.from.class.android.os.Parcelable">
+                                            <!--   -->
+                                        </a>
+                                            <h3>Methods inherited from class&nbsp;android.os.Parcelable</h3>
+                                            <code>describeContents, writeToParcel</code></li>
+                                 
+                                    <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
+                                        <!--   -->
+                                    </a>
+                                        <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+                                        <code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString,
+                                            wait, wait, wait</code></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                </li>
+            </ul>
+        </div>
+        <div class="details">
+            <ul class="blockList">
+                <li class="blockList">
+                    <!-- ========= CONSTRUCTOR DETAIL ======== -->
+                    
+                    <!-- ============ METHOD DETAIL ========== -->
+                    
+                    <section role="region">
+                        <ul class="blockList">
+                            <li class="blockList"><a id="method.detail">
+                                <!--   -->
+                            </a>
+                                <h3>Method Detail</h3>
+                                
+                                <a id="setOperator(MenigaTransactionOperations)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setOperator</h4>
+                                        <pre class="methodSignature"> static void <a href=MenigaTransaction.html#setOperator(MenigaTransactionOperations)>setOperator</a>(<a href=../com/meniga/sdk/models/transactions/operators/MenigaTransactionOperations.html>MenigaTransactionOperations</a> operator)</pre>
+                                        <div class="block"><p>Sets the api operator for doing api calls</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>operator</code> - An object that implements the MenigaTransactionOperations interface for carrying out api operations on this class.</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setIsReadAndUpdate()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setIsReadAndUpdate</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#setIsReadAndUpdate()>setIsReadAndUpdate</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getIsSplitParent()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getIsSplitParent</h4>
+                                        <pre class="methodSignature"> boolean <a href=MenigaTransaction.html#getIsSplitParent()>getIsSplitParent</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setIsSplitParent(boolean)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setIsSplitParent</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#setIsSplitParent(boolean)>setIsSplitParent</a>(boolean splitParent)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>splitParent</code> - Sets a flag that indicates that this transaction is a split parent and contains split children</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getIsSplit()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getIsSplit</h4>
+                                        <pre class="methodSignature"> boolean <a href=MenigaTransaction.html#getIsSplit()>getIsSplit</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="describeContents()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>describeContents</h4>
+                                        <pre class="methodSignature"> int <a href=MenigaTransaction.html#describeContents()>describeContents</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="writeToParcel(Parcel,int)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>writeToParcel</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#writeToParcel(Parcel,int)>writeToParcel</a>(<a href=https://developer.android.com/reference/kotlin/android/os/Parcel.html>Parcel</a> dest, int flags)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="equals(Object)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>equals</h4>
+                                        <pre class="methodSignature"> boolean <a href=MenigaTransaction.html#equals(Object)>equals</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html>Object</a> o)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="hashCode()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>hashCode</h4>
+                                        <pre class="methodSignature"> int <a href=MenigaTransaction.html#hashCode()>hashCode</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="clone()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>clone</h4>
+                                        <pre class="methodSignature"> <a href=MenigaTransaction.html>MenigaTransaction</a> <a href=MenigaTransaction.html#clone()>clone</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="toString()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>toString</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#toString()>toString</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="update()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>update</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransactionUpdate.html>MenigaTransactionUpdate</a>&gt; <a href=MenigaTransaction.html#update()>update</a>()</pre>
+                                        <div class="block"><p>Updates the user created transaction</p></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="delete()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>delete</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Void.html>Void</a>&gt; <a href=MenigaTransaction.html#delete()>delete</a>()</pre>
+                                        <div class="block"><p>Deletes a user created transaction</p></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="fetchSplitChildren()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>fetchSplitChildren</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt; <a href=MenigaTransaction.html#fetchSplitChildren()>fetchSplitChildren</a>()</pre>
+                                        <div class="block"><p>Gets all the splitTransaction children of this transaction. If this transaction is a splitTransaction child, this function will returnan empty list. If this transaction is not splitTransaction, it will also return an empty list.</p></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="fetchSplitParent()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>fetchSplitParent</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt; <a href=MenigaTransaction.html#fetchSplitParent()>fetchSplitParent</a>()</pre>
+                                        <div class="block"><p>Return the parent of this splitTransaction child transaction. If this is not a splitTransaction child, then the result will be null.</p></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="fetchSplitAndParent()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>fetchSplitAndParent</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt; <a href=MenigaTransaction.html#fetchSplitAndParent()>fetchSplitAndParent</a>()</pre>
+                                        <div class="block"><p>Returns all split children and parent regardless of who is calling (a split transaction or the parent transaction)</p></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="split(MenigaDecimal,String,long,boolean)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>split</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt; <a href=MenigaTransaction.html#split(MenigaDecimal,String,long,boolean)>split</a>(<a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> amount, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> text, long categoryId, boolean isFlagged)</pre>
+                                        <div class="block"><p>Splits a transaction, creating a new connected, splitTransaction transaction, deducting the amount from this (parent) transaction</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>amount</code> - The amount that the splitTransaction transaction should have, this amount will be deducted from this (parent) transaction</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>text</code> - The text for the split transaction</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>categoryId</code> - The category id of the new transaction</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>isFlagged</code> - Setwether the split transaction should be flagged or not</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="updateSplits(List)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>updateSplits</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt;&gt; <a href=MenigaTransaction.html#updateSplits(List)>updateSplits</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=../com/meniga/sdk/webservices/requests/UpdateSplits.html>UpdateSplits</a>&gt; update)</pre>
+                                        <div class="block"><p>Updates split transactions for a particular parent transaction by deleting current split child transactions and creating new splits.</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>update</code> - The new data for all the transaction's split children</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="refresh()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>refresh</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt; <a href=MenigaTransaction.html#refresh()>refresh</a>()</pre>
+                                        <div class="block"><p>Fetches the server version of this object and updates all fields in this object with the server values, essentially syncing it with the server</p></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="update(List,MenigaDecimal,Long,boolean,Boolean,String,DateTime,Boolean,Boolean,String)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>update</h4>
+                                        <pre class="methodSignature"> static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransactionUpdate.html>MenigaTransactionUpdate</a>&gt; <a href=MenigaTransaction.html#update(List,MenigaDecimal,Long,boolean,Boolean,String,DateTime,Boolean,Boolean,String)>update</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a>&gt; transToUpdate, <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> amount, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a> categoryId, boolean hasUncertainCategorization, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> useSubTextInRecat, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> text, DateTime date, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> isRead, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> isFlagged, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> userData)</pre>
+                                        <div class="block"><p>Updates a list of transactions.</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>transToUpdate</code> - The IDs of the transactions that should be updated.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>amount</code> - The updated amount of the transactions.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>categoryId</code> - The updated category ID for the transactions.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>hasUncertainCategorization</code> - Whether or not the transaction has uncertain categorization.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>useSubTextInRecat</code> - True if automatic categorization should be matched against subtext otherwise it will by default be matched against text.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>text</code> - The updated text of the transaction.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>date</code> - The updated date of the transactions.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>isRead</code> - Set whether a transaction has been read or not.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>isFlagged</code> - Set whether a transaction should be flagged or not.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>userData</code> - Holds extra custom data that is not parsed or read via the transaction data format parser</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="fetch(List)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>fetch</h4>
+                                        <pre class="methodSignature"> static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransactionPage.html>MenigaTransactionPage</a>&gt; <a href=MenigaTransaction.html#fetch(List)>fetch</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=TransactionsFilter.html>TransactionsFilter</a>&gt; filters)</pre>
+                                        <div class="block"><p>Combines multiple calls to the transactions endpoint with multiple filters</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>filters</code> - A list containing all the filters.</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="fetch(TransactionsFilter)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>fetch</h4>
+                                        <pre class="methodSignature"> static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransactionPage.html>MenigaTransactionPage</a>&gt; <a href=MenigaTransaction.html#fetch(TransactionsFilter)>fetch</a>(<a href=TransactionsFilter.html>TransactionsFilter</a> transFilter)</pre>
+                                        <div class="block"><p>Returns all transactions that meet the filter criteria in transFilter</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>transFilter</code> - A filter object for selecting the transactions</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="fetch(long)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>fetch</h4>
+                                        <pre class="methodSignature"> static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt; <a href=MenigaTransaction.html#fetch(long)>fetch</a>(long transactionId)</pre>
+                                        <div class="block"><p>Retrieves a specific transaction with a specific transaction id</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>transactionId</code> - The id of the transaction to retrieve</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="create(DateTime,String,MenigaDecimal,long)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>create</h4>
+                                        <pre class="methodSignature"> static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=MenigaTransaction.html>MenigaTransaction</a>&gt; <a href=MenigaTransaction.html#create(DateTime,String,MenigaDecimal,long)>create</a>(DateTime date, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> text, <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> amount, long categoryId)</pre>
+                                        <div class="block"><p>Creates a transaction in the user wallet and returns the new transaction.</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>date</code> - Date of the transaction.</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>text</code> - The title of the transaction</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>amount</code> - The amount of the transaction</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>categoryId</code> - The category of the new transaction</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="deleteTransactions(List)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>deleteTransactions</h4>
+                                        <pre class="methodSignature"> static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Void.html>Void</a>&gt; <a href=MenigaTransaction.html#deleteTransactions(List)>deleteTransactions</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a>&gt; transactionIds)</pre>
+                                        <div class="block"><p>Deletes a list of user created transactions</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>transactionIds</code> - The ids of the user transactions to delete</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="recategorize(List,Boolean,Boolean,Boolean)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>recategorize</h4>
+                                        <pre class="methodSignature"> static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Void.html>Void</a>&gt; <a href=MenigaTransaction.html#recategorize(List,Boolean,Boolean,Boolean)>recategorize</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>&gt; transactionTexts, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> recategorizeUnreadOnly, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> useSubTextInRecat, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> markAsRead)</pre>
+                                        <div class="block"><p>Recategorize transactions by text(s). If categoryId is set, the matching transactions will be recategorized as the category specified by categoryId.</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>transactionTexts</code> - The texts used to find transactions to recategorize</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>recategorizeUnreadOnly</code> - Recategorize only unread transactions if true, otherwise recategorize unread or read transactions</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>useSubTextInRecat</code> - Whether to include the subText field when searching for transactions to recategorize</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>markAsRead</code> - Mark recategorized transactions as read or not</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="addComments(List,String)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>addComments</h4>
+                                        <pre class="methodSignature"> static <a href=../com/meniga/sdk/helpers/Result.html>Result</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaComment.html>MenigaComment</a>&gt;&gt; <a href=MenigaTransaction.html#addComments(List,String)>addComments</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a>&gt; transactionIds, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> comment)</pre>
+                                        <div class="block"><p>Create a comment for a list of transaction ids. If the comment contains any tags (words starting with '#') they are automaticallycreated and associated with these transaction if they do not already exist.</p></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>transactionIds</code> - The ids of the user transactions to add the comment</dd>
+                                            
+                                            
+                                            
+                                            <dd><code>comment</code> - The new comment to add to transactions</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getParentIdentifier()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getParentIdentifier</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getParentIdentifier()>getParentIdentifier</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getId()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getId</h4>
+                                        <pre class="methodSignature"> long <a href=MenigaTransaction.html#getId()>getId</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getAmount()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getAmount</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> <a href=MenigaTransaction.html#getAmount()>getAmount</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getBookedAmount()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getBookedAmount</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> <a href=MenigaTransaction.html#getBookedAmount()>getBookedAmount</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getTags()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getTags</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>&gt; <a href=MenigaTransaction.html#getTags()>getTags</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getComments()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getComments</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=MenigaComment.html>MenigaComment</a>&gt; <a href=MenigaTransaction.html#getComments()>getComments</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getCategoryId()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getCategoryId</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a> <a href=MenigaTransaction.html#getCategoryId()>getCategoryId</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getDate()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getDate</h4>
+                                        <pre class="methodSignature"> DateTime <a href=MenigaTransaction.html#getDate()>getDate</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getText()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getText</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getText()>getText</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getOriginalDate()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getOriginalDate</h4>
+                                        <pre class="methodSignature"> DateTime <a href=MenigaTransaction.html#getOriginalDate()>getOriginalDate</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getOriginalText()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getOriginalText</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getOriginalText()>getOriginalText</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getOriginalAmount()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getOriginalAmount</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> <a href=MenigaTransaction.html#getOriginalAmount()>getOriginalAmount</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getIsRead()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getIsRead</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> <a href=MenigaTransaction.html#getIsRead()>getIsRead</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getIsFlagged()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getIsFlagged</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> <a href=MenigaTransaction.html#getIsFlagged()>getIsFlagged</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getHasUncertainCategorization()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getHasUncertainCategorization</h4>
+                                        <pre class="methodSignature"> boolean <a href=MenigaTransaction.html#getHasUncertainCategorization()>getHasUncertainCategorization</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getAccountId()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getAccountId</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a> <a href=MenigaTransaction.html#getAccountId()>getAccountId</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getAccount()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getAccount</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/models/accounts/MenigaAccount.html>MenigaAccount</a> <a href=MenigaTransaction.html#getAccount()>getAccount</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getMcc()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getMcc</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html>Integer</a> <a href=MenigaTransaction.html#getMcc()>getMcc</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getDetectedCategories()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getDetectedCategories</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=../com/meniga/sdk/models/categories/MenigaCategoryScore.html>MenigaCategoryScore</a>&gt; <a href=MenigaTransaction.html#getDetectedCategories()>getDetectedCategories</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getCurrency()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getCurrency</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getCurrency()>getCurrency</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getAmountInCurrency()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getAmountInCurrency</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> <a href=MenigaTransaction.html#getAmountInCurrency()>getAmountInCurrency</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getDataFormat()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getDataFormat</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html>Integer</a> <a href=MenigaTransaction.html#getDataFormat()>getDataFormat</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getMerchantId()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getMerchantId</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a> <a href=MenigaTransaction.html#getMerchantId()>getMerchantId</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getMerchant()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getMerchant</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/models/merchants/MenigaMerchant.html>MenigaMerchant</a> <a href=MenigaTransaction.html#getMerchant()>getMerchant</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getMerchants()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getMerchants</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=../com/meniga/sdk/models/merchants/MenigaMerchant.html>MenigaMerchant</a>&gt; <a href=MenigaTransaction.html#getMerchants()>getMerchants</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getBankId()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getBankId</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getBankId()>getBankId</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getInsertTime()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getInsertTime</h4>
+                                        <pre class="methodSignature"> DateTime <a href=MenigaTransaction.html#getInsertTime()>getInsertTime</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getHasUserClearedCategoryUncertainty()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getHasUserClearedCategoryUncertainty</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> <a href=MenigaTransaction.html#getHasUserClearedCategoryUncertainty()>getHasUserClearedCategoryUncertainty</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getIsUncleared()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getIsUncleared</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> <a href=MenigaTransaction.html#getIsUncleared()>getIsUncleared</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getBalance()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getBalance</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> <a href=MenigaTransaction.html#getBalance()>getBalance</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getCategoryChangedTime()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getCategoryChangedTime</h4>
+                                        <pre class="methodSignature"> DateTime <a href=MenigaTransaction.html#getCategoryChangedTime()>getCategoryChangedTime</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getChangedByRule()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getChangedByRule</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html>Long</a> <a href=MenigaTransaction.html#getChangedByRule()>getChangedByRule</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getChangedByRuleTime()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getChangedByRuleTime</h4>
+                                        <pre class="methodSignature"> DateTime <a href=MenigaTransaction.html#getChangedByRuleTime()>getChangedByRuleTime</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getCounterpartyAccountIdentifier()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getCounterpartyAccountIdentifier</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getCounterpartyAccountIdentifier()>getCounterpartyAccountIdentifier</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getDueDate()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getDueDate</h4>
+                                        <pre class="methodSignature"> DateTime <a href=MenigaTransaction.html#getDueDate()>getDueDate</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getLastModifiedTime()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getLastModifiedTime</h4>
+                                        <pre class="methodSignature"> DateTime <a href=MenigaTransaction.html#getLastModifiedTime()>getLastModifiedTime</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getParsedData()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getParsedData</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=ParsedData.html>ParsedData</a>&gt; <a href=MenigaTransaction.html#getParsedData()>getParsedData</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getData()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getData</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getData()>getData</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getRedeemed()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getRedeemed</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> <a href=MenigaTransaction.html#getRedeemed()>getRedeemed</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getToRedeem()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getToRedeem</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> <a href=MenigaTransaction.html#getToRedeem()>getToRedeem</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getRemainingToSpend()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getRemainingToSpend</h4>
+                                        <pre class="methodSignature"> <a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> <a href=MenigaTransaction.html#getRemainingToSpend()>getRemainingToSpend</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getBelongsToExpiredOffer()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getBelongsToExpiredOffer</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> <a href=MenigaTransaction.html#getBelongsToExpiredOffer()>getBelongsToExpiredOffer</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getReason()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getReason</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getReason()>getReason</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getTimeStamp()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getTimeStamp</h4>
+                                        <pre class="methodSignature"> long <a href=MenigaTransaction.html#getTimeStamp()>getTimeStamp</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getUserData()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getUserData</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getUserData()>getUserData</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getEventTypeIdentifier()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getEventTypeIdentifier</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getEventTypeIdentifier()>getEventTypeIdentifier</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="getTopicName()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getTopicName</h4>
+                                        <pre class="methodSignature"> <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> <a href=MenigaTransaction.html#getTopicName()>getTopicName</a>()</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setAmount(MenigaDecimal)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setAmount</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#setAmount(MenigaDecimal)>setAmount</a>(<a href=../com/meniga/sdk/helpers/MenigaDecimal.html>MenigaDecimal</a> amount)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>amount</code> - The amount of the transaction.</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setCategoryId(long)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setCategoryId</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#setCategoryId(long)>setCategoryId</a>(long categoryId)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>categoryId</code> - Sets a new category for the transaction.</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setDate(DateTime)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setDate</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#setDate(DateTime)>setDate</a>(DateTime date)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>date</code> - The new date for the transaction.</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setIsRead(boolean)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setIsRead</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#setIsRead(boolean)>setIsRead</a>(boolean isRead)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>isRead</code> - Sets the transaction to be read or not.</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setIsFlagged(boolean)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setIsFlagged</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#setIsFlagged(boolean)>setIsFlagged</a>(boolean isFlagged)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>isFlagged</code> - If you want the transaction to be flagged or not.</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setHasUncertainCategorization(boolean)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setHasUncertainCategorization</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#setHasUncertainCategorization(boolean)>setHasUncertainCategorization</a>(boolean uncertain)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <dl>
+                                            <dt><span class="paramLabel">Parameters:</span></dt>
+                                            
+                                            
+                                            <dd><code>uncertain</code> - Sets the transaction to have uncertain categorization or not.</dd>
+                                            
+                                            
+                                        </dl>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setUserData(String)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockListLast"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setUserData</h4>
+                                        <pre class="methodSignature"> void <a href=MenigaTransaction.html#setUserData(String)>setUserData</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> data)</pre>
+                                        <div class="block"></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                            </li>
+                        </ul>
+                    </section>
+                    
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+<footer role="contentinfo">
+    <nav role="navigation">
+        <!-- ======= START OF BOTTOM NAVBAR ====== -->
+        <div class="bottomNav"><a id="navbar.bottom">
+            <!--   -->
+        </a>
+            <div class="skipNav"><a href="#skip.navbar.bottom" title="Skip navigation links">Skip navigation links</a>
+            </div>
+            <a id="navbar.bottom.firstrow">
+                <!--   -->
+            </a>
+            <ul class="navList" title="Navigation">
+    <li><a href="../../../../../index.html">Overview</a></li>
+    
+    <li><a href="package-summary.html">Package</a></li>
+    
+    <li class="navBarCell1Rev">Class</li>
+    
+    <li><a href="package-tree.html">Tree</a></li>
+    
+    <li><a href="../../../../../deprecated.html">Deprecated</a></li>
+    <li><a href="../../../../../index-files/index-1.html">Index</a></li>
+    <li>Help</li>
+</ul></div>
+        <a id="skip.navbar.bottom">
+            <!--   -->
+        </a>
+        <div class="subNav">
+<ul class="navList" id="allclasses_navbar_top" style="display: block;">
+    <li><a href="../../../../../allclasses.html">All&nbsp;Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+</div>
+<a id="skip.navbar.top">
+<!--   -->
+</a></div><!-- ======== END OF BOTTOM NAVBAR ======= -->
+    </nav>
+</footer><ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0"
+    style="display: none;"></ul>
+<span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
+</body>
+</html>
