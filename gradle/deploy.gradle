@@ -16,9 +16,10 @@ task publishSnapshot() {
 
 task publishRelease() {
     if (!isSnapshot) {
-        Task closeTask = tasks.getByPath(":closeAndReleaseRepository")
+        Task closeTask = tasks.getByPath(":closeRepository")
+        Task releaseTask = tasks.getByPath(":releaseRepository")
         closeTask.dependsOn ":sdk-android:publishAarPublicationToMavenRepository"
-        dependsOn closeTask
+        dependsOn closeTask, releaseTask
     }
 }
 
