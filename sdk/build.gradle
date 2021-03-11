@@ -65,7 +65,7 @@ dependencies {
     implementation "javax.annotation:javax.annotation-api:1.3.2"
 
     testImplementation "com.atlassian.oai:swagger-request-validator-core:1.4.2"
-    testImplementation "com.jayway.jsonpath:json-path-assert:2.4.0"
+    testImplementation "com.jayway.jsonpath:json-path-assert:2.5.0"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
     testImplementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
     testImplementation "junit:junit:4.13.2"
