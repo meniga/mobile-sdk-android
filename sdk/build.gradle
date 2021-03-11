@@ -70,7 +70,7 @@ dependencies {
     testImplementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
     testImplementation "junit:junit:4.13.2"
     testImplementation "net.jodah:concurrentunit:0.4.6"
-    testImplementation "org.assertj:assertj-core:3.13.2"
+    testImplementation "org.assertj:assertj-core:3.19.0"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
     testImplementation "org.spekframework.spek2:spek-dsl-jvm:$spekVersion"
     testImplementation "org.spekframework.spek2:spek-runner-junit5:$spekVersion"
