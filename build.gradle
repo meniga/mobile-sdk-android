@@ -4,7 +4,7 @@ buildscript {
         // MOBILE-3449 Parameters encoding changed in later versions https://github.com/square/okhttp/issues/3235
         okHttpVersion = "3.9.1"
         retrofitVersion = "2.3.0"
-        spekVersion = "2.0.15"
+        spekVersion = "2.0.16"
     }
     repositories {
         google()
