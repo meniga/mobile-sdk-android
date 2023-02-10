@@ -23,7 +23,7 @@ plugins {
     id "de.undercouch.download" version "4.1.1"
     // Using legacy plugin until https://github.com/gradle-nexus/publish-plugin/issues/75 is resolved
     id "io.codearte.nexus-staging" version "0.30.0"
-    id "pl.allegro.tech.build.axion-release" version "1.12.1"
+    id "pl.allegro.tech.build.axion-release" version "1.14.4"
 }
 
 scmVersion {
